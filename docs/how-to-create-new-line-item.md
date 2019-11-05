@@ -29,15 +29,13 @@ line-item是为了配合listof和ListofPage做展示用的，这里以增加一�
 
 ```javascript
 import JustALine from './biz/just-a-line-template'
-........
+     ......
   render() {
-    ........
-     {template === 'just-a-line' && <JustALine {...itemProps} />}
-     ........
-
+    ......
+     { template === 'just-a-line' && <JustALine {...itemProps} /> }
+    ......
   }
 
-   {template === 'just-a-line' && <JustALine {...itemProps} />}
 ```
 
 3. 这样在任意listof或者ListofPage就可以使用displayMode="just-a-line"

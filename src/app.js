@@ -59,11 +59,11 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/biz/hello-daas-page',
       'pages/home/home-page',
       'pages/me/me-page',
       'pages/article/article-detail-page',
       'pages/login/login-page',
+      'pages/biz/hello-daas-page',
       // base
       'nice-router/h5-page',
       'nice-router/network-exception-page',
