@@ -1,6 +1,6 @@
-#### nice-router
+#### 第0适合后端程序员的前端小程序开发框架。
 
-第0适合后端程序员的前端小程序开发框架。
+nice-router包含两部分：
 
 [nice-router-taro](https://github.com/doublechaintech/nice-router-taro)
 
@@ -14,38 +14,42 @@
 
 # nice-router-taro
 
-#### 基础知识：React +DVA+Taro+TaroUI
+#### 基础知识：React + DVA + Taro + TaroUI
 
-[Taro](https://github.com/NervJS/taro) 是京东家的小程序开发框架，基于react的语法。
+[Taro](https://github.com/NervJS/taro) 是京东家的小程序开发框架，基于react的语法，跨多端开发框架（微信小程序，支付宝小程序，RN，抖音小程序......）
 
-目前来说个人感觉综合评分最高的第三方小程序开发框架（相比wepy和mpvue）
+- 目前来说Taro可能是综合评分最高的第三方小程序开发框架（相比wepy和mpvue）
+
+[DVA](https://github.com/dvajs/dva) 基于redux + saga的轻量级react开发框架
+
+
 
 ### 如何开始
 
 ##### 1.环境与知识准备
 
-1. 下载安装 [Taro](http://taro-docs.jd.com/taro/docs/GETTING-STARTED.html)
+1. 下载安装 [Taro cli](http://taro-docs.jd.com/taro/docs/GETTING-STARTED.html)
 
 2. 成为开发者（找到您的小程序应用的管理员，把你的微信添加到开发者列表里就行）
 
 3. 下载 nice-router-taro
 
-```
+```bash
 git clone https://github.com/kala888/nice-router-taro
 ```
 
-4. 修改小程序AppId(project.config.json)
+4. 修改小程序AppId (project.config.json)
 
-```textile
+```javascript
     "appid": "wxff........07",
 ```
 
 5. 修改 默认title和theme  (**可选**)
 
-通过[https://nervjs.github.io/taro-ui-theme-preview/](https://nervjs.github.io/taro-ui-theme-preview/) 填入主色后下载文件，
- 修改src/styles.theme.scss中的三个值就行了，
+修改主色：通过 [Taro UI](https://nervjs.github.io/taro-ui-theme-preview/) 填入主色后，下载并打开文件
+修改./src/styles.theme.scss中的三个值就行了
 
-```scss
+```css
   $color-brand: #6dbb4d;  
   $color-brand-light: #92cc7a; 
   $color-brand-dark: #57963e;
@@ -57,7 +61,7 @@ git clone https://github.com/kala888/nice-router-taro
 
 ./src/utils/config.js
 
-```
+```javascript
 const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/'
 ```
 
@@ -73,6 +77,10 @@ yarn dev:weapp
 8. 微信开发者工具中，导入项目
    查看效果
 
+
+
+
+
 > **小提示:**
 > 1.提交代码前，先 'yarn format' 一道，有助于团队成员间代码merge.
 > 
@@ -86,7 +94,7 @@ yarn dev:weapp
 
 ##### 2.我需要一个后端服务，最好搭配一个中台
 
-- 这里使用自动代码生成框架Daas Start Kit（TODO应该有一个链接），可以与nice-router-taro完美配合。
+- 这里推荐使用自动代码生成框架DaaS Start Kit（TODO应该有一个链接），可以与nice-router完美配合。
 
 #### 
 
