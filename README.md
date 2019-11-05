@@ -1,10 +1,10 @@
 # nice-router-taro
 
-第0适合后端程序员的前端小程序开发框架
+第二适合后端程序员的前端小程序开发框架
 
 #### 基础知识：React +DVA+Taro+TaroUI
 
-[Taro](https://github.com/NervJS/taro) 是京东家的小程序开发框架，基于react的语法。
+[Taro](https://github.com/NervJS/taro)是京东家的小程序开发框架，基于react的语法。
 
 目前来说个人感觉综合评分最高的第三方小程序开发框架（相比wepy和mpvue）
 
@@ -12,7 +12,7 @@
 
 ##### 1.环境与知识准备
 
-1. 下载安装 [Taro] (http://taro-docs.jd.com/taro/docs/GETTING-STARTED.html)
+1. 下载安装 [Taro](http://taro-docs.jd.com/taro/docs/GETTING-STARTED.html)
 
 2. 成为开发者（找到您的小程序应用的管理员，把你的微信添加到开发者列表里就行）
 
@@ -129,7 +129,8 @@ Step-Form
 ##### 100. [Tips](/docs/tips.md)
 
 
-> webstorm/idea 格式化和format不一致问题：打开.prettierrc文件，点击右键，Apply Prettier Style Rules
-或者修改rule后，接受提示"Use code style base on Prettier for this project?"
+[nice-router-taro 开发文档](https://github.com/doublechaintech/nice-router/blob/master/docs/README.md)
 
+
+[nice-router-react-native 开发文档](https://github.com/doublechaintech/nice-router)
 
