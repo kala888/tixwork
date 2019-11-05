@@ -7,7 +7,7 @@ yarn
 yarn dev:weapp
 ```
 
-[nice-router-taro 开发文档](https://github.com/doublechaintech/nice-router/docs/README.md)
+[nice-router-taro 开发文档](https://github.com/doublechaintech/nice-router/blob/master/docs/README.md)
 
 
 [nice-router-react-native 开发文档](https://github.com/doublechaintech/nice-router)
