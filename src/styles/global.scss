@@ -1,0 +1,105 @@
+@import './theme';
+
+// 修改switch样式
+.wx-switch-input {
+  width: 82px !important;
+  height: 15px !important;
+}
+
+// false样式
+.wx-switch-input::before {
+  width: 82px !important;
+  height: 15px !important;
+  background: $text-color-lighter !important;
+}
+
+// true样式
+.wx-switch-input::after {
+  width: 40px !important;
+  height: 40px !important;
+  margin-top: -15px !important;
+  background-color: $primary-color !important;
+}
+
+.at-input {
+  margin-left: 0;
+}
+
+:global .content-inner__img {
+  width: 20px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.flex-center {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row-center {
+  @extend .flex-row;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column-center {
+  @extend .flex-column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-full {
+  width: 100%;
+  height: 100%;
+}
+
+.ellipsis {
+  @include text-ellipsis;
+}
+
+// text
+$text-sizes: 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42;
+@each $size in $text-sizes {
+  .f#{$size} {
+    font-size: #{$size}px;
+    color: $text-color;
+  }
+}
+
+.note {
+  font-size: 22px;
+  color: $text-color-light;
+}
+
+.breakLine {
+  margin: 0 16px;
+  height: 1px;
+  background-color: $color-brand;
+  position: relative;
+}
+
+.red-tag {
+  color: $price-text;
+  border-color: $price-text;
+  height: 35px;
+  line-height: 36px;
+}
+
+.red-tag-tiny {
+  @extend .red-tag;
+  line-height: 32px;
+  padding: 2px 5px;
+  margin-left: 10px;
+}

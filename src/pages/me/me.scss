@@ -1,0 +1,55 @@
+@import '../../styles/theme';
+
+.me-page {
+  @extend %page;
+
+  &-header {
+    background-color: #fff;
+
+    &-top {
+      background-color: $primary-color;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-bottom-left-radius: 50px;
+      padding-bottom: 60px;
+
+      .avatar {
+        padding: 0 40px;
+        width: 120px;
+        height: 120px;
+
+        image {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          border: 2px solid #fff;
+        }
+      }
+
+      .content {
+        color: $white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 24px;
+
+        &-name {
+          font-size: 40px;
+        }
+
+        &-brief {
+          font-size: 22px;
+        }
+      }
+    }
+
+    &-footer {
+      padding-top: 20px;
+    }
+  }
+
+  &-body {
+    padding: 30px;
+  }
+}
