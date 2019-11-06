@@ -17,17 +17,13 @@ const niceRouterConfig = {
     FooterMe: 'customerViewDashboard/',
     Login: 'clientLogin/',
     VerifyCode: 'sendVerifyCode/:mobile/',
+    OSSToken: 'test0ss/',
   },
 }
 
 const Config = {
   ...niceRouterConfig,
   name: 'NiceRouter App Start',
-  oss: {
-    ossBucket: 'doublechain-public',
-    staticUrl: 'https://doublechaintech-public.oss-cn-beijing.aliyuncs.com/',
-    endPoint: 'oss-cn-beijing.aliyuncs.com',
-  },
   goBackSkipScreen: [],
   useWxLogin: true,
 }

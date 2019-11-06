@@ -3,11 +3,24 @@ import isEmpty from 'lodash/isEmpty'
 import random from 'lodash/random'
 import NavigationService from '@/nice-router/navigation.service'
 import { formatTime } from '@/utils/index'
+import Config from '@/utils/config'
+import getAliyunConfig from './aliyun-oss-helper'
 
-let ossToken = {}
+let ossToken = {
+  // type: 'qiniu',
+  // expiration: '2019-11-06T10:21:18Z',
+  // userHome: 'upload/doublechain/11',
+  // prefix: 'https://doublechain-public.oss-cn-beijing.aliyuncs.com',
+  // uploadPrefix: 'https://doublechain-public.oss-cn-beijing.aliyuncs.com',
+}
 
 function isValidateToken() {
-  return !(isEmpty(ossToken) || ossToken.exprTime < Date.now() - 1000 * 300)
+  if (!isEmpty(ossToken) && !isEmpty(ossToken.expiration)) {
+    const expr = new Date(ossToken.expiration)
+    // 5分钟提前量
+    return expr < Date.now() - 1000 * 300
+  }
+  return false
 }
 
 function getFileName(filePath = '') {
@@ -27,21 +40,42 @@ function uploadFiles(params = {}) {
   }
 
   if (isValidateToken()) {
+    console.log('validatae...token')
     uploadFiles2OSS(params)
   } else {
-    NavigationService.ajax('testOss/', {}, {
-      onSuccess: (resp) => {
-        ossToken = resp
-        uploadFiles2OSS(params)
-      },
-    })
+    console.log('need-new token')
+    NavigationService.ajax(
+      Config.api.OSSToken,
+      {},
+      {
+        onSuccess: (resp) => {
+          console.log('need-new resp', resp)
+          ossToken = resp
+          uploadFiles2OSS(params)
+        },
+      }
+    )
   }
 }
 
-
 function uploadFiles2OSS(params = {}) {
+  //
+  // if (isEmpty(ossToken)) {
+  //   Taro.showToast({
+  //     title: `获取token失败，稍后再试`,
+  //     icon: 'none',
+  //     duration: 2 * 1000,
+  //   })
+  //   return
+  // }
+
   const { todoList, onProgress, onStart, onComplete, onSuccess, onFail } = params
-  const { token = '', uploadPrefix = '', downloadPrefix = '', home = '' } = ossToken
+  const { type = 'aliyun', uploadPrefix = '', prefix = '', userHome = '' } = ossToken
+
+  let formParam = { token: ossToken.token }
+  if (type === 'aliyun') {
+    formParam = getAliyunConfig(ossToken)
+  }
 
   todoList.map(async (it) => {
     if (onStart) {
@@ -50,25 +84,23 @@ function uploadFiles2OSS(params = {}) {
 
     const { url: sourceFile = '' } = it
     const fileName = getFileName(sourceFile)
-    const key = `${home}/${fileName}`
+    const key = `${userHome}/${fileName}`
     Taro.showLoading({ title: '上传凭证中' })
 
     const uploadTask = Taro.uploadFile({
-      url: uploadPrefix,
+      url: uploadPrefix || prefix,
       filePath: sourceFile,
       name: 'file',
       formData: {
         key,
-        token,
+        ...formParam,
       },
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      success: (res) => {
-        const dataString = res.data
-        const dataObject = JSON.parse(dataString)
-        const remoteFile = downloadPrefix + '/' + dataObject.key
+      success: (resp) => {
+        console.log('upload file result', resp)
+        const remoteFile = prefix + '/' + key
         const result = {
           sourceFile,
-          resp: dataObject,
           remoteFile,
         }
         if (onSuccess) {

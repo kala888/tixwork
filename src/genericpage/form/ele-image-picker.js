@@ -4,7 +4,7 @@ import { AtImagePicker, AtProgress } from 'taro-ui'
 
 import './ele-form.scss'
 import EleHelper from '../ele-helper'
-import uploadFiles from '../../service/file-upload.service'
+import uploadFiles from '../../service/file-upload/file-upload.service'
 
 export default class EleImagePicker extends Taro.PureComponent {
   static options = {
@@ -24,9 +24,8 @@ export default class EleImagePicker extends Taro.PureComponent {
     progress: 0,
   }
 
-
   uploadNewFiles = (files = []) => {
-    const todoList = files.filter(it => {
+    const todoList = files.filter((it) => {
       const { url = '' } = it
       return url.startsWith('http://tmp') || url.startsWith('wxfile://tmp')
     })
@@ -45,22 +44,20 @@ export default class EleImagePicker extends Taro.PureComponent {
         console.log('upload image success', result)
         const { remoteFile, sourceFile } = result
 
-        this.setState(preState => {
-          const newFiles = preState.files.map(it => {
+        this.setState((preState) => {
+          const newFiles = preState.files.map((it) => {
             if (it.url === sourceFile) {
-              return ({
+              return {
                 url: remoteFile,
-              })
+              }
             }
             return it
           })
-          return ({ files: newFiles })
+          return { files: newFiles }
         })
       },
     })
-
   }
-
 
   handleFileChange = (files, operationType) => {
     const { maxLength } = this.props
@@ -73,9 +70,11 @@ export default class EleImagePicker extends Taro.PureComponent {
 
     if (operationType === 'add') {
       if (files.length < this.state.files.length || files.length <= maxLength) {
-        this.setState({
+        this.setState(
+          {
             files,
-          }, () => this.uploadNewFiles(files),
+          },
+          () => this.uploadNewFiles(files)
         )
       } else {
         Taro.showModal({
@@ -116,9 +115,7 @@ export default class EleImagePicker extends Taro.PureComponent {
           onImageClick={this.onImageClick}
         />
         <Text className='note'>{briefText}</Text>
-        {
-          progress > 0 && <AtProgress percent={progress} />
-        }
+        {progress > 0 && <AtProgress percent={progress} />}
         <Text onClick={() => console.log(this.state.files)}>show</Text>
       </View>
     )

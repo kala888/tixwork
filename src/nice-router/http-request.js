@@ -180,7 +180,6 @@ const HttpRequest = {
       }
     }
     const success = !this.isFailedResult(result)
-    console.log('gggggg', result)
     result.success = success
     if (!success) {
       showError(result)
