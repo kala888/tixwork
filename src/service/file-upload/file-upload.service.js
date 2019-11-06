@@ -10,7 +10,7 @@ let ossToken = {
   // type: 'qiniu',
   // expiration: '2019-11-06T10:21:18Z',
   // userHome: 'upload/doublechain/11',
-  // prefix: 'https://doublechain-public.oss-cn-beijing.aliyuncs.com',
+  // prefix: 'xxx',
   // uploadPrefix: 'https://doublechain-public.oss-cn-beijing.aliyuncs.com',
 }
 
@@ -72,7 +72,7 @@ function uploadFiles2OSS(params = {}) {
   const { todoList, onProgress, onStart, onComplete, onSuccess, onFail } = params
   const { type = 'aliyun', uploadPrefix = '', prefix = '', userHome = '' } = ossToken
 
-  let formParam = { token: ossToken.token }
+  let formParam = { token: ossToken.securityToken }
   if (type === 'aliyun') {
     formParam = getAliyunConfig(ossToken)
   }

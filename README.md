@@ -22,8 +22,6 @@ nice-router包含两部分：
 
 [DVA](https://github.com/dvajs/dva) 基于redux + saga的轻量级react开发框架
 
-
-
 ### 如何开始
 
 ##### 1.环境与知识准备
@@ -77,8 +75,6 @@ yarn dev:weapp
 8. 微信开发者工具中，导入项目
    查看效果
 
-
-
 > **小提示:**
 > 
 > 1.以集成prettier，提交代码前，先 'yarn format' 一道，有助于团队成员间代码merge.
@@ -88,8 +84,6 @@ yarn dev:weapp
 ##### 
 
 *老铁，都看到这了，点个赞呗*
-
-
 
 ##### 2.我需要一个后端服务，最好搭配一个中台
 
@@ -109,11 +103,11 @@ yarn dev:weapp
 
 [如何创建新的line-item](/docs/how-to-create-new-line-item.md)
 
-图片上传
+[图片上传](/docs/file-upload-service.md)
 
 [提交一个Form](/docs/submit-form.md)
 
-Step-Form
+[Step-Form]
 
 [ServerImage](/docs/server-image.md)
 
@@ -151,9 +145,7 @@ Step-Form
 
 ##### 100. [Tips](/docs/tips.md)
 
-
 ### nice-router 已经组件共享提供了基础的支持。希望各位兄弟贡献各种常用的组件，尤其是那些促销组件。让体力活变为OOTB。
-
 
 [nice-router-taro 开发文档](https://github.com/doublechaintech/nice-router/blob/master/docs/README.md)
 
