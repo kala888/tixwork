@@ -151,7 +151,7 @@ Step-Form
 ##### 100. [Tips](/docs/tips.md)
 
 
-# nice-router 已经组件共享提供了基础的支持。希望各位兄弟贡献各种常用的组件，尤其是那些促销组件。让体力活变为OOTB。
+### nice-router 已经组件共享提供了基础的支持。希望各位兄弟贡献各种常用的组件，尤其是那些促销组件。让体力活变为OOTB。
 
 
 [nice-router-taro 开发文档](https://github.com/doublechaintech/nice-router/blob/master/docs/README.md)
