@@ -79,8 +79,6 @@ yarn dev:weapp
 
 
 
-
-
 > **小提示:**
 > 1.以集成prettier，提交代码前，先 'yarn format' 一道，有助于团队成员间代码merge.
 > 
@@ -151,6 +149,10 @@ Step-Form
 ##### ......
 
 ##### 100. [Tips](/docs/tips.md)
+
+
+#nice-router 为组件共享提供了基础的支持，希望各位兄弟贡献各种常用的促销组件。让体力活变为OOTB
+
 
 [nice-router-taro 开发文档](https://github.com/doublechaintech/nice-router/blob/master/docs/README.md)
 
