@@ -50,13 +50,8 @@ export default class MePage extends Taro.PureComponent {
   }
 
   render() {
-    const {
-      boxNavigatorList = Box_Navigator_List,
-      lineItemNavigatorList = LineItem_Navigator_List,
-      name,
-      brief,
-      imageUrl,
-    } = this.props
+
+    const { boxNavigatorList = Box_Navigator_List, lineItemNavigatorList = LineItem_Navigator_List, name, brief, imageUrl } = this.props
 
     return (
       <View className='me-page'>

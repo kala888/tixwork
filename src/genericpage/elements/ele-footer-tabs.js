@@ -26,7 +26,7 @@ export default class EleFooterTabs extends Taro.PureComponent {
           return
         }
         NavigationService.view(selected)
-      }
+      },
     )
   }
 
