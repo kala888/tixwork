@@ -1,6 +1,6 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "nice-router-taro",
+	"projectname": "链问链答",
 	"description": "nice-router-taro a wx development framework base on Taro and React",
 	"appid": "wxffe4c48a31d36507",
 	"setting": {
@@ -21,7 +21,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"simulatorType": "qywx_simulator_plugin",
+	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {
 		"qywx_simulator_plugin": "1.2.0"
 	},

@@ -23,6 +23,7 @@ export default class EleButton extends Taro.PureComponent {
     full: false,
     className: null,
     circle: null,
+    onGetUserInfo: null,
   }
 
   handleScan = async () => {
@@ -66,14 +67,14 @@ export default class EleButton extends Taro.PureComponent {
     }
   }
 
-  handleClick = () => {
+  handleClick = (e) => {
     const { btnType = '', linkToUrl, onClick } = this.props
     if (onClick) {
-      onClick()
+      onClick(e)
       return
     }
 
-    if (btnType === 'submit' || btnType === 'share') {
+    if (btnType === 'submit' || btnType === 'share' || btnType === 'getUserInfo') {
       return
     }
 
@@ -94,7 +95,7 @@ export default class EleButton extends Taro.PureComponent {
   }
 
   render() {
-    const { title, btnType, size, uiType, customStyle, className, full, circle } = this.props
+    const { title, btnType, size, uiType, customStyle, className, full, circle, onGetUserInfo } = this.props
 
     let { openType } = this.props
 
@@ -117,6 +118,7 @@ export default class EleButton extends Taro.PureComponent {
         full={full}
         customStyle={customStyle}
         onClick={this.handleClick}
+        onGetUserInfo={onGetUserInfo}
       >
         {title}
         {this.props.children}

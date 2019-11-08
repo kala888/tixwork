@@ -35,7 +35,8 @@ class App extends Component {
   componentDidMount() {
     if (Taro.canIUse('getUpdateManager')) {
       const updateManager = Taro.getUpdateManager()
-      updateManager.onCheckForUpdate(() => {})
+      updateManager.onCheckForUpdate(() => {
+      })
       updateManager.onUpdateReady(() => {
         Taro.showModal({
           title: '更新提示',
@@ -59,11 +60,12 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/biz/hello-daas-page',
-      'pages/home/home-page',
+      'pages/biz/question/score-share-page',
+      'pages/biz/question/question-detail-page',
       'pages/me/me-page',
-      'pages/article/article-detail-page',
       'pages/login/login-page',
+      'pages/home/home-page',
+      'pages/article/article-detail-page',
       // base
       'nice-router/h5-page',
       'nice-router/network-exception-page',
@@ -75,7 +77,6 @@ class App extends Component {
       'listof/listof-page3',
       'listof/listof-page4',
       // biz
-      'pages/biz/generic-test-page',
     ],
 
     permission: {
@@ -85,35 +86,9 @@ class App extends Component {
     },
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#6dbb4d',
-      navigationBarTitleText: '双链科技',
+      navigationBarBackgroundColor: '#28aaff',
+      navigationBarTitleText: '链问链答',
       navigationBarTextStyle: 'white',
-    },
-    tabBar: {
-      color: '#666',
-      selectedColor: '#92cc7a',
-      backgroundColor: '#fafafa',
-      borderStyle: 'black',
-      list: [
-        {
-          pagePath: 'pages/home/home-page',
-          iconPath: './assets/icon/icon_home_n@2x.png',
-          selectedIconPath: './assets/icon/icon_home_s@2x.png',
-          text: '首页',
-        },
-        {
-          pagePath: 'pages/biz/generic-test-page',
-          iconPath: './assets/icon/icon_service_n@2x.png',
-          selectedIconPath: './assets/icon/icon_service_s@2x.png',
-          text: 'GenericPage',
-        },
-        {
-          pagePath: 'pages/me/me-page',
-          iconPath: './assets/icon/icon_me_n@2x.png',
-          selectedIconPath: './assets/icon/icon_me_s@2x.png',
-          text: '我的',
-        },
-      ],
     },
   }
 

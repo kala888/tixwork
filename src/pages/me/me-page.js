@@ -14,16 +14,31 @@ const defaultAvatar = 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg'
 
 const Box_Navigator_List = [
   {
-    code: 'FINE_DECORATION',
+    code: 'continue-answer',
     icon: buildingIcon,
-    title: '发起申请',
+    title: '继续答题',
   },
   {
-    code: 'BIZ_CHAIN',
+    code: 'view-score',
     icon: commerceIcon,
-    title: '我发起',
+    title: '查看成绩',
   },
 ]
+
+
+const LineItem_Navigator_List = [
+  {
+    code: 'my-wrong-list',
+    imageUrl:defaultAvatar,
+    title:'我的错题',
+  },
+  {
+    code: 'my-favorite-list',
+    icon: commerceIcon,
+    title: '我的收藏',
+  },
+]
+
 
 @connect(({ me }) => ({ ...me }))
 export default class MePage extends Taro.PureComponent {
@@ -37,7 +52,7 @@ export default class MePage extends Taro.PureComponent {
   }
 
   render() {
-    const { boxNavigatorList = Box_Navigator_List, lineItemNavigatorList = [], name, brief, imageUrl } = this.props
+    const { boxNavigatorList = Box_Navigator_List, lineItemNavigatorList = LineItem_Navigator_List, name, brief, imageUrl } = this.props
 
     return (
       <View className='me-page'>

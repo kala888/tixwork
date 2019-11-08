@@ -1,98 +1,82 @@
 import Taro from '@tarojs/taro'
-import { Block, Form, Image, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import EleButton from '@/genericpage/elements/ele-button'
-import EleInput from '@/genericpage/form/ele-input'
-import EleVcode from '@/genericpage/form/ele-vcode'
+import { AtRadio } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
+import StorageTools from '@/nice-router/storage-tools'
 import Config from '@/utils/config'
-import AuthTools from '@/nice-router/auth-tools'
+
 import './login.scss'
-import loginLogo from '../../assets/login-logo.png'
 
-const KEY = 'login-form'
-
-export default class LoginPage extends Taro.PureComponent {
-  submit = async (formData) => {
-    if (Config.useWxLogin) {
-      //其实在app.js中已经登录过了只需要重放上一次请求
-      NavigationService.dispatch('niceRouter/retry')
-      //为了保险起见，再发一道wxlogin
-      NavigationService.dispatch('app/wxLogin')
-      return
-    }
-
-    NavigationService.put(
-      Config.api.Login,
-      {
-        ...formData,
-        loginMethod: 'mobile_vcode',
-      },
-      {
-        onSuccess: (resp, { headers }) => {
-          const { authorization } = headers
-          console.log('111111', headers)
-          if (authorization) {
-            AuthTools.saveTokenAsync(authorization)
-          }
-        },
-      }
-    )
+class LoginPage extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+  state = {
+    userType: 'civilians',
   }
 
-  handleClick = (e) => {
-    const { value } = e.detail
-    const payload = {
-      formKey: KEY,
-      values: value,
-      submit: this.submit,
+  componentDidMount() {
+    const authorized = StorageTools.get('authorized', false)
+    console.log('local saved authorized', authorized)
+    if (authorized) {
+      NavigationService.view(Config.api.FooterHome)
     }
-    console.log('form submit from ele-flex', payload, this.props)
-    Taro.eventCenter.trigger('form-submit', payload)
+  }
+
+  handleTypeChange = (userType) => {
+    this.setState({ userType })
+  }
+
+  handleGetUserInfo = (e) => {
+    if (!e || !e.detail) {
+      return
+    }
+    console.log('handle get user info')
+    NavigationService.ajax(Config.api.UpdateUserInfo, {
+      userInfo: e.detail.userInfo,
+      userType: this.state.userType,
+    }, {
+      onSuccess: () => {
+        StorageTools.set('authorized', true)
+        NavigationService.view(Config.api.FooterHome)
+      },
+    })
   }
 
   render() {
-    return (
-      <Form onSubmit={this.handleClick}>
-        <View className='login-page'>
-          <View className='login-page-header'>
-            <View className='login-page-header-txt'>
-              <View>DoubleChain</View>
-              <View>Tech</View>
-            </View>
-            <View className='login-page-header-logo'>
-              <Image src={loginLogo} />
-            </View>
-          </View>
 
-          <View className='login-page-body'>
-            <View className='login-form'>
-              <View className='login-form-brief'>WELCOME TO LOGIN</View>
-              <View className='login-form-title'>欢迎登录</View>
-              {!Config.useWxLogin && (
-                <Block>
-                  <EleVcode
-                    className='login-form-phone'
-                    placeholder='请输入手机号'
-                    name='mobile'
-                    formKey={KEY}
-                    defaultValue={13308188512}
-                  />
-                  <EleInput
-                    className='login-form-vcode-value'
-                    placeholder='请输入验证码'
-                    maxLength={6}
-                    name='verifyCode'
-                    formKey={KEY}
-                  />
-                </Block>
-              )}
-            </View>
-            <View>
-              <EleButton btnType='submit' title='登录' className='login-submit-button' full={false} />
-            </View>
+    return (
+      <View className='login-page'>
+        <View className='login-page-header'>
+          <View className='login-page-header-txt'>
+            <View>链问链达</View>
+            <View>ChainQA</View>
           </View>
         </View>
-      </Form>
+
+        <View className='login-page-body'>
+          <AtRadio
+            className='login-page-body-type'
+            options={[
+              { label: '我是公务员', value: 'civil-servant', desc: '会包含公务员特有题型' },
+              { label: '我真的不是公务员', value: 'civilians' },
+            ]}
+            value={this.state.userType}
+            onClick={this.handleTypeChange}
+          />
+          <View>
+            <EleButton
+              btnType='getUserInfo'
+              title='授权登录'
+              className='login-submit-button' full={false}
+              onGetUserInfo={this.handleGetUserInfo}
+            />
+          </View>
+        </View>
+      </View>
     )
   }
 }
+
+export default LoginPage

@@ -3,7 +3,7 @@ import viewConfig from './viewmapping.config'
 const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/' //后端服务地址
 
 const niceRouterConfig = {
-  name: '双链科技',
+  name: '链问链答',
   baseURL,
   version: 1,
   appType: 'mini-program',
@@ -18,6 +18,7 @@ const niceRouterConfig = {
     Login: 'clientLogin/',
     VerifyCode: 'sendVerifyCode/:mobile/',
     OSSToken: 'test0ss/',
+    UpdateUserInfo: 'viewHomepage/',
   },
 }
 

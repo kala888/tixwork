@@ -24,18 +24,6 @@
       font-weight: bold;
       line-height: 100px;
     }
-
-    &-logo {
-      display: flex;
-      flex: 1;
-      justify-content: flex-end;
-      padding-bottom: 20px;
-
-      image {
-        width: 150px;
-        height: 82px;
-      }
-    }
   }
 
   &-body {
@@ -43,32 +31,8 @@
     flex: 7;
     flex-direction: column;
 
-    .login-form {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-
-      &-brief {
-        font-family: $b181black;
-        font-size: 32px;
-        font-weight: 900;
-        line-height: 36px;
-      }
-
-      &-title {
-        font-size: 25px;
-        font-weight: 400;
-      }
-
-      &-phone {
-        margin-top: 50px;
-        margin-left: 0;
-      }
-
-      &-vcode-value {
-        margin-top: 28px;
-        margin-left: 0;
-      }
+    &-type {
+      margin-bottom: 150px;
     }
 
     .login-submit-button {
