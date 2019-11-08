@@ -21,10 +21,8 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"simulatorType": "qywx_simulator_plugin",
-	"simulatorPluginLibVersion": {
-		"qywx_simulator_plugin": "1.2.0"
-	},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"libVersion": "2.8.0",
 	"condition": {}
 }
