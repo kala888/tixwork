@@ -33,24 +33,27 @@ class LoginPage extends Taro.PureComponent {
       return
     }
     console.log('handle get user info')
-    NavigationService.ajax(Config.api.UpdateUserInfo, {
-      userInfo: e.detail.userInfo,
-      userType: this.state.userType,
-    }, {
-      onSuccess: () => {
-        StorageTools.set('authorized', true)
-        NavigationService.view(Config.api.FooterHome)
+    NavigationService.ajax(
+      Config.api.UpdateUserInfo,
+      {
+        userInfo: e.detail.userInfo,
+        userType: this.state.userType,
       },
-    })
+      {
+        onSuccess: () => {
+          StorageTools.set('authorized', true)
+          NavigationService.view(Config.api.FooterHome)
+        },
+      }
+    )
   }
 
   render() {
-
     return (
       <View className='login-page'>
         <View className='login-page-header'>
           <View className='login-page-header-txt'>
-            <View>链问链达</View>
+            <View>链问链答</View>
             <View>ChainQA</View>
           </View>
         </View>
@@ -69,7 +72,8 @@ class LoginPage extends Taro.PureComponent {
             <EleButton
               btnType='getUserInfo'
               title='授权登录'
-              className='login-submit-button' full={false}
+              className='login-submit-button'
+              full={false}
               onGetUserInfo={this.handleGetUserInfo}
             />
           </View>

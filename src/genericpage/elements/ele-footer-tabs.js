@@ -26,7 +26,7 @@ export default class EleFooterTabs extends Taro.PureComponent {
           return
         }
         NavigationService.view(selected)
-      },
+      }
     )
   }
 
@@ -38,6 +38,6 @@ export default class EleFooterTabs extends Taro.PureComponent {
       image: it.imageUrl,
     }))
 
-    return (<AtTabBar fixed tabList={tabList} onClick={this.selectTab} current={current} />)
+    return <AtTabBar fixed tabList={tabList} onClick={this.selectTab} current={current} />
   }
 }

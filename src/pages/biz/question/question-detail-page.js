@@ -8,7 +8,6 @@ import EleFooterTabs from '@/genericpage/elements/ele-footer-tabs'
 
 import './question-detail.scss'
 
-
 const mockList = [
   {
     id: 1,
@@ -45,9 +44,7 @@ const mockList = [
   },
 ]
 
-
 export default class QuestionDetailPage extends Taro.PureComponent {
-
   state = {
     selected: null,
     current: 0,
@@ -58,28 +55,31 @@ export default class QuestionDetailPage extends Taro.PureComponent {
     const selected = item.id
     const { questionList = mockList } = this.props
     const question = questionList[this.state.current]
-    this.setState(pre => ({
-      selected,
-      theLastAnswer: pre.theLastAnswer + 1,
-    }), () => {
-      NavigationService.ajax('/post-answer', {
-        id: question.id,
-        answer: selected,
-      })
-    })
+    this.setState(
+      (pre) => ({
+        selected,
+        theLastAnswer: pre.theLastAnswer + 1,
+      }),
+      () => {
+        NavigationService.ajax('/post-answer', {
+          id: question.id,
+          answer: selected,
+        })
+      }
+    )
   }
 
   changeQuestion = (item) => {
     const { code } = item
     if (code === 'go-next') {
-      this.setState(pre => ({
+      this.setState((pre) => ({
         current: pre.current + 1,
         selected: null,
       }))
       return
     }
     if (code === 'go-pre') {
-      this.setState(pre => ({
+      this.setState((pre) => ({
         current: pre.current - 1,
         selected: null,
       }))
@@ -110,48 +110,37 @@ export default class QuestionDetailPage extends Taro.PureComponent {
       <View className='question-page'>
         <View className='question'>
           <View className='question-title'>
-            <View className='question-title-txt'>({this.state.current + 1}/{questionList.length})</View>
+            <View className='question-title-txt'>
+              ({this.state.current + 1}/{questionList.length})
+            </View>
             <View className='question-title-number'>{title}</View>
           </View>
 
           <View className='question-choices'>
-            {
-              choices.map(it => {
+            {choices.map((it) => {
+              const cls = classNames('question-choices-item', {
+                hidden: answered && (it.id !== this.state.selected && it.id !== correctAnswerId),
+                correct: answered && it.id === correctAnswerId,
+                notCorrect: answered && it.id === this.state.selected && !correct,
+              })
 
-                  const cls = classNames('question-choices-item', {
-                    hidden: answered && (it.id !== this.state.selected && it.id !== correctAnswerId),
-                    correct: answered && it.id === correctAnswerId,
-                    notCorrect: answered && it.id === this.state.selected && !correct,
-                  })
-
-                  return (
-                    <View key={it.id} className={cls} onClick={this.handleChoose.bind(this, it)}>
-                      {
-                        answered && !correct && it.id === this.state.selected && <AtIcon size='small' value='close' />
-                      }
-                      <View className='question-choices-item-id'>{it.id}.</View>
-                      <View className='question-choices-item-txt'>{it.text}</View>
-                      {
-                        answered && (it.id === correctAnswerId) && <AtIcon value='check-circle' />
-                      }
-                    </View>
-                  )
-                },
+              return (
+                <View key={it.id} className={cls} onClick={this.handleChoose.bind(this, it)}>
+                  {answered && !correct && it.id === this.state.selected && <AtIcon size='small' value='close' />}
+                  <View className='question-choices-item-id'>{it.id}.</View>
+                  <View className='question-choices-item-txt'>{it.text}</View>
+                  {answered && it.id === correctAnswerId && <AtIcon value='check-circle' />}
+                </View>
               )
-            }
+            })}
           </View>
 
-          {
-            this.state.current < this.state.theLastAnswer && <View>
-              <View>
-                {desc}
-              </View>
-              <EleFooterTabs
-                onClick={this.changeQuestion}
-                tabs={footerTabs}
-              />
+          {this.state.current < this.state.theLastAnswer && (
+            <View>
+              <View>{desc}</View>
+              <EleFooterTabs onClick={this.changeQuestion} tabs={footerTabs} />
             </View>
-          }
+          )}
         </View>
       </View>
     )

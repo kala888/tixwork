@@ -35,8 +35,7 @@ class App extends Component {
   componentDidMount() {
     if (Taro.canIUse('getUpdateManager')) {
       const updateManager = Taro.getUpdateManager()
-      updateManager.onCheckForUpdate(() => {
-      })
+      updateManager.onCheckForUpdate(() => {})
       updateManager.onUpdateReady(() => {
         Taro.showModal({
           title: '更新提示',

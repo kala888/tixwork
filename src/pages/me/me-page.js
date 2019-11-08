@@ -25,12 +25,11 @@ const Box_Navigator_List = [
   },
 ]
 
-
 const LineItem_Navigator_List = [
   {
     code: 'my-wrong-list',
-    imageUrl:defaultAvatar,
-    title:'我的错题',
+    imageUrl: defaultAvatar,
+    title: '我的错题',
   },
   {
     code: 'my-favorite-list',
@@ -38,7 +37,6 @@ const LineItem_Navigator_List = [
     title: '我的收藏',
   },
 ]
-
 
 @connect(({ me }) => ({ ...me }))
 export default class MePage extends Taro.PureComponent {
@@ -52,7 +50,13 @@ export default class MePage extends Taro.PureComponent {
   }
 
   render() {
-    const { boxNavigatorList = Box_Navigator_List, lineItemNavigatorList = LineItem_Navigator_List, name, brief, imageUrl } = this.props
+    const {
+      boxNavigatorList = Box_Navigator_List,
+      lineItemNavigatorList = LineItem_Navigator_List,
+      name,
+      brief,
+      imageUrl,
+    } = this.props
 
     return (
       <View className='me-page'>

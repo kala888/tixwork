@@ -1,8 +1,8 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "链问链答",
+	"projectname": "%E9%93%BE%E9%97%AE%E9%93%BE%E7%AD%94",
 	"description": "nice-router-taro a wx development framework base on Taro and React",
-	"appid": "wxffe4c48a31d36507",
+	"appid": "wxfd61a66b5321054a",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
@@ -22,9 +22,7 @@
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {
-		"qywx_simulator_plugin": "1.2.0"
-	},
+	"simulatorPluginLibVersion": {},
 	"libVersion": "2.8.0",
 	"condition": {}
 }

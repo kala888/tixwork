@@ -67,10 +67,11 @@ export default class EleButton extends Taro.PureComponent {
     }
   }
 
-  handleClick = (e) => {
+  handleClick = () => {
     const { btnType = '', linkToUrl, onClick } = this.props
     if (onClick) {
-      onClick(e)
+      console.log('button onclick')
+      onClick()
       return
     }
 
