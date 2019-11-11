@@ -14,6 +14,12 @@ async function saveTokenAsync(token) {
   return authInfo
 }
 
+async function isValidateToken(token) {
+  const authInfo = jwtDecode(token)
+  console.log('authInfo', authInfo) //TODO need check the exprtime
+  return true
+}
+
 async function getAuthInfoAsync() {
   const authInfo = await StorageTools.get(AUTH_INFO, {})
   return authInfo
@@ -55,5 +61,6 @@ const AuthTools = {
   saveTokenAsync,
   logout,
   // syncToken,
+  isValidateToken,
 }
 export default AuthTools
