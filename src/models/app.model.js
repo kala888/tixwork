@@ -52,7 +52,6 @@ export default {
       wxObj.checkSession({
         success: async () => {
           const isValidate = await AuthTools.isValidateToken()
-          console.log('有效 session,token is', token)
           if (!isValidate) {
             wxLogin(wxObj, loginMethod)
           }
