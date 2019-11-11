@@ -3,7 +3,6 @@ import parse from 'url-parse'
 import qs from 'qs'
 import isObject from 'lodash/isObject'
 import isEmpty from 'lodash/isEmpty'
-import trim from 'lodash/trim'
 import startsWith from 'lodash/startsWith'
 import localCacheService from './local-cache.service'
 import { LoadingType, toTaroUrl } from './nice-router-util'
@@ -93,10 +92,10 @@ const NavigationService = {
       const pages = Taro.getCurrentPages()
       const url = toTaroUrl(routeName, params)
       if (routeName) {
-        let { method = 'navigateTo' } = options
+        let { navigationOptions: { method = 'navigateTo' } = {} } = options
         if (
-          (method == 'navigateTo' && pages.length >= PAGE_LEVEL_LIMIT - 3) ||
-          (method == 'navigateToByForce' && pages.length == PAGE_LEVEL_LIMIT)
+          (method === 'navigateTo' && pages.length >= PAGE_LEVEL_LIMIT - 3) ||
+          (method === 'navigateToByForce' && pages.length === PAGE_LEVEL_LIMIT)
         ) {
           method = 'redirectTo'
         }
@@ -158,7 +157,9 @@ const NavigationService = {
     if (protocol === 'page:') {
       const { query, pathname } = urlData
       const queryParams = qs.parse(query)
-      const pageName = trim(pathname, '/')
+      const pageName = pathname
+      // const pageName = trim(pathname, '/')
+      console.log('.......', protocol, pathname, pageName)
       this.navigate(pageName, { ...params, ...queryParams })
       return
     }
