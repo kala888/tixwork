@@ -1,57 +1,148 @@
 @import '../../styles/theme';
 
+$second-color: #5fbdfa;
+
 .me-page {
   @extend %page;
+  background-color: $primary-color;
+  color: $white;
 
   &-header {
-    background-color: #fff;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 50px;
 
-    &-top {
-      background-color: $primary-color;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      border-bottom-left-radius: 50px;
-      padding-bottom: 60px;
-
-      .avatar {
-        padding: 0 40px;
-        width: 200px;
-        height: 200px;
-
-        image {
-          margin-top: 20px;
-          width: 150px;
-          height: 150px;
-          border-radius: 50%;
-          border: 8px solid darken($primary-color, 10%);
-          box-shadow: 0px 0px 20px #fff;
-        }
-      }
-
-      .content {
-        color: $white;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        font-size: 30px;
-
-        &-name {
-          font-size: 40px;
-        }
-
-        &-brief {
-          font-size: 22px;
-        }
+    &-avatar {
+      image {
+        margin-top: 20px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 8px solid lighten($primary-color, 20%);
+        box-shadow: 0px 0px 30px #fff;
       }
     }
 
-    &-footer {
-      padding-top: 20px;
+    &-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+
+      &-name {
+        align-self: center;
+        font-size: 40px;
+      }
+
+      &-brief {
+        font-size: 22px;
+      }
     }
   }
 
   &-body {
-    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: #5fbdfa;
+    margin: 20px 40px;
+    padding: 20px;
+    font-weight: 500;
+    justify-content: center;
+
+    &-title {
+      font-size: 45px;
+      text-align: center;
+    }
+
+    &-score {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+
+      &-txt {
+        background-color: $primary-color;
+        font-size: 26px;
+        padding: 5px 50px;
+        border-radius: 20px;
+        text-align: center;
+      }
+    }
+
+    &-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 0 20px;
+      background-color: $primary-color;
+      min-height: 600px;
+      border-radius: 10px;
+      color: $white;
+      font-weight: 600;
+
+      &-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
+        box-sizing: border-box;
+        border-bottom: 1px solid lighten($primary-color, 20%);
+
+        &-order {
+          font-size: 35px;
+          min-width: 60px;
+        }
+
+        &-avatar {
+          padding: 5px 20px;
+
+          image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 8px solid lighten($primary-color, 20%);
+          }
+        }
+
+        &-name {
+          display: flex;
+          flex: 1;
+        }
+
+        &-score {
+          font-weight: 500;
+          color: lighten($second-color, 20%);
+        }
+      }
+    }
+  }
+
+  &-share {
+    padding: 40px 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .share-button {
+      min-width: 220px;
+      //$btn-color: lighten($second-color, 10%);
+      $btn-color: $second-color;
+      background-color: $btn-color;
+      border-color: $border-color;
+      border-radius: 20px;
+      font-weight: 600;
+      color: $white;
+      box-shadow: 10px 10px 20px $second-color;
+    }
+  }
+  .navigation-bar {
+    background-color: $primary-color;
   }
 }

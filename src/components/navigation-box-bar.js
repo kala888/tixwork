@@ -1,21 +1,30 @@
 import Taro from '@tarojs/taro'
 import { AtBadge } from 'taro-ui'
 import m_ from '@/utils/mini-lodash'
+import toNumber from 'lodash/toNumber'
 import { Image, View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
+import classNames from 'classnames'
 
 import './biz/styles.scss'
 
 export default class NavigationBoxBar extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   handleClick = (item) => {
     NavigationService.view(item)
   }
 
   render() {
-    const { list = [] } = this.props
+    const { list = [], className, customStyle = {} } = this.props
+
+    const rootClass = classNames('navigation-bar', className)
+
+    console.log('custom', customStyle, rootClass)
     return (
       list.length > 0 && (
-        <View className='navigation-bar'>
+        <View className={rootClass} customStyle={customStyle}>
           {list.map((it, index) => {
             const { icon, title, value } = it
             const isLast = index === list.length - 1
@@ -30,7 +39,11 @@ export default class NavigationBoxBar extends Taro.PureComponent {
                 {!isLast && <View className='navigation-bar-item-break' />}
               </View>
             )
-            return m_.isNumber(value) && value > 0 ? <AtBadge value={value}>{itemRender}</AtBadge> : itemRender
+            return m_.isNumber(value) && value > 0 ? (
+              <AtBadge value={toNumber(value)}>{itemRender}</AtBadge>
+            ) : (
+              itemRender
+            )
           })}
         </View>
       )

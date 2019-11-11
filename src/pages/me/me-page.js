@@ -1,85 +1,90 @@
 import Taro from '@tarojs/taro'
 import { Image, View } from '@tarojs/components'
+import EleButton from '@/genericpage/elements/ele-button'
 import { connect } from '@tarojs/redux'
 import NavigationService from '@/nice-router/navigation.service'
-import NavigationLineItem from '@/components/navigation-line-item'
-import NavigationBoxBar from '@/components/navigation-box-bar'
 import Config from '@/utils/config'
-import './me.scss'
+import NavigationBoxBar from '@/components/navigation-box-bar'
+import ShareCanvas from '@/components/biz/share-canvas'
 
+import './me.scss'
 import buildingIcon from '../../assets/icon/icon_loupan@2x.png'
 import commerceIcon from '../../assets/icon/icon_liansuo@2x.png'
 
-const defaultAvatar = 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg'
-
-const Box_Navigator_List = [
+const defaultActionList = [
   {
     code: 'continue-answer',
     icon: buildingIcon,
     title: '继续答题',
+    linkToUrl: 'page:///pages/biz/exam/question-detail-page',
   },
   {
     code: 'view-score',
     icon: commerceIcon,
-    title: '查看成绩',
-  },
-]
-
-const LineItem_Navigator_List = [
-  {
-    code: 'my-wrong-list',
-    imageUrl: defaultAvatar,
     title: '我的错题',
-  },
-  {
-    code: 'my-favorite-list',
-    icon: commerceIcon,
-    title: '我的收藏',
   },
 ]
 
 @connect(({ me }) => ({ ...me }))
 export default class MePage extends Taro.PureComponent {
   componentDidMount() {
-    NavigationService.view(Config.api.FooterMe)
-  }
-
-  handleOpenProfile = () => {
-    const { userInfo } = this.props
-    NavigationService.view(userInfo)
+    NavigationService.view(Config.api.ViewScore, { id: '+' })
   }
 
   render() {
-
-    const { boxNavigatorList = Box_Navigator_List, lineItemNavigatorList = LineItem_Navigator_List, name, brief, imageUrl } = this.props
+    console.log('this.props....', this.props)
+    const {
+      question = '什么是区块连？',
+      imageUrl,
+      name = 'kala888',
+      brief = '',
+      examScore = null,
+      list = [],
+      worldRanking = 2254,
+      totalScore = 8000,
+    } = this.props
 
     return (
       <View className='me-page'>
         <View className='me-page-header'>
-          <View className='me-page-header-top'>
-            <View className='avatar' onClick={this.handleOpenProfile}>
-              <Image src={imageUrl || defaultAvatar} />
-            </View>
-
-            <View className='content'>
-              <View className='content-name'>{name}</View>
-              <View className='content-brief'>{brief}</View>
-            </View>
+          <View className='me-page-header-avatar'>
+            <Image src={imageUrl} />
           </View>
-          <View className='me-page-header-footer'>
-            <NavigationBoxBar list={boxNavigatorList} />
+
+          <View className='me-page-header-content'>
+            <View className='me-page-header-content-name'>{name}</View>
+            <View className='me-page-header-content-brief'>{brief}</View>
           </View>
         </View>
+
+        <NavigationBoxBar list={defaultActionList} />
+
         <View className='me-page-body'>
-          {lineItemNavigatorList.map((it) => (
-            <NavigationLineItem
-              key={it.id}
-              imageUrl={it.imageUrl}
-              title={it.title}
-              brief={it.brief}
-              linkToUrl={it.linkToUrl}
-            />
-          ))}
+          <View className='me-page-body-title'>挑战排行榜</View>
+          {examScore && (
+            <View className='me-page-body-score'>
+              <View className='me-page-body-score-txt'>本次获得分数：{examScore}</View>
+            </View>
+          )}
+          <View className='me-page-body-list'>
+            {list.map((it) => (
+              <View className='me-page-body-list-item' key={it.id}>
+                <View className='me-page-body-list-item-order'>{it.worldRanking}</View>
+                <View className='me-page-body-list-item-avatar'>
+                  <Image src={it.imageUrl} />
+                </View>
+                <View className='me-page-body-list-item-name'>{it.name}</View>
+                <View className='me-page-body-list-item-score'>{it.totalScore}分</View>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <View className='me-page-share'>
+          <EleButton btnType='share' uiType='secondary' className='share-button'>
+            分享
+          </EleButton>
+          <ShareCanvas question={question} name={name} worldRanking={worldRanking} totalScore={totalScore} />
         </View>
       </View>
     )

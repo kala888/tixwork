@@ -5,6 +5,7 @@ import { AtRadio } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import StorageTools from '@/nice-router/storage-tools'
 import Config from '@/utils/config'
+import m_ from '@/utils/mini-lodash'
 
 import './login.scss'
 
@@ -17,11 +18,15 @@ class LoginPage extends Taro.PureComponent {
   }
 
   componentDidMount() {
-    const authorized = StorageTools.get('authorized', false)
-    console.log('local saved authorized', authorized)
-    if (authorized) {
-      NavigationService.view(Config.api.FooterHome)
+    const userInfo = StorageTools.get('userInfo', {})
+    console.log('local saved authorized', userInfo)
+    if (!m_.isEmpty(userInfo)) {
+      this.startExam()
     }
+  }
+
+  startExam = () => {
+    NavigationService.navigate('/pages/biz/exam/question-detail-page')
   }
 
   handleTypeChange = (userType) => {
@@ -33,16 +38,19 @@ class LoginPage extends Taro.PureComponent {
       return
     }
     console.log('handle get user info')
+    const { userInfo = {} } = e.detail
+    const { nickName, avatarUrl } = userInfo
     NavigationService.ajax(
       Config.api.UpdateUserInfo,
       {
-        userInfo: e.detail.userInfo,
+        name: nickName,
+        avatar: encodeURIComponent(avatarUrl),
         userType: this.state.userType,
       },
       {
         onSuccess: () => {
-          StorageTools.set('authorized', true)
-          NavigationService.view(Config.api.FooterHome)
+          StorageTools.set('userInfo', userInfo)
+          this.startExam()
         },
       }
     )
@@ -71,7 +79,7 @@ class LoginPage extends Taro.PureComponent {
           <View>
             <EleButton
               btnType='getUserInfo'
-              title='授权登录'
+              title='授权开始答题'
               className='login-submit-button'
               full={false}
               onGetUserInfo={this.handleGetUserInfo}

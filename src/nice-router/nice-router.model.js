@@ -90,6 +90,7 @@ export default {
         arrayMerge = 'replace',
         onSuccess = noop,
         loading,
+        navigationOptions,
       } = payload
 
       if (!uri) {
@@ -167,7 +168,7 @@ export default {
         }
 
         if (doRedirect) {
-          NavigationService.navigate(pageName)
+          NavigationService.navigate(pageName, {}, { navigationOptions })
         }
 
         if (cache || !asForm) {

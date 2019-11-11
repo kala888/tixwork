@@ -1,0 +1,70 @@
+@import '../../../styles/theme';
+
+.question-page {
+  @extend %page;
+  background-color: $primary-color;
+
+  .question {
+    margin-top: 50px;
+    padding: 36px;
+    font-weight: 500;
+    color: $white;
+    font-size: 50px;
+    line-height: 65px;
+
+    &-title {
+      display: flex;
+      flex-direction: row;
+
+      &-number {
+        padding: 0 20px;
+      }
+    }
+
+    &-choices {
+      padding-top: 50px;
+      font-size: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &-item {
+        display: flex;
+        flex-direction: row;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 20px 40px;
+        margin: 40px 40px 0 40px;
+        background-color: $white;
+        color: darken($primary-color, 20%);
+        border-radius: 40px;
+
+        &-id {
+          padding: 0 20px;
+        }
+
+        &-txt {
+          display: flex;
+          flex: 1;
+        }
+      }
+
+      .correct {
+        background-color: #2cdfbd;
+        font-weight: 600;
+        color: $white;
+      }
+
+      .notCorrect {
+        background-color: #fc7269;
+        font-weight: 600;
+        color: $white;
+      }
+
+      .hidden {
+        opacity: 0.2;
+      }
+    }
+  }
+}

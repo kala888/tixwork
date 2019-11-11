@@ -43,6 +43,10 @@ const ViewmappingConfig = {
   },
 
   // end global pages
+  'com.doublechaintech.bcex.wxappservicepageview.ScoreboardPage': {
+    pageName: '/pages/me/me-page',
+    stateAction: 'me/save',
+  },
 
   'com.mock': [
     {

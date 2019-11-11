@@ -1,6 +1,6 @@
 import viewConfig from './viewmapping.config'
 
-const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/' //后端服务地址
+const baseURL = 'https://demo2.doublechaintech.com/bcex/wxappService/' //后端服务地址
 
 const niceRouterConfig = {
   name: '链问链答',
@@ -18,7 +18,10 @@ const niceRouterConfig = {
     Login: 'clientLogin/',
     VerifyCode: 'sendVerifyCode/:mobile/',
     OSSToken: 'test0ss/',
-    UpdateUserInfo: 'viewHomepage/',
+    UpdateUserInfo: 'customerUpdateProfile/:name/:avatar/:userType/',
+    StartExam: 'customerStartExam/',
+    AnswerQuestion: 'customerAnswerQuestion/:questionId/:choicesId/',
+    ViewScore: 'customerViewScore/:id/',
   },
 }
 

@@ -28,8 +28,6 @@ const modelListOOTB = [
   'listofpage3',
   'listofpage4',
   //biz
-  'article',
-  'recommendUser',
 ]
 
 const customizedModelList = []
