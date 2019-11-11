@@ -1,8 +1,11 @@
 import jwtDecode from 'jwt-decode'
+import isEmpty from 'lodash/isEmpty'
 import StorageTools from './storage-tools'
 
 const TOKEN = 'TOKEN'
 const AUTH_INFO = 'AUTH_INFO'
+
+const SAFTY_TIME = 1800 //预留半个小时过期（单位秒）
 
 async function saveTokenAsync(token) {
   StorageTools.set(TOKEN, token)
@@ -14,10 +17,13 @@ async function saveTokenAsync(token) {
   return authInfo
 }
 
-async function isValidateToken(token) {
-  const authInfo = jwtDecode(token)
-  console.log('authInfo', authInfo) //TODO need check the exprtime
-  return true
+async function isValidateToken() {
+  const authInfo = await getAuthInfoAsync()
+  if (!isEmpty(authInfo) && authInfo.exp > 0) {
+    console.log('the token expTime is', authInfo.exp, 'will exp ', authInfo.exp - Date.now() / 1000, 'latter')
+    return authInfo.exp - Date.now() / 1000 > SAFTY_TIME
+  }
+  return false
 }
 
 async function getAuthInfoAsync() {
