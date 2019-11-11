@@ -20,7 +20,7 @@ function wxLogin(wxObj, loginMethod) {
               AuthTools.saveTokenAsync(authorization)
             }
           },
-        }
+        },
       )
     },
   })
@@ -31,7 +31,7 @@ export default {
   state: {},
   reducers: {},
   effects: {
-    *wxLogin({ payload = {} }) {
+    * wxLogin({ payload = {} }) {
       if (!Config.useWxLogin) {
         console.log('这个应用不使用WXLogin，Config.useWxLogin=' + Config.useWxLogin)
         return
@@ -51,9 +51,8 @@ export default {
 
       wxObj.checkSession({
         success: async () => {
-          const token = await AuthTools.getTokenAsync()
-          console.log('有效 session,token is', token)
-          if (!token) {
+          const isValidate = await AuthTools.isValidateToken()
+          if (!isValidate) {
             wxLogin(wxObj, loginMethod)
           }
         },
