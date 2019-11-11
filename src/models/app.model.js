@@ -4,6 +4,28 @@ import Config from '@/utils/config'
 import AuthTools from '@/nice-router/auth-tools'
 import Taro from '@tarojs/taro'
 
+function wxLogin(wxObj, loginMethod) {
+  console.log('进行wx login')
+  wxObj.login({
+    success: (response) => {
+      NavigationService.put(
+        Config.api.Login,
+        { loginMethod, code: response.code },
+        {
+          statInPage: true,
+          onSuccess: (resp, { headers }) => {
+            const { authorization } = headers
+            console.log('wx login response, headers', headers)
+            if (authorization) {
+              AuthTools.saveTokenAsync(authorization)
+            }
+          },
+        }
+      )
+    },
+  })
+}
+
 export default {
   namespace: 'app',
   state: {},
@@ -28,29 +50,16 @@ export default {
       }
 
       wxObj.checkSession({
-        success: () => {
-          console.log('有效 session')
+        success: async () => {
+          const token = await AuthTools.getTokenAsync()
+          console.log('有效 session,token is', token)
+          if (!token || AuthTools.is) {
+            wxLogin(wxObj, loginMethod)
+          }
         },
         fail: () => {
           console.log('session失效，重新登录')
-          wxObj.login({
-            success: (response) => {
-              NavigationService.put(
-                Config.api.Login,
-                { loginMethod, code: response.code },
-                {
-                  statInPage: true,
-                  onSuccess: (resp, { headers }) => {
-                    const { authorization } = headers
-                    console.log('111111', headers)
-                    if (authorization) {
-                      AuthTools.saveTokenAsync(authorization)
-                    }
-                  },
-                }
-              )
-            },
-          })
+          wxLogin(wxObj, loginMethod)
         },
       })
     },
