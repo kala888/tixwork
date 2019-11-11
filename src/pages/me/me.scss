@@ -8,12 +8,11 @@ $second-color: #5fbdfa;
   color: $white;
 
   &-header {
-    padding-top: 30px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
     border-bottom-left-radius: 50px;
+    padding: 20px 80px;
 
     &-avatar {
       image {
@@ -27,15 +26,14 @@ $second-color: #5fbdfa;
     }
 
     &-content {
+      padding-left: 40px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
       font-size: 30px;
 
       &-name {
-        align-self: center;
         font-size: 40px;
+        flex: 1;
       }
 
       &-brief {
@@ -142,7 +140,14 @@ $second-color: #5fbdfa;
       box-shadow: 10px 10px 20px $second-color;
     }
   }
+
   .navigation-bar {
     background-color: $primary-color;
+
+    .navigation-box-txt {
+      color: #fff;
+      padding-top: 20px;
+      font-size: 30px;
+    }
   }
 }

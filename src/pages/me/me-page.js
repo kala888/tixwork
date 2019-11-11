@@ -19,9 +19,10 @@ const defaultActionList = [
     linkToUrl: 'page:///pages/biz/exam/question-detail-page',
   },
   {
-    code: 'view-score',
+    code: 'view-fault-answer-list',
     icon: commerceIcon,
     title: '我的错题',
+    linkToUrl: Config.api.ViewFaultAnswer,
   },
 ]
 
@@ -31,12 +32,15 @@ export default class MePage extends Taro.PureComponent {
     NavigationService.view(Config.api.ViewScore, { id: '+' })
   }
 
+  handleAuth = () => {
+    NavigationService.navigate('/pages/login/login-page')
+  }
+
   render() {
-    console.log('this.props....', this.props)
     const {
       question = '什么是区块连？',
       imageUrl,
-      name = 'kala888',
+      name = '',
       brief = '',
       examScore = null,
       list = [],
@@ -47,7 +51,7 @@ export default class MePage extends Taro.PureComponent {
     return (
       <View className='me-page'>
         <View className='me-page-header'>
-          <View className='me-page-header-avatar'>
+          <View className='me-page-header-avatar' onClick={this.handleAuth}>
             <Image src={imageUrl} />
           </View>
 
@@ -57,7 +61,7 @@ export default class MePage extends Taro.PureComponent {
           </View>
         </View>
 
-        <NavigationBoxBar list={defaultActionList} />
+        <NavigationBoxBar list={defaultActionList} customStyle={{ color: '#fff' }} />
 
         <View className='me-page-body'>
           <View className='me-page-body-title'>挑战排行榜</View>

@@ -63,7 +63,7 @@ const StorageTools = {
     keys.map((key) => {
       const remove = key.indexOf(CACHE_PREFIX) === 0 || key.indexOf(CACHE_EXPIRATION_PREFIX) === 0
       if (remove) {
-        Taro.removeStorage(key)
+        Taro.removeStorage({ key })
       }
     })
   },
@@ -74,7 +74,7 @@ const StorageTools = {
       const remove =
         key.indexOf(`${CACHE_PREFIX}${prefix}`) === 0 || key.indexOf(`${CACHE_EXPIRATION_PREFIX}${prefix}`) === 0
       if (remove) {
-        Taro.removeStorage(key)
+        Taro.removeStorage({ key })
       }
     })
   },

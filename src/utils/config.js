@@ -22,6 +22,7 @@ const niceRouterConfig = {
     StartExam: 'customerStartExam/',
     AnswerQuestion: 'customerAnswerQuestion/:questionId/:choicesId/',
     ViewScore: 'customerViewScore/:id/',
+    ViewFaultAnswer: 'customerViewFaultAnswer/',
   },
 }
 

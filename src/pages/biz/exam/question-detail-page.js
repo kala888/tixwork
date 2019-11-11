@@ -6,25 +6,8 @@ import m_ from '@/utils/mini-lodash'
 import NavigationService from '@/nice-router/navigation.service'
 import EleFooterTabs from '@/genericpage/elements/ele-footer-tabs'
 import Config from '@/utils/config'
+import { LoadingType } from '@/nice-router/nice-router-util'
 import './question-detail.scss'
-
-const defaultQuestionList = [
-  {
-    id: 1,
-    title: '什么是区块链?',
-    correctAnswerId: 'A333',
-    choices: [
-      { id: 'A111', displayId: 'A', text: '由攀成钢专门打造，千年寒铁构成' },
-      { id: 'A222', displayId: 'B', text: '别说了，就是比特币' },
-      {
-        id: 'A333',
-        displayId: 'C',
-        text: '区块链是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式',
-      },
-      { id: 'A444', displayId: 'D', text: '骗人的，跟0f0一样要交押金的' },
-    ],
-  },
-]
 
 const DISPLAY_ID = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'n']
 
@@ -33,7 +16,7 @@ export default class QuestionDetailPage extends Taro.PureComponent {
     selected: null,
     current: 0,
     theLastAnswer: 0,
-    questionList: defaultQuestionList,
+    questionList: [],
     examId: '+',
   }
 
@@ -42,6 +25,7 @@ export default class QuestionDetailPage extends Taro.PureComponent {
       Config.api.StartExam,
       {},
       {
+        loading: LoadingType.modal,
         onSuccess: (resp) => {
           const { questions = [], examId } = resp
           this.setState({
@@ -106,6 +90,9 @@ export default class QuestionDetailPage extends Taro.PureComponent {
 
   render() {
     const { questionList = [], selected, current, theLastAnswer } = this.state
+    if (questionList.length === 0) {
+      return null
+    }
     const { title, choices = [], correctAnswerId, desc } = questionList[current] || {}
     const answered = !m_.isEmpty(selected)
     const correct = selected === correctAnswerId

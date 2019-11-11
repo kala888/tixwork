@@ -74,7 +74,6 @@ export default class Listof extends Taro.PureComponent {
       onItemPress,
     } = this.props
 
-    console.log('11111', listRefs)
     const list = enrichListOfEntity({ dataContainer, targetList: listRefs })
     console.log('listof', list)
 

@@ -5,8 +5,7 @@ import { AtRadio } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import StorageTools from '@/nice-router/storage-tools'
 import Config from '@/utils/config'
-import m_ from '@/utils/mini-lodash'
-
+import AuthTools from '@/nice-router/auth-tools'
 import './login.scss'
 
 class LoginPage extends Taro.PureComponent {
@@ -17,12 +16,9 @@ class LoginPage extends Taro.PureComponent {
     userType: 'civilians',
   }
 
-  componentDidMount() {
-    const userInfo = StorageTools.get('userInfo', {})
-    console.log('local saved authorized', userInfo)
-    if (!m_.isEmpty(userInfo)) {
-      this.startExam()
-    }
+  async componentDidMount() {
+    await AuthTools.logout()
+    NavigationService.dispatch('app/wxLogin')
   }
 
   startExam = () => {
