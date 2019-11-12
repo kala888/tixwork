@@ -89,7 +89,14 @@ yarn dev:weapp
 
 - 这里推荐使用自动代码生成框架DaaS Start Kit（TODO应该有一个链接），可以与nice-router完美配合。
 
-#### 
+
+###### 已经上线的小程序
+
+<div>
+  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/chainqa/chainqa-wechat.jpg'/>
+</div>
+
+
 
 ### 开发手册
 
