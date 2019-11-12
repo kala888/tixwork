@@ -23,7 +23,6 @@ export default class EleMoreActions extends Taro.PureComponent {
     Taro.showActionSheet({
       itemList,
       success: ({ tapIndex }) => {
-        console.log(actionList, tapIndex)
         NavigationService.view(actionList[tapIndex])
       },
     })

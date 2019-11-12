@@ -41,7 +41,6 @@ export default class EleImagePicker extends Taro.PureComponent {
       onStart: resetProgress,
       onComplete: resetProgress,
       onSuccess: (result) => {
-        console.log('upload image success', result)
         const { remoteFile, sourceFile } = result
 
         this.setState((preState) => {
@@ -116,7 +115,6 @@ export default class EleImagePicker extends Taro.PureComponent {
         />
         <Text className='note'>{briefText}</Text>
         {progress > 0 && <AtProgress percent={progress} />}
-        <Text onClick={() => console.log(this.state.files)}>show</Text>
       </View>
     )
   }

@@ -30,7 +30,6 @@ export default class LoginPage extends Taro.PureComponent {
       {
         onSuccess: (resp, { headers }) => {
           const { authorization } = headers
-          console.log('111111', headers)
           if (authorization) {
             AuthTools.saveTokenAsync(authorization)
           }

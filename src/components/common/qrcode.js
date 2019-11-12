@@ -57,12 +57,7 @@ export default class QRCode extends Taro.PureComponent {
     const qrcode = new QRCodeImpl(-1, ErrorCorrectLevel[level])
     qrcode.addData(this.convertStr(text))
     qrcode.make()
-
-    console.log('qrcode =', qrcode)
-
     const ctx = Taro.createCanvasContext(defaultCanvasId, this.$scope)
-
-    console.log('xxx', ctx)
     if (!ctx) {
       return
     }
@@ -83,7 +78,6 @@ export default class QRCode extends Taro.PureComponent {
         ctx && ctx.fillRect(Math.round(cdx * tileW), Math.round(rdx * tileH), w, h)
       })
     })
-    console.log('xxx')
     ctx.save()
     ctx.draw()
   }

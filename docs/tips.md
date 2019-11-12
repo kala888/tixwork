@@ -18,4 +18,7 @@
 
 9. CSS部分使用SCSS和css就好了，这也不需要纠结。
 
+10. idea 格式化和format不一致：打开.prettierrc文件，点击右键，Apply Prettier Style Rules 或者修改rule后，接受提示"Use code style base on Prettier for this project?"
+ 如果idea中格式化还报jsx/react-tag-spacing错误设置idea：Code Style -> HTML -> Other -> Spaces -> In empty tag
+
 

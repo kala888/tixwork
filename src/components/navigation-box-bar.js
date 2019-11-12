@@ -20,7 +20,6 @@ export default class NavigationBoxBar extends Taro.PureComponent {
   render() {
     const { list = [], className, customStyle = {} } = this.props
     const rootClass = classNames('navigation-bar', className)
-    // console.log('custom', customStyle, rootClass)
     return (
       list.length > 0 && (
         <View className={rootClass} customStyle={customStyle}>

@@ -19,7 +19,6 @@ export default class EleFooterTabs extends Taro.PureComponent {
       },
       () => {
         const { tabs, onClick } = this.props
-        console.log(value, tabs)
         const selected = tabs[value]
         if (onClick) {
           onClick(selected)

@@ -346,7 +346,6 @@ const pageData = {
     { id: '16', type: 'footer-tabs', ...footer },
   ],
 }
-console.log(popup)
 
 const mockData = {
   xclass: 'com.terapico.caf.viewcomponent.GenericPage',

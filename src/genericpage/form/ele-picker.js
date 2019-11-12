@@ -25,11 +25,8 @@ export default class ElePicker extends Taro.PureComponent {
   handleChange = (e) => {
     const { name, range, rangeKey, formKey, valueKey } = this.props
     const { value } = e.detail
-    console.log(value, range[value])
-
     const selected = range ? range[value] : value
     const displayValue = selected[rangeKey] || selected
-    console.log('displayValue', displayValue)
 
     this.setState(
       {
@@ -46,8 +43,6 @@ export default class ElePicker extends Taro.PureComponent {
 
   render() {
     const { title, brief, mode, range, rangeKey, className, customStyle } = this.props
-
-    console.log('picker...', this.props)
 
     const value = this.state.displayValue
     const rootClass = EleHelper.classNames('ele-picker', className)

@@ -44,7 +44,6 @@ export default class EleCarousel extends Taro.PureComponent {
     const style = { ...customStyle, height: toRpx(height) }
 
     const rootClass = EleHelper.classNames('ele-carousel', className)
-    console.log('x....', style)
     return (
       <View className={rootClass} style={style}>
         <Swiper

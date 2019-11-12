@@ -6,7 +6,6 @@ export default {
   state: {},
   reducers: {
     hideWelcome(state) {
-      console.log('hidden.....')
       return { ...state, welcomeSlides: {} }
     },
   },

@@ -33,13 +33,11 @@ export default class FooterTips extends Taro.PureComponent {
       tips = '正在加载中...'
     }
 
-    console.log('footerTips', !loading, listMeta)
     if (!loading && listMeta) {
       if (listMeta.hasNextPage) {
         tips = '加载更多'
         disabled = false
       }
-      console.log('footerTips2', !listMeta.hasNextPage, listLength)
       if (!listMeta.hasNextPage && listLength > 10) {
         tips = '我们是有底线的'
       }

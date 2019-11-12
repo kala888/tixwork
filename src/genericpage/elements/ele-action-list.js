@@ -23,7 +23,6 @@ class EleActionList extends Taro.PureComponent {
       <View className={rootClass} style={customStyle}>
         {list.map((it) => {
           const { customStyle: actionStyle = {} } = it
-          console.log('btn', it)
           return (
             <View key={it.id} className='ele-action-list-btn'>
               <EleButton

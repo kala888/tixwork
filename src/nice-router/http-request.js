@@ -116,11 +116,6 @@ const HttpRequest = {
   },
   logResp(response) {
     console.log('%c****************************', 'color:#40aad8')
-    // console.log(
-    //   `%c*  ${response.config.method} to ${response.config.url}`,
-    //   'color:40aad8'
-    // )
-
     console.log('%c*  X-Class:', 'color:#40aad8', response.headers['x-class'])
     console.log('%c*  X-Env-Type:', 'color:#40aad8', response.headers['x-env-type'])
     console.log('%c*  JSON Data:', 'color:#40aad8', response.data)

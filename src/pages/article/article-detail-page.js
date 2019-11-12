@@ -15,8 +15,6 @@ export default class ArticleDetailPage extends Taro.PureComponent {
   render() {
     const { articleParagraphList = [], createTime, authorName, title } = this.props
 
-    console.log('show article', this.props)
-
     return (
       <View className='article-page'>
         <View className='article-page-body'>
