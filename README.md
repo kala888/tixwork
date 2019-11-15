@@ -12,6 +12,13 @@ nice-router包含两部分：
 
 给予后端开发页面控制权（方便实现客CS程序的千人千面，业务变更）
 
+
+<div>
+  <img src='http://img14.360buyimg.com/img/jfs/t1/75655/32/15369/1497606/5dce1c26E27e2c759/031a033c857992a5.jpg!q60.webp'/>
+</div>
+  
+
+
 # nice-router-taro
 
 #### 基础知识：React + DVA + Taro + TaroUI
