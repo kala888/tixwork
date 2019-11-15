@@ -94,7 +94,7 @@ yarn dev:weapp
 
 ##### 2.我需要一个后端服务，最好搭配一个中台
 
-- 这里推荐使用自动代码生成框架DaaS Start Kit（TODO应该有一个链接），可以与nice-router完美配合。
+- 这里推荐使用自动代码生成框架[DaaS Start Kit](https://github.com/doublechaintech/daas-start-kit)，可以与nice-router完美配合。
 
 
 ###### 已经上线的小程序
