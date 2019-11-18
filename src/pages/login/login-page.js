@@ -5,7 +5,6 @@ import EleInput from '@/genericpage/form/ele-input'
 import EleVcode from '@/genericpage/form/ele-vcode'
 import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
-import AuthTools from '@/nice-router/auth-tools'
 import './login.scss'
 import loginLogo from '../../assets/login-logo.png'
 
@@ -13,29 +12,7 @@ const KEY = 'login-form'
 
 export default class LoginPage extends Taro.PureComponent {
   submit = async (formData) => {
-    if (Config.useWxLogin) {
-      //其实在app.js中已经登录过了只需要重放上一次请求
-      NavigationService.dispatch('niceRouter/retry')
-      //为了保险起见，再发一道wxlogin
-      NavigationService.dispatch('app/wxLogin')
-      return
-    }
-
-    NavigationService.put(
-      Config.api.Login,
-      {
-        ...formData,
-        loginMethod: 'mobile_vcode',
-      },
-      {
-        onSuccess: (resp, { headers }) => {
-          const { authorization } = headers
-          if (authorization) {
-            AuthTools.saveTokenAsync(authorization)
-          }
-        },
-      }
-    )
+    NavigationService.dispatch('app/login', formData)
   }
 
   handleClick = (e) => {

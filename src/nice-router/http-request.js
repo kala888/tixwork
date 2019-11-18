@@ -128,7 +128,12 @@ const HttpRequest = {
     showLoading(loading)
     // await AuthTools.syncToken()
     const token = await AuthTools.getTokenAsync()
-    console.log('toooooooken', token)
+    // if (process.env.NODE_ENV === 'development') {
+    //  const auth = await AuthTools.getAuthInfoAsync()
+    // console.log('auth info for dev', auth)
+    // }
+    const auth = await AuthTools.getAuthInfoAsync()
+    console.log('auth info for dev', auth)
 
     let result = {}
     const requestHeader = {

@@ -17,7 +17,7 @@ const niceRouterConfig = {
     FooterMe: 'customerViewDashboard/',
     Login: 'clientLogin/',
     VerifyCode: 'sendVerifyCode/:mobile/',
-    OSSToken: 'test0ss/',
+    OSSToken: 'customGetOssToken/',
   },
 }
 

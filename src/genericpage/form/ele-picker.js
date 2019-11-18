@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import { AtIcon } from 'taro-ui'
+import isArray from 'lodash/isArray'
 import { Label, Picker, View } from '@tarojs/components'
 
 import './ele-form.scss'
@@ -12,21 +13,37 @@ export default class ElePicker extends Taro.PureComponent {
     mode: 'date',
     displayMode: 'right-brief',
     range: null,
-    rangeKey: 'title',
-    valueKey: 'value',
+    displayProperty: 'title',
+    valueProperty: 'value',
     customStyle: {},
     className: null,
+    name: '',
   }
 
   state = {
-    displayValue: '',
+    displayValue: null,
   }
 
   handleChange = (e) => {
-    const { name, range, rangeKey, formKey, valueKey } = this.props
+    const { name, range, formKey, displayProperty, valueProperty } = this.props
     const { value } = e.detail
-    const selected = range ? range[value] : value
-    const displayValue = selected[rangeKey] || selected
+    let selected = value
+    let displayValue = value
+    let selectedValue = null
+
+    if (isArray(value)) {
+      selected = value.map((it, idx) => {
+        if (range) {
+          return range[idx][it]
+        }
+        return it
+      })
+      displayValue = selected.map((it) => it[displayProperty] || it).join('-')
+    } else if (range) {
+      selected = range[value]
+      displayValue = selected[displayProperty]
+      selectedValue = selected[valueProperty]
+    }
 
     this.setState(
       {
@@ -35,25 +52,30 @@ export default class ElePicker extends Taro.PureComponent {
       () =>
         Taro.eventCenter.trigger('form-value-changed', {
           name,
-          value: selected[valueKey] || selected,
+          value: selectedValue || selected,
           formKey,
         })
     )
   }
 
   render() {
-    const { title, brief, mode, range, rangeKey, className, customStyle } = this.props
-
-    const value = this.state.displayValue
+    const { title, brief, mode, range, displayProperty, className, customStyle, onColumnChange } = this.props
+    const { displayValue } = this.state
     const rootClass = EleHelper.classNames('ele-picker', className)
 
     return (
-      <Picker mode={mode} onChange={this.handleChange} range={range} rangeKey={rangeKey}>
+      <Picker
+        mode={mode}
+        onChange={this.handleChange}
+        range={range}
+        rangeKey={displayProperty}
+        onColumnChange={onColumnChange}
+      >
         <View className={rootClass} style={customStyle}>
           <Label className='label-text ele-picker-left'>{title}</Label>
           <View className='ele-picker-right'>
-            {value ? (
-              <View className='ele-picker-right-value'>{value}</View>
+            {displayValue ? (
+              <View className='ele-picker-right-value'>{displayValue}</View>
             ) : (
               <View className='ele-picker-right-brief'>{brief}</View>
             )}

@@ -30,12 +30,19 @@ export default class EleTextarea extends Taro.PureComponent {
       {
         value,
       },
-      () =>
+      () => {
+        const { onChange } = this.props
+        if (onChange) {
+          onChange(value)
+          return
+        }
+
         Taro.eventCenter.trigger('form-value-changed', {
           name,
           value,
           formKey,
         })
+      }
     )
   }
 
