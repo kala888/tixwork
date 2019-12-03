@@ -4,19 +4,25 @@ import Config from '@/utils/config'
 import AuthTools from '@/nice-router/auth-tools'
 import Taro from '@tarojs/taro'
 
-function wxLogin(wxObj, loginMethod) {
+function wxLogin(wxObj, loginMethod, options) {
   console.log('进行wx login')
   wxObj.login({
     success: async (response) => {
       console.log('进行wx login, code is', response.code)
-      await login({ loginMethod, code: response.code })
+      await remoteLogin({ loginMethod, code: response.code }, options)
     },
   })
 }
 
-async function login(params = {}) {
+function remoteLogin(params = {}, options = {}) {
+  const navigationOptions = {}
+  if (!options.statInPage) {
+    navigationOptions.method = 'reLaunch'
+  }
+
   NavigationService.put(Config.api.Login, params, {
-    navigationOptions: { method: 'reLaunch' },
+    ...options,
+    navigationOptions,
     onSuccess: (resp, { headers }) => {
       const { authorization } = headers
       console.log('wx login response, headers', headers)
@@ -33,15 +39,16 @@ export default {
   reducers: {},
   effects: {
     *login({ payload = {} }, { put }) {
-      let { loginMethod } = payload
+      const { statInPage, ...params } = payload
+      const options = { statInPage }
       yield put({ type: 'logout' })
-
       if (!Config.useWxLogin) {
         console.log('登录。。。非微信登录')
-        this.login(payload)
+        remoteLogin(params, options)
         return
       }
 
+      let loginMethod = ''
       let wxObj = Taro
       if (wx.qy) {
         console.log('登录。。。企业微信登录')
@@ -57,12 +64,12 @@ export default {
           const isValidate = await AuthTools.isValidateToken()
           console.log('token isValidate?', isValidate)
           if (!isValidate) {
-            wxLogin(wxObj, loginMethod)
+            wxLogin(wxObj, loginMethod, options)
           }
         },
         fail: () => {
           console.log('session失效，重新登录')
-          wxLogin(wxObj, loginMethod)
+          wxLogin(wxObj, loginMethod, options)
         },
       })
     },
