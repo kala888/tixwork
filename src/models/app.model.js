@@ -21,9 +21,12 @@ function remoteLogin(params = {}, options = {}) {
   }
 
   NavigationService.put(Config.api.Login, params, {
-    ...options,
     navigationOptions,
+    ...options,
     onSuccess: (resp, { headers }) => {
+      if (options.onSuccess) {
+        options.onSuccess(resp)
+      }
       const { authorization } = headers
       console.log('wx login response, headers', headers)
       if (authorization) {
@@ -38,7 +41,7 @@ export default {
   state: {},
   reducers: {},
   effects: {
-    *login({ payload = {} }, { put }) {
+    * login({ payload = {} }, { put }) {
       const { statInPage, ...params } = payload
       const options = { statInPage }
       yield put({ type: 'logout' })
@@ -74,7 +77,7 @@ export default {
       })
     },
 
-    *logout() {
+    * logout() {
       console.log('logout from app')
       yield AuthTools.logout()
     },
