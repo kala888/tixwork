@@ -17,11 +17,19 @@ export default class EleImagePicker extends Taro.PureComponent {
     maxLength: 4,
     className: null,
     customStyle: {},
+    defaultValue: [],
   }
 
   state = {
     files: [],
     progress: 0,
+  }
+
+  componentDidMount() {
+    const { defaultValue = [] } = this.props
+    this.setState({
+      files: defaultValue.map((it) => ({ url: it.imageUrl })),
+    })
   }
 
   uploadNewFiles = (files = []) => {

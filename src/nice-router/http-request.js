@@ -92,7 +92,15 @@ const HttpRequest = {
       uri = uri.slice(domain.length)
     }
     const match = pathToRegexp.parse(uri)
-    uri = pathToRegexp.compile(uri)(params)
+    // const toPath = pathToRegexp.compile(uri, { encode: encodeURIComponent })
+    const toPath = pathToRegexp.compile(uri)
+
+    try {
+      uri = toPath(params)
+    } catch (e) {
+      console.warn('解析uri错误, 多半是带":"的替代变量为空了，请尽量避免在url中使用":"', e)
+    }
+
     match.forEach((item) => {
       if (item instanceof Object && item.name in cloneData) {
         delete cloneData[item.name]
@@ -170,7 +178,7 @@ const HttpRequest = {
       }
     } catch (error) {
       const { status } = error
-      console.log('Request exception', JSON.stringify(error))
+      console.log('Request exception', error)
       result = {
         xclass: systemErrorXClass,
         message: `error code:${status}`,

@@ -2,6 +2,7 @@ import Taro from '@tarojs/taro'
 import { AtIcon } from 'taro-ui'
 import isArray from 'lodash/isArray'
 import { Label, Picker, View } from '@tarojs/components'
+import m_ from '@/utils/mini-lodash'
 
 import './ele-form.scss'
 import EleHelper from '../ele-helper'
@@ -13,41 +14,53 @@ export default class ElePicker extends Taro.PureComponent {
     mode: 'date',
     displayMode: 'right-brief',
     range: null,
-    displayProperty: 'title',
-    valueProperty: 'value',
+    displayProperty: 'name',
+    valueProperty: 'id',
     customStyle: {},
     className: null,
     name: '',
+    displayValue: '',
   }
 
   state = {
-    displayValue: null,
+    innerDisplayValue: null,
+  }
+
+  componentDidMount() {
+    const { displayValue } = this.props
+    this.setState({
+      innerDisplayValue: displayValue,
+    })
   }
 
   handleChange = (e) => {
-    const { name, range, formKey, displayProperty, valueProperty } = this.props
+    const { name, range, formKey, displayProperty, valueProperty, onChange } = this.props
     const { value } = e.detail
     let selected = value
-    let displayValue = value
+    let innerDisplayValue = value
     let selectedValue = null
 
     if (isArray(value)) {
       selected = value.map((it, idx) => {
         if (range) {
-          return range[idx][it]
+          return range[idx][it] || ''
         }
         return it
       })
-      displayValue = selected.map((it) => it[displayProperty] || it).join('-')
+      innerDisplayValue = m_.trim(selected.map((it) => it[displayProperty] || it).join('-'), '-')
     } else if (range) {
       selected = range[value]
-      displayValue = selected[displayProperty]
+      innerDisplayValue = selected[displayProperty]
       selectedValue = selected[valueProperty]
+    }
+
+    if (onChange) {
+      onChange(selected)
     }
 
     this.setState(
       {
-        displayValue,
+        innerDisplayValue,
       },
       () =>
         Taro.eventCenter.trigger('form-value-changed', {
@@ -60,8 +73,10 @@ export default class ElePicker extends Taro.PureComponent {
 
   render() {
     const { title, brief, mode, range, displayProperty, className, customStyle, onColumnChange } = this.props
-    const { displayValue } = this.state
+    const { innerDisplayValue } = this.state
     const rootClass = EleHelper.classNames('ele-picker', className)
+
+    console.log('innerDisplayValue', innerDisplayValue)
 
     return (
       <Picker
@@ -74,8 +89,8 @@ export default class ElePicker extends Taro.PureComponent {
         <View className={rootClass} style={customStyle}>
           <Label className='label-text ele-picker-left'>{title}</Label>
           <View className='ele-picker-right'>
-            {displayValue ? (
-              <View className='ele-picker-right-value'>{displayValue}</View>
+            {innerDisplayValue ? (
+              <View className='ele-picker-right-value'>{innerDisplayValue}</View>
             ) : (
               <View className='ele-picker-right-brief'>{brief}</View>
             )}

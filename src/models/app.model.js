@@ -16,6 +16,7 @@ function wxLogin(wxObj, loginMethod) {
 
 async function login(params = {}) {
   NavigationService.put(Config.api.Login, params, {
+    navigationOptions: { method: 'reLaunch' },
     onSuccess: (resp, { headers }) => {
       const { authorization } = headers
       console.log('wx login response, headers', headers)

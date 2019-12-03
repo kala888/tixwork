@@ -145,6 +145,7 @@ const NavigationService = {
 
     console.log('************')
     console.log('start to NavigationService.routeTo, action uri :', uri)
+    console.log(params)
     console.log('************')
 
     if (uri.length === 0) {

@@ -87,6 +87,7 @@ class App extends Component {
       navigationBarBackgroundColor: '#6dbb4d',
       navigationBarTitleText: '双链科技',
       navigationBarTextStyle: 'white',
+      enablePullDownRefresh: true,
     },
     tabBar: {
       color: '#666',

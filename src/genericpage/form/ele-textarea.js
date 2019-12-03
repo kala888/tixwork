@@ -17,10 +17,17 @@ export default class EleTextarea extends Taro.PureComponent {
     className: null,
     customStyle: {},
     height: null,
+    defaultValue: '',
   }
 
   state = {
     value: '',
+  }
+
+  componentDidMount() {
+    this.setState({
+      value: this.props.defaultValue,
+    })
   }
 
   handleChange = (event) => {
