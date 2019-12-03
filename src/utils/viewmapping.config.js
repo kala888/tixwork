@@ -36,6 +36,7 @@ const ViewmappingConfig = {
   },
   'com.terapico.appview.LoginForm': {
     pageName: '/pages/login/login-page',
+    stateAction: 'app/logout',
   },
   'com.terapico.appview.HomePage': {
     pageName: '/pages/home/home-page',

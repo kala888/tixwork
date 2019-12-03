@@ -27,7 +27,8 @@
   .at-input__container {
     box-sizing: border-box;
     //padding-left: 20px;
-    flex: 1;
+    min-width: 170px;
+    width: 100%;
   }
 }
 

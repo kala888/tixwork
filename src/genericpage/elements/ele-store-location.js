@@ -48,7 +48,6 @@ export default class EleStoreLocation extends Taro.PureComponent {
         scale: 18,
         name: address,
       }
-      console.log(location)
       Taro.openLocation(location)
     }
   }

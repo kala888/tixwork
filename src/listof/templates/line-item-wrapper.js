@@ -63,7 +63,7 @@ export default class LineItemWrapper extends Taro.PureComponent {
         loading: true,
       },
       () => {
-        this.timer = setTimeout(this.stopLoading, 3000)
+        this.timer = setTimeout(() => this.stopLoading(), 3000)
       }
     )
   }

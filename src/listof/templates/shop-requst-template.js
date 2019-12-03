@@ -6,7 +6,6 @@ class CardTemplate extends Taro.PureComponent {
   render() {
     const { item = {}, className } = this.props
     const { imageUrl, title, brief, createTime, actionList, status } = item
-    // console.log('1231231231231')
     return (
       <EleCard
         title={title}

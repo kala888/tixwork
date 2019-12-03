@@ -17,7 +17,6 @@ export default class GenericPage extends Taro.PureComponent {
   componentDidMount() {
     const { pageTitle = '' } = this.props
     Taro.setNavigationBarTitle({ title: pageTitle })
-    console.log(this.$router.params)
     const { q } = this.$router.params
     if (q) {
       const uri = decodeURIComponent(q)
@@ -48,7 +47,6 @@ export default class GenericPage extends Taro.PureComponent {
       }
     }
     const encodePath = encodeURIComponent(pageLinkToUrl)
-    console.log('share ....', encodePath)
     return {
       title: pageTitle,
       path: encodePath,
@@ -56,7 +54,6 @@ export default class GenericPage extends Taro.PureComponent {
   }
 
   render() {
-    console.log('this.props', this.props)
     const rootClass = EleHelper.classNames('generic-page', this.props.className)
     return (
       <View className={rootClass}>

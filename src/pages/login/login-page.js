@@ -5,7 +5,6 @@ import { AtRadio } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import StorageTools from '@/nice-router/storage-tools'
 import Config from '@/utils/config'
-import AuthTools from '@/nice-router/auth-tools'
 import './login.scss'
 
 class LoginPage extends Taro.PureComponent {
@@ -16,9 +15,8 @@ class LoginPage extends Taro.PureComponent {
     userType: 'civilians',
   }
 
-  async componentDidMount() {
-    await AuthTools.logout()
-    NavigationService.dispatch('app/wxLogin')
+  componentDidMount = async () => {
+    NavigationService.dispatch('app/login', { statInPage: true })
   }
 
   startExam = () => {

@@ -21,11 +21,15 @@ export default class EleInput extends Taro.PureComponent {
     customStyle: {},
     maxLength: 2000,
     defaultValue: null,
+    focus: null,
   }
 
   handleChange = (value) => {
-    const { name, formKey } = this.props
-    console.log('EleInput', value, this.props)
+    const { name, formKey, onChange } = this.props
+    if (onChange) {
+      onChange(value)
+      return
+    }
     Taro.eventCenter.trigger('form-value-changed', {
       name,
       value,
@@ -34,7 +38,7 @@ export default class EleInput extends Taro.PureComponent {
   }
 
   render() {
-    const { name, title, type, placeholder, className, maxLength, defaultValue, customStyle } = this.props
+    const { name, title, type, placeholder, className, maxLength, focus, defaultValue, customStyle } = this.props
     const inputType = type === 'money' ? 'digit' : type
     const rootClass = EleHelper.classNames('ele-input', className)
     return (
@@ -49,6 +53,7 @@ export default class EleInput extends Taro.PureComponent {
         placeholderStyle='font-size:24rpx;color:#999'
         maxLength={maxLength}
         value={defaultValue}
+        focus={focus}
         customStyle={customStyle}
       />
     )

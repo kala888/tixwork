@@ -30,7 +30,6 @@ export default class WelcomeCarousel extends Taro.PureComponent {
         })
         return
       }
-      console.log('set to 0')
       this.setState({ second: 0 })
       this.handleStop()
     }, 1000)
@@ -44,11 +43,6 @@ export default class WelcomeCarousel extends Taro.PureComponent {
     console.log('.....stop welcome count')
     if (this.interval) {
       clearInterval(this.interval)
-    }
-    try {
-      // Taro.showTabBar()
-    } catch (e) {
-      console.log('xxxxx,e', e)
     }
     NavigationService.dispatch('home/hideWelcome')
   }

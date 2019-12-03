@@ -27,8 +27,7 @@ async function isValidateToken() {
 }
 
 async function getAuthInfoAsync() {
-  const authInfo = await StorageTools.get(AUTH_INFO, {})
-  return authInfo
+  return await StorageTools.get(AUTH_INFO, {})
 }
 
 async function getTokenAsync() {

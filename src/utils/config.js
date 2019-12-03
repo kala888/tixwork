@@ -12,17 +12,16 @@ const niceRouterConfig = {
   backendRouterPageBlackList: ['NetworkException', 'EditProfileForm', 'Login', 'Me', 'UserDetail'],
   api: {
     GenericPageMock: 'mock/',
-
     FooterHome: 'viewHomepage/',
     FooterMe: 'customerViewDashboard/',
     Login: 'clientLogin/',
     VerifyCode: 'sendVerifyCode/:mobile/',
-    OSSToken: 'test0ss/',
     UpdateUserInfo: 'customerUpdateProfile/:name/:avatar/:userType/',
     StartExam: 'customerStartExam/',
     AnswerQuestion: 'customerAnswerQuestion/:questionId/:choicesId/',
     ViewScore: 'customerViewScore/:id/',
     ViewFaultAnswer: 'customerViewFaultAnswer/',
+    OSSToken: 'customGetOssToken/',
   },
 }
 

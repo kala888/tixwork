@@ -8,7 +8,7 @@ import EleHelper from '../ele-helper'
 export default class EleBreakLine extends Taro.PureComponent {
   static defaultProps = {
     color: '#ddd',
-    height: 2,
+    height: 1,
     text: '',
     fontColor: '#ddd',
     customStyle: {},

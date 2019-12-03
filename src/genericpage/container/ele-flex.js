@@ -54,7 +54,6 @@ export default class EleFlex extends Taro.PureComponent {
 
   render() {
     const { flex, kids, formKey, customStyle = {}, className } = this.props
-    console.log('xxxxxxx', this.props)
     const rootClass = EleHelper.classNames(className, { 'flex-column': !className })
 
     return (
@@ -65,7 +64,6 @@ export default class EleFlex extends Taro.PureComponent {
             ...it,
             formKey: formKey,
           }
-          console.log('iiiiii', it)
           return (
             <Block key={it.id}>
               {/* ui elements*/}

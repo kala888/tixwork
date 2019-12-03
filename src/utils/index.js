@@ -76,7 +76,10 @@ function dateFormat(t, fmt) {
 }
 
 export function formatTime(time, fmt = 'yyyy-MM-dd') {
-  return dateFormat(new Date(time), fmt)
+  if (time) {
+    return dateFormat(new Date(time), fmt)
+  }
+  return ''
 }
 
 export function formatMoney(money) {

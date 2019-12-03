@@ -1,6 +1,8 @@
 import Taro from '@tarojs/taro'
 import { AtIcon } from 'taro-ui'
+import isArray from 'lodash/isArray'
 import { Label, Picker, View } from '@tarojs/components'
+import m_ from '@/utils/mini-lodash'
 
 import './ele-form.scss'
 import EleHelper from '../ele-helper'
@@ -12,53 +14,83 @@ export default class ElePicker extends Taro.PureComponent {
     mode: 'date',
     displayMode: 'right-brief',
     range: null,
-    rangeKey: 'title',
-    valueKey: 'value',
+    displayProperty: 'name',
+    valueProperty: 'id',
     customStyle: {},
     className: null,
-  }
-
-  state = {
+    name: '',
     displayValue: '',
   }
 
-  handleChange = (e) => {
-    const { name, range, rangeKey, formKey, valueKey } = this.props
-    const { value } = e.detail
-    console.log(value, range[value])
+  state = {
+    innerDisplayValue: null,
+  }
 
-    const selected = range ? range[value] : value
-    const displayValue = selected[rangeKey] || selected
-    console.log('displayValue', displayValue)
+  componentDidMount() {
+    const { displayValue } = this.props
+    this.setState({
+      innerDisplayValue: displayValue,
+    })
+  }
+
+  handleChange = (e) => {
+    const { name, range, formKey, displayProperty, valueProperty, onChange } = this.props
+    const { value } = e.detail
+    let selected = value
+    let innerDisplayValue = value
+    let selectedValue = null
+
+    if (isArray(value)) {
+      selected = value.map((it, idx) => {
+        if (range) {
+          return range[idx][it] || ''
+        }
+        return it
+      })
+      innerDisplayValue = m_.trim(selected.map((it) => it[displayProperty] || it).join('-'), '-')
+    } else if (range) {
+      selected = range[value]
+      innerDisplayValue = selected[displayProperty]
+      selectedValue = selected[valueProperty]
+    }
+
+    if (onChange) {
+      onChange(selected)
+    }
 
     this.setState(
       {
-        displayValue,
+        innerDisplayValue,
       },
       () =>
         Taro.eventCenter.trigger('form-value-changed', {
           name,
-          value: selected[valueKey] || selected,
+          value: selectedValue || selected,
           formKey,
         })
     )
   }
 
   render() {
-    const { title, brief, mode, range, rangeKey, className, customStyle } = this.props
-
-    console.log('picker...', this.props)
-
-    const value = this.state.displayValue
+    const { title, brief, mode, range, displayProperty, className, customStyle, onColumnChange } = this.props
+    const { innerDisplayValue } = this.state
     const rootClass = EleHelper.classNames('ele-picker', className)
 
+    console.log('innerDisplayValue', innerDisplayValue)
+
     return (
-      <Picker mode={mode} onChange={this.handleChange} range={range} rangeKey={rangeKey}>
+      <Picker
+        mode={mode}
+        onChange={this.handleChange}
+        range={range}
+        rangeKey={displayProperty}
+        onColumnChange={onColumnChange}
+      >
         <View className={rootClass} style={customStyle}>
           <Label className='label-text ele-picker-left'>{title}</Label>
           <View className='ele-picker-right'>
-            {value ? (
-              <View className='ele-picker-right-value'>{value}</View>
+            {innerDisplayValue ? (
+              <View className='ele-picker-right-value'>{innerDisplayValue}</View>
             ) : (
               <View className='ele-picker-right-brief'>{brief}</View>
             )}

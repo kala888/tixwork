@@ -92,7 +92,15 @@ const HttpRequest = {
       uri = uri.slice(domain.length)
     }
     const match = pathToRegexp.parse(uri)
-    uri = pathToRegexp.compile(uri)(params)
+    // const toPath = pathToRegexp.compile(uri, { encode: encodeURIComponent })
+    const toPath = pathToRegexp.compile(uri)
+
+    try {
+      uri = toPath(params)
+    } catch (e) {
+      console.warn('解析uri错误, 多半是带":"的替代变量为空了，请尽量避免在url中使用":"', e)
+    }
+
     match.forEach((item) => {
       if (item instanceof Object && item.name in cloneData) {
         delete cloneData[item.name]
@@ -116,11 +124,6 @@ const HttpRequest = {
   },
   logResp(response) {
     console.log('%c****************************', 'color:#40aad8')
-    // console.log(
-    //   `%c*  ${response.config.method} to ${response.config.url}`,
-    //   'color:40aad8'
-    // )
-
     console.log('%c*  X-Class:', 'color:#40aad8', response.headers['x-class'])
     console.log('%c*  X-Env-Type:', 'color:#40aad8', response.headers['x-env-type'])
     console.log('%c*  JSON Data:', 'color:#40aad8', response.data)
@@ -133,7 +136,12 @@ const HttpRequest = {
     showLoading(loading)
     // await AuthTools.syncToken()
     const token = await AuthTools.getTokenAsync()
-    console.log('toooooooken', token)
+    // if (process.env.NODE_ENV === 'development') {
+    //  const auth = await AuthTools.getAuthInfoAsync()
+    // console.log('auth info for dev', auth)
+    // }
+    const auth = await AuthTools.getAuthInfoAsync()
+    console.log('auth info for dev', auth)
 
     let result = {}
     const requestHeader = {
@@ -170,7 +178,7 @@ const HttpRequest = {
       }
     } catch (error) {
       const { status } = error
-      console.log('Request exception', JSON.stringify(error))
+      console.log('Request exception', error)
       result = {
         xclass: systemErrorXClass,
         message: `error code:${status}`,

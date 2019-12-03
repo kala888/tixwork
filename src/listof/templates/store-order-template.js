@@ -10,7 +10,6 @@ class StoreOrderTemplate extends Taro.PureComponent {
   render() {
     const { item = {} } = this.props
     const { order, name, score, recommendStore, newStore, avg, percent } = item
-    // console.log('1231231231231')
     const colStyle = {
       display: 'flex',
       flex: 2,

@@ -92,6 +92,7 @@ export default class EleButton extends Taro.PureComponent {
       return
     }
 
+    console.log('btnType is', btnType, 'just do view action')
     NavigationService.view(linkToUrl)
   }
 

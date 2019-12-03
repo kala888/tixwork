@@ -74,7 +74,6 @@ export default class EleVcode extends Taro.PureComponent {
 
   handleChange = (value) => {
     const { name, formKey } = this.props
-    console.log('Vcode', value, this.props)
     this.setState(
       {
         mobile: value,

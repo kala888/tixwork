@@ -17,6 +17,7 @@ export default class EleImagePicker extends Taro.PureComponent {
     maxLength: 4,
     className: null,
     customStyle: {},
+    defaultValue: [],
   }
 
   state = {
@@ -24,7 +25,15 @@ export default class EleImagePicker extends Taro.PureComponent {
     progress: 0,
   }
 
+  componentDidMount() {
+    const { defaultValue = [] } = this.props
+    this.setState({
+      files: defaultValue.map((it) => ({ url: it.imageUrl })),
+    })
+  }
+
   uploadNewFiles = (files = []) => {
+    const { formKey, name } = this.props
     const todoList = files.filter((it) => {
       const { url = '' } = it
       return url.startsWith('http://tmp') || url.startsWith('wxfile://tmp')
@@ -41,20 +50,29 @@ export default class EleImagePicker extends Taro.PureComponent {
       onStart: resetProgress,
       onComplete: resetProgress,
       onSuccess: (result) => {
-        console.log('upload image success', result)
         const { remoteFile, sourceFile } = result
 
-        this.setState((preState) => {
-          const newFiles = preState.files.map((it) => {
-            if (it.url === sourceFile) {
-              return {
-                url: remoteFile,
+        this.setState(
+          (preState) => {
+            const newFiles = preState.files.map((it) => {
+              if (it.url === sourceFile) {
+                return {
+                  url: remoteFile,
+                }
               }
-            }
-            return it
-          })
-          return { files: newFiles }
-        })
+              return it
+            })
+            return { files: newFiles }
+          },
+          () => {
+            console.log('1111', name, formKey, this.state.files)
+            Taro.eventCenter.trigger('form-value-changed', {
+              name,
+              value: this.state.files,
+              formKey,
+            })
+          }
+        )
       },
     })
   }
@@ -116,7 +134,6 @@ export default class EleImagePicker extends Taro.PureComponent {
         />
         <Text className='note'>{briefText}</Text>
         {progress > 0 && <AtProgress percent={progress} />}
-        <Text onClick={() => console.log(this.state.files)}>show</Text>
       </View>
     )
   }

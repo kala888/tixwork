@@ -13,7 +13,6 @@ export default class ArticleTemplate extends Taro.PureComponent {
 
   render() {
     const { item = {}, className } = this.props
-    console.log('article....', item)
     const { title, brief, createTime } = item.article || item
     const src = getImageUrl(item)
 

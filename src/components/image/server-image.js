@@ -48,7 +48,6 @@ export default class ServerImage extends Taro.PureComponent {
 
   render() {
     const { style = {}, mode = 'scaleToFill', className } = this.props
-    console.log('adsfasdfasdf', mode)
     const { src } = this.getUrl()
     return <Image src={src} style={style} mode={mode} className={className} />
   }

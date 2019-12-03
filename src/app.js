@@ -3,10 +3,9 @@ import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 import NiceRouter from '@/nice-router/nice-router'
 import Config from '@/utils/config'
-import NavigationService from '@/nice-router/navigation.service'
+import { View } from '@tarojs/components'
 
 import './app.scss'
-import HomePage from './pages/home/home-page'
 import dva from './dva'
 import models from './models/model-center'
 
@@ -28,9 +27,9 @@ NiceRouter.start({ config: Config, container: dvaApp })
 initial()
 
 class App extends Component {
-  componentWillMount() {
-    NavigationService.dispatch('app/wxLogin')
-  }
+  // componentWillMount() {
+  //   NavigationService.dispatch('app/wxLogin')
+  // }
 
   componentDidMount() {
     if (Taro.canIUse('getUpdateManager')) {
@@ -87,6 +86,7 @@ class App extends Component {
       navigationBarBackgroundColor: '#28aaff',
       navigationBarTitleText: '链问链答',
       navigationBarTextStyle: 'white',
+      enablePullDownRefresh: true,
     },
   }
 
@@ -95,7 +95,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <HomePage />
+        <View />
       </Provider>
     )
   }

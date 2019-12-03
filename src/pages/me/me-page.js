@@ -32,6 +32,10 @@ export default class MePage extends Taro.PureComponent {
     NavigationService.view(Config.api.ViewScore, { id: '+' })
   }
 
+  onPullDownRefresh = () => {
+    NavigationService.view(Config.api.ViewScore, { id: '+' })
+  }
+
   handleAuth = () => {
     NavigationService.navigate('/pages/login/login-page')
   }

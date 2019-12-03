@@ -2,6 +2,7 @@ import Taro from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import { AtFab, AtIcon } from 'taro-ui'
 import ServerImage from '@/components/image/server-image'
+import NavigationService from '@/nice-router/navigation.service'
 
 import './ele.scss'
 import EleHelper from '../ele-helper'
@@ -13,14 +14,24 @@ export default class EleFab extends Taro.PureComponent {
     icon: null,
     customStyle: {},
     className: null,
+    linkToUrl: null,
+  }
+
+  handleClick = () => {
+    const { onClick, linkToUrl } = this.props
+    if (onClick) {
+      onClick()
+      return
+    }
+    NavigationService.view(linkToUrl)
   }
 
   render() {
-    const { imageUrl, text, icon, customStyle, className } = this.props
+    const { imageUrl, text, icon, customStyle, className, size } = this.props
     const rootClass = EleHelper.classNames('ele-fab', className)
     return (
       <View className={rootClass}>
-        <AtFab>
+        <AtFab size={size} onClick={this.handleClick}>
           {icon ? (
             <AtIcon className='more-action-icon' value={icon} size={20} color='grey' />
           ) : (

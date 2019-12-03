@@ -17,7 +17,7 @@ export default class AutoTemplate extends Taro.PureComponent {
       const size = m_.min([showImageCount, tempList.length])
       list = m_.slice(tempList, 0, size)
       // const list = m_.concat(m_.slice(tempList, 0, size), m_.slice(tempList, 0, size), m_.slice(tempList, 0, size))
-      console.log('list', list)
+      // console.log('list', list)
     }
 
     return (

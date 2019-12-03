@@ -70,7 +70,7 @@ function uploadFiles2OSS(params = {}) {
   // }
 
   const { todoList, onProgress, onStart, onComplete, onSuccess, onFail } = params
-  const { type = 'aliyun', uploadPrefix = '', prefix = '', userHome = '' } = ossToken
+  const { type = 'qiniu', uploadPrefix = '', prefix = '', userHome = '' } = ossToken
 
   let formParam = { token: ossToken.securityToken }
   if (type === 'aliyun') {
