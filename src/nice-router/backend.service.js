@@ -8,8 +8,6 @@ import isNull from 'lodash/isNull'
 import isUndefined from 'lodash/isUndefined'
 import HttpRequest from './http-request'
 
-import mockData from './mock-data-genericpage'
-
 const EMPTY_PARAMETER_TOKEN = '+'
 const BackendService = {}
 
@@ -55,9 +53,9 @@ BackendService.send = async (action = {}) => {
     headers,
   }
   //
-  if (actionUri === 'mock/') {
-    return mockData
-  }
+  // if (actionUri === 'mock/') {
+  //   return mockData
+  // }
   // if (actionUri === 'genericPageMock/') {
   //   return genericMockData
   // }

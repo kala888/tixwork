@@ -11,25 +11,20 @@ import niceRouter from '@/nice-router/nice-router.model'
 import ModelTools from './model-tools'
 import app from './app.model'
 import listof from '../listof/listof.model'
-import home from './biz/home.model'
 
 const modelListOOTB = [
   niceRouter,
   app,
-  home,
   listof,
+  'dataSearch',
   'me',
   'navigationList',
   'H5',
-  'genericpage',
-  'genericpage2',
   'listofpage',
   'listofpage2',
   'listofpage3',
   'listofpage4',
   //biz
-  'article',
-  'recommendUser',
 ]
 
 const customizedModelList = []

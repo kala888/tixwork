@@ -58,23 +58,16 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/biz/hello-daas-page',
-      'pages/home/home-page',
-      'pages/me/me-page',
-      'pages/article/article-detail-page',
+      'pages/data-search/data-search-page',
       'pages/login/login-page',
       // base
       'nice-router/h5-page',
       'nice-router/network-exception-page',
-      'genericpage/generic-page',
-      'genericpage/generic-page2',
-      'genericpage/user-picker-page',
       'listof/listof-page',
       'listof/listof-page2',
       'listof/listof-page3',
       'listof/listof-page4',
       // biz
-      'pages/biz/generic-test-page',
     ],
 
     permission: {
@@ -82,38 +75,13 @@ class App extends Component {
         desc: '你的位置信息将用于小程序位置接口的效果展示',
       },
     },
+
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#6dbb4d',
+      navigationBarBackgroundColor: '#28aaff',
       navigationBarTitleText: '双链科技',
       navigationBarTextStyle: 'white',
       enablePullDownRefresh: true,
-    },
-    tabBar: {
-      color: '#666',
-      selectedColor: '#92cc7a',
-      backgroundColor: '#fafafa',
-      borderStyle: 'black',
-      list: [
-        {
-          pagePath: 'pages/home/home-page',
-          iconPath: './assets/icon/icon_home_n@2x.png',
-          selectedIconPath: './assets/icon/icon_home_s@2x.png',
-          text: '首页',
-        },
-        {
-          pagePath: 'pages/biz/generic-test-page',
-          iconPath: './assets/icon/icon_service_n@2x.png',
-          selectedIconPath: './assets/icon/icon_service_s@2x.png',
-          text: 'GenericPage',
-        },
-        {
-          pagePath: 'pages/me/me-page',
-          iconPath: './assets/icon/icon_me_n@2x.png',
-          selectedIconPath: './assets/icon/icon_me_s@2x.png',
-          text: '我的',
-        },
-      ],
     },
   }
 

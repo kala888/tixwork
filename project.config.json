@@ -23,6 +23,6 @@
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"libVersion": "2.8.0",
+	"libVersion": "2.9.4",
 	"condition": {}
 }

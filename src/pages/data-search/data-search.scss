@@ -1,0 +1,23 @@
+@import '../../styles/theme';
+
+.data-search-page {
+  @extend %page;
+
+  &-header {
+    padding: 20px 40px;
+    background-color: #fff;
+  }
+
+  &-body {
+    min-height: 200px;
+    padding: 15px;
+    background-color: #ddd;
+
+    .chart {
+      background-color: #fff;
+      border-radius: 20px;
+      margin-top: 20px;
+      //padding:10px;
+    }
+  }
+}

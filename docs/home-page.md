@@ -29,4 +29,4 @@
 
 #### 相关的代码文件
 
-home-page.js, home.model.js, welcome-carousel.js, viewmapping.config.js
+data-search-page.js, home.model.js, welcome-carousel.js, viewmapping.config.js

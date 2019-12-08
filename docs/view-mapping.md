@@ -2,17 +2,17 @@
 
 前端页面与服务端response的关系映射文件。
 
-先看一个栗子：点击“查看”这个button的时候，NavigationService.view到后端服务。后端服务发现，该action需要登录权限，那么返回的respose中包含x-class=com.terapico.appview.MePage，引导用户重新登录。
+先看一个栗子：点击“查看”这个button的时候，NavigationService.view到后端服务。后端服务发现，该action需要登录权限，那么返回的respose中包含x-class=com.terapico.appview.HomePage，引导用户重新登录。
 
 ```javascript
 
-  'com.terapico.appview.MePage': {
+  'com.terapico.appview.HomePage': {
       pageName: '/pages/me/me-page',   
        stateAction: 'me/save',  
   },
 ```
 
-> 当x-class='com.terapico.appview.MePage' 的时候，nice-router.model 会查阅该配置信息，前端路由到/pages/me/me-page，并执行model中的save这个reducer。
+> 当x-class='com.terapico.appview.HomePage' 的时候，nice-router.model 会查阅该配置信息，前端路由到/pages/me/me-page，并执行model中的save这个reducer。
 
 根据上面的例子，可以看出viewmapping就是后端控制前端路由的核心配置
 

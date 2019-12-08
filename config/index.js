@@ -31,6 +31,11 @@ const config = {
   },
   copy: {
     patterns: [
+      {
+        from: 'node_modules/taro-echarts/components/ec-canvas/',
+        to: 'dist/npm/taro-echarts/components/ec-canvas',
+        ignore: ['ec-canvas.js', 'wx-canvas.js']
+      }
     ],
     options: {
     }
@@ -82,6 +87,7 @@ const config = {
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
+    esnextModules: ['taro-echarts'],
     module: {
       postcss: {
         autoprefixer: {

@@ -1,6 +1,6 @@
 import viewConfig from './viewmapping.config'
 
-const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/' //后端服务地址
+const baseURL = 'https://demo.doublechaintech.com/dmos/' //后端服务地址
 
 const niceRouterConfig = {
   name: '双链科技',
@@ -13,11 +13,14 @@ const niceRouterConfig = {
   api: {
     GenericPageMock: 'mock/',
 
-    FooterHome: 'viewHomepage/',
+    FooterHome: 'viewHomePage/',
     FooterMe: 'customerViewDashboard/',
     Login: 'clientLogin/',
     VerifyCode: 'sendVerifyCode/:mobile/',
     OSSToken: 'customGetOssToken/',
+    SearchHome: 'dataApplicationManager/view/DA000008/',
+    Search:
+      'dataApplicationManager/loadDataApplication/DA000008/candidateDataSetList.searchField.0=name;candidateDataSetList.searchVerb.0=contains;candidateDataSetList.searchValue.0=:pSearchValue;candidateDataSetList=1;candidateDataSetList.orderBy.0=id;candidateDataSetList.descOrAsc.0=desc/',
   },
 }
 
