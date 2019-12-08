@@ -41,7 +41,7 @@ export default {
   state: {},
   reducers: {},
   effects: {
-    * login({ payload = {} }, { put }) {
+    *login({ payload = {} }, { put }) {
       const { statInPage, ...params } = payload
       const options = { statInPage }
       yield put({ type: 'logout' })
@@ -77,7 +77,7 @@ export default {
       })
     },
 
-    * logout() {
+    *logout() {
       console.log('logout from app')
       yield AuthTools.logout()
     },

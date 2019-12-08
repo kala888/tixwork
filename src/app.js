@@ -58,8 +58,8 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/biz/hello-daas-page',
       'pages/home/home-page',
+      'pages/biz/hello-daas-page',
       'pages/me/me-page',
       'pages/article/article-detail-page',
       'pages/login/login-page',
@@ -84,14 +84,14 @@ class App extends Component {
     },
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#6dbb4d',
+      navigationBarBackgroundColor: '#28aaff',
       navigationBarTitleText: '双链科技',
       navigationBarTextStyle: 'white',
       enablePullDownRefresh: true,
     },
     tabBar: {
       color: '#666',
-      selectedColor: '#92cc7a',
+      selectedColor: '#28aaff',
       backgroundColor: '#fafafa',
       borderStyle: 'black',
       list: [
