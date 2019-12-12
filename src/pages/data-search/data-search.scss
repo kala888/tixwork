@@ -8,6 +8,12 @@
     background-color: #fff;
   }
 
+  &-loading{
+    width: 100%;
+   text-align: center;
+    margin-top: 100px;
+  }
+
   &-body {
     min-height: 200px;
     padding: 15px;

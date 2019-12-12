@@ -5,8 +5,16 @@ import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
 import { AtSearchBar } from 'taro-ui'
 import Chart from 'taro-echarts'
-
+import { LoadingType } from '@/nice-router/nice-router-util'
 import './data-search.scss'
+
+
+function formatTitle(name = '') {
+  if (name.length > 20) {
+    return name.substr(1, 15) + '\n' + name.substr(16)
+  }
+  return name
+}
 
 function calcOptionMapFromSource(source) {
   if (source.length === 0) {
@@ -129,8 +137,7 @@ function renderExtraHeader(candidateDataSet) {
   let i = 0
   const optionsExpr = candidateDataSet.previewData
   const title = {
-    text: candidateDataSet.name,
-    // subtext: '数据来自双链科技DR引擎',
+    text: formatTitle(candidateDataSet.name),
     left: 'center',
     textStyle: {
       fontSize: 15,
@@ -145,7 +152,7 @@ function renderExtraHeader(candidateDataSet) {
   const color = ['#92cc7a', '#ee620a', '#4cabce', '#e5323e', '#d2ab66']
   const commonset = { title, label, animation, color }
 
-  const radius = ['50%', '70%']
+  const radius = ['20%', '35%']
   const option = { ...JSON.parse(optionsExpr), ...commonset }
 
   if (option.series) {
@@ -201,17 +208,20 @@ export default class DataSearchPage extends Taro.PureComponent {
       Config.api.SearchHome,
       {},
       {
+        loading: LoadingType.modal,
         onSuccess: (resp) => this.setRespData(resp),
-      }
+      },
     )
   }
 
   setRespData = (resp = {}) => {
+    const { candidateDataSetList = [] } = resp
     this.setState(
       {
         ...resp,
+        candidateDataSetList,
       },
-      () => Taro.setNavigationBarTitle({ title: resp.displayName || '双链科技' })
+      () => Taro.setNavigationBarTitle({ title: '公证电子档案云链' }),
     )
   }
 
@@ -222,14 +232,16 @@ export default class DataSearchPage extends Taro.PureComponent {
   }
 
   handleSearch = () => {
+
     NavigationService.ajax(
       Config.api.Search,
       {
         pSearchValue: this.state.searchValue,
       },
       {
+        loading: LoadingType.modal,
         onSuccess: (resp) => this.setRespData(resp),
-      }
+      },
     )
   }
 
@@ -256,14 +268,22 @@ export default class DataSearchPage extends Taro.PureComponent {
             onActionClick={this.handleSearch}
           />
         </View>
-
-        <View className='data-search-page-body'>
-          {list.map((it) => (
-            <View key={it.id} className='chart'>
-              <Chart option={it} height='250px' width='95%' />
+        {
+          list.length > 0 ? (
+            <View className='data-search-page-body'>
+              {list.map((it) => (
+                <View key={it.id} className='chart'>
+                  <Chart option={it} height='300px' width='95%' />
+                </View>
+              ))}
             </View>
-          ))}
-        </View>
+          ) : (
+            <View className='data-search-page-loading'>
+              没有找到相关订阅
+            </View>
+          )
+        }
+
       </View>
     )
   }

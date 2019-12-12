@@ -59,8 +59,6 @@ class App extends Component {
   config = {
     pages: [
       'pages/data-search/data-search-page',
-      'pages/home/home-page',
-      'pages/me/me-page',
       'pages/login/login-page',
       // base
       'nice-router/h5-page',
@@ -81,7 +79,7 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#28aaff',
-      navigationBarTitleText: '双链科技',
+      navigationBarTitleText: '公证电子档案云链',
       navigationBarTextStyle: 'white',
       enablePullDownRefresh: true,
     },

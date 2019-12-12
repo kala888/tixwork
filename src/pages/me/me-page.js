@@ -2,8 +2,6 @@ import Taro from '@tarojs/taro'
 import { Image, View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import NavigationService from '@/nice-router/navigation.service'
-import NavigationLineItem from '@/components/navigation-line-item'
-import NavigationBoxBar from '@/components/navigation-box-bar'
 import Config from '@/utils/config'
 import './me.scss'
 
@@ -51,8 +49,6 @@ export default class MePage extends Taro.PureComponent {
 
   render() {
     const {
-      boxNavigatorList = Box_Navigator_List,
-      lineItemNavigatorList = LineItem_Navigator_List,
       name,
       brief,
       imageUrl,
@@ -72,19 +68,10 @@ export default class MePage extends Taro.PureComponent {
             </View>
           </View>
           <View className='me-page-header-footer'>
-            <NavigationBoxBar list={boxNavigatorList} />
           </View>
         </View>
         <View className='me-page-body'>
-          {lineItemNavigatorList.map((it) => (
-            <NavigationLineItem
-              key={it.id}
-              imageUrl={it.imageUrl}
-              title={it.title}
-              brief={it.brief}
-              linkToUrl={it.linkToUrl}
-            />
-          ))}
+
         </View>
       </View>
     )
