@@ -241,7 +241,7 @@ const productList = {
       imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
     },
     p2: {
-      preTag: '公证电子档案云链',
+      preTag: '双链索骥',
       tags: ['券'],
       brand: '可口可乐',
       name: '300ml，冰霜开心',

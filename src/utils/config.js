@@ -3,7 +3,7 @@ import viewConfig from './viewmapping.config'
 const baseURL = 'https://demo.doublechaintech.com/dmos/' //后端服务地址
 
 const niceRouterConfig = {
-  name: '公证电子档案云链',
+  name: '双链索骥',
   baseURL,
   version: 1,
   appType: 'mini-program',
@@ -18,9 +18,9 @@ const niceRouterConfig = {
     Login: 'clientLogin/',
     VerifyCode: 'sendVerifyCode/:mobile/',
     OSSToken: 'customGetOssToken/',
-    SearchHome: 'dataApplicationManager/view/DA000007/',
+    SearchHome: 'dataApplicationManager/view/DA000008/',
     Search:
-      'dataApplicationManager/loadDataApplication/DA000007/candidateDataSetList.searchField.0=name;candidateDataSetList.searchVerb.0=contains;candidateDataSetList.searchValue.0=:pSearchValue;candidateDataSetList=1;candidateDataSetList.orderBy.0=id;candidateDataSetList.descOrAsc.0=desc/',
+      'dataApplicationManager/loadDataApplication/DA000008/candidateDataSetList.searchField.0=name;candidateDataSetList.searchVerb.0=contains;candidateDataSetList.searchValue.0=:pSearchValue;candidateDataSetList=1;candidateDataSetList.orderBy.0=id;candidateDataSetList.descOrAsc.0=desc/',
   },
 }
 

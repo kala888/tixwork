@@ -203,7 +203,16 @@ export default class DataSearchPage extends Taro.PureComponent {
     candidateDataSetList: [],
   }
 
+
   componentDidMount() {
+    this.handleRefresh()
+  }
+
+  onPullDownRefresh() {
+    this.handleRefresh()
+  }
+
+  handleRefresh = () => {
     NavigationService.ajax(
       Config.api.SearchHome,
       {},
@@ -214,6 +223,7 @@ export default class DataSearchPage extends Taro.PureComponent {
     )
   }
 
+
   setRespData = (resp = {}) => {
     const { candidateDataSetList = [] } = resp
     this.setState(
@@ -221,7 +231,7 @@ export default class DataSearchPage extends Taro.PureComponent {
         ...resp,
         candidateDataSetList,
       },
-      () => Taro.setNavigationBarTitle({ title: '公证电子档案云链' }),
+      () => Taro.setNavigationBarTitle({ title: '双链索骥' }),
     )
   }
 

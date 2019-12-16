@@ -79,7 +79,7 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#28aaff',
-      navigationBarTitleText: '公证电子档案云链',
+      navigationBarTitleText: '双链索骥',
       navigationBarTextStyle: 'white',
       enablePullDownRefresh: true,
     },
