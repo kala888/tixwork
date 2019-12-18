@@ -16,6 +16,10 @@ nice-router包含两部分：
 <div>
   <img src='http://img14.360buyimg.com/img/jfs/t1/75655/32/15369/1497606/5dce1c26E27e2c759/031a033c857992a5.jpg!q60.webp'/>
 </div>
+
+<div>
+  <img src='https://github.com/doublechaintech/nice-router/blob/master/nice-router-2.png'/>
+<div>
   
 
 
@@ -100,7 +104,9 @@ yarn dev:weapp
 ###### 已经上线的小程序
 
 <div>
-  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/chainqa/chainqa-wechat.jpg'/>
+  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/chainqa-ar.jpg'/>
+  <img width='100px' height='100px' style='margin-left:20px'} src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/xiaohuanglong-qr.jpg'/>
+    <img width='100px' height='100px' style='margin-left:20px'} src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/doublechain-qr.jpg'/>
 </div>
 
 
