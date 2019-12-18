@@ -61,7 +61,6 @@ class App extends Component {
       'pages/home/home-page',
       'pages/biz/hello-daas-page',
       'pages/me/me-page',
-      'pages/article/article-detail-page',
       'pages/login/login-page',
       // base
       'nice-router/h5-page',
