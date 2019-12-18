@@ -104,9 +104,9 @@ yarn dev:weapp
 ###### 已经上线的小程序
 
 <div>
-  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/chainqa-ar.jpg'/>
-  <img width='100px' height='100px' style='margin-left:20px'} src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/xiaohuanglong-qr.jpg'/>
-    <img width='100px' height='100px' style='margin-left:20px'} src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/doublechain-qr.jpg'/>
+  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/chainqa-qr.jpg'/>
+  <img width='100px' height='100px' style='margin-left:20px'} src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/xiaohuanglong-qr.png'/>
+    <img width='100px' height='100px' style='margin-left:20px'} src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/doublechain-qr.png'/>
 </div>
 
 
