@@ -13,11 +13,6 @@ import Waterfall from './waterfall-templage'
 import ProductTemplate from './product-template'
 import ImageOnBottomTemplate from './image-on-bottom'
 
-import ProjectTemplate from './biz/project-template'
-import DailyReportTemplate from './biz/daily-report-template'
-import ProjectNotificationTemplate from './biz/project-notification-template'
-import OrderTemplate from './biz/order-template'
-
 import '../listof.scss'
 
 export default class LineItemWrapper extends Taro.PureComponent {
@@ -119,11 +114,6 @@ export default class LineItemWrapper extends Taro.PureComponent {
         {template === 'document-card' && <DocumentCardTemplate {...itemProps} />}
         {template === 'article' && <ArticleTemplate {...itemProps} />}
         {template === 'article-small' && <ArticleTemplate className='article-small' {...itemProps} />}
-
-        {template === 'project' && <ProjectTemplate {...itemProps} />}
-        {template === 'daily-report-for-owner' && <DailyReportTemplate {...itemProps} />}
-        {template === 'project-notification' && <ProjectNotificationTemplate {...itemProps} />}
-        {template === 'main-order' && <OrderTemplate {...itemProps} />}
       </View>
     )
   }

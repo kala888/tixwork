@@ -218,7 +218,7 @@ export default class DataSearchPage extends Taro.PureComponent {
             dataAppList: dataApplicationList,
           })
         },
-      },
+      }
     )
     this.handleRefresh()
   }
@@ -245,7 +245,7 @@ export default class DataSearchPage extends Taro.PureComponent {
           }
           this.setRespData(resp)
         },
-      },
+      }
     )
   }
 
@@ -256,7 +256,7 @@ export default class DataSearchPage extends Taro.PureComponent {
         ...resp,
         candidateDataSetList,
       },
-      () => Taro.setNavigationBarTitle({ title: '双链索骥' }),
+      () => Taro.setNavigationBarTitle({ title: '双链索骥' })
     )
   }
 
@@ -295,7 +295,7 @@ export default class DataSearchPage extends Taro.PureComponent {
       {
         loading: LoadingType.modal,
         onSuccess: (resp) => this.setRespData(resp),
-      },
+      }
     )
   }
 
@@ -328,7 +328,6 @@ export default class DataSearchPage extends Taro.PureComponent {
           </View>
         </AtDrawer>
 
-
         <View className='data-search-page-header'>
           <View className='data-search-page-header-draw' onClick={this.handleShowDraw}>
             <AtIcon value='analytics' size={20} color='#ddd' />
@@ -341,10 +340,7 @@ export default class DataSearchPage extends Taro.PureComponent {
           />
         </View>
 
-        {(
-          list.length > 0 &&
-          !this.state.showDraw
-        ) ? (
+        {list.length > 0 && !this.state.showDraw ? (
           <View className='data-search-page-body'>
             {list.map((it) => (
               <View key={it.id} className='chart'>
