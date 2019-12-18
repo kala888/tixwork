@@ -3,11 +3,13 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
-import { AtSearchBar } from 'taro-ui'
+import StorageTools from '@/nice-router/storage-tools'
+import { AtDrawer, AtIcon, AtSearchBar } from 'taro-ui'
 import Chart from 'taro-echarts'
 import { LoadingType } from '@/nice-router/nice-router-util'
 import './data-search.scss'
 
+const defaultAppId = 'DA000008'
 
 function formatTitle(name = '') {
   if (name.length > 20) {
@@ -201,10 +203,23 @@ export default class DataSearchPage extends Taro.PureComponent {
   state = {
     searchValue: '',
     candidateDataSetList: [],
+    dataAppList: [],
+    showDraw: false,
   }
 
-
   componentDidMount() {
+    NavigationService.ajax(
+      'dataAppUserManager/view/DAU000004/',
+      {},
+      {
+        onSuccess: (resp) => {
+          const { dataApplicationList } = resp
+          this.setState({
+            dataAppList: dataApplicationList,
+          })
+        },
+      },
+    )
     this.handleRefresh()
   }
 
@@ -212,17 +227,27 @@ export default class DataSearchPage extends Taro.PureComponent {
     this.handleRefresh()
   }
 
-  handleRefresh = () => {
+  handleRefresh = (onSuccess) => {
+    this.setState({
+      searchValue: '',
+    })
+    const dataAppUser = StorageTools.get('dataAppUser', defaultAppId)
     NavigationService.ajax(
       Config.api.SearchHome,
-      {},
+      {
+        dataAppUser,
+      },
       {
         loading: LoadingType.modal,
-        onSuccess: (resp) => this.setRespData(resp),
+        onSuccess: (resp) => {
+          if (onSuccess) {
+            onSuccess()
+          }
+          this.setRespData(resp)
+        },
       },
     )
   }
-
 
   setRespData = (resp = {}) => {
     const { candidateDataSetList = [] } = resp
@@ -241,11 +266,30 @@ export default class DataSearchPage extends Taro.PureComponent {
     })
   }
 
+  onDrawClose = () => {
+    this.setState({ showDraw: false })
+  }
+
+  handleShowDraw = () => {
+    console.log('show...')
+    this.setState({ showDraw: true })
+  }
+
+  onDrawItemClick = (item = {}) => {
+    const { id } = item
+    if (id) {
+      StorageTools.set('dataAppUser', id)
+      this.handleRefresh(() => this.onDrawClose())
+    }
+  }
+
   handleSearch = () => {
+    const dataAppUser = StorageTools.get('dataAppUser', defaultAppId)
 
     NavigationService.ajax(
       Config.api.Search,
       {
+        dataAppUser,
         pSearchValue: this.state.searchValue,
       },
       {
@@ -256,7 +300,7 @@ export default class DataSearchPage extends Taro.PureComponent {
   }
 
   render() {
-    const { searchValue, candidateDataSetList } = this.state
+    const { searchValue, candidateDataSetList, dataAppList = [] } = this.state
 
     let list = []
     candidateDataSetList.map((it) => {
@@ -270,7 +314,25 @@ export default class DataSearchPage extends Taro.PureComponent {
 
     return (
       <View className='data-search-page'>
+        <AtDrawer show={this.state.showDraw} right mask onClose={this.onDrawClose}>
+          <View className='data-search-page-draw-icon'>
+            <AtIcon value='user' size={80} />
+          </View>
+
+          <View className='data-search-page-draw'>
+            {dataAppList.map((it) => (
+              <View key={it.id} className='data-search-page-draw-item' onClick={this.onDrawItemClick.bind(this, it)}>
+                {it.name}
+              </View>
+            ))}
+          </View>
+        </AtDrawer>
+
+
         <View className='data-search-page-header'>
+          <View className='data-search-page-header-draw' onClick={this.handleShowDraw}>
+            <AtIcon value='analytics' size={20} color='#ddd' />
+          </View>
           <AtSearchBar
             value={searchValue}
             actionName='搜一下'
@@ -278,22 +340,21 @@ export default class DataSearchPage extends Taro.PureComponent {
             onActionClick={this.handleSearch}
           />
         </View>
-        {
-          list.length > 0 ? (
-            <View className='data-search-page-body'>
-              {list.map((it) => (
-                <View key={it.id} className='chart'>
-                  <Chart option={it} height='300px' width='95%' />
-                </View>
-              ))}
-            </View>
-          ) : (
-            <View className='data-search-page-loading'>
-              没有找到相关订阅
-            </View>
-          )
-        }
 
+        {(
+          list.length > 0 &&
+          !this.state.showDraw
+        ) ? (
+          <View className='data-search-page-body'>
+            {list.map((it) => (
+              <View key={it.id} className='chart'>
+                <Chart option={it} height='300px' width='95%' />
+              </View>
+            ))}
+          </View>
+        ) : (
+          <View className='data-search-page-loading'>没有找到相关订阅</View>
+        )}
       </View>
     )
   }

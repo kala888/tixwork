@@ -5,36 +5,7 @@ import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
 import './me.scss'
 
-import buildingIcon from '../../assets/icon/icon_loupan@2x.png'
-import commerceIcon from '../../assets/icon/icon_liansuo@2x.png'
-
 const defaultAvatar = 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg'
-
-const Box_Navigator_List = [
-  {
-    code: 'FINE_DECORATION',
-    icon: buildingIcon,
-    title: '发起申请',
-  },
-  {
-    code: 'BIZ_CHAIN',
-    icon: commerceIcon,
-    title: '我发起',
-  },
-]
-
-const LineItem_Navigator_List = [
-  {
-    code: 'my-wrong-list',
-    imageUrl: defaultAvatar,
-    title: '我参与的项目',
-  },
-  {
-    code: 'my-favorite-list',
-    icon: commerceIcon,
-    title: '我的收藏',
-  },
-]
 
 @connect(({ me }) => ({ ...me }))
 export default class MePage extends Taro.PureComponent {
@@ -48,11 +19,7 @@ export default class MePage extends Taro.PureComponent {
   }
 
   render() {
-    const {
-      name,
-      brief,
-      imageUrl,
-    } = this.props
+    const { name, brief, imageUrl } = this.props
 
     return (
       <View className='me-page'>
@@ -67,12 +34,9 @@ export default class MePage extends Taro.PureComponent {
               <View className='content-brief'>{brief}</View>
             </View>
           </View>
-          <View className='me-page-header-footer'>
-          </View>
+          <View className='me-page-header-footer' />
         </View>
-        <View className='me-page-body'>
-
-        </View>
+        <View className='me-page-body' />
       </View>
     )
   }

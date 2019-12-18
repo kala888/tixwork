@@ -18,9 +18,9 @@ const niceRouterConfig = {
     Login: 'clientLogin/',
     VerifyCode: 'sendVerifyCode/:mobile/',
     OSSToken: 'customGetOssToken/',
-    SearchHome: 'dataApplicationManager/view/DA000008/',
+    SearchHome: 'dataApplicationManager/view/:dataAppUser/',
     Search:
-      'dataApplicationManager/loadDataApplication/DA000008/candidateDataSetList.searchField.0=name;candidateDataSetList.searchVerb.0=contains;candidateDataSetList.searchValue.0=:pSearchValue;candidateDataSetList=1;candidateDataSetList.orderBy.0=id;candidateDataSetList.descOrAsc.0=desc/',
+      'dataApplicationManager/loadDataApplication/:dataAppUser/candidateDataSetList.searchField.0=name;candidateDataSetList.searchVerb.0=contains;candidateDataSetList.searchValue.0=:pSearchValue;candidateDataSetList=1;candidateDataSetList.orderBy.0=id;candidateDataSetList.descOrAsc.0=desc/',
   },
 }
 

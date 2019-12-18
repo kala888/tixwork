@@ -3,14 +3,55 @@
 .data-search-page {
   @extend %page;
 
+  &-draw-icon {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    color: $primary-color;
+  }
+
+  &-draw {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 20px;
+
+    &-item {
+      display: flex;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 40px;
+      align-self: flex-end;
+      color: $text-color-light;
+      border-bottom: 1px solid #ddd;
+    }
+  }
+
   &-header {
     padding: 20px 40px;
     background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+
+    &-draw {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    at-search-bar {
+      width: 100%;
+    }
   }
 
-  &-loading{
+  &-loading {
     width: 100%;
-   text-align: center;
+    text-align: center;
     margin-top: 100px;
   }
 
