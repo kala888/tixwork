@@ -12,13 +12,24 @@ nice-router包含两部分：
 
 给予后端开发页面控制权（方便实现客CS程序的千人千面，业务变更）
 
+###### 已经上线的小程序
+
+<div>
+  
+  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/chainqa-qr.jpg'/><span style='margin-right:20px'>连问链达(区块链科普)</span>
+  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/xiaohuanglong-qr.png'/><span style='margin-right:20px'>小黄龙(环保供应链)</span>
+  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/doublechain-qr.jpg'/><span style='margin-right:20px'>双链索骥(新型智慧大数据平台)</span>
+  
+</div>
+
+###### 部分项目截图
 
 <div>
   <img src='http://img14.360buyimg.com/img/jfs/t1/75655/32/15369/1497606/5dce1c26E27e2c759/031a033c857992a5.jpg!q60.webp'/>
 </div>
 
 <div>
-  <img src='https://github.com/doublechaintech/nice-router/blob/master/nice-router-2.png'/>
+  <img src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/nice-router-2.png?x-oss-process=style/large'/>
 <div>
   
 
