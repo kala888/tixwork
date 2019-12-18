@@ -60,9 +60,8 @@ class App extends Component {
     pages: [
       'pages/me/me-page',
       'pages/biz/exam/question-detail-page',
-      'pages/login/login-page',
-
       'pages/home/home-page',
+      'pages/login/login-page',
       // base
       'nice-router/h5-page',
       'nice-router/network-exception-page',

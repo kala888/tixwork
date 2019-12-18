@@ -14,13 +14,6 @@ import ProductTemplate from './product-template'
 import SmallUserCardTemplate from './small-user-card-templage'
 import ImageOnBottomTemplate from './image-on-bottom'
 
-import ProjectTemplate from './biz/project-template'
-import DailyReportTemplate from './biz/daily-report-template'
-import ProjectNotificationTemplate from './biz/project-notification-template'
-import OrderTemplate from './biz/order-template'
-import ShopRequestTemplate from './shop-requst-template'
-import StoreOrderList from './store-order-template'
-
 import '../listof.scss'
 
 export default class LineItemWrapper extends Taro.PureComponent {
@@ -123,13 +116,6 @@ export default class LineItemWrapper extends Taro.PureComponent {
         {template === 'article' && <ArticleTemplate {...itemProps} />}
         {template === 'article-small' && <ArticleTemplate className='article-small' {...itemProps} />}
         {template === 'small-user-card' && <SmallUserCardTemplate {...itemProps} />}
-
-        {template === 'project' && <ProjectTemplate {...itemProps} />}
-        {template === 'daily-report-for-owner' && <DailyReportTemplate {...itemProps} />}
-        {template === 'project-notification' && <ProjectNotificationTemplate {...itemProps} />}
-        {template === 'main-order' && <OrderTemplate {...itemProps} />}
-        {template === 'shop-request' && <ShopRequestTemplate {...itemProps} />}
-        {template === 'store-order' && <StoreOrderList {...itemProps} />}
       </View>
     )
   }
