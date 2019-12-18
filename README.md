@@ -112,13 +112,6 @@ yarn dev:weapp
 - 这里推荐使用自动代码生成框架 [DaaS Start Kit](https://github.com/doublechaintech/daas-start-kit)，可以与nice-router完美配合。
 
 
-###### 已经上线的小程序
-
-<div>
-  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/chainqa-qr.jpg'/>
-  <img width='100px' height='100px' style='margin-left:20px'} src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/xiaohuanglong-qr.png'/>
-    <img width='100px' height='100px' style='margin-left:20px'} src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/doublechain-qr.png'/>
-</div>
 
 
 
