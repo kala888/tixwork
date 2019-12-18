@@ -29,7 +29,7 @@ nice-router包含两部分：
 </div>
 
 <div>
-  <img src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/nice-router-2.png?x-oss-process=style/large'/>
+  <img src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/nice-router-2.png?x-oss-process=style/xlarge'/>
 <div>
   
 
