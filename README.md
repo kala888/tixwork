@@ -2,15 +2,9 @@
 
 nice-router包含两部分：
 
-[nice-router-taro](https://github.com/doublechaintech/nice-router-taro)
+[nice-router-taro](https://github.com/doublechaintech/nice-router-taro)          [nice-router-react-native](https://github.com/doublechaintech/nice-router-react-native) (暂未开源, 稍等片刻)
 
-[nice-router-react-native](https://github.com/doublechaintech/nice-router-react-native) (暂未开源, 稍等片刻)
-
-多端统一开发体验
-
-满足前端页面驱动和后端路由驱动的需求
-
-给予后端开发页面控制权（方便实现客CS程序的千人千面，业务变更）
+多端统一开发体验 + 满足前端页面驱动和后端路由驱动的需求 + 给予后端开发页面控制权（方便实现客CS程序的千人千面，业务变更）
 
 ###### 已经上线的小程序(界面截图在最下面)
 
