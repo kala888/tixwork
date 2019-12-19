@@ -6,7 +6,7 @@
 
 <div>
   
-  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/chainqa-qr.jpg'/><span style='margin-right:20px'>链问链达(区块链)</span>
+  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/chainqa-qr.jpg'/><span style='margin-right:20px'>链问链答(区块链)</span>
   <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/xiaohuanglong-qr.png'/><span style='margin-right:20px'>小黄龙(环保供应链)</span>
    <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/shuxiang-qr.png'/><span style='margin-right:20px'>爱书香(社交类)</span>
   <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/doublechain-qr.jpg'/><span style='margin-right:20px'>双链索骥(大数据)</span>
