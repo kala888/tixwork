@@ -1,11 +1,5 @@
 #### 第0适合后端程序员的前端小程序开发框架。
 
-nice-router包含两部分：
-
-[nice-router-taro](https://github.com/doublechaintech/nice-router-taro)
-
-[nice-router-react-native](https://github.com/doublechaintech/nice-router-react-native) (暂未开源, 稍等片刻)
-
 多端统一开发体验 + 满足前端页面驱动和后端路由驱动的需求 + 给予后端开发页面控制权（方便实现客CS程序的千人千面，业务变更）
 
 ###### 已经上线的小程序(界面截图在最下面)
@@ -56,6 +50,9 @@ nice-router包含两部分：
 
 ### nice-router 已经组件共享提供了基础的支持。希望各位兄弟贡献各种常用的组件，尤其是那些促销组件。让体力活变为OOTB。
 
+nice-router 包含两部分：
+
+
 [nice-router-taro 开发文档](https://github.com/doublechaintech/nice-router/blob/master/docs/README.md)
 
-[nice-router-react-native 开发文档](https://github.com/doublechaintech/nice-router)
+[nice-router-react-native 开发文档](https://github.com/doublechaintech/nice-router) (暂未开源, 稍等片刻)
