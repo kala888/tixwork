@@ -1,3 +1,5 @@
+@import '../../styles/theme';
+
 .navigation-line-item {
   margin-top: 20px;
   height: 120px;
@@ -5,9 +7,7 @@
   background-color: $white;
   border-radius: 10px;
   //box-shadow: 0 6px 13px 1px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
+  @extend %flex-row;
 
   &-preicon {
     height: 100%;
@@ -18,11 +18,9 @@
 
   &-content {
     margin-left: 46px;
-    display: flex;
+    @extend %flex-1;
     flex-direction: column;
     justify-content: center;
-    flex: 1;
-    box-sizing: border-box;
 
     &-brief {
       font-family: $b181black;
@@ -42,37 +40,35 @@
 }
 
 .action-floor {
-  @extend %flex;
-  flex-direction: column;
+  @extend %flex-column;
 
   action-floor-item {
     width: 100%;
   }
 
   &-first {
-    @extend %flex;
-    flex-direction: row;
+    @extend %flex-row;
     height: 350px;
     width: 100%;
 
     &-left {
-      @extend %flex1;
+      @extend %flex-1;
     }
 
     &-right {
-      @extend %flex1;
+      @extend %flex-1;
       margin-left: 8px;
       flex-direction: column;
       justify-content: space-between;
 
       &-top {
-        @extend %flex1;
+        @extend %flex-1;
         margin-bottom: 4px;
         border-radius: 10px;
       }
 
       &-bottom {
-        @extend %flex1;
+        @extend %flex-1;
         margin-top: 4px;
         border-radius: 10px;
       }
@@ -80,19 +76,18 @@
   }
 
   &-second {
-    @extend %flex;
-    flex-direction: row;
+    @extend %flex-row;
     margin-top: 10px;
     height: 150px;
     width: 100%;
 
     &-left {
-      @extend %flex1;
+      @extend %flex-1;
       flex: 2;
     }
 
     &-right {
-      @extend %flex1;
+      @extend %flex-1;
       margin-left: 8px;
     }
   }
@@ -144,5 +139,30 @@
   .action-floor-item-brief {
     border-top-color: #7ba7d1;
     border-bottom-color: #7ba7d1;
+  }
+}
+
+.txt-table {
+  @extend %flex-column;
+  width: 100%;
+  font-size: 28px;
+  background-color: #fff;
+  padding: 24px;
+  color: $text-color-lighter;
+
+  .info-row {
+    @extend %flex-row;
+    padding: 5px 10px;
+
+    &-cell {
+      @extend %flex-1;
+      flex-direction: row;
+
+      &-value {
+        @extend %flex-1;
+        padding-left: 20px;
+        color: $text-color-light;
+      }
+    }
   }
 }

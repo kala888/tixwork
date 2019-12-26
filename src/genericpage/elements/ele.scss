@@ -1,16 +1,9 @@
 @import '../../styles/theme';
 
-.ele-flex {
-  display: flex;
-  box-sizing: border-box;
-}
-
 .image-placeholder {
   background: $image-bg;
   color: $white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @extend %flex-center;
 }
 
 .image-placeholder image {
@@ -19,8 +12,7 @@
 }
 
 .ele-message-swiper {
-  display: flex;
-  flex-direction: row;
+  @extend %flex-row;
   justify-content: center;
   padding: 10px 40px 10px 40px;
 
@@ -34,7 +26,7 @@
     margin-left: 20px;
 
     &-item {
-      display: flex;
+      @extend %flex;
       align-items: center;
 
       &-txt {
@@ -54,15 +46,12 @@
 }
 
 .ele-navigation-box-bar {
-  display: flex;
+  @extend %flex-1;
   flex-flow: row wrap;
-  flex: 1;
 
   &-item {
-    display: flex;
+    @extend %flex-center;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
     &-txt {
       font-size: 26px;
@@ -74,9 +63,7 @@
 }
 
 .ele-more-actions {
-  display: flex;
-  justify-items: center;
-  align-items: center;
+  @extend %flex-center;
 
   &-txt {
     font-size: 30px;
@@ -102,7 +89,7 @@
   background-color: $white;
 
   .header {
-    display: flex;
+    @extend %flex;
     padding: 20px 0;
 
     &-left {
@@ -140,7 +127,7 @@
       }
 
       &-tags {
-        display: flex;
+        @extend %flex;
 
         &-item {
           margin-left: 10px;
@@ -150,7 +137,7 @@
   }
 
   .info-item {
-    display: flex;
+    @extend %flex;
     align-items: center;
     line-height: 80px;
     border-top: 1px solid rgb(250, 240, 250);
@@ -172,16 +159,15 @@
 
 .ele-image {
   image {
-    display: flex;
+    @extend %flex;
     align-self: center;
   }
 }
 
 .ele-avatar {
+  @extend %flex-1;
   align-self: center;
-  display: flex;
   justify-content: center;
-  flex: 1;
   padding-top: 20px;
 
   image {
@@ -228,17 +214,15 @@
   border-radius: 20px;
   font-size: 28px;
   font-weight: 600;
-  display: flex;
+  @extend %flex;
 }
 
 .ele-card {
-  @extend .ele-flex;
+  @extend %flex-column;
   position: relative;
   background-color: $white;
   border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0px 10px 19px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 19px 1px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 
   &-status-flag {
@@ -247,7 +231,7 @@
     border-top: 120px solid #d2ab66;
     border-left: 120px solid transparent;
     position: absolute;
-    top: 0px;
+    top: 0;
     right: 0;
     opacity: 0.8;
   }
@@ -255,19 +239,18 @@
   &-status-txt {
     transform: rotate(45deg);
     position: absolute;
-    top: 0px;
+    top: 0;
     right: -5px;
     font-size: 30px;
     color: $white;
     font-weight: 600;
-    display: flex;
+    @extend %flex;
     align-items: flex-end;
     height: 70px;
   }
 
   &-header {
-    display: flex;
-    flex-direction: row;
+    @extend %flex-row;
     padding: 20px;
 
     image {
@@ -276,11 +259,9 @@
     }
 
     &_content {
-      display: flex;
+      @extend %flex-1;
       flex-direction: column;
       padding: 30px;
-      flex: 1;
-      box-sizing: border-box;
 
       &-title {
         font-size: 28px;
@@ -288,15 +269,14 @@
       }
 
       &-brief {
+        @extend %flex-1;
         padding: 20px 0;
-        box-sizing: border-box;
         height: 53px;
         line-height: 30px;
         font-size: 26px;
         font-weight: 400;
         color: #74767a;
         @include lamp-clamp(2);
-        flex: 1;
       }
 
       &-time {
@@ -308,7 +288,7 @@
 
   &-footer {
     border-top: 2px solid #f3f5f7;
-    padding: 20px 0px;
+    padding: 20px 0;
   }
 }
 
@@ -322,13 +302,11 @@
 }
 
 .ele-action-list {
-  display: flex;
-  flex-direction: row;
+  @extend %flex-row;
   justify-content: space-around;
   align-items: center;
   padding-right: 40px;
   padding-left: 40px;
-  box-sizing: border-box;
 
   &-btn {
     font-size: 28px;
@@ -352,7 +330,7 @@
 }
 
 .store-location-big {
-  margin: 20px 0px;
+  margin: 20px 0;
   background-color: $white;
   box-sizing: border-box;
   border-radius: 10px;
@@ -362,16 +340,15 @@
     image {
       width: 100%;
       height: 400px;
-      display: flex;
+      @extend %flex;
       justify-content: center;
     }
   }
 
   &-title {
     padding: 20px;
-    display: flex;
-    flex-direction: row;
     align-items: center;
+    @extend %flex-row;
 
     &-logo {
       padding-right: 20px;
@@ -382,17 +359,14 @@
 
   &-content {
     padding: 20px 40px 20px 20px;
-    display: flex;
-    flex-direction: row;
+    @extend %flex-row;
     justify-content: center;
     font-size: 26px;
-    box-sizing: border-box;
     width: 100%;
 
     &-address {
-      padding: 0px 15px;
-      display: flex;
-      flex: 1;
+      padding: 0 15px;
+      @extend %flex-1;
     }
 
     at-icon {
