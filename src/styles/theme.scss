@@ -40,10 +40,20 @@ $b181black: Brother-1816-Black, -apple-system, system-ui !important;
   box-sizing: border-box;
 }
 
-%flex1 {
+%flex-1 {
   display: flex;
   flex: 1;
   box-sizing: border-box;
+}
+
+%flex-row {
+  @extend %flex;
+  flex-direction: row;
+}
+
+%flex-column {
+  @extend %flex;
+  flex-direction: column;
 }
 
 %flex-center {

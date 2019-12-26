@@ -14,9 +14,8 @@
 
 .ele-input {
   @extend %ele-ele;
+  @extend %flex;
   height: 100px;
-  box-sizing: border-box;
-  display: flex;
   align-self: center;
   //border-radius: 10px;
 
@@ -31,78 +30,6 @@
     width: 100%;
   }
 }
-
-//.ele-input {
-//
-//  .at-input__container {
-//    display: flex;
-//    flex-direction: column;
-//    align-items: flex-start;
-//    box-sizing: border-box;
-//
-//    .at-input__title {
-//      font-size: 24px;
-//    }
-//
-//    .at-input__input {
-//      border: 1px solid $border-color;
-//      width: 100%;
-//      box-sizing: border-box;
-//      padding: 20px;
-//      margin-top: 20px;
-//      color: $text-color;
-//      font-size: 32px;
-//      line-height: 1.5;
-//      vertical-align: middle;
-//    }
-//  }
-//}
-//
-//.ele-input-money {
-//  .at-input__container {
-//    .at-input__input {
-//      padding-left: 40px;
-//    }
-//
-//    .at-input__input:focus {
-//      border-style: solid;
-//      border-color: $border-color-light-blue;
-//      box-shadow: 0 0 15px $border-color-light-blue;
-//    }
-//
-//    .at-input__input:before {
-//      content: '￥';
-//      margin-left: -40px;
-//    }
-//  }
-//}
-//
-//.ele-input.noLabel {
-//  .at-input__container {
-//    .at-input__title {
-//      width: 0px;
-//      height: 0px;
-//      opacity: 0;
-//    }
-//  }
-//}
-//
-//.ele-input.noBorder {
-//  .at-input__container {
-//    .at-input__input {
-//      border: 0px;
-//    }
-//  }
-//}
-//
-//.ele-input.underLine {
-//  .at-input__container {
-//    .at-input__input {
-//      border: 0px;
-//      border-bottom: 1px solid $border-color;
-//    }
-//  }
-//}
 
 .ele-textarea {
   @extend %ele-ele;
@@ -122,8 +49,7 @@
 
 .ele-switch {
   @extend %ele-ele;
-  display: flex;
-  flex-direction: row;
+  @extend %flex-row;
   justify-content: space-between;
 }
 
@@ -140,9 +66,8 @@
 
 .ele-picker {
   @extend %ele-ele;
+  @extend %flex-row;
   //margin-top: 20px;
-  display: flex;
-  flex-direction: row;
   flex: 1;
 
   font-size: 35px;
@@ -150,14 +75,12 @@
   vertical-align: middle;
 
   &-left {
-    display: flex;
-    flex: 1;
+    @extend %flex-1;
     //padding-left: 20px;
   }
 
   &-right {
-    display: flex;
-    flex: 1;
+    @extend %flex-1;
     justify-content: flex-end;
     font-size: 30px;
     color: $text-color-lighter;
