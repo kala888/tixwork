@@ -8,8 +8,7 @@
 
     &-top {
       background-color: $primary-color;
-      display: flex;
-      flex-direction: row;
+      @extend %flex-row;
       align-items: center;
       border-bottom-left-radius: 50px;
       padding-bottom: 60px;
@@ -31,8 +30,7 @@
 
       .content {
         color: $white;
-        display: flex;
-        flex-direction: column;
+        @extend %flex-column;
         justify-content: center;
         font-size: 30px;
 

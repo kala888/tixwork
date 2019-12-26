@@ -8,25 +8,21 @@
 .listof-footer-tips {
   color: $text-color-lighter;
   z-index: 9999;
-  display: flex;
+  @extend %flex;
   justify-content: center;
   align-items: center;
   padding: 30px 40px;
-  box-sizing: border-box;
 
   &-line {
-    display: flex;
-    flex: 1;
+    @extend %flex-1;
     height: 2px;
     background-color: $text-color-lighter;
   }
 
   &-content {
-    box-sizing: border-box;
-    padding: 0px 30px;
+    padding: 0 30px;
     font-size: 30px;
-    display: flex;
-    flex-direction: row;
+    @extend %flex-row;
     justify-content: space-around;
     align-items: center;
 
@@ -38,9 +34,7 @@
 
 .listof-empty-message {
   height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %flex-center;
   color: $text-color-light;
 }
 
@@ -49,26 +43,21 @@
 }
 
 .list-of-container {
-  display: flex;
+  @extend %flex-column;
   align-items: center;
-  flex-direction: column;
   flex-wrap: wrap;
-  padding: 0px 15px;
-  box-sizing: border-box;
+  padding: 0 15px;
   //border-radius: 20px;
   &-item {
-    display: flex;
-    flex: 1;
+    @extend %flex-1;
     width: 100%;
     align-self: flex-start;
-    box-sizing: border-box;
     margin-top: 20px;
     overflow: hidden;
 
     //padding-right: 20px;
     line-item-wrapper {
-      display: flex;
-      flex: 1;
+      @extend %flex-1;
     }
   }
 
@@ -112,19 +101,15 @@
 
 %template {
   background-color: $white;
-  display: flex;
+  @extend %flex-column;
   justify-content: center;
-  flex-direction: column;
   padding: 10px;
-  box-sizing: border-box;
   border-radius: 2px;
-  box-shadow: 0px 10px 19px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 19px 1px rgba(0, 0, 0, 0.08);
 
   .content {
-    display: flex;
+    @extend %flex-column;
     flex: 1;
-    flex-direction: column;
-    box-sizing: border-box;
 
     &-title {
       box-sizing: border-box;
@@ -150,18 +135,14 @@
   @extend %template;
 
   .image-list {
-    display: flex;
-    flex-direction: row;
+    @extend %flex-row;
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box;
     flex: 1;
 
     .image-item {
-      display: flex;
+      @extend %flex-center;
       flex: 1;
-      justify-content: center;
-      align-items: center;
       height: 200px;
     }
   }
@@ -218,9 +199,8 @@
     margin-left: 20px;
 
     &-title {
-      margin-left: 0px;
-      display: flex;
-      flex-direction: row;
+      margin-left: 0;
+      @extend %flex-row;
       align-items: center;
       height: 64px;
       color: #232326;
@@ -230,11 +210,10 @@
     }
 
     &-brief {
-      margin-left: 0px;
+      margin-left: 0;
       font-size: 32px;
       color: #f23030;
-      display: flex;
-      flex-direction: row;
+      @extend %flex-row;
       align-items: center;
     }
   }
@@ -255,12 +234,11 @@
 
   .content {
     height: 100px;
-    display: flex;
-    flex: 1;
+    @extend %flex-1;
     padding: 16px 5px;
 
     &-title {
-      margin: 0px;
+      margin: 0;
       font-weight: unset;
       font-size: 26px;
     }
@@ -291,16 +269,14 @@
   width: 320px;
   height: 280px;
   background-color: $white;
-  display: flex;
-  flex-direction: column;
+  @extend %flex-column;
   align-items: center;
   justify-content: flex-start;
-  box-sizing: border-box;
 }
 
 .project-template {
   @extend %template;
-  flex-direction: row;
+  @extend %flex-row;
   height: 250px;
   width: 100%;
   border: 1px solid $border-color;
@@ -337,11 +313,10 @@
   &-reporter {
     font-size: 24px;
     color: $text-color-light;
-    display: flex;
-    flex-direction: row;
+    @extend %flex-row;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 20px;
+    padding: 0 20px;
   }
 
   .content {
@@ -364,7 +339,7 @@
 
 .document-card-footer-btn {
   padding: 10px 40px;
-  display: flex;
+  @extend %flex;
 
   &-icon {
     width: 20px;
@@ -379,16 +354,12 @@
   padding: 20px;
 
   &-user-info {
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
+    @extend %flex-row;
 
     &-name {
-      display: flex;
-      flex: 1;
-      box-sizing: border-box;
+      @extend %flex-1;
       color: $text-color-lighter;
-      padding: 0px 10px;
+      padding: 0 10px;
       @include lamp-clamp(2);
     }
   }
@@ -420,22 +391,18 @@
 
 .order {
   @extend %template;
-  display: flex;
-  flex-direction: column;
+  @extend %flex-column;
   font-size: 28px;
   padding: 20px;
   border-radius: 10px;
 
   &-title {
-    display: flex;
-    flex-direction: row;
+    @extend %flex-row;
     justify-content: space-between;
     padding: 0 20px;
-    box-sizing: border-box;
 
     &-project {
-      display: flex;
-      flex-direction: row;
+      @extend %flex-row;
       flex: 1;
     }
   }
@@ -445,10 +412,8 @@
     color: $text-color;
 
     &-item {
-      display: flex;
-      flex-direction: row;
+      @extend %flex-row;
       padding-top: 20px;
-      box-sizing: border-box;
 
       &-img {
         image {
@@ -459,16 +424,14 @@
       }
 
       &-content {
-        display: flex;
-        flex-direction: column;
+        @extend %flex-column;
         flex: 1;
-        box-sizing: border-box;
-        padding: 0px 20px;
+        padding: 0 20px;
 
         &-price {
           color: $color-orange;
           font-size: 30px;
-          display: flex;
+          @extend %flex;
           font-weight: 500;
         }
 
@@ -477,8 +440,7 @@
         }
 
         &-brief {
-          display: flex;
-          flex: 1;
+          @extend %flex-1;
           color: $text-color-lighter;
           font-size: 24px;
           @include lamp-clamp(2);
@@ -494,9 +456,8 @@
   }
 
   &-footer {
-    display: flex;
+    @extend %flex-row;
     flex: 1;
-    flex-direction: row;
     justify-content: flex-end;
     align-items: center;
 

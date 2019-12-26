@@ -30,34 +30,25 @@
 }
 
 .flex-column {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  @extend %flex-column;
 }
 
 .flex-row {
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
+  @extend %flex-row;
 }
 
 .flex-center {
-  display: flex;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
+  @extend %flex-center;
 }
 
 .flex-row-center {
-  @extend .flex-row;
-  justify-content: center;
-  align-items: center;
+  @extend .flex-center;
+  flex-direction: row;
 }
 
 .flex-column-center {
-  @extend .flex-column;
-  justify-content: center;
-  align-items: center;
+  @extend .flex-center;
+  flex-direction: column;
 }
 
 .flex-full {
