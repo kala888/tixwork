@@ -1,8 +1,8 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "nice-router-taro",
-	"description": "nice-router-taro a wx development framework base on Taro and React",
-	"appid": "wxffe4c48a31d36507",
+	"projectname": "%E5%8F%8C%E9%93%BE%E7%B4%A2%E9%AA%A5",
+	"description": "新型大数据平台",
+	"appid": "wxbaf676ae27500c5a",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
