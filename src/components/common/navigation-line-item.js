@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { Image, View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 
-import './biz/styles.scss'
+import './styles.scss'
 
 export default class NavigationLineItem extends Taro.PureComponent {
   static options = {
