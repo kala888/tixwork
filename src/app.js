@@ -74,12 +74,12 @@ class App extends Component {
       'listof/listof-page4',
       // biz
     ],
-
-    permission: {
-      'scope.userLocation': {
-        desc: '你的位置信息将用于小程序位置接口的效果展示',
-      },
-    },
+    //
+    // permission: {
+    //   'scope.userLocation': {
+    //     desc: '你的位置信息将用于小程序位置接口的效果展示',
+    //   },
+    // },
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#28aaff',
