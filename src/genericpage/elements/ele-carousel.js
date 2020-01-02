@@ -23,7 +23,7 @@ export default class EleCarousel extends Taro.PureComponent {
     circular: true,
     indicatorColor: 'rgba(255, 255, 255, 0.6)',
     indicatorActiveColor: '#fff',
-    indicatorDots: true,
+    indicatorDots: null,
     customStyle: {},
     className: null,
   }
@@ -58,6 +58,8 @@ export default class EleCarousel extends Taro.PureComponent {
 
     const style = { ...customStyle, height: toRpx(height) }
 
+    const showDots = indicatorDots === null ? items.length > 1 : indicatorDots
+
     const rootClass = EleHelper.classNames('ele-carousel', className)
     return (
       <View className={rootClass} style={style}>
@@ -68,7 +70,7 @@ export default class EleCarousel extends Taro.PureComponent {
           circular={circular}
           indicatorColor={indicatorColor}
           indicatorActiveColor={indicatorActiveColor}
-          indicatorDots={indicatorDots}
+          indicatorDots={showDots}
           style={style}
         >
           {items.map((it) => {
