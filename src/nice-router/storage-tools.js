@@ -5,7 +5,7 @@ import md5 from 'blueimp-md5'
 
 const CACHE_PREFIX = 'cachestore-'
 const CACHE_EXPIRATION_PREFIX = 'cacheexpiration-'
-const EXPIRY_UNITS = 60 * 1000
+const EXPIRY_UNITS = 1000 // seconds
 
 const shortKey = (key) => (key.length > 100 ? md5(key) : key)
 
@@ -33,6 +33,7 @@ const StorageTools = {
     return value ? JSON.parse(value) : defaultValue
   },
 
+  // time unit: second
   set(key, value = '', time) {
     const { exprKey, theKey } = getKeys(key)
     if (time) {
@@ -54,9 +55,12 @@ const StorageTools = {
   isExpired(key) {
     const { exprKey } = getKeys(key)
     const expiry = Taro.getStorageSync(exprKey)
-
-    const expired = expiry && currentTime() >= parseInt(expiry, 10)
-    return expired
+    if (expiry > 0) {
+      const expired = expiry && currentTime() >= parseInt(expiry, 10)
+      console.log('是否过期？', 1, expired, currentTime())
+      return expired
+    }
+    return true
   },
   flush() {
     const { keys } = Taro.getStorageInfoSync()

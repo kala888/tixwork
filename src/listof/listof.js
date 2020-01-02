@@ -25,6 +25,7 @@ export default class Listof extends Taro.PureComponent {
     numColumns: null,
     horizontal: false,
     bordered: true,
+    className: null,
   }
 
   state = {
@@ -72,6 +73,7 @@ export default class Listof extends Taro.PureComponent {
       bordered,
       containerClass,
       onItemPress,
+      className,
     } = this.props
 
     const list = enrichListOfEntity({ dataContainer, targetList: listRefs })
@@ -80,7 +82,7 @@ export default class Listof extends Taro.PureComponent {
     const itemWidth = numColumns ? 100 / numColumns - 1 : null
 
     const scrollViewStyle = height ? { height: toRpx(height) } : {}
-    const scrollViewClass = classNames({
+    const scrollViewClass = classNames(className, {
       'scroll-view-horizontal': horizontal,
     })
 
