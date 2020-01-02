@@ -4,7 +4,7 @@ import { Image, View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 import classNames from 'classnames'
 
-import './biz/styles.scss'
+import './styles.scss'
 
 import commerceIcon from '../assets/icon/icon_liansuo@2x.png'
 
