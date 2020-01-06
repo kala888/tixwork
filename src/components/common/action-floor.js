@@ -38,7 +38,9 @@ export default class ActionFloor extends Taro.PureComponent {
 
             <View className='action-floor-first-right'>
               <View className='action-floor-first-right-top'>
-                <ActionFloorItem action={action4} />
+                <View className='action-floor-item-container'>
+                  <ActionFloorItem action={action4} />
+                </View>
               </View>
               <View className='action-floor-first-right-bottom'>
                 <View className='action-floor-item-container'>

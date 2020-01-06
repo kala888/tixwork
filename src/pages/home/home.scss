@@ -2,4 +2,7 @@
 
 .home-page {
   @extend %page;
+  &-action-floor {
+    margin: 30px;
+  }
 }
