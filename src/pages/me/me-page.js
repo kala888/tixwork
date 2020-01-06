@@ -65,7 +65,7 @@ export default class MePage extends Taro.PureComponent {
         <View className='me-page-header'>
           <View className='me-page-header-top'>
             <View className='avatar' onClick={this.handleOpenProfile}>
-              <ServerImage my-claa='avatar-image' src={imageUrl || defaultAvatar} />
+              <ServerImage my-class='avatar-image' src={imageUrl || defaultAvatar} />
             </View>
 
             <View className='content'>
