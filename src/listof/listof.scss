@@ -47,17 +47,14 @@
   align-items: center;
   flex-wrap: wrap;
   padding: 0 15px;
-  //border-radius: 20px;
+
   &-item {
-    @extend %flex-1;
     width: 100%;
-    align-self: flex-start;
     margin-top: 20px;
     overflow: hidden;
 
-    //padding-right: 20px;
-    line-item-wrapper {
-      @extend %flex-1;
+    &-wrapper {
+      width: 100%;
     }
   }
 
@@ -78,10 +75,8 @@
 }
 
 .line-item-wrapper {
-  box-sizing: border-box;
   position: relative;
   width: 100%;
-  align-self: flex-start;
 
   .item-loading {
     position: absolute;
@@ -137,13 +132,15 @@
   .image-list {
     @extend %flex-row;
     justify-content: space-between;
-    align-items: center;
-    flex: 1;
+    width: 100%;
 
-    .image-item {
-      @extend %flex-center;
-      flex: 1;
-      height: 200px;
+    &-item {
+      width: 100%;
+
+      &-image {
+        height: 200px;
+        width: 100%;
+      }
     }
   }
 }
@@ -173,10 +170,8 @@
   padding: 0 0 10px 0;
 
   &-img {
-    image {
-      height: 330px;
-      width: 100%;
-    }
+    height: 330px;
+    width: 100%;
   }
 }
 
@@ -189,10 +184,8 @@
   padding: 0 0 10px 0;
 
   &-img {
-    image {
-      height: 220px;
-      width: 100%;
-    }
+    height: 220px;
+    width: 100%;
   }
 
   .content {
@@ -264,212 +257,7 @@
   }
 }
 
-.user-card-template {
-  @extend %template;
-  width: 320px;
-  height: 280px;
-  background-color: $white;
-  @extend %flex-column;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.project-template {
-  @extend %template;
-  @extend %flex-row;
-  height: 250px;
-  width: 100%;
-  border: 1px solid $border-color;
-  box-sizing: border-box;
-
-  .left-image {
-    align-self: center;
-
-    image {
-      width: 200px;
-    }
-  }
-
-  .content {
-    margin-left: 20px;
-
-    &-brief {
-      @include lamp-clamp(3);
-    }
-
-    &-location {
-      @include text-ellipsis;
-    }
-  }
-}
-
-.daily-report {
-  @extend %template;
-  height: 200px;
-  width: 100%;
-  border: 1px solid $border-color;
-  overflow: hidden;
-
-  &-reporter {
-    font-size: 24px;
-    color: $text-color-light;
-    @extend %flex-row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-  }
-
-  .content {
-    margin-left: 20px;
-
-    &-brief {
-      @include lamp-clamp(3);
-    }
-
-    &-location {
-      @include text-ellipsis;
-    }
-  }
-}
-
 .space-between-container {
   justify-content: space-between;
   flex-direction: row;
-}
-
-.document-card-footer-btn {
-  padding: 10px 40px;
-  @extend %flex;
-
-  &-icon {
-    width: 20px;
-    height: 24px;
-    padding-right: 10px;
-  }
-}
-
-.project-notification {
-  @extend %template;
-  font-size: 28px;
-  padding: 20px;
-
-  &-user-info {
-    @extend %flex-row;
-
-    &-name {
-      @extend %flex-1;
-      color: $text-color-lighter;
-      padding: 0 10px;
-      @include lamp-clamp(2);
-    }
-  }
-
-  &-title {
-    padding-top: 10px;
-    font-size: 32px;
-    @include text-ellipsis;
-  }
-
-  &-brief {
-    padding-top: 10px;
-    color: $text-color-lighter;
-    @include text-ellipsis;
-  }
-
-  &-content {
-    padding: 10px;
-    color: $text-color-light;
-    @include lamp-clamp(3);
-  }
-
-  &-time {
-    font-size: 24px;
-    color: $text-color-lighter;
-    align-self: flex-end;
-  }
-}
-
-.order {
-  @extend %template;
-  @extend %flex-column;
-  font-size: 28px;
-  padding: 20px;
-  border-radius: 10px;
-
-  &-title {
-    @extend %flex-row;
-    justify-content: space-between;
-    padding: 0 20px;
-
-    &-project {
-      @extend %flex-row;
-      flex: 1;
-    }
-  }
-
-  &-content {
-    padding-top: 5px;
-    color: $text-color;
-
-    &-item {
-      @extend %flex-row;
-      padding-top: 20px;
-
-      &-img {
-        image {
-          width: 150px;
-          height: 150px;
-          border-radius: 10px;
-        }
-      }
-
-      &-content {
-        @extend %flex-column;
-        flex: 1;
-        padding: 0 20px;
-
-        &-price {
-          color: $color-orange;
-          font-size: 30px;
-          @extend %flex;
-          font-weight: 500;
-        }
-
-        &-title {
-          @include lamp-clamp(2);
-        }
-
-        &-brief {
-          @extend %flex-1;
-          color: $text-color-lighter;
-          font-size: 24px;
-          @include lamp-clamp(2);
-        }
-
-        &-store {
-          color: $text-color-lighter;
-          font-size: 24px;
-          @include text-ellipsis;
-        }
-      }
-    }
-  }
-
-  &-footer {
-    @extend %flex-row;
-    flex: 1;
-    justify-content: flex-end;
-    align-items: center;
-
-    &-price {
-      color: $price-text;
-      font-size: 32px;
-      font-weight: 800;
-    }
-  }
-
-  &-actions {
-    padding-top: 20px;
-    border-top: 2px solid #f3f5f7;
-  }
 }

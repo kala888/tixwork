@@ -25,7 +25,7 @@ export default class EleImage extends Taro.PureComponent {
     return (
       <View className={rootClass} style={customStyle}>
         {path ? (
-          <ServerImage src={path} style={customStyle} mode={mode} />
+          <ServerImage src={path} customStyle={customStyle} mode={mode} />
         ) : (
           <View className='image-placeholder' style={customStyle}>
             <AtIcon value='image' />

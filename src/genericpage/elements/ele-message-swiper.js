@@ -38,7 +38,7 @@ export default class EleMessageSwiper extends Taro.PureComponent {
           {imageUrl.length > 0 ? (
             <ServerImage
               src={imageUrl}
-              style={{ verticalAlign: 'middle', width: `${toRpx(imageWidth)}`, height: `${toRpx(imageHeight)}` }}
+              customStyle={{ verticalAlign: 'middle', width: `${toRpx(imageWidth)}`, height: `${toRpx(imageHeight)}` }}
             />
           ) : (
             <AtIcon value='volume-plus' size={22} />
@@ -46,8 +46,9 @@ export default class EleMessageSwiper extends Taro.PureComponent {
         </View>
         <Swiper className='ele-message-swiper-messages' autoplay circular vertical>
           {items.map((it) => {
+            const { id } = it
             return (
-              <SwiperItem className='ele-message-swiper-messages-item' key={it.id}>
+              <SwiperItem className='ele-message-swiper-messages-item' key={id}>
                 <Text className='ele-message-swiper-messages-item-txt' onClick={this.handleItemClick.bind(this, it)}>
                   {it.text}
                 </Text>

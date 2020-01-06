@@ -21,7 +21,7 @@ export default class ArticleTemplate extends Taro.PureComponent {
     return (
       <View className={rootClass}>
         <View className='image-item'>
-          <ServerImage style={{ width: '100%', height: '100%' }} mode='aspectFit' src={src} />
+          <ServerImage customStyle={{ width: '100%', height: '100%' }} mode='aspectFit' src={src} />
         </View>
 
         <View className='content'>

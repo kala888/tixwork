@@ -74,9 +74,7 @@ export default class EleStoreLocation extends Taro.PureComponent {
       <View className={rootClass} style={{ margin: `0 ${toRpx(padding)}` }}>
         {showBrief && (
           <View className='header'>
-            <View className='header-left'>
-              <ServerImage src={imageUrl} />
-            </View>
+            <ServerImage my-class='header-left' src={imageUrl} />
             <View className='header-right'>
               <View className='header-right-name'>{name}</View>
 

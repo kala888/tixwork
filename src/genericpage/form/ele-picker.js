@@ -94,7 +94,9 @@ export default class ElePicker extends Taro.PureComponent {
             ) : (
               <View className='ele-picker-right-brief'>{brief}</View>
             )}
-            <AtIcon size={12} value='chevron-right' />
+            <View className='ele-picker-right-icon'>
+              <AtIcon size={12} value='chevron-right' />
+            </View>
           </View>
         </View>
       </Picker>

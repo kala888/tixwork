@@ -1,8 +1,6 @@
 import { Block, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 
-import UserCard from '@/components/biz/user-card'
-
 import EleFab from '../elements/ele-fab'
 import EleText from '../elements/ele-text'
 import EleImage from '../elements/ele-image'
@@ -59,13 +57,13 @@ export default class EleFlex extends Taro.PureComponent {
     return (
       <View className={rootClass} style={{ flex, ...customStyle }}>
         {kids.map((it) => {
-          const { flex: itemFlex = 1 } = it
+          const { flex: itemFlex = 1, id } = it
           const ele = {
             ...it,
             formKey: formKey,
           }
           return (
-            <Block key={it.id}>
+            <Block key={id}>
               {/* ui elements*/}
               {it.type === 'text' && <EleText {...ele} />}
               {it.type === 'image' && <EleImage {...ele} />}
@@ -94,7 +92,6 @@ export default class EleFlex extends Taro.PureComponent {
               {it.type === 'switch' && <EleSwitch {...ele} />}
               {it.type === 'textarea' && <EleTextarea {...ele} />}
               {it.type === 'vcode' && <EleVcode {...ele} />}
-              {it.type === 'user-card' && <UserCard {...ele} />}
 
               {/* container elements*/}
               {it.type === 'form' && <EleForm {...ele} />}

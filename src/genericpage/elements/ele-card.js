@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
-import { Block, Image, View } from '@tarojs/components'
+import { Block, View } from '@tarojs/components'
 import { formatTime } from '@/utils/index'
+import ServerImage from '@/components/image/server-image'
 
 import './ele.scss'
 import EleHelper from '../ele-helper'
@@ -34,7 +35,7 @@ class EleCard extends Taro.PureComponent {
         )}
 
         <View className='ele-card-header'>
-          <Image src={imageUrl} />
+          <ServerImage my-class='ele-card-header-image' src={imageUrl} />
           <View className='ele-card-header_content'>
             <View className='ele-card-header_content-title'>{title}</View>
             <View className='ele-card-header_content-brief'>{brief}</View>

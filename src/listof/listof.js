@@ -111,18 +111,22 @@ export default class Listof extends Taro.PureComponent {
         style={{ ...scrollViewStyle }}
       >
         <View className={listofContainerClass} style={style}>
-          {list.map((item, index) => (
-            <View key={item.id} className={itemContainerClass} style={listofContainerItemContainerStyle}>
-              <LineItemWrapper
-                index={index}
-                item={item}
-                onItemPress={onItemPress}
-                displayMode={displayMode}
-                bordered={bordered}
-                horizontal={horizontal}
-              />
-            </View>
-          ))}
+          {list.map((item, index) => {
+            const { id } = item
+            return (
+              <View key={id} className={itemContainerClass} style={listofContainerItemContainerStyle}>
+                <LineItemWrapper
+                  my-class='list-of-container-item-wrapper'
+                  index={index}
+                  item={item}
+                  onItemPress={onItemPress}
+                  displayMode={displayMode}
+                  bordered={bordered}
+                  horizontal={horizontal}
+                />
+              </View>
+            )
+          })}
         </View>
         <FooterTips
           isBigList={isBigList}

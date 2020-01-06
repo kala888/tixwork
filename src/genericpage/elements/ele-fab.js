@@ -36,7 +36,7 @@ export default class EleFab extends Taro.PureComponent {
             <AtIcon className='more-action-icon' value={icon} size={24} color='grey' />
           ) : (
             <View style={{ width: '25px', height: '25px' }}>
-              {imageUrl && <ServerImage src={imageUrl} style={{ width: '100%', height: '100%' }} />}
+              {imageUrl && <ServerImage src={imageUrl} customStyle={{ width: '100%', height: '100%' }} />}
               {text && <Text style={{ width: '20px', height: '20px', ...customStyle }}>{text}</Text>}
             </View>
           )}

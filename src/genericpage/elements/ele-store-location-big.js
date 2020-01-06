@@ -27,13 +27,11 @@ export default class EleStoreLocationBig extends Taro.PureComponent {
 
     return (
       <View className='store-location-big'>
-        <View className='store-location-big-face-image'>
-          <ServerImage src={imageUrl} />
-        </View>
+        <ServerImage my-class='store-location-big-face-image' src={imageUrl} />
 
         <View className='store-location-big-title'>
           <View className='store-location-big-title-logo'>
-            <ServerImage style={{ width: '100%', height: '100%' }} src={logo} />
+            <ServerImage customStyle={{ width: '100%', height: '100%' }} src={logo} />
           </View>
           <View>{name}</View>
         </View>
@@ -41,7 +39,9 @@ export default class EleStoreLocationBig extends Taro.PureComponent {
         <View className='store-location-big-content' onClick={this.handleMakeCall}>
           <AtIcon value='map-pin' size={18} color='orangered' />
           <View className='store-location-big-content-address'>{address}</View>
-          <AtIcon value='phone' size={18} />
+          <View className='store-location-big-content-icon'>
+            <AtIcon value='phone' size={18} />
+          </View>
         </View>
       </View>
     )

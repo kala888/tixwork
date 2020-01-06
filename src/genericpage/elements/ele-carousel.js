@@ -4,9 +4,9 @@ import { Swiper, SwiperItem, Video, View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 import { toRpx } from '@/utils/index'
 import isEmpty from 'lodash/isEmpty'
+import ServerImage from '@/components/image/server-image'
 
 import './ele.scss'
-import EleImage from './ele-image'
 import EleHelper from '../ele-helper'
 
 export default class EleCarousel extends Taro.PureComponent {
@@ -74,12 +74,14 @@ export default class EleCarousel extends Taro.PureComponent {
           style={style}
         >
           {items.map((it) => {
-            const { videoUrl = '', imageUrl } = it
+            const { videoUrl = '', imageUrl, id } = it
+            console.log('id', id)
             return (
-              <SwiperItem key={it.id} onClick={this.handleClick.bind(this, it)}>
+              <SwiperItem key={id} onClick={this.handleClick.bind(this, it)}>
                 {videoUrl.length > 0 ? (
                   <View>
                     <Video
+                      className='ele-carousel-video'
                       src={videoUrl}
                       controls
                       autoplay={it.autoplay}
@@ -91,7 +93,7 @@ export default class EleCarousel extends Taro.PureComponent {
                     />
                   </View>
                 ) : (
-                  <EleImage {...it} customStyle={style} />
+                  <ServerImage src={it.imageUrl} my-class='ele-carousel-image' customStyle={style} />
                 )}
               </SwiperItem>
             )

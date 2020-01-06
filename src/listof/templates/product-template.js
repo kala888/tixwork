@@ -14,9 +14,7 @@ export default class ProductTemplate extends Taro.PureComponent {
 
     return (
       <View className='product'>
-        <View className='product-img'>
-          <ServerImage src={src} />
-        </View>
+        <ServerImage my-class='product-img' src={src} />
 
         <View class='content'>
           <View className='content-title'>

@@ -10,7 +10,9 @@
 		"postcss": false,
 		"minified": false,
 		"newFeature": true,
+		"coverView": true,
 		"autoAudits": false,
+		"showShadowRootInWxmlPanel": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -22,7 +24,9 @@
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"libVersion": "2.8.0",
+	"simulatorPluginLibVersion": {
+		"qywx_simulator_plugin": "1.2.0"
+	},
+	"libVersion": "2.10.0",
 	"condition": {}
 }

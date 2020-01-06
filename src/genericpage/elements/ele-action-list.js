@@ -22,9 +22,9 @@ class EleActionList extends Taro.PureComponent {
     return (
       <View className={rootClass} style={customStyle}>
         {list.map((it) => {
-          const { customStyle: actionStyle = {} } = it
+          const { customStyle: actionStyle = {}, id } = it
           return (
-            <View key={it.id} className='ele-action-list-btn'>
+            <View key={id} className='ele-action-list-btn'>
               <EleButton
                 uiType={it.uiType}
                 btnType={it.btnType}
@@ -35,7 +35,7 @@ class EleActionList extends Taro.PureComponent {
                 disabled={it.disabled}
                 onClick={it.onClick}
               >
-                {it.imageUrl && <ServerImage src={it.imageUrl} />}
+                {it.imageUrl && <ServerImage my-class='ele-action-list-btn-image' src={it.imageUrl} />}
                 {it.title}
               </EleButton>
             </View>

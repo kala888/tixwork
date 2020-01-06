@@ -24,10 +24,10 @@ export default class NavigationBoxBar extends Taro.PureComponent {
       list.length > 0 && (
         <View className={rootClass} customStyle={customStyle}>
           {list.map((it, index) => {
-            const { icon, imageUrl, title, badge } = it
+            const { icon, imageUrl, title, badge, id } = it
             const isLast = index === list.length - 1
             return (
-              <View key={it.id} className='navigation-bar-item'>
+              <View key={id} className='navigation-bar-item'>
                 <View className='navigation-box' onClick={this.handleClick.bind(this, it)}>
                   <View className='navigation-box-img'>
                     <AtBadge value={badge}>
