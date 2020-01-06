@@ -12,7 +12,7 @@
   flex: 1;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
-  box-shadow: 0px 15px 10px 1px rgba(40, 170, 255, 0.1);
+  box-shadow: 0px 15px 10px 1px $shadow-color;
 
   &-item {
     display: flex;
@@ -26,9 +26,7 @@
       align-items: center;
 
       &-img {
-        image {
-          width: 44px;
-        }
+        width: 44px;
       }
 
       &-txt {

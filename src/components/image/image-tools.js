@@ -1,4 +1,3 @@
-import Config from '@/utils/config'
 import m_ from '@/utils/mini-lodash'
 import curryRight from 'lodash/curryRight'
 
@@ -10,14 +9,7 @@ function loadServerImage(uri, style) {
     return uri
   }
   let url = uri || ''
-  if (uri && !/^(http|https):/.test(uri)) {
-    if (uri.indexOf('images') === -1) {
-      url = `${Config.oss.staticURL}images/${uri}`
-    } else {
-      url = `${Config.oss.staticUR}${uri}`
-    }
-  }
-  if (url.indexOf('x-oss-process') > -1) {
+  if (!/^(http|https):/.test(url) || url.indexOf('x-oss-process') > -1) {
     return url
   }
   return url + style

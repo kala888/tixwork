@@ -1,10 +1,12 @@
 import Taro from '@tarojs/taro'
-import { Image, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import NavigationService from '@/nice-router/navigation.service'
 import NavigationLineItem from '@/components/common/navigation-line-item'
 import NavigationBoxBar from '@/components/navigation-box-bar'
 import Config from '@/utils/config'
+import ServerImage from '@/components/image/server-image'
+
 import './me.scss'
 
 import buildingIcon from '../../assets/icon/icon_loupan@2x.png'
@@ -63,7 +65,7 @@ export default class MePage extends Taro.PureComponent {
         <View className='me-page-header'>
           <View className='me-page-header-top'>
             <View className='avatar' onClick={this.handleOpenProfile}>
-              <Image src={imageUrl || defaultAvatar} />
+              <ServerImage my-claa='avatar-image' src={imageUrl || defaultAvatar} />
             </View>
 
             <View className='content'>

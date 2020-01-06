@@ -1,10 +1,12 @@
 import Taro from '@tarojs/taro'
-import { Block, Form, Image, View } from '@tarojs/components'
+import { Block, Form, View } from '@tarojs/components'
 import EleButton from '@/genericpage/elements/ele-button'
 import EleInput from '@/genericpage/form/ele-input'
 import EleVcode from '@/genericpage/form/ele-vcode'
 import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
+import ServerImage from '@/components/image/server-image'
+
 import './login.scss'
 import loginLogo from '../../assets/login-logo.png'
 
@@ -36,7 +38,7 @@ export default class LoginPage extends Taro.PureComponent {
               <View>Tech</View>
             </View>
             <View className='login-page-header-logo'>
-              <Image src={loginLogo} />
+              <ServerImage my-class='login-page-header-logo-image' src={loginLogo} />
             </View>
           </View>
 

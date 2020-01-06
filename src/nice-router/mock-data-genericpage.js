@@ -22,6 +22,7 @@ const popup = {
     {
       id: '333',
       type: 'image',
+      mode: 'widthFix',
       imageUrl,
     },
   ],

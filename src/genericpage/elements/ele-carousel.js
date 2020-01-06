@@ -26,6 +26,7 @@ export default class EleCarousel extends Taro.PureComponent {
     indicatorDots: null,
     customStyle: {},
     className: null,
+    mode: null,
   }
 
   handleClick = (item = {}) => {
@@ -54,6 +55,7 @@ export default class EleCarousel extends Taro.PureComponent {
       indicatorDots,
       customStyle,
       className,
+      mode,
     } = this.props
 
     const style = { ...customStyle, height: toRpx(height) }
@@ -93,7 +95,7 @@ export default class EleCarousel extends Taro.PureComponent {
                     />
                   </View>
                 ) : (
-                  <ServerImage src={it.imageUrl} my-class='ele-carousel-image' customStyle={style} />
+                  <ServerImage src={it.imageUrl} my-class='ele-carousel-image' customStyle={style} mode={mode} />
                 )}
               </SwiperItem>
             )

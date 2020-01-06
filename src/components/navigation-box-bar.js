@@ -29,9 +29,9 @@ export default class NavigationBoxBar extends Taro.PureComponent {
             return (
               <View key={id} className='navigation-bar-item'>
                 <View className='navigation-box' onClick={this.handleClick.bind(this, it)}>
-                  <View className='navigation-box-img'>
+                  <View className='navigation-box-badge'>
                     <AtBadge value={badge}>
-                      <Image mode='widthFix' src={icon || imageUrl || commerceIcon} />
+                      <Image className='navigation-box-img' mode='widthFix' src={icon || imageUrl || commerceIcon} />
                     </AtBadge>
                   </View>
                   <View className='navigation-box-txt'>{title}</View>

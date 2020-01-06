@@ -31,7 +31,9 @@ export default class ActionFloor extends Taro.PureComponent {
         {action3 && (
           <View className='action-floor-first'>
             <View className='action-floor-first-left'>
-              <ActionFloorItem action={action3} />
+              <View className='action-floor-item-container'>
+                <ActionFloorItem action={action3} />
+              </View>
             </View>
 
             <View className='action-floor-first-right'>
@@ -39,7 +41,9 @@ export default class ActionFloor extends Taro.PureComponent {
                 <ActionFloorItem action={action4} />
               </View>
               <View className='action-floor-first-right-bottom'>
-                <ActionFloorItem action={action5} />
+                <View className='action-floor-item-container'>
+                  <ActionFloorItem action={action5} />
+                </View>
               </View>
             </View>
           </View>
@@ -47,12 +51,16 @@ export default class ActionFloor extends Taro.PureComponent {
         {action1 && (
           <View className='action-floor-second'>
             <View className='action-floor-second-left'>
-              <ActionFloorItem className='blue' action={action1} />
+              <View className='action-floor-item-container'>
+                <ActionFloorItem className='blue' action={action1} />
+              </View>
             </View>
 
             {action2 && (
               <View className='action-floor-second-right'>
-                <ActionFloorItem className='blue' action={action2} />
+                <View className='action-floor-item-container'>
+                  <ActionFloorItem className='blue' action={action2} />
+                </View>
               </View>
             )}
           </View>
