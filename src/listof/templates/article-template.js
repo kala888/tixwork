@@ -7,6 +7,9 @@ import '../listof.scss'
 import { getImageUrl } from '../listof-helper'
 
 export default class ArticleTemplate extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   static defaultProps = {
     item: {},
   }

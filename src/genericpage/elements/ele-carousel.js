@@ -79,23 +79,28 @@ export default class EleCarousel extends Taro.PureComponent {
             const { videoUrl = '', imageUrl, id } = it
             console.log('id', id)
             return (
-              <SwiperItem key={id} onClick={this.handleClick.bind(this, it)}>
+              <SwiperItem
+                key={id}
+                onClick={this.handleClick.bind(this, it)}
+                className='ele-carousel-item'
+                customStyle={style}
+              >
                 {videoUrl.length > 0 ? (
-                  <View>
-                    <Video
-                      className='ele-carousel-video'
-                      src={videoUrl}
-                      controls
-                      autoplay={it.autoplay}
-                      poster={imageUrl}
-                      initialTime='0'
-                      loop
-                      muted={false}
-                      style={style}
-                    />
-                  </View>
+                  <Video
+                    className='ele-carousel-item'
+                    src={videoUrl}
+                    controls
+                    autoplay={it.autoplay}
+                    poster={imageUrl}
+                    initialTime='0'
+                    loop
+                    muted={false}
+                    style={style}
+                  />
                 ) : (
-                  <ServerImage src={it.imageUrl} my-class='ele-carousel-image' customStyle={style} mode={mode} />
+                  <View className='ele-carousel-item'>
+                    <ServerImage src={it.imageUrl} mode={mode} />
+                  </View>
                 )}
               </SwiperItem>
             )

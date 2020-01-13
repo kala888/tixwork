@@ -225,7 +225,10 @@ const messageSwiper = {
   imageHeight: 25,
   imageWidth: 70,
   imageUrl: 'https://m.360buyimg.com/babel/jfs/t22534/23/795940699/14893/3457ee4/5b442279N1dde2af1.png',
-  items: [{ id: 1, text: '恭喜城北旗舰店，大麦1个亿' }, { id: 2, text: '热烈庆祝优荣之星成功上市' }],
+  items: [
+    { id: 1, text: '恭喜城北旗舰店，大麦1个亿' },
+    { id: 2, text: '热烈庆祝优荣之星成功上市' },
+  ],
 }
 
 const productList = {

@@ -14,6 +14,10 @@ import EleHelper from '../ele-helper'
 //   uiType:'primary'
 // }
 export default class EleButton extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     title: '',
     btnType: '',

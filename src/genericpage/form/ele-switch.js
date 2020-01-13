@@ -4,6 +4,10 @@ import './ele-form.scss'
 import EleHelper from '../ele-helper'
 
 export default class EleSwitch extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     id: null,
     name: '',

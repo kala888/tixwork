@@ -16,6 +16,9 @@ import ImageOnBottomTemplate from './image-on-bottom'
 import '../listof.scss'
 
 export default class LineItemWrapper extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   static externalClasses = ['my-class']
 
   state = {

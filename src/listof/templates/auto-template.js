@@ -7,6 +7,10 @@ import '../listof.scss'
 import { getImageList } from '../listof-helper'
 
 export default class AutoTemplate extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   render() {
     const { item = {}, showImageCount = 3 } = this.props
     const { title, brief, displayTime } = item
@@ -42,7 +46,7 @@ export default class AutoTemplate extends Taro.PureComponent {
               console.log('123123123', id)
               return (
                 <View key={id} className='image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
-                  <ServerImage my-class='image-list-item-image' src={it.imageUrl} />
+                  <ServerImage src={it.imageUrl} />
                 </View>
               )
             })}

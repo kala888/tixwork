@@ -21,4 +21,10 @@
 10. idea 格式化和format不一致：打开.prettierrc文件，点击右键，Apply Prettier Style Rules 或者修改rule后，接受提示"Use code style base on Prettier for this project?"
  如果idea中格式化还报jsx/react-tag-spacing错误设置idea：Code Style -> HTML -> Other -> Spaces -> In empty tag
 
+11. Taro2.0 中组件如果引用公共的SCSS文件，需要添加addGlobalClass,CSS会被打到vendors.wxss
+```$javascript
+static options = {
+    addGlobalClass: true,
+  }
+```
 

@@ -6,6 +6,10 @@ import '../listof.scss'
 import { getImageUrl } from '../listof-helper'
 
 export default class Waterfall extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   render() {
     const { item = {}, horizontal } = this.props
     const { title, brief } = item
@@ -15,7 +19,9 @@ export default class Waterfall extends Taro.PureComponent {
 
     return (
       <View className={rootClass}>
-        <ServerImage my-class='waterfall-img' src={src} />
+        <View className='waterfall-img'>
+          <ServerImage src={src} />
+        </View>
 
         <View class='content'>
           <Text className='content-title' numberOfLines={1}>

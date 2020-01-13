@@ -8,6 +8,10 @@ import './styles.scss'
 // const defaultImageUrl = 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg'
 
 export default class ActionFloorItem extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   handleClick = () => {
     const { action } = this.props
     NavigationService.view(action)
@@ -24,7 +28,9 @@ export default class ActionFloorItem extends Taro.PureComponent {
     return (
       <View className={rootCls} onClick={this.handleClick}>
         {imageUrl ? (
-          <ServerImage mode='scaleToFill' my-class='action-floor-item-image' src={imageUrl} />
+          <View className='action-floor-item-image'>
+            <ServerImage mode='scaleToFill' src={imageUrl} />
+          </View>
         ) : (
           <View className='action-floor-item-title'>{title}</View>
         )}

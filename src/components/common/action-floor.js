@@ -6,6 +6,10 @@ import ActionFloorItem from './action-floor-item'
 import './styles.scss'
 
 export default class ActionFloor extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   render() {
     const { actions = [] } = this.props
     if (actions.length === 0) {

@@ -41,7 +41,7 @@ const LineItem_Navigator_List = [
 ]
 
 @connect(({ me }) => ({ ...me }))
-export default class MePage extends Taro.PureComponent {
+class MePage extends Taro.PureComponent {
   componentDidMount() {
     NavigationService.view(Config.api.FooterMe)
   }
@@ -95,3 +95,5 @@ export default class MePage extends Taro.PureComponent {
     )
   }
 }
+
+export default MePage

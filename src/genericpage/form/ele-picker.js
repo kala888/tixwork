@@ -8,6 +8,10 @@ import './ele-form.scss'
 import EleHelper from '../ele-helper'
 
 export default class ElePicker extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     title: '',
     brief: '请选择',

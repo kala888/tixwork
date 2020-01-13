@@ -2,6 +2,9 @@ import Taro from '@tarojs/taro'
 import Listof from '../../listof/listof'
 
 export default class EleListof extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   render() {
     const { dataContainer, list, listMeta, displayMode, customStyle = {}, horizontal, numColumns } = this.props
 

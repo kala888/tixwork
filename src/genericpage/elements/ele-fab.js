@@ -8,6 +8,9 @@ import './ele.scss'
 import EleHelper from '../ele-helper'
 
 export default class EleFab extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   static defaultProps = {
     imageUrl: null,
     text: null,

@@ -4,6 +4,9 @@ import NavigationService from '@/nice-router/navigation.service'
 import m_ from '@/utils/mini-lodash'
 
 export default class EleFooterTabs extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   static defaultProps = {
     tabs: [],
   }

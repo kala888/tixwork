@@ -6,6 +6,10 @@ const downloadIcon =
   'https://doublechain-public.oss-cn-hangzhou.aliyuncs.com/yourong/assets/icons/icon_xiazai%402x.png?x-oss-process=style/origin'
 
 class DocumentCardTemplate extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   handleConfirm = () => {}
 
   render() {

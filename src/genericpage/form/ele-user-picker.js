@@ -7,6 +7,10 @@ import '../styles.scss'
 import EleHelper from '../ele-helper'
 
 class EleUserPicker extends Taro.Component {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     title: '',
     brief: '请选择',

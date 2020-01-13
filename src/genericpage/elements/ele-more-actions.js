@@ -9,6 +9,9 @@ import './ele.scss'
 import EleHelper from '../ele-helper'
 
 export default class EleMoreActions extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   static defaultProps = {
     text: '',
     imageUrl: '',

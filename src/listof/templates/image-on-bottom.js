@@ -5,6 +5,10 @@ import '../listof.scss'
 import { getImageUrl } from '../listof-helper'
 
 export default class ImageOnBottomTemplate extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   render() {
     const { item = {} } = this.props
     const { title, brief } = item

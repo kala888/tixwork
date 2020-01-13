@@ -3,6 +3,10 @@ import Taro from '@tarojs/taro'
 import { toRpx } from '@/utils/index'
 
 export default class EleWhiteSpace extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     height: 30,
     color: '#fff',

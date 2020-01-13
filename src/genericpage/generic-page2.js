@@ -9,7 +9,7 @@ import './styles.scss'
 import EleHelper from './ele-helper'
 
 @connect(({ genericpage2 }) => ({ ...genericpage2 }))
-export default class GenericPage2 extends Taro.PureComponent {
+class GenericPage2 extends Taro.PureComponent {
   static options = {
     addGlobalClass: true,
   }
@@ -63,3 +63,5 @@ export default class GenericPage2 extends Taro.PureComponent {
     )
   }
 }
+
+export default GenericPage2

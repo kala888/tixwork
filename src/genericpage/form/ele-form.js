@@ -4,6 +4,10 @@ import '../styles.scss'
 import EleFlex from '../container/ele-flex'
 
 export default class EleForm extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   submit = (values) => {
     console.log('submit values:', values)
   }

@@ -6,7 +6,7 @@ import Listof from './listof'
 import './listof.scss'
 
 @connect(({ listofpage4 }) => ({ ...listofpage4 }))
-export default class ListofPage4 extends Taro.PureComponent {
+class ListofPage4 extends Taro.PureComponent {
   componentDidMount() {
     const { pageTitle = '' } = this.props
     Taro.setNavigationBarTitle({ title: pageTitle })
@@ -52,3 +52,5 @@ export default class ListofPage4 extends Taro.PureComponent {
     )
   }
 }
+
+export default ListofPage4

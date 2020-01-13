@@ -133,14 +133,9 @@
     @extend %flex-row;
     justify-content: space-between;
     width: 100%;
-
+    height: 200px;
     &-item {
       width: 100%;
-
-      &-image {
-        height: 200px;
-        width: 100%;
-      }
     }
   }
 }

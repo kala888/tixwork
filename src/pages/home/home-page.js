@@ -9,11 +9,24 @@ import './home.scss'
 const defaultImageUrl = 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg'
 
 @connect(({ home }) => ({ ...home }))
-export default class HomePage extends Taro.PureComponent {
+class HomePage extends Taro.PureComponent {
   render() {
     const {
-      slideList = [{ imageUrl: defaultImageUrl }, { imageUrl: defaultImageUrl }],
-      actionList = [1, 2, 3, 4, 5],
+      slideList = [{ videoUrl: defaultImageUrl, imageUrl: defaultImageUrl }, { imageUrl: defaultImageUrl }],
+      actionList = [
+        {
+          title: '中华',
+          brief: '牛逼',
+          imageUrl: defaultImageUrl,
+        },
+        {
+          title: '玉溪',
+          brief: '也很牛逼',
+        },
+        3,
+        4,
+        5,
+      ],
     } = this.props
 
     return (
@@ -26,3 +39,5 @@ export default class HomePage extends Taro.PureComponent {
     )
   }
 }
+
+export default HomePage

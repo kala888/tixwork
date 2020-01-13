@@ -8,6 +8,10 @@ import EleHelper from '../ele-helper'
 import EleActionList from './ele-action-list'
 
 class EleCard extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     imageUrl: null,
     title: '',
@@ -35,7 +39,9 @@ class EleCard extends Taro.PureComponent {
         )}
 
         <View className='ele-card-header'>
-          <ServerImage my-class='ele-card-header-image' src={imageUrl} />
+          <View className='ele-card-header-image'>
+            <ServerImage src={imageUrl} />
+          </View>
           <View className='ele-card-header_content'>
             <View className='ele-card-header_content-title'>{title}</View>
             <View className='ele-card-header_content-brief'>{brief}</View>

@@ -38,7 +38,9 @@ export default class LoginPage extends Taro.PureComponent {
               <View>Tech</View>
             </View>
             <View className='login-page-header-logo'>
-              <ServerImage my-class='login-page-header-logo-image' src={loginLogo} />
+              <View className='login-page-header-logo-image'>
+                <ServerImage src={loginLogo} />
+              </View>
             </View>
           </View>
 

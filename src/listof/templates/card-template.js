@@ -3,6 +3,9 @@ import Taro from '@tarojs/taro'
 import EleCard from '@/genericpage/elements/ele-card'
 
 class CardTemplate extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   render() {
     const { item = {}, className } = this.props
     const { imageUrl, title, brief, createTime, actionList, status } = item

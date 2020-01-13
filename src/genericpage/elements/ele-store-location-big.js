@@ -7,6 +7,10 @@ import ServerImage from '@/components/image/server-image'
 import './ele.scss'
 
 export default class EleStoreLocationBig extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static propTypes = {
     imageUrl: PropTypes.string.isRequired,
     logo: PropTypes.string,
@@ -27,8 +31,9 @@ export default class EleStoreLocationBig extends Taro.PureComponent {
 
     return (
       <View className='store-location-big'>
-        <ServerImage my-class='store-location-big-face-image' src={imageUrl} />
-
+        <View className='store-location-big-face-image'>
+          <ServerImage src={imageUrl} />
+        </View>
         <View className='store-location-big-title'>
           <View className='store-location-big-title-logo'>
             <ServerImage customStyle={{ width: '100%', height: '100%' }} src={logo} />
