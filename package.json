@@ -93,8 +93,7 @@
 		"stylelint-config-standard": "^18.0.0",
 		"stylelint-config-taro-rn": "2.0.0",
 		"stylelint-taro-rn": "2.0.0",
-		"webpack-bundle-analyzer": "^3.3.2",
-    "@tarojs/plugin-sass": "2.0.0"
+		"webpack-bundle-analyzer": "^3.3.2"
   },
 	"lint-staged": {
 		"**/*.{js,jsx,scss}": [
