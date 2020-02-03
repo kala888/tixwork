@@ -37,14 +37,17 @@ export default class EleNavigationBox extends Taro.PureComponent {
           paddingRight: `${paddingHorizontal}rpx`,
         }}
       >
-        {kids.map((it) => (
-          <View key={it.id} className='ele-navigation-box-bar-item' style={boxStyle}>
-            <ServerImage style={imageStyle} src={it.imageUrl} />
-            <View className='ele-navigation-box-bar-item-txt' style={{ color: it.color }}>
-              {it.title}
+        {kids.map((it) => {
+          const { id } = it
+          return (
+            <View key={id} className='ele-navigation-box-bar-item' style={boxStyle}>
+              <ServerImage customStyle={imageStyle} src={it.imageUrl} />
+              <View className='ele-navigation-box-bar-item-txt' style={{ color: it.color }}>
+                {it.title}
+              </View>
             </View>
-          </View>
-        ))}
+          )
+        })}
       </View>
     )
   }

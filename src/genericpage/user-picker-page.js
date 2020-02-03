@@ -19,11 +19,14 @@ export default class UserPickerPage extends Taro.PureComponent {
     return (
       <View>
         <View>{projectId}</View>
-        {userList.map((it) => (
-          <View key={it.id} onClick={this.handleClick.bind(this, it)}>
-            {it.name}
-          </View>
-        ))}
+        {userList.map((it) => {
+          const { id } = it
+          return (
+            <View key={id} onClick={this.handleClick.bind(this, it)}>
+              {it.name}
+            </View>
+          )
+        })}
       </View>
     )
   }

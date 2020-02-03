@@ -1,14 +1,14 @@
 module.exports = {
   env: {
-    NODE_ENV: '"development"'
+    NODE_ENV: '"development"',
   },
-  defineConstants: {
+  defineConstants: {},
+  mini: {
   },
-  weapp: {},
   h5: {
-    webpackChain(chain) {
-      chain.plugin('analyzer')
-        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
-    },
-  }
+    // webpackChain(chain) {
+    //   chain.plugin('analyzer')
+    //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
+    // },
+  },
 }

@@ -11,6 +11,10 @@ import EleHelper from '../ele-helper'
 const MAX_COUNT = 5
 
 export default class EleVcode extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     name: '',
     placeholder: '请输入手机号码',

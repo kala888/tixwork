@@ -38,7 +38,7 @@ LocalCache.saveBackendRouter = async (uri, page) => {
   if (!inBlackList(key, page)) {
     // 缓存前端路由3天
     if (key.length > 0) {
-      StorageTools.set(key, page, 60 * 24 * 3)
+      StorageTools.set(key, page, 3600 * 24 * 3)
     }
   }
 }
@@ -57,14 +57,14 @@ LocalCache.isCachedForm = async (url, params = {}) => {
   }
   const content = JSON.stringify(params)
   const key = `${url}_${content}`
-  return StorageTools.isExpired(key)
+  return !StorageTools.isExpired(key)
 }
-// form 提交内容 缓存 3 分钟
+// form 提交内容 缓存 30 秒
 LocalCache.cacheForm = async (url, params = {}) => {
   if (!isEmpty(params)) {
     const content = JSON.stringify(params)
     const key = `${url}_${content}`
-    StorageTools.set(key, params, 3)
+    StorageTools.set(key, params, 30)
   }
 }
 

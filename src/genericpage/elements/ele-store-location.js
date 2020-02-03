@@ -77,6 +77,7 @@ export default class EleStoreLocation extends Taro.PureComponent {
             <View className='header-left'>
               <ServerImage src={imageUrl} />
             </View>
+
             <View className='header-right'>
               <View className='header-right-name'>{name}</View>
 

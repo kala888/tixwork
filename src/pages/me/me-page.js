@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import { Image, View } from '@tarojs/components'
 import EleButton from '@/genericpage/elements/ele-button'
+
 import { connect } from '@tarojs/redux'
 import NavigationService from '@/nice-router/navigation.service'
 import NavigationBoxBar from '@/components/navigation-box-bar'
@@ -27,7 +28,7 @@ const defaultActionList = [
 ]
 
 @connect(({ me }) => ({ ...me }))
-export default class MePage extends Taro.PureComponent {
+class MePage extends Taro.PureComponent {
   componentDidMount() {
     NavigationService.view(Config.api.ViewScore, { id: '+' })
   }
@@ -98,3 +99,5 @@ export default class MePage extends Taro.PureComponent {
     )
   }
 }
+
+export default MePage

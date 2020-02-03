@@ -1,4 +1,5 @@
-import Config from '@/utils/config'
+import m_ from '@/utils/mini-lodash'
+import curryRight from 'lodash/curryRight'
 
 // const logo = require('./images/default_id_icon.png')
 
@@ -8,54 +9,57 @@ function loadServerImage(uri, style) {
     return uri
   }
   let url = uri || ''
-  if (uri && !/^(http|https):/.test(uri)) {
-    if (uri.indexOf('images') === -1) {
-      url = `${Config.oss.staticURL}images/${uri}`
-    } else {
-      url = `${Config.oss.staticUR}${uri}`
-    }
-  }
-  if (url.indexOf('x-oss-process') > -1) {
+  if (!/^(http|https):/.test(url) || url.indexOf('x-oss-process') > -1) {
     return url
   }
   return url + style
 }
 
 // taro 1.3以后才支持克里化
-// const curriedLoadImgWithStyle = _.curryRight(loadServerImage)
-// const loadTinyImg = curriedLoadImgWithStyle('?x-oss-process=style/tiny')
-// const loadSmallImg = curriedLoadImgWithStyle('?x-oss-process=style/small')
-// const loadMiddleImg = curriedLoadImgWithStyle('?x-oss-process=style/middle')
-// const loadNormalImg = curriedLoadImgWithStyle('?x-oss-process=style/normal')
-// const loadLargeImg = curriedLoadImgWithStyle('?x-oss-process=style/large')
-// const loadXLargeImg = curriedLoadImgWithStyle('?x-oss-process=style/xlarge')
-// const loadOriginImg = curriedLoadImgWithStyle('?x-oss-process=style/origin')
-// const loadWaterfallImg = curriedLoadImgWithStyle('?x-oss-process=style/waterfall')
-// const loadThumbnailImg = curriedLoadImgWithStyle('?x-oss-process=style/thumbnail')
+const curriedLoadImgWithStyle = curryRight(loadServerImage)
+const loadTinyImg = curriedLoadImgWithStyle('?x-oss-process=style/tiny')
+const loadSmallImg = curriedLoadImgWithStyle('?x-oss-process=style/small')
+const loadMiddleImg = curriedLoadImgWithStyle('?x-oss-process=style/middle')
+const loadNormalImg = curriedLoadImgWithStyle('?x-oss-process=style/normal')
+const loadLargeImg = curriedLoadImgWithStyle('?x-oss-process=style/large')
+const loadXLargeImg = curriedLoadImgWithStyle('?x-oss-process=style/xlarge')
+const loadOriginImg = curriedLoadImgWithStyle('?x-oss-process=style/origin')
+const loadThumbnailImg = curriedLoadImgWithStyle('?x-oss-process=style/thumbnail')
 
-const loadTinyImg = function(uri) {
-  return loadServerImage(uri, '?x-oss-process=style/tiny')
-}
-const loadSmallImg = function(uri) {
-  return loadServerImage(uri, '?x-oss-process=style/small')
-}
-const loadMiddleImg = function(uri) {
-  return loadServerImage(uri, '?x-oss-process=style/middle')
-}
-const loadNormalImg = function(uri) {
-  return loadServerImage(uri, '?x-oss-process=style/normal')
-}
-const loadLargeImg = function(uri) {
-  return loadServerImage(uri, '?x-oss-process=style/large')
-}
-const loadXLargeImg = function(uri) {
-  return loadServerImage(uri, '?x-oss-process=style/xlarge')
-}
-const loadOriginImg = function(uri) {
-  return loadServerImage(uri, '?x-oss-process=style/origin')
-}
-const loadThumbnailImg = function(uri) {
-  return loadServerImage(uri, '?x-oss-process=style/thumbnail')
+const getServerImagUrl = (uri, size = 'normal') => {
+  let url = m_.trim(uri || '')
+  let result = url
+  if (url) {
+    switch (size) {
+      case 'thumbnail':
+        result = loadThumbnailImg(url)
+        break
+      case 'tiny':
+        result = loadTinyImg(url)
+        break
+      case 'small':
+        result = loadSmallImg(url)
+        break
+      case 'middle':
+        result = loadMiddleImg(url)
+        break
+      case 'normal':
+        result = loadNormalImg(url)
+        break
+      case 'large':
+        result = loadLargeImg(url)
+        break
+      case 'xlarge':
+        result = loadXLargeImg(url)
+        break
+      case 'origin':
+        result = loadOriginImg(url)
+        break
+      default:
+        result = loadServerImage(url)
+    }
+  }
+  return result
 }
 
 const ImageTools = {
@@ -66,7 +70,7 @@ const ImageTools = {
   loadLargeImg,
   loadXLargeImg,
   loadOriginImg,
-  loadServerImage,
   loadThumbnailImg,
+  getServerImagUrl,
 }
 export default ImageTools

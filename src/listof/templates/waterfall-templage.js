@@ -6,6 +6,10 @@ import '../listof.scss'
 import { getImageUrl } from '../listof-helper'
 
 export default class Waterfall extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   render() {
     const { item = {}, horizontal } = this.props
     const { title, brief } = item

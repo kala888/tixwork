@@ -188,11 +188,11 @@ const HttpRequest = {
       }
     }
     const success = !this.isFailedResult(result)
+    await hideLoading(loading)
     result.success = success
     if (!success) {
       showError(result)
     }
-    hideLoading(loading)
     return result
   },
 }

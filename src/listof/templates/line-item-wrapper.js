@@ -11,12 +11,16 @@ import CardTemplate from './card-template'
 import DocumentCardTemplate from './document-card-template'
 import Waterfall from './waterfall-templage'
 import ProductTemplate from './product-template'
-import SmallUserCardTemplate from './small-user-card-templage'
 import ImageOnBottomTemplate from './image-on-bottom'
 
 import '../listof.scss'
 
 export default class LineItemWrapper extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+  static externalClasses = ['my-class']
+
   state = {
     loading: false,
   }
@@ -89,7 +93,7 @@ export default class LineItemWrapper extends Taro.PureComponent {
     const template = m_.toLower(itemDisplayMode || displayMode)
     console.log(`line-item show with "${template}, item is`, item)
 
-    const wrapperClass = classNames('line-item-wrapper', {
+    const wrapperClass = classNames('line-item-wrapper', 'my-class', {
       'no-border': !bordered,
       shadow,
     })
@@ -115,7 +119,6 @@ export default class LineItemWrapper extends Taro.PureComponent {
         {template === 'document-card' && <DocumentCardTemplate {...itemProps} />}
         {template === 'article' && <ArticleTemplate {...itemProps} />}
         {template === 'article-small' && <ArticleTemplate className='article-small' {...itemProps} />}
-        {template === 'small-user-card' && <SmallUserCardTemplate {...itemProps} />}
       </View>
     )
   }

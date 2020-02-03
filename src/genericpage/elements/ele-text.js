@@ -4,6 +4,10 @@ import NavigationService from '@/nice-router/navigation.service'
 import EleHelper from '../ele-helper'
 
 export default class EleText extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     text: '',
     action: null,

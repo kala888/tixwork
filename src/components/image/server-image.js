@@ -1,54 +1,22 @@
 import Taro from '@tarojs/taro'
 import { Image } from '@tarojs/components'
-import m_ from '@/utils/mini-lodash'
-import ImageTools from './image-tools'
+import classNames from 'classnames'
+import ImageTools from '@/components/image/image-tools'
+import './styles.scss'
 
-export default class ServerImage extends Taro.PureComponent {
-  getUrl = () => {
-    const { uri, src, size = 'normal' } = this.props
-    let url = m_.trim(uri || src || '')
-    const result = {}
-    if (url) {
-      switch (size) {
-        case 'thumbnail':
-          result.src = ImageTools.loadThumbnailImg(url)
-          break
-        case 'tiny':
-          result.src = ImageTools.loadTinyImg(url)
-          break
-        case 'small':
-          result.src = ImageTools.loadSmallImg(url)
-          break
-        case 'middle':
-          result.src = ImageTools.loadMiddleImg(url)
-          break
-        case 'normal':
-          result.src = ImageTools.loadNormalImg(url)
-          result.thumb = ImageTools.loadThumbnailImg(url)
-          break
-        case 'large':
-          result.src = ImageTools.loadLargeImg(url)
-          result.thumb = ImageTools.loadThumbnailImg(url)
-          break
-        case 'xlarge':
-          result.src = ImageTools.loadXLargeImg(url)
-          result.thumb = ImageTools.loadThumbnailImg(url)
-          break
-        case 'origin':
-          result.src = ImageTools.loadOriginImg(url)
-          result.thumb = ImageTools.loadThumbnailImg(url)
-          break
-        default:
-          result.src = ImageTools.loadServerImage(url)
-          result.thumb = ImageTools.loadThumbnailImg(url)
-      }
-    }
-    return result
+class ServerImage extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
   }
+  static externalClasses = ['my-class']
 
   render() {
-    const { style = {}, mode = 'scaleToFill', className } = this.props
-    const { src } = this.getUrl()
-    return <Image src={src} style={style} mode={mode} className={className} />
+    const { mode = 'scaleToFill', className, src, uri, size, customStyle = {} } = this.props
+    const rootCls = classNames('server-image', 'my-class', className)
+    // const style = { width: '100%', height: '100%', ...customStyle }
+    const remotePath = ImageTools.getServerImagUrl(src || uri, size)
+    return <Image className={rootCls} src={remotePath} mode={mode} style={customStyle} />
   }
 }
+
+export default ServerImage

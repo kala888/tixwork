@@ -32,8 +32,17 @@ export default class EleImagePicker extends Taro.PureComponent {
     })
   }
 
-  uploadNewFiles = (files = []) => {
+  saveImageToForm = () => {
     const { formKey, name } = this.props
+    console.log('save images to form', name, formKey, this.state.files)
+    Taro.eventCenter.trigger('form-value-changed', {
+      name,
+      value: this.state.files,
+      formKey,
+    })
+  }
+
+  uploadNewFiles = (files = []) => {
     const todoList = files.filter((it) => {
       const { url = '' } = it
       return url.startsWith('http://tmp') || url.startsWith('wxfile://tmp')
@@ -64,14 +73,7 @@ export default class EleImagePicker extends Taro.PureComponent {
             })
             return { files: newFiles }
           },
-          () => {
-            console.log('1111', name, formKey, this.state.files)
-            Taro.eventCenter.trigger('form-value-changed', {
-              name,
-              value: this.state.files,
-              formKey,
-            })
-          }
+          () => this.saveImageToForm()
         )
       },
     })
@@ -80,9 +82,12 @@ export default class EleImagePicker extends Taro.PureComponent {
   handleFileChange = (files, operationType) => {
     const { maxLength } = this.props
     if (operationType === 'remove') {
-      this.setState({
-        files,
-      })
+      this.setState(
+        {
+          files,
+        },
+        () => this.saveImageToForm()
+      )
       return
     }
 

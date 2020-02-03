@@ -120,7 +120,7 @@ export default class QuestionDetailPage extends Taro.PureComponent {
           <View className='question-choices'>
             {choices.map((it, idx) => {
               const cls = classNames('question-choices-item', {
-                hidden: answered && (it.id !== selected && it.id !== correctAnswerId),
+                hidden: answered && it.id !== selected && it.id !== correctAnswerId,
                 correct: answered && it.id === correctAnswerId,
                 notCorrect: answered && it.id === selected && !correct,
               })

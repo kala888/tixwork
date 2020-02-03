@@ -5,6 +5,7 @@ import { AtRadio } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import StorageTools from '@/nice-router/storage-tools'
 import Config from '@/utils/config'
+
 import './login.scss'
 
 class LoginPage extends Taro.PureComponent {

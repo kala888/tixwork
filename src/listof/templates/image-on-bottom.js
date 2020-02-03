@@ -5,6 +5,10 @@ import '../listof.scss'
 import { getImageUrl } from '../listof-helper'
 
 export default class ImageOnBottomTemplate extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   render() {
     const { item = {} } = this.props
     const { title, brief } = item
@@ -20,7 +24,7 @@ export default class ImageOnBottomTemplate extends Taro.PureComponent {
             {brief}
           </Text>
         </View>
-        <ServerImage className='bottom-image' style={{ width: '100%', height: '400rpx' }} src={src} />
+        <ServerImage className='bottom-image' customStyle={{ width: '100%', height: '400rpx' }} src={src} />
       </View>
     )
   }

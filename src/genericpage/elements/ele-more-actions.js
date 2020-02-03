@@ -9,6 +9,9 @@ import './ele.scss'
 import EleHelper from '../ele-helper'
 
 export default class EleMoreActions extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   static defaultProps = {
     text: '',
     imageUrl: '',
@@ -54,7 +57,11 @@ export default class EleMoreActions extends Taro.PureComponent {
       <View onClick={this.handleClick} className={rootClass}>
         <Text className='ele-more-actions-txt'>{text}</Text>
         {imageUrl.length > 0 && (
-          <ServerImage className='ele-more-actions-image' style={{ width: '20px', height: '20px' }} src={imageUrl} />
+          <ServerImage
+            className='ele-more-actions-image'
+            customStyle={{ width: '20px', height: '20px' }}
+            src={imageUrl}
+          />
         )}
         {icon.length > 0 && <AtIcon className='ele-more-actions-icon' value={icon} size={20} color='grey' />}
       </View>

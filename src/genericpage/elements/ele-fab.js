@@ -8,6 +8,9 @@ import './ele.scss'
 import EleHelper from '../ele-helper'
 
 export default class EleFab extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   static defaultProps = {
     imageUrl: null,
     text: null,
@@ -33,10 +36,10 @@ export default class EleFab extends Taro.PureComponent {
       <View className={rootClass}>
         <AtFab size={size} onClick={this.handleClick}>
           {icon ? (
-            <AtIcon className='more-action-icon' value={icon} size={20} color='grey' />
+            <AtIcon className='more-action-icon' value={icon} size={24} color='grey' />
           ) : (
             <View style={{ width: '25px', height: '25px' }}>
-              {imageUrl && <ServerImage src={imageUrl} style={{ width: '100%', height: '100%' }} />}
+              {imageUrl && <ServerImage src={imageUrl} customStyle={{ width: '100%', height: '100%' }} />}
               {text && <Text style={{ width: '20px', height: '20px', ...customStyle }}>{text}</Text>}
             </View>
           )}

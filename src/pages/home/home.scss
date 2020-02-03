@@ -2,8 +2,7 @@
 
 .home-page {
   @extend %page;
-  background-color: $primary-color;
-  height: 100vh;
-  padding: 36px;
-  box-sizing: border-box;
+  &-action-floor {
+    margin: 30px;
+  }
 }

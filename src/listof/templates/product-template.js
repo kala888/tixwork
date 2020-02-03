@@ -7,6 +7,10 @@ import '../listof.scss'
 import { getImageUrl } from '../listof-helper'
 
 export default class ProductTemplate extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   render() {
     const { item = {} } = this.props
     const { preTag = '', tags = [], brand, name, price } = item
@@ -17,7 +21,6 @@ export default class ProductTemplate extends Taro.PureComponent {
         <View className='product-img'>
           <ServerImage src={src} />
         </View>
-
         <View class='content'>
           <View className='content-title'>
             {preTag.length > 0 && (

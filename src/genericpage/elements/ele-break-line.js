@@ -6,6 +6,10 @@ import { toRpx } from '@/utils/index'
 import EleHelper from '../ele-helper'
 
 export default class EleBreakLine extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     color: '#ddd',
     height: 1,

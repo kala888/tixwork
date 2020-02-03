@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import m_ from '@/utils/mini-lodash'
+import classNames from 'classnames'
 import './styles.scss'
 
 function transToDoubleItemList(list = []) {
@@ -24,8 +25,13 @@ function transToDoubleItemList(list = []) {
 
 export default class TxtTable extends Taro.PureComponent {
   render() {
-    const { list = [] } = this.props
+    const { list = [], maxLine } = this.props
     const doubleItemList = transToDoubleItemList(list)
+    const valueCls = classNames('info-row-cell-value', {
+      'info-row-cell-2lines': maxLine === 2,
+      'info-row-cell-3lines': maxLine === 3,
+      'info-row-cell-4lines': maxLine === 4,
+    })
     return (
       <View className='txt-table'>
         {doubleItemList.map((it) => {
@@ -35,12 +41,12 @@ export default class TxtTable extends Taro.PureComponent {
             <View key={id} className='info-row'>
               <View className='info-row-cell'>
                 <View className='info-row-cell-title'>{left.title}</View>
-                <View className='info-row-cell-value'>{left.value}</View>
+                <View className={valueCls}>{left.value}</View>
               </View>
               {!m_.isEmpty(right) && (
                 <View className='info-row-cell'>
                   <View className='info-row-cell-title'>{right.title}</View>
-                  <View className='info-row-cell-value'>{right.value}</View>
+                  <View className={valueCls}>{right.value}</View>
                 </View>
               )}
             </View>

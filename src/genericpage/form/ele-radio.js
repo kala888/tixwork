@@ -6,6 +6,10 @@ import './ele-form.scss'
 import EleHelper from '../ele-helper'
 
 export default class EleRadio extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     title: '',
     options: [

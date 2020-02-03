@@ -4,9 +4,9 @@ import { Swiper, SwiperItem, Video, View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 import { toRpx } from '@/utils/index'
 import isEmpty from 'lodash/isEmpty'
+import ServerImage from '@/components/image/server-image'
 
 import './ele.scss'
-import EleImage from './ele-image'
 import EleHelper from '../ele-helper'
 
 export default class EleCarousel extends Taro.PureComponent {
@@ -23,9 +23,10 @@ export default class EleCarousel extends Taro.PureComponent {
     circular: true,
     indicatorColor: 'rgba(255, 255, 255, 0.6)',
     indicatorActiveColor: '#fff',
-    indicatorDots: true,
+    indicatorDots: null,
     customStyle: {},
     className: null,
+    mode: null,
   }
 
   handleClick = (item = {}) => {
@@ -54,9 +55,12 @@ export default class EleCarousel extends Taro.PureComponent {
       indicatorDots,
       customStyle,
       className,
+      mode,
     } = this.props
 
     const style = { ...customStyle, height: toRpx(height) }
+
+    const showDots = indicatorDots === null ? items.length > 1 : indicatorDots
 
     const rootClass = EleHelper.classNames('ele-carousel', className)
     return (
@@ -68,28 +72,35 @@ export default class EleCarousel extends Taro.PureComponent {
           circular={circular}
           indicatorColor={indicatorColor}
           indicatorActiveColor={indicatorActiveColor}
-          indicatorDots={indicatorDots}
+          indicatorDots={showDots}
           style={style}
         >
           {items.map((it) => {
-            const { videoUrl = '', imageUrl } = it
+            const { videoUrl = '', imageUrl, id } = it
+            console.log('id', id)
             return (
-              <SwiperItem key={it.id} onClick={this.handleClick.bind(this, it)}>
+              <SwiperItem
+                key={id}
+                onClick={this.handleClick.bind(this, it)}
+                className='ele-carousel-item'
+                customStyle={style}
+              >
                 {videoUrl.length > 0 ? (
-                  <View>
-                    <Video
-                      src={videoUrl}
-                      controls
-                      autoplay={it.autoplay}
-                      poster={imageUrl}
-                      initialTime='0'
-                      loop
-                      muted={false}
-                      style={style}
-                    />
-                  </View>
+                  <Video
+                    className='ele-carousel-item'
+                    src={videoUrl}
+                    controls
+                    autoplay={it.autoplay}
+                    poster={imageUrl}
+                    initialTime='0'
+                    loop
+                    muted={false}
+                    style={style}
+                  />
                 ) : (
-                  <EleImage {...it} customStyle={style} />
+                  <View className='ele-carousel-item'>
+                    <ServerImage src={it.imageUrl} mode={mode} />
+                  </View>
                 )}
               </SwiperItem>
             )

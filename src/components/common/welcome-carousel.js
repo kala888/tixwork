@@ -56,8 +56,9 @@ export default class WelcomeCarousel extends Taro.PureComponent {
       <View className='welcome-carousel'>
         <Swiper circular={false} className='welcome-carousel-swiper' indicatorDots>
           {items.map((it) => {
+            const { id } = it
             return (
-              <SwiperItem key={it.id}>
+              <SwiperItem key={id}>
                 <View className='carousel-image'>
                   <ServerImage src={it.imageUrl} size='large' mode='widthFix' />
                 </View>

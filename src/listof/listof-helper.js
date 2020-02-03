@@ -23,7 +23,7 @@ export function getImageList(item = {}) {
   const { imageList = [], editorSuggestionImageList = [], imageUrl } = item
   let list = []
   if (imageUrl) {
-    list.push({ imageUrl })
+    list.push({ id: `${item.id}_imageUrl`, imageUrl })
   } else {
     list = m_.concat(editorSuggestionImageList, imageList)
   }
