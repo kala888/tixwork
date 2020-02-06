@@ -1,0 +1,96 @@
+@import '../../../styles/theme';
+
+.org-group {
+  padding: 20px;
+  background-color: lighten($primary-color, 10%);
+  border-radius: 10px;
+  box-shadow: 0 15px 10px 1px $shadow-color;
+
+  &-title {
+    padding: 10px;
+    color: $text-color-light;
+  }
+
+  &-body {
+    @extend %flex-row;
+    justify-content: space-between;
+    color: $white;
+
+    &-left {
+      @extend %flex-1;
+      font-size: 40px;
+    }
+
+    &-right {
+      font-size: 28px;
+    }
+  }
+}
+
+.questionnaire-answer {
+  background-color: $white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: $text-color-light;
+  box-shadow: 0 15px 10px 1px $shadow-color;
+
+  &-title {
+    padding: 10px;
+    @extend %flex-row;
+    justify-content: space-between;
+
+    &-time {
+      font-size: 28px;
+    }
+  }
+}
+
+.questionnaire {
+  background-color: lighten($primary-color, 10%);
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: $text-color-light;
+  box-shadow: 0 15px 10px 1px $shadow-color;
+
+  &-title {
+    padding: 10px;
+    @extend %flex-row;
+    justify-content: space-between;
+
+    &-org {
+      font-size: 38px;
+      @extend %flex-1;
+    }
+
+    &-time {
+      font-size: 28px;
+    }
+  }
+
+  &-body {
+    width: 100%;
+    padding: 20px;
+    @extend %flex-row;
+    justify-content: space-around;
+    color: $white;
+
+    &-item {
+      @extend %flex-center;
+      flex-direction: column;
+      font-size: 30px;
+      color: $white;
+
+      &-icon {
+        padding-bottom: 10px;
+      }
+    }
+
+    &-item.risk {
+      color: $color-orange !important;
+    }
+
+    &-item.grey {
+      color: $text-color-light;
+    }
+  }
+}

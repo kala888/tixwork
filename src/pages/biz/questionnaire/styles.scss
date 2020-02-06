@@ -1,0 +1,75 @@
+@import '../../../styles/theme';
+
+.questionnaire-page {
+  @extend %page;
+  padding: 20px 20px 200px 20px;
+
+  .at-input {
+    margin-left: 0;
+  }
+
+  .at-input__title {
+    width: unset;
+    max-width: 350px;
+  }
+
+  .question-title {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .question-org {
+    padding-top: 20px;
+    font-size: 34px;
+  }
+
+  .question-time {
+    padding: 20px 0;
+    text-align: right;
+  }
+}
+
+.questionnaire-detail-page {
+  @extend %page;
+  padding: 20px 20px 20px 20px;
+
+  .detail-header {
+    background-color: $white;
+    border-radius: 20px;
+    padding: 40px 40px 20px 40px;
+
+    &-org {
+      font-size: 40px;
+      text-align: center;
+    }
+
+    &-time {
+      padding-top: 20px;
+      text-align: right;
+    }
+  }
+
+  .detail-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @extend %flex-row;
+    padding: 40px 60px;
+
+    &-btn {
+      width: 100%;
+      padding: 0 40px;
+    }
+  }
+}
+
+.question-list {
+  &-item {
+    margin-top: 20px;
+    background-color: $white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 19px 1px $shadow-color;
+  }
+}

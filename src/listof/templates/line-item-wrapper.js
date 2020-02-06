@@ -11,8 +11,11 @@ import CardTemplate from './card-template'
 import DocumentCardTemplate from './document-card-template'
 import Waterfall from './waterfall-templage'
 import ProductTemplate from './product-template'
-import ImageOnBottomTemplate from './image-on-bottom'
+import QuestionnaireTemplate from './biz/questionnaire-template'
+import OrgGroupTemplate from './biz/org-group-template'
+import QuestionnaireAnswerTemplate from './biz/questionnaire-answer-template'
 
+import ImageOnBottomTemplate from './image-on-bottom'
 import '../listof.scss'
 
 export default class LineItemWrapper extends Taro.PureComponent {
@@ -119,6 +122,9 @@ export default class LineItemWrapper extends Taro.PureComponent {
         {template === 'document-card' && <DocumentCardTemplate {...itemProps} />}
         {template === 'article' && <ArticleTemplate {...itemProps} />}
         {template === 'article-small' && <ArticleTemplate className='article-small' {...itemProps} />}
+        {template === 'questionnaire' && <QuestionnaireTemplate {...itemProps} />}
+        {template === 'questionnaire-answer' && <QuestionnaireAnswerTemplate {...itemProps} />}
+        {template === 'org-group' && <OrgGroupTemplate {...itemProps} />}
       </View>
     )
   }

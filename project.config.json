@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "nice-router-taro",
 	"description": "nice-router-taro a wx development framework base on Taro and React",
-	"appid": "wxffe4c48a31d36507",
+	"appid": "wx75d9eeba369649ec",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
@@ -27,6 +27,6 @@
 	"simulatorPluginLibVersion": {
 		"qywx_simulator_plugin": "1.2.0"
 	},
-	"libVersion": "2.10.0",
+	"libVersion": "2.10.1",
 	"condition": {}
 }

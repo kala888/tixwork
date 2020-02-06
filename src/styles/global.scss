@@ -94,3 +94,16 @@ $text-sizes: 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42;
   padding: 2px 5px;
   margin-left: 10px;
 }
+
+.footer-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  @extend %flex-center;
+  padding: 40px 60px;
+
+  &-btn {
+    width: 100%;
+  }
+}

@@ -1,9 +1,9 @@
 import viewConfig from './viewmapping.config'
 
-const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/' //后端服务地址
+const baseURL = 'https://demo.doublechaintech.com/health/wxappService/' //后端服务地址
 
 const niceRouterConfig = {
-  name: '双链科技',
+  name: '疾疫报',
   baseURL,
   version: 1,
   appType: 'mini-program',
@@ -13,6 +13,11 @@ const niceRouterConfig = {
   api: {
     GenericPageMock: 'mock/',
 
+    NewOrg: 'mock/',
+    NewQuestionnaire: 'mock/',
+    QuestionList: 'mock/',
+
+    UpdateUserInfo: 'customerUpdateProfile/:name/:avatar/:userType/',
     FooterHome: 'viewHomepage/',
     FooterMe: 'customerViewDashboard/',
     Login: 'clientLogin/',

@@ -245,7 +245,7 @@ const productList = {
       imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
     },
     p2: {
-      preTag: '双链小超',
+      preTag: '疾疫报',
       tags: ['券'],
       brand: '可口可乐',
       name: '300ml，冰霜开心',

@@ -59,11 +59,11 @@ class App extends Component {
   config = {
     pages: [
       'pages/home/home-page',
+      'pages/biz/questionnaire/questionnaire-detail-page',
+      'pages/biz/org/org-detail-page',
       'pages/login/login-page',
-      'pages/biz/generic-test-page',
-      'pages/me/me-page',
-
-      'pages/biz/hello-daas-page',
+      'pages/biz/org/new-org-page',
+      'pages/biz/questionnaire/questionnaire-page',
 
       // base
       'nice-router/h5-page',
@@ -86,35 +86,9 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#28aaff',
-      navigationBarTitleText: '双链科技',
+      navigationBarTitleText: '疾疫报',
       navigationBarTextStyle: 'white',
       enablePullDownRefresh: true,
-    },
-    tabBar: {
-      color: '#666',
-      selectedColor: '#28aaff',
-      backgroundColor: '#fafafa',
-      borderStyle: 'black',
-      list: [
-        {
-          pagePath: 'pages/home/home-page',
-          iconPath: './assets/icon/icon_home_n@2x.png',
-          selectedIconPath: './assets/icon/icon_home_s@2x.png',
-          text: '首页',
-        },
-        {
-          pagePath: 'pages/biz/generic-test-page',
-          iconPath: './assets/icon/icon_service_n@2x.png',
-          selectedIconPath: './assets/icon/icon_service_s@2x.png',
-          text: 'GenericPage',
-        },
-        {
-          pagePath: 'pages/me/me-page',
-          iconPath: './assets/icon/icon_me_n@2x.png',
-          selectedIconPath: './assets/icon/icon_me_s@2x.png',
-          text: '我的',
-        },
-      ],
     },
   }
 

@@ -21,16 +21,10 @@
       color: $white;
       font-weight: bold;
       line-height: 100px;
-    }
-
-    &-logo {
-      @extend %flex-1;
-      justify-content: flex-end;
-      padding-bottom: 20px;
-
-      &-image {
-        width: 150px;
-        height: 82px;
+      &-brief {
+        padding-top: 20px;
+        font-size: 28px;
+        line-height: 35px;
       }
     }
   }
@@ -39,31 +33,8 @@
     @extend %flex-column;
     flex: 7;
 
-    .login-form {
-      @extend %flex-column;
-      flex: 1;
-
-      &-brief {
-        font-family: $b181black;
-        font-size: 32px;
-        font-weight: 900;
-        line-height: 36px;
-      }
-
-      &-title {
-        font-size: 25px;
-        font-weight: 400;
-      }
-
-      &-phone {
-        margin-top: 50px;
-        margin-left: 0;
-      }
-
-      &-vcode-value {
-        margin-top: 28px;
-        margin-left: 0;
-      }
+    &-type {
+      margin-bottom: 150px;
     }
 
     .login-submit-button {
