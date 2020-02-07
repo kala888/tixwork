@@ -146,7 +146,7 @@
 .txt-table {
   @extend %flex-column;
   font-size: 28px;
-  background-color: #fff;
+  background-color: transparent;
   color: $text-color-lighter;
 
   .info-row {
@@ -179,6 +179,56 @@
       &-4lines {
         @include lamp-clamp(4);
       }
+    }
+  }
+}
+
+.section-bar {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+
+  &-title {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    &-txt-en {
+      font-family: $b181black;
+      font-size: 26px;
+    }
+
+    &-txt {
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    &-preicon {
+      width: 10px;
+      height: 20px;
+      background-color: $primary-color;
+      margin-right: 20px;
+    }
+
+    &-second {
+      font-size: 28px;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+  }
+
+  &-action {
+    display: flex;
+    font-family: $b181black;
+    color: #56585c;
+    font-size: 24px;
+    align-self: flex-end;
+
+    &-image {
+      width: 14px;
+      height: 14px;
+      margin-left: 6px;
+      align-self: center;
     }
   }
 }
