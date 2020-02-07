@@ -40,12 +40,7 @@ export default class NewOrgPage extends Taro.PureComponent {
           />
           <EleInput name='title' title='班级' placeholder='请填部门或者班级名称，例如：三年级2班' formKey={KEY} />
           <EleInput name='title' title='成员数量' placeholder='成员数量，或者学生数量，例如：10' formKey={KEY} />
-          <EleInput
-            name='title'
-            title='负责人姓名'
-            placeholder='老师或者负责收集的人的姓名，例如王翠花'
-            formKey={KEY}
-          />
+          <EleInput name='title' title='老师姓名' placeholder='老师或者负责收集的人的姓名，例如王翠花' formKey={KEY} />
 
           <View className='footer-button'>
             <View className='footer-button-btn'>

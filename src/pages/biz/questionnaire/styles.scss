@@ -49,6 +49,23 @@
     }
   }
 
+  .incomplete-section {
+    margin-top: 20px;
+    background-color: $white;
+    padding: 20px;
+    border-radius: 20px;
+
+    &-list {
+      margin-top: 20px;
+      @extend %flex-row;
+      flex-wrap: nowrap;
+
+      &-item {
+        margin-right: 10px;
+      }
+    }
+  }
+
   .detail-footer {
     position: absolute;
     bottom: 0;

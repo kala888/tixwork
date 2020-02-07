@@ -25,6 +25,14 @@ class HomePage extends Taro.PureComponent {
     })
   }
 
+  onShareAppMessage(res) {
+    console.log(res)
+    return {
+      title: '欢迎使用疾疫报，帮助您收集健康信息',
+      path: '/pages/home-page',
+    }
+  }
+
   handleNewOrg = () => {
     // NavigationService.navigate('/pages/biz/new-org-page')
     NavigationService.navigate('/pages/biz/org/new-org-page')
@@ -33,7 +41,7 @@ class HomePage extends Taro.PureComponent {
   handleSwitchUserType = () => {
     const { userType } = this.state
     const newType = userType === 'teacher' ? 'guardian' : 'teacher'
-    const newTypeName = newType === 'teacher' ? '老师' : '监护人'
+    const newTypeName = newType === 'teacher' ? '老师' : '家长'
     Taro.showModal({
       title: '提示',
       content: `是否切换身份到（ ${newTypeName} ）`,
@@ -59,7 +67,7 @@ class HomePage extends Taro.PureComponent {
         <EleCarousel items={slideList} />
 
         <View className='home-page-share'>
-          <EleButton title={shareBtn} />
+          <EleButton btnType='share' title={shareBtn} />
         </View>
 
         <View className='home-page-switch' onClick={this.handleSwitchUserType}>
