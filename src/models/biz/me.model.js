@@ -23,7 +23,11 @@ export default {
       if (userType === 'teacher') {
         url = Config.api.TeacherHome
       }
-      // NavigationService.view('customerStudentViewSurvey/CDHS000017/')
+      // if(userType==='guardian'){
+      //   //TODO just for test
+      //   NavigationService.view('customerStudentViewSurvey/CDHS000017/')
+      //   return
+      // }
       NavigationService.view(url, {}, { onSuccess, loading: LoadingType.modal })
     },
     *switchToGuardian({ payload = {} }, { put }) {

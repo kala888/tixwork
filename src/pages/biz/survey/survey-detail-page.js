@@ -161,11 +161,11 @@ class SurveyDetailPage extends Taro.PureComponent {
 
         <Listof list={repliedList} displayMode='survey-answer' emptyMessage='还没有人填写调查表，稍等' />
 
-        <View className='detail-footer'>
-          <View className='detail-footer-btn'>
+        <View className='footer-button'>
+          <View className='footer-button-btn'>
             <EleButton onClick={this.handlePreview} title='导出Excel' />
           </View>
-          <View className='detail-footer-btn'>
+          <View className='footer-button-btn'>
             <EleButton btnType='share' title='继续分享调查' />
           </View>
         </View>

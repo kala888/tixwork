@@ -64,18 +64,8 @@
     }
   }
 
-  .detail-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    @extend %flex-row;
-    padding: 40px 60px;
-
-    &-btn {
-      width: 100%;
-      padding: 0 40px;
-    }
+  .footer-button-btn {
+    padding: 0 30px;
   }
 }
 
