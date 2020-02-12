@@ -28,7 +28,7 @@ export default class EleInput extends Taro.PureComponent {
     const { name, formKey, onChange } = this.props
     if (onChange) {
       onChange(value)
-      return
+      // return
     }
     Taro.eventCenter.trigger('form-value-changed', {
       name,

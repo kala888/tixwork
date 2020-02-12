@@ -15,7 +15,6 @@ export default class ChooseQuestion extends Taro.Component {
   handleSelect = (e) => {
     const { detail: { value } = {} } = e
     const { formKey, name } = this.props
-
     this.setState(
       {
         selected: value,

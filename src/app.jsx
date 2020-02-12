@@ -58,12 +58,11 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/biz/questionnaire/questionnaire-detail-page',
-      'pages/home/home-page',
+      'pages/me/me-page',
       'pages/login/login-page',
-      'pages/biz/org/org-detail-page',
+      'pages/biz/survey/survey-detail-page',
       'pages/biz/org/new-org-page',
-      'pages/biz/questionnaire/questionnaire-page',
+      'pages/biz/survey/survey-page',
 
       // base
       'nice-router/h5-page',

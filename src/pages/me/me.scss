@@ -1,55 +1,31 @@
 @import '../../styles/theme';
 
-.me-page {
+.home-page {
   @extend %page;
 
-  &-header {
-    background-color: #fff;
-
-    &-top {
-      background-color: $primary-color;
-      @extend %flex-row;
-      align-items: center;
-      border-bottom-left-radius: 50px;
-      padding-bottom: 60px;
-
-      .avatar {
-        padding: 0 40px;
-        width: 200px;
-        height: 200px;
-
-        &-image {
-          margin-top: 20px;
-          width: 150px;
-          height: 150px;
-          border-radius: 50%;
-          border: 8px solid darken($primary-color, 10%);
-          box-shadow: 0 0 20px #fff;
-        }
-      }
-
-      .content {
-        color: $white;
-        @extend %flex-column;
-        justify-content: center;
-        font-size: 30px;
-
-        &-name {
-          font-size: 40px;
-        }
-
-        &-brief {
-          font-size: 22px;
-        }
-      }
-    }
-
-    &-footer {
-      padding-top: 20px;
-    }
+  &-share {
+    padding: 20px 40px 0 40px;
   }
 
-  &-body {
-    padding: 30px;
+  &-switch {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    padding: 10px 10px 10px 30px;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    background-color: lighten($color-orange, 20%);
+    color: $white;
+    z-index: 9999;
+  }
+
+  .org-group-section {
+    margin-top: 20px;
+    padding: 0 20px;
+    @extend %flex-row;
+
+    &-title {
+      @extend %flex-1;
+    }
   }
 }

@@ -1,96 +1,112 @@
 import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { Block, View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import Listof from '@/listof/listof'
+import { AtIcon } from 'taro-ui'
+import EleCarousel from '@/genericpage/elements/ele-carousel'
 import NavigationService from '@/nice-router/navigation.service'
-import NavigationLineItem from '@/components/common/navigation-line-item'
-import NavigationBoxBar from '@/components/navigation-box-bar'
+import EleButton from '@/genericpage/elements/ele-button'
+import StorageTools from '@/nice-router/storage-tools'
 import Config from '@/utils/config'
-import ServerImage from '@/components/image/server-image'
-
+import { LoadingType } from '@/nice-router/nice-router-util'
 import './me.scss'
 
-import buildingIcon from '../../assets/icon/icon_loupan@2x.png'
-import commerceIcon from '../../assets/icon/icon_liansuo@2x.png'
-
-const defaultAvatar = 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg'
-
-const Box_Navigator_List = [
-  {
-    code: 'FINE_DECORATION',
-    icon: buildingIcon,
-    title: '发起申请',
-  },
-  {
-    code: 'BIZ_CHAIN',
-    icon: commerceIcon,
-    title: '我发起',
-  },
-]
-
-const LineItem_Navigator_List = [
-  {
-    code: 'my-wrong-list',
-    imageUrl: defaultAvatar,
-    title: '我参与的项目',
-  },
-  {
-    code: 'my-favorite-list',
-    icon: commerceIcon,
-    title: '我的收藏',
-  },
-]
+// const defaultImageUrl = 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/jiyibao/slide.jpg'
 
 @connect(({ me }) => ({ ...me }))
 class MePage extends Taro.PureComponent {
   componentDidMount() {
-    NavigationService.view(Config.api.FooterMe)
+    const userType = StorageTools.get('user-type')
+    NavigationService.dispatch('me/switchUserType', { userType })
   }
 
-  handleOpenProfile = () => {
-    const { userInfo } = this.props
-    NavigationService.view(userInfo)
+  onPullDownRefresh = () => {
+    const { userType } = this.props
+    let url = Config.api.GuardianHome
+    if (userType === 'teacher') {
+      url = Config.api.TeacherHome
+    }
+    NavigationService.ajax(url, {}, { onSuccess: () => Taro.stopPullDownRefresh(), loading: LoadingType.modal })
+  }
+
+  onShareAppMessage(res) {
+    console.log(res)
+    return {
+      title: '疾疫报，帮助您收集健康信息',
+      path: '/pages/me/me-page',
+    }
+  }
+
+  handleNewOrg = () => {
+    NavigationService.navigate('/pages/biz/org/new-org-page')
+  }
+
+  handleSwitchUserType = () => {
+    const { userType } = this.props
+    const newType = userType === 'teacher' ? 'guardian' : 'teacher'
+    const newTypeName = newType === 'teacher' ? '老师' : '家长'
+
+    Taro.showModal({
+      title: '提示',
+      content: `是否切换身份到（ ${newTypeName} ）`,
+      success: (res) => {
+        console.log('xxxxx', JSON.stringify(res))
+        if (res.confirm) {
+          NavigationService.dispatch('me/switchUserType', { userType: newType })
+        }
+      },
+    })
+  }
+
+  handleViewMore = (action) => {
+    NavigationService.view(action)
   }
 
   render() {
-    const {
-      boxNavigatorList = Box_Navigator_List,
-      lineItemNavigatorList = LineItem_Navigator_List,
-      name,
-      brief,
-      imageUrl,
-    } = this.props
+    const { userType } = this.props
+    console.log('render..', userType)
+    const shareBtn = userType === 'teacher' ? '分享给其他老师' : '分享给老师'
+    const switchBtn = userType === 'teacher' ? '我是家长' : '我是老师'
+    const emptyMessage = userType === 'teacher' ? '创建好班级以后就能发布调查问卷' : '还有没做问卷，赶快分享给老师吧'
+
+    const { slideList = [], actions = {}, surveyList = [], classList = [], surveyAnswerList = [] } = this.props
+    const { viewMoreClass } = actions
 
     return (
-      <View className='me-page'>
-        <View className='me-page-header'>
-          <View className='me-page-header-top'>
-            <View className='avatar' onClick={this.handleOpenProfile}>
-              <ServerImage my-class='avatar-image' src={imageUrl || defaultAvatar} />
-            </View>
+      <View className='home-page'>
+        {slideList.length > 0 && <EleCarousel items={slideList} />}
 
-            <View className='content'>
-              <View className='content-name'>{name}</View>
-              <View className='content-brief'>{brief}</View>
+        <View className='home-page-share'>
+          <EleButton btnType='share' title={shareBtn} />
+        </View>
+
+        <View className='home-page-switch' onClick={this.handleSwitchUserType}>
+          {switchBtn}
+        </View>
+
+        {userType === 'teacher' && (
+          <Block>
+            <View className='org-group-section'>
+              <View className='org-group-section-title'>
+                我的班级
+                {viewMoreClass && <View onClick={this.handleViewMore.bind(this, viewMoreClass)}>（查看更多）</View>}
+              </View>
+              <View className='org-group-section-add' onClick={this.handleNewOrg}>
+                <AtIcon value='add-circle' />
+              </View>
             </View>
-          </View>
-          <View className='me-page-header-footer'>
-            <NavigationBoxBar list={boxNavigatorList} />
-          </View>
-        </View>
-        <View className='me-page-body'>
-          {lineItemNavigatorList.map((it) => {
-            const { id } = it
-            return (
-              <NavigationLineItem
-                key={id}
-                imageUrl={it.imageUrl}
-                title={it.title}
-                brief={it.brief}
-                linkToUrl={it.linkToUrl}
-              />
-            )
-          })}
-        </View>
+            <Listof list={classList} displayMode='org-group' emptyMessage='需要收集问卷，要先创建班级哦' />
+
+            <View className='org-group-section'>
+              <View className='org-group-section-title'>近期调查结果</View>
+            </View>
+            <Listof list={surveyList} displayMode='class_daily_health_survey' emptyMessage={emptyMessage} />
+          </Block>
+        )}
+
+        {userType !== 'teacher' && (
+          <Listof list={surveyAnswerList} displayMode='survey-answer' emptyMessage={emptyMessage} />
+        )}
       </View>
     )
   }

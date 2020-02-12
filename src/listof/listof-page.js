@@ -1,6 +1,8 @@
 import Taro from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View } from '@tarojs/components'
+import NavigationService from '@/nice-router/navigation.service'
+import { AtButton } from 'taro-ui'
 import CustomerTabs from '../components/common/customer-tabs'
 import Listof from './listof'
 import './listof.scss'
@@ -20,6 +22,10 @@ class ListofPage extends Taro.PureComponent {
     }
   }
 
+  handleFooterButtonClick = (action) => {
+    NavigationService.view(action)
+  }
+
   render() {
     const {
       tabs,
@@ -31,6 +37,7 @@ class ListofPage extends Taro.PureComponent {
       dataContainer,
       articleList,
       articleListMeta,
+      footerAction,
     } = this.props
 
     return (
@@ -48,8 +55,18 @@ class ListofPage extends Taro.PureComponent {
           height='100vh'
           style={style}
         />
+        {footerAction && (
+          <View className='footer-button'>
+            <View className='footer-button-btn'>
+              <AtButton type='primary' onClick={this.handleFooterButtonClick.bind(this, footerAction)}>
+                {footerAction.title}
+              </AtButton>
+            </View>
+          </View>
+        )}
       </View>
     )
   }
 }
+
 export default ListofPage

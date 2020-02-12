@@ -33,6 +33,7 @@ const ViewmappingConfig = {
   'com.terapico.appview.MePage': {
     pageName: '/pages/me/me-page',
     stateAction: 'me/save',
+    effectAction: 'me/switchToTeacher',
   },
   'com.terapico.appview.LoginForm': {
     pageName: '/pages/login/login-page',
@@ -44,6 +45,30 @@ const ViewmappingConfig = {
   },
 
   // end global pages
+
+  'com.doublechaintech.health.wechatapppageview.AddSurveyPage': {
+    pageName: '/pages/biz/survey/survey-page',
+    stateAction: 'survey/save',
+  },
+  'com.doublechaintech.health.wechatapppageview.StudentSurveyFormPage': {
+    pageName: '/pages/biz/survey/survey-page',
+    stateAction: 'survey/save',
+  },
+  'com.doublechaintech.health.wechatapppageview.SurveyDetailPage': {
+    pageName: '/pages/biz/survey/survey-detail-page',
+    stateAction: 'surveyDetail/save',
+  },
+
+  'com.doublechaintech.health.wechatapppageview.StudentSurveyListPage': {
+    pageName: '/pages/me/me-page',
+    stateAction: 'me/save',
+    effectAction: 'me/switchToGuardian',
+  },
+  // 'com.doublechaintech.health.wechatapppageview.SurveyListPage': {
+  //   pageName: '/pages/me/me-page',
+  //   stateAction: 'me/save',
+  //   effectAction: 'me/switchToTeacher',
+  // },
 
   'com.mock': [
     {

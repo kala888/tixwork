@@ -13,11 +13,12 @@ const niceRouterConfig = {
   api: {
     GenericPageMock: 'mock/',
 
-    NewOrg: 'mock/',
-    NewQuestionnaire: 'mock/',
+    NewOrg: 'customerSubmitClass/formData/',
     QuestionList: 'mock/',
 
     UpdateUserInfo: 'customerUpdateProfile/:name/:avatar/:userType/',
+    GuardianHome: 'customerSwitchToStudent/',
+    TeacherHome: 'customerSwitchToTeacher/',
     FooterHome: 'viewHomepage/',
     FooterMe: 'customerViewDashboard/',
     Login: 'clientLogin/',

@@ -1,6 +1,6 @@
 @import '../../../styles/theme';
 
-.questionnaire-page {
+.survey-page {
   @extend %page;
   padding: 20px 20px 200px 20px;
 
@@ -13,30 +13,28 @@
     max-width: 350px;
   }
 
-  .question-title {
-    font-size: 40px;
+  .question-org {
+    color: $text-color-light;
+    padding-top: 20px;
+    font-size: 34px;
     text-align: center;
   }
 
-  .question-org {
-    padding-top: 20px;
-    font-size: 34px;
-  }
-
   .question-time {
+    color: $text-color-light;
     padding: 20px 0;
     text-align: right;
   }
 }
 
-.questionnaire-detail-page {
+.survey-detail-page {
   @extend %page;
   padding: 20px 20px 20px 20px;
 
   .detail-header {
     background-color: $white;
     border-radius: 20px;
-    padding: 40px 40px 20px 40px;
+    padding: 20px 40px 20px 40px;
 
     &-org {
       font-size: 40px;
@@ -44,7 +42,7 @@
     }
 
     &-time {
-      padding-top: 20px;
+      padding: 10px;
       text-align: right;
     }
   }

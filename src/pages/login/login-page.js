@@ -32,7 +32,11 @@ class LoginPage extends Taro.PureComponent {
     const { userInfo = {} } = e.detail
     const { nickName, avatarUrl } = userInfo
     const { userType } = this.state
-    NavigationService.ajax(
+    StorageTools.set('user-info', userInfo)
+
+    const action = userType === 'teacher' ? 'me/switchToTeacher' : 'me/switchToGuardian'
+    NavigationService.dispatch(action)
+    NavigationService.view(
       Config.api.UpdateUserInfo,
       {
         name: nickName,
@@ -40,12 +44,7 @@ class LoginPage extends Taro.PureComponent {
         userType,
       },
       {
-        onSuccess: (resp) => {
-          console.log('resp', resp)
-          StorageTools.set('userInfo', userInfo)
-          StorageTools.set('userType', userType)
-          NavigationService.view(Config.api.FooterHome)
-        },
+        navigationOptions: { method: 'redirectTo' },
       }
     )
   }

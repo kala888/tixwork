@@ -11,9 +11,9 @@ import CardTemplate from './card-template'
 import DocumentCardTemplate from './document-card-template'
 import Waterfall from './waterfall-templage'
 import ProductTemplate from './product-template'
-import QuestionnaireTemplate from './biz/questionnaire-template'
+import SurveyTemplate from './biz/survey-template'
 import OrgGroupTemplate from './biz/org-group-template'
-import QuestionnaireAnswerTemplate from './biz/questionnaire-answer-template'
+import SurveyAnswerTemplate from './biz/survey-answer-template'
 
 import ImageOnBottomTemplate from './image-on-bottom'
 import '../listof.scss'
@@ -122,8 +122,8 @@ export default class LineItemWrapper extends Taro.PureComponent {
         {template === 'document-card' && <DocumentCardTemplate {...itemProps} />}
         {template === 'article' && <ArticleTemplate {...itemProps} />}
         {template === 'article-small' && <ArticleTemplate className='article-small' {...itemProps} />}
-        {template === 'questionnaire' && <QuestionnaireTemplate {...itemProps} />}
-        {template === 'questionnaire-answer' && <QuestionnaireAnswerTemplate {...itemProps} />}
+        {template === 'class_daily_health_survey' && <SurveyTemplate {...itemProps} />}
+        {template === 'survey-answer' && <SurveyAnswerTemplate {...itemProps} />}
         {template === 'org-group' && <OrgGroupTemplate {...itemProps} />}
       </View>
     )
