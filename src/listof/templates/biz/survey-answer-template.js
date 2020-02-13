@@ -13,13 +13,14 @@ export default class SurveyAnswerTemplate extends Taro.PureComponent {
 
   render() {
     const { item = {} } = this.props
-    const { studentName, surveyTime, infoList = [] } = item
+    const { tips, studentName, surveyTime, infoList = [] } = item
     return (
       <View className='survey-answer'>
         <View className='survey-title'>
           <View className='survey-title-name'>{studentName}</View>
           <View className='survey-title-time'>{formatTime(surveyTime)}</View>
         </View>
+        {tips && <View className='survey-tips'>{tips}</View>}
         <TxtTable list={infoList} />
       </View>
     )

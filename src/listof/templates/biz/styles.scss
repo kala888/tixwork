@@ -69,6 +69,12 @@
     }
   }
 
+  &-tips {
+    text-align: center;
+    color: $color-orange;
+    padding: 20px;
+  }
+
   &-body {
     width: 100%;
     @extend %flex-row;

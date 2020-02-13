@@ -23,9 +23,9 @@ export default {
       if (userType === 'teacher') {
         url = Config.api.TeacherHome
       }
-      // if(userType==='guardian'){
+      // if (userType === 'guardian') {
       //   //TODO just for test
-      //   NavigationService.view('customerStudentViewSurvey/CDHS000017/')
+      //   NavigationService.view('customerStudentViewSurvey/CDHS000001/')
       //   return
       // }
       NavigationService.view(url, {}, { onSuccess, loading: LoadingType.modal })

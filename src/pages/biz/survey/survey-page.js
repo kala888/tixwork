@@ -10,8 +10,6 @@ import EleInput from '@/genericpage/form/ele-input'
 import './styles.scss'
 import ChooseQuestion from '../org/choose-question'
 
-const KEY = 'new-survey'
-
 @connect(({ survey }) => ({ ...survey }))
 class SurveyPage extends Taro.PureComponent {
   static options = {
@@ -44,11 +42,12 @@ class SurveyPage extends Taro.PureComponent {
     }
 
     const payload = {
-      formKey: KEY,
+      formKey: surveyId,
       submit: (formData) => {
         console.log('submit-form', formData)
 
-        const { studentName, ...answer } = formData
+        const defaultName = StorageTools.get('student-name')
+        const { studentName = defaultName, ...answer } = formData
 
         NavigationService.post(
           submit,
@@ -58,6 +57,9 @@ class SurveyPage extends Taro.PureComponent {
             studentName,
           },
           {
+            onSuccess: () => {
+              Taro.eventCenter.trigger('form-reset', { formKey: surveyId })
+            },
             navigationOptions: { method: 'redirectTo' },
           }
         )
@@ -87,11 +89,11 @@ class SurveyPage extends Taro.PureComponent {
   }
 
   render() {
-    const { surveyId, school, schoolClass, surveyDate, questionList = [] } = this.props
+    const { surveyId, school, schoolClass, surveyDate, questionList = [], alreadySubmitted = false } = this.props
 
     let questionDate = Date.now()
-    let submitBtn = '确认提交'
-    let studentName = '确认创建问卷'
+    let submitBtn = '确认创建问卷'
+    let studentName = ''
 
     if (surveyId) {
       // 如果是家长填表
@@ -108,10 +110,11 @@ class SurveyPage extends Taro.PureComponent {
           </View>
 
           <View class='question-time'>问卷时间： {formatTime(questionDate)}</View>
+          {alreadySubmitted && <View className='question-tips'>今天的问卷已经提交过了，是否确认继续提交？</View>}
 
           <View class='question-user'>
             <EleInput
-              formKey={KEY}
+              formKey={surveyId}
               name='studentName'
               title='姓名'
               defaultValue={studentName}
@@ -122,7 +125,7 @@ class SurveyPage extends Taro.PureComponent {
 
           <View class='question-list'>
             {questionList.map((it, idx) => {
-              const { id, type, title, placeholder, candidateValues } = it
+              const { id, type, title, placeholder = '请填写', candidateValues } = it
               const labelTxt = `${idx + 1}. ${title}`
               return (
                 <View key={id} className='question-list-item'>
@@ -131,11 +134,11 @@ class SurveyPage extends Taro.PureComponent {
                       name={id}
                       title={labelTxt}
                       placeholder={placeholder}
-                      formKey={KEY}
+                      formKey={surveyId}
                       className='newquestion-input'
                     />
                   ) : (
-                    <ChooseQuestion formKey={KEY} name={id} title={labelTxt} options={candidateValues} />
+                    <ChooseQuestion formKey={surveyId} name={id} title={labelTxt} options={candidateValues} />
                   )}
                 </View>
               )

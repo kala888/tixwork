@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { Block, View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import Listof from '@/listof/listof'
-import { AtIcon } from 'taro-ui'
+import { AtButton, AtIcon } from 'taro-ui'
 import EleCarousel from '@/genericpage/elements/ele-carousel'
 import NavigationService from '@/nice-router/navigation.service'
 import EleButton from '@/genericpage/elements/ele-button'
@@ -76,6 +76,7 @@ class MePage extends Taro.PureComponent {
       <View className='home-page'>
         {slideList.length > 0 && <EleCarousel items={slideList} />}
 
+        <AtButton onClick={() => NavigationService.view('customerStudentViewSurvey/CDHS000001/')}>测试</AtButton>
         <View className='home-page-share'>
           <EleButton btnType='share' title={shareBtn} />
         </View>

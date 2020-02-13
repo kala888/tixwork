@@ -8,6 +8,8 @@ export default class ChooseQuestion extends Taro.Component {
     addGlobalClass: true,
   }
 
+  componentDidMount() {}
+
   state = {
     selected: null,
   }

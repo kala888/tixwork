@@ -100,8 +100,8 @@ class SurveyDetailPage extends Taro.PureComponent {
 
   render() {
     const {
-      school = '中心小学',
-      schoolClass = '三年级二班',
+      school,
+      schoolClass,
       classSize,
       answerCount,
       riskCount,
