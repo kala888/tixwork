@@ -17,6 +17,7 @@ import './me.scss'
 class MePage extends Taro.PureComponent {
   componentDidMount() {
     const userType = StorageTools.get('user-type')
+    console.log('componentDidMount，load data')
     NavigationService.dispatch('me/switchUserType', { userType })
   }
 
@@ -76,7 +77,7 @@ class MePage extends Taro.PureComponent {
       <View className='home-page'>
         {slideList.length > 0 && <EleCarousel items={slideList} />}
 
-        <AtButton onClick={() => NavigationService.view('customerStudentViewSurvey/CDHS000001/')}>测试</AtButton>
+        {/*<AtButton onClick={() => NavigationService.view('customerStudentViewSurvey/CDHS000001/')}>测试</AtButton>*/}
         <View className='home-page-share'>
           <EleButton btnType='share' title={shareBtn} />
         </View>
