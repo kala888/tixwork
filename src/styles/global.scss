@@ -96,7 +96,7 @@ $text-sizes: 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42;
 }
 
 .footer-button {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -105,5 +105,6 @@ $text-sizes: 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42;
 
   &-btn {
     width: 100%;
+    padding: 0 20px;
   }
 }

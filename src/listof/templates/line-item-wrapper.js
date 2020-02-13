@@ -29,7 +29,7 @@ export default class LineItemWrapper extends Taro.PureComponent {
     const { item: current } = this.props
     const { item: next } = nextProps
 
-    console.log('should item update?', current, next)
+    // console.log('should item update?', current, next)
 
     if (this.state.loading !== nextState.loading) {
       return true
@@ -91,7 +91,7 @@ export default class LineItemWrapper extends Taro.PureComponent {
     //   this.props.delay || 300,
     // )
     const template = m_.toLower(itemDisplayMode || displayMode)
-    console.log(`line-item show with "${template}, item is`, item)
+    // console.log(`line-item show with "${template}, item is`, item)
 
     const wrapperClass = classNames('line-item-wrapper', 'my-class', {
       'no-border': !bordered,
