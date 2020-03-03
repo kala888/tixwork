@@ -26,6 +26,8 @@ const Config = {
   name: 'NiceRouter App Start',
   goBackSkipScreen: [],
   useWxLogin: true,
+  useVcode: false,
+  usePassword: false,
 }
 
 console.log('***********   current env  ***********   ')

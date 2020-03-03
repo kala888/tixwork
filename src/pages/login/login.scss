@@ -39,6 +39,10 @@
     @extend %flex-column;
     flex: 7;
 
+    .hidden {
+      display: none;
+    }
+
     .login-form {
       @extend %flex-column;
       flex: 1;
@@ -55,8 +59,8 @@
         font-weight: 400;
       }
 
-      &-phone {
-        margin-top: 50px;
+      &-txt-input {
+        margin-top: 20px;
         margin-left: 0;
       }
 

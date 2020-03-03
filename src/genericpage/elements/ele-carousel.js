@@ -30,12 +30,16 @@ export default class EleCarousel extends Taro.PureComponent {
   }
 
   handleClick = (item = {}) => {
+    const { videoUrl = '', imageUrl } = item
+
+    if (!isEmpty(videoUrl)) {
+      return
+    }
+
     if (NavigationService.isActionLike(item)) {
       NavigationService.view(item)
       return
     }
-
-    const { videoUrl = '', imageUrl } = item
 
     if (isEmpty(videoUrl) && !isEmpty(imageUrl)) {
       Taro.previewImage({ urls: [imageUrl] })

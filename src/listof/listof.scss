@@ -99,7 +99,7 @@
   @extend %flex-column;
   justify-content: center;
   padding: 10px;
-  border-radius: 2px;
+  border-radius: 10px;
   box-shadow: 0 10px 19px 1px $shadow-color;
 
   .content {
@@ -136,6 +136,14 @@
     height: 200px;
     &-item {
       width: 100%;
+    }
+  }
+}
+
+.auto.only-title {
+  .content {
+    .content-title {
+      font-weight: 400;
     }
   }
 }

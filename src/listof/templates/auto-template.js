@@ -3,6 +3,7 @@ import { Text, View } from '@tarojs/components'
 import ServerImage from '@/components/image/server-image'
 import m_ from '@/utils/mini-lodash'
 import { formatTime } from '@/utils/index'
+import classNames from 'classnames'
 import '../listof.scss'
 import { getImageList } from '../listof-helper'
 
@@ -24,8 +25,25 @@ export default class AutoTemplate extends Taro.PureComponent {
       // console.log('list', list)
     }
 
+    const onlyTitleCls = !(brief || displayTime)
+    const rootCls = classNames('auto', {
+      'only-title': onlyTitleCls,
+    })
+
     return (
-      <View className='auto'>
+      <View className={rootCls}>
+        {list.length > 0 && (
+          <View className='image-list'>
+            {list.map((it, index) => {
+              const { id } = it
+              return (
+                <View key={id} className='image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
+                  <ServerImage src={it.imageUrl} />
+                </View>
+              )
+            })}
+          </View>
+        )}
         <View class='content'>
           <Text className='content-title' numberOfLines={1}>
             {title}
@@ -39,19 +57,6 @@ export default class AutoTemplate extends Taro.PureComponent {
             </Text>
           )}
         </View>
-        {list.length > 0 && (
-          <View className='image-list'>
-            {list.map((it, index) => {
-              const { id } = it
-              console.log('123123123', id)
-              return (
-                <View key={id} className='image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
-                  <ServerImage src={it.imageUrl} />
-                </View>
-              )
-            })}
-          </View>
-        )}
       </View>
     )
   }

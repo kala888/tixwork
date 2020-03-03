@@ -48,10 +48,10 @@ export default class LoginPage extends Taro.PureComponent {
             <View className='login-form'>
               <View className='login-form-brief'>WELCOME TO LOGIN</View>
               <View className='login-form-title'>欢迎登录</View>
-              {!Config.useWxLogin && (
+              {Config.useVcode && (
                 <Block>
                   <EleVcode
-                    className='login-form-phone'
+                    className='login-form-txt-input'
                     placeholder='请输入手机号'
                     name='mobile'
                     formKey={KEY}
@@ -64,6 +64,13 @@ export default class LoginPage extends Taro.PureComponent {
                     name='verifyCode'
                     formKey={KEY}
                   />
+                </Block>
+              )}
+
+              {Config.usePassword && (
+                <Block>
+                  <EleInput className='login-form-txt-input' placeholder='请输入用户名' name='login' formKey={KEY} />
+                  <EleInput className='login-form-txt-input' placeholder='请输入密码' name='password' formKey={KEY} />
                 </Block>
               )}
             </View>

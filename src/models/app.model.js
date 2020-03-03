@@ -20,20 +20,27 @@ function remoteLogin(params = {}, options = {}) {
     navigationOptions.method = 'reLaunch'
   }
 
-  NavigationService.put(Config.api.Login, params, {
-    navigationOptions,
-    ...options,
-    onSuccess: (resp, { headers }) => {
-      if (options.onSuccess) {
-        options.onSuccess(resp)
-      }
-      const { authorization } = headers
-      console.log('wx login response, headers', headers)
-      if (authorization) {
-        AuthTools.saveTokenAsync(authorization)
-      }
+  NavigationService.put(
+    Config.api.Login,
+    {
+      loginMethod: Config.usePassword ? 'account_password' : 'mobile_vcode',
+      ...params,
     },
-  })
+    {
+      navigationOptions,
+      ...options,
+      onSuccess: (resp, { headers }) => {
+        if (options.onSuccess) {
+          options.onSuccess(resp)
+        }
+        const { authorization } = headers
+        console.log('wx login response, headers', headers)
+        if (authorization) {
+          AuthTools.saveTokenAsync(authorization)
+        }
+      },
+    }
+  )
 }
 
 export default {
