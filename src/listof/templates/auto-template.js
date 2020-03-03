@@ -15,6 +15,7 @@ export default class AutoTemplate extends Taro.PureComponent {
   render() {
     const { item = {}, showImageCount = 3 } = this.props
     const { title, brief, displayTime } = item
+    console.log('item.....', item)
 
     let list = []
     if (showImageCount > 0) {
@@ -34,16 +35,16 @@ export default class AutoTemplate extends Taro.PureComponent {
       <View className={rootCls}>
         {list.length > 0 && (
           <View className='image-list'>
-            {list.map((it, index) => {
-              const { id } = it
-              return (
-                <View key={id} className='image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
-                  <ServerImage src={it.imageUrl} />
+            {list.map((it, index) => (
+              <View key={it.id} className='image-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
+                <View style={{ width: '100%', height: '100%' }}>
+                  <ServerImage style={{ width: '100%', height: '100%' }} src={it.imageUrl} />
                 </View>
-              )
-            })}
+              </View>
+            ))}
           </View>
         )}
+
         <View class='content'>
           <Text className='content-title' numberOfLines={1}>
             {title}
