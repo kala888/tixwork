@@ -1,8 +1,9 @@
 import Taro from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View } from '@tarojs/components'
-import Config from '@/utils/config'
 import NavigationService from '@/nice-router/navigation.service'
+import { ajaxPullDownRefresh } from '@/utils/index'
+import Config from '@/utils/config'
 
 import EleFlex from './container/ele-flex'
 import './styles.scss'
@@ -32,6 +33,10 @@ class GenericPage2 extends Taro.PureComponent {
     }
   }
 
+  onPullDownRefresh = () => {
+    ajaxPullDownRefresh(this.props)
+  }
+
   onShareAppMessage(res) {
     const { pageTitle = Config.name, pageLinkToUrl = Config.api.FooterHome } = this.props
 
@@ -47,7 +52,6 @@ class GenericPage2 extends Taro.PureComponent {
       }
     }
     const encodePath = encodeURIComponent(pageLinkToUrl)
-    console.log('share ....', encodePath)
     return {
       title: pageTitle,
       path: encodePath,

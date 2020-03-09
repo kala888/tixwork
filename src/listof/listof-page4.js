@@ -3,6 +3,7 @@ import { connect } from '@tarojs/redux'
 import { View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 import { AtButton } from 'taro-ui'
+import { ajaxPullDownRefresh } from '@/utils/index'
 import CustomerTabs from '../components/common/customer-tabs'
 import Listof from './listof'
 import './listof.scss'
@@ -20,6 +21,10 @@ class ListofPage4 extends Taro.PureComponent {
     if (currentTitle !== nextPageTitle) {
       Taro.setNavigationBarTitle({ title: nextPageTitle })
     }
+  }
+
+  onPullDownRefresh = () => {
+    ajaxPullDownRefresh(this.props)
   }
 
   handleFooterButtonClick = (action) => {

@@ -1,5 +1,7 @@
 import Taro from '@tarojs/taro'
 import m_ from '@/utils/mini-lodash'
+import NavigationService from '@/nice-router/navigation.service'
+import { LoadingType } from '@/nice-router/nice-router-util'
 
 let device = {}
 
@@ -87,6 +89,17 @@ export function formatMoney(money) {
     return money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
   }
   return money
+}
+
+export function ajaxPullDownRefresh(action) {
+  NavigationService.ajax(
+    action,
+    {},
+    {
+      onSuccess: () => Taro.stopPullDownRefresh(),
+      loading: LoadingType.modal,
+    }
+  )
 }
 
 // export function transCandidateValuesToRange(field = {}) {

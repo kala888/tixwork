@@ -2,6 +2,7 @@ import Taro from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
+import { ajaxPullDownRefresh } from '@/utils/index'
 import Config from '@/utils/config'
 
 import EleFlex from './container/ele-flex'
@@ -30,6 +31,10 @@ class GenericPage extends Taro.PureComponent {
     if (currentTitle !== nextPageTitle) {
       Taro.setNavigationBarTitle({ title: nextPageTitle })
     }
+  }
+
+  onPullDownRefresh = () => {
+    ajaxPullDownRefresh(this.props)
   }
 
   onShareAppMessage(res) {
@@ -62,4 +67,5 @@ class GenericPage extends Taro.PureComponent {
     )
   }
 }
+
 export default GenericPage

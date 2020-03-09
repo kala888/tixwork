@@ -4,12 +4,19 @@ import { connect } from '@tarojs/redux'
 import EleCarousel from '@/genericpage/elements/ele-carousel'
 import ActionFloor from '@/components/common/action-floor'
 
+import { ajaxPullDownRefresh } from '@/utils/index'
+import Config from '@/utils/config'
+
 import './home.scss'
 
 const defaultImageUrl = 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg'
 
 @connect(({ home }) => ({ ...home }))
 class HomePage extends Taro.PureComponent {
+  onPullDownRefresh() {
+    ajaxPullDownRefresh(Config.api.FooterHome)
+  }
+
   render() {
     const {
       slideList = [{ videoUrl: defaultImageUrl, imageUrl: defaultImageUrl }, { imageUrl: defaultImageUrl }],
