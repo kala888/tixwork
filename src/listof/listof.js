@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { ScrollView, Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import NavigationService from '@/nice-router/navigation.service'
-
+import { getNumberColumns } from '@/listof/listof-helper'
 import { enrichListOfEntity, toRpx } from '../utils'
 import LineItemWrapper from './templates/line-item-wrapper'
 
@@ -68,7 +68,6 @@ export default class Listof extends Taro.PureComponent {
       height,
       style = {},
       dataContainer,
-      numColumns,
       horizontal,
       bordered,
       containerClass,
@@ -79,6 +78,7 @@ export default class Listof extends Taro.PureComponent {
     const list = enrichListOfEntity({ dataContainer, targetList: listRefs })
     console.log('listof', list)
 
+    const numColumns = getNumberColumns(displayMode)
     const itemWidth = numColumns ? 100 / numColumns - 1 : null
 
     const scrollViewStyle = height ? { height: toRpx(height) } : {}

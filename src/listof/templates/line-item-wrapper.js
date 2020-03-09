@@ -4,9 +4,9 @@ import { AtActivityIndicator } from 'taro-ui'
 import classNames from 'classnames'
 import m_ from '@/utils/mini-lodash'
 import NavigationService from '@/nice-router/navigation.service'
+import UserTemplate from '@/listof/templates/user-template'
 
 import AutoTemplate from './auto-template'
-import ArticleTemplate from './article-template'
 import CardTemplate from './card-template'
 import DocumentCardTemplate from './document-card-template'
 import Waterfall from './waterfall-templage'
@@ -14,6 +14,9 @@ import ProductTemplate from './product-template'
 import ImageOnBottomTemplate from './image-on-bottom'
 
 import '../listof.scss'
+
+//不触发click事件的模板
+const ITEM_SELF_PROCESS_WHITELIST = ['document']
 
 export default class LineItemWrapper extends Taro.PureComponent {
   static options = {
@@ -70,10 +73,13 @@ export default class LineItemWrapper extends Taro.PureComponent {
     }
   }
 
-  handlePress = () => {
+  handlePress = (template) => {
     const { onItemPress, item } = this.props
     if (onItemPress) {
       onItemPress(item)
+      return
+    }
+    if (ITEM_SELF_PROCESS_WHITELIST.indexOf(template) > -1) {
       return
     }
     if (NavigationService.isActionLike(item)) {
@@ -99,7 +105,7 @@ export default class LineItemWrapper extends Taro.PureComponent {
     })
     const itemProps = { horizontal, item }
     return (
-      <View onClick={this.handlePress} className={wrapperClass}>
+      <View onClick={this.handlePress.bind(this, template)} className={wrapperClass}>
         {this.state.loading && (
           <View className='item-loading'>
             <AtActivityIndicator size={50} mode='center' />
@@ -113,12 +119,10 @@ export default class LineItemWrapper extends Taro.PureComponent {
         {template === 'three-image' && <AutoTemplate showImageCount={3} {...itemProps} />}
         {template === 'image-on-bottom' && <ImageOnBottomTemplate {...itemProps} />}
         {template === 'waterfall' && <Waterfall {...itemProps} />}
+        {template === 'user' && <UserTemplate {...itemProps} />}
         {template === 'product' && <ProductTemplate {...itemProps} />}
         {template === 'card' && <CardTemplate {...itemProps} />}
-        {template === 'image-on-left' && <CardTemplate className='small' {...itemProps} />}
-        {template === 'document-card' && <DocumentCardTemplate {...itemProps} />}
-        {template === 'article' && <ArticleTemplate {...itemProps} />}
-        {template === 'article-small' && <ArticleTemplate className='article-small' {...itemProps} />}
+        {template === 'document' && <DocumentCardTemplate {...itemProps} />}
       </View>
     )
   }

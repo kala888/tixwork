@@ -198,6 +198,13 @@
     @extend %flex-row;
     padding: 20px;
 
+    &-icon {
+      @extend %flex-center;
+      width: 200px;
+      height: 215px;
+      color: $text-color-light;
+    }
+
     &-image {
       width: 200px;
       height: 215px;

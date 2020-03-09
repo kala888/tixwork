@@ -29,3 +29,10 @@ export function getImageList(item = {}) {
   }
   return list
 }
+
+export function getNumberColumns(displayMode) {
+  if (displayMode === 'product' || displayMode === 'waterfall') {
+    return 2
+  }
+  return 1
+}
