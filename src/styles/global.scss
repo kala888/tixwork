@@ -108,3 +108,18 @@ $text-sizes: 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42;
     padding: 0 20px;
   }
 }
+
+.transparent-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: block;
+  height: unset;
+  color: unset;
+  line-height: unset;
+  text-align: unset;
+}
+
+.transparent-btn.at-button--disabled {
+  opacity: 1;
+}

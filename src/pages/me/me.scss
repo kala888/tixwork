@@ -11,14 +11,11 @@
       @extend %flex-row;
       align-items: center;
       border-bottom-left-radius: 50px;
-      padding-bottom: 60px;
+      padding-bottom: 40px;
 
-      .avatar {
-        padding: 0 40px;
-        width: 200px;
-        height: 200px;
-
-        &-image {
+      &-avatar {
+        padding: 40px;
+        .avatar-image {
           margin-top: 20px;
           width: 150px;
           height: 150px;
@@ -28,18 +25,18 @@
         }
       }
 
-      .content {
+      &-title {
         color: $white;
         @extend %flex-column;
         justify-content: center;
         font-size: 30px;
 
         &-name {
-          font-size: 40px;
+          font-size: 38px;
         }
 
         &-brief {
-          font-size: 22px;
+          font-size: 24px;
         }
       }
     }

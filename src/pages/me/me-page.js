@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import NavigationLineItem from '@/components/common/navigation-line-item'
 import NavigationBoxBar from '@/components/navigation-box-bar'
@@ -55,24 +56,27 @@ class MePage extends Taro.PureComponent {
     const {
       boxNavigatorList = Box_Navigator_List,
       lineItemNavigatorList = LineItem_Navigator_List,
-      name,
-      brief,
-      imageUrl,
+      name = '用户A',
+      brief = '超级管理员',
+      avatar,
     } = this.props
 
     return (
       <View className='me-page'>
         <View className='me-page-header'>
           <View className='me-page-header-top'>
-            <View className='avatar' onClick={this.handleOpenProfile}>
-              <ServerImage my-class='avatar-image' src={imageUrl || defaultAvatar} />
-            </View>
+            <AtButton openType='getUserInfo' className='transparent-btn' onGetUserInfo={this.handleUpdateProfileInfo}>
+              <View className='me-page-header-top-avatar'>
+                <ServerImage my-class='avatar-image' src={avatar || defaultAvatar} />
+              </View>
+            </AtButton>
 
-            <View className='content'>
-              <View className='content-name'>{name}</View>
-              <View className='content-brief'>{brief}</View>
+            <View className='me-page-header-top-title'>
+              <View className='me-page-header-top-title-name'>{name}</View>
+              <View className='me-page-header-top-title-brief'>{brief}</View>
             </View>
           </View>
+
           <View className='me-page-header-footer'>
             <NavigationBoxBar list={boxNavigatorList} />
           </View>
