@@ -14,7 +14,7 @@ export default class QRCode extends Taro.PureComponent {
     level: 'L',
     bgColor: '#fff',
     fgColor: '#000000',
-    text: 'https://www.github.com/doublechaintech',
+    text: 'https://www.github.com/kala888',
   }
 
   componentDidMount() {
