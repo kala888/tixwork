@@ -2,7 +2,6 @@
 import cloneDeep from 'lodash/cloneDeep'
 import concat from 'lodash/concat'
 import curryRight from 'lodash/curryRight'
-import debounce from 'lodash/debounce'
 import findIndex from 'lodash/findIndex'
 import forEach from 'lodash/forEach'
 import forIn from 'lodash/forIn'
@@ -35,7 +34,6 @@ const m_ = {
   cloneDeep,
   concat,
   curryRight,
-  debounce,
   findIndex,
   forEach,
   forIn,

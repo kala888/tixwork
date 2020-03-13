@@ -35,7 +35,7 @@ const config = {
   copy: {
     patterns: [
       { from: 'src/sitemap.json', to: 'dist/' },
-    ]
+    ],
   },
   defineConstants: {},
   alias: {
@@ -77,6 +77,27 @@ const config = {
           generateScopedName: '[name]__[local]___[hash:base64:5]',
         },
       },
+    },
+    webpackChain(chain) { // 将 lodash 单独拆分出来 (防止vendors.js过大)
+      chain.merge({
+        optimization: {
+          splitChunks: {
+            cacheGroups: {
+              lodash: {
+                name: 'lodash',
+                priority: 1000,
+                test(module) {
+                  return /node_modules[\\/]lodash/.test(module.context)
+                },
+              },
+            },
+          },
+        },
+      })
+    },
+    commonChunks(commonChunks) { // 添加 lodash 公共文件
+      commonChunks.push('lodash')
+      return commonChunks
     },
   },
   h5: {
