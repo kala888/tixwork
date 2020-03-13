@@ -81,7 +81,6 @@ export default class EleCarousel extends Taro.PureComponent {
         >
           {items.map((it) => {
             const { videoUrl = '', imageUrl, id } = it
-            console.log('id', id)
             return (
               <SwiperItem
                 key={id}

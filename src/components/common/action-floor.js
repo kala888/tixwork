@@ -23,7 +23,6 @@ export default class ActionFloor extends Taro.PureComponent {
       actionList = concat([t1, t2], actions)
     }
 
-    console.log('action-floor', actionList)
     const action1 = actionList[0]
     const action2 = actionList[1]
     const action3 = actionList[2]

@@ -24,7 +24,6 @@ export default class ActionFloorItem extends Taro.PureComponent {
     }
     const { title = 'action', brief = 'brief', imageUrl } = action
     const rootCls = classNames('action-floor-item', className)
-    console.log(rootCls)
     return (
       <View className={rootCls} onClick={this.handleClick}>
         {imageUrl ? (

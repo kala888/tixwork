@@ -76,7 +76,6 @@ export default class Listof extends Taro.PureComponent {
     } = this.props
 
     const list = enrichListOfEntity({ dataContainer, targetList: listRefs })
-    console.log('listof', list)
 
     const numColumns = getNumberColumns(displayMode)
     const itemWidth = numColumns ? 100 / numColumns - 1 : null

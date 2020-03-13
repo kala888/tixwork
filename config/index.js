@@ -32,6 +32,11 @@ const config = {
       ],
     ],
   },
+  copy: {
+    patterns: [
+      { from: 'src/sitemap.json', to: 'dist/' },
+    ]
+  },
   defineConstants: {},
   alias: {
     '@/components': path.resolve(__dirname, '..', 'src/components'),
