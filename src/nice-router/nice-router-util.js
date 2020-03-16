@@ -21,3 +21,7 @@ export function toTaroUrl(uri, params) {
   }
   return uri
 }
+
+export function log(...params) {
+  console.log('%c nice-router: ', 'color:#8add4c; text-shadow: 0.5px 0.5px 0.5px grey', ...params)
+}

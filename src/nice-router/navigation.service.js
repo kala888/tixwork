@@ -5,7 +5,7 @@ import isObject from 'lodash/isObject'
 import isEmpty from 'lodash/isEmpty'
 import startsWith from 'lodash/startsWith'
 import localCacheService from './local-cache.service'
-import { LoadingType, toTaroUrl } from './nice-router-util'
+import { LoadingType, toTaroUrl, log } from './nice-router-util'
 
 const PAGE_LEVEL_LIMIT = 10
 
@@ -100,7 +100,7 @@ const NavigationService = {
           method = 'redirectTo'
         }
         // 把resolve存起来，主动调用 back的时候再调用
-        console.log('resolve...resolve', this.pagesResolves[routeName])
+        log('resolve...resolve', this.pagesResolves[routeName])
         const routeMethod = Taro[method]
         if (routeMethod) {
           routeMethod({ url })
@@ -114,7 +114,7 @@ const NavigationService = {
                 Taro.switchTab({ url }).then(() => this.clearPagesResolves())
                 return
               }
-              console.log(`Trao.${method} run failed`, err)
+              log(`Taro.${method} run failed`, err)
               reject(err)
             })
         }
@@ -142,12 +142,6 @@ const NavigationService = {
     const { uri: actionUri = '', cache = false, params } = action
 
     const uri = getActionUri(actionUri)
-
-    console.log('************')
-    console.log('start to NavigationService.routeTo, action uri :', uri)
-    console.log(params)
-    console.log('************')
-
     if (uri.length === 0) {
       return
     }
@@ -160,7 +154,7 @@ const NavigationService = {
       const queryParams = qs.parse(query)
       const pageName = pathname
       // const pageName = trim(pathname, '/')
-      console.log('.......', protocol, pathname, pageName)
+      log('.......', protocol, pathname, pageName)
       this.navigate(pageName, { ...params, ...queryParams })
       return
     }
@@ -173,12 +167,12 @@ const NavigationService = {
 
     // 3, 后端路由, 获取后端路由缓存
     const cachedPage = await localCacheService.getCachedPage(uri)
-    console.log('go to cached page first', cachedPage)
+    log('go to cached page first', cachedPage)
     // 如果缓存存在，做页面跳转
     if (cachedPage) {
       // this.navigate(cachedPage)
       // TODO
-      console.log('need CACHE the DATA', cache)
+      log('need CACHE the DATA', cache)
       // if (cache) {
       //   return
       // }

@@ -1,6 +1,7 @@
 import jwtDecode from 'jwt-decode'
 import isEmpty from 'lodash/isEmpty'
 import StorageTools from './storage-tools'
+import { log } from './nice-router-util'
 
 const TOKEN = 'TOKEN'
 const AUTH_INFO = 'AUTH_INFO'
@@ -12,15 +13,15 @@ async function saveTokenAsync(token) {
   const authInfo = jwtDecode(token)
   StorageTools.set(AUTH_INFO, authInfo)
 
-  console.log('saveToken', token)
-  console.log('saveAuthInfo', authInfo)
+  log('saveToken', token)
+  log('saveAuthInfo', authInfo)
   return authInfo
 }
 
 async function isValidateToken() {
   const authInfo = await getAuthInfoAsync()
   if (!isEmpty(authInfo) && authInfo.exp > 0) {
-    console.log('the token expTime is', authInfo.exp, 'will exp ', authInfo.exp - Date.now() / 1000, 'latter')
+    log('the token expTime is', authInfo.exp, 'will exp ', authInfo.exp - Date.now() / 1000, 'latter')
     return authInfo.exp - Date.now() / 1000 > SAFTY_TIME
   }
   return false

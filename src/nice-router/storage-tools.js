@@ -2,6 +2,7 @@
 import Taro from '@tarojs/taro'
 import memoize from 'lodash/memoize'
 import md5 from 'blueimp-md5'
+import { log } from './nice-router-util'
 
 const CACHE_PREFIX = 'cachestore-'
 const CACHE_EXPIRATION_PREFIX = 'cacheexpiration-'
@@ -57,7 +58,7 @@ const StorageTools = {
     const expiry = Taro.getStorageSync(exprKey)
     if (expiry > 0) {
       const expired = expiry && currentTime() >= parseInt(expiry, 10)
-      console.log('是否过期？', 1, expired, currentTime())
+      log('是否过期？', 1, expired, currentTime())
       return expired
     }
     return true

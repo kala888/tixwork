@@ -4,11 +4,12 @@ import cloneDeep from 'lodash/cloneDeep'
 import keys from 'lodash/keys'
 import unset from 'lodash/unset'
 import forIn from 'lodash/forIn'
+import { LoadingType } from '@/nice-router/nice-router-util'
 import isNull from 'lodash/isNull'
 import isUndefined from 'lodash/isUndefined'
-import HttpRequest from './http-request'
 
-import mockData from './mock-data-genericpage'
+import HttpRequest from './http-request'
+import mockData from '../mock-data-genericpage'
 
 const EMPTY_PARAMETER_TOKEN = '+'
 const BackendService = {}
@@ -40,10 +41,18 @@ function removeEmptyValues(params = {}) {
 }
 
 BackendService.send = async (action = {}) => {
-  const { method = 'get', uri, params = {}, headers = {}, loading, asForm } = action
-  console.log('backend.backendRouter, action is ', action)
+  const {
+    method = 'get', // get,post,put 等http方法
+    uri, // uri或者url
+    params = {}, // 请求的参数
+    headers = {}, // 请求header
+    loading = LoadingType.none, //loading的处理方式
+    asForm, // 请后台约定，如果是form提交的话，把body包装成一个json字符串放到body里面
+  } = action
 
+  // 将url中的替代变量替换掉
   const { uri: actionUri, lastParams } = replaceUrlPlaceholder(uri, params)
+  // 移除undefined，null的数据，不然daas接受处理有点小问题
   let data = removeEmptyValues(lastParams)
   if (asForm) {
     data = { formData: JSON.stringify(data) }
@@ -54,16 +63,11 @@ BackendService.send = async (action = {}) => {
     params: data,
     headers,
   }
-  //
+  // mock 数据处理
   if (actionUri === 'mock/') {
     return mockData
   }
-  // if (actionUri === 'genericPageMock/') {
-  //   return genericMockData
-  // }
-
-  const response = await HttpRequest.send(options, loading)
-  return response
+  return HttpRequest.send(options, loading)
 }
 
 export default BackendService

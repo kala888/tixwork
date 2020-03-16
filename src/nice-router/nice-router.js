@@ -1,7 +1,7 @@
 import forEach from 'lodash/forEach'
 import trim from 'lodash/trim'
 import merge from 'lodash/merge'
-import './http-request'
+
 import NavigationService from './navigation.service'
 
 const defaultViewConfig = {

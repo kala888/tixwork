@@ -4,6 +4,7 @@ import slice from 'lodash/slice'
 import isEmpty from 'lodash/isEmpty'
 import NiceRouter from './nice-router'
 import StorageTools from './storage-tools'
+import { log } from './nice-router-util'
 
 function getPageKeyByUri(uri = '') {
   let key = uri
@@ -23,7 +24,7 @@ function inBlackList(key, page) {
   const result =
     NiceRouter.config.backendRouterPageBlackList.includes(page) ||
     NiceRouter.config.backendRouterPageKeyBlackList.includes(key)
-  console.log('key and page is in black list?', result)
+  log('key and page is in black list?', result)
   return result
 }
 
@@ -34,7 +35,7 @@ const LocalCache = {
 // 后端路由缓存
 LocalCache.saveBackendRouter = async (uri, page) => {
   const key = getPageKeyByUri(uri)
-  console.log('start save backend router to cache, uri:', uri, ', page:', page)
+  log('start save backend router to cache, uri:', uri, ', page:', page)
   if (!inBlackList(key, page)) {
     // 缓存前端路由3天
     if (key.length > 0) {

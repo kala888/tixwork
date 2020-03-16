@@ -5,19 +5,25 @@ import EleCarousel from '@/genericpage/elements/ele-carousel'
 import ActionFloor from '@/components/common/action-floor'
 
 import { ajaxPullDownRefresh } from '@/utils/index'
-import Config from '@/utils/config'
+import NavigationService from '@/nice-router/navigation.service'
 
+import Config from '@/utils/config'
 import './home.scss'
 
 const defaultImageUrl = 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg'
 
 @connect(({ home }) => ({ ...home }))
 class HomePage extends Taro.PureComponent {
+  componentDidMount() {
+    NavigationService.view(Config.api.FooterHome)
+  }
+
   onPullDownRefresh() {
     ajaxPullDownRefresh(Config.api.FooterHome)
   }
 
   render() {
+    console.log('.....', this.props)
     const {
       slideList = [{ videoUrl: defaultImageUrl, imageUrl: defaultImageUrl }, { imageUrl: defaultImageUrl }],
       actionList = [
