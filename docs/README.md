@@ -5,34 +5,19 @@
 
 1. 下载安装 [Taro cli](http://taro-docs.jd.com/taro/docs/GETTING-STARTED.html)
 
-2. 成为开发者（找到您的小程序应用的管理员，把你的微信添加到开发者列表里就行）
+```bash
+$ npm install -g @tarojs/cli 
+#或者
+$ yarn global add @tarojs/cli
+```
 
-3. 下载 nice-router-taro
+2. 下载 nice-router-taro
 
 ```bash
 git clone https://github.com/kala888/nice-router-taro
 ```
 
-4. 修改小程序AppId (project.config.json)
-
-```javascript
-    "appid": "wxff........07",
-```
-
-5. 修改 默认title和theme  (**可选**)
-
-修改主色：通过 [Taro UI](https://nervjs.github.io/taro-ui-theme-preview/) 填入主色后，下载并打开文件
-修改./src/styles.theme.scss中的三个值就行了
-
-```css
-  $color-brand: #6dbb4d;  
-  $color-brand-light: #92cc7a; 
-  $color-brand-dark: #57963e;
-```
-
-修改navigationBarBackgroundColor和tabBar的颜色（app.js中）
-
-6. 修改服务端地址  (**可选**)
+3. 修改服务端地址  (**可选**)
 
 ./src/utils/config.js
 
@@ -40,7 +25,7 @@ git clone https://github.com/kala888/nice-router-taro
 const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/'
 ```
 
-7. 编译，启动开发环境
+4. 编译，启动开发环境
 
 ```shell
 #下载相关的依赖，可以用npm install或者yarn
@@ -49,7 +34,7 @@ yarn
 yarn dev:weapp
 ```
 
-8. 微信开发者工具中，导入项目
+5. [微信开发者工具中](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，导入项目
    查看效果
 
 > **小提示:**
@@ -57,6 +42,25 @@ yarn dev:weapp
 > 1.以集成prettier，提交代码前，先 'yarn format' 一道，有助于团队成员间代码merge.
 > 
 > 2.文档中提到的“服务端”是指供前端开发使用**Façade**层，根据项目架构不同可能指代的是后台或者中台应用。（Façade 读音： 法萨）
+> 
+> 3. 成为开发者（找到您的小程序应用的管理员，把你的微信添加到开发者列表里就行）
+> 
+> 4. 如何修改小程序AppId (project.config.json)
+```javascript
+    "appid": "wxff........07",
+```
+> 
+> 5. 如何修改 默认title和theme  (**可选**)
+> 修改主色：通过 [Taro UI](https://nervjs.github.io/taro-ui-theme-preview/) 填入主色后，下载并打开文件
+> 修改./src/styles.theme.scss中的三个值就行了
+```css
+  $color-brand: #6dbb4d;  
+  $color-brand-light: #92cc7a; 
+  $color-brand-dark: #57963e;
+```
+>
+>修改navigationBarBackgroundColor和tabBar的颜色（app.js中）
+
 
 ##### 
 
