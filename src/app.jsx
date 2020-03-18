@@ -41,10 +41,16 @@ class App extends Component {
           content: '新版本已经准备好，是否重启应用？',
           success: function(res) {
             if (res.confirm) {
-              // 应用新版本并重启
               updateManager.applyUpdate()
             }
           },
+        })
+      })
+      updateManager.onUpdateFailed(()=> {
+        Taro.showModal({
+          title: '更新提示',
+          content: '新版本下载失败，请检查你的微信',
+          showCancel: false,
         })
       })
     } else {
