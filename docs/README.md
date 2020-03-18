@@ -1,11 +1,10 @@
-### 如何开始
-
-##### 1.环境与知识准备
+#### 环境与知识准备
 
 1.  下载安装 [Taro cli](http://taro-docs.jd.com/taro/docs/GETTING-STARTED.html)
 
 ```bash
-$ npm install -g @tarojs/cli #或者$ yarn global add @tarojs/cli
+# 安装taro，首页你得有一个合适的nodejs环境，然后通过yarn安装taro-cli，或者使用npm：npm install -g @tarojs/cli 
+$ yarn global add @tarojs/cli
 ```
 
 2.  下载 nice-router-taro
@@ -14,21 +13,16 @@ $ npm install -g @tarojs/cli #或者$ yarn global add @tarojs/cli
 git clone https://github.com/kala888/nice-router-taro
 ```
 
-3.  修改服务端地址 (**可选**)
-
-./src/utils/config.js
-
-```javascript
-const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/'
-```
-
-4.  编译，启动开发环境
+3.  编译，启动开发环境
 
 ```shell
-#下载相关的依赖，可以用npm install或者yarnyarn#启动小程序 可以用npm run dev:weapp或者yarn dev:weappyarn dev:weapp
+#下载相关的依赖,推荐yarn，当然也可以用npm install
+$yarn
+#启动小程序 推荐yarn，当然也可以用npm run dev:weapp
+$yarn dev:weapp
 ```
 
-5.  [微信开发者工具中](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，导入项目
+4.  [微信开发者工具中](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，导入项目
     查看效果
 
 > **小提示:**
@@ -57,14 +51,22 @@ const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/'
 > ```
 > 
 > 修改navigationBarBackgroundColor和tabBar的颜色（app.js中）
+> 6.  如何修改后端服务地址 (**可选**) ./src/utils/config.js
+
+> ```javascript
+> const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/'
+> ```
+
 
 #####
 
 *老铁，都看到这了，点个赞呗*
 
-##### 2.我需要一个后端服务，最好搭配一个中台
+#### 我需要一个后端服务，最好搭配一个中台
 
--   这里推荐使用自动代码生成框架 [DaaS Start Kit](https://github.com/doublechaintech/daas-start-kit)，可以与nice-router完美配合。
+-   这里强力安利一款牛逼的低码平台，通过使用自动代码生成技术，告别996。
+[DaaS Start Kit](https://github.com/doublechaintech/daas-start-kit)，可以与nice-router完美配合。
+
 
 ### 开发手册
 
