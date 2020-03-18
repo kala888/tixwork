@@ -30,7 +30,7 @@
 
 
 
-[更多文档](/docs/README.md)
+[开始安装看效果](/docs/README.md)
 
 
 
