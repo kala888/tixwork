@@ -56,7 +56,7 @@ const getServerImagUrl = (uri, size = 'normal') => {
         result = loadOriginImg(url)
         break
       default:
-        result = loadServerImage(url)
+        result = url
     }
   }
   return result
