@@ -21,7 +21,7 @@
 
 #### 基础知识：React + DVA + Taro + TaroUI
 
-[Taro](https://github.com/NervJS/taro) 是京东家的小程序开发框架，基于react的语法，跨多端开发框架（微信小程序，支付宝小程序，RN，抖音小程序......）
+[Taro(读音：泰罗)](https://github.com/NervJS/taro) 是京东家的小程序开发框架，基于react的语法，跨多端开发框架（微信小程序，支付宝小程序，RN，抖音小程序......）
 
 - 目前来说Taro可能是综合评分最高的第三方小程序开发框架（相比wepy和mpvue）
 
