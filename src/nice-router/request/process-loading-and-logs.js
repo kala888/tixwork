@@ -1,9 +1,9 @@
 import Taro from '@tarojs/taro'
+import isEmpty from 'lodash/isEmpty'
 import { LoadingType } from '@/nice-router/nice-router-util'
 import OverlayLoading from '@/nice-router/overlay-loading'
 import ViewMappingService from '@/nice-router/viewmapping.service'
 import GlobalToast from '@/nice-router/global-toast'
-import isEmpty from 'lodash/isEmpty'
 
 const systemErrorXClass = 'com.terapico.caf.local.NetworkException'
 
@@ -26,10 +26,11 @@ async function hideLoading(loading) {
 }
 
 function showError({ xclass, data = {} }) {
-  console.error('request got error', data)
+  console.error('request got error', xclass, data)
 
+  const view = ViewMappingService.getView(xclass)
   // 系统错误，根据xclass跳转页面
-  if (xclass === systemErrorXClass || ViewMappingService.getView(xclass)) {
+  if (xclass === systemErrorXClass || !isEmpty(view)) {
     return
   }
 
@@ -38,6 +39,7 @@ function showError({ xclass, data = {} }) {
   const text = localizedMessage || message || messageList.map((msg) => msg.body).join('\n')
   if (!isEmpty(text)) {
     GlobalToast.show({ text, duration: 5000 })
+    return
   }
   // 开发环境，如果没有配置 本地错误，
   if (process.env.NODE_ENV === 'development') {
