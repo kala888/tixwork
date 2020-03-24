@@ -31,8 +31,8 @@ export default class ObjectPicker extends Taro.PureComponent {
     let displayName = isObject(value) ? value.title : value
     return (
       <ActionField onClick={this.goObjectPickerPage} value={displayName} placeholder={placeholder}>
-        <View className='ele-object-picker' onClick={this.goObjectPickerPage}>
-          <AtIcon className='ele-object-picker-icon' value='chevron-right' size={20} />
+        <View className='action-field-picker' onClick={this.goObjectPickerPage}>
+          <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
         </View>
       </ActionField>
     )

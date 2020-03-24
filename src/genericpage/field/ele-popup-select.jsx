@@ -1,9 +1,16 @@
 import Taro from '@tarojs/taro'
-import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtRadio } from 'taro-ui'
-import ActionField from './action-field'
+import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtIcon, AtRadio } from 'taro-ui'
+import { View } from '@tarojs/components'
 import { isEmpty } from '@/nice-router/nice-router-util'
+import ActionField from './action-field'
+
+import './styles.scss'
 
 export default class ElePopupSelect extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
+
   static defaultProps = {
     multiple: false,
     value: [],
@@ -12,6 +19,12 @@ export default class ElePopupSelect extends Taro.PureComponent {
 
   state = {
     visible: false,
+  }
+
+  handleToggle = () => {
+    this.setState((preState) => ({
+      visible: !preState.visible,
+    }))
   }
 
   show = () => {
@@ -54,6 +67,13 @@ export default class ElePopupSelect extends Taro.PureComponent {
 
     return (
       <ActionField onClick={this.show} value={displayValue} placeholder={placeholder}>
+        <View className='action-field-picker' onClick={this.handleToggle}>
+          {visible ? (
+            <AtIcon className='action-field-picker-icon' value='chevron-down' size={20} />
+          ) : (
+            <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
+          )}
+        </View>
         <AtActionSheet title={label} onClose={this.close} isOpened={visible} cancelText={cancelText}>
           <AtActionSheetItem>
             {multiple ? (
