@@ -18,7 +18,7 @@ export default class GenericForm extends Taro.PureComponent {
     layout: 'horizontal', //'vertical','float'
     fields: [],
     bordered: true,
-    showRequired: false,
+    showRequired: true,
     onFieldChange: null,
     initialValues: {},
   }
