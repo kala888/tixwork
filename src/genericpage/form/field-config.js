@@ -16,5 +16,5 @@ const fieldConfig = {
 }
 
 export default function mergeConfig(field) {
-  return merge(fieldConfig[field.type], field)
+  return merge({}, fieldConfig[field.type], field)
 }
