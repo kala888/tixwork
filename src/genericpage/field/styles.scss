@@ -1,0 +1,63 @@
+@import 'src/styles/theme';
+
+.action-field {
+  @extend %flex-row;
+
+  &-content {
+    @extend %flex-1;
+  }
+
+  .at-action-sheet__item {
+    padding-top: 0;
+  }
+
+  .at-radio::before {
+    border-top: none;
+    margin-top: 0;
+  }
+}
+
+.ele-vcode {
+  &-txt {
+    font-size: 28px !important;
+    width: 150px !important;
+  }
+
+  &-txt-disabled {
+    color: $disabled-color !important;
+  }
+}
+
+.ele-money {
+  display: flex;
+  flex-direction: row;
+
+  &-icon {
+    color: $text-color-lighter;
+    margin-left: -1rem;
+  }
+}
+
+.ele-image-picker {
+  height: 80px;
+
+  .note {
+    margin-left: 20px;
+  }
+
+  &-icon {
+    margin-top: 10px;
+  }
+}
+
+.ele-object-picker {
+  margin-right: -40px;
+
+  &-icon {
+    color: $text-color-lighter;
+  }
+}
+
+.unknown {
+  color: $color-orange;
+}

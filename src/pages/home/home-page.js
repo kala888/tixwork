@@ -23,7 +23,6 @@ class HomePage extends Taro.PureComponent {
   }
 
   render() {
-    console.log('.....', this.props)
     const {
       slideList = [{ videoUrl: defaultImageUrl, imageUrl: defaultImageUrl }, { imageUrl: defaultImageUrl }],
       actionList = [

@@ -3,10 +3,9 @@ import { Text, View } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import ServerImage from '@/components/image/server-image'
 import NavigationService from '@/nice-router/navigation.service'
+import classNames from 'classnames'
 
 import './ele.scss'
-
-import EleHelper from '../ele-helper'
 
 export default class EleMoreActions extends Taro.PureComponent {
   static options = {
@@ -51,7 +50,7 @@ export default class EleMoreActions extends Taro.PureComponent {
 
   render() {
     const { text, imageUrl, icon, className } = this.props
-    const rootClass = EleHelper.classNames('ele-more-actions', className)
+    const rootClass = classNames('ele-more-actions', className)
 
     return (
       <View onClick={this.handleClick} className={rootClass}>

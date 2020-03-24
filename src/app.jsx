@@ -46,7 +46,7 @@ class App extends Component {
           },
         })
       })
-      updateManager.onUpdateFailed(()=> {
+      updateManager.onUpdateFailed(() => {
         Taro.showModal({
           title: '更新提示',
           content: '新版本下载失败，请检查你的微信',
@@ -76,7 +76,7 @@ class App extends Component {
       'nice-router/network-exception-page',
       'genericpage/generic-page',
       'genericpage/generic-page2',
-      'genericpage/user-picker-page',
+      'genericpage/object-picker-page',
       'listof/listof-page',
       'listof/listof-page2',
       'listof/listof-page3',

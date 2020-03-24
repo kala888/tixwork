@@ -1,13 +1,14 @@
 import Taro from '@tarojs/taro'
 import { Block, View } from '@tarojs/components'
 import { formatTime } from '@/utils/index'
-import isEmpty from 'lodash/isEmpty'
 import { AtIcon } from 'taro-ui'
 
 import ServerImage from '@/components/image/server-image'
 import NavigationService from '@/nice-router/navigation.service'
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
+import classNames from 'classnames'
+
 import './ele.scss'
-import EleHelper from '../ele-helper'
 import EleActionList from './ele-action-list'
 
 class EleCard extends Taro.PureComponent {
@@ -34,7 +35,7 @@ class EleCard extends Taro.PureComponent {
   render() {
     const { imageUrl, title, brief, createTime, status, customStyle, className, actionList } = this.props
 
-    const rootClass = EleHelper.classNames('ele-card', className)
+    const rootClass = classNames('ele-card', className)
 
     return (
       <View className={rootClass} style={customStyle}>
@@ -52,7 +53,7 @@ class EleCard extends Taro.PureComponent {
             </View>
           )}
 
-          {!isEmpty(imageUrl) && (
+          {isNotEmpty(imageUrl) && (
             <View className='ele-card-header-image'>
               <ServerImage src={imageUrl} />
             </View>

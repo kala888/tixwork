@@ -1,5 +1,7 @@
-import { Block, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import classNames from 'classnames'
+import GenericForm from '@/genericpage/form/generic-form'
 
 import EleFab from '../elements/ele-fab'
 import EleText from '../elements/ele-text'
@@ -13,20 +15,10 @@ import EleStoreLocation from '../elements/ele-store-location'
 import ElePopup from './ele-popup'
 import EleFooterTabs from '../elements/ele-footer-tabs'
 import EleNavigationBox from '../elements/ele-navigation-box'
-import EleCheckbox from '../form/ele-checkbox'
-import EleImagePicker from '../form/ele-image-picker'
-import EleInput from '../form/ele-input'
-import ElePicker from '../form/ele-picker'
-import EleRadio from '../form/ele-radio'
-import EleSwitch from '../form/ele-switch'
-import EleTextarea from '../form/ele-textarea'
-import EleForm from '../form/ele-form'
-import EleVcode from '../form/ele-vcode'
 import EleQRCode from '../elements/ele-qrcode'
 import EleMoreActions from '../elements/ele-more-actions'
 import EleListof from '../elements/ele-listof'
 
-import EleHelper from '../ele-helper'
 import '../styles.scss'
 
 export default class EleFlex extends Taro.PureComponent {
@@ -51,61 +43,41 @@ export default class EleFlex extends Taro.PureComponent {
   }
 
   render() {
-    const { flex, kids, formKey, customStyle = {}, className } = this.props
-    const rootClass = EleHelper.classNames(className, { 'flex-column': !className })
+    const { flex, kids, customStyle = {}, className } = this.props
+    const rootClass = classNames(className, { 'flex-column': !className })
 
     return (
       <View className={rootClass} style={{ flex, ...customStyle }}>
         {kids.map((it) => {
           const { flex: itemFlex = 1, id } = it
-          const ele = {
-            ...it,
-            formKey: formKey,
-          }
-          return (
-            <Block key={id}>
-              {/* ui elements*/}
-              {it.type === 'text' && <EleText {...ele} />}
-              {it.type === 'image' && <EleImage {...ele} />}
-              {it.type === 'button' && <EleButton {...ele} />}
-              {it.type === 'carousel' && <EleCarousel {...ele} />}
-              {it.type === 'message-swiper' && <EleMessageSwiper {...ele} />}
-              {it.type === 'break-line' && <EleBreakLine {...ele} />}
-              {it.type === 'white-space' && <EleWhiteSpace {...ele} />}
-              {it.type === 'box-bar' && <EleNavigationBox {...ele} />}
-              {it.type === 'fab' && <EleFab {...ele} />}
-              {it.type === 'store-location' && <EleStoreLocation {...ele} />}
-              {it.type === 'popup' && <ElePopup {...ele} />}
-              {it.type === 'footer-tabs' && <EleFooterTabs {...ele} />}
-              {it.type === 'qrcode' && <EleQRCode {...ele} />}
-              {it.type === 'more-actions' && <EleMoreActions {...ele} />}
+          if (it.type === 'text') return <EleText key={id} {...it} />
+          if (it.type === 'image') return <EleImage key={id} {...it} />
+          if (it.type === 'button') return <EleButton key={id} {...it} />
+          if (it.type === 'carousel') return <EleCarousel key={id} {...it} />
+          if (it.type === 'message-swiper') return <EleMessageSwiper key={id} {...it} />
+          if (it.type === 'break-line') return <EleBreakLine key={id} {...it} />
+          if (it.type === 'white-space') return <EleWhiteSpace key={id} {...it} />
+          if (it.type === 'box-bar') return <EleNavigationBox key={id} {...it} />
+          if (it.type === 'fab') return <EleFab key={id} {...it} />
+          if (it.type === 'store-location') return <EleStoreLocation key={id} {...it} />
+          if (it.type === 'popup') return <ElePopup key={id} {...it} />
+          if (it.type === 'footer-tabs') return <EleFooterTabs key={id} {...it} />
+          if (it.type === 'qrcode') return <EleQRCode key={id} {...it} />
+          if (it.type === 'more-actions') return <EleMoreActions key={id} {...it} />
+          if (it.type === 'listof') return <EleListof key={id} {...it} />
 
-              {/* form Biz*/}
-              {it.type === 'listof' && <EleListof {...ele} />}
+          if (it.type === 'form') return <GenericForm key={id} {...it} fields={it.kids} />
 
-              {/* form elements*/}
-              {it.type === 'checkbox' && <EleCheckbox {...ele} />}
-              {it.type === 'image-picker' && <EleImagePicker {...ele} />}
-              {it.type === 'input' && <EleInput {...ele} />}
-              {it.type === 'picker' && <ElePicker {...ele} />}
-              {it.type === 'radio' && <EleRadio {...ele} />}
-              {it.type === 'switch' && <EleSwitch {...ele} />}
-              {it.type === 'textarea' && <EleTextarea {...ele} />}
-              {it.type === 'vcode' && <EleVcode {...ele} />}
-
-              {/* container elements*/}
-              {it.type === 'form' && <EleForm {...ele} />}
-              {it.type === 'flex' && (
-                // Taro && wechat-mini-program could not support self reference, using it as mini-program component
-                <View className='flex-row' style={{ flex: itemFlex }}>
-                  <View style={{ width: '100%', height: '100%' }}>
-                    {/* eslint-disable-next-line react/jsx-no-undef */}
-                    <EleFlexBox {...ele} />
-                  </View>
+          if (it.type === 'flex')
+            return (
+              // Taro && wechat-mini-program could not support self reference, using it as mini-program component
+              <View key={id} className='flex-row' style={{ flex: itemFlex }}>
+                <View style={{ width: '100%', height: '100%' }}>
+                  {/* eslint-disable-next-line react/jsx-no-undef */}
+                  <EleFlexBox {...it} />
                 </View>
-              )}
-            </Block>
-          )
+              </View>
+            )
         })}
       </View>
     )

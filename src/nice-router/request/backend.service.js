@@ -1,15 +1,13 @@
-import isEmpty from 'lodash/isEmpty'
 import trim from 'lodash/trim'
 import cloneDeep from 'lodash/cloneDeep'
 import keys from 'lodash/keys'
 import unset from 'lodash/unset'
 import forIn from 'lodash/forIn'
-import { LoadingType } from '@/nice-router/nice-router-util'
+import { isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
 import isNull from 'lodash/isNull'
 import isUndefined from 'lodash/isUndefined'
 
 import HttpRequest from './http-request'
-import mockData from '../mock-data-genericpage'
 
 const EMPTY_PARAMETER_TOKEN = '+'
 const BackendService = {}
@@ -17,7 +15,7 @@ const BackendService = {}
 const replaceUrlPlaceholder = (pUri, params) => {
   let lastParams = params
   let uri = pUri
-  if (!isEmpty(params) || trim(pUri)) {
+  if (isNotEmpty(params) || trim(pUri)) {
     lastParams = cloneDeep(params)
     keys(params).forEach((key) => {
       const tmp = `:${key}`
@@ -64,9 +62,15 @@ BackendService.send = async (action = {}) => {
     headers,
   }
   // mock 数据处理
-  if (actionUri === 'mock/') {
-    return mockData
-  }
+  // if (actionUri === 'step1/') {
+  //   return step1
+  // }
+  // if (actionUri === 'step2/') {
+  //   return step2
+  // }
+  // if (actionUri === 'step3/') {
+  //   return step3
+  // }
   return HttpRequest.send(options, loading)
 }
 

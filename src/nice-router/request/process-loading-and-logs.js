@@ -1,6 +1,5 @@
 import Taro from '@tarojs/taro'
-import isEmpty from 'lodash/isEmpty'
-import { LoadingType } from '@/nice-router/nice-router-util'
+import { isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
 import OverlayLoading from '@/nice-router/overlay-loading'
 import ViewMappingService from '@/nice-router/viewmapping.service'
 import GlobalToast from '@/nice-router/global-toast'
@@ -30,14 +29,14 @@ function showError({ xclass, data = {} }) {
 
   const view = ViewMappingService.getView(xclass)
   // 系统错误，根据xclass跳转页面
-  if (xclass === systemErrorXClass || !isEmpty(view)) {
+  if (xclass === systemErrorXClass || isNotEmpty(view)) {
     return
   }
 
   const { localizedMessage, messageList = [], message } = data
 
   const text = localizedMessage || message || messageList.map((msg) => msg.body).join('\n')
-  if (!isEmpty(text)) {
+  if (isNotEmpty(text)) {
     GlobalToast.show({ text, duration: 5000 })
     return
   }

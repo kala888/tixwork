@@ -2,10 +2,9 @@ import Taro from '@tarojs/taro'
 import parse from 'url-parse'
 import qs from 'qs'
 import isObject from 'lodash/isObject'
-import isEmpty from 'lodash/isEmpty'
 import startsWith from 'lodash/startsWith'
 import localCacheService from './local-cache.service'
-import { LoadingType, toTaroUrl, log } from './nice-router-util'
+import { isNotEmpty, LoadingType, log, toTaroUrl } from './nice-router-util'
 
 const PAGE_LEVEL_LIMIT = 10
 
@@ -37,7 +36,7 @@ const NavigationService = {
   },
 
   isActionLike(action) {
-    return !isEmpty(getActionUri(action))
+    return isNotEmpty(getActionUri(action))
   },
 
   dispatch(action, params) {

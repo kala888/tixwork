@@ -2,10 +2,9 @@ import Taro from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import EleButton from '@/genericpage/elements/ele-button'
 import ServerImage from '@/components/image/server-image'
+import classNames from 'classnames'
 
 import './ele.scss'
-
-import EleHelper from '../ele-helper'
 
 class EleActionList extends Taro.PureComponent {
   static options = {
@@ -21,7 +20,7 @@ class EleActionList extends Taro.PureComponent {
   render() {
     const { customStyle, className } = this.props
     const { list } = this.props
-    const rootClass = EleHelper.classNames('ele-action-list', className)
+    const rootClass = classNames('ele-action-list', className)
 
     return (
       <View className={rootClass} style={customStyle}>

@@ -3,11 +3,11 @@ import { Swiper, SwiperItem, Video, View } from '@tarojs/components'
 
 import NavigationService from '@/nice-router/navigation.service'
 import { toRpx } from '@/utils/index'
-import isEmpty from 'lodash/isEmpty'
 import ServerImage from '@/components/image/server-image'
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
+import classNames from 'classnames'
 
 import './ele.scss'
-import EleHelper from '../ele-helper'
 
 export default class EleCarousel extends Taro.PureComponent {
   static options = {
@@ -32,7 +32,7 @@ export default class EleCarousel extends Taro.PureComponent {
   handleClick = (item = {}) => {
     const { videoUrl = '', imageUrl } = item
 
-    if (!isEmpty(videoUrl)) {
+    if (isNotEmpty(videoUrl)) {
       return
     }
 
@@ -41,7 +41,7 @@ export default class EleCarousel extends Taro.PureComponent {
       return
     }
 
-    if (isEmpty(videoUrl) && !isEmpty(imageUrl)) {
+    if (isEmpty(videoUrl) && isNotEmpty(imageUrl)) {
       Taro.previewImage({ urls: [imageUrl] })
     }
   }
@@ -66,7 +66,7 @@ export default class EleCarousel extends Taro.PureComponent {
 
     const showDots = indicatorDots === null ? items.length > 1 : indicatorDots
 
-    const rootClass = EleHelper.classNames('ele-carousel', className)
+    const rootClass = classNames('ele-carousel', className)
     return (
       <View className={rootClass} style={style}>
         <Swiper

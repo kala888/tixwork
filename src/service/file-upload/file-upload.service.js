@@ -1,8 +1,8 @@
 import Taro from '@tarojs/taro'
-import isEmpty from 'lodash/isEmpty'
 import random from 'lodash/random'
 import NavigationService from '@/nice-router/navigation.service'
 import { formatTime } from '@/utils/index'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 import Config from '@/utils/config'
 import getAliyunConfig from './aliyun-oss-helper'
 
@@ -15,7 +15,7 @@ let ossToken = {
 }
 
 function isValidateToken() {
-  if (!isEmpty(ossToken) && !isEmpty(ossToken.expiration)) {
+  if (isNotEmpty(ossToken) && isNotEmpty(ossToken.expiration)) {
     const expr = new Date(ossToken.expiration)
     // 5分钟提前量
     return expr < Date.now() - 1000 * 300

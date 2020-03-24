@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import m_ from '@/utils/mini-lodash'
 import classNames from 'classnames'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 import './styles.scss'
 
 function transToDoubleItemList(list = []) {
@@ -43,7 +43,7 @@ export default class TxtTable extends Taro.PureComponent {
                 <View className='info-row-cell-title'>{left.title}</View>
                 <View className={valueCls}>{left.value}</View>
               </View>
-              {!m_.isEmpty(right) && (
+              {isNotEmpty(right) && (
                 <View className='info-row-cell'>
                   <View className='info-row-cell-title'>{right.title}</View>
                   <View className={valueCls}>{right.value}</View>

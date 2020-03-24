@@ -1,0 +1,111 @@
+@import 'node_modules/taro-ui/dist/style/mixins/libs/hairline';
+@import 'src/styles/theme';
+
+$error-color: $color-orange;
+
+.generic-form {
+  padding: 0 30px;
+}
+
+.form-item {
+  color: $text-color;
+
+  .at-input,
+  .at-switch {
+    padding: 0;
+    margin-left: 0;
+  }
+
+  &-flex-field {
+    width: 100%;
+  }
+}
+
+.form-item-horizontal {
+  display: flex;
+  align-items: center;
+}
+
+.form-item-error {
+  color: $error-color;
+
+  .at-input input {
+    color: $error-color;
+  }
+}
+
+.item-wrapper {
+  padding: 22px 0;
+  font-size: 32px;
+  min-height: 1.4rem;
+  @extend %flex;
+  align-items: center;
+
+  &-children {
+    flex: 1;
+  }
+
+  &-tail {
+    padding-right: 16px;
+    width: 60px;
+    display: flex;
+    justify-content: flex-end;
+
+    &-alert {
+      color: $error-color;
+    }
+
+    &-clear {
+      color: #999;
+    }
+  }
+}
+
+.item-wrapper-bordered {
+  @include hairline-bottom(#d6e4ef);
+}
+
+.item-label {
+  width: 190px;
+  padding-right: 24px;
+
+  &-title {
+    position: relative;
+
+    &-required {
+      color: $error-color;
+      padding-right: 5px;
+    }
+  }
+
+  &-tips-icon {
+    padding: 0 10px;
+    color: #999;
+  }
+
+  &-tips-view {
+    padding: 20px 20px 100px;
+    color: $text-color-light;
+
+    &-title {
+      min-height: 1em;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    &-content {
+      text-align: left;
+      font-size: 22px;
+    }
+  }
+}
+
+.item-label-vertical {
+  width: 100%;
+  padding-bottom: 12px;
+}
+
+.error-message {
+  color: $error-color;
+  font-size: 22px;
+}

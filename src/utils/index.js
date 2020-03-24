@@ -1,12 +1,12 @@
 import Taro from '@tarojs/taro'
 import m_ from '@/utils/mini-lodash'
 import NavigationService from '@/nice-router/navigation.service'
-import { LoadingType } from '@/nice-router/nice-router-util'
+import { isEmpty, isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
 
 let device = {}
 
 function getDevice() {
-  if (m_.isEmpty(device)) {
+  if (isEmpty(device)) {
     const res = Taro.getSystemInfoSync()
     device = res
   }
@@ -38,7 +38,7 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
   if (!refsEntityContainer) {
     refsEntityContainer = root.dataContainer
   }
-  if (!refsEntityContainer || (m_.isEmpty(refsEntityContainer) && !m_.isEmpty(targetList))) {
+  if (!refsEntityContainer || (isEmpty(refsEntityContainer) && isNotEmpty(targetList))) {
     console.log('data container is empty, and target is not empty, return itself')
     return targetList
   }
@@ -56,22 +56,26 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
   return tempObj
 }
 
-function dateFormat(t, fmt) {
-  var o = {
-    'M+': t.getMonth() + 1, //月份
-    'd+': t.getDate(), //日
-    'h+': t.getHours(), //小时
-    'm+': t.getMinutes(), //分
-    's+': t.getSeconds(), //秒
-    'q+': Math.floor((t.getMonth() + 3) / 3), //季度
-    S: t.getMilliseconds(), //毫秒
+function dateFormat(time, fmt) {
+  const values = {
+    'M+': time.getMonth() + 1, //月份
+    'd+': time.getDate(), //日
+    'H+': time.getHours(), //小时
+    'h+': time.getHours() % 12, //小时
+    'm+': time.getMinutes(), //分
+    's+': time.getSeconds(), //秒
+    'q+': Math.floor((time.getMonth() + 3) / 3), //季度
+    S: time.getMilliseconds(), //毫秒
   }
   if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (t.getFullYear() + '').substr(4 - RegExp.$1.length))
+    fmt = fmt.replace(RegExp.$1, (time.getFullYear() + '').substr(4 - RegExp.$1.length))
   }
-  for (var k in o) {
-    if (new RegExp('(' + k + ')').test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length))
+  for (const key in values) {
+    if (new RegExp('(' + key + ')').test(fmt)) {
+      fmt = fmt.replace(
+        RegExp.$1,
+        RegExp.$1.length == 1 ? values[key] : ('00' + values[key]).substr(('' + values[key]).length)
+      )
     }
   }
   return fmt

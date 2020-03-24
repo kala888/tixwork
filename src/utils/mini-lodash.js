@@ -7,7 +7,6 @@ import forEach from 'lodash/forEach'
 import forIn from 'lodash/forIn'
 import get from 'lodash/get'
 import isArray from 'lodash/isArray'
-import isEmpty from 'lodash/isEmpty'
 import isNumber from 'lodash/isNumber'
 import isObject from 'lodash/isObject'
 import isObjectLike from 'lodash/isObjectLike'
@@ -39,7 +38,6 @@ const m_ = {
   forIn,
   get,
   isArray,
-  isEmpty,
   isNumber,
   isObject,
   isObjectLike,

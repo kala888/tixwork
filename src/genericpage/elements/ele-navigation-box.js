@@ -1,9 +1,9 @@
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import ServerImage from '@/components/image/server-image'
+import classNames from 'classnames'
 
 import './ele.scss'
-import EleHelper from '../ele-helper'
 
 export default class EleNavigationBox extends Taro.PureComponent {
   static options = {
@@ -26,7 +26,7 @@ export default class EleNavigationBox extends Taro.PureComponent {
     const imageWidth = `${width - 12 * lineOfItems}rpx`
     const boxStyle = { width: `${width}rpx`, height: `${width + 40}rpx` }
     const imageStyle = { width: imageWidth, height: imageWidth, borderRadius }
-    const rootClass = EleHelper.classNames('ele-navigation-box-bar', className)
+    const rootClass = classNames('ele-navigation-box-bar', className)
 
     return (
       <View

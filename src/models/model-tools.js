@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 import isArray from 'lodash/isArray'
-import isEmpty from 'lodash/isEmpty'
 import mergeWith from 'lodash/mergeWith'
 import concat from 'lodash/concat'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 function replaceArray(objValue, srcValue) {
   if (isArray(objValue)) {
@@ -21,7 +21,7 @@ function mergeState(preState = {}, newState = {}, doMerge = false, arrayMerge = 
   const { viewHashString: newHash } = newState
 
   // 数据没有变化
-  if (!isEmpty(newHash) && preHash === newHash) {
+  if (isNotEmpty(newHash) && preHash === newHash) {
     return null
   }
 

@@ -3,9 +3,9 @@ import { Text, View } from '@tarojs/components'
 import { AtFab, AtIcon } from 'taro-ui'
 import ServerImage from '@/components/image/server-image'
 import NavigationService from '@/nice-router/navigation.service'
+import classNames from 'classnames'
 
 import './ele.scss'
-import EleHelper from '../ele-helper'
 
 export default class EleFab extends Taro.PureComponent {
   static options = {
@@ -31,7 +31,7 @@ export default class EleFab extends Taro.PureComponent {
 
   render() {
     const { imageUrl, text, icon, customStyle, className, size } = this.props
-    const rootClass = EleHelper.classNames('ele-fab', className)
+    const rootClass = classNames('ele-fab', className)
     return (
       <View className={rootClass}>
         <AtFab size={size} onClick={this.handleClick}>

@@ -1,7 +1,6 @@
 import get from 'lodash/get'
 import trim from 'lodash/trim'
-import isEmpty from 'lodash/isEmpty'
-import { log } from './nice-router-util'
+import { isEmpty, log } from './nice-router-util'
 import NiceRouter from './nice-router'
 
 const ViewMappingService = {

@@ -1,10 +1,9 @@
 import split from 'lodash/split'
 import trim from 'lodash/trim'
 import slice from 'lodash/slice'
-import isEmpty from 'lodash/isEmpty'
 import NiceRouter from './nice-router'
 import StorageTools from './storage-tools'
-import { log } from './nice-router-util'
+import { isEmpty, isNotEmpty, log } from './nice-router-util'
 
 function getPageKeyByUri(uri = '') {
   let key = uri
@@ -62,7 +61,7 @@ LocalCache.isCachedForm = async (url, params = {}) => {
 }
 // form 提交内容 缓存 30 秒
 LocalCache.cacheForm = async (url, params = {}) => {
-  if (!isEmpty(params)) {
+  if (isNotEmpty(params)) {
     const content = JSON.stringify(params)
     const key = `${url}_${content}`
     StorageTools.set(key, params, 30)

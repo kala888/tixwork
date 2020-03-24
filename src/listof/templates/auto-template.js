@@ -15,7 +15,6 @@ export default class AutoTemplate extends Taro.PureComponent {
   render() {
     const { item = {}, showImageCount = 3 } = this.props
     const { title, brief, displayTime } = item
-    console.log('item.....', item)
 
     let list = []
     if (showImageCount > 0) {

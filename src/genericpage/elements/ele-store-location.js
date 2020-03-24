@@ -3,9 +3,9 @@ import Taro from '@tarojs/taro'
 import { AtIcon, AtTag } from 'taro-ui'
 import { toRpx } from '@/utils/index'
 import ServerImage from '@/components/image/server-image'
+import classNames from 'classnames'
 
 import './ele.scss'
-import EleHelper from '../ele-helper'
 
 export default class EleStoreLocation extends Taro.PureComponent {
   static options = {
@@ -68,7 +68,7 @@ export default class EleStoreLocation extends Taro.PureComponent {
       className,
     } = this.props
 
-    const rootClass = EleHelper.classNames('ele-store-location', className)
+    const rootClass = classNames('ele-store-location', className)
 
     return (
       <View className={rootClass} style={{ margin: `0 ${toRpx(padding)}` }}>

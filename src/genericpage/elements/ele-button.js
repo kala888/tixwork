@@ -1,8 +1,8 @@
 import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
+import classNames from 'classnames'
 import './ele.scss'
-import EleHelper from '../ele-helper'
 
 // form中组件封装后，button 不会触发form的handle方法问题
 // https://github.com/NervJS/taro-ui/issues/96
@@ -110,7 +110,7 @@ export default class EleButton extends Taro.PureComponent {
 
     const formType = btnType === 'submit' || btnType === 'reset' ? btnType : null
 
-    const rootClass = EleHelper.classNames('ele-button', className)
+    const rootClass = classNames('ele-button', className)
 
     return (
       <AtButton

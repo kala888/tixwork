@@ -3,7 +3,7 @@ import { View } from '@tarojs/components'
 import { AtDivider } from 'taro-ui'
 
 import { toRpx } from '@/utils/index'
-import EleHelper from '../ele-helper'
+import classNames from 'classnames'
 
 export default class EleBreakLine extends Taro.PureComponent {
   static options = {
@@ -34,7 +34,7 @@ export default class EleBreakLine extends Taro.PureComponent {
             ...customStyle,
           }
 
-    const rootClass = EleHelper.classNames('ele-break-line', className)
+    const rootClass = classNames('ele-break-line', className)
     return (
       <View className={rootClass} style={style}>
         {text.length > 0 && <AtDivider height={fixedHeight} content={text} fontColor={fontColor} lineColor={color} />}

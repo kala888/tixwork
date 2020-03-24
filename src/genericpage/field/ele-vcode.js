@@ -3,10 +3,10 @@ import { View } from '@tarojs/components'
 import { AtInput } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
+import classNames from 'classnames'
+import { noop } from '@/nice-router/nice-router-util'
 
-import './ele-form.scss'
-
-import EleHelper from '../ele-helper'
+import './styles.scss'
 
 const MAX_COUNT = 5
 
@@ -18,6 +18,7 @@ export default class EleVcode extends Taro.PureComponent {
   static defaultProps = {
     name: '',
     placeholder: '请输入手机号码',
+    onChange: noop,
   }
 
   state = {
@@ -77,19 +78,8 @@ export default class EleVcode extends Taro.PureComponent {
   }
 
   handleChange = (value) => {
-    const { name, formKey } = this.props
-    this.setState(
-      {
-        mobile: value,
-      },
-      () => {
-        Taro.eventCenter.trigger('form-value-changed', {
-          name,
-          value,
-          formKey,
-        })
-      }
-    )
+    const { onChange } = this.props
+    onChange(value)
   }
 
   render() {
@@ -97,11 +87,8 @@ export default class EleVcode extends Taro.PureComponent {
     const { disabled, second, mobile } = this.state
     const tips = disabled ? `${second}秒...` : '获取验证码'
 
-    const rootClass = EleHelper.classNames('ele-vcode', className)
-
-    const txtClass = EleHelper.classNames('ele-vcode-txt', {
-      'ele-vcode-txt-disabled': disabled,
-    })
+    const rootClass = classNames('ele-vcode', className)
+    const txtClass = classNames('ele-vcode-txt', { 'ele-vcode-txt-disabled': disabled })
     return (
       <AtInput
         name={name}

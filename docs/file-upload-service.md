@@ -52,6 +52,6 @@
 > 
 > src/service/file-upload/file-upload.service.js 
 > 
-> src/genericpage/form/ele-image-picker.js
+> src/genericpage/field/ele-image-picker.js
 
 

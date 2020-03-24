@@ -1,9 +1,8 @@
 import Taro from '@tarojs/taro'
-import { Label, Text, View } from '@tarojs/components'
+import { Text, View } from '@tarojs/components'
 import { AtImagePicker, AtProgress } from 'taro-ui'
 
-import './ele-form.scss'
-import EleHelper from '../ele-helper'
+import './styles.scss'
 import uploadFiles from '../../service/file-upload/file-upload.service'
 
 export default class EleImagePicker extends Taro.PureComponent {
@@ -116,23 +115,24 @@ export default class EleImagePicker extends Taro.PureComponent {
   }
 
   render() {
-    const { title, brief, maxLength, className, customStyle } = this.props
+    const { brief, maxLength, id } = this.props
     const { files: imageList = [], progress } = this.state
 
-    const briefText = brief || (maxLength > 1 ? `最多可以上传${maxLength}个文件` : '')
+    const multiple = maxLength > 1
+    const briefText = brief || (multiple ? `最多可以上传 ${maxLength} 个文件` : '')
     const showAddBtn = imageList.length < maxLength
-    const rootClass = EleHelper.classNames('ele-image-picker', className)
     const count = maxLength - imageList.length
 
+    console.log('maxLength', id, maxLength)
+
     return (
-      <View className={rootClass} style={customStyle}>
-        <Label className='label-text'>{title}</Label>
+      <View>
         <AtImagePicker
           className='ele-image-picker-icon'
           count={count}
           length={maxLength}
           showAddBtn={showAddBtn}
-          multiple
+          multiple={multiple}
           files={imageList}
           onChange={this.handleFileChange}
           onImageClick={this.onImageClick}

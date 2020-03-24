@@ -4,10 +4,9 @@ import { AtIcon } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import { toRpx } from '@/utils/index'
 import ServerImage from '@/components/image/server-image'
+import classNames from 'classnames'
 
 import './ele.scss'
-
-import EleHelper from '../ele-helper'
 
 export default class EleMessageSwiper extends Taro.PureComponent {
   static options = {
@@ -30,7 +29,7 @@ export default class EleMessageSwiper extends Taro.PureComponent {
   render() {
     const { items, imageUrl, customStyle, imageHeight, imageWidth, className } = this.props
 
-    const rootClass = EleHelper.classNames('ele-message-swiper', className)
+    const rootClass = classNames('ele-message-swiper', className)
 
     return (
       <View className={rootClass} style={customStyle}>

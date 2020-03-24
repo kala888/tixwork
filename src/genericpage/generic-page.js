@@ -2,12 +2,12 @@ import Taro from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
+import classNames from 'classnames'
 import { ajaxPullDownRefresh } from '@/utils/index'
 import Config from '@/utils/config'
 
 import EleFlex from './container/ele-flex'
 import './styles.scss'
-import EleHelper from './ele-helper'
 
 @connect(({ genericpage }) => ({ ...genericpage }))
 class GenericPage extends Taro.PureComponent {
@@ -59,7 +59,7 @@ class GenericPage extends Taro.PureComponent {
   }
 
   render() {
-    const rootClass = EleHelper.classNames('generic-page', this.props.className)
+    const rootClass = classNames('generic-page', this.props.className)
     return (
       <View className={rootClass}>
         <EleFlex {...this.props} />
