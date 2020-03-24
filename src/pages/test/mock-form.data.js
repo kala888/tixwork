@@ -1,7 +1,20 @@
 export default [
   {
-    id: '1-favorite',
-    name: 'favorite',
+    name: '0-phone',
+    label: '手机号',
+    type: 'phone',
+    placeholder: '输入手机号',
+    rules: [
+      {
+        required: true,
+        type: 'string',
+        pattern: /^1\d{10}$/,
+        message: '要填写手机号哦',
+      },
+    ],
+  },
+  {
+    name: '1-favorite',
     label: '爱好',
     type: 'multi-select',
     placeholder: '请选择你的最爱',
@@ -20,8 +33,7 @@ export default [
     ],
   },
   {
-    id: '11-your-favorite',
-    name: '-your-favorite',
+    name: '11-your-favorite',
     label: '爱好222',
     type: 'multi-select',
     placeholder: '请选择你的最爱22222',
@@ -40,8 +52,7 @@ export default [
     ],
   },
   {
-    id: '2-real-name',
-    name: 'real-name',
+    name: '2-real-name',
     label: '姓名',
     type: 'text',
     placeholder: '请输入您的真实姓名',
@@ -50,18 +61,18 @@ export default [
     rules: [
       {
         required: true,
-        type: 'text',
         message: '真实姓名不能为空',
       },
       {
+        min: 2,
         max: 32,
-        message: '真实姓名长度不能超过32位',
+        type: 'string',
+        message: '真实姓名长度不能超过32位,也不能少于2位',
       },
     ],
   },
   {
-    id: '3-age',
-    name: 'age',
+    name: '3-age',
     label: '年龄',
     type: 'integer',
     placeholder: '请输入您的年龄',
@@ -73,28 +84,29 @@ export default [
       },
       {
         max: 180,
+        type: 'integer',
         message: '最大年纪为180',
       },
       {
-        min: 0,
-        message: '最小年纪为0',
+        min: 5,
+        type: 'integer',
+        message: '最小年纪为5',
       },
     ],
   },
   {
-    id: '4-gender',
-    name: 'gender',
+    name: '4-gender',
     label: '性别',
     type: 'boolean',
 
     candidateValues: [
       {
-        id: 1,
+        name: 1,
         title: '男',
         value: true,
       },
       {
-        id: 2,
+        name: 2,
         title: '女',
         value: false,
       },
@@ -102,43 +114,35 @@ export default [
   },
 
   {
-    id: '5-height',
-    name: 'height',
+    name: '5-height',
     label: '身高（cm）',
     type: 'double',
     placeholder: '输入身高',
 
     rules: [
       {
+        required: true,
         min: 20,
-        message: '不能低于一个尺子的长度哦',
-      },
-      {
         max: 300,
-        message: '不能比楼房的层高还高',
-      },
-      {
-        precision: 2,
-        message: '精确两位即可',
+        type: 'number',
+        message: '最少20，最多3000',
       },
     ],
   },
   {
-    id: '6-deposit',
-    name: 'deposit',
+    name: '6-deposit',
     label: '存款',
     type: 'money',
     placeholder: '输入存款余额',
     rules: [
       {
         required: true,
-        message: '必填',
+        message: '怎么也有点存款吧',
       },
     ],
   },
   {
-    id: '7-start-date',
-    name: 'start-date',
+    name: '7-start-date',
     label: '开始日期',
 
     type: 'date',
@@ -151,8 +155,7 @@ export default [
     ],
   },
   {
-    id: '8-date-time',
-    name: 'plan-time',
+    name: '8-date-time',
     label: '约会时间',
     type: 'datetime',
     placeholder: '请选择约会时间',
@@ -164,16 +167,14 @@ export default [
     ],
   },
   {
-    id: '9-avatar',
-    name: 'avatar',
+    name: '9-avatar',
     label: '头像',
     type: 'image',
     placeholder: '这里是你的头像',
     maxLength: 3,
   },
   {
-    id: '10-photos',
-    name: 'photos',
+    name: '10-photos',
     label: '生活照',
 
     type: 'image',
@@ -187,8 +188,7 @@ export default [
     ],
   },
   {
-    id: '11-job-title',
-    name: 'job-title',
+    name: '11-job-title',
     label: '工种',
 
     type: 'single-select',
@@ -200,7 +200,6 @@ export default [
     ],
   },
   {
-    id: '12-description',
     name: '12-description',
     label: '详细描述',
 
@@ -209,14 +208,15 @@ export default [
 
     rules: [
       {
-        min: 500,
-        max: 10,
+        required: true,
+        max: 500,
+        min: 10,
+        type: 'string',
         message: '这玩意最多填500字,最少10个字',
       },
     ],
   },
   {
-    id: '13-user-selector',
     name: '13-user-selector',
     label: '选工长',
 

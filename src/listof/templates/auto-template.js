@@ -1,7 +1,8 @@
 import Taro from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
+import min from 'lodash/min'
+import slice from 'lodash/slice'
 import ServerImage from '@/components/image/server-image'
-import m_ from '@/utils/mini-lodash'
 import { formatTime } from '@/utils/index'
 import classNames from 'classnames'
 import '../listof.scss'
@@ -19,8 +20,8 @@ export default class AutoTemplate extends Taro.PureComponent {
     let list = []
     if (showImageCount > 0) {
       const tempList = getImageList(item)
-      const size = m_.min([showImageCount, tempList.length])
-      list = m_.slice(tempList, 0, size)
+      const size = min([showImageCount, tempList.length])
+      list = slice(tempList, 0, size)
       // const list = m_.concat(m_.slice(tempList, 0, size), m_.slice(tempList, 0, size), m_.slice(tempList, 0, size))
       // console.log('list', list)
     }

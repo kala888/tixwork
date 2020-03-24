@@ -8,7 +8,6 @@ import './app.scss'
 import dva from './dva'
 
 import models from './models/model-center'
-import { initial } from './service/initial.service'
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -23,8 +22,6 @@ const dvaApp = dva.createApp({
 })
 const store = dvaApp.getStore()
 NiceRouter.start({ config: Config, container: dvaApp })
-
-initial()
 
 class App extends Component {
   // componentWillMount() {

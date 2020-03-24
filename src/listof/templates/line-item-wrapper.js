@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtActivityIndicator } from 'taro-ui'
 import classNames from 'classnames'
-import m_ from '@/utils/mini-lodash'
+import toLower from 'lodash/toLower'
 import NavigationService from '@/nice-router/navigation.service'
 import UserTemplate from '@/listof/templates/user-template'
 
@@ -96,7 +96,7 @@ export default class LineItemWrapper extends Taro.PureComponent {
     //   this.handlePress,
     //   this.props.delay || 300,
     // )
-    const template = m_.toLower(itemDisplayMode || displayMode)
+    const template = toLower(itemDisplayMode || displayMode)
     // console.log(`line-item show with "${template}, item is`, item)
 
     const wrapperClass = classNames('line-item-wrapper', 'my-class', {

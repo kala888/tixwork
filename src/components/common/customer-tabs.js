@@ -1,8 +1,8 @@
 import Taro from '@tarojs/taro'
 import { AtTabs } from 'taro-ui'
+import findIndex from 'lodash/findIndex'
 import NavigationService from '@/nice-router/navigation.service'
 import { LoadingType } from '@/nice-router/nice-router-util'
-import m_ from '@/utils/mini-lodash'
 
 export default class CustomerTabs extends Taro.PureComponent {
   state = {
@@ -25,7 +25,7 @@ export default class CustomerTabs extends Taro.PureComponent {
 
   render() {
     const { tabs = [] } = this.props
-    const selectTabIndex = m_.findIndex(tabs, 'selected')
+    const selectTabIndex = findIndex(tabs, 'selected')
     const selectedIndex = this.state.current || selectTabIndex
     const scroll = tabs.length > 4
 

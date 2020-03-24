@@ -1,27 +1,52 @@
 import Schema from 'async-validator'
 import toNumber from 'lodash/toNumber'
-import isFunction from 'lodash/isFunction'
 import { isEmpty } from '@/nice-router/nice-router-util'
 
+//valid OOTB type:
+// const VALIDATOR_OOTB_TYP = [
+//   'string',
+//   'number',
+//   'boolean',
+//   'method',
+//   'regexp',
+//   'integer',
+//   'float',
+//   'array',
+//   'object',
+//   'enum',
+//   'date',
+//   'url',
+//   'hex',
+//   'email',
+//   'any',
+// ]
+
+// //TODO 可以后台映射，当做rule返回
+// const TYPE_MAPPING = {
+//   text: 'string',
+//   longtext: 'string',
+//   textarea: 'string',
+//   phone: 'string',
+//   money: 'integer',
+//   double: 'number',
+//   decimal: 'number',
+//   switch: 'boolean',
+// }
+
+const numberLikeType = ['integer', 'number', 'float', 'decimal', 'double', 'money']
+
 function transformValue(type, value) {
-  const validatorType = TYPE_MAPPING[type] || type
-  return validatorType === 'integer' || validatorType === 'double' ? toNumber(value) : value
+  if (isEmpty(value)) {
+    return value
+  }
+  const isNumberLike = numberLikeType.includes(type)
+  return isNumberLike ? toNumber(value) : value
 }
 
-function getSpecialValidator(rule, type) {
-  console.log('for field type', type, ':', rule, 'with special validator? no...')
-  return null
-}
-
-//validate OOTB type:
-// string, number, boolean, method, regexp, integer, float, array, object
-// enum, date, url, hex, email, any
-const TYPE_MAPPING = {
-  text: 'string',
-  longText: 'string',
-  money: 'integer',
-  switch: 'boolean',
-}
+// function getSpecialValidator(rule, type) {
+//   console.log('for field type', type, ':', rule, 'with special validator? no...')
+//   return null
+// }
 
 function handleErrors(errors = [], fields) {
   console.log('fields', fields)
@@ -29,31 +54,35 @@ function handleErrors(errors = [], fields) {
 }
 
 const validator = (field = {}, value) => {
-  const { id, rules, type } = field
-  if (isEmpty(id) || isEmpty(rules)) {
+  const { name, rules = [], type } = field
+  if (isEmpty(name) || isEmpty(rules)) {
     return Promise.resolve()
   }
 
-  const ruleList = rules.map((it) => {
-    const rule = {
-      ...it,
-    }
-    if (it.type) {
-      rule.type = TYPE_MAPPING[it.type] || it.type
-    }
-    const specialValidator = getSpecialValidator(it, type)
-    if (isFunction(specialValidator)) {
-      rule.validator = specialValidator
-    }
-    return rule
-  })
+  // const ruleList = rules.map((it) => {
+  //   const rule = { ...it }
+  //   // // 强制把type塞回去
+  //   // if (
+  //   //   (isNotEmpty(it.max) || isNotEmpty(it.min) || isNotEmpty(it.type) || isNotEmpty(it.required)) &&
+  //   //   VALIDATOR_OOTB_TYP.includes(validatorType)
+  //   // ) {
+  //   //   rule.type = validatorType
+  //   // }
+  //
+  //   // const specialValidator = getSpecialValidator(it, type)
+  //   // if (isFunction(specialValidator)) {
+  //   //   rule.validator = specialValidator
+  //   // }
+  //   return rule
+  // })
 
   // processedRules.push({
   //   type: validatorType, // 通过增加rule方式做类型检测
   // })
-  const schema = new Schema({ [id]: ruleList })
+  const schema = new Schema({ [name]: rules })
   const fieldValue = transformValue(type, value)
-  const source = { [id]: fieldValue }
+  const source = { [name]: fieldValue }
+  console.log('validate field:', name, 'type:', type, 'value:', value, '->', fieldValue, 'rules:', rules)
   return schema
     .validate(source)
     .then((res) => {

@@ -23,7 +23,7 @@ export default class GenericForm extends Taro.PureComponent {
     initialValues: {},
   }
 
-  //以id为key, 注意不是name, {'id-1':'xxx'}
+  //以name为key
   state = {
     fieldValues: {},
     fieldErrors: {},
@@ -46,14 +46,14 @@ export default class GenericForm extends Taro.PureComponent {
 
   getFieldValues = () => this.state.fieldValues
 
-  handleFieldChange = async (id, value) => {
+  handleFieldChange = async (name, value) => {
     const { onFieldChange } = this.props
     // 记录处理错误信息
-    const errors = await this._validateField(id, value)
+    const errors = await this._validateField(name, value)
     this.setState((preState) => ({
       fieldErrors: {
         ...preState.fieldErrors,
-        [id]: errors,
+        [name]: errors,
       },
     }))
 
@@ -62,12 +62,12 @@ export default class GenericForm extends Taro.PureComponent {
       (preState) => ({
         fieldValues: {
           ...preState.fieldValues,
-          [id]: value,
+          [name]: value,
         },
       }),
       () => {
         if (isFunction(onFieldChange)) {
-          onFieldChange(id, this.state.fieldValues)
+          onFieldChange(name, this.state.fieldValues)
         }
       }
     )
@@ -86,12 +86,12 @@ export default class GenericForm extends Taro.PureComponent {
 
     const fieldErrors = {}
     for (const field of fields) {
-      const { id } = field
-      const value = fieldValues[id]
-      const errors = await this._validateField(id, value)
+      const { name } = field
+      const value = fieldValues[name]
+      const errors = await this._validateField(name, value)
       if (isNotEmpty(errors)) {
         console.log('set errors', errors)
-        fieldErrors[id] = errors
+        fieldErrors[name] = errors
       }
     }
     this.setState({
@@ -103,8 +103,8 @@ export default class GenericForm extends Taro.PureComponent {
     }
   }
 
-  _validateField = (id, value) => {
-    const field = find(this.props.fields, { id })
+  _validateField = (name, value) => {
+    const field = find(this.props.fields, { name })
     if (!field) {
       return Promise.resolve()
     }
@@ -121,14 +121,13 @@ export default class GenericForm extends Taro.PureComponent {
       <View className='generic-form'>
         {fields.map((it) => {
           const field = mergeConfig(it)
-          const { id } = field
-          const value = fieldValues[id]
-          const errors = fieldErrors[id]
-          console.log('fields inform', id)
+          const { name } = field
+          const value = fieldValues[name]
+          const errors = fieldErrors[name]
 
           return (
             <FormItem
-              key={id}
+              key={name}
               field={field}
               value={value}
               bordered={bordered}

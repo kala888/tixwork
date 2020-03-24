@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
-import m_ from '@/utils/mini-lodash'
+import isNumber from 'lodash/isNumber'
+import forEach from 'lodash/forEach'
 import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty, isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
 
@@ -15,7 +16,7 @@ function getDevice() {
 
 export function toRpx(num) {
   // Taro.pxTransform
-  if (m_.isNumber(num)) {
+  if (isNumber(num)) {
     const width = getDeviceWidth()
     const result = (num * (750 / width)).toFixed(2)
     return `${result}rpx`
@@ -47,7 +48,7 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
     return targetList ? doEnrichment(targetList) : []
   }
   const tempObj = {}
-  m_.forEach(names, (it) => {
+  forEach(names, (it) => {
     const list = root[it] || []
     if (list.length > 0) {
       tempObj[it] = doEnrichment(list)
@@ -89,7 +90,7 @@ export function formatTime(time, fmt = 'yyyy-MM-dd') {
 }
 
 export function formatMoney(money) {
-  if (m_.isNumber(money)) {
+  if (isNumber(money)) {
     return money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
   }
   return money

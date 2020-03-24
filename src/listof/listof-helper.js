@@ -1,4 +1,4 @@
-import m_ from '@/utils/mini-lodash'
+import concat from 'lodash/concat'
 
 const defaultImage = null
 
@@ -25,7 +25,7 @@ export function getImageList(item = {}) {
   if (imageUrl) {
     list.push({ id: `${item.id}_imageUrl`, imageUrl })
   } else {
-    list = m_.concat(editorSuggestionImageList, imageList)
+    list = concat(editorSuggestionImageList, imageList)
   }
   return list
 }

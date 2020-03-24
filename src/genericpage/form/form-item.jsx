@@ -22,20 +22,20 @@ export default class FormItem extends Taro.PureComponent {
   handleChange = (value, event) => {
     console.log('event', event)
     const { field, onChange } = this.props
-    const { id } = field
+    const { name } = field
     let fieldValue = value
     if (value && isObject(value.target)) {
       fieldValue = value.target.value
     }
-    onChange(id, fieldValue)
+    onChange(name, fieldValue)
   }
 
   handleClear = () => {
     const {
-      field: { id },
+      field: { name },
       onChange,
     } = this.props
-    onChange(id, null)
+    onChange(name, null)
   }
 
   render() {

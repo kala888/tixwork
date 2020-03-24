@@ -1,5 +1,5 @@
-import m_ from '@/utils/mini-lodash'
 import curryRight from 'lodash/curryRight'
+import trim from 'lodash/trim'
 
 // const logo = require('./images/default_id_icon.png')
 
@@ -27,7 +27,7 @@ const loadOriginImg = curriedLoadImgWithStyle('?x-oss-process=style/origin')
 const loadThumbnailImg = curriedLoadImgWithStyle('?x-oss-process=style/thumbnail')
 
 const getServerImagUrl = (uri, size = 'normal') => {
-  let url = m_.trim(uri || '')
+  let url = trim(uri || '')
   let result = url
   if (url) {
     switch (size) {

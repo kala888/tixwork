@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import { AtTabBar } from 'taro-ui'
+import findIndex from 'lodash/findIndex'
 import NavigationService from '@/nice-router/navigation.service'
-import m_ from '@/utils/mini-lodash'
 
 export default class EleFooterTabs extends Taro.PureComponent {
   static options = {
@@ -34,7 +34,7 @@ export default class EleFooterTabs extends Taro.PureComponent {
 
   render() {
     const { tabs } = this.props
-    const current = this.state.selectedIndex !== null ? this.state.selectedIndex : m_.findIndex(tabs, 'selected')
+    const current = this.state.selectedIndex !== null ? this.state.selectedIndex : findIndex(tabs, 'selected')
     const tabList = tabs.map((it) => ({
       ...it,
       image: it.imageUrl,

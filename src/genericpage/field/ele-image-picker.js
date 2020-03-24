@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import { AtImagePicker, AtProgress } from 'taro-ui'
+import { noop } from '@/nice-router/nice-router-util'
 
 import './styles.scss'
 import uploadFiles from '../../service/file-upload/file-upload.service'
@@ -11,12 +12,10 @@ export default class EleImagePicker extends Taro.PureComponent {
   }
 
   static defaultProps = {
-    title: '',
     brief: '',
     maxLength: 4,
-    className: null,
-    customStyle: {},
-    defaultValue: [],
+    value: [],
+    onChange: noop,
   }
 
   state = {
@@ -32,13 +31,7 @@ export default class EleImagePicker extends Taro.PureComponent {
   }
 
   saveImageToForm = () => {
-    const { formKey, name } = this.props
-    console.log('save images to form', name, formKey, this.state.files)
-    Taro.eventCenter.trigger('form-value-changed', {
-      name,
-      value: this.state.files,
-      formKey,
-    })
+    this.props.onChange(this.state.files)
   }
 
   uploadNewFiles = (files = []) => {
@@ -101,7 +94,7 @@ export default class EleImagePicker extends Taro.PureComponent {
       } else {
         Taro.showModal({
           title: '提示',
-          content: `最多可以上传${maxLength}张图片`,
+          content: `最多可以上传 ${maxLength} 张图片`,
           showCancel: false,
         })
       }
@@ -115,7 +108,7 @@ export default class EleImagePicker extends Taro.PureComponent {
   }
 
   render() {
-    const { brief, maxLength, id } = this.props
+    const { brief, maxLength } = this.props
     const { files: imageList = [], progress } = this.state
 
     const multiple = maxLength > 1
@@ -123,14 +116,15 @@ export default class EleImagePicker extends Taro.PureComponent {
     const showAddBtn = imageList.length < maxLength
     const count = maxLength - imageList.length
 
-    console.log('maxLength', id, maxLength)
+    //单行显示最大个数
+    // const length = maxLength >= 4 ? 4 : maxLength
 
     return (
       <View>
         <AtImagePicker
           className='ele-image-picker-icon'
           count={count}
-          length={maxLength}
+          length={4}
           showAddBtn={showAddBtn}
           multiple={multiple}
           files={imageList}

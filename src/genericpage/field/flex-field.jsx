@@ -1,5 +1,4 @@
 import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
 import { AtInput, AtTextarea } from 'taro-ui'
 import { noop } from '@/nice-router/nice-router-util'
 import NumberInput from './ele-number-input'
@@ -67,6 +66,7 @@ export default class FlexField extends Taro.PureComponent {
 
     if (type === 'tree-picker') return <ObjectPicker {...field} />
 
-    return <View className='unknown'>该字段暂不支持</View>
+    // phone
+    return <AtInput border={false} {...field} />
   }
 }
