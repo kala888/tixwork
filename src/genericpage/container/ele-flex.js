@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
-import GenericForm from '@/genericpage/form/generic-form'
+import GenericForm from '@/genericform/form/generic-form'
 
 import EleFab from '../elements/ele-fab'
 import EleText from '../elements/ele-text'

@@ -4,11 +4,12 @@
     "paths": {
       "@/components/*": ["./src/components/*"],
       "@/utils/*": ["./src/utils/*"],
+
       "@/nice-router/*": ["./src/nice-router/*"],
       "@/genericpage/*": ["./src/genericpage/*"],
-      "@/listof/*": ["./src/listof/*"],
-      "@/package": ["./package.json"],
-      "@/project": ["./project.config.json"]
+      "@/genericform/*": ["./src/genericform/*"],
+      "@/server-image/*": ["./src/server-image/*"],
+      "@/listof/*": ["./src/listof/*"]
     }
   }
 }

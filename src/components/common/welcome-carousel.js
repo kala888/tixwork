@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { Swiper, SwiperItem, View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 
-import ServerImage from '../image/server-image'
+import ServerImage from '@/server-image'
 import '../biz/styles.scss'
 
 const MAX_COUNT = 5

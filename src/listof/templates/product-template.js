@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import { AtTag } from 'taro-ui'
 
-import ServerImage from '@/components/image/server-image'
+import ServerImage from '@/server-image'
 import '../listof.scss'
 import { getImageUrl } from '../listof-helper'
 

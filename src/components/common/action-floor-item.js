@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 import classNames from 'classnames'
-import ServerImage from '@/components/image/server-image'
+import ServerImage from '@/server-image'
 import './styles.scss'
 
 // const defaultImageUrl = 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg'

@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import GenericForm from '@/genericpage/form/generic-form'
+import GenericForm from '@/genericform/form/generic-form'
 import { AtButton } from 'taro-ui'
 
 import { isEmpty } from '@/nice-router/nice-router-util'

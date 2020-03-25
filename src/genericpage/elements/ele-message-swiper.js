@@ -3,7 +3,7 @@ import { Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import { toRpx } from '@/utils/index'
-import ServerImage from '@/components/image/server-image'
+import ServerImage from '@/server-image'
 import classNames from 'classnames'
 
 import './ele.scss'

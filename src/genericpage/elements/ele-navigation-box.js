@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import ServerImage from '@/components/image/server-image'
+import ServerImage from '@/server-image/server-image'
 import classNames from 'classnames'
 
 import './ele.scss'

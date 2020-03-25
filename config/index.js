@@ -40,13 +40,14 @@ const config = {
   defineConstants: {},
   alias: {
     '@/components': path.resolve(__dirname, '..', 'src/components'),
-    '@/genericpage': path.resolve(__dirname, '..', 'src/genericpage'),
-    '@/listof': path.resolve(__dirname, '..', 'src/listof'),
     '@/utils': path.resolve(__dirname, '..', 'src/utils'),
-    '@/pages': path.resolve(__dirname, '..', 'src/pages'),
+
     '@/nice-router': path.resolve(__dirname, '..', 'src/nice-router'),
-    '@/package': path.resolve(__dirname, '..', 'package.json'),
-    '@/project': path.resolve(__dirname, '..', 'project.config.json'),
+    '@/genericpage': path.resolve(__dirname, '..', 'src/genericpage'),
+    '@/genericform': path.resolve(__dirname, '..', 'src/genericform'),
+    '@/server-image': path.resolve(__dirname, '..', 'src/server-image'),
+    '@/listof': path.resolve(__dirname, '..', 'src/listof'),
+
   },
   mini: {
     postcss: {

@@ -3,7 +3,7 @@ import { Swiper, SwiperItem, Video, View } from '@tarojs/components'
 
 import NavigationService from '@/nice-router/navigation.service'
 import { toRpx } from '@/utils/index'
-import ServerImage from '@/components/image/server-image'
+import ServerImage from '@/server-image/server-image'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import classNames from 'classnames'
 

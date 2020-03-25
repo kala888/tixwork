@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import { Image } from '@tarojs/components'
 import classNames from 'classnames'
-import ImageTools from '@/components/image/image-tools'
+import ImageTools from './image-tools'
 import './styles.scss'
 
 class ServerImage extends Taro.PureComponent {

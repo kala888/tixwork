@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import EleImagePicker from '@/genericpage/field/ele-image-picker'
+import EleImagePicker from '@/genericform/field/ele-image-picker'
 
 export default class HelloDaaSPage extends Taro.Component {
   render() {

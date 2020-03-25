@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import { Button, View } from '@tarojs/components'
-import validator from '@/genericpage/form/validator'
+import validator from '@/genericform/form/validator'
 
 export default class TestPage extends Taro.PureComponent {
   validate = () => {

@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import NavigationService from '@/nice-router/navigation.service'
-import ServerImage from '@/components/image/server-image'
+import ServerImage from '@/server-image'
 
 import './styles.scss'
 import moreIcon from '../../assets/icon/icon_more@2x.png'
