@@ -2,7 +2,8 @@ import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 import { AtSteps } from 'taro-ui'
-import './form.scss'
+
+import './styles.scss'
 
 export default class FormSteps extends Taro.PureComponent {
   static defaultProps = {

@@ -5,6 +5,7 @@ import { AtButton } from 'taro-ui'
 
 import { isEmpty } from '@/nice-router/nice-router-util'
 import GlobalToast from '@/nice-router/global-toast'
+import FormSteps from '@/genericform/form-steps'
 import kids from './mock-form.data'
 import './index.scss'
 
@@ -26,6 +27,7 @@ export default class FormPage extends Taro.PureComponent {
   render() {
     return (
       <View className='form'>
+        <FormSteps steps={steps} />
         <GenericForm ref={(ref) => (this.form = ref)} fields={kids} />
 
         <View className='footer-button-list'>
@@ -38,3 +40,21 @@ export default class FormPage extends Taro.PureComponent {
     )
   }
 }
+
+const steps = [{
+  title: '第一步',
+  status: 'success',
+},
+  {
+    title: '2222',
+    selected: true,
+  },
+  { title: '完成1' },
+  { title: '完成2' },
+  { title: '完成3' },
+  { title: '完成4' },
+  { title: '完成6' },
+  { title: '完成7' },
+  { title: '完成8' },
+  { title: '完成9' },
+]

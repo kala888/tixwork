@@ -4,8 +4,9 @@ import isFunction from 'lodash/isFunction'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import FormItem from './form-item'
 import validator from './validator'
-import './styles.scss'
 import mergeConfig from './field-config'
+
+import './styles.scss'
 
 // 参考 https://github.com/react-component/form
 
@@ -68,7 +69,7 @@ export default class GenericForm extends Taro.PureComponent {
         if (isFunction(onFieldChange)) {
           onFieldChange(name, this.state.fieldValues)
         }
-      }
+      },
     )
   }
 

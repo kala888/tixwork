@@ -21,7 +21,6 @@ import { isEmpty } from '@/nice-router/nice-router-util'
 //   'any',
 // ]
 
-// //TODO 可以后台映射，当做rule返回
 // const TYPE_MAPPING = {
 //   text: 'string',
 //   longtext: 'string',

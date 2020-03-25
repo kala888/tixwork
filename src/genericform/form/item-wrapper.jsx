@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { AtIcon, AtToast } from 'taro-ui'
+
 import './styles.scss'
 
 export default class ItemWrapper extends Taro.PureComponent {

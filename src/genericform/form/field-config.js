@@ -1,18 +1,13 @@
 import merge from 'lodash/merge'
 
+const verticalField = {
+  layout: 'vertical',
+  showTail: false,
+}
 const fieldConfig = {
-  textarea: {
-    layout: 'vertical',
-    showTail: false,
-  },
-  longtext: {
-    layout: 'vertical',
-    showTail: false,
-  },
-  image: {
-    layout: 'vertical',
-    showTail: false,
-  },
+  textarea: verticalField,
+  longtext: verticalField,
+  image: verticalField,
 }
 
 export default function mergeConfig(field) {

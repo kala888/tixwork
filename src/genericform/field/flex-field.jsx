@@ -11,7 +11,6 @@ import ObjectPicker from './ele-object-picker'
 import './styles.scss'
 
 // TODO 实现树型选择器
-// TODO 实现手机号输入
 // TODO 实现附件上传
 // TODO 处理disabled, hidden, display
 // TODO 实现checkbox（多用于terms）

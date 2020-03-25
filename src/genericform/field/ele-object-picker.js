@@ -8,7 +8,7 @@ import { View } from '@tarojs/components'
 import ActionField from './action-field'
 import './styles.scss'
 
-const OBJECT_PICKER_PAGE = '/genericpage/object-picker-page'
+const OBJECT_PICKER_PAGE = '/genericform/object-picker-page'
 
 export default class ObjectPicker extends Taro.PureComponent {
   static options = {
