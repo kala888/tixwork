@@ -24,11 +24,19 @@ export default class FormPage extends Taro.PureComponent {
     this.form.resetFields()
   }
 
+
   render() {
+    const groups = [
+      {
+        title: '六六六的组',
+        fields: kids,
+      },
+    ]
+
     return (
       <View className='form'>
         <FormSteps steps={steps} />
-        <GenericForm ref={(ref) => (this.form = ref)} fields={kids} />
+        <GenericForm ref={(ref) => (this.form = ref)} groups={groups} />
 
         <View className='footer-button-list'>
           <AtButton onClick={this.handleReset}>reset</AtButton>
@@ -51,10 +59,4 @@ const steps = [{
   },
   { title: '完成1' },
   { title: '完成2' },
-  { title: '完成3' },
-  { title: '完成4' },
-  { title: '完成6' },
-  { title: '完成7' },
-  { title: '完成8' },
-  { title: '完成9' },
 ]

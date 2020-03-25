@@ -1,11 +1,12 @@
 import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { Block, View } from '@tarojs/components'
 import isFunction from 'lodash/isFunction'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
+import SectionBar from '@/components/common/section-bar'
 import FormItem from './form-item'
 import validator from './validator'
-import mergeConfig from './field-config'
 
+import mergeConfig from './field-config'
 import './styles.scss'
 
 // 参考 https://github.com/react-component/form
@@ -14,9 +15,11 @@ export default class GenericForm extends Taro.PureComponent {
   static options = {
     addGlobalClass: true,
   }
+
   static defaultProps = {
     layout: 'horizontal', //'vertical','float'
     fields: [],
+    groups: [],
     bordered: true,
     showRequired: true,
     onFieldChange: null,
@@ -114,30 +117,46 @@ export default class GenericForm extends Taro.PureComponent {
   }
 
   render() {
-    const { fields, layout, showRequired, bordered } = this.props
+    const { fields, groups, layout, showRequired, bordered } = this.props
     const { fieldValues, fieldErrors } = this.state
-
+    const fieldGroups = isNotEmpty(groups) ? groups : [{ id: 'base-group', fields }]
     return (
       <View className='generic-form'>
-        {fields.map((it) => {
-          const field = mergeConfig(it)
-          const { name } = field
-          const value = fieldValues[name]
-          const errors = fieldErrors[name]
+        {fieldGroups.map(groupItem => {
+            const { id, title, brief, fields: subFields } = groupItem
+            return (
+              <Block key={id}>
 
-          return (
-            <FormItem
-              key={name}
-              field={field}
-              value={value}
-              bordered={bordered}
-              errors={errors}
-              layout={layout}
-              onChange={this.handleFieldChange}
-              showRequired={showRequired}
-            />
-          )
-        })}
+                {
+                  isNotEmpty(title) && <SectionBar title={title} brief={brief} />
+                }
+
+                <View className='generic-form-fields'>
+                  {
+                    subFields.map((it) => {
+                      const field = mergeConfig(it)
+                      const { name } = field
+                      const value = fieldValues[name]
+                      const errors = fieldErrors[name]
+
+                      return (
+                        <FormItem
+                          key={name}
+                          field={field}
+                          value={value}
+                          bordered={bordered}
+                          errors={errors}
+                          layout={layout}
+                          onChange={this.handleFieldChange}
+                          showRequired={showRequired}
+                        />
+                      )
+                    })
+                  }
+                </View>
+              </Block>)
+          },
+        )}
       </View>
     )
   }

@@ -4,7 +4,27 @@
 $error-color: $color-orange;
 
 .generic-form {
-  padding: 0 30px;
+
+
+  &-fields {
+    padding: 0 20px;
+  }
+
+  .section-bar {
+    padding: 20px;
+    margin: 20px 0;
+    @include hairline-bottom(#d6e4ef);
+
+    &-preicon {
+      width: 4px;
+    }
+
+    &-title-txt {
+      color: #6a6a77;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+  }
 }
 
 .form-item {

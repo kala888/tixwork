@@ -187,10 +187,11 @@
   padding-top: 20px;
   display: flex;
   flex-direction: row;
+  color: $text-color;
 
   &-preicon {
     width: 10px;
-    min-height: 1em;
+    min-height: 0.8em;
     background-color: $primary-color;
     margin-right: 20px;
   }
@@ -207,7 +208,7 @@
 
     &-txt {
       font-size: 32px;
-      font-weight: 400;
+      font-weight: 600;
     }
 
     &-second {
