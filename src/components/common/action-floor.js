@@ -1,6 +1,5 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import concat from 'lodash/concat'
 import ActionFloorItem from './action-floor-item'
 
 import './styles.scss'
@@ -20,7 +19,7 @@ export default class ActionFloor extends Taro.PureComponent {
     if (actions.length >= 3) {
       const t1 = actions[3]
       const t2 = actions[4]
-      actionList = concat([t1, t2], actions)
+      actionList = [t1, t2].concat(actions)
     }
 
     const action1 = actionList[0]

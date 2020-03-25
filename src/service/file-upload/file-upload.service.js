@@ -1,5 +1,4 @@
 import Taro from '@tarojs/taro'
-import random from 'lodash/random'
 import NavigationService from '@/nice-router/navigation.service'
 import { formatTime } from '@/utils/index'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
@@ -27,7 +26,7 @@ function getFileName(filePath = '') {
   const startPos = filePath.lastIndexOf('.')
   const enPos = filePath.length
   const suffix = filePath.substring(startPos + 1, enPos)
-  const randomFileName = formatTime(Date.now(), 'yyyyMMddhhmmss_') + random(1000000, 9999999)
+  const randomFileName = formatTime(Date.now(), 'yyyyMMddhhmmss_') + (Math.random() * 1000000 + 100000).toFixed()
   return `${randomFileName}.${suffix}`
 }
 

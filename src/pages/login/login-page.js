@@ -5,7 +5,7 @@ import EleInput from '@/genericform/field/ele-input'
 import EleVcode from '@/genericform/field/ele-vcode'
 import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
-import ServerImage from '@/server-image'
+import ServerImage from '@/server-image/server-image'
 
 import './login.scss'
 import loginLogo from '../../assets/login-logo.png'

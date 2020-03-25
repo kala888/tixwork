@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
-import ServerImage from '@/server-image'
+import ServerImage from '@/server-image/server-image'
 import classNames from 'classnames'
 
 import './ele.scss'

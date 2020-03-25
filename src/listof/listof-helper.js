@@ -1,5 +1,3 @@
-import concat from 'lodash/concat'
-
 const defaultImage = null
 
 export function getImageUrl(item = {}) {
@@ -25,7 +23,7 @@ export function getImageList(item = {}) {
   if (imageUrl) {
     list.push({ id: `${item.id}_imageUrl`, imageUrl })
   } else {
-    list = concat(editorSuggestionImageList, imageList)
+    list = editorSuggestionImageList.concat(imageList)
   }
   return list
 }

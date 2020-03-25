@@ -1,9 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Taro from '@tarojs/taro'
-import isArray from 'lodash/isArray'
-import concat from 'lodash/concat'
 import last from 'lodash/last'
-import findIndex from 'lodash/findIndex'
 import { createAction, LoadingType, log, noop } from './nice-router-util'
 import ViewMappingService from './viewmapping.service'
 import BackendService from './request/backend.service'
@@ -119,7 +116,7 @@ export default {
           statInPage,
           arrayMerge,
         }
-        const modelActions = concat(stateAction, effectAction)
+        const modelActions = [].concat(stateAction, effectAction)
         for (let i = 0; i < modelActions.length; i++) {
           const modelAction = modelActions[i]
           if (modelAction) {
@@ -151,8 +148,8 @@ function getCurrentPage() {
 function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPage }) {
   const currentPage = getCurrentPage()
   let nextView = ViewMappingService.getView(xclass)
-  if (isArray(nextView)) {
-    const currentIndex = findIndex(nextView, { pageName: currentPage })
+  if (Array.isArray(nextView)) {
+    const currentIndex = nextView.findIndex((it) => it.pageName === currentPage)
     let nextPageIndex = currentIndex
     if (!statInPage) {
       nextPageIndex = currentIndex + 1 >= nextView.length ? 0 : currentIndex + 1

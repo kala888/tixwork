@@ -2,7 +2,7 @@ import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtIcon, AtTag } from 'taro-ui'
 import { toRpx } from '@/utils/index'
-import ServerImage from '@/server-image'
+import ServerImage from '@/server-image/server-image'
 import classNames from 'classnames'
 
 import './ele.scss'

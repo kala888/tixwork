@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
-import ServerImage from '@/server-image'
+import ServerImage from '@/server-image/server-image'
 import '../listof.scss'
 
 export default class UserTemplate extends Taro.PureComponent {

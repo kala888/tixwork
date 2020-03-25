@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import EleButton from '@/genericpage/elements/ele-button'
-import ServerImage from '@/server-image'
+import ServerImage from '@/server-image/server-image'
 import classNames from 'classnames'
 
 import './ele.scss'

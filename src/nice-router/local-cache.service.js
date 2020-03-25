@@ -1,20 +1,10 @@
-import split from 'lodash/split'
-import trim from 'lodash/trim'
-import slice from 'lodash/slice'
 import NiceRouter from './nice-router'
 import StorageTools from './storage-tools'
 import { isEmpty, isNotEmpty, log } from './nice-router-util'
 
 function getPageKeyByUri(uri = '') {
   let key = uri
-  if (key.length > 0) {
-    const ary = split(trim(uri, '/'), '/')
-    let end = ary.length
-    if (ary[0] !== 'customerEntryPointClicked' && ary[0] !== 'onChannelClicked') {
-      end = ary.length > 3 ? ary.length - 1 : 2
-    }
-    key = `${slice(ary, 0, end).join('/')}/`
-  }
+  //TODO 小程序上，应该有点问题，暂时没有测试
   key = `${StorageTools.PageCachePrefix}${key}`
   return key
 }

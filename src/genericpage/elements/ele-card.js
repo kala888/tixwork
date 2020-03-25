@@ -3,7 +3,7 @@ import { Block, View } from '@tarojs/components'
 import { formatTime } from '@/utils/index'
 import { AtIcon } from 'taro-ui'
 
-import ServerImage from '@/server-image'
+import ServerImage from '@/server-image/server-image'
 import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import classNames from 'classnames'

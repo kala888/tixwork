@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { View } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import EleBreakLine from '@/genericpage/elements/ele-break-line'
-import ServerImage from '@/server-image'
+import ServerImage from '@/server-image/server-image'
 import './ele.scss'
 
 export default class EleStoreLocationBig extends Taro.PureComponent {

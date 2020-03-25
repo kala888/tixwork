@@ -1,7 +1,6 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import isFunction from 'lodash/isFunction'
-import find from 'lodash/find'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import FormItem from './form-item'
 import validator from './validator'
@@ -104,7 +103,7 @@ export default class GenericForm extends Taro.PureComponent {
   }
 
   _validateField = (name, value) => {
-    const field = find(this.props.fields, { name })
+    const field = this.props.fields.find((it) => it.name === name)
     if (!field) {
       return Promise.resolve()
     }

@@ -1,18 +1,16 @@
 /* eslint-disable consistent-return */
-import isArray from 'lodash/isArray'
 import mergeWith from 'lodash/mergeWith'
-import concat from 'lodash/concat'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 function replaceArray(objValue, srcValue) {
-  if (isArray(objValue)) {
+  if (Array.isArray(objValue)) {
     return srcValue
   }
 }
 
 function concatArray(objValue, srcValue) {
-  if (isArray(objValue)) {
-    return concat(objValue, srcValue)
+  if (Array.isArray(objValue)) {
+    return objValue.concat(srcValue)
   }
 }
 
