@@ -60,7 +60,6 @@
     "qr.js": "^0.0.0",
     "qs": "^6.7.0",
     "redux": "^4.0.5",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.11.1",
     "taro-ui": "^2.3.1",

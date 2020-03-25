@@ -3,10 +3,8 @@ import cloneDeep from 'lodash/cloneDeep'
 import keys from 'lodash/keys'
 import unset from 'lodash/unset'
 import forIn from 'lodash/forIn'
+import isNil from 'lodash/isNil'
 import { isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
-import isNull from 'lodash/isNull'
-import isUndefined from 'lodash/isUndefined'
-
 import HttpRequest from './http-request'
 
 const EMPTY_PARAMETER_TOKEN = '+'
@@ -31,7 +29,7 @@ const replaceUrlPlaceholder = (pUri, params) => {
 function removeEmptyValues(params = {}) {
   const result = {}
   forIn(params, (value, key) => {
-    if (!isUndefined(value) && !isNull(value)) {
+    if (!isNil(value)) {
       result[key] = value
     }
   })

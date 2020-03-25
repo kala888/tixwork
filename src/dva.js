@@ -1,4 +1,4 @@
-import { createLogger } from 'redux-logger'
+// import { createLogger } from 'redux-logger'
 import { create } from 'dva-core'
 // import createLoading from 'dva-loading'
 
@@ -10,9 +10,9 @@ let registered
 function createApp(opt) {
   // redux日志
   opt.onAction = []
-  if (opt.enableLog) {
-    opt.onAction.push(createLogger())
-  }
+  // if (opt.enableLog) {
+  //   opt.onAction.push(createLogger())
+  // }
   app = create(opt)
   // app.use(createLoading({}))
 

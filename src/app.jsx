@@ -66,19 +66,20 @@ class App extends Component {
       'pages/biz/generic-test-page',
       'pages/me/me-page',
 
-      'pages/biz/hello-daas-page',
-
       // base
       'nice-router/h5-page',
       'nice-router/network-exception-page',
       'genericpage/generic-page',
       'genericpage/generic-page2',
-      'genericpage/object-picker-page',
+
+      'genericform/object-picker-page',
+
       'listof/listof-page',
       'listof/listof-page2',
       'listof/listof-page3',
       'listof/listof-page4',
       // biz
+      'pages/biz/hello-daas-page',
     ],
     //
     // permission: {

@@ -2,7 +2,6 @@ import Taro from '@tarojs/taro'
 import parse from 'url-parse'
 import qs from 'qs'
 import isObject from 'lodash/isObject'
-import startsWith from 'lodash/startsWith'
 import localCacheService from './local-cache.service'
 import { isNotEmpty, LoadingType, log, toTaroUrl } from './nice-router-util'
 
@@ -10,7 +9,7 @@ const PAGE_LEVEL_LIMIT = 10
 
 let _container = {} // eslint-disable-line
 
-const isH5Path = (uri) => startsWith(uri, 'https://') || startsWith(uri, 'http://')
+const isH5Path = (uri = '') => uri.startsWith('https://') || uri.startsWith('http://')
 
 const getActionUri = (action) => {
   let result = action
