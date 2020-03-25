@@ -26,7 +26,7 @@ export default class FormPage extends Taro.PureComponent {
   render() {
     return (
       <View className='form'>
-        <GenericForm  ref={(ref) => (this.form = ref)} fields={kids} />
+        <GenericForm ref={(ref) => (this.form = ref)} fields={kids} />
 
         <View className='footer-button-list'>
           <AtButton onClick={this.handleReset}>reset</AtButton>

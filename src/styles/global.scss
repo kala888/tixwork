@@ -29,37 +29,6 @@
   width: 20px;
 }
 
-.flex-column {
-  @extend %flex-column;
-}
-
-.flex-row {
-  @extend %flex-row;
-}
-
-.flex-center {
-  @extend %flex-center;
-}
-
-.flex-row-center {
-  @extend .flex-center;
-  flex-direction: row;
-}
-
-.flex-column-center {
-  @extend .flex-center;
-  flex-direction: column;
-}
-
-.flex-full {
-  width: 100%;
-  height: 100%;
-}
-
-.ellipsis {
-  @include text-ellipsis;
-}
-
 // text
 $text-sizes: 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42;
 @each $size in $text-sizes {
