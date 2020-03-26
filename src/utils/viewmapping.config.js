@@ -10,6 +10,16 @@ const ViewmappingConfig = {
       stateAction: 'genericpage2/save',
     },
   ],
+  'com.terapico.caf.viewcomponent.GenericFormPage': [
+    {
+      pageName: '/genericform/genericform-page',
+      stateAction: 'genericform/save',
+    },
+    {
+      pageName: '/genericform/genericform-page2',
+      stateAction: 'genericform2/save',
+    },
+  ],
 
   'com.terapico.appview.ListOfPage': [
     {

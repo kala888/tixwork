@@ -11,7 +11,7 @@ import './styles.scss'
 
 // 参考 https://github.com/react-component/form
 
-export default class GenericForm extends Taro.PureComponent {
+export default class EleForm extends Taro.PureComponent {
   static options = {
     addGlobalClass: true,
   }
@@ -72,7 +72,7 @@ export default class GenericForm extends Taro.PureComponent {
         if (isFunction(onFieldChange)) {
           onFieldChange(name, this.state.fieldValues)
         }
-      },
+      }
     )
   }
 
@@ -121,42 +121,37 @@ export default class GenericForm extends Taro.PureComponent {
     const { fieldValues, fieldErrors } = this.state
     const fieldGroups = isNotEmpty(groups) ? groups : [{ id: 'base-group', fields }]
     return (
-      <View className='generic-form'>
-        {fieldGroups.map(groupItem => {
-            const { id, title, brief, fields: subFields } = groupItem
-            return (
-              <Block key={id}>
+      <View className='ele-form'>
+        {fieldGroups.map((groupItem) => {
+          const { name: groupId, title, brief, fields: subFields } = groupItem
+          return (
+            <Block key={groupId}>
+              {isNotEmpty(title) && <SectionBar title={title} brief={brief} />}
 
-                {
-                  isNotEmpty(title) && <SectionBar title={title} brief={brief} />
-                }
+              <View className='ele-form-fields'>
+                {subFields.map((it) => {
+                  const field = mergeConfig(it)
+                  const { name } = field
+                  const value = fieldValues[name]
+                  const errors = fieldErrors[name]
 
-                <View className='generic-form-fields'>
-                  {
-                    subFields.map((it) => {
-                      const field = mergeConfig(it)
-                      const { name } = field
-                      const value = fieldValues[name]
-                      const errors = fieldErrors[name]
-
-                      return (
-                        <FormItem
-                          key={name}
-                          field={field}
-                          value={value}
-                          bordered={bordered}
-                          errors={errors}
-                          layout={layout}
-                          onChange={this.handleFieldChange}
-                          showRequired={showRequired}
-                        />
-                      )
-                    })
-                  }
-                </View>
-              </Block>)
-          },
-        )}
+                  return (
+                    <FormItem
+                      key={name}
+                      field={field}
+                      value={value}
+                      bordered={bordered}
+                      errors={errors}
+                      layout={layout}
+                      onChange={this.handleFieldChange}
+                      showRequired={showRequired}
+                    />
+                  )
+                })}
+              </View>
+            </Block>
+          )
+        })}
       </View>
     )
   }

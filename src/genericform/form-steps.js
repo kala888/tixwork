@@ -17,7 +17,7 @@ export default class FormSteps extends Taro.PureComponent {
       {},
       {
         navigationOptions: { method: 'redirectTo' },
-      },
+      }
     )
   }
 

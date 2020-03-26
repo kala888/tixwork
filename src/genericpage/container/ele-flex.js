@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
-import GenericForm from '@/genericform/form/generic-form'
+import EleForm from '@/genericform/form/ele-form'
 
 import EleFab from '../elements/ele-fab'
 import EleText from '../elements/ele-text'
@@ -66,7 +66,7 @@ export default class EleFlex extends Taro.PureComponent {
           if (it.type === 'more-actions') return <EleMoreActions key={id} {...it} />
           if (it.type === 'listof') return <EleListof key={id} {...it} />
 
-          if (it.type === 'form') return <GenericForm key={id} {...it} fields={it.kids} />
+          if (it.type === 'form') return <EleForm key={id} {...it} fields={it.kids} />
 
           if (it.type === 'flex')
             return (
