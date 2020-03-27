@@ -124,7 +124,7 @@ export default {
           label: '性别',
           type: 'boolean',
 
-          value: false,
+          value: true,
 
           candidateValues: [
             {

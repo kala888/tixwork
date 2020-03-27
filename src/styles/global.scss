@@ -3,13 +3,14 @@
 // 修改switch样式
 .wx-switch-input {
   width: 82px !important;
-  height: 15px !important;
+  height: 20px !important;
+  background-color: $primary-color !important;
 }
 
 // false样式
 .wx-switch-input::before {
   width: 82px !important;
-  height: 15px !important;
+  height: 20px !important;
   background: $text-color-lighter !important;
 }
 
@@ -17,7 +18,7 @@
 .wx-switch-input::after {
   width: 40px !important;
   height: 40px !important;
-  margin-top: -15px !important;
+  margin-top: -10px !important;
   background-color: $primary-color !important;
 }
 

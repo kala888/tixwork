@@ -139,6 +139,7 @@ export default class EleForm extends Taro.PureComponent {
                     <FormItem
                       key={name}
                       field={field}
+                      // field={{ ...field, disabled: true }}
                       value={value}
                       bordered={bordered}
                       errors={errors}

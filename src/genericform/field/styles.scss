@@ -1,10 +1,22 @@
 @import 'src/styles/theme';
 
+.ele-switch {
+  &-disabled {
+    .at-switch__title {
+      opacity: 0.3;
+    }
+  }
+}
+
 .action-field {
   @extend %flex-row;
 
   &-content {
     @extend %flex-1;
+  }
+
+  &-content.disabled {
+    opacity: 0.3;
   }
 
   .at-action-sheet__item {
@@ -52,6 +64,7 @@
 
 .action-field-picker {
   margin-right: -20px;
+
   &-icon {
     color: $text-color-lighter;
   }
