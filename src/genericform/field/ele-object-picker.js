@@ -27,10 +27,10 @@ export default class ObjectPicker extends Taro.PureComponent {
   }
 
   render() {
-    const { value, placeholder } = this.props
+    const { value, placeholder, disabled } = this.props
     let displayName = isObject(value) ? value.title : value
     return (
-      <ActionField onClick={this.goObjectPickerPage} value={displayName} placeholder={placeholder}>
+      <ActionField onClick={this.goObjectPickerPage} disabled={disabled} value={displayName} placeholder={placeholder}>
         <View className='action-field-picker' onClick={this.goObjectPickerPage}>
           <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
         </View>

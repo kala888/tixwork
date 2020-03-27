@@ -16,6 +16,7 @@ export default class ItemWrapper extends Taro.PureComponent {
     bordered: false,
     value: null,
     showTail: true,
+    disabled: false,
   }
 
   state = {
@@ -25,10 +26,11 @@ export default class ItemWrapper extends Taro.PureComponent {
   showError = (visible) => this.setState({ visible })
 
   render() {
-    const { bordered, clear, errors, value, onClear, showTail } = this.props
+    const { bordered, clear, errors, value, onClear, showTail, disabled } = this.props
     const hasError = errors.length > 0
     const hasValue = isNotEmpty(value)
-    const showClearAction = !hasError && clear && hasValue
+    // 没有disabled，没有错误，有值，显示清理btn，就展示
+    const showClearAction = !disabled && !hasError && clear && hasValue
 
     const rootClass = classNames('item-wrapper', { 'item-wrapper-bordered': bordered })
 

@@ -48,7 +48,7 @@ export default class ElePopupSelect extends Taro.PureComponent {
   }
 
   render() {
-    const { placeholder, label, value, candidateValues, multiple } = this.props
+    const { placeholder, label, value, candidateValues, multiple, disabled } = this.props
     const { visible } = this.state
 
     const currentValue = isEmpty(value) ? (multiple ? [] : '') : value
@@ -66,7 +66,7 @@ export default class ElePopupSelect extends Taro.PureComponent {
     const cancelText = multiple ? '确定' : '取消'
 
     return (
-      <ActionField onClick={this.show} value={displayValue} placeholder={placeholder}>
+      <ActionField onClick={this.show} disabled={disabled} value={displayValue} placeholder={placeholder}>
         <View className='action-field-picker' onClick={this.handleToggle}>
           {visible ? (
             <AtIcon className='action-field-picker-icon' value='chevron-down' size={20} />
@@ -74,6 +74,7 @@ export default class ElePopupSelect extends Taro.PureComponent {
             <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
           )}
         </View>
+
         <AtActionSheet title={label} onClose={this.close} isOpened={visible} cancelText={cancelText}>
           <AtActionSheetItem>
             {multiple ? (

@@ -40,7 +40,7 @@ export default class FormItem extends Taro.PureComponent {
 
   render() {
     const { field, value, errors, showRequired, bordered } = this.props
-    const { label, rules, clear, tips, showTail } = field
+    const { label, rules, clear, tips, showTail, disabled } = field
 
     const layout = field.layout || this.props.layout || ''
     const hasError = isNotEmpty(errors)
@@ -56,6 +56,7 @@ export default class FormItem extends Taro.PureComponent {
         errors={errors}
         bordered={bordered}
         showTail={showTail}
+        disabled={disabled}
         onClear={this.handleClear}
       >
         <View className={rootClass}>

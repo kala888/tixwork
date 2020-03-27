@@ -72,7 +72,16 @@ export default class EleImagePicker extends Taro.PureComponent {
   }
 
   handleFileChange = (files, operationType) => {
-    const { maxLength } = this.props
+    const { maxLength, disabled } = this.props
+    if (disabled) {
+      Taro.showModal({
+        title: '提示',
+        content: `该字段不可编辑`,
+        showCancel: false,
+      })
+      return
+    }
+
     if (operationType === 'remove') {
       this.setState(
         {

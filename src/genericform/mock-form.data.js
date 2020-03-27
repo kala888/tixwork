@@ -24,6 +24,7 @@ export default {
           label: '手机号',
           type: 'phone',
           placeholder: '输入手机号',
+          disabled: true,
           rules: [
             {
               required: true,

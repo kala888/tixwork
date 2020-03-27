@@ -12,6 +12,7 @@ export default class EleCalendar extends Taro.PureComponent {
     mode: 'date',
     // mode: 'date-time',
     value: '',
+    disabled: false,
   }
 
   state = {
@@ -70,11 +71,11 @@ export default class EleCalendar extends Taro.PureComponent {
 
   render() {
     const { isCalendarVisible, visible } = this.state
-    const { placeholder, label, value, mode } = this.props
+    const { placeholder, label, value, mode, disabled } = this.props
     const { date, time } = this.getDateTime(value)
 
     return (
-      <ActionField onClick={this.show} value={value} placeholder={placeholder}>
+      <ActionField onClick={this.show} disabled={disabled} value={value} placeholder={placeholder}>
         <AtActionSheet title={label} onClose={this.close} isOpened={visible} cancelText='取消'>
           <AtActionSheetItem>
             {mode === 'date' && <AtCalendar isVertical currentDate={date} onSelectDate={this.handleDateSelected} />}
