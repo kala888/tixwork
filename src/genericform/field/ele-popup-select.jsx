@@ -48,27 +48,33 @@ export default class ElePopupSelect extends Taro.PureComponent {
     }
   }
 
-  getCurrentValue = () => {
-    const { value, multiple } = this.props
+  getValue = () => {
+    const { value, multiple, candidateValues } = this.props
+    let currentValue = value
+
     if (isEmpty(value)) {
-      return multiple ? [] : ''
+      currentValue = multiple ? [] : ''
     }
+
     if (multiple && isString(value)) {
-      return [value]
+      currentValue = [value]
     }
-    return value
+
+    const displayValue = candidateValues
+      .filter((it) => (multiple ? currentValue.includes(it.value) : currentValue === it.value))
+      .map((it) => it.title)
+      .join('、')
+
+    return {
+      currentValue,
+      displayValue,
+    }
   }
 
   render() {
     const { placeholder, label, candidateValues, multiple, disabled } = this.props
     const { visible } = this.state
-
-    const currentValue = this.getCurrentValue()
-
-    const displayValue = candidateValues
-      .filter((it) => currentValue.includes(it.value))
-      .map((it) => it.title)
-      .join('、')
+    const { currentValue, displayValue } = this.getValue()
 
     const options = candidateValues.map((it) => ({
       ...it,
