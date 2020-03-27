@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 import EleForm from '@/genericform/form/ele-form'
 import { AtButton } from 'taro-ui'
 import { connect } from '@tarojs/redux'
+import isNil from 'lodash/isNil'
 
 import { isEmpty } from '@/nice-router/nice-router-util'
 import GlobalToast from '@/nice-router/global-toast'
@@ -65,6 +66,21 @@ class GenericformPage extends Taro.PureComponent {
     console.log('form-errors：', errors)
   }
 
+  getDefaultValues = (groupList = []) => {
+    const defaultValues = {}
+
+    for (const group of groupList) {
+      const { fields = [] } = group
+      for (const field of fields) {
+        const { name, value } = field
+        if (!isNil(value)) {
+          defaultValues[name] = value
+        }
+      }
+    }
+    return defaultValues
+  }
+
   render() {
     const { groupList = [], stepList = [], actionList = [] } = mockData
     // const { groupList = [], stepList = [], actionList = [] } = this.props
@@ -73,12 +89,15 @@ class GenericformPage extends Taro.PureComponent {
       type: it.code === 'next' || it.code === 'submit' ? 'primary' : null,
       ...it,
     }))
+    const initialValues = this.getDefaultValues(groupList)
+    console.log('form initial values', initialValues)
 
     const groups = groupList.filter((it) => !it.hidden)
+
     return (
       <View className='generic-form-page'>
         <FormSteps steps={stepList} />
-        <EleForm ref={(ref) => (this.form = ref)} groups={groups} />
+        <EleForm ref={(ref) => (this.form = ref)} groups={groups} initialValues={initialValues} />
 
         <View className='footer-button-list'>
           {footerActionList.map((it) => {

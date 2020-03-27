@@ -25,6 +25,7 @@ export default {
           type: 'phone',
           placeholder: '输入手机号',
           disabled: true,
+          value: 13880964614,
           rules: [
             {
               required: true,
@@ -40,6 +41,7 @@ export default {
           type: 'multi-select',
           placeholder: '请选择你的最爱',
           tips: '不能填写男女关系',
+          value: ['pia-pia'],
           candidateValues: [
             { title: '吃饭', value: 'eat' },
             { title: '睡觉', value: 'sleep' },
@@ -59,6 +61,7 @@ export default {
           type: 'multi-select',
           placeholder: '请选择你的最爱22222',
           tips: '不能填写男女关系222222',
+          value: ['sing-song3'],
           candidateValues: [
             { title: '吃饭2', value: 'eat3' },
             { title: '睡觉3', value: 'sleep2' },
@@ -78,7 +81,7 @@ export default {
           type: 'text',
           placeholder: '请输入您的真实姓名',
           tips: '这里需要填写你的真实姓名哦',
-
+          value: '张三',
           rules: [
             {
               required: true,
@@ -98,6 +101,7 @@ export default {
           type: 'integer',
           placeholder: '请输入您的年龄',
 
+          value: 19,
           rules: [
             {
               required: true,
@@ -119,6 +123,8 @@ export default {
           name: '4-gender',
           label: '性别',
           type: 'boolean',
+
+          value: false,
 
           candidateValues: [
             {
@@ -144,7 +150,7 @@ export default {
           label: '身高（cm）',
           type: 'double',
           placeholder: '输入身高',
-
+          value: 182.0,
           rules: [
             {
               required: true,
@@ -160,6 +166,7 @@ export default {
           label: '存款',
           type: 'money',
           placeholder: '输入存款余额',
+          value: 2000,
           rules: [
             {
               required: true,
@@ -172,6 +179,7 @@ export default {
           label: '开始日期',
 
           type: 'date',
+          value: 1585278389758,
           placeholder: '应该填写开始日期',
           rules: [
             {
@@ -184,6 +192,7 @@ export default {
           name: '8-date-time',
           label: '约会时间',
           type: 'datetime',
+          value: 1585278389758,
           placeholder: '请选择约会时间',
           rules: [
             {
@@ -198,6 +207,7 @@ export default {
           type: 'image',
           placeholder: '这里是你的头像',
           maxLength: 3,
+          value: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
         },
         {
           name: '10-photos',
@@ -219,6 +229,7 @@ export default {
 
           type: 'single-select',
           placeholder: '请选择职位',
+          value: 'role2',
           candidateValues: [
             { title: '铲墙工', value: 'role1' },
             { title: '木工', value: 'role2' },
@@ -231,7 +242,7 @@ export default {
 
           type: 'longtext',
           placeholder: '请详细描述一下你所有的学习经历',
-
+          value: '学习雷锋好榜样，忠于革命主与党，爱憎分明不忘本，立场见底斗志强',
           rules: [
             {
               required: true,

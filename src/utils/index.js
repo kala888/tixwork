@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import isNumber from 'lodash/isNumber'
 import forEach from 'lodash/forEach'
+import isNaN from 'lodash/isNaN'
 import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty, isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
 
@@ -57,10 +58,17 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
   return tempObj
 }
 
+export function transToDate(value) {
+  const dateValue = new Date(value)
+  const ifDateType = dateValue instanceof Date && !isNaN(dateValue)
+  return ifDateType ? dateValue : null
+}
+
 function dateFormat(time, fmt) {
   const values = {
     'M+': time.getMonth() + 1, //月份
     'd+': time.getDate(), //日
+    'D+': time.getDate(), //日
     'H+': time.getHours(), //小时
     'h+': time.getHours() % 12, //小时
     'm+': time.getMinutes(), //分
@@ -68,7 +76,7 @@ function dateFormat(time, fmt) {
     'q+': Math.floor((time.getMonth() + 3) / 3), //季度
     S: time.getMilliseconds(), //毫秒
   }
-  if (/(y+)/.test(fmt)) {
+  if (/([y,Y]+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, (time.getFullYear() + '').substr(4 - RegExp.$1.length))
   }
   for (const key in values) {

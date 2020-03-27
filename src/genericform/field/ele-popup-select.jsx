@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtIcon, AtRadio } from 'taro-ui'
 import { View } from '@tarojs/components'
+import isString from 'lodash/isString'
 import { isEmpty } from '@/nice-router/nice-router-util'
 import ActionField from './action-field'
 
@@ -47,11 +48,22 @@ export default class ElePopupSelect extends Taro.PureComponent {
     }
   }
 
+  getCurrentValue = () => {
+    const { value, multiple } = this.props
+    if (isEmpty(value)) {
+      return multiple ? [] : ''
+    }
+    if (multiple && isString(value)) {
+      return [value]
+    }
+    return value
+  }
+
   render() {
-    const { placeholder, label, value, candidateValues, multiple, disabled } = this.props
+    const { placeholder, label, candidateValues, multiple, disabled } = this.props
     const { visible } = this.state
 
-    const currentValue = isEmpty(value) ? (multiple ? [] : '') : value
+    const currentValue = this.getCurrentValue()
 
     const displayValue = candidateValues
       .filter((it) => currentValue.includes(it.value))
