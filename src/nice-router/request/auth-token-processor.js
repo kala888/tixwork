@@ -1,10 +1,10 @@
 import AuthTools from '../auth-tools'
 import { log } from '../nice-router-util'
 
-const processAuth = async (chain) => {
+const AuthTokenProcessor = async (chain) => {
   const token = await AuthTools.getTokenAsync()
   const { requestParams } = chain
-  const { options: { headers = {} } = {} } = requestParams
+  const { headers = {} } = requestParams
 
   log('set Authorization token to Request Header:', token)
   return chain.proceed({
@@ -16,4 +16,4 @@ const processAuth = async (chain) => {
   })
 }
 
-export default processAuth
+export default AuthTokenProcessor

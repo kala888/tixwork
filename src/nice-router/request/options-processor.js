@@ -33,7 +33,7 @@ function getUrlAndParam({ uri, params }) {
   }
 }
 
-const processOptions = (chain) => {
+const OptionsProcessor = (chain) => {
   const { requestParams } = chain
   const { method = 'GET' } = requestParams
   const { url, params } = getUrlAndParam(requestParams)
@@ -47,10 +47,10 @@ const processOptions = (chain) => {
     ...requestParams,
     url,
     method: method.toLocaleLowerCase(),
-    header: requestHeader,
+    headers: requestHeader,
     data: params,
   }
   return chain.proceed(nextParams)
 }
 
-export default processOptions
+export default OptionsProcessor

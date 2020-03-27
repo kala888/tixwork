@@ -46,7 +46,7 @@ function showError({ xclass, data = {} }) {
   }
 }
 
-const processLoadingAndLogs = (chain) => {
+const LoadingAndLogsProcessor = (chain) => {
   const { requestParams } = chain
   const { loading } = requestParams
   showLoading(loading)
@@ -69,4 +69,4 @@ const processLoadingAndLogs = (chain) => {
   })
 }
 
-export default processLoadingAndLogs
+export default LoadingAndLogsProcessor

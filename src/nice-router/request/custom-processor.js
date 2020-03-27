@@ -1,7 +1,7 @@
 import keys from 'lodash/keys'
 import isObjectLike from 'lodash/isObjectLike'
 
-const processCustom = async (chain) => {
+const CustomProcessor = async (chain) => {
   const { headers: requestHeaders, ...others } = chain.requestParams
 
   // 注意request 中使用 header，在应用中使用的是headers，
@@ -35,4 +35,4 @@ const processCustom = async (chain) => {
     })
 }
 
-export default processCustom
+export default CustomProcessor
