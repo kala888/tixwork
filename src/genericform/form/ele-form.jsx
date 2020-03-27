@@ -37,6 +37,15 @@ export default class EleForm extends Taro.PureComponent {
     this.setFieldsValue(initialValues)
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { formKey: currentFormKey } = this.props
+    const { formKey: nextFormKey, initialValues } = nextProps
+    if (currentFormKey !== nextFormKey) {
+      this.resetFields()
+      this.setFieldsValue(initialValues)
+    }
+  }
+
   // 设置value到state
   setFieldsValue = (changedValues) => {
     this.setState((preState) => ({

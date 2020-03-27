@@ -1,15 +1,19 @@
 import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty } from '@/nice-router/nice-router-util'
 import { AtSteps } from 'taro-ui'
+import { View } from '@tarojs/components'
 
 import './styles.scss'
 
 export default class FormSteps extends Taro.PureComponent {
+  static options = {
+    addGlobalClass: true,
+  }
   static defaultProps = {
     steps: [],
   }
+
   handleChange = (current) => {
     const { steps } = this.props
     NavigationService.view(

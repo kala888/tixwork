@@ -26,8 +26,13 @@
   margin-left: 0;
 }
 
-:global .content-inner__img {
+.content-inner__img {
   width: 20px;
+}
+
+.at-steps__title {
+  font-size: 28px;
+  color: $text-color;
 }
 
 // text

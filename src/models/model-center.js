@@ -21,8 +21,6 @@ const modelListOOTB = [
   'H5',
 
   'genericform',
-  'genericform2',
-  'genericform3',
 
   'genericpage',
   'genericpage2',

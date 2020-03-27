@@ -24,14 +24,17 @@ export default class EleImagePicker extends Taro.PureComponent {
   }
 
   componentDidMount() {
-    const { defaultValue = [] } = this.props
+    const { value = [] } = this.props
+    const files = value.filter((it) => it.imageUrl).map((it) => ({ url: it.imageUrl }))
+
     this.setState({
-      files: defaultValue.map((it) => ({ url: it.imageUrl })),
+      files,
     })
   }
 
   saveImageToForm = () => {
-    this.props.onChange(this.state.files)
+    const images = this.state.files.map((it) => ({ imageUrl: it.url }))
+    this.props.onChange(images)
   }
 
   uploadNewFiles = (files = []) => {
@@ -39,36 +42,41 @@ export default class EleImagePicker extends Taro.PureComponent {
       const { url = '' } = it
       return url.startsWith('http://tmp') || url.startsWith('wxfile://tmp')
     })
+
     const resetProgress = () => {
       this.setState({ progress: 0 })
     }
 
-    uploadFiles({
+    const onProgress = ({ progress }) => {
+      this.setState({ progress })
+    }
+
+    const onSuccess = (result) => {
+      const { remoteFile, sourceFile } = result
+      this.setState(
+        (preState) => {
+          const newFiles = preState.files.map((it) => {
+            if (it.url === sourceFile) {
+              return {
+                url: remoteFile,
+              }
+            }
+            return it
+          })
+          return { files: newFiles }
+        },
+        () => this.saveImageToForm()
+      )
+    }
+
+    const uploadFileOption = {
       todoList,
-      onProgress: ({ progress }) => {
-        this.setState({ progress })
-      },
+      onProgress,
       onStart: resetProgress,
       onComplete: resetProgress,
-      onSuccess: (result) => {
-        const { remoteFile, sourceFile } = result
-
-        this.setState(
-          (preState) => {
-            const newFiles = preState.files.map((it) => {
-              if (it.url === sourceFile) {
-                return {
-                  url: remoteFile,
-                }
-              }
-              return it
-            })
-            return { files: newFiles }
-          },
-          () => this.saveImageToForm()
-        )
-      },
-    })
+      onSuccess,
+    }
+    uploadFiles(uploadFileOption)
   }
 
   handleFileChange = (files, operationType) => {
