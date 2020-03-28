@@ -11,7 +11,7 @@ $error-color: $color-orange;
   .section-bar {
     padding: 20px;
     margin: 20px 0;
-    @include hairline-bottom(#d6e4ef);
+    @include hairline-bottom($under-line-color);
 
     &-preicon {
       width: 4px;
@@ -80,7 +80,7 @@ $error-color: $color-orange;
 }
 
 .item-wrapper-bordered {
-  @include hairline-bottom(#d6e4ef);
+  @include hairline-bottom($under-line-color);
 }
 
 .item-label {
