@@ -1,4 +1,44 @@
+const treeRoot = {
+  title: '娱乐项目',
+  value: '1',
+  nodes: [
+    {
+      title: '麻将',
+      value: '1-1',
+    },
+    {
+      title: '火锅串串',
+      value: '1-2',
+      nodes: [
+        {
+          title: '魏蜀吴火锅',
+          value: '1-2-1',
+          nodes: [
+            {
+              title: '鸭血',
+              value: '1-2-1-1',
+              brief: '缺货',
+              disabled: true,
+            },
+            {
+              title: '猪脑',
+              value: '1-2-1-2',
+            },
+          ],
+        },
+        {
+          title: '马路边边',
+          value: '1-2-2',
+          brief: '暂停营业',
+          disabled: true,
+        },
+      ],
+    },
+  ],
+}
+
 export default {
+  id: 'test-form',
   stepList: [
     {
       title: '选货',
@@ -11,14 +51,29 @@ export default {
     { title: '走人' },
   ],
   actionList: [
-    { code: 'pre', title: '上一步' },
-    { code: 'next', title: '下一步' },
+    { code: 'preStep', title: '上一步' },
+    { code: 'nextStep', title: '下一步' },
   ],
   groupList: [
     {
       name: 'fist-group',
       title: '第一组',
       fields: [
+        {
+          name: '-1-team-building',
+          label: '团建',
+          type: 'tree-picker',
+          placeholder: '团建项目',
+          value: '1-1',
+          title: 'AAA',
+          root: treeRoot,
+          rules: [
+            {
+              required: true,
+              message: '团建必须要选择的哦',
+            },
+          ],
+        },
         {
           name: '0-phone',
           label: '手机号',

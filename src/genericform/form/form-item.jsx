@@ -20,7 +20,7 @@ export default class FormItem extends Taro.PureComponent {
   }
 
   handleChange = (value, event) => {
-    console.log('event', event)
+    console.log('item event maybe you needed', event)
     const { field, onChange } = this.props
     const { name } = field
     let fieldValue = value

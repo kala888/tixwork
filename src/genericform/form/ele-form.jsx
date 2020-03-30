@@ -23,7 +23,7 @@ export default class EleForm extends Taro.PureComponent {
     bordered: true,
     showRequired: true,
     onFieldChange: null,
-    initialValues: {},
+    defaultValues: {},
   }
 
   //以name为key
@@ -33,21 +33,24 @@ export default class EleForm extends Taro.PureComponent {
   }
 
   componentDidMount() {
-    const { initialValues } = this.props
-    this.setFieldsValue(initialValues)
+    const { defaultValues } = this.props
+    console.log('initial form', this.props)
+    this.setFieldsValue(defaultValues)
   }
 
   componentWillReceiveProps(nextProps) {
     const { formKey: currentFormKey } = this.props
-    const { formKey: nextFormKey, initialValues } = nextProps
+    const { formKey: nextFormKey, defaultValues } = nextProps
+    console.log('form update，form key changed?', currentFormKey, nextFormKey)
     if (currentFormKey !== nextFormKey) {
       this.resetFields()
-      this.setFieldsValue(initialValues)
+      this.setFieldsValue(defaultValues)
     }
   }
 
   // 设置value到state
   setFieldsValue = (changedValues) => {
+    console.log('set field values', changedValues)
     this.setState((preState) => ({
       fieldValues: {
         ...preState.fieldValues,

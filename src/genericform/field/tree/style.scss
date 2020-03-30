@@ -1,7 +1,9 @@
 @import '~taro-ui/dist/style/mixins/libs/hairline.scss';
 @import 'src/styles/theme';
-
 .ele-tree {
+  margin-top: 0;
+}
+.tree {
   padding-left: 30px;
 
   &-item {
@@ -21,6 +23,7 @@
     &-title {
       font-size: 32px;
       padding: 0 24px;
+      align-self: flex-end;
     }
 
     &-brief {

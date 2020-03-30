@@ -8,6 +8,7 @@ import ElePopupSelect from './ele-popup-select'
 import EleCalendar from './ele-calendar'
 import EleImagePicker from './ele-image-picker'
 import ObjectPicker from './ele-object-picker'
+import EleTree from './ele-tree'
 import './styles.scss'
 
 // TODO 实现树型选择器
@@ -63,7 +64,7 @@ export default class FlexField extends Taro.PureComponent {
 
     if (type === 'object-picker') return <ObjectPicker {...field} />
 
-    if (type === 'tree-picker') return <ObjectPicker {...field} />
+    if (type === 'tree-picker') return <EleTree {...field} />
 
     // phone
     return <AtInput border={false} {...field} />

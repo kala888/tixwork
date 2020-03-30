@@ -5,11 +5,11 @@ import classNames from 'classnames'
 import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import './style.scss'
 
-class EleTree extends Taro.PureComponent {
+class Tree extends Taro.PureComponent {
   config = {
     component: true,
     usingComponents: {
-      'sub-tree': './ele-tree',
+      'sub-tree': './tree',
     },
   }
 
@@ -41,32 +41,31 @@ class EleTree extends Taro.PureComponent {
   render() {
     const { visible } = this.state
 
-    const { selectedValue, onChange, expandAll } = this.props
-    const { value, nodes, disabled, name, brief } = this.props
+    const { selected, onChange, expandAll } = this.props
+    const { value, nodes, disabled, title, brief } = this.props
 
     const isTrunk = isNotEmpty(nodes)
-    const selected = selectedValue === value
-    console.log('1123123', selectedValue, value, selectedValue === value)
+    const isSelected = selected === value
 
     const actionIcon = visible ? 'chevron-down' : 'chevron-right'
 
-    const subTreeClass = classNames('ele-tree-subtree', { hidden: !visible })
-    const treeItemClass = classNames('ele-tree-item', { selected, disabled })
+    const subTreeClass = classNames('tree-subtree', { hidden: !visible })
+    const treeItemClass = classNames('tree-item', { selected: isSelected, disabled })
 
     return (
-      <View className='ele-tree'>
+      <View className='tree'>
         <View className={treeItemClass} onClick={this.handleItemSelect}>
           {isTrunk && (
-            <View className='ele-tree-item-action-icon'>
+            <View className='tree-item-action-icon'>
               <AtIcon value={actionIcon} size='18' />
             </View>
           )}
 
-          <Text className='ele-tree-item-title'>{name}</Text>
-          <Text className='ele-tree-item-brief'>{brief}</Text>
+          <Text className='tree-item-title'>{title}</Text>
+          <Text className='tree-item-brief'>{brief}</Text>
 
-          {selected && (
-            <View className='ele-tree-item-selected-icon'>
+          {isSelected && (
+            <View className='tree-item-selected-icon'>
               <AtIcon value='check' size='18' />
             </View>
           )}
@@ -77,7 +76,7 @@ class EleTree extends Taro.PureComponent {
             const { id } = it
             return (
               // eslint-disable-next-line react/jsx-no-undef
-              <SubTree key={id} selectedValue={selectedValue} onChange={onChange} expandAll={expandAll} {...it} />
+              <SubTree key={id} selected={selected} onChange={onChange} expandAll={expandAll} {...it} />
             )
           })}
         </View>
@@ -86,4 +85,4 @@ class EleTree extends Taro.PureComponent {
   }
 }
 
-export default EleTree
+export default Tree

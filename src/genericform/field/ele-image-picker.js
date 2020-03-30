@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import { AtImagePicker, AtProgress } from 'taro-ui'
-import { noop } from '@/nice-router/nice-router-util'
+import { isEmpty, noop } from '@/nice-router/nice-router-util'
 
 import './styles.scss'
 import uploadFiles from '../../service/file-upload/file-upload.service'
@@ -25,11 +25,13 @@ export default class EleImagePicker extends Taro.PureComponent {
 
   componentDidMount() {
     const { value = [] } = this.props
-    const files = value.filter((it) => it.imageUrl).map((it) => ({ url: it.imageUrl }))
-
-    this.setState({
-      files,
-    })
+    if (!isEmpty(value)) {
+      const sourceFile = Array.isArray(value) ? value : [{ imageUrl: value }]
+      const files = sourceFile.filter((it) => it.imageUrl).map((it) => ({ url: it.imageUrl }))
+      this.setState({
+        files,
+      })
+    }
   }
 
   saveImageToForm = () => {

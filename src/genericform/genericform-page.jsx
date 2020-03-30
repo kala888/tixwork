@@ -28,6 +28,11 @@ class GenericformPage extends Taro.PureComponent {
   componentDidMount() {
     const { pageTitle = '' } = this.props
     Taro.setNavigationBarTitle({ title: pageTitle })
+    setTimeout(() => {
+      this.setState({
+        ...mockData,
+      })
+    }, 2000)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -70,7 +75,6 @@ class GenericformPage extends Taro.PureComponent {
 
   getDefaultValues = (groupList = []) => {
     const defaultValues = {}
-
     for (const group of groupList) {
       const { fields = [] } = group
       for (const field of fields) {
@@ -86,14 +90,15 @@ class GenericformPage extends Taro.PureComponent {
   isSubmitAction = (code) => code === 'nextStep' || code === 'submit' || code === 'commit'
 
   render() {
-    const { id, groupList = [], stepList = [], actionList = [] } = mockData
+    // const { id, groupList = [], stepList = [], actionList = [] } = this.props
+    const { id, groupList = [], stepList = [], actionList = [] } = this.state
 
     const footerActionList = actionList.map((it) => ({
       type: this.isSubmitAction(it.code) ? 'primary' : null,
       ...it,
     }))
-    const initialValues = this.getDefaultValues(groupList)
-    console.log('form initial values', initialValues)
+    const defaultValues = this.getDefaultValues(groupList)
+    console.log('form initial defaultValues', defaultValues)
 
     const groups = groupList
       .filter((it) => !it.hidden)
@@ -112,7 +117,7 @@ class GenericformPage extends Taro.PureComponent {
     return (
       <View className='generic-form-page'>
         <FormSteps steps={steps} />
-        <EleForm formKey={id} ref={(ref) => (this.form = ref)} groups={groups} initialValues={initialValues} />
+        <EleForm formKey={id} ref={(ref) => (this.form = ref)} groups={groups} defaultValues={defaultValues} />
 
         <View className='footer-button-list'>
           {footerActionList.map((it) => {
