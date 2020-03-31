@@ -1,23 +1,26 @@
 import Taro from '@tarojs/taro'
 import { connect } from '@tarojs/redux'
 import { View } from '@tarojs/components'
-import NavigationService from '@/nice-router/navigation.service'
 import classNames from 'classnames'
+import NavigationService from '@/nice-router/navigation.service'
 import { ajaxPullDownRefresh } from '@/utils/index'
 import Config from '@/utils/config'
 
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 import EleFlex from './container/ele-flex'
 import './styles.scss'
 
-@connect(({ genericpage }) => ({ ...genericpage }))
-class GenericPage extends Taro.PureComponent {
+@connect(({ genericpage2 }) => ({ ...genericpage2 }))
+class GenericPage2 extends Taro.PureComponent {
   static options = {
     addGlobalClass: true,
   }
 
   componentDidMount() {
-    const { pageTitle = '' } = this.props
-    Taro.setNavigationBarTitle({ title: pageTitle })
+    const { pageTitle } = this.props
+    if (isNotEmpty(pageTitle)) {
+      Taro.setNavigationBarTitle({ title: pageTitle })
+    }
     const { q } = this.$router.params
     if (q) {
       const uri = decodeURIComponent(q)
@@ -68,4 +71,4 @@ class GenericPage extends Taro.PureComponent {
   }
 }
 
-export default GenericPage
+export default GenericPage2

@@ -6,8 +6,9 @@
  * http://code.google.com/p/crypto-js/wiki/License
  */
 
-// const Crypto = require('./crypto.js');
-import Crypto from './crypto'
+const Crypto = require('./crypto.js')
+// import Crypto from './crypto'
+
 ;(function() {
   // Shortcut
   var util = Crypto.util

@@ -5,7 +5,7 @@ import { AtButton } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 import isNil from 'lodash/isNil'
 
-import { isEmpty } from '@/nice-router/nice-router-util'
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import NavigationService from '@/nice-router/navigation.service'
 import { ajaxPullDownRefresh } from '@/utils/index'
 import FormSteps from '@/genericform/form-steps'
@@ -27,7 +27,9 @@ class GenericformPage extends Taro.PureComponent {
 
   componentDidMount() {
     const { pageTitle = '' } = this.props
-    Taro.setNavigationBarTitle({ title: pageTitle })
+    if (isNotEmpty(pageTitle)) {
+      Taro.setNavigationBarTitle({ title: pageTitle })
+    }
     NavigationService.ajax('mock-generic-form/')
   }
 

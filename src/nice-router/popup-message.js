@@ -1,4 +1,4 @@
-import Taro from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import NavigationService from './navigation.service'
 
 export default class PopupMessage {

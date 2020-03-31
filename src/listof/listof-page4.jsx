@@ -4,15 +4,18 @@ import { View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 import { AtButton } from 'taro-ui'
 import { ajaxPullDownRefresh } from '@/utils/index'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 import CustomerTabs from '../components/common/customer-tabs'
 import Listof from './listof'
 import './listof.scss'
 
-@connect(({ listofpage }) => ({ ...listofpage }))
-class ListofPage extends Taro.PureComponent {
+@connect(({ listofpage4 }) => ({ ...listofpage4 }))
+class ListofPage4 extends Taro.PureComponent {
   componentDidMount() {
-    const { pageTitle = '' } = this.props
-    Taro.setNavigationBarTitle({ title: pageTitle })
+    const { pageTitle } = this.props
+    if (isNotEmpty(pageTitle)) {
+      Taro.setNavigationBarTitle({ title: pageTitle })
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -80,4 +83,4 @@ class ListofPage extends Taro.PureComponent {
   }
 }
 
-export default ListofPage
+export default ListofPage4

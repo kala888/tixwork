@@ -1,6 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-import { View } from '@tarojs/components'
 import Config from '@/utils/config'
 import NiceRouter from '@/nice-router/nice-router'
 
@@ -8,6 +7,7 @@ import './app.scss'
 import dva from './dva'
 
 import models from './models/model-center'
+import HomePage from './pages/home/home-page'
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -29,6 +29,12 @@ class App extends Component {
   // }
 
   componentDidMount() {
+    if (process.env.TARO_ENV === 'weapp') {
+      this.updateWeapp()
+    }
+  }
+
+  updateWeapp = () => {
     if (Taro.canIUse('getUpdateManager')) {
       const updateManager = Taro.getUpdateManager()
       updateManager.onCheckForUpdate(() => {})
@@ -61,9 +67,9 @@ class App extends Component {
 
   config = {
     pages: [
+      'pages/home/home-page',
       'genericform/genericform-page',
       'pages/biz/base-form-page',
-      'pages/home/home-page',
       'pages/login/login-page',
       'pages/biz/generic-test-page',
       'pages/me/me-page',
@@ -129,7 +135,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View />
+        <HomePage />
       </Provider>
     )
   }
