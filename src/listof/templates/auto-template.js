@@ -37,7 +37,7 @@ export default class AutoTemplate extends Taro.PureComponent {
               const { id } = it
               return (
                 <View key={id} className='image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
-                  <ServerImage src={it.imageUrl} />
+                  <ServerImage src={it.imageUrl} model='aspectFill' />
                 </View>
               )
             })}

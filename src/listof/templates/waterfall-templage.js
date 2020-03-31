@@ -20,7 +20,7 @@ export default class Waterfall extends Taro.PureComponent {
     return (
       <View className={rootClass}>
         <View className='waterfall-img'>
-          <ServerImage src={src} />
+          <ServerImage src={src} mode='aspectFill' />
         </View>
 
         <View class='content'>

@@ -24,7 +24,12 @@ export default class ImageOnBottomTemplate extends Taro.PureComponent {
             {brief}
           </Text>
         </View>
-        <ServerImage className='bottom-image' customStyle={{ width: '100%', height: '400rpx' }} src={src} />
+        <ServerImage
+          className='bottom-image'
+          customStyle={{ width: '100%', height: '400rpx' }}
+          mode='aspectFill'
+          src={src}
+        />
       </View>
     )
   }

@@ -26,7 +26,7 @@ export default class EleCarousel extends Taro.PureComponent {
     indicatorDots: null,
     customStyle: {},
     className: null,
-    mode: null,
+    mode: 'aspectFill',
   }
 
   handleClick = (item = {}) => {
