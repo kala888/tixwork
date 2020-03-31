@@ -19,7 +19,7 @@ GenericPage的设计原理很简单，通过解析服务端返回的数据结合
 
 nice-router 会路由到GenericPage页面渲染数据。
 
-又来一个栗子（数据：mock-data-genericpage.js）
+又来一个栗子（数据：mock-genericpage.data.js）
 
 ![](/docs/assets/generic-page.gif)
 

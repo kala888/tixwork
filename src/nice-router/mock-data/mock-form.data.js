@@ -37,7 +37,7 @@ const treeRoot = {
   ],
 }
 
-export default {
+const pageData = {
   id: 'test-form',
   stepList: [
     {
@@ -321,3 +321,12 @@ export default {
     },
   ],
 }
+
+const mockFormData = {
+  xclass: 'com.terapico.caf.viewcomponent.GenericFormPage',
+  success: true,
+  xredirect: null,
+  data: pageData,
+}
+
+export default mockFormData

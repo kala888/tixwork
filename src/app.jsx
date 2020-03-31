@@ -62,6 +62,7 @@ class App extends Component {
   config = {
     pages: [
       'genericform/genericform-page',
+      'pages/biz/base-form-page',
       'pages/home/home-page',
       'pages/login/login-page',
       'pages/biz/generic-test-page',

@@ -7,6 +7,9 @@ import isNil from 'lodash/isNil'
 import { isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
 import HttpRequest from './http-request'
 
+import mockFormData from '../mock-data/mock-form.data'
+import mockGenericPageData from '../mock-data/mock-genericpage.data'
+
 const EMPTY_PARAMETER_TOKEN = '+'
 const BackendService = {}
 
@@ -60,12 +63,12 @@ BackendService.send = async (action = {}) => {
     headers,
   }
   // mock 数据处理
-  // if (actionUri === 'step1/') {
-  //   return step1
-  // }
-  // if (actionUri === 'step2/') {
-  //   return step2
-  // }
+  if (actionUri === 'mock-generic-form/') {
+    return mockFormData
+  }
+  if (actionUri === 'mock-generic-page/') {
+    return mockGenericPageData
+  }
   // if (actionUri === 'step3/') {
   //   return step3
   // }

@@ -351,10 +351,10 @@ const pageData = {
   ],
 }
 
-const mockData = {
+const mockGenericPageData = {
   xclass: 'com.terapico.caf.viewcomponent.GenericPage',
   success: true,
   xredirect: null,
   data: pageData,
 }
-export default mockData
+export default mockGenericPageData

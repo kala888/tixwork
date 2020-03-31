@@ -20,7 +20,6 @@ export default (props) => {
   const switchClass = classNames({
     'ele-switch-disabled': disabled,
   })
-  console.log('checkedcheckedchecked', checked)
   return (
     <View className='ele-switch'>
       <AtSwitch

@@ -1,6 +1,5 @@
 import Taro from '@tarojs/taro'
 import NavigationService from '@/nice-router/navigation.service'
-import { isEmpty } from '@/nice-router/nice-router-util'
 import { AtSteps } from 'taro-ui'
 import { View } from '@tarojs/components'
 
@@ -28,13 +27,11 @@ export default class FormSteps extends Taro.PureComponent {
   // steps=[{title,icon:{value},status,linkToUrl}]
   render() {
     const { steps } = this.props
-    if (isEmpty(steps)) {
-      return
-    }
+    const stepList = steps.map((it) => ({ ...it, desc: it.desc || it.brief || '' }))
     let selectedIdx = steps.findIndex((it) => it.selected)
     return (
       <View className='form-steps'>
-        <AtSteps items={steps} current={selectedIdx} onChange={this.handleChange} />
+        <AtSteps items={stepList} current={selectedIdx} onChange={this.handleChange} />
       </View>
     )
   }

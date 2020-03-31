@@ -144,7 +144,17 @@ export default class EleForm extends Taro.PureComponent {
 
   getGroups = () => {
     const { fields, groups } = this.props
-    return isNotEmpty(groups) ? groups : [{ id: 'base-group', fields }]
+    const groupList = isNotEmpty(groups) ? groups : [{ id: 'base-group', fields }]
+    return groupList
+      .filter((it) => !it.hidden)
+      .map((group) => {
+        const { fields: groupFields = [] } = group
+        const fieldsList = groupFields.filter((field) => !field.hidden)
+        return {
+          ...group,
+          fields: fieldsList,
+        }
+      })
   }
 
   render() {

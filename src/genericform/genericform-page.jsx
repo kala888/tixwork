@@ -6,12 +6,11 @@ import { connect } from '@tarojs/redux'
 import isNil from 'lodash/isNil'
 
 import { isEmpty } from '@/nice-router/nice-router-util'
-import FormSteps from '@/genericform/form-steps'
 import NavigationService from '@/nice-router/navigation.service'
 import { ajaxPullDownRefresh } from '@/utils/index'
-import './index.scss'
+import FormSteps from '@/genericform/form-steps'
 
-import mockData from './mock-form.data'
+import './index.scss'
 
 @connect(({ genericform }) => ({ ...genericform }))
 class GenericformPage extends Taro.PureComponent {
@@ -23,16 +22,13 @@ class GenericformPage extends Taro.PureComponent {
     groupList: [],
     stepList: [],
     actionList: [],
+    fieldList: [],
   }
 
   componentDidMount() {
     const { pageTitle = '' } = this.props
     Taro.setNavigationBarTitle({ title: pageTitle })
-    setTimeout(() => {
-      this.setState({
-        ...mockData,
-      })
-    }, 2000)
+    NavigationService.ajax('mock-generic-form/')
   }
 
   componentWillReceiveProps(nextProps) {
@@ -90,34 +86,26 @@ class GenericformPage extends Taro.PureComponent {
   isSubmitAction = (code) => code === 'nextStep' || code === 'submit' || code === 'commit'
 
   render() {
-    // const { id, groupList = [], stepList = [], actionList = [] } = this.props
-    const { id, groupList = [], stepList = [], actionList = [] } = this.state
-
+    const { id, groupList = [], fieldList = [], stepList = [], actionList = [] } = this.props
+    // 有时候初始值undefined，https://github.com/NervJS/taro/issues/5864
+    // const { id, groupList, fieldList, stepList, actionList } = this.props
+    console.log('xxxxx2', groupList, fieldList, stepList, actionList)
     const footerActionList = actionList.map((it) => ({
       type: this.isSubmitAction(it.code) ? 'primary' : null,
       ...it,
     }))
     const defaultValues = this.getDefaultValues(groupList)
     console.log('form initial defaultValues', defaultValues)
-
-    const groups = groupList
-      .filter((it) => !it.hidden)
-      .map((group) => {
-        const { name: groupName, title: groupTitle, fields = [] } = group
-        const fieldsList = fields.filter((field) => !field.hidden)
-        return {
-          name: groupName,
-          title: groupTitle,
-          fields: fieldsList,
-        }
-      })
-
-    const steps = stepList.map((it) => ({ ...it, desc: it.brief }))
-
     return (
       <View className='generic-form-page'>
-        <FormSteps steps={steps} />
-        <EleForm formKey={id} ref={(ref) => (this.form = ref)} groups={groups} defaultValues={defaultValues} />
+        {stepList.length > 0 && <FormSteps steps={stepList} />}
+        <EleForm
+          formKey={id}
+          ref={(ref) => (this.form = ref)}
+          groups={groupList}
+          fields={fieldList}
+          defaultValues={defaultValues}
+        />
 
         <View className='footer-button-list'>
           {footerActionList.map((it) => {
