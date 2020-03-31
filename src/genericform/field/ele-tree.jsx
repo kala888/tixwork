@@ -3,13 +3,19 @@ import { View } from '@tarojs/components'
 import { AtActionSheet, AtIcon } from 'taro-ui'
 import ActionField from '@/genericform/field/action-field'
 import Tree from '../field/tree/tree'
+import './styles.scss'
 
 class EleTree extends Taro.PureComponent {
-  static defaultProps = {
-    root: {},
+  static options = {
+    addGlobalClass: true,
   }
+
   state = {
     visible: false,
+  }
+
+  static defaultProps = {
+    root: {},
   }
 
   handleToggle = () => {
@@ -51,7 +57,6 @@ class EleTree extends Taro.PureComponent {
     if (result) {
       return result
     }
-    console.log('valueddddd', this.props)
     return {
       currentValue: value,
       displayValue: value ? title : '',

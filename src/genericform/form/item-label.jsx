@@ -12,8 +12,7 @@ export default class ItemLabel extends Taro.PureComponent {
   }
 
   static defaultProps = {
-    rules: [],
-    showRequired: true,
+    required: true,
   }
 
   state = {
@@ -33,8 +32,7 @@ export default class ItemLabel extends Taro.PureComponent {
   }
 
   render() {
-    const { rules, showRequired, tips, layout } = this.props
-    const isRequired = showRequired && rules.find((rule) => rule.required)
+    const { required, tips, layout } = this.props
     const rootClass = classNames('item-label', { [`item-label-${layout}`]: true })
 
     const tipsTitle = isObject(tips) ? tips.title : ''
@@ -45,7 +43,7 @@ export default class ItemLabel extends Taro.PureComponent {
         <View className={rootClass}>
           <View onClick={this.showTips}>
             <Text className='item-label-title'>
-              {isRequired && <Text className='item-label-title-required'>*</Text>}
+              {required && <Text className='item-label-title-required'>*</Text>}
               {this.props.children}
             </Text>
 

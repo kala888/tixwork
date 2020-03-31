@@ -5,8 +5,7 @@ import { isNotEmpty } from '@/nice-router/nice-router-util'
 import SectionBar from '@/components/common/section-bar'
 import FormItem from './form-item'
 import validator from './validator'
-
-import mergeConfig from './field-config'
+import FormUtil from '../form-util'
 import './styles.scss'
 
 // 参考 https://github.com/react-component/form
@@ -17,7 +16,6 @@ export default class EleForm extends Taro.PureComponent {
   }
 
   static defaultProps = {
-    layout: 'horizontal', //'vertical','float'
     fields: [],
     groups: [],
     bordered: true,
@@ -62,6 +60,7 @@ export default class EleForm extends Taro.PureComponent {
   getFieldValues = () => this.state.fieldValues
 
   handleFieldChange = async (name, value) => {
+    console.log('vvvvvvv', name, value)
     const { onFieldChange } = this.props
     // 记录处理错误信息
     const errors = await this._validateField(name, value)
@@ -96,8 +95,8 @@ export default class EleForm extends Taro.PureComponent {
   }
 
   validateFields = async () => {
-    const { fields = [] } = this.props
     const { fieldValues } = this.state
+    const fields = this.getFields()
 
     const fieldErrors = {}
     for (const field of fields) {
@@ -119,7 +118,8 @@ export default class EleForm extends Taro.PureComponent {
   }
 
   _validateField = (name, value) => {
-    const field = this.props.fields.find((it) => it.name === name)
+    const fields = this.getFields()
+    const field = fields.find((it) => it.name === name)
     if (!field) {
       return Promise.resolve()
     }
@@ -128,10 +128,29 @@ export default class EleForm extends Taro.PureComponent {
     })
   }
 
+  getFields = () => {
+    const { fields, groups } = this.props
+    if (isNotEmpty(groups)) {
+      let result = []
+      groups.map((it) => {
+        if (it.fields) {
+          result = result.concat(it.fields)
+        }
+      })
+      return result
+    }
+    return fields
+  }
+
+  getGroups = () => {
+    const { fields, groups } = this.props
+    return isNotEmpty(groups) ? groups : [{ id: 'base-group', fields }]
+  }
+
   render() {
-    const { fields, groups, layout, showRequired, bordered } = this.props
+    const { layout, showRequired, bordered } = this.props
     const { fieldValues, fieldErrors } = this.state
-    const fieldGroups = isNotEmpty(groups) ? groups : [{ id: 'base-group', fields }]
+    const fieldGroups = this.getGroups()
     return (
       <View className='ele-form'>
         {fieldGroups.map((groupItem) => {
@@ -142,7 +161,7 @@ export default class EleForm extends Taro.PureComponent {
 
               <View className='ele-form-fields'>
                 {subFields.map((it) => {
-                  const field = mergeConfig(it)
+                  const field = FormUtil.mergeConfig(it)
                   const { name } = field
                   const value = fieldValues[name]
                   const errors = fieldErrors[name]
@@ -150,14 +169,14 @@ export default class EleForm extends Taro.PureComponent {
                   return (
                     <FormItem
                       key={name}
-                      field={field}
-                      // field={{ ...field, disabled: true }}
-                      value={value}
                       bordered={bordered}
-                      errors={errors}
                       layout={layout}
-                      onChange={this.handleFieldChange}
+                      {...field}
                       showRequired={showRequired}
+                      value={value}
+                      errors={errors}
+                      onChange={this.handleFieldChange}
+                      customized={false}
                     />
                   )
                 })}

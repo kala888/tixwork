@@ -13,9 +13,9 @@ export default class ItemWrapper extends Taro.PureComponent {
   static defaultProps = {
     errors: [],
     clear: true,
-    bordered: false,
+    bordered: true,
     value: null,
-    showTail: true,
+    inline: true,
     disabled: false,
   }
 
@@ -26,7 +26,7 @@ export default class ItemWrapper extends Taro.PureComponent {
   showError = (visible) => this.setState({ visible })
 
   render() {
-    const { bordered, clear, errors, value, onClear, showTail, disabled } = this.props
+    const { bordered, clear, errors, value, onClear, inline, disabled } = this.props
     const hasError = errors.length > 0
     const hasValue = isNotEmpty(value)
     // 没有disabled，没有错误，有值，显示清理btn，就展示
@@ -38,7 +38,7 @@ export default class ItemWrapper extends Taro.PureComponent {
       <View className={rootClass}>
         <View className='item-wrapper-children'>{this.props.children}</View>
 
-        {showTail && (
+        {inline && (
           <View className='item-wrapper-tail'>
             {showClearAction && (
               <AtIcon className='item-wrapper-tail-clear' onClick={onClear} value='close-circle' size={20} />

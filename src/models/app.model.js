@@ -23,7 +23,7 @@ function remoteLogin(params = {}, options = {}) {
   NavigationService.put(
     Config.api.Login,
     {
-      loginMethod: Config.usePassword ? 'account_password' : 'mobile_vcode',
+      loginMethod: Config.loginMethod === 'password' ? 'account_password' : 'mobile_vcode',
       ...params,
     },
     {
@@ -52,7 +52,7 @@ export default {
       const { statInPage, ...params } = payload
       const options = { statInPage }
       yield put({ type: 'logout' })
-      if (!Config.useWxLogin) {
+      if (Config.loginMethod !== 'wechat') {
         console.log('登录。。。非微信登录')
         remoteLogin(params, options)
         return

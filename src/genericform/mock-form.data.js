@@ -84,7 +84,7 @@ export default {
           rules: [
             {
               required: true,
-              type: 'string',
+              type: 'number',
               pattern: /^1\d{10}$/,
               message: '要填写手机号哦',
             },
@@ -225,6 +225,7 @@ export default {
           rules: [
             {
               required: true,
+              type: 'number',
               message: '怎么也有点存款吧',
             },
           ],

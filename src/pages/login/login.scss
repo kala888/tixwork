@@ -39,13 +39,10 @@
     @extend %flex-column;
     flex: 7;
 
-    .hidden {
-      display: none;
-    }
-
     .login-form {
       @extend %flex-column;
       flex: 1;
+      padding-top: 20px;
 
       &-brief {
         font-family: $b181black;
@@ -59,14 +56,20 @@
         font-weight: 400;
       }
 
-      &-txt-input {
-        margin-top: 20px;
-        margin-left: 0;
-      }
+      &-fields {
+        padding-top: 20px;
 
-      &-vcode-value {
-        margin-top: 28px;
-        margin-left: 0;
+        &-txt-input {
+          margin-top: 20px;
+          margin-left: 0;
+          padding-left: 20px;
+          border-radius: 8px;
+        }
+
+        &-vcode-value {
+          margin-top: 28px;
+          margin-left: 0;
+        }
       }
     }
 

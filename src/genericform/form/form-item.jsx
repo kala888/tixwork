@@ -2,7 +2,8 @@ import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import classNames from 'classnames'
-import isObject from 'lodash/isObject'
+import isNil from 'lodash/isNil'
+import FormUtil from '../form-util'
 import FlexField from '../field/flex-field'
 import ItemLabel from './item-label'
 import ItemWrapper from './item-wrapper'
@@ -14,57 +15,64 @@ export default class FormItem extends Taro.PureComponent {
   }
 
   static defaultProps = {
-    field: {},
     errors: [],
     onChange: noop,
+    customized: true,
+    layout: 'horizontal', //'vertical','float'
+    required: null,
+    rules: [],
+    showRequired: true,
   }
 
   handleChange = (value, event) => {
     console.log('item event maybe you needed', event)
-    const { field, onChange } = this.props
-    const { name } = field
-    let fieldValue = value
-    if (value && isObject(value.target)) {
-      fieldValue = value.target.value
-    }
+    const { name, onChange } = this.props
+    let fieldValue = FormUtil.getValue(value)
     onChange(name, fieldValue)
   }
 
   handleClear = () => {
-    const {
-      field: { name },
-      onChange,
-    } = this.props
+    const { name, onChange } = this.props
     onChange(name, null)
   }
 
-  render() {
-    const { field, value, errors, showRequired, bordered } = this.props
-    const { label, rules, clear, tips, showTail, disabled } = field
+  showRequiredIcon = () => {
+    const { required, rules, showRequired } = this.props
+    if (showRequired) {
+      return isNil(required) ? !!rules.find((rule) => rule.required) : required
+    }
+    return false
+  }
 
-    const layout = field.layout || this.props.layout || ''
+  render() {
+    const { clear, value, errors, bordered, inline, disabled, label, tips, layout, customized } = this.props
+
+    // const layout = field.layout || this.props.layout || ''
     const hasError = isNotEmpty(errors)
 
     const rootClass = classNames('form-item', {
       'form-item-error': hasError,
       [`form-item-${layout}`]: true,
     })
+
+    const isRequired = this.showRequiredIcon()
+
     return (
       <ItemWrapper
         clear={clear}
         value={value}
         errors={errors}
         bordered={bordered}
-        showTail={showTail}
+        inline={inline}
         disabled={disabled}
         onClear={this.handleClear}
       >
         <View className={rootClass}>
-          <ItemLabel tips={tips} rules={rules} layout={layout} showRequired={showRequired}>
+          <ItemLabel tips={tips} layout={layout} required={isRequired}>
             {label}
           </ItemLabel>
           <View className='form-item-flex-field'>
-            <FlexField field={field} value={value} onChange={this.handleChange} />
+            {customized ? this.props.children : <FlexField {...this.props} onChange={this.handleChange} />}
           </View>
         </View>
       </ItemWrapper>

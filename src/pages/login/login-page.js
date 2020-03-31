@@ -1,85 +1,105 @@
 import Taro from '@tarojs/taro'
-import { Block, Form, View } from '@tarojs/components'
+import { Block, View } from '@tarojs/components'
 import EleButton from '@/genericpage/elements/ele-button'
 import EleInput from '@/genericform/field/ele-input'
 import EleVcode from '@/genericform/field/ele-vcode'
 import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
 import ServerImage from '@/server-image/server-image'
+import FormUtil from '@/genericform/form-util'
 
 import './login.scss'
 import loginLogo from '../../assets/login-logo.png'
 
-const KEY = 'login-form'
-
 export default class LoginPage extends Taro.PureComponent {
-  submit = async (formData) => {
-    NavigationService.dispatch('app/login', formData)
+  state = {
+    fieldValues: {},
   }
 
-  handleClick = (e) => {
-    const { value } = e.detail
-    const payload = {
-      formKey: KEY,
-      values: value,
-      submit: this.submit,
-    }
-    console.log('form submit from ele-flex', payload, this.props)
-    Taro.eventCenter.trigger('form-submit', payload)
+  handleChange = (name, value, event) => {
+    console.log('item event maybe you needed', event)
+    const fieldValue = FormUtil.getValue(value)
+    this.setState((preState) => ({
+      fieldValues: {
+        ...preState.fieldValues,
+        [name]: fieldValue,
+      },
+    }))
+  }
+
+  handleSubmit = () => {
+    NavigationService.dispatch('app/login', this.state.fieldValues)
   }
 
   render() {
     return (
-      <Form onSubmit={this.handleClick}>
-        <View className='login-page'>
-          <View className='login-page-header'>
-            <View className='login-page-header-txt'>
-              <View>DoubleChain</View>
-              <View>Tech</View>
-            </View>
-            <View className='login-page-header-logo'>
-              <View className='login-page-header-logo-image'>
-                <ServerImage src={loginLogo} />
-              </View>
-            </View>
+      <View className='login-page'>
+        <View className='login-page-header'>
+          <View className='login-page-header-txt'>
+            <View>DoubleChain</View>
+            <View>Tech</View>
           </View>
-
-          <View className='login-page-body'>
-            <View className='login-form'>
-              <View className='login-form-brief'>WELCOME TO LOGIN</View>
-              <View className='login-form-title'>欢迎登录</View>
-              {Config.useVcode && (
-                <Block>
-                  <EleVcode
-                    className='login-form-txt-input'
-                    placeholder='请输入手机号'
-                    name='mobile'
-                    formKey={KEY}
-                    defaultValue={13308188512}
-                  />
-                  <EleInput
-                    className='login-form-vcode-value'
-                    placeholder='请输入验证码'
-                    maxLength={6}
-                    name='verifyCode'
-                    formKey={KEY}
-                  />
-                </Block>
-              )}
-
-              {Config.usePassword && (
-                <Block>
-                  <EleInput className='login-form-txt-input' placeholder='请输入用户名' name='login' formKey={KEY} />
-                  <EleInput className='login-form-txt-input' placeholder='请输入密码' name='password' formKey={KEY} />
-                </Block>
-              )}
-            </View>
-            <View>
-              <EleButton btnType='submit' title='登录' className='login-submit-button' full={false} />
+          <View className='login-page-header-logo'>
+            <View className='login-page-header-logo-image'>
+              <ServerImage src={loginLogo} />
             </View>
           </View>
         </View>
-      </Form>
+
+        <View className='login-page-body'>
+          <View className='login-form'>
+            <View className='login-form-brief'>WELCOME TO LOGIN</View>
+            <View className='login-form-title'>欢迎登录</View>
+            <View className='login-form-fields'>
+              {Config.loginMethod === 'vcode' && (
+                <Block>
+                  <EleVcode
+                    className='login-form-fields-txt-input'
+                    placeholder='请输入手机号'
+                    name='mobile'
+                    type='phone'
+                    onChange={this.handleChange.bind(this, 'mobile')}
+                  />
+                  <EleInput
+                    className='login-form-fields-txt-input,login-form-fields-vcode-value'
+                    placeholder='请输入验证码'
+                    type='number'
+                    name='verifyCode'
+                    onChange={this.handleChange.bind(this, 'verifyCode')}
+                  />
+                </Block>
+              )}
+
+              {Config.loginMethod === 'password' && (
+                <Block>
+                  <EleInput
+                    className='login-form-fields-txt-input'
+                    placeholder='请输入用户名'
+                    name='login'
+                    onChange={this.handleChange.bind(this, 'login')}
+                  />
+                  <EleInput
+                    className='login-form-fields-txt-input'
+                    placeholder='请输入密码'
+                    name='password'
+                    type='password'
+                    onChange={this.handleChange.bind(this, 'password')}
+                  />
+                </Block>
+              )}
+            </View>
+          </View>
+          <View>
+            <EleButton
+              btnType='submit'
+              title='登录'
+              className='login-submit-button'
+              full={false}
+              onClick={this.handleSubmit}
+            />
+          </View>
+        </View>
+      </View>
     )
   }
 }

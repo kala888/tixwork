@@ -30,7 +30,6 @@ export default class EleFlex extends Taro.PureComponent {
   static defaultProps = {
     flex: 1,
     kids: [], //children的同义词，不用children，微信有问题
-    formKey: null,
     customStyle: {},
     className: null,
   }
