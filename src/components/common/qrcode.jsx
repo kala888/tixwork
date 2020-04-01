@@ -8,7 +8,7 @@ import { toRpx } from '@/utils/index'
 // 修改自 https://github.com/xueyida/QRcode.taro/blob/master/QRCodeCanvas.js
 const defaultCanvasId = 'qrcode-canvase'
 
-export default class QRCode extends Taro.PureComponent {
+export default class Qrcode extends Taro.PureComponent {
   static defaultProps = {
     size: 200,
     level: 'L',

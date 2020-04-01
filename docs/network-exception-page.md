@@ -20,4 +20,4 @@
 
 #### 相关的代码文件
 
-network-exception-page.js, nice-router.js, viewmapping.config.js, http-request.js
+network-exception-page.jsx, nice-router.js, viewmapping.config.js, http-request.js

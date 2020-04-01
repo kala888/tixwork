@@ -15,7 +15,7 @@ import EleStoreLocation from '../elements/ele-store-location'
 import ElePopup from './ele-popup'
 import EleFooterTabs from '../elements/ele-footer-tabs'
 import EleNavigationBox from '../elements/ele-navigation-box'
-import EleQRCode from '../elements/ele-qrcode'
+import EleQrcode from '../elements/ele-qrcode'
 import EleMoreActions from '../elements/ele-more-actions'
 import EleListof from '../elements/ele-listof'
 
@@ -61,7 +61,7 @@ export default class EleFlex extends Taro.PureComponent {
           if (it.type === 'store-location') return <EleStoreLocation key={id} {...it} />
           if (it.type === 'popup') return <ElePopup key={id} {...it} />
           if (it.type === 'footer-tabs') return <EleFooterTabs key={id} {...it} />
-          if (it.type === 'qrcode') return <EleQRCode key={id} {...it} />
+          if (it.type === 'qrcode') return <EleQrcode key={id} {...it} />
           if (it.type === 'more-actions') return <EleMoreActions key={id} {...it} />
           if (it.type === 'listof') return <EleListof key={id} {...it} />
 

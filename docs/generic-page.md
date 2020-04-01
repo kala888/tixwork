@@ -29,7 +29,7 @@ nice-router 会路由到GenericPage页面渲染数据。
 
 查询文档或者代码，确定目前支持的组件
 
-./src/genericpage/container/ele-flex.js
+./src/genericpage/container/ele-flex.jsx
 
 组件目前分为4大部分
 

@@ -4,7 +4,7 @@
 
 > 开发环境建议使用webstorm或者Idea，简单省事，不需要折腾那些有的没的插件.
 
-1. hello-daas-page.js
+1. hello-daas-page.jsx
    
    在./src/pages/biz目录下新建文件hello-daas-page.js文件
    
@@ -12,7 +12,7 @@
    import Taro from '@tarojs/taro'
    import { Button, View } from '@tarojs/components'
    
-   export default class HelloDaaSPage extends Taro.PureComponent {
+   export default class HelloDaasPage extends Taro.PureComponent {
      handleClick = () => {
        Taro.showToast({ title: 'Hello....' })
      }

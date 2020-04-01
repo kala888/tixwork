@@ -322,7 +322,7 @@ const footer = {
 
 ![](/docs/assets/footer.png)
 
-###### EleQRCode
+###### EleQrcode
 
 type=qrcode 
 
@@ -336,7 +336,7 @@ type=qrcode
 | color   | color='#000'                 | 二维码的颜色                   |
 
 ```javascript
-   <EleQRCode
+   <EleQrcode
           size={150}
           text='第0适合后端程序员的前端小程序开发框架'
           color='#f23030'

@@ -23,7 +23,7 @@ SPA开发中点击一个button后，前端先路由到这个页面，然后通�
 目标页面
 
 ```javascript
-// /pages/me-page.js
+// /pages/me-page.jsx
 
 componentDidMount(){
     NavigationService.ajax("/fetch-my-account-info", {},{

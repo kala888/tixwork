@@ -5,7 +5,7 @@ import NavigationService from '@/nice-router/navigation.service'
 import { AtButton } from 'taro-ui'
 import { ajaxPullDownRefresh } from '@/utils/index'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-import CustomerTabs from '../components/common/customer-tabs'
+import CustomerTabs from '@/components/common/customer-tabs'
 import Listof from './listof'
 import './listof.scss'
 

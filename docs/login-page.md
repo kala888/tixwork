@@ -38,4 +38,4 @@ x-class= com.terapico.appview.LoginForm
 
 #### 相关的代码文件
 
-login-page.js
+login-page.jsx

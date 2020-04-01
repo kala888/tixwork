@@ -24,4 +24,4 @@ const isH5Path = (uri) => startsWith(uri, 'https://') || startsWith(uri, 'http:/
 
 #### 相关的代码文件
 
-h5-page.js, navigation.service.js
+h5-page.jsx, navigation.service.js
