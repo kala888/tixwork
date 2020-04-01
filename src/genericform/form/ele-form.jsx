@@ -16,8 +16,8 @@ export default class EleForm extends Taro.PureComponent {
   }
 
   static defaultProps = {
-    fields: [],
-    groups: [],
+    fieldList: [],
+    groupList: [],
     bordered: true,
     showRequired: true,
     onFieldChange: null,
@@ -60,7 +60,6 @@ export default class EleForm extends Taro.PureComponent {
   getFieldValues = () => this.state.fieldValues
 
   handleFieldChange = async (name, value) => {
-    console.log('vvvvvvv', name, value)
     const { onFieldChange } = this.props
     // 记录处理错误信息
     const errors = await this._validateField(name, value)
@@ -83,7 +82,7 @@ export default class EleForm extends Taro.PureComponent {
         if (isFunction(onFieldChange)) {
           onFieldChange(name, this.state.fieldValues)
         }
-      }
+      },
     )
   }
 
@@ -129,30 +128,30 @@ export default class EleForm extends Taro.PureComponent {
   }
 
   getFields = () => {
-    const { fields, groups } = this.props
-    if (isNotEmpty(groups)) {
+    const { fieldList, groupList } = this.props
+    if (isNotEmpty(groupList)) {
       let result = []
-      groups.map((it) => {
-        if (it.fields) {
-          result = result.concat(it.fields)
+      groupList.map((it) => {
+        if (it.fieldList) {
+          result = result.concat(it.fieldList)
         }
       })
       return result
     }
-    return fields
+    return fieldList
   }
 
   getGroups = () => {
-    const { fields, groups } = this.props
-    const groupList = isNotEmpty(groups) ? groups : [{ id: 'base-group', fields }]
-    return groupList
+    const { fieldList, groupList } = this.props
+    const groups = isNotEmpty(groupList) ? groupList : [{ id: 'base-group', fieldList }]
+    return groups
       .filter((it) => !it.hidden)
       .map((group) => {
-        const { fields: groupFields = [] } = group
-        const fieldsList = groupFields.filter((field) => !field.hidden)
+        const { fieldList: groupFields = [] } = group
+        const fields = groupFields.filter((field) => !field.hidden)
         return {
           ...group,
-          fields: fieldsList,
+          fieldsList: fields,
         }
       })
   }
@@ -160,17 +159,18 @@ export default class EleForm extends Taro.PureComponent {
   render() {
     const { layout, showRequired, bordered } = this.props
     const { fieldValues, fieldErrors } = this.state
-    const fieldGroups = this.getGroups()
+    const groupList = this.getGroups()
+    console.log('groupListgroupList', groupList)
     return (
       <View className='ele-form'>
-        {fieldGroups.map((groupItem) => {
-          const { name: groupId, title, brief, fields: subFields } = groupItem
+        {groupList.map((groupItem) => {
+          const { name: groupId, title, brief, fieldList = [] } = groupItem
           return (
             <Block key={groupId}>
               {isNotEmpty(title) && <SectionBar title={title} brief={brief} />}
 
               <View className='ele-form-fields'>
-                {subFields.map((it) => {
+                {fieldList.map((it) => {
                   const field = FormUtil.mergeConfig(it)
                   const { name } = field
                   const value = fieldValues[name]

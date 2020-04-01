@@ -74,8 +74,8 @@ class GenericformPage extends Taro.PureComponent {
   getDefaultValues = (groupList = []) => {
     const defaultValues = {}
     for (const group of groupList) {
-      const { fields = [] } = group
-      for (const field of fields) {
+      const { fieldList = [] } = group
+      for (const field of fieldList) {
         const { name, value } = field
         if (!isNil(value)) {
           defaultValues[name] = value
@@ -91,7 +91,6 @@ class GenericformPage extends Taro.PureComponent {
     const { id, groupList = [], fieldList = [], stepList = [], actionList = [] } = this.props
     // 有时候初始值undefined，https://github.com/NervJS/taro/issues/5864
     // const { id, groupList, fieldList, stepList, actionList } = this.props
-    console.log('xxxxx2', groupList, fieldList, stepList, actionList)
     const footerActionList = actionList.map((it) => ({
       type: this.isSubmitAction(it.code) ? 'primary' : null,
       ...it,
@@ -104,8 +103,8 @@ class GenericformPage extends Taro.PureComponent {
         <EleForm
           formKey={id}
           ref={(ref) => (this.form = ref)}
-          groups={groupList}
-          fields={fieldList}
+          groupList={groupList}
+          fieldList={fieldList}
           defaultValues={defaultValues}
         />
 

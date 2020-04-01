@@ -58,7 +58,7 @@ const pageData = {
     {
       name: 'fist-group',
       title: '第一组',
-      fields: [
+      fieldList: [
         {
           name: '-1-team-building',
           label: '团建',
@@ -199,7 +199,7 @@ const pageData = {
     {
       name: 'second-group',
       title: '第二组',
-      fields: [
+      fieldList: [
         {
           name: '5-height',
           label: '身高（cm）',
