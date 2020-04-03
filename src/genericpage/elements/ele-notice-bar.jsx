@@ -8,7 +8,7 @@ import classNames from 'classnames'
 
 import './ele.scss'
 
-export default class EleMessageSwiper extends Taro.PureComponent {
+export default class EleNoticeBar extends Taro.PureComponent {
   static options = {
     addGlobalClass: true,
   }
@@ -29,11 +29,11 @@ export default class EleMessageSwiper extends Taro.PureComponent {
   render() {
     const { items, imageUrl, customStyle, imageHeight, imageWidth, className } = this.props
 
-    const rootClass = classNames('ele-message-swiper', className)
+    const rootClass = classNames('ele-notice-bar', className)
 
     return (
       <View className={rootClass} style={customStyle}>
-        <View className='ele-message-swiper-preicon'>
+        <View className='ele-notice-bar-preicon'>
           {imageUrl.length > 0 ? (
             <ServerImage
               src={imageUrl}
@@ -43,14 +43,16 @@ export default class EleMessageSwiper extends Taro.PureComponent {
             <AtIcon value='volume-plus' size={22} />
           )}
         </View>
-        <Swiper className='ele-message-swiper-messages' autoplay circular vertical>
+        <Swiper className='ele-notice-bar-messages' autoplay circular vertical>
           {items.map((it) => {
             const { id } = it
             return (
-              <SwiperItem className='ele-message-swiper-messages-item' key={id}>
-                <Text className='ele-message-swiper-messages-item-txt' onClick={this.handleItemClick.bind(this, it)}>
-                  {it.text}
-                </Text>
+              <SwiperItem
+                key={id}
+                className='ele-notice-bar-messages-item'
+                onClick={this.handleItemClick.bind(this, it)}
+              >
+                <Text className='ele-notice-bar-messages-item-txt'>{it.text}</Text>
               </SwiperItem>
             )
           })}

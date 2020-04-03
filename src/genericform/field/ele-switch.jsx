@@ -1,3 +1,4 @@
+import { View } from '@tarojs/components'
 import { AtSwitch } from 'taro-ui'
 import classNames from 'classnames'
 import { toBoolean } from '@/nice-router/nice-router-util'
@@ -12,7 +13,7 @@ import { toBoolean } from '@/nice-router/nice-router-util'
 //   title: '女',
 //   value: 'false',
 // }]
-export default (props) => {
+const EleSwitch = (props) => {
   const { value = false, candidateValues = [], disabled, ...others } = props
   const checked = toBoolean(value)
   const selected = candidateValues.find((it) => toBoolean(it.value) === checked)
@@ -33,3 +34,4 @@ export default (props) => {
     </View>
   )
 }
+export default EleSwitch

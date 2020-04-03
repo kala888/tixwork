@@ -1,17 +1,18 @@
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
+import { isDevEnv, isH5, isWeapp } from '@/utils/index'
 import Config from '@/utils/config'
+
 import NiceRouter from '@/nice-router/nice-router'
-
 import './app.scss'
-import dva from './dva'
 
+import dva from './dva'
 import models from './models/model-center'
 import HomePage from './pages/home/home-page'
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
-// if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5') {
+// if (isDevEnv() && isH5()) {
 //   require('nerv-devtools')
 // }
 
@@ -24,12 +25,9 @@ const store = dvaApp.getStore()
 NiceRouter.start({ config: Config, container: dvaApp })
 
 class App extends Component {
-  // componentWillMount() {
-  //   NavigationService.dispatch('app/wxLogin')
-  // }
 
   componentDidMount() {
-    if (process.env.TARO_ENV === 'weapp') {
+    if (isWeapp()) {
       this.updateWeapp()
     }
   }
@@ -37,7 +35,9 @@ class App extends Component {
   updateWeapp = () => {
     if (Taro.canIUse('getUpdateManager')) {
       const updateManager = Taro.getUpdateManager()
-      updateManager.onCheckForUpdate(() => {})
+      updateManager.onCheckForUpdate(() => {
+        console.log('checking.......')
+      })
       updateManager.onUpdateReady(() => {
         Taro.showModal({
           title: '更新提示',

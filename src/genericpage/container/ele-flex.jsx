@@ -8,7 +8,7 @@ import EleText from '../elements/ele-text'
 import EleImage from '../elements/ele-image'
 import EleButton from '../elements/ele-button'
 import EleCarousel from '../elements/ele-carousel'
-import EleMessageSwiper from '../elements/ele-message-swiper'
+import EleNoticeBar from '../elements/ele-notice-bar'
 import EleBreakLine from '../elements/ele-break-line'
 import EleWhiteSpace from '../elements/ele-white-space'
 import EleStoreLocation from '../elements/ele-store-location'
@@ -53,7 +53,7 @@ export default class EleFlex extends Taro.PureComponent {
           if (it.type === 'image') return <EleImage key={id} {...it} />
           if (it.type === 'button') return <EleButton key={id} {...it} />
           if (it.type === 'carousel') return <EleCarousel key={id} {...it} />
-          if (it.type === 'message-swiper') return <EleMessageSwiper key={id} {...it} />
+          if (it.type === 'message-swiper') return <EleNoticeBar key={id} {...it} />
           if (it.type === 'break-line') return <EleBreakLine key={id} {...it} />
           if (it.type === 'white-space') return <EleWhiteSpace key={id} {...it} />
           if (it.type === 'box-bar') return <EleNavigationBox key={id} {...it} />

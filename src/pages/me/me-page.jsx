@@ -4,7 +4,7 @@ import { connect } from '@tarojs/redux'
 import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import NavigationLineItem from '@/components/common/navigation-line-item'
-import NavigationBoxBar from '@/components/navigation-box-bar'
+import NavigationBoxBar from '@/components/common/navigation-box-bar'
 import Config from '@/utils/config'
 import ServerImage from '@/server-image/server-image'
 
