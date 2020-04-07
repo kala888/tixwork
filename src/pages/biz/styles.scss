@@ -1,0 +1,11 @@
+@import 'src/styles/theme';
+
+.hello-daas {
+  background-color: #f0f2f5;
+
+  .section-bar {
+    padding-left: 20px;
+    margin: 20px 0;
+    background-color: $white;
+  }
+}

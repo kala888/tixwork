@@ -19,18 +19,22 @@ export default class ProductTemplate extends Taro.PureComponent {
     return (
       <View className='product'>
         <View className='product-img'>
-          <ServerImage src={src} mode='aspectFill' />
+          <View className='product-img-container'>
+            <ServerImage src={src} mode='heightFix' />
+          </View>
         </View>
-        <View class='content'>
-          <View className='content-title'>
+
+        <View class='product-content'>
+          <View className='product-content-title'>
             {preTag.length > 0 && (
               <AtTag className='red-tag' size='small' active>
                 {preTag}
               </AtTag>
             )}
-            <Text style={{ marginLeft: '10px' }}>{`${brand} ${name}`}</Text>
+            <Text className='product-content-title-txt'>{`${brand} ${name}`}</Text>
           </View>
-          <View className='content-brief'>
+
+          <View className='product-content-brief'>
             <Text numberOfLines={1}>{`￥${price}`}</Text>
             {tags.map(
               (it) =>

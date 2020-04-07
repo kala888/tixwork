@@ -9,7 +9,12 @@ function loadServerImage(uri, style) {
     return uri
   }
   let url = uri || ''
-  if (!/^(http|https):/.test(url) || url.indexOf('x-oss-process') > -1) {
+  if (
+    !/^(http|https):/.test(url) || // 不是http（本地文件）
+    url.indexOf('x-oss-process') > -1 || // 或者已经包含style
+    (url.indexOf('?') > -1 && url.indexOf('=') > -1)
+  ) {
+    // 如果已经添加了参数
     return url
   }
   return url + style

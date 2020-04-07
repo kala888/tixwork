@@ -82,7 +82,7 @@ export default class EleForm extends Taro.PureComponent {
         if (isFunction(onFieldChange)) {
           onFieldChange(name, this.state.fieldValues)
         }
-      },
+      }
     )
   }
 

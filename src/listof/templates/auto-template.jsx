@@ -32,29 +32,29 @@ export default class AutoTemplate extends Taro.PureComponent {
     return (
       <View className={rootCls}>
         {list.length > 0 && (
-          <View className='image-list'>
+          <View className='auto-image-list'>
             {list.map((it, index) => {
               const { id } = it
               return (
-                <View key={id} className='image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
-                  <ServerImage src={it.imageUrl} model='aspectFill' />
+                <View key={id} className='auto-image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
+                  <ServerImage src={it.imageUrl} />
                 </View>
               )
             })}
           </View>
         )}
 
-        <View class='content'>
-          <Text className='content-title' numberOfLines={1}>
+        <View class='auto-content'>
+          <Text className='auto-content-title' numberOfLines={1}>
             {title}
           </Text>
           {brief && (
-            <Text className='content-brief' numberOfLines={1}>
+            <Text className='auto-content-brief' numberOfLines={1}>
               {brief}
             </Text>
           )}
           {displayTime && (
-            <Text className='content-brief' numberOfLines={1}>
+            <Text className='auto-content-brief' numberOfLines={1}>
               {formatTime(displayTime)}
             </Text>
           )}

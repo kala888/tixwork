@@ -28,9 +28,8 @@ export function getImageList(item = {}) {
   return list
 }
 
+const TWO_COLUMN_DISPLAY_MODE = ['product', 'image-on-top-waterfall', 'image-on-top-horizontal']
+
 export function getNumberColumns(displayMode) {
-  if (displayMode === 'product' || displayMode === 'waterfall') {
-    return 2
-  }
-  return 1
+  return TWO_COLUMN_DISPLAY_MODE.indexOf(displayMode) > -1 ? 2 : 1
 }

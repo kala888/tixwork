@@ -15,21 +15,16 @@ export default class ImageOnBottomTemplate extends Taro.PureComponent {
     const src = getImageUrl(item)
 
     return (
-      <View className='image-on-bottom'>
-        <View className='content'>
-          <Text className='content-title' numberOfLines={1}>
+      <View className='auto image-on-bottom'>
+        <View className='auto-content'>
+          <Text className='auto-content-title' numberOfLines={1}>
             {title}
           </Text>
-          <Text className='content-brief' numberOfLines={1}>
+          <Text className='auto-content-brief' numberOfLines={1}>
             {brief}
           </Text>
         </View>
-        <ServerImage
-          className='bottom-image'
-          customStyle={{ width: '100%', height: '400rpx' }}
-          mode='aspectFill'
-          src={src}
-        />
+        <ServerImage className='auto-content-image' src={src} />
       </View>
     )
   }

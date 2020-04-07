@@ -184,7 +184,7 @@
 }
 
 .section-bar {
-  padding-top: 20px;
+  padding: 20px 0;
   display: flex;
   flex-direction: row;
   color: $text-color;
@@ -233,6 +233,7 @@
     }
   }
 }
+
 .navigation-bar {
   padding: 19px 5px;
   background-color: $white;
@@ -245,7 +246,7 @@
   flex: 1;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
-  box-shadow: 0px 15px 10px 1px $shadow-color;
+  box-shadow: 0 15px 10px 1px $shadow-color;
 
   &-item {
     display: flex;

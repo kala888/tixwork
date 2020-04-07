@@ -194,7 +194,7 @@
     height: 70px;
   }
 
-  &-header {
+  &-body {
     @extend %flex-row;
     padding: 20px;
 
@@ -206,14 +206,14 @@
     }
 
     &-image {
-      width: 200px;
+      width: 215px;
       height: 215px;
     }
 
     &_content {
       @extend %flex-1;
       flex-direction: column;
-      padding: 30px;
+      padding: 20px 35px 0 20px;
 
       &-title {
         font-size: 28px;
@@ -223,12 +223,15 @@
       &-brief {
         @extend %flex-1;
         padding: 20px 0;
-        height: 53px;
-        line-height: 30px;
-        font-size: 26px;
-        font-weight: 400;
-        color: #74767a;
-        @include lamp-clamp(2);
+
+        &-txt {
+          line-height: 30px;
+          font-size: 26px;
+          font-weight: 400;
+          height: 90px;
+          color: $text-color-light;
+          @include lamp-clamp(3);
+        }
       }
 
       &-time {
@@ -240,14 +243,7 @@
 
   &-footer {
     border-top: 2px solid #f3f5f7;
-    padding: 20px 0;
-  }
-}
-
-.ele-card.small {
-  .ele-card-header-image {
-    width: 150px;
-    height: 150px;
+    padding-bottom: 20px;
   }
 }
 

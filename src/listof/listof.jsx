@@ -87,15 +87,13 @@ export default class Listof extends Taro.PureComponent {
 
     const listofContainerClass = classNames(
       {
-        'list-of-container': !horizontal,
+        'listof-container': !horizontal,
         'multiple-items': itemWidth,
       },
       containerClass
     )
 
-    const itemContainerClass = classNames('list-of-container-item', {
-      horizontal: horizontal,
-    })
+    const itemContainerClass = classNames('listof-container-item', { horizontal })
 
     const listofContainerItemContainerStyle = itemWidth ? { width: `${itemWidth}%` } : {}
 
@@ -115,7 +113,7 @@ export default class Listof extends Taro.PureComponent {
             return (
               <View key={id} className={itemContainerClass} style={listofContainerItemContainerStyle}>
                 <LineItemWrapper
-                  my-class='list-of-container-item-wrapper'
+                  my-class='listof-container-item-wrapper'
                   index={index}
                   item={item}
                   onItemPress={onItemPress}
