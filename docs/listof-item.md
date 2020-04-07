@@ -4,7 +4,7 @@ listof 列表中哪些一个一个的小组件
 
 #### 概念和对象
 
-|                         |                                                                                                           |                                                                         |
+| displayMode             | 说明                                                                                                        | 属性                                                                      |
 | ----------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | auto                    | 根据image的数量来自动展示未0，1，2，3图, 其中Image的数量遵循规则：如果有imageUrl，则判定为1图，否则拼接editorSuggestionImageList和imageList 这两个属性 | title，brief, displayTime,imageUrl (editorSuggestionImageList和imageList) |
 | only-title              | auto模板，强制指定图片数量=0                                                                                         |                                                                         |
@@ -21,15 +21,7 @@ listof 列表中哪些一个一个的小组件
 
 #### 测试页面和数据
 
-![](/docs/assets/listof-item-user.png)
-![](/docs/assets/listof-item-card.png)
-![](/docs/assets/listof-item-document-card.png)
-![](/docs/assets/listof-item-iotv.png)
-![](/docs/assets/listof-item-ioth.png)
-![](/docs/assets/listof-item-iot.png)
-![](/docs/assets/listof-item-iob.png)
-![](/docs/assets/listof-item-product.png)
-![](/docs/assets/listof-item-auto.png)
+![](/docs/assets/action-sheet.png)
 
 
 
