@@ -160,7 +160,6 @@ const userList = [
 function HelloDaaSPage() {
   return (
     <View className='hello-daas'>
-
       <SectionBar title='用户卡片' brief='displayMode：user' />
       <Listof list={userList} displayMode='user' />
 

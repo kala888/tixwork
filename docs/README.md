@@ -115,7 +115,7 @@ $yarn dev:weapp
 
 [内置的Genericpage UI Element](/docs/generic-page-ele.md)
 
-内置的Listof lineitem
+[内置的Listof item](/docs/listof-item.md)
 
 ##### ......
 
