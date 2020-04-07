@@ -118,10 +118,13 @@ export default class LineItemWrapper extends Taro.PureComponent {
         {template === 'single-image' && <AutoTemplate showImageCount={1} {...itemProps} />}
         {template === 'double-image' && <AutoTemplate showImageCount={2} {...itemProps} />}
         {template === 'three-image' && <AutoTemplate showImageCount={3} {...itemProps} />}
+
         {template === 'image-on-bottom' && <ImageOnBottom {...itemProps} />}
+
         {template === 'image-on-top' && <ImageOnTop {...itemProps} />}
         {template === 'image-on-top-waterfall' && <ImageOnTop {...itemProps} waterfall />}
         {template === 'image-on-top-horizontal' && <ImageOnTop {...itemProps} horizontal />}
+
         {template === 'user' && <UserTemplate {...itemProps} />}
         {template === 'product' && <ProductTemplate {...itemProps} />}
         {template === 'card' && <CardTemplate {...itemProps} />}

@@ -1,4 +1,3 @@
-// import { useEffect, useLayoutEffect, useReducer, useState, useContext, useRef, useCallback, useMemo } from '@tarojs/taro'
 import Listof from '@/listof/listof'
 import SectionBar from '@/components/common/section-bar'
 import { View } from '@tarojs/components'
@@ -48,8 +47,10 @@ const newsList = [
     id: '333',
     title: '中国发布新冠肺炎疫情信息、推进疫情防控国际合作纪事',
   },
+]
+const imageOnBottomList = [
   {
-    id: '44',
+    id: '11',
     title: '震撼！武汉230组高铁动车整装待发',
     displayMode: 'image-on-bottom',
     imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/news-6.jpeg',
@@ -159,28 +160,32 @@ const userList = [
 function HelloDaaSPage() {
   return (
     <View className='hello-daas'>
-      <SectionBar title='user' />
+
+      <SectionBar title='用户卡片' brief='displayMode：user' />
       <Listof list={userList} displayMode='user' />
 
-      <SectionBar title='card' />
+      <SectionBar title='卡片' brief='displayMode：card' />
       <Listof list={businessCardList} displayMode='card' />
 
-      <SectionBar title='card (document)' />
+      <SectionBar title='文件卡片' brief='displayMode：card，documentUrl不为空' />
       <Listof list={movieList} displayMode='card' />
 
-      <SectionBar title='image-on-top-horizontal' />
+      <SectionBar title='上图+下文字，水平滑动' brief='displayMode：image-on-top-horizontal' />
       <Listof list={newsList.slice(0, 3)} horizontal displayMode='image-on-top-horizontal' />
 
-      <SectionBar title='image-on-top-waterfall' />
+      <SectionBar title='上图+下文字 两排' brief='displayMode：image-on-top-waterfall' />
       <Listof list={newsList.slice(0, 3)} displayMode='image-on-top-waterfall' />
 
-      <SectionBar title='image-on-top' />
+      <SectionBar title='上图+下文字' brief='displayMode：image-on-top' />
       <Listof list={newsList.slice(0, 2)} displayMode='image-on-top' />
 
-      <SectionBar title='product' />
+      <SectionBar title='上文字+下图' brief='displayMode：image-on-bottom' />
+      <Listof list={imageOnBottomList} displayMode='image-on-bottom' />
+
+      <SectionBar title='商品' brief='displayMode：product' />
       <Listof list={productList} displayMode='product' />
 
-      <SectionBar title='Auto系列' />
+      <SectionBar title='Auto系列' brief='displayMode：auto|single-image|double-image|three-image' />
       <Listof list={newsList} displayMode='auto' />
     </View>
   )
