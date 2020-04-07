@@ -6,7 +6,7 @@ import classNames from 'classnames'
 
 import './styles.scss'
 
-import commerceIcon from '../assets/icon/icon_liansuo@2x.png'
+import commerceIcon from '../../assets/icon/icon_liansuo@2x.png'
 
 export default class NavigationBoxBar extends Taro.PureComponent {
   static options = {
