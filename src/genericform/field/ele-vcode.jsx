@@ -1,109 +1,85 @@
-import Taro from '@tarojs/taro'
+import Taro, { useEffect, useRef, useState } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtInput } from 'taro-ui'
-import NavigationService from '@/nice-router/navigation.service'
-import Config from '@/utils/config'
 import classNames from 'classnames'
 import { noop } from '@/nice-router/nice-router-util'
+import NavigationService from '@/nice-router/navigation.service'
+import Config from '@/utils/config'
 
 import './styles.scss'
 
-const MAX_COUNT = 10
+function EleVcode(props) {
+  const { maxCount } = props
+  const [disabled, setDisabled] = useState(false)
+  const [second, setSecond] = useState(maxCount)
+  const [mobile, setMobile] = useState(null)
 
-export default class EleVcode extends Taro.PureComponent {
-  static options = {
-    addGlobalClass: true,
-  }
+  const interval = useRef()
 
-  static defaultProps = {
-    name: '',
-    placeholder: '请输入手机号码',
-    onChange: noop,
-  }
+  useEffect(() => {
+    if (disabled) {
+      interval.current = setInterval(() => {
+        setSecond((t) => {
+          console.log('.....', t)
+          if (t === 0) {
+            setDisabled(false)
+            clearInterval(interval.current)
+            return maxCount
+          }
+          return t - 1
+        })
+      }, 1000)
+    }
+    return () => clearInterval(interval.current) // clean-up 函数，当前组件被注销时调用
+  }, [disabled])
 
-  state = {
-    disabled: false,
-    second: MAX_COUNT,
-    mobile: null,
-  }
-
-  componentWillUnmount() {
-    this.stop()
-  }
-
-  sendCode = () => {
-    if (this.state.disabled) {
+  const { onChange, name, value, placeholder, className } = props
+  const sendCode = () => {
+    if (disabled) {
       return
     }
-
-    const { mobile } = this.state
-
     if (!/^1\d{10}$/.test(mobile)) {
       Taro.showToast({ title: '请输入正确的手机号' })
       return
     }
-
-    this.setState(
-      {
-        disabled: true,
-      },
-      () => {
-        NavigationService.ajax(Config.api.VerifyCode, { mobile })
-
-        // 倒计时
-        this.interval = setInterval(() => {
-          if (this.state.second > 0) {
-            this.setState({
-              second: this.state.second - 1,
-            })
-            return
-          }
-
-          this.setState(
-            {
-              second: MAX_COUNT,
-              disabled: false,
-            },
-            () => this.stop()
-          )
-        }, 1000)
-      }
-    )
+    setDisabled(true)
+    NavigationService.ajax(Config.api.VerifyCode, { mobile })
   }
 
-  stop = () => {
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
+  const handleChange = (v) => {
+    setMobile(v)
+    onChange(v)
   }
 
-  handleChange = (value) => {
-    const { onChange } = this.props
-    this.setState({ mobile: value })
-    onChange(value)
-  }
+  const tips = disabled ? `${second}秒...` : '获取验证码'
 
-  render() {
-    const { name, placeholder, className } = this.props
-    const { disabled, second, mobile } = this.state
-    const tips = disabled ? `${second}秒...` : '获取验证码'
-
-    const rootClass = classNames('ele-vcode', className)
-    const txtClass = classNames('ele-vcode-txt', { 'ele-vcode-txt-disabled': disabled })
-    return (
-      <AtInput
-        name={name}
-        border={false}
-        type='phone'
-        placeholder={placeholder}
-        value={mobile}
-        onChange={this.handleChange}
-        className={rootClass}
-      >
-        <View className={txtClass} onClick={this.sendCode}>
-          {tips}
-        </View>
-      </AtInput>
-    )
-  }
+  const rootClass = classNames('ele-vcode', className)
+  const txtClass = classNames('ele-vcode-txt', { 'ele-vcode-txt-disabled': disabled })
+  return (
+    <AtInput
+      name={name}
+      border={false}
+      type='phone'
+      placeholder={placeholder}
+      value={value}
+      onChange={handleChange}
+      className={rootClass}
+    >
+      <View className={txtClass} onClick={sendCode}>
+        {tips}
+      </View>
+    </AtInput>
+  )
 }
+
+EleVcode.options = {
+  addGlobalClass: true,
+}
+
+EleVcode.defaultProps = {
+  name: '',
+  placeholder: '请输入手机号码',
+  onChange: noop,
+  EleVcode: 60,
+}
+export default EleVcode

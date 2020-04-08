@@ -2,8 +2,8 @@ import { Block, View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
 import classNames from 'classnames'
 import ServerImage from '@/server-image/server-image'
-import './styles.scss'
 import { isEmpty } from '@/nice-router/nice-router-util'
+import './styles.scss'
 
 function ActionFloorItem(props) {
   const { action, className } = props
@@ -35,6 +35,9 @@ function ActionFloorItem(props) {
 
 ActionFloorItem.options = {
   addGlobalClass: true,
+}
+ActionFloorItem.defaultProps = {
+  action: {},
 }
 
 export default ActionFloorItem
