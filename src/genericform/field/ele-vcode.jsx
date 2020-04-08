@@ -80,6 +80,6 @@ EleVcode.defaultProps = {
   name: '',
   placeholder: '请输入手机号码',
   onChange: noop,
-  EleVcode: 60,
+  maxCount: 60,
 }
 export default EleVcode

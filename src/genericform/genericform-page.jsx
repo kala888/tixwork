@@ -10,7 +10,7 @@ import NavigationService from '@/nice-router/navigation.service'
 import FormSteps from '@/genericform/form-steps'
 
 import './index.scss'
-import { usePageTitle, usePullDown } from '../service/use.service'
+import { usePageTitle, usePullDown } from '@/utils/use-util'
 
 function GenericformPage(props) {
   const formRef = useRef(null)

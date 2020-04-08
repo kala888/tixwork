@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import Taro, { useState } from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import { AtImagePicker, AtProgress } from 'taro-ui'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
@@ -6,70 +6,46 @@ import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import './styles.scss'
 import uploadFiles from '../../service/file-upload/file-upload.service'
 
-export default class EleImagePicker extends Taro.PureComponent {
-  static options = {
-    addGlobalClass: true,
+function EleImagePicker(props) {
+  const { value = [], onChange, maxLength, disabled, brief } = props
+  let defaultImages = []
+  if (!isEmpty(value)) {
+    const sourceFile = Array.isArray(value) ? value : [{ imageUrl: value }]
+    defaultImages = sourceFile.filter((it) => it.imageUrl).map((it) => ({ url: it.imageUrl }))
   }
 
-  static defaultProps = {
-    brief: '',
-    maxLength: 4,
-    value: [],
-    onChange: noop,
+  const [files, setFiles] = useState(defaultImages)
+  const [progress, setProgress] = useState(0)
+
+  const saveImageToForm = () => {
+    const images = files.map((it) => ({ imageUrl: it.url }))
+    onChange(images)
   }
 
-  state = {
-    files: [],
-    progress: 0,
-  }
-
-  componentDidMount() {
-    const { value = [] } = this.props
-    console.log('.....picker-did', this.props)
-    if (!isEmpty(value)) {
-      const sourceFile = Array.isArray(value) ? value : [{ imageUrl: value }]
-      const files = sourceFile.filter((it) => it.imageUrl).map((it) => ({ url: it.imageUrl }))
-      this.setState({
-        files,
-      })
-    }
-  }
-
-  saveImageToForm = () => {
-    const images = this.state.files.map((it) => ({ imageUrl: it.url }))
-    this.props.onChange(images)
-  }
-
-  uploadNewFiles = (files = []) => {
+  const uploadNewFiles = () => {
     const todoList = files.filter((it) => {
       const { url = '' } = it
       return url.startsWith('http://tmp') || url.startsWith('wxfile://tmp')
     })
 
-    const resetProgress = () => {
-      this.setState({ progress: 0 })
-    }
-
-    const onProgress = ({ progress }) => {
-      this.setState({ progress })
-    }
+    const resetProgress = () => setProgress(0)
+    const onProgress = ({ progress: progressValue }) => setProgress(progressValue)
 
     const onSuccess = (result) => {
       const { remoteFile, sourceFile } = result
-      this.setState(
-        (preState) => {
-          const newFiles = preState.files.map((it) => {
-            if (it.url === sourceFile) {
-              return {
-                url: remoteFile,
-              }
+
+      setFiles((preState) => {
+        return preState.map((it) => {
+          if (it.url === sourceFile) {
+            return {
+              url: remoteFile,
             }
-            return it
-          })
-          return { files: newFiles }
-        },
-        () => this.saveImageToForm()
-      )
+          }
+          return it
+        })
+      })
+
+      saveImageToForm()
     }
 
     const uploadFileOption = {
@@ -82,8 +58,8 @@ export default class EleImagePicker extends Taro.PureComponent {
     uploadFiles(uploadFileOption)
   }
 
-  handleFileChange = (files, operationType) => {
-    const { maxLength, disabled } = this.props
+  const handleFileChange = (changedFiles, operationType) => {
+    console.log('the item disabled', disabled)
     if (disabled) {
       Taro.showModal({
         title: '提示',
@@ -94,23 +70,15 @@ export default class EleImagePicker extends Taro.PureComponent {
     }
 
     if (operationType === 'remove') {
-      this.setState(
-        {
-          files,
-        },
-        () => this.saveImageToForm()
-      )
+      setFiles(changedFiles)
+      saveImageToForm()
       return
     }
 
     if (operationType === 'add') {
-      if (files.length < this.state.files.length || files.length <= maxLength) {
-        this.setState(
-          {
-            files,
-          },
-          () => this.uploadNewFiles(files)
-        )
+      if (changedFiles.length < files.length || changedFiles.length <= maxLength) {
+        setFiles(changedFiles)
+        uploadNewFiles()
       } else {
         Taro.showModal({
           title: '提示',
@@ -123,40 +91,43 @@ export default class EleImagePicker extends Taro.PureComponent {
     console.error('未知操作')
   }
 
-  onImageClick = (index, file) => {
+  const onImageClick = (index, file) => {
     Taro.previewImage({ urls: [file.url] })
   }
 
-  render() {
-    const { brief, maxLength } = this.props
-    const { files: imageList = [], progress } = this.state
 
-    // const { value = [] } = this.props
-    // console.log('.....picker-render', imageList, value)
+  const multiple = maxLength > 1
+  const briefText = brief || (multiple ? `最多可以上传 ${maxLength} 个文件` : '')
+  const showAddBtn = files.length < maxLength
+  const count = maxLength - files.length
 
-    const multiple = maxLength > 1
-    const briefText = brief || (multiple ? `最多可以上传 ${maxLength} 个文件` : '')
-    const showAddBtn = imageList.length < maxLength
-    const count = maxLength - imageList.length
-
-    //单行显示最大个数
-    // const length = maxLength >= 4 ? 4 : maxLength
-
-    return (
-      <View>
-        <AtImagePicker
-          className='ele-image-picker-icon'
-          count={count}
-          length={4}
-          showAddBtn={showAddBtn}
-          multiple={multiple}
-          files={imageList}
-          onChange={this.handleFileChange}
-          onImageClick={this.onImageClick}
-        />
-        <Text className='note'>{briefText}</Text>
-        {progress > 0 && <AtProgress percent={progress} />}
-      </View>
-    )
-  }
+  return (
+    <View>
+      <AtImagePicker
+        className='ele-image-picker-icon'
+        count={count}
+        length={4} //单行显示最大个数
+        showAddBtn={showAddBtn}
+        multiple={multiple}
+        files={files}
+        onChange={handleFileChange}
+        onImageClick={onImageClick}
+      />
+      <Text className='note'>{briefText}</Text>
+      {progress > 0 && <AtProgress percent={progress} />}
+    </View>
+  )
 }
+
+EleImagePicker.options = {
+  addGlobalClass: true,
+}
+
+EleImagePicker.defaultProps = {
+  brief: '',
+  maxLength: 4,
+  value: [],
+  onChange: noop,
+}
+
+export default EleImagePicker

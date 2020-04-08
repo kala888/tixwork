@@ -84,15 +84,7 @@ class MePage extends Taro.PureComponent {
         <View className='me-page-body'>
           {lineItemNavigatorList.map((it) => {
             const { id } = it
-            return (
-              <NavigationLineItem
-                key={id}
-                imageUrl={it.imageUrl}
-                title={it.title}
-                brief={it.brief}
-                linkToUrl={it.linkToUrl}
-              />
-            )
+            return <NavigationLineItem key={id} {...it} />
           })}
         </View>
       </View>
