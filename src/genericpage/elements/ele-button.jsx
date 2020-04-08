@@ -3,7 +3,7 @@ import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import classNames from 'classnames'
-import './ele.scss'
+import './styles.scss'
 
 // form中组件封装后，button 不会触发form的handle方法问题
 // https://github.com/NervJS/taro-ui/issues/96
@@ -14,35 +14,38 @@ import './ele.scss'
 //   btnType: 'share',
 //   uiType:'primary'
 // }
-export default class EleButton extends Taro.PureComponent {
-  static options = {
-    addGlobalClass: true,
+function EleButton({
+  linkToUrl,
+  openType,
+  onClick,
+  extraData,
+  title,
+  btnType,
+  size,
+  uiType,
+  customStyle,
+  className,
+  full,
+  circle,
+  onGetUserInfo,
+  children,
+}) {
+  let wxOpenType = btnType
+  if (!openType && (btnType === 'share' || btnType === 'getPhoneNumber' || btnType === 'getUserInfo')) {
+    wxOpenType = btnType
   }
 
-  static defaultProps = {
-    title: '',
-    btnType: '',
-    size: null,
-    uiType: 'primary',
-    customStyle: {},
-    full: false,
-    className: null,
-    circle: null,
-    onGetUserInfo: null,
-    extraData: {},
-  }
+  const formType = btnType === 'submit' || btnType === 'reset' ? btnType : null
 
-  handleScan = async () => {
+  const handleScan = async () => {
     const res = Taro.scanCode()
     const arg = encodeURIComponent(res.result)
-    const { linkToUrl } = this.props
     const actionPath = `${linkToUrl}${arg}/`
     console.log('I want to access ', actionPath)
     NavigationService.view(actionPath)
   }
 
-  handlePreview = async () => {
-    const { linkToUrl } = this.props
+  const handlePreview = async () => {
     console.log('preview document', linkToUrl)
     if (!linkToUrl) {
       return
@@ -58,8 +61,7 @@ export default class EleButton extends Taro.PureComponent {
     }
   }
 
-  handleDownload = async () => {
-    const { linkToUrl } = this.props
+  const handleDownload = async () => {
     if (!linkToUrl) {
       return
     }
@@ -73,8 +75,7 @@ export default class EleButton extends Taro.PureComponent {
     }
   }
 
-  handleCopy = () => {
-    const { extraData } = this.props
+  const handleCopy = () => {
     if (isNotEmpty(extraData)) {
       Taro.setClipboardData({
         data: JSON.stringify(extraData),
@@ -83,8 +84,7 @@ export default class EleButton extends Taro.PureComponent {
     }
   }
 
-  handleClick = () => {
-    const { btnType = '', linkToUrl, onClick } = this.props
+  const handleClick = () => {
     if (onClick) {
       onClick()
       return
@@ -95,19 +95,19 @@ export default class EleButton extends Taro.PureComponent {
     }
 
     if (btnType === 'open-document') {
-      this.handlePreview()
+      handlePreview()
       return
     }
     if (btnType === 'download') {
-      this.handleDownload()
+      handleDownload()
       return
     }
     if (btnType === 'copy') {
-      this.handleCopy()
+      handleCopy()
       return
     }
     if (btnType === 'scanner') {
-      this.handleScan()
+      handleScan()
       return
     }
 
@@ -115,35 +115,42 @@ export default class EleButton extends Taro.PureComponent {
     NavigationService.view(linkToUrl)
   }
 
-  render() {
-    const { title, btnType, size, uiType, customStyle, className, full, circle, onGetUserInfo } = this.props
+  const rootClass = classNames('ele-button', className)
 
-    let { openType } = this.props
-
-    if (!openType && (btnType === 'share' || btnType === 'getPhoneNumber' || btnType === 'getUserInfo')) {
-      openType = btnType
-    }
-
-    const formType = btnType === 'submit' || btnType === 'reset' ? btnType : null
-
-    const rootClass = classNames('ele-button', className)
-
-    return (
-      <AtButton
-        circle={circle}
-        type={uiType}
-        className={rootClass}
-        openType={openType}
-        formType={formType}
-        size={size}
-        full={full}
-        customStyle={customStyle}
-        onClick={this.handleClick}
-        onGetUserInfo={onGetUserInfo}
-      >
-        {title}
-        {this.props.children}
-      </AtButton>
-    )
-  }
+  return (
+    <AtButton
+      circle={circle}
+      type={uiType}
+      className={rootClass}
+      openType={wxOpenType}
+      formType={formType}
+      size={size}
+      full={full}
+      customStyle={customStyle}
+      onClick={handleClick}
+      onGetUserInfo={onGetUserInfo}
+    >
+      {title}
+      {children}
+    </AtButton>
+  )
 }
+
+EleButton.options = {
+  addGlobalClass: true,
+}
+
+EleButton.defaultProps = {
+  title: '',
+  btnType: '',
+  size: null,
+  uiType: 'primary',
+  customStyle: {},
+  full: false,
+  className: null,
+  circle: null,
+  onGetUserInfo: null,
+  extraData: {},
+}
+
+export default EleButton

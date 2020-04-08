@@ -1,0 +1,75 @@
+@import 'src/styles/theme';
+
+.listof-page {
+  background-color: $color-page-bg;
+  height: 100vh;
+}
+
+.listof-footer-tips {
+  color: $text-color-lighter;
+  z-index: 9999;
+  @extend %flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 40px;
+
+  &-line {
+    @extend %flex-1;
+    height: 2px;
+    background-color: $text-color-lighter;
+  }
+
+  &-content {
+    padding: 0 30px;
+    font-size: 30px;
+    @extend %flex-row;
+    justify-content: space-around;
+    align-items: center;
+
+    &-loading {
+      padding-right: 20px;
+    }
+  }
+}
+
+.listof-empty-message {
+  height: 400px;
+  @extend %flex-center;
+  color: $text-color-light;
+}
+
+.scroll-view-horizontal {
+  white-space: nowrap;
+}
+
+.listof-container {
+  @extend %flex-column;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 15px;
+
+  &-item {
+    width: 100%;
+    margin-top: 20px;
+    overflow: hidden;
+
+    &-wrapper {
+      width: 100%;
+    }
+  }
+
+  &-item.horizontal {
+    display: inline-block;
+    margin-right: 20px;
+    width: unset;
+  }
+}
+
+.listof-container.multiple-items {
+  flex-direction: row;
+  justify-content: space-between;
+
+  .listof-container-item {
+    flex: unset;
+  }
+}

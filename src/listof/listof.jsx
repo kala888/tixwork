@@ -6,7 +6,7 @@ import { getNumberColumns } from '@/listof/listof-helper'
 import { enrichListOfEntity, toRpx } from '../utils'
 import LineItemWrapper from './templates/line-item-wrapper'
 
-import './listof.scss'
+import './styles.scss'
 import FooterTips from './footer-tips'
 
 function Listof({
@@ -62,8 +62,6 @@ function Listof({
   const itemContainerClass = classNames('listof-container-item', { horizontal })
 
   const listofContainerItemContainerStyle = itemWidth ? { width: `${itemWidth}%` } : {}
-
-  console.log('onItemPressonItemPress1', onItemPress)
 
   return list.length === 0 ? (
     <Text className='listof-empty-message'>{emptyMessage}</Text>

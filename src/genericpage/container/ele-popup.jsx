@@ -1,26 +1,17 @@
+import { useState } from '@tarojs/taro'
 import { ScrollView } from '@tarojs/components'
-import Taro from '@tarojs/taro'
 import { AtCurtain } from 'taro-ui'
 import EleFlex from './ele-flex'
 
-export default class ElePopup extends Taro.PureComponent {
-  state = {
-    show: true,
-  }
+export default function ElePopup() {
+  const [show, setShow] = useState(true)
+  const onClose = () => setShow(false)
 
-  close = () => {
-    this.setState({
-      show: false,
-    })
-  }
-
-  render() {
-    return (
-      <AtCurtain isOpened={this.state.show} onClose={this.close}>
-        <ScrollView scrollY scrollWithAnimation scrollTop='0' style='max-height: 750rpx;'>
-          <EleFlex {...this.props} />
-        </ScrollView>
-      </AtCurtain>
-    )
-  }
+  return (
+    <AtCurtain isOpened={show} onClose={onClose}>
+      <ScrollView scrollY scrollWithAnimation scrollTop='0' style='max-height: 750rpx;'>
+        <EleFlex {...this.props} />
+      </ScrollView>
+    </AtCurtain>
+  )
 }

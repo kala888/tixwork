@@ -2,8 +2,8 @@ import { Text, View } from '@tarojs/components'
 import ServerImage from '@/server-image/server-image'
 import { formatTime } from '@/utils/index'
 import classNames from 'classnames'
-import '../listof.scss'
 import { getImageList } from '../listof-helper'
+import './styles.scss'
 
 function AutoTemplate(props) {
   const { item = {}, showImageCount = 3 } = props

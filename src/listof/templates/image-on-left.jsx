@@ -4,12 +4,12 @@ import ServerImage from '@/server-image/server-image'
 import { getImageUrl } from '../listof-helper'
 import './styles.scss'
 
-function ImageOnTop(props) {
-  const { item = {}, horizontal, waterfall } = props
+function ImageOnLeft(props) {
+  const { item = {} } = props
   const { title, brief } = item
   const src = getImageUrl(item)
 
-  const rootClass = classNames('auto', 'image-on-top', { horizontal, waterfall })
+  const rootClass = classNames('auto', 'image-on-left')
 
   return (
     <View className={rootClass}>
@@ -30,8 +30,8 @@ function ImageOnTop(props) {
   )
 }
 
-ImageOnTop.options = {
+ImageOnLeft.options = {
   addGlobalClass: true,
 }
 
-export default ImageOnTop
+export default ImageOnLeft

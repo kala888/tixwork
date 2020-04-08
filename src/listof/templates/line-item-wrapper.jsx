@@ -11,7 +11,7 @@ import ImageOnTop from './image-on-top'
 import ProductTemplate from './product-template'
 import ImageOnBottom from './image-on-bottom'
 
-import '../listof.scss'
+import './styles.scss'
 
 //不触发click事件的模板
 const ITEM_SELF_PROCESS_WHITELIST = ['document']
@@ -94,7 +94,6 @@ export default class LineItemWrapper extends Taro.PureComponent {
   render() {
     const { item = {}, displayMode, bordered = true, shadow = true, horizontal, onItemPress } = this.props
     const { displayMode: itemDisplayMode } = item
-    console.log('onItemPressonItemPress2', onItemPress)
 
     // const debouncePress = _.debounce(
     //   this.handlePress,

@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-import { isDevEnv, isH5, isWeapp } from '@/utils/index'
+import { isWeapp } from '@/utils/index'
 import Config from '@/utils/config'
 
 import NiceRouter from '@/nice-router/nice-router'

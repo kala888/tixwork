@@ -183,7 +183,7 @@ const articleList = {
     article3: {
       title: '水电改造攻略',
       brief: '水电改造是坑货么？会不会被装修公司坑？难道没有合理的高质量水电改造？让我们一起来给大家分析一下',
-      displayMode: 'singleimage',
+      displayMode: 'single-image',
       imageList: [
         { id: 1, imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg' },
         {
@@ -201,7 +201,7 @@ const articleList = {
 
     article4: {
       title: '吊顶么？',
-      displayMode: 'doubleimage',
+      displayMode: 'double-image',
       imageList: [
         { id: 1, imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg' },
         {
@@ -274,7 +274,7 @@ const productList = {
 }
 
 const waterfallList = {
-  displayMode: 'waterfall',
+  displayMode: 'image-on-top-waterfall',
   numColumns: 2,
   list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
   dataContainer: {
@@ -299,9 +299,8 @@ const waterfallList = {
 }
 
 const horizontalList = {
-  displayMode: 'waterfall',
+  displayMode: 'image-on-top-horizontal',
   horizontal: true,
-  itemClass: 'waterfall-horizontal',
   list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
   dataContainer: {
     p1: {

@@ -2,6 +2,7 @@ import Listof from '@/listof/listof'
 import SectionBar from '@/components/common/section-bar'
 import { View } from '@tarojs/components'
 import './styles.scss'
+import EleCarousel from '@/genericpage/elements/ele-carousel'
 
 const newsList = [
   {
@@ -158,10 +159,13 @@ const userList = [
 ]
 
 function HelloDaaSPage() {
+  const mockList = userList.map((it) => ({ ...it, linkToUrl: 'https://www.baidu.com/' }))
   return (
     <View className='hello-daas'>
+      <EleCarousel items={userList} />
+
       <SectionBar title='用户卡片' brief='displayMode：user' />
-      <Listof list={userList} displayMode='user' />
+      <Listof list={mockList} displayMode='user' />
 
       <SectionBar title='卡片' brief='displayMode：card' />
       <Listof list={businessCardList} displayMode='card' />

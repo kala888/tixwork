@@ -4,51 +4,49 @@ import { View } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import EleBreakLine from '@/genericpage/elements/ele-break-line'
 import ServerImage from '@/server-image/server-image'
-import './ele.scss'
+import './styles.scss'
 
-export default class EleStoreLocationBig extends Taro.PureComponent {
-  static options = {
-    addGlobalClass: true,
-  }
-
-  static propTypes = {
-    imageUrl: PropTypes.string.isRequired,
-    logo: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    phoneNumber: PropTypes.string,
-  }
-
-  handleMakeCall = () => {
-    const { phoneNumber } = this.props
+function EleStoreLocationBig(props) {
+  const { phoneNumber, imageUrl, logo, name, address } = props
+  const handleMakeCall = () => {
     if (phoneNumber) {
       Taro.makePhoneCall({ phoneNumber })
     }
   }
 
-  render() {
-    const { imageUrl, logo, name, address } = this.props
-
-    return (
-      <View className='store-location-big'>
-        <View className='store-location-big-face-image'>
-          <ServerImage src={imageUrl} />
+  return (
+    <View className='store-location-big'>
+      <View className='store-location-big-face-image'>
+        <ServerImage src={imageUrl} />
+      </View>
+      <View className='store-location-big-title'>
+        <View className='store-location-big-title-logo'>
+          <ServerImage customStyle={{ width: '100%', height: '100%' }} src={logo} />
         </View>
-        <View className='store-location-big-title'>
-          <View className='store-location-big-title-logo'>
-            <ServerImage customStyle={{ width: '100%', height: '100%' }} src={logo} />
-          </View>
-          <View>{name}</View>
-        </View>
-        <EleBreakLine />
-        <View className='store-location-big-content' onClick={this.handleMakeCall}>
-          <AtIcon value='map-pin' size={18} color='orangered' />
-          <View className='store-location-big-content-address'>{address}</View>
-          <View className='store-location-big-content-icon'>
-            <AtIcon value='phone' size={18} />
-          </View>
+        <View>{name}</View>
+      </View>
+      <EleBreakLine />
+      <View className='store-location-big-content' onClick={handleMakeCall}>
+        <AtIcon value='map-pin' size={18} color='orangered' />
+        <View className='store-location-big-content-address'>{address}</View>
+        <View className='store-location-big-content-icon'>
+          <AtIcon value='phone' size={18} />
         </View>
       </View>
-    )
-  }
+    </View>
+  )
 }
+
+EleStoreLocationBig.options = {
+  addGlobalClass: true,
+}
+
+EleStoreLocationBig.propTypes = {
+  imageUrl: PropTypes.string.isRequired,
+  logo: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  phoneNumber: PropTypes.string,
+}
+
+export default EleStoreLocationBig

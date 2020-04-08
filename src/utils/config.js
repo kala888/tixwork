@@ -11,8 +11,6 @@ const niceRouterConfig = {
   backendRouterPageKeyBlackList: ['refreshPage/', 'goBack/', 'goPrevious/'],
   backendRouterPageBlackList: ['NetworkException', 'EditProfileForm', 'Login', 'Me', 'UserDetail'],
   api: {
-    GenericPageMock: 'mock/',
-
     FooterHome: 'viewHomepage/',
     FooterMe: 'customerViewDashboard/',
     Login: 'clientLogin/',

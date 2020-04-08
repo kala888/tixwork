@@ -1,6 +1,6 @@
 import { Text, View } from '@tarojs/components'
 import ServerImage from '@/server-image/server-image'
-import '../listof.scss'
+import './styles.scss'
 
 function UserTemplate(props) {
   const { item = {} } = props

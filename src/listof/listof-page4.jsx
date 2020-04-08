@@ -7,7 +7,7 @@ import { ajaxPullDownRefresh } from '@/utils/index'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import CustomerTabs from '@/components/common/customer-tabs'
 import Listof from './listof'
-import './listof.scss'
+import './styles.scss'
 
 @connect(({ listofpage4 }) => ({ ...listofpage4 }))
 class ListofPage4 extends Taro.PureComponent {

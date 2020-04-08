@@ -1,6 +1,6 @@
 import EleCard from '@/genericpage/elements/ele-card'
 import { View } from '@tarojs/components'
-import '../listof.scss'
+import './styles.scss'
 
 function CardTemplate(props) {
   const { item = {} } = props

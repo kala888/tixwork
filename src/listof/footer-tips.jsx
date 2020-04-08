@@ -1,7 +1,7 @@
 import { Block, View } from '@tarojs/components'
 import { AtActivityIndicator } from 'taro-ui'
 
-import './listof.scss'
+import './styles.scss'
 
 function FooterTips(props) {
   const { listMeta, loading, listLength, isBigList } = props
