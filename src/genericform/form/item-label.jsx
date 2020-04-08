@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import isObject from 'lodash/isObject'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { AtActionSheet, AtIcon } from 'taro-ui'
-import { useVisible } from '@/genericform/field/use-visible'
+import { useVisible } from '@/nice-router/use-visible'
 import './styles.scss'
 
 function ItemLabel(props) {

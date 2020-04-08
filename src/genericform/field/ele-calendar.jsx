@@ -3,7 +3,7 @@ import { Picker } from '@tarojs/components'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { AtActionSheet, AtActionSheetItem, AtCalendar } from 'taro-ui'
 import { formatTime, transToDate } from '@/utils/index'
-import { useVisible } from '@/genericform/field/use-visible'
+import { useVisible } from '@/nice-router/use-visible'
 import ActionField from './action-field'
 
 function EleCalendar(props) {

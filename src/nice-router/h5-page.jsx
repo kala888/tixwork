@@ -1,10 +1,16 @@
-import Taro from '@tarojs/taro'
-import { WebView } from '@tarojs/components'
+import { View, WebView } from '@tarojs/components'
+import { useVisible } from '@/nice-router/use-visible'
+import { AtActivityIndicator } from 'taro-ui'
 
-export default class H5Page extends Taro.PureComponent {
-  render() {
-    const { uri = false } = this.$router.params || {}
-    console.log('action path in H5', uri)
-    return uri && <WebView src={uri} />
-  }
+export default function H5Page() {
+  const { visible, show, close } = useVisible(true)
+  const { uri = false } = this.$router.params || {}
+  console.log('action path in H5', uri)
+  show()
+  return (
+    <View>
+      <AtActivityIndicator isOpened={visible} size={50} mode='center' />
+      <WebView src={uri} onLoad={close} />
+    </View>
+  )
 }

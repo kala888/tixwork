@@ -1,7 +1,7 @@
 import { Text, View } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
 import classNames from 'classnames'
-import { useVisible } from '@/genericform/field/use-visible'
+import { useVisible } from '@/nice-router/use-visible'
 import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 
 import './style.scss'
