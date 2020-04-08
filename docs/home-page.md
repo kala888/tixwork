@@ -5,28 +5,6 @@
 
 #### 设计目标
 
-    路由到home-page.js，同时支持有些客户想要的welcome page。
+    路由到home-page.js
 
 #### 如何使用 welcome
-
- home请求返回的数据，包含一个特殊的对象
-
-```
-    {
-        ....
-        welcomeSlides:{
-            slideList:[{
-                id:'111',
-                imageUrl:'https://.......'
-            }],
-            version: 12
-        }
-        ....
-    }
-```
-
-小程序部分会比较local本地version信息来决定，是否向C端展示Welcome
-
-#### 相关的代码文件
-
-home-page.jsx, home.model.js, welcome-carousel.jsx, viewmapping.config.js

@@ -1,4 +1,3 @@
-import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
@@ -23,36 +22,33 @@ function transToDoubleItemList(list = []) {
   return newList
 }
 
-export default class TxtTable extends Taro.PureComponent {
-  render() {
-    const { list = [], maxLine } = this.props
-    const doubleItemList = transToDoubleItemList(list)
-    const valueCls = classNames('info-row-cell-value', {
-      'info-row-cell-2lines': maxLine === 2,
-      'info-row-cell-3lines': maxLine === 3,
-      'info-row-cell-4lines': maxLine === 4,
-    })
-    return (
-      <View className='txt-table'>
-        {doubleItemList.map((it) => {
-          const { id, left, right } = it
+export default function TxtTable(list = [], maxLine) {
+  const doubleItemList = transToDoubleItemList(list)
+  const valueCls = classNames('info-row-cell-value', {
+    'info-row-cell-2lines': maxLine === 2,
+    'info-row-cell-3lines': maxLine === 3,
+    'info-row-cell-4lines': maxLine === 4,
+  })
+  return (
+    <View className='txt-table'>
+      {doubleItemList.map((it) => {
+        const { id, left, right } = it
 
-          return (
-            <View key={id} className='info-row'>
-              <View className='info-row-cell'>
-                <View className='info-row-cell-title'>{left.title}</View>
-                <View className={valueCls}>{left.value}</View>
-              </View>
-              {isNotEmpty(right) && (
-                <View className='info-row-cell'>
-                  <View className='info-row-cell-title'>{right.title}</View>
-                  <View className={valueCls}>{right.value}</View>
-                </View>
-              )}
+        return (
+          <View key={id} className='info-row'>
+            <View className='info-row-cell'>
+              <View className='info-row-cell-title'>{left.title}</View>
+              <View className={valueCls}>{left.value}</View>
             </View>
-          )
-        })}
-      </View>
-    )
-  }
+            {isNotEmpty(right) && (
+              <View className='info-row-cell'>
+                <View className='info-row-cell-title'>{right.title}</View>
+                <View className={valueCls}>{right.value}</View>
+              </View>
+            )}
+          </View>
+        )
+      })}
+    </View>
+  )
 }

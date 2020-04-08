@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import EleFab from '@/genericpage/elements/ele-fab'
 
 function Container(props) {
-  console.log('base page configuration')
-
   return (
     <View className='container'>
       <EleFab />

@@ -1,38 +1,32 @@
-import Taro from '@tarojs/taro'
-import { Button, Image, View } from '@tarojs/components'
+import { Image, View } from '@tarojs/components'
+import { AtButton } from 'taro-ui'
+
 import NavigationService from './navigation.service'
-
 import networkImage from './network.png'
+import './styles.scss'
 
-export default class NetworkExceptionPage extends Taro.PureComponent {
-  onRefresh = () => {
-    NavigationService.dispatch('niceRouter/retry')
-  }
-
-  render() {
-    return (
-      <View
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#fff',
-        }}
-      >
-        <Image
-          style={{
-            width: '200px',
-            height: '200px',
-          }}
-          src={networkImage}
-        />
-        <View style={{ color: '#999', margin: '20px 0px' }}>网络状态待提升，点击重试</View>
-        <Button style={{ color: '#999' }} onClick={this.onRefresh}>
-          查看解决方案
-        </Button>
-      </View>
-    )
-  }
+function refresh() {
+  NavigationService.dispatch('niceRouter/retry')
 }
+
+function NetworkExceptionPage() {
+  return (
+    <View className='network-exception-page'>
+      <View className='network-exception-page-image'>
+        <Image style='width:100%;height:100%' src={networkImage} mode='widthFix' />
+      </View>
+      <View className='network-exception-page-tips'>
+        <View className='network-exception-page-tips-txt'>网络状态待提升</View>
+        <View className='network-exception-page-tips-btn'>
+          <AtButton type='primary' full onClick={refresh}>
+            查看解决方案
+          </AtButton>
+        </View>
+      </View>
+    </View>
+  )
+}
+
+NetworkExceptionPage.onPullDownRefresh = refresh
+
+export default NetworkExceptionPage
