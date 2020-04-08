@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/nice-router/use-visible'
+import { useVisible } from '@/service/use.service'
 import { AtIcon, AtToast } from 'taro-ui'
 
 import './styles.scss'

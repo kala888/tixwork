@@ -95,7 +95,6 @@ function EleImagePicker(props) {
     Taro.previewImage({ urls: [file.url] })
   }
 
-
   const multiple = maxLength > 1
   const briefText = brief || (multiple ? `最多可以上传 ${maxLength} 个文件` : '')
   const showAddBtn = files.length < maxLength

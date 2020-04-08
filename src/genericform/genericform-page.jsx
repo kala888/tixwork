@@ -8,9 +8,9 @@ import isNil from 'lodash/isNil'
 import { isEmpty } from '@/nice-router/nice-router-util'
 import NavigationService from '@/nice-router/navigation.service'
 import FormSteps from '@/genericform/form-steps'
+import { usePageTitle, usePullDown } from '@/service/use.service'
 
 import './index.scss'
-import { usePageTitle, usePullDown } from '@/utils/use-util'
 
 function GenericformPage(props) {
   const formRef = useRef(null)

@@ -1,5 +1,5 @@
 import { View, WebView } from '@tarojs/components'
-import { useVisible } from '@/nice-router/use-visible'
+import { useVisible } from '@/service/use.service'
 import { AtActivityIndicator } from 'taro-ui'
 
 export default function H5Page() {

@@ -8,10 +8,19 @@ import { connect } from '@tarojs/redux'
 // TODO 这页面应该是一个特殊的listof
 
 function ObjectPickerPage(props) {
-
   const [keyword, setKeyword] = useState('')
 
-  const { searchUrl, list, listMeta, displayMode, emptyMessage, style, dataContainer, articleList, articleListMeta } = props
+  const {
+    searchUrl,
+    list,
+    listMeta,
+    displayMode,
+    emptyMessage,
+    style,
+    dataContainer,
+    articleList,
+    articleListMeta,
+  } = props
 
   // TODO 未处理？
   // componentDidMount()

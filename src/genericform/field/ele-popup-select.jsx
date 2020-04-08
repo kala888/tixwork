@@ -1,5 +1,5 @@
 import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtIcon, AtRadio } from 'taro-ui'
-import { useVisible } from '@/nice-router/use-visible'
+import { useVisible } from '@/service/use.service'
 import { View } from '@tarojs/components'
 import isString from 'lodash/isString'
 import { isEmpty } from '@/nice-router/nice-router-util'

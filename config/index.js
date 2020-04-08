@@ -41,6 +41,7 @@ const config = {
   alias: {
     '@/components': path.resolve(__dirname, '..', 'src/components'),
     '@/utils': path.resolve(__dirname, '..', 'src/utils'),
+    '@/service': path.resolve(__dirname, '..', 'src/service'),
 
     '@/nice-router': path.resolve(__dirname, '..', 'src/nice-router'),
     '@/genericpage': path.resolve(__dirname, '..', 'src/genericpage'),

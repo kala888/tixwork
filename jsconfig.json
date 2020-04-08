@@ -4,6 +4,7 @@
     "paths": {
       "@/components/*": ["./src/components/*"],
       "@/utils/*": ["./src/utils/*"],
+      "@/service/*": ["./src/service/*"],
 
       "@/nice-router/*": ["./src/nice-router/*"],
       "@/genericpage/*": ["./src/genericpage/*"],

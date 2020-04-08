@@ -2,7 +2,7 @@ import { useShareAppMessage } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import Config from '@/utils/config'
-import { usePageTitle, usePullDown } from '@/utils/use-util'
+import { usePageTitle, usePullDown } from '@/service/use.service'
 
 import EleFlex from './container/ele-flex'
 import './styles.scss'
@@ -18,7 +18,6 @@ function GenericPageBase(props) {
   //   const uri = decodeURIComponent(q)
   //   NavigationService.view(uri)
   // }
-
 
   useShareAppMessage((res) => {
     if (res.from === 'button') {

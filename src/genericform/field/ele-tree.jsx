@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components'
 import { AtActionSheet, AtIcon } from 'taro-ui'
 import ActionField from '@/genericform/field/action-field'
-import { useVisible } from '@/nice-router/use-visible'
+import { useVisible } from '@/service/use.service'
 import Tree from '../field/tree/tree'
 import './styles.scss'
 
