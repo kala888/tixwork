@@ -22,6 +22,7 @@ export default class LineItemWrapper extends Taro.PureComponent {
   }
   static defaultProps = {
     displayMode: 'auto',
+    onItemPress: null,
   }
   static externalClasses = ['my-class']
 
@@ -91,8 +92,10 @@ export default class LineItemWrapper extends Taro.PureComponent {
   }
 
   render() {
-    const { item = {}, displayMode, bordered = true, shadow = true, horizontal } = this.props
+    const { item = {}, displayMode, bordered = true, shadow = true, horizontal, onItemPress } = this.props
     const { displayMode: itemDisplayMode } = item
+    console.log('onItemPressonItemPress2', onItemPress)
+
     // const debouncePress = _.debounce(
     //   this.handlePress,
     //   this.props.delay || 300,

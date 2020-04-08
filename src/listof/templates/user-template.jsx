@@ -1,27 +1,25 @@
-import Taro from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import ServerImage from '@/server-image/server-image'
 import '../listof.scss'
 
-export default class UserTemplate extends Taro.PureComponent {
-  static options = {
-    addGlobalClass: true,
-  }
+function UserTemplate(props) {
+  const { item = {} } = props
+  const { title, brief, imageUrl } = item
 
-  render() {
-    const { item = {} } = this.props
-    const { title, brief, imageUrl } = item
-
-    return (
-      <View className='user'>
-        <View className='user-avatar' onClick={this.handleOpenProfile}>
-          <ServerImage my-class='user-avatar-image' src={imageUrl} />
-        </View>
-        <View className='user-info'>
-          <Text className='user-info-title'>{title}</Text>
-          <Text className='user-info-brief'>{brief}</Text>
-        </View>
+  return (
+    <View className='user'>
+      <View className='user-avatar'>
+        <ServerImage my-class='user-avatar-image' src={imageUrl} />
       </View>
-    )
-  }
+      <View className='user-info'>
+        <Text className='user-info-title'>{title}</Text>
+        <Text className='user-info-brief'>{brief}</Text>
+      </View>
+    </View>
+  )
 }
+
+UserTemplate.options = {
+  addGlobalClass: true,
+}
+export default UserTemplate

@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 import classNames from 'classnames'
 import './ele.scss'
 
@@ -28,6 +29,7 @@ export default class EleButton extends Taro.PureComponent {
     className: null,
     circle: null,
     onGetUserInfo: null,
+    extraData: {},
   }
 
   handleScan = async () => {
@@ -71,6 +73,16 @@ export default class EleButton extends Taro.PureComponent {
     }
   }
 
+  handleCopy = () => {
+    const { extraData } = this.props
+    if (isNotEmpty(extraData)) {
+      Taro.setClipboardData({
+        data: JSON.stringify(extraData),
+        success: () => Taro.showToast({ title: '已经复制到内存, 请分享或在浏览器中打开', icon: 'none' }),
+      })
+    }
+  }
+
   handleClick = () => {
     const { btnType = '', linkToUrl, onClick } = this.props
     if (onClick) {
@@ -88,6 +100,10 @@ export default class EleButton extends Taro.PureComponent {
     }
     if (btnType === 'download') {
       this.handleDownload()
+      return
+    }
+    if (btnType === 'copy') {
+      this.handleCopy()
       return
     }
     if (btnType === 'scanner') {

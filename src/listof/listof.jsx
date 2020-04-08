@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import { useState } from '@tarojs/taro'
 import { ScrollView, Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import NavigationService from '@/nice-router/navigation.service'
@@ -9,130 +9,118 @@ import LineItemWrapper from './templates/line-item-wrapper'
 import './listof.scss'
 import FooterTips from './footer-tips'
 
-export default class Listof extends Taro.PureComponent {
-  static options = {
-    addGlobalClass: true,
-  }
-
-  static defaultProps = {
-    dataContainer: {},
-    list: [],
-    listMeta: {},
-    displayMode: 'auto',
-    emptyMessage: '',
-    isBigList: false,
-    height: null,
-    numColumns: null,
-    horizontal: false,
-    bordered: true,
-    className: null,
-  }
-
-  state = {
-    loading: false,
-  }
-
-  startLoading = (cb) => {
-    this.setState({ loading: true }, cb)
-  }
-
-  stopLoading = () => {
-    this.setState({ loading: false })
-  }
-
-  loadMore = () => {
+function Listof({
+  list: listRefs,
+  listMeta,
+  displayMode,
+  emptyMessage,
+  isBigList,
+  height,
+  style = {},
+  dataContainer,
+  horizontal,
+  bordered,
+  containerClass,
+  onItemPress = null,
+  className,
+}) {
+  const [loading, setLoading] = useState(false)
+  const loadMore = () => {
     console.log('on-end1')
-    if (!this.state.loading) {
-      const { listMeta } = this.props
+    if (!loading) {
       if (listMeta.hasNextPage) {
-        this.startLoading(() =>
-          NavigationService.dispatch('listof/fetchNext', {
-            listMeta,
-            onSuccess: () => {
-              console.log('xxxx set loading to false')
-              this.stopLoading()
-            },
-          })
-        )
+        setLoading(true)
+        NavigationService.dispatch('listof/fetchNext', {
+          listMeta,
+          onSuccess: () => {
+            console.log('xxxx set loading to false')
+            setLoading(false)
+          },
+        })
       }
     }
   }
 
-  render() {
-    const {
-      list: listRefs,
-      listMeta,
-      displayMode,
-      emptyMessage,
-      isBigList,
-      height,
-      style = {},
-      dataContainer,
-      horizontal,
-      bordered,
-      containerClass,
-      onItemPress,
-      className,
-    } = this.props
+  const list = enrichListOfEntity({ dataContainer, targetList: listRefs })
 
-    const list = enrichListOfEntity({ dataContainer, targetList: listRefs })
+  const numColumns = getNumberColumns(displayMode)
+  const itemWidth = numColumns ? 100 / numColumns - 1 : null
 
-    const numColumns = getNumberColumns(displayMode)
-    const itemWidth = numColumns ? 100 / numColumns - 1 : null
+  const scrollViewStyle = height ? { height: toRpx(height) } : {}
+  const scrollViewClass = classNames(className, {
+    'scroll-view-horizontal': horizontal,
+  })
 
-    const scrollViewStyle = height ? { height: toRpx(height) } : {}
-    const scrollViewClass = classNames(className, {
-      'scroll-view-horizontal': horizontal,
-    })
+  const listofContainerClass = classNames(
+    {
+      'listof-container': !horizontal,
+      'multiple-items': itemWidth,
+    },
+    containerClass
+  )
 
-    const listofContainerClass = classNames(
-      {
-        'listof-container': !horizontal,
-        'multiple-items': itemWidth,
-      },
-      containerClass
-    )
+  const itemContainerClass = classNames('listof-container-item', { horizontal })
 
-    const itemContainerClass = classNames('listof-container-item', { horizontal })
+  const listofContainerItemContainerStyle = itemWidth ? { width: `${itemWidth}%` } : {}
 
-    const listofContainerItemContainerStyle = itemWidth ? { width: `${itemWidth}%` } : {}
+  console.log('onItemPressonItemPress1', onItemPress)
 
-    return list.length === 0 ? (
-      <Text className='listof-empty-message'>{emptyMessage}</Text>
-    ) : (
-      <ScrollView
-        scrollY={!horizontal}
-        scrollX={horizontal}
-        onScrollToLower={this.loadMore}
-        className={scrollViewClass}
-        style={{ ...scrollViewStyle }}
-      >
-        <View className={listofContainerClass} style={style}>
-          {list.map((item, index) => {
-            const { id } = item
-            return (
-              <View key={id} className={itemContainerClass} style={listofContainerItemContainerStyle}>
-                <LineItemWrapper
-                  my-class='listof-container-item-wrapper'
-                  index={index}
-                  item={item}
-                  onItemPress={onItemPress}
-                  displayMode={displayMode}
-                  bordered={bordered}
-                  horizontal={horizontal}
-                />
-              </View>
-            )
-          })}
-        </View>
-        <FooterTips
-          isBigList={isBigList}
-          listMeta={listMeta}
-          loading={this.state.loading}
-          listLength={list.length}
-          loadMore={this.loadMore}
-        />
-      </ScrollView>
-    )
-  }
+  return list.length === 0 ? (
+    <Text className='listof-empty-message'>{emptyMessage}</Text>
+  ) : (
+    <ScrollView
+      scrollY={!horizontal}
+      scrollX={horizontal}
+      onScrollToLower={loadMore}
+      className={scrollViewClass}
+      style={{ ...scrollViewStyle }}
+    >
+      <View className={listofContainerClass} style={style}>
+        {list.map((item, index) => {
+          const { id } = item
+          return (
+            <View key={id} className={itemContainerClass} style={listofContainerItemContainerStyle}>
+              <LineItemWrapper
+                my-class='listof-container-item-wrapper'
+                index={index}
+                item={item}
+                onItemPress={onItemPress}
+                displayMode={displayMode}
+                bordered={bordered}
+                horizontal={horizontal}
+              />
+            </View>
+          )
+        })}
+      </View>
+      <FooterTips
+        isBigList={isBigList}
+        listMeta={listMeta}
+        loading={loading}
+        listLength={list.length}
+        loadMore={loadMore}
+      />
+    </ScrollView>
+  )
 }
+
+Listof.options = {
+  addGlobalClass: true,
+}
+
+Listof.defaultProps = {
+  dataContainer: {},
+  list: [],
+  listMeta: {},
+  displayMode: 'auto',
+  emptyMessage: '',
+  isBigList: false,
+  height: null,
+  numColumns: null,
+  horizontal: false,
+  bordered: true,
+  className: null,
+  onItemPress: null,
+}
+
+export default Listof
