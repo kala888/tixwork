@@ -1,4 +1,3 @@
-import Taro from '@tarojs/taro'
 import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import isObject from 'lodash/isObject'
@@ -10,31 +9,30 @@ import './styles.scss'
 
 const OBJECT_PICKER_PAGE = '/genericform/object-picker-page'
 
-export default class ObjectPicker extends Taro.PureComponent {
-  static options = {
-    addGlobalClass: true,
-  }
-  static defaultProps = {
-    onChange: noop,
-  }
+function EleObjectPicker(props) {
+  const { linkToUrl, onChange, value, placeholder, disabled } = props
 
-  goObjectPickerPage = async () => {
-    const { linkToUrl, onChange } = this.props
+  const goObjectPickerPage = async () => {
     const item = await NavigationService.navigate(OBJECT_PICKER_PAGE, { linkToUrl })
     if (!isEmpty(item)) {
       onChange(item)
     }
   }
-
-  render() {
-    const { value, placeholder, disabled } = this.props
-    let displayName = isObject(value) ? value.title : value
-    return (
-      <ActionField onClick={this.goObjectPickerPage} disabled={disabled} value={displayName} placeholder={placeholder}>
-        <View className='action-field-picker' onClick={this.goObjectPickerPage}>
-          <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
-        </View>
-      </ActionField>
-    )
-  }
+  let displayName = isObject(value) ? value.title : value
+  return (
+    <ActionField onClick={goObjectPickerPage} disabled={disabled} value={displayName} placeholder={placeholder}>
+      <View className='action-field-picker' onClick={goObjectPickerPage}>
+        <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
+      </View>
+    </ActionField>
+  )
 }
+
+EleObjectPicker.options = {
+  addGlobalClass: true,
+}
+EleObjectPicker.defaultProps = {
+  onChange: noop,
+}
+
+export default EleObjectPicker

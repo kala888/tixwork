@@ -111,7 +111,7 @@ const pageData = {
           ],
         },
         {
-          name: '11-your-favorite',
+          name: '2-your-favorite',
           label: '爱好222',
           type: 'multi-select',
           placeholder: '请选择你的最爱22222',
@@ -131,7 +131,7 @@ const pageData = {
           ],
         },
         {
-          name: '2-real-name',
+          name: '3-real-name',
           label: '姓名',
           type: 'text',
           placeholder: '请输入您的真实姓名',
@@ -151,7 +151,7 @@ const pageData = {
           ],
         },
         {
-          name: '3-age',
+          name: '4-age',
           label: '年龄',
           type: 'integer',
           placeholder: '请输入您的年龄',
@@ -175,7 +175,7 @@ const pageData = {
           ],
         },
         {
-          name: '4-gender',
+          name: '5-gender',
           label: '性别',
           type: 'boolean',
 
@@ -201,7 +201,7 @@ const pageData = {
       title: '第二组',
       fieldList: [
         {
-          name: '5-height',
+          name: '6-height',
           label: '身高（cm）',
           type: 'double',
           placeholder: '输入身高',
@@ -217,7 +217,7 @@ const pageData = {
           ],
         },
         {
-          name: '6-deposit',
+          name: '7-deposit',
           label: '存款',
           type: 'money',
           placeholder: '输入存款余额',
@@ -231,7 +231,7 @@ const pageData = {
           ],
         },
         {
-          name: '7-start-date',
+          name: '8-start-date',
           label: '开始日期',
 
           type: 'date',
@@ -245,7 +245,7 @@ const pageData = {
           ],
         },
         {
-          name: '8-date-time',
+          name: '9-date-time',
           label: '约会时间',
           type: 'datetime',
           value: 1585278389758,
@@ -258,20 +258,13 @@ const pageData = {
           ],
         },
         {
-          name: '9-avatar',
-          label: '头像',
-          type: 'image',
-          placeholder: '这里是你的头像',
-          maxLength: 3,
-          value: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
-        },
-        {
-          name: '10-photos',
+          name: '11-photos',
           label: '生活照',
 
           type: 'image',
           placeholder: '请详细描述一下你所有的学习经历',
           maxLength: 8,
+          value: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/avatar-3.jpg',
           rules: [
             {
               required: true,
@@ -280,7 +273,14 @@ const pageData = {
           ],
         },
         {
-          name: '11-job-title',
+          name: '10-avatar',
+          label: '头像',
+          type: 'image',
+          placeholder: '这里是你的头像',
+          maxLength: 3,
+        },
+        {
+          name: '12-job-title',
           label: '工种',
 
           type: 'single-select',
@@ -293,7 +293,7 @@ const pageData = {
           ],
         },
         {
-          name: '12-description',
+          name: '13-description',
           label: '详细描述',
 
           type: 'longtext',
@@ -310,7 +310,7 @@ const pageData = {
           ],
         },
         {
-          name: '13-user-selector',
+          name: '14-user-selector',
           label: '选工长',
 
           type: 'object-picker',

@@ -1,105 +1,91 @@
-import Taro from '@tarojs/taro'
+import { useState } from '@tarojs/taro'
 import { Picker } from '@tarojs/components'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { AtActionSheet, AtActionSheetItem, AtCalendar } from 'taro-ui'
 import { formatTime, transToDate } from '@/utils/index'
+import { useVisible } from '@/genericform/field/use-visible'
 import ActionField from './action-field'
 
-export default class EleCalendar extends Taro.PureComponent {
-  static defaultProps = {
-    placeholder: '请选择',
-    onChange: noop,
-    mode: 'date',
-    // mode: 'date-time',
-    value: '',
-    disabled: false,
+function EleCalendar(props) {
+  const [date, setDate] = useState('')
+  const [showCalendar, setShowCalendar] = useState(true)
+  const { visible, show: showPopup, close: closePopup } = useVisible(false)
+  const { mode, onChange, placeholder, label, value, disabled } = props
+
+  const show = () => {
+    showPopup()
+    setShowCalendar(true)
+  }
+  const close = () => {
+    closePopup()
+    setShowCalendar(false)
   }
 
-  state = {
-    date: '',
-    visible: false,
-    isCalendarVisible: true,
-  }
-
-  show = () => {
-    this.setState({
-      visible: true,
-      isCalendarVisible: true,
-    })
-  }
-
-  close = () => {
-    this.setState({
-      visible: false,
-      isCalendarVisible: true,
-    })
-  }
-
-  handleDateSelected = ({ value }) => {
-    const { mode } = this.props
-    const { start: date } = value
-    this.close()
+  const handleDateSelected = (e) => {
+    const { start: startDate } = e.value
+    close()
 
     if (mode === 'date') {
-      this.props.onChange(date)
+      onChange(startDate)
       return
     }
-    this.setState({
-      date,
-    })
+    setDate(startDate)
   }
 
-  handleTimeChange = (e) => {
-    const { date } = this.state
+  const handleTimeChange = (e) => {
     const {
       detail: { value: time },
     } = e
-    this.props.onChange(`${date} ${time}`)
+    onChange(`${date} ${time}`)
   }
 
-  getDateTime = (value) => {
-    const { mode } = this.props
+  const getDateTime = () => {
     const dateValue = transToDate(value)
     if (dateValue) {
       const fmt = mode === 'date-time' ? 'yyyy-MM-dd HH:mm' : 'yyyy-MM-dd'
       const displayValue = formatTime(dateValue, fmt)
-      let [date, time] = displayValue.split(' ')
+      let [displayDate, displayTime] = displayValue.split(' ')
       return {
         displayValue,
-        date,
-        time,
+        displayDate,
+        displayTime,
       }
     }
 
     if (mode === 'date-time' && isEmpty(value)) {
       return {
-        time: formatTime(Date.now(), 'HH:mm'),
+        displayTime: formatTime(Date.now(), 'HH:mm'),
       }
     }
     return {}
   }
 
-  render() {
-    const { isCalendarVisible, visible } = this.state
-    const { placeholder, label, value, mode, disabled } = this.props
-    const { displayValue, date, time } = this.getDateTime(value)
+  const { displayValue, displayDate, displayTime } = getDateTime()
 
-    return (
-      <ActionField onClick={this.show} disabled={disabled} value={displayValue} placeholder={placeholder}>
-        <AtActionSheet title={label} onClose={this.close} isOpened={visible} cancelText='取消'>
-          <AtActionSheetItem>
-            {mode === 'date' && <AtCalendar isVertical currentDate={date} onSelectDate={this.handleDateSelected} />}
+  return (
+    <ActionField onClick={show} disabled={disabled} value={displayValue} placeholder={placeholder}>
+      <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText='取消'>
+        <AtActionSheetItem>
+          {mode === 'date' && <AtCalendar isVertical currentDate={displayDate} onSelectDate={handleDateSelected} />}
 
-            {mode === 'date-time' && (
-              <Picker mode='time' value={time} onChange={this.handleTimeChange} onCancel={this.close}>
-                {isCalendarVisible && (
-                  <AtCalendar isVertical currentDate={date} onSelectDate={this.handleDateSelected} />
-                )}
-              </Picker>
-            )}
-          </AtActionSheetItem>
-        </AtActionSheet>
-      </ActionField>
-    )
-  }
+          {mode === 'date-time' && (
+            <Picker mode='time' value={displayTime} onChange={handleTimeChange} onCancel={close}>
+              {showCalendar && <AtCalendar isVertical currentDate={date} onSelectDate={handleDateSelected} />}
+            </Picker>
+          )}
+        </AtActionSheetItem>
+      </AtActionSheet>
+    </ActionField>
+  )
 }
+
+EleCalendar.defaultProps = {
+  placeholder: '请选择',
+  onChange: noop,
+  mode: 'date',
+  // mode: 'date-time',
+  value: '',
+  disabled: false,
+}
+
+export default EleCalendar

@@ -25,6 +25,7 @@ export default class EleImagePicker extends Taro.PureComponent {
 
   componentDidMount() {
     const { value = [] } = this.props
+    console.log('.....picker-did', this.props)
     if (!isEmpty(value)) {
       const sourceFile = Array.isArray(value) ? value : [{ imageUrl: value }]
       const files = sourceFile.filter((it) => it.imageUrl).map((it) => ({ url: it.imageUrl }))
@@ -129,6 +130,9 @@ export default class EleImagePicker extends Taro.PureComponent {
   render() {
     const { brief, maxLength } = this.props
     const { files: imageList = [], progress } = this.state
+
+    const { value = [] } = this.props
+    console.log('.....picker-render', imageList, value)
 
     const multiple = maxLength > 1
     const briefText = brief || (multiple ? `最多可以上传 ${maxLength} 个文件` : '')

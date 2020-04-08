@@ -13,7 +13,7 @@ import { toBoolean } from '@/nice-router/nice-router-util'
 //   title: '女',
 //   value: 'false',
 // }]
-const EleSwitch = (props) => {
+function EleSwitch(props) {
   const { value = false, candidateValues = [], disabled, ...others } = props
   const checked = toBoolean(value)
   const selected = candidateValues.find((it) => toBoolean(it.value) === checked)
@@ -34,4 +34,5 @@ const EleSwitch = (props) => {
     </View>
   )
 }
+
 export default EleSwitch

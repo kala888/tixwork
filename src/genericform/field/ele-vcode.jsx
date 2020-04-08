@@ -8,7 +8,7 @@ import { noop } from '@/nice-router/nice-router-util'
 
 import './styles.scss'
 
-const MAX_COUNT = 5
+const MAX_COUNT = 10
 
 export default class EleVcode extends Taro.PureComponent {
   static options = {
@@ -79,6 +79,7 @@ export default class EleVcode extends Taro.PureComponent {
 
   handleChange = (value) => {
     const { onChange } = this.props
+    this.setState({ mobile: value })
     onChange(value)
   }
 

@@ -1,5 +1,5 @@
-import Taro from '@tarojs/taro'
 import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtIcon, AtRadio } from 'taro-ui'
+import { useVisible } from '@/genericform/field/use-visible'
 import { View } from '@tarojs/components'
 import isString from 'lodash/isString'
 import { isEmpty } from '@/nice-router/nice-router-util'
@@ -7,59 +7,26 @@ import ActionField from './action-field'
 
 import './styles.scss'
 
-export default class ElePopupSelect extends Taro.PureComponent {
-  static options = {
-    addGlobalClass: true,
-  }
+function ElePopupSelect(props) {
+  const { visible, show, close, toggle } = useVisible(false)
 
-  static defaultProps = {
-    multiple: false,
-    value: [],
-    candidateValues: [],
-  }
+  const { onChange, multiple, value, placeholder, label, candidateValues, disabled } = props
 
-  state = {
-    visible: false,
-  }
-
-  handleToggle = () => {
-    this.setState((preState) => ({
-      visible: !preState.visible,
-    }))
-  }
-
-  show = () => {
-    this.setState({
-      visible: true,
-    })
-  }
-
-  close = () => {
-    this.setState({
-      visible: false,
-    })
-  }
-
-  handleChange = (value) => {
-    const { onChange, multiple } = this.props
-    onChange(value)
+  const handleChange = (v) => {
+    onChange(v)
     if (!multiple) {
-      this.close()
+      close()
     }
   }
 
-  getValue = () => {
-    const { value, multiple, candidateValues } = this.props
+  const getValue = () => {
     let currentValue = value
-
     if (isEmpty(value)) {
       currentValue = multiple ? [] : ''
     }
-
     if (multiple && isString(value)) {
       currentValue = [value]
     }
-
     const displayValue = candidateValues
       .filter((it) => (multiple ? currentValue.includes(it.value) : currentValue === it.value))
       .map((it) => it.title)
@@ -71,38 +38,46 @@ export default class ElePopupSelect extends Taro.PureComponent {
     }
   }
 
-  render() {
-    const { placeholder, label, candidateValues, multiple, disabled } = this.props
-    const { visible } = this.state
-    const { currentValue, displayValue } = this.getValue()
+  const { currentValue, displayValue } = getValue()
 
-    const options = candidateValues.map((it) => ({
-      ...it,
-      label: it.title,
-    }))
+  const options = candidateValues.map((it) => ({
+    ...it,
+    label: it.title,
+  }))
 
-    const cancelText = multiple ? '确定' : '取消'
+  const cancelText = multiple ? '确定' : '取消'
 
-    return (
-      <ActionField onClick={this.show} disabled={disabled} value={displayValue} placeholder={placeholder}>
-        <View className='action-field-picker' onClick={this.handleToggle}>
-          {visible ? (
-            <AtIcon className='action-field-picker-icon' value='chevron-down' size={20} />
+  return (
+    <ActionField onClick={show} disabled={disabled} value={displayValue} placeholder={placeholder}>
+      <View className='action-field-picker' onClick={toggle}>
+        {visible ? (
+          <AtIcon className='action-field-picker-icon' value='chevron-down' size={20} />
+        ) : (
+          <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
+        )}
+      </View>
+
+      <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText={cancelText}>
+        <AtActionSheetItem>
+          {multiple ? (
+            <AtCheckbox options={options} selectedList={currentValue} onChange={handleChange} />
           ) : (
-            <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
+            <AtRadio options={options} value={currentValue} onClick={handleChange} />
           )}
-        </View>
-
-        <AtActionSheet title={label} onClose={this.close} isOpened={visible} cancelText={cancelText}>
-          <AtActionSheetItem>
-            {multiple ? (
-              <AtCheckbox options={options} selectedList={currentValue} onChange={this.handleChange} />
-            ) : (
-              <AtRadio options={options} value={currentValue} onClick={this.handleChange} />
-            )}
-          </AtActionSheetItem>
-        </AtActionSheet>
-      </ActionField>
-    )
-  }
+        </AtActionSheetItem>
+      </AtActionSheet>
+    </ActionField>
+  )
 }
+
+ElePopupSelect.options = {
+  addGlobalClass: true,
+}
+
+ElePopupSelect.defaultProps = {
+  multiple: false,
+  value: [],
+  candidateValues: [],
+}
+
+export default ElePopupSelect
