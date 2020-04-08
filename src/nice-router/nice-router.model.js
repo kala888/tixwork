@@ -142,7 +142,8 @@ export default {
 
 function getCurrentPage() {
   const pages = Taro.getCurrentPages()
-  return '/' + last(pages).route
+  const currentPage = last(pages) || { route: '' }
+  return '/' + currentPage.route
 }
 
 function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPage }) {

@@ -1,6 +1,8 @@
-import Taro from '@tarojs/taro'
+import { useEffect, useState } from '@tarojs/taro'
 import { Block, View } from '@tarojs/components'
 import isFunction from 'lodash/isFunction'
+import memoize from 'lodash/memoize'
+import omit from 'lodash/omit'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import SectionBar from '@/components/common/section-bar'
 import FormItem from './form-item'
@@ -10,114 +12,97 @@ import './styles.scss'
 
 // 参考 https://github.com/react-component/form
 
-export default class EleForm extends Taro.PureComponent {
-  static options = {
-    addGlobalClass: true,
+const getFields = memoize((groupList, fieldList) => {
+  if (isNotEmpty(groupList)) {
+    let result = []
+    groupList.map((it) => {
+      if (it.fieldList) {
+        result = result.concat(it.fieldList)
+      }
+    })
+    return result
   }
+  return fieldList
+})
 
-  static defaultProps = {
-    fieldList: [],
-    groupList: [],
-    bordered: true,
-    showRequired: true,
-    onFieldChange: null,
-    defaultValues: {},
-  }
+const getGroups = memoize((groupList, fieldList) => {
+  const groups = isNotEmpty(groupList) ? groupList : [{ id: 'base-group', fieldList }]
+  return groups
+    .filter((it) => !it.hidden)
+    .map((group) => {
+      const { fieldList: groupFields = [] } = group
+      const fields = groupFields.filter((field) => !field.hidden)
+      return {
+        ...group,
+        fieldsList: fields,
+      }
+    })
+})
 
+function EleForm(props) {
+  const { defaultValues, onFieldChange, fieldList, groupList, layout, showRequired, bordered } = props
+  console.log('generic-form initial defaultValues,eeeeee', defaultValues)
   //以name为key
-  state = {
-    fieldValues: {},
-    fieldErrors: {},
-  }
+  const [fieldValues, setFieldValues] = useState(defaultValues)
+  const [fieldErrors, setFieldErrors] = useState({})
 
-  componentDidMount() {
-    const { defaultValues } = this.props
-    console.log('initial form', this.props)
-    this.setFieldsValue(defaultValues)
-  }
+  useEffect(() => setFieldValues(defaultValues), [defaultValues])
 
-  componentWillReceiveProps(nextProps) {
-    const { formKey: currentFormKey } = this.props
-    const { formKey: nextFormKey, defaultValues } = nextProps
-    console.log('form update，form key changed?', currentFormKey, nextFormKey)
-    if (currentFormKey !== nextFormKey) {
-      this.resetFields()
-      this.setFieldsValue(defaultValues)
+  const handleFieldChange = async (name, value) => {
+    // 记录处理错误信息
+    const errors = await _validateField(name, value)
+    console.log('xxxxxxx', name, errors, value)
+    if (isNotEmpty(errors)) {
+      setFieldErrors((preState) => ({
+        ...preState,
+        [name]: errors,
+      }))
+    } else {
+      setFieldErrors((preState) => {
+        return omit(preState, name)
+      })
+    }
+    // 记录值
+    setFieldValues((preState) => ({
+      ...preState,
+      [name]: value,
+    }))
+
+    if (isFunction(onFieldChange)) {
+      onFieldChange(name, fieldValues)
     }
   }
 
-  // 设置value到state
-  setFieldsValue = (changedValues) => {
-    console.log('set field values', changedValues)
-    this.setState((preState) => ({
-      fieldValues: {
-        ...preState.fieldValues,
-        ...changedValues,
-      },
-    }))
+  const resetFields = () => {
+    setFieldValues(defaultValues)
+    setFieldErrors({})
   }
 
-  getFieldValues = () => this.state.fieldValues
-
-  handleFieldChange = async (name, value) => {
-    const { onFieldChange } = this.props
-    // 记录处理错误信息
-    const errors = await this._validateField(name, value)
-    this.setState((preState) => ({
-      fieldErrors: {
-        ...preState.fieldErrors,
-        [name]: errors,
-      },
-    }))
-
-    // 记录值
-    this.setState(
-      (preState) => ({
-        fieldValues: {
-          ...preState.fieldValues,
-          [name]: value,
-        },
-      }),
-      () => {
-        if (isFunction(onFieldChange)) {
-          onFieldChange(name, this.state.fieldValues)
-        }
-      }
-    )
-  }
-
-  resetFields = () => {
-    this.setState({
-      fieldValues: {},
-      fieldErrors: {},
-    })
-  }
-
-  validateFields = async () => {
-    const { fieldValues } = this.state
-    const fields = this.getFields()
-
-    const fieldErrors = {}
+  async function validateFields() {
+    const fields = getFields(groupList, fieldList)
+    const errors = {}
     for (const field of fields) {
       const { name } = field
       const value = fieldValues[name]
-      const errors = await this._validateField(name, value)
-      if (isNotEmpty(errors)) {
-        console.log('set errors', errors)
-        fieldErrors[name] = errors
+      const e = await _validateField(name, value)
+      if (isNotEmpty(e)) {
+        console.log('set errors', e)
+        errors[name] = e
       }
     }
-    this.setState({
-      fieldErrors,
-    })
+    setFieldErrors(errors)
     return {
       errors: fieldErrors,
       values: fieldValues,
     }
   }
 
-  _validateField = (name, value) => {
-    const fields = this.getFields()
+  // 导出，外用
+  this.validateFields = validateFields
+  this.resetFields = resetFields
+
+  const _validateField = (name, value) => {
+    const fields = getFields(groupList, fieldList)
     const field = fields.find((it) => it.name === name)
     if (!field) {
       return Promise.resolve()
@@ -127,74 +112,56 @@ export default class EleForm extends Taro.PureComponent {
     })
   }
 
-  getFields = () => {
-    const { fieldList, groupList } = this.props
-    if (isNotEmpty(groupList)) {
-      let result = []
-      groupList.map((it) => {
-        if (it.fieldList) {
-          result = result.concat(it.fieldList)
-        }
-      })
-      return result
-    }
-    return fieldList
-  }
+  const groups = getGroups(groupList, fieldList)
+  return (
+    <View className='ele-form'>
+      {groups.map((groupItem) => {
+        const { name: groupId, title, brief, fieldList: fields = [] } = groupItem
+        return (
+          <Block key={groupId}>
+            {isNotEmpty(title) && <SectionBar title={title} brief={brief} />}
 
-  getGroups = () => {
-    const { fieldList, groupList } = this.props
-    const groups = isNotEmpty(groupList) ? groupList : [{ id: 'base-group', fieldList }]
-    return groups
-      .filter((it) => !it.hidden)
-      .map((group) => {
-        const { fieldList: groupFields = [] } = group
-        const fields = groupFields.filter((field) => !field.hidden)
-        return {
-          ...group,
-          fieldsList: fields,
-        }
-      })
-  }
+            <View className='ele-form-fields'>
+              {fields.map((it) => {
+                const field = FormUtil.mergeConfig(it)
+                const { name } = field
+                const value = fieldValues[name]
+                const errors = fieldErrors[name]
 
-  render() {
-    const { layout, showRequired, bordered } = this.props
-    const { fieldValues, fieldErrors } = this.state
-    const groupList = this.getGroups()
-    console.log('groupListgroupList', groupList)
-    return (
-      <View className='ele-form'>
-        {groupList.map((groupItem) => {
-          const { name: groupId, title, brief, fieldList = [] } = groupItem
-          return (
-            <Block key={groupId}>
-              {isNotEmpty(title) && <SectionBar title={title} brief={brief} />}
+                console.log('get v', name, fieldValues, defaultValues)
 
-              <View className='ele-form-fields'>
-                {fieldList.map((it) => {
-                  const field = FormUtil.mergeConfig(it)
-                  const { name } = field
-                  const value = fieldValues[name]
-                  const errors = fieldErrors[name]
-
-                  return (
-                    <FormItem
-                      key={name}
-                      bordered={bordered}
-                      layout={layout}
-                      {...field}
-                      showRequired={showRequired}
-                      value={value}
-                      errors={errors}
-                      onChange={this.handleFieldChange}
-                      customized={false}
-                    />
-                  )
-                })}
-              </View>
-            </Block>
-          )
-        })}
-      </View>
-    )
-  }
+                return (
+                  <FormItem
+                    key={name}
+                    bordered={bordered}
+                    layout={layout}
+                    {...field}
+                    showRequired={showRequired}
+                    value={value}
+                    errors={errors}
+                    onChange={handleFieldChange}
+                    customized={false}
+                  />
+                )
+              })}
+            </View>
+          </Block>
+        )
+      })}
+    </View>
+  )
 }
+
+EleForm.options = {
+  addGlobalClass: true,
+}
+
+EleForm.defaultProps = {
+  fieldList: [],
+  groupList: [],
+  bordered: true,
+  showRequired: true,
+  onFieldChange: null,
+  defaultValues: {},
+}
+export default EleForm

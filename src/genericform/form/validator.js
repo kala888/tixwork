@@ -81,7 +81,7 @@ const validator = (field = {}, value) => {
   const schema = new Schema({ [name]: rules })
   const fieldValue = transformValue(type, value)
   const source = { [name]: fieldValue }
-  console.log('validate field:', name, 'type:', type, 'value:', value, '->', fieldValue, 'rules:', rules)
+  // console.log('validate field:', name, 'type:', type, 'value:', value, '->', fieldValue, 'rules:', rules)
   return schema
     .validate(source)
     .then((res) => {

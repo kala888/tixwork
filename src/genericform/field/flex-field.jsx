@@ -1,6 +1,6 @@
 import { AtInput, AtTextarea } from 'taro-ui'
 import NumberInput from './ele-number-input'
-import Money from './ele-money'
+import EleMoney from './ele-money'
 import EleSwitch from './ele-switch'
 import ElePopupSelect from './ele-popup-select'
 import EleCalendar from './ele-calendar'
@@ -16,9 +16,9 @@ import './styles.scss'
 export default function FlexField(props) {
   const { type } = props
 
-  if (type === 'image') {
-    console.log('.....picker-flexfield', this.props.label, this.props.value)
-  }
+  // if (type === 'image') {
+  //   console.log('.....picker-flexfield', this.props.label, this.props.value)
+  // }
 
   // email，区分email应该是在校验规则上做手脚
   if (type === 'text' || type === 'email') return <AtInput {...props} type='text' border={false} />
@@ -30,7 +30,7 @@ export default function FlexField(props) {
   if (type === 'boolean') return <EleSwitch {...props} />
 
   //钱，这玩意不一样
-  if (type === 'money') return <Money {...props} />
+  if (type === 'money') return <EleMoney {...props} />
 
   // 日期，暂时支持YYYY-MM-DD
   if (type === 'date') return <EleCalendar {...props} mode='date' />

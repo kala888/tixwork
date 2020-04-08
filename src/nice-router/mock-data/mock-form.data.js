@@ -4,31 +4,31 @@ const treeRoot = {
   nodes: [
     {
       title: '麻将',
-      value: '1-1',
+      value: '麻将1-1',
     },
     {
       title: '火锅串串',
-      value: '1-2',
+      value: '火锅串串1-2',
       nodes: [
         {
           title: '魏蜀吴火锅',
-          value: '1-2-1',
+          value: '魏蜀吴火锅1-2-1',
           nodes: [
             {
               title: '鸭血',
-              value: '1-2-1-1',
+              value: '鸭血1-2-1-1',
               brief: '缺货',
               disabled: true,
             },
             {
               title: '猪脑',
-              value: '1-2-1-2',
+              value: '猪脑1-2-1-2',
             },
           ],
         },
         {
           title: '马路边边',
-          value: '1-2-2',
+          value: '马路边边1-2-2',
           brief: '暂停营业',
           disabled: true,
         },
@@ -39,6 +39,7 @@ const treeRoot = {
 
 const pageData = {
   id: 'test-form',
+  pageTitle: '测试form1',
   stepList: [
     {
       title: '选货',
@@ -52,7 +53,7 @@ const pageData = {
   ],
   actionList: [
     { code: 'preStep', title: '上一步' },
-    { code: 'nextStep', title: '下一步' },
+    { code: 'nextStep', title: '下一步', linkToUrl: 'mock-generic-form2/' },
   ],
   groupList: [
     {
@@ -64,7 +65,7 @@ const pageData = {
           label: '团建',
           type: 'tree-picker',
           placeholder: '团建项目',
-          value: '1-1',
+          value: '猪脑1-2-1-2',
           title: 'AAA',
           root: treeRoot,
           rules: [
@@ -84,9 +85,11 @@ const pageData = {
           rules: [
             {
               required: true,
-              type: 'number',
-              pattern: /^1\d{10}$/,
               message: '要填写手机号哦',
+            },
+            {
+              pattern: /^1\d{10}$/,
+              message: '手机号码格式不对',
             },
           ],
         },

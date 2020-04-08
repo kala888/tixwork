@@ -14,3 +14,4 @@ function EleMoney(props) {
 EleMoney.options = {
   addGlobalClass: true,
 }
+export default EleMoney
