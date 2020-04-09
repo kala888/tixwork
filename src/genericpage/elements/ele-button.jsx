@@ -30,7 +30,7 @@ function EleButton({
   onGetUserInfo,
   children,
 }) {
-  let wxOpenType = btnType
+  let wxOpenType = openType
   if (!openType && (btnType === 'share' || btnType === 'getPhoneNumber' || btnType === 'getUserInfo')) {
     wxOpenType = btnType
   }

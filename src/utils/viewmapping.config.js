@@ -43,7 +43,7 @@ const ViewmappingConfig = {
   },
   'com.terapico.appview.HomePage': {
     pageName: '/pages/home/home-page',
-    stateAction: 'home/saveHomeData',
+    stateAction: 'home/save',
   },
 
   // end global pages

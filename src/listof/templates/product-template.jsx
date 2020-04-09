@@ -2,6 +2,7 @@ import { Text, View } from '@tarojs/components'
 import { AtTag } from 'taro-ui'
 
 import ServerImage from '@/server-image/server-image'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { getImageUrl } from '../listof-helper'
 import './styles.scss'
 
@@ -20,7 +21,7 @@ function ProductTemplate(props) {
 
       <View class='product-content'>
         <View className='product-content-title'>
-          {preTag.length > 0 && (
+          {isNotEmpty(preTag) && (
             <AtTag className='red-tag' size='small' active>
               {preTag}
             </AtTag>
@@ -30,13 +31,12 @@ function ProductTemplate(props) {
 
         <View className='product-content-brief'>
           <Text numberOfLines={1}>{`￥${price}`}</Text>
-          {tags.map(
-            (it) =>
-              it.length > 0 && (
-                <AtTag className='red-tag-tiny' key={it} size='small' active>
-                  {it}
-                </AtTag>
-              )
+          {tags.map((it) =>
+            isNotEmpty(it) && (
+              <AtTag className='red-tag-tiny' key={it} size='small' active>
+                {it}
+              </AtTag>
+            ),
           )}
         </View>
       </View>
