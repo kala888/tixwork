@@ -22,7 +22,7 @@ function transToDoubleItemList(list = []) {
   return newList
 }
 
-export default function TxtTable(list = [], maxLine) {
+export default function TxtTable({ list = [], maxLine }) {
   const doubleItemList = transToDoubleItemList(list)
   const valueCls = classNames('info-row-cell-value', {
     'info-row-cell-2lines': maxLine === 2,

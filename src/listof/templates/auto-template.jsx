@@ -6,7 +6,7 @@ import { getImageList } from '../listof-helper'
 import './styles.scss'
 
 function AutoTemplate(props) {
-  const { item = {}, showImageCount = 3 } = props
+  const { item, showImageCount } = props
   const { title, brief, displayTime } = item
 
   let list = []
@@ -60,4 +60,10 @@ function AutoTemplate(props) {
 AutoTemplate.options = {
   addGlobalClass: true,
 }
+
+AutoTemplate.defaultProps = {
+  item: {},
+  showImageCount: 3,
+}
+
 export default AutoTemplate
