@@ -1,7 +1,8 @@
-import Taro, { useEffect, usePullDownRefresh, useState } from '@tarojs/taro'
+import Taro, { useEffect, usePullDownRefresh, useRef, useState } from '@tarojs/taro'
 import Config from '@/utils/config'
 import { ajaxPullDownRefresh } from '@/utils/index'
 
+// boolean类型的控制属性，show，close，toggle
 export function useVisible(initial = false) {
   const [visible, setVisible] = useState(initial)
   const show = () => setVisible(true)
@@ -15,6 +16,7 @@ export function useVisible(initial = false) {
   }
 }
 
+// 这只page的title
 export function usePageTitle(title = Config.name) {
   useEffect(() => {
     Taro.setNavigationBarTitle({
@@ -23,8 +25,48 @@ export function usePageTitle(title = Config.name) {
   }, [title])
 }
 
+// 下拉刷新
 export function usePullDown(action) {
   usePullDownRefresh(() => {
     ajaxPullDownRefresh(action)
   })
 }
+
+// 倒计时
+export function useCountdown(maxCount = 60) {
+  const [second, setSecond] = useState(maxCount)
+  const [counting, setCounting] = useState(false)
+  const interval = useRef()
+
+  const startCount = () => setCounting(true)
+
+  useEffect(() => {
+    if (!counting) {
+      return
+    }
+    setCounting(true)
+    console.log('countdown....run')
+    interval.current = setInterval(() => {
+      setSecond((t) => {
+        const result = t - 1
+        console.log('countdown....run....', result)
+        if (result === 0) {
+          clearInterval(interval.current)
+          setCounting(false)
+          return maxCount
+        }
+        return result
+      })
+    }, 1000)
+    return () => clearInterval(interval.current)
+  }, [counting, maxCount])
+  return {
+    second,
+    counting,
+    startCount,
+  }
+}
+
+// 纯粹因为IDE不能自动导入Taro的useState
+export const useAsyncEffect = useEffect
+export const useAsyncState = useState

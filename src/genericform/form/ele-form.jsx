@@ -1,7 +1,6 @@
-import { useEffect, useState } from '@tarojs/taro'
+import { useMemo, useEffect, useState } from '@tarojs/taro'
 import { Block, View } from '@tarojs/components'
 import isFunction from 'lodash/isFunction'
-import memoize from 'lodash/memoize'
 import omit from 'lodash/omit'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import SectionBar from '@/components/common/section-bar'
@@ -12,7 +11,7 @@ import './styles.scss'
 
 // 参考 https://github.com/react-component/form
 
-const getFields = memoize((groupList, fieldList) => {
+const getFields = (groupList, fieldList) => {
   if (isNotEmpty(groupList)) {
     let result = []
     groupList.map((it) => {
@@ -23,9 +22,9 @@ const getFields = memoize((groupList, fieldList) => {
     return result
   }
   return fieldList
-})
+}
 
-const getGroups = memoize((groupList, fieldList) => {
+const getGroups = (groupList, fieldList) => {
   const groups = isNotEmpty(groupList) ? groupList : [{ id: 'base-group', fieldList }]
   return groups
     .filter((it) => !it.hidden)
@@ -37,7 +36,7 @@ const getGroups = memoize((groupList, fieldList) => {
         fieldsList: fields,
       }
     })
-})
+}
 
 function EleForm(props) {
   const { defaultValues, onFieldChange, fieldList, groupList, layout, showRequired, bordered } = props
@@ -47,6 +46,8 @@ function EleForm(props) {
   const [fieldErrors, setFieldErrors] = useState({})
 
   useEffect(() => setFieldValues(defaultValues), [defaultValues])
+
+  const groups = useMemo(() => getGroups(groupList, fieldList), [groupList, fieldList])
 
   const handleFieldChange = async (name, value) => {
     // 记录处理错误信息
@@ -112,7 +113,6 @@ function EleForm(props) {
     })
   }
 
-  const groups = getGroups(groupList, fieldList)
   return (
     <View className='ele-form'>
       {groups.map((groupItem) => {

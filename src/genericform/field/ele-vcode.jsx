@@ -1,48 +1,29 @@
-import Taro, { useEffect, useRef, useState } from '@tarojs/taro'
+import Taro, { useState } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtInput } from 'taro-ui'
 import classNames from 'classnames'
 import { noop } from '@/nice-router/nice-router-util'
+import { useCountdown } from '@/service/use.service'
 import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
 
 import './styles.scss'
 
 function EleVcode(props) {
-  const { maxCount } = props
-  const [disabled, setDisabled] = useState(false)
-  const [second, setSecond] = useState(maxCount)
   const [mobile, setMobile] = useState(null)
-
-  const interval = useRef()
-
-  useEffect(() => {
-    if (disabled) {
-      interval.current = setInterval(() => {
-        setSecond((t) => {
-          console.log('.....', t)
-          if (t === 0) {
-            setDisabled(false)
-            clearInterval(interval.current)
-            return maxCount
-          }
-          return t - 1
-        })
-      }, 1000)
-    }
-    return () => clearInterval(interval.current) // clean-up 函数，当前组件被注销时调用
-  }, [disabled])
+  const { second, counting, startCount } = useCountdown(props.maxCount)
 
   const { onChange, name, value, placeholder, className } = props
+
   const sendCode = () => {
-    if (disabled) {
+    if (counting) {
       return
     }
     if (!/^1\d{10}$/.test(mobile)) {
       Taro.showToast({ title: '请输入正确的手机号' })
       return
     }
-    setDisabled(true)
+    startCount()
     NavigationService.ajax(Config.api.VerifyCode, { mobile })
   }
 
@@ -51,10 +32,9 @@ function EleVcode(props) {
     onChange(v)
   }
 
-  const tips = disabled ? `${second}秒...` : '获取验证码'
-
+  const tips = counting ? `${second}秒...` : '获取验证码'
   const rootClass = classNames('ele-vcode', className)
-  const txtClass = classNames('ele-vcode-txt', { 'ele-vcode-txt-disabled': disabled })
+  const txtClass = classNames('ele-vcode-txt', { 'ele-vcode-txt-disabled': counting })
   return (
     <AtInput
       name={name}

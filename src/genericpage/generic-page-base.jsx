@@ -2,7 +2,8 @@ import { useShareAppMessage } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import Config from '@/utils/config'
-import { usePageTitle, usePullDown } from '@/service/use.service'
+import { useAsyncEffect, usePageTitle, usePullDown } from '@/service/use.service'
+import NavigationService from '@/nice-router/navigation.service'
 
 import EleFlex from './container/ele-flex'
 import './styles.scss'
@@ -11,13 +12,15 @@ function GenericPageBase(props) {
   const { pageTitle = Config.name, pageLinkToUrl = Config.api.FooterHome } = props
   usePageTitle(pageTitle)
   usePullDown(props)
-  // TODO 处理share进入的时候，didmount
-  //
-  // const { q } = this.$router.params
-  // if (q) {
-  //   const uri = decodeURIComponent(q)
-  //   NavigationService.view(uri)
-  // }
+
+  // q如果变化了，就发送一个后台请求
+  const { q } = this.$router.params
+  useAsyncEffect(() => {
+    if (q) {
+      const uri = decodeURIComponent(q)
+      NavigationService.view(uri)
+    }
+  }, [q])
 
   useShareAppMessage((res) => {
     if (res.from === 'button') {

@@ -11,7 +11,7 @@ export default class BaseFormPage extends Taro.PureComponent {
   }
 
   handleChange = (name, value, event) => {
-    console.log('item event maybe you needed', event)
+    // console.log('item event maybe you needed', event)
     const fieldValue = FormUtil.getValue(value)
     this.setState((preState) => ({
       fieldValues: {

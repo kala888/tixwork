@@ -4,6 +4,7 @@ import NavigationService from '@/nice-router/navigation.service'
 import { AtSearchBar } from 'taro-ui'
 import Listof from '@/listof/listof'
 import { connect } from '@tarojs/redux'
+import { useAsyncEffect } from '@/service/use.service'
 
 // TODO 这页面应该是一个特殊的listof
 
@@ -22,14 +23,14 @@ function ObjectPickerPage(props) {
     articleListMeta,
   } = props
 
-  // TODO 未处理？
-  // componentDidMount()
-  // {
-  //   const { linkToUrl } = this.$router.params
-  //   if (linkToUrl) {
-  //     NavigationService.ajax(linkToUrl)
-  //   }
-  // }
+  // q如果变化了，就发送一个后台请求
+  const { q } = this.$router.params
+  useAsyncEffect(() => {
+    if (q) {
+      const uri = decodeURIComponent(q)
+      NavigationService.view(uri)
+    }
+  }, [q])
 
   const handleItemPress = (item) => {
     NavigationService.back({ data: item }, this)

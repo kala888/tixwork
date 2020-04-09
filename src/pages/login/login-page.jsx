@@ -1,4 +1,3 @@
-import { useState } from '@tarojs/taro'
 import { Block, View } from '@tarojs/components'
 import EleButton from '@/genericpage/elements/ele-button'
 import EleInput from '@/genericform/field/ele-input'
@@ -7,15 +6,16 @@ import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
 import ServerImage from '@/server-image/server-image'
 import FormUtil from '@/genericform/form-util'
+import { useAsyncState } from '@/service/use.service'
 
 import './login.scss'
 import loginLogo from '../../assets/login-logo.png'
 
 export default function LoginPage() {
-  const [fieldValues, setFieldValues] = useState({})
+  const [fieldValues, setFieldValues] = useAsyncState({})
 
   const handleChange = (name, value, event) => {
-    console.log('item event maybe you needed', event)
+    // console.log('item event maybe you needed', event)
     const fieldValue = FormUtil.getValue(value)
     setFieldValues((preState) => ({
       ...preState,
