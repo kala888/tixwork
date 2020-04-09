@@ -25,7 +25,6 @@ const store = dvaApp.getStore()
 NiceRouter.start({ config: Config, container: dvaApp })
 
 class App extends Component {
-
   componentDidMount() {
     if (isWeapp()) {
       this.updateWeapp()
@@ -68,10 +67,7 @@ class App extends Component {
   config = {
     pages: [
       'pages/home/home-page',
-      'genericform/genericform-page',
-      'pages/biz/base-form-page',
       'pages/login/login-page',
-      'pages/biz/generic-test-page',
       'pages/me/me-page',
 
       // base
@@ -80,6 +76,7 @@ class App extends Component {
       'genericpage/generic-page',
       'genericpage/generic-page2',
 
+      'genericform/genericform-page',
       'genericform/object-picker-page',
 
       'listof/listof-page',
@@ -87,7 +84,7 @@ class App extends Component {
       'listof/listof-page3',
       'listof/listof-page4',
       // biz
-      'pages/biz/hello-daas-page',
+      'pages/biz/listof-test-page',
     ],
     //
     // permission: {
@@ -113,12 +110,6 @@ class App extends Component {
           iconPath: './assets/icon/icon_home_n@2x.png',
           selectedIconPath: './assets/icon/icon_home_s@2x.png',
           text: '首页',
-        },
-        {
-          pagePath: 'pages/biz/generic-test-page',
-          iconPath: './assets/icon/icon_service_n@2x.png',
-          selectedIconPath: './assets/icon/icon_service_s@2x.png',
-          text: 'GenericPage',
         },
         {
           pagePath: 'pages/me/me-page',

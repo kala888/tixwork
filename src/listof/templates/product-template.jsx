@@ -31,12 +31,13 @@ function ProductTemplate(props) {
 
         <View className='product-content-brief'>
           <Text numberOfLines={1}>{`￥${price}`}</Text>
-          {tags.map((it) =>
-            isNotEmpty(it) && (
-              <AtTag className='red-tag-tiny' key={it} size='small' active>
-                {it}
-              </AtTag>
-            ),
+          {tags.map(
+            (it) =>
+              isNotEmpty(it) && (
+                <AtTag className='red-tag-tiny' key={it} size='small' active>
+                  {it}
+                </AtTag>
+              )
           )}
         </View>
       </View>
