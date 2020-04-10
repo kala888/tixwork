@@ -70,6 +70,15 @@ const productList = [
   },
   {
     id: 2,
+    preTag: '快',
+    tags: ['Enjoy', '厨房切菜刀'],
+    brand: '双立人',
+    name: '红点',
+    price: 329.00,
+    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-5.jpg',
+  },
+  {
+    id: 3,
     preTag: '柴',
     tags: ['香', '五常'],
     brand: '柴火大院',
@@ -78,22 +87,31 @@ const productList = [
     imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-2.jpg',
   },
   {
-    id: 3,
+    id: 4,
     preTag: '买',
     tags: ['iPhone', 'HDR'],
     brand: '苹果',
-    name: '乔布斯的新作iPhone11 Pro',
+    name: '新品 iPhone11 Pro',
     price: 9088.0,
     imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-3.png',
   },
   {
-    id: 4,
+    id: 5,
     preTag: '坑',
     tags: ['半成品'],
     brand: '必胜客',
     name: '想吃披萨又觉得外面的披萨不卫生又贵',
     price: 39.2,
     imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-4.jpg',
+  },
+  {
+    id: 6,
+    preTag: '包邮',
+    tags: ['好用'],
+    brand: '小米',
+    name: '巨能写中性笔10支装',
+    price: 9.8,
+    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-6.jpg',
   },
 ]
 
@@ -162,8 +180,6 @@ function HelloDaaSPage() {
   const mockList = userList.map((it) => ({ ...it, linkToUrl: 'https://www.baidu.com/' }))
   return (
     <View className='hello-daas'>
-      <EleCarousel items={userList} />
-
       <SectionBar title='用户卡片' brief='displayMode：user' />
       <Listof list={mockList} displayMode='user' />
 

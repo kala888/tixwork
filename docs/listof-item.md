@@ -118,7 +118,7 @@ const productList = [
     preTag: '买',
     tags: ['iPhone', 'HDR'],
     brand: '苹果',
-    name: '乔布斯的新作iPhone11 Pro',
+    name: '新品 iPhone11 Pro',
     price: 9088.0,
     imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-3.png',
   },
