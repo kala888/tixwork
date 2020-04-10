@@ -1,7 +1,6 @@
 import Listof from '@/listof/listof'
 import SectionBar from '@/components/common/section-bar'
 import { View } from '@tarojs/components'
-import EleCarousel from '@/genericpage/elements/ele-carousel'
 import './styles.scss'
 
 const newsList = [
