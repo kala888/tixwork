@@ -2,8 +2,7 @@ import Taro from '@tarojs/taro'
 import isNumber from 'lodash/isNumber'
 import forEach from 'lodash/forEach'
 import isNaN from 'lodash/isNaN'
-import NavigationService from '@/nice-router/navigation.service'
-import { isEmpty, isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 
 let device = {}
 
@@ -102,17 +101,6 @@ export function formatMoney(money) {
     return money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
   }
   return money
-}
-
-export function ajaxPullDownRefresh(action) {
-  NavigationService.ajax(
-    action,
-    {},
-    {
-      onSuccess: () => Taro.stopPullDownRefresh(),
-      loading: LoadingType.modal,
-    }
-  )
 }
 
 export function isH5() {

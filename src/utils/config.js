@@ -23,9 +23,9 @@ const Config = {
   ...niceRouterConfig,
   name: 'NiceRouter App Start',
   goBackSkipScreen: [],
-  // loginMethod:'wechat', //
-  // loginMethod:'vcode', //
-  loginMethod: 'password', //
+  // loginMethod:'wechat',
+  // loginMethod:'vcode',
+  loginMethod: 'password',
 }
 
 console.log('***********   current env  ***********   ')

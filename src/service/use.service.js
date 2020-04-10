@@ -1,6 +1,7 @@
 import Taro, { useEffect, usePullDownRefresh, useRef, useState } from '@tarojs/taro'
 import Config from '@/utils/config'
-import { ajaxPullDownRefresh } from '@/utils/index'
+import NavigationService from '@/nice-router/navigation.service'
+import { LoadingType } from '@/nice-router/nice-router-util'
 
 // boolean类型的控制属性，show，close，toggle
 export function useVisible(initial = false) {
@@ -25,10 +26,17 @@ export function usePageTitle(title = Config.name) {
   }, [title])
 }
 
-// 下拉刷新
+// 下拉刷新, 应该传入ActionLike
 export function usePullDown(action) {
   usePullDownRefresh(() => {
-    ajaxPullDownRefresh(action)
+    NavigationService.ajax(
+      action,
+      {},
+      {
+        onSuccess: () => Taro.stopPullDownRefresh(),
+        loading: LoadingType.modal,
+      }
+    )
   })
 }
 

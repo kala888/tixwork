@@ -3,6 +3,9 @@ import { connect } from '@tarojs/redux'
 import EleCarousel from '@/genericpage/elements/ele-carousel'
 import ActionFloor from '@/components/common/action-floor'
 import { usePageTitle, usePullDown } from '@/service/use.service'
+import SectionBar from '@/components/common/section-bar'
+import Listof from '@/listof/listof'
+
 import './home.scss'
 
 function HomePage(props) {
@@ -17,10 +20,14 @@ function HomePage(props) {
       <EleCarousel items={slideList} height={220} />
       <View className='home-page-action-floor'>
         <ActionFloor actions={actionList} />
+        <SectionBar title='促销抢购' />
+        <Listof list={productList} displayMode='product' />
       </View>
     </View>
   )
 }
+
+export default connect(({ home }) => ({ ...home }))(HomePage)
 
 const userList = [
   {
@@ -46,32 +53,68 @@ const defaultActionList = [
   {
     id: 1,
     title: 'Listof 测试',
-    brief: '好用',
+    brief: '有惊喜',
     linkToUrl: 'page:///pages/biz/listof-test-page',
   },
   {
     id: 2,
-    title: 'Generic Page 测试',
+    title: 'GenericPage 测试',
     brief: '省心',
     linkToUrl: 'mock-generic-page/',
   },
   {
     id: 3,
-    title: 'Generic Form 测试',
+    title: 'GenericForm 测试',
     brief: '牛逼',
     linkToUrl: 'mock-generic-form/',
   },
   {
     id: 4,
-    title: 'H5 baidu 测试',
-    brief: '无敌',
+    title: 'H5 测试',
+    brief: '某度',
     linkToUrl: 'https://www.baidu.com',
   },
   {
     id: 5,
     title: 'Login 页面',
-    linkToUrl: 'page:///pages/login/login-page',
+    brief: '通用',
   },
 ]
-
-export default connect(({ home }) => ({ ...home }))(HomePage)
+const productList = [
+  {
+    id: 1,
+    preTag: '促',
+    tags: ['专业', '防水'],
+    brand: '3M',
+    name: '成人雨衣半透明',
+    price: 13.8,
+    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-1.jpg',
+  },
+  {
+    id: 2,
+    preTag: '柴',
+    tags: ['香', '五常'],
+    brand: '柴火大院',
+    name: '五常稻花香米',
+    price: 72.99,
+    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-2.jpg',
+  },
+  {
+    id: 3,
+    preTag: '买',
+    tags: ['iPhone', 'HDR'],
+    brand: '苹果',
+    name: '乔布斯的新作iPhone11 Pro',
+    price: 9088.0,
+    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-3.png',
+  },
+  {
+    id: 4,
+    preTag: '坑',
+    tags: ['半成品'],
+    brand: '必胜客',
+    name: '想吃披萨又觉得外面的披萨不卫生又贵',
+    price: 39.2,
+    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-4.jpg',
+  },
+]

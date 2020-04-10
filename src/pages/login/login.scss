@@ -11,7 +11,7 @@
     @extend %flex-row;
     flex: 3;
     align-items: flex-end;
-    padding-bottom: 80px;
+    padding-bottom: 100px;
 
     &-txt {
       @extend %flex-column;

@@ -11,22 +11,22 @@ const storeLocation = {
   latitude: 104.06476,
   longitude: 30.5702,
 }
-const popup = {
-  bgColor: '#fff',
-  kids: [
-    {
-      id: '222',
-      type: 'text',
-      text: '快去这里',
-    },
-    {
-      id: '333',
-      type: 'image',
-      mode: 'widthFix',
-      imageUrl,
-    },
-  ],
-}
+// const popup = {
+//   bgColor: '#fff',
+//   kids: [
+//     {
+//       id: '222',
+//       type: 'text',
+//       text: '快去这里',
+//     },
+//     {
+//       id: '333',
+//       type: 'image',
+//       mode: 'widthFix',
+//       imageUrl,
+//     },
+//   ],
+// }
 const carousel = {
   items: [
     {
@@ -343,7 +343,7 @@ const pageData = {
     { id: '13', type: 'break-line', text: '线下门店', ...breakLine },
     { id: '14', type: 'store-location', ...storeLocation },
     { id: '14.1', type: 'break-line' },
-    { id: '41', type: 'popup', ...popup },
+    // { id: '41', type: 'popup', ...popup },
     { id: '15.1', type: 'white-space' },
     { id: '15.3', type: 'white-space' },
     { id: '16', type: 'footer-tabs', ...footer },
