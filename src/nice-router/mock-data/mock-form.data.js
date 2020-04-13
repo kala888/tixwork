@@ -248,7 +248,7 @@ const pageData = {
           ],
         },
         {
-          name: '9-date-time',
+          name: '9-datetime',
           label: '约会时间',
           type: 'datetime',
           value: 1585278389758,

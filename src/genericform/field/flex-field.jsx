@@ -36,7 +36,7 @@ export default function FlexField(props) {
   if (type === 'date') return <EleCalendar {...props} mode='date' />
 
   // 日期+时间，暂时支持YYYY-MM-DD HH:mm
-  if (type === 'datetime') return <EleCalendar {...props} mode='date-time' />
+  if (type === 'datetime') return <EleCalendar {...props} mode='datetime' />
 
   //通过candidateValues来控制 单选，页面上有的单选Radio
   if (type === 'single-select') return <ElePopupSelect {...props} multiple={false} />

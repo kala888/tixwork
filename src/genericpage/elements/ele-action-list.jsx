@@ -11,7 +11,7 @@ function EleActionList({ list, customStyle, className }) {
   return (
     <View className={rootClass} style={customStyle}>
       {list.map((it) => {
-        const { customStyle: actionStyle = {}, id } = it
+        const { customStyle: actionStyle = {}, id, extraData } = it
         return (
           <EleButton
             key={id}
@@ -23,6 +23,7 @@ function EleActionList({ list, customStyle, className }) {
             customStyle={{ ...actionStyle }}
             disabled={it.disabled}
             onClick={it.onClick}
+            extraData={extraData}
           >
             <View className='ele-action-list-btn'>
               {it.imageUrl && (

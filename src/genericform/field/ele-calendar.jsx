@@ -42,7 +42,7 @@ function EleCalendar(props) {
   const getDateTime = () => {
     const dateValue = transToDate(value)
     if (dateValue) {
-      const fmt = mode === 'date-time' ? 'yyyy-MM-dd HH:mm' : 'yyyy-MM-dd'
+      const fmt = mode === 'datetime' ? 'yyyy-MM-dd HH:mm' : 'yyyy-MM-dd'
       const displayValue = formatTime(dateValue, fmt)
       let [displayDate, displayTime] = displayValue.split(' ')
       return {
@@ -52,7 +52,7 @@ function EleCalendar(props) {
       }
     }
 
-    if (mode === 'date-time' && isEmpty(value)) {
+    if (mode === 'datetime' && isEmpty(value)) {
       return {
         displayTime: formatTime(Date.now(), 'HH:mm'),
       }
@@ -68,7 +68,7 @@ function EleCalendar(props) {
         <AtActionSheetItem>
           {mode === 'date' && <AtCalendar isVertical currentDate={displayDate} onSelectDate={handleDateSelected} />}
 
-          {mode === 'date-time' && (
+          {mode === 'datetime' && (
             <Picker mode='time' value={displayTime} onChange={handleTimeChange} onCancel={close}>
               {showCalendar && <AtCalendar isVertical currentDate={date} onSelectDate={handleDateSelected} />}
             </Picker>
@@ -83,7 +83,7 @@ EleCalendar.defaultProps = {
   placeholder: '请选择',
   onChange: noop,
   mode: 'date',
-  // mode: 'date-time',
+  // mode: 'datetime',
   value: '',
   disabled: false,
 }
