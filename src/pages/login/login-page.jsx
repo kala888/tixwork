@@ -15,7 +15,7 @@ export default function LoginPage() {
   const [fieldValues, setFieldValues] = useAsyncState({})
 
   const handleChange = (name, value, event) => {
-    // console.log('item event maybe you needed', event)
+    console.log('item event maybe you needed', event)
     const fieldValue = FormUtil.getValue(value)
     setFieldValues((preState) => ({
       ...preState,
@@ -31,8 +31,7 @@ export default function LoginPage() {
     <View className='login-page'>
       <View className='login-page-header'>
         <View className='login-page-header-txt'>
-          <View>DoubleChain</View>
-          <View>Tech</View>
+          <View>{Config.name}</View>
         </View>
         <View className='login-page-header-logo'>
           <View className='login-page-header-logo-image'>

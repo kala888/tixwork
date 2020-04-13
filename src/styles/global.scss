@@ -36,24 +36,17 @@
 }
 
 // text
-$text-sizes: 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42;
-@each $size in $text-sizes {
-  .f#{$size} {
-    font-size: #{$size}px;
-    color: $text-color;
-  }
-}
+//$text-sizes: 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42;
+//@each $size in $text-sizes {
+//  .f#{$size} {
+//    font-size: #{$size}px;
+//    color: $text-color;
+//  }
+//}
 
 .note {
   font-size: 22px;
   color: $text-color-light;
-}
-
-.breakLine {
-  margin: 0 16px;
-  height: 1px;
-  background-color: $color-brand;
-  position: relative;
 }
 
 .red-tag {
