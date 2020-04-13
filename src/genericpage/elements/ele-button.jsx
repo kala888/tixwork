@@ -15,21 +15,21 @@ import './styles.scss'
 //   uiType:'primary'
 // }
 function EleButton({
-                     linkToUrl,
-                     openType,
-                     onClick,
-                     extraData,
-                     title,
-                     btnType,
-                     size,
-                     uiType,
-                     customStyle,
-                     className,
-                     full,
-                     circle,
-                     onGetUserInfo,
-                     children,
-                   }) {
+  linkToUrl,
+  openType,
+  onClick,
+  extraData,
+  title,
+  btnType,
+  size,
+  uiType,
+  customStyle,
+  className,
+  full,
+  circle,
+  onGetUserInfo,
+  children,
+}) {
   let wxOpenType = openType
   if (!openType && (btnType === 'share' || btnType === 'getPhoneNumber' || btnType === 'getUserInfo')) {
     wxOpenType = btnType
@@ -79,7 +79,8 @@ function EleButton({
     if (isNotEmpty(extraData)) {
       Taro.setClipboardData({
         data: JSON.stringify(extraData),
-        success: () => Taro.showToast({ title: '已经复制到内存, 请分享或在浏览器中打开', icon: 'none', duration: 5000 }),
+        success: () =>
+          Taro.showToast({ title: '已经复制到内存, 请分享或在浏览器中打开', icon: 'none', duration: 5000 }),
       })
     }
   }

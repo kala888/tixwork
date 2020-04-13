@@ -96,7 +96,7 @@ const productList = [
     tags: ['Enjoy', '厨房切菜刀'],
     brand: '双立人',
     name: '红点',
-    price: 329.00,
+    price: 329.0,
     imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-5.jpg',
   },
   {
