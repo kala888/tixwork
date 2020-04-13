@@ -78,6 +78,7 @@ const defaultActionList = [
     id: 5,
     title: 'Login 页面',
     brief: '通用',
+    linkToUrl: 'page:///pages/login/login-page',
   },
 ]
 const productList = [

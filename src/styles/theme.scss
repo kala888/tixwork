@@ -22,6 +22,12 @@ $text-color: #333;
 $text-color-light: #56585c;
 $text-color-lighter: #999;
 
+$level-default: $text-color-light;
+$level-normal: #07c160;
+$level-primary: $primary-color;
+$level-warn: #ffc300;
+$level-danger: #fa5151;
+
 $image-bg: #f4f4f4;
 $price-text: #f23030;
 
@@ -36,6 +42,7 @@ $under-line-color: #d6e4ee;
   src: url('https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/Brother-1816-Black.woff') format('woff');
 }
 
+$b181black: Brother-1816-Black, -apple-system, system-ui !important;
 .b181black {
   font-family: $b181black;
   font-style: normal;
@@ -43,8 +50,6 @@ $under-line-color: #d6e4ee;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-$b181black: Brother-1816-Black, -apple-system, system-ui !important;
 
 %page {
   display: flex;
