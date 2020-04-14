@@ -33,6 +33,7 @@
 
 .auto {
   @extend %template;
+  padding: 0;
 
   .auto-image-list {
     @extend %flex-row;
@@ -42,10 +43,12 @@
 
     &-item {
       width: 100%;
+      border: 1px solid $border-color;
     }
   }
 
   &-content {
+    padding: 10px;
     @extend %flex-column;
     flex: 1;
 

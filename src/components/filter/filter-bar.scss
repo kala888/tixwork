@@ -1,0 +1,104 @@
+@import 'src/styles/theme';
+
+.filter-tabs {
+  @extend %flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  text-align: center;
+  padding: 0 20px;
+  font-size: 30px;
+  color: #666;
+
+  &-item {
+    padding: 20px 10px;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .fixed-first {
+    &:first-child {
+      flex: 0 0 100px;
+    }
+  }
+
+  &-item.selected {
+    position: relative;
+    font-weight: 800;
+    color: #333;
+
+    &:after {
+      position: absolute;
+      content: '';
+      left: 10px;
+      right: 10px;
+      bottom: 8px;
+      height: 10px;
+      background: linear-gradient(120deg, $orange-color, $red-color);
+      box-shadow: 0 0 12px $red-color;
+      //background: linear-gradient(135deg, $color-brand-light, $color-brand-dark);
+      //box-shadow: 0 0 12px $color-brand-dark;
+      border-radius: 10px;
+    }
+  }
+
+  &-icon {
+    padding: 5px;
+  }
+}
+
+.filter-draw {
+  @extend %flex-column;
+  text-align: center;
+  height: 100%;
+  color: $text-color;
+
+  &-group {
+    @extend %flex-1;
+    flex-direction: column;
+    overflow: auto;
+
+    &-title {
+      font-size: 30px;
+      font-weight: 500;
+      margin: 20px 20px 10px;
+      text-align: left;
+    }
+
+    &-content {
+      @extend %flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      &-item {
+        flex: 0 0 25%;
+        font-size: 24px;
+        overflow: hidden;
+
+        &-txt {
+          border-radius: 100px;
+          background: $white;
+          line-height: 60px;
+          margin: 8px 14px;
+          padding: 0 10px;
+          @include text-ellipsis;
+          //box-sizing: border-box;
+          border: 1px solid $white; // border-box没有生效
+        }
+      }
+
+      &-item.selected &-item-txt {
+        color: $red-color;
+        border: 1px solid $red-color;
+      }
+    }
+  }
+
+  &-footer {
+    color: #fff;
+    text-align: center;
+    background: linear-gradient(to right, $orange-color, $red-color);
+    line-height: 70px;
+    font-size: 30px;
+  }
+}
