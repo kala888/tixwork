@@ -10,7 +10,7 @@ export const useFacet = (tabs = [], title, code, facetList = []) => {
   useEffect(() => {
     const group = isEmpty(tabs) ? [] : [{ id: 0, code, title, list: tabs }]
     setFaceGroup(group.concat(facetList))
-  }, [tabs, facetList])
+  }, [tabs, title, code, facetList])
 
   const onFacetChange = (item) => {
     setSelectedFacet((pre) => {
@@ -49,7 +49,7 @@ export const useFilterTabs = (items = [], max, pinFirst) => {
       ...it,
     }))
     setActiveTabs(result)
-  }, [selected, tabs, max])
+  }, [selected, tabs, max, pinFirst])
 
   return { tabs, setTabs, activeTabs, setSelected, selected }
 }

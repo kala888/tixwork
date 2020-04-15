@@ -10,7 +10,6 @@ import { useFacet, useFilterTabs } from './filter.use'
 const DEFAULT_CODE_4_MAIN = 'main'
 
 function FilterBar(props) {
-  // const { items, onChange, pinFirst } = props
   const { title, items, facetList, pinFirst, max } = props
   const asATabBar = isEmpty(facetList)
 
