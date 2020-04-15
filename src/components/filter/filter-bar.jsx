@@ -10,7 +10,7 @@ import { useFacet, useFilterTabs } from './filter.use'
 const DEFAULT_CODE_4_MAIN = 'main'
 
 function FilterBar(props) {
-  const { title, items, facetList, pinFirst, max } = props
+  const { title, items, facetList, pinFirst, max, onChange } = props
   const asATabBar = isEmpty(facetList)
 
   // filter
@@ -24,7 +24,11 @@ function FilterBar(props) {
 
   const { visible, show, close } = useVisible(false)
 
-  const onTabClick = (item) => setSelected(item)
+  const onTabClick = (item) => {
+    setSelected(item)
+    clearFacetCondition()
+    onChange(item)
+  }
 
   const handleFacetSelect = (item, facetCode) => {
     if (facetCode === DEFAULT_CODE_4_MAIN) {
@@ -43,6 +47,8 @@ function FilterBar(props) {
     }
     return selectedFacet.findIndex((it) => it.id === item.id) > -1
   }
+
+  const clearFacetCondition = () => setSelectedFacet([])
 
   const handleConfirm = () => {}
 
@@ -77,7 +83,7 @@ function FilterBar(props) {
               )
             })}
           </View>
-          <View className='facet-condition-clear' onClick={() => setSelectedFacet([])}>
+          <View className='facet-condition-clear' onClick={clearFacetCondition}>
             全部清除
           </View>
         </View>
