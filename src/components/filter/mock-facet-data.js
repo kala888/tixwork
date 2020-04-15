@@ -6,7 +6,7 @@ const mockCategory = [
   },
   {
     id: '2',
-    name: '定制家居',
+    name: '定制家居我牛逼',
     icon: 'iconmumen',
   },
   {
@@ -141,13 +141,24 @@ const mockCategory = [
   },
 ]
 const mockPriceFacet = [
-  { id: 1, name: '5万以下' },
-  { id: 2, name: '5-10万' },
-  { id: 3, name: '10-25万' },
-  { id: 4, name: '25万以上' },
+  { id: 'price-1', name: '5万以下' },
+  { id: 'price-2', name: '5-10万' },
+  { id: 'price-3', name: '10-25万' },
+  { id: 'price-4', name: '25万以上' },
 ]
-const mockFacetData = [
-  { id: 1, code: 'category', title: '类别', list: mockCategory },
-  { id: 2, code: 'price', title: '价格', list: mockPriceFacet },
+const mockAreaFacet = [
+  { id: 'area-1', name: '大源片区' },
+  { id: 'area-2', name: '中和片区' },
+  { id: 'area-3', name: '市中心' },
+  { id: 'area-4', name: '万安镇' },
 ]
+const mockFacetData = {
+  code: 'category',
+  title: '类别',
+  list: mockCategory,
+  facetList: [
+    { id: 2, code: 'price', title: '价格区间', list: mockPriceFacet },
+    { id: 3, code: 'area', title: '所在区域', list: mockAreaFacet },
+  ],
+}
 export default mockFacetData

@@ -66,6 +66,7 @@ class App extends Component {
 
   config = {
     pages: [
+      'pages/biz/hello-daas-page',
       'pages/home/home-page',
       'pages/login/login-page',
       'pages/me/me-page',

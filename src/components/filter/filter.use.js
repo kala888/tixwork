@@ -1,42 +1,61 @@
-import { isEmpty, noop } from '@/nice-router/nice-router-util'
+import { isEmpty } from '@/nice-router/nice-router-util'
 import { useEffect, useState } from '@tarojs/taro'
+import remove from 'lodash/remove'
+import clone from 'lodash/clone'
 
-export const useFilter = (initial, onChange = noop) => {
-  const [filter, setFilter] = useState(initial)
+export const useFacet = (tabs = [], title, code, facetList = []) => {
+  const [facetGroup, setFaceGroup] = useState(facetList)
+  const [selectedFacet, setSelectedFacet] = useState([])
 
-  const onFilterChange = (value) => {
-    setFilter((preState) => {
-      const newState = { ...preState, ...value }
-      onChange(newState)
-      return newState
+  useEffect(() => {
+    const group = isEmpty(tabs) ? [] : [{ id: 0, code, title, list: tabs }]
+    setFaceGroup(group.concat(facetList))
+  }, [tabs, facetList])
+
+  const onFacetChange = (item) => {
+    setSelectedFacet((pre) => {
+      const list = clone(pre)
+      const isUncheckAction = list.findIndex((it) => it.id === item.id) > -1
+      remove(list, (it) => it.facet === item.facet || it.id === item.id)
+      const result = isUncheckAction ? [] : [item]
+      return result.concat(list)
     })
   }
-  return [filter, onFilterChange]
+
+  return {
+    facetGroup,
+    setFaceGroup,
+    selectedFacet,
+    setSelectedFacet,
+    onFacetChange,
+  }
 }
-
-export const useFilterTabs = (filter, max, initialTabs = [], fixedFirst) => {
-  const [tabs, setTabs] = useState([])
+export const useFilterTabs = (items = [], max, pinFirst) => {
+  const [tabs, setTabs] = useState(items)
+  const [selected, setSelected] = useState({})
   const [activeTabs, setActiveTabs] = useState([])
-  console.log('useFilterTabs1', tabs, initialTabs)
 
   useEffect(() => {
-    setTabs(initialTabs)
-  }, [initialTabs])
+    setTabs(items)
+    const current = items.find((it) => it.selected) || items[0] || {}
+    setSelected(current)
+  }, [items])
 
   useEffect(() => {
+    const tabsInViewport = findActiveTabs(tabs, selected, max, pinFirst)
     // 这里重新算一下key，不然偶尔会触发，两次渲染后，button的key重复的bug
-    const tabsInViewport = findActiveTabs(tabs, filter.selected, max, fixedFirst).map((it, idx) => ({
+    const result = tabsInViewport.map((it, idx) => ({
       key: it.id + '_' + idx,
       ...it,
     }))
-    console.log('useFilterTabs2', tabs, tabsInViewport)
-    setActiveTabs(tabsInViewport)
-  }, [filter, tabs])
+    setActiveTabs(result)
+  }, [selected, tabs, max])
 
-  return { tabs, setTabs, activeTabs }
+  return { tabs, setTabs, activeTabs, setSelected, selected }
 }
 
-export const findActiveTabs = (items = [], selected, max, fixedFirst) => {
+// 居中算法
+export const findActiveTabs = (items = [], selected, max, pinFirst) => {
   if (isEmpty(items) || items.length <= max) {
     return items
   }
@@ -47,10 +66,10 @@ export const findActiveTabs = (items = [], selected, max, fixedFirst) => {
     return items.slice(0, max)
   }
 
-  const maxItemLength = fixedFirst ? max - 1 : max
+  const maxItemLength = pinFirst ? max - 1 : max
   const startIndex = selectedIndex - parseInt(maxItemLength / 2)
   const endIndex = startIndex + maxItemLength
-  let result = fixedFirst ? items.slice(0, 1) : []
+  let result = pinFirst ? items.slice(0, 1) : []
   if (endIndex > items.length - 1) {
     // 上边界超了，就取，倒数max个
     return result.concat(items.slice(-maxItemLength))

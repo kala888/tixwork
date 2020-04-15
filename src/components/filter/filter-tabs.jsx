@@ -6,7 +6,7 @@ import './filter-bar.scss'
 
 function FilterTabs({ items }) {
   const onChange = (item) => NavigationService.ajax(item, {}, { loading: LoadingType.modal })
-  return <FilterBar items={items} onChange={onChange} fixedFirst={false} />
+  return <FilterBar items={items} onChange={onChange} max={5} pinFirst={false} />
 }
 
 FilterTabs.propTypes = {
