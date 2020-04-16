@@ -1,8 +1,8 @@
 import { useAsyncEffect, useAsyncState } from '@/service/use.service'
-import mockFacetData from '../../mock-data/mock-facet-data'
 import { View } from '@tarojs/components'
 import FilterTabs from '@/components/filter/filter-tabs'
 import FilterBar from '@/components/filter/filter-bar'
+import mockFacetData from '../../mock-data/mock-facet-data'
 import './styles.scss'
 
 function HelloDaaSPage() {
