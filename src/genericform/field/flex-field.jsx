@@ -47,7 +47,7 @@ export default function FlexField(props) {
   //max=1来处理单图，max=n处理多图
   if (type === 'image') return <EleImagePicker {...props} />
 
-  if (type === 'textarea' || type === 'longtext') return <AtTextarea {...props} />
+  if (type === 'textarea' || type === 'long-text') return <AtTextarea {...props} />
 
   if (type === 'object-picker') return <ObjectPicker {...props} />
 

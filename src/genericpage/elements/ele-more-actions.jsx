@@ -64,3 +64,5 @@ EleMoreActions.defaultProps = {
   mode: 'auto',
   linkToUrl: '',
 }
+
+export default EleMoreActions

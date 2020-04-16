@@ -299,7 +299,7 @@ const pageData = {
           name: '13-description',
           label: '详细描述',
 
-          type: 'longtext',
+          type: 'long-text',
           placeholder: '请详细描述一下你所有的学习经历',
           value: '学习雷锋好榜样，忠于革命主与党，爱憎分明不忘本，立场见底斗志强',
           rules: [

@@ -132,7 +132,7 @@ Items中支持视频和图片
 
 ###### EleMessageSwiper
 
- type=message-swiper
+ type=notice-bar
 
 一个上下滚动的消息广播
 

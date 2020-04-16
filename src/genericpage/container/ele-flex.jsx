@@ -17,6 +17,7 @@ import EleNavigationBox from '../elements/ele-navigation-box'
 import EleQrcode from '../elements/ele-qrcode'
 import EleMoreActions from '../elements/ele-more-actions'
 import EleListof from '../elements/ele-listof'
+import EleRichText from '../elements/ele-rich-text'
 
 import '../styles.scss'
 
@@ -31,7 +32,7 @@ function EleFlex(props) {
         if (it.type === 'image') return <EleImage key={id} {...it} />
         if (it.type === 'button') return <EleButton key={id} {...it} />
         if (it.type === 'carousel') return <EleCarousel key={id} {...it} />
-        if (it.type === 'message-swiper') return <EleNoticeBar key={id} {...it} />
+        if (it.type === 'notice-bar') return <EleNoticeBar key={id} {...it} />
         if (it.type === 'break-line') return <EleBreakLine key={id} {...it} />
         if (it.type === 'white-space') return <EleWhiteSpace key={id} {...it} />
         if (it.type === 'box-bar') return <EleNavigationBox key={id} {...it} />
@@ -42,6 +43,7 @@ function EleFlex(props) {
         if (it.type === 'qrcode') return <EleQrcode key={id} {...it} />
         if (it.type === 'more-actions') return <EleMoreActions key={id} {...it} />
         if (it.type === 'listof') return <EleListof key={id} {...it} />
+        if (it.type === 'rich-text') return <EleRichText key={id} {...it} />
 
         if (it.type === 'form') return <EleForm key={id} {...it} fields={it.kids} />
 

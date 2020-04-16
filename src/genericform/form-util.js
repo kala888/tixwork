@@ -18,7 +18,7 @@ const BaseField = {
 }
 const fieldConfig = {
   textarea: VerticalField,
-  longtext: VerticalField,
+  'long-text': VerticalField,
   image: VerticalField,
 }
 

@@ -323,6 +323,34 @@ const horizontalList = {
   },
 }
 
+const richText = '<h2 style="padding-left: 20px;margin-top:20px;text-align:center"><strong>西红柿炒鸡蛋的家庭做法</strong></h2>\n' +
+  '<h4 style="padding-left: 20px;margin-top:20px">原料：</h4>\n' +
+  '<ul>\n' +
+  '<li style="list-style-type: none;">\n' +
+  '<ul>\n' +
+  '<li>西红柿 <span style="color: #e03e2d;">150g</span></li>\n' +
+  '<li>鸡蛋 <span style="color: #e03e2d;">3枚</span></li>\n' +
+  '<li>葱 <span style="color: #e03e2d;">15g</span></li>\n' +
+  '<li>盐 <span style="color: #e03e2d;">3g</span></li>\n' +
+  '<li>油 <span style="color: #e03e2d;">10g</span></li>\n' +
+  '<li>料酒 <span style="color: #e03e2d;">10g</span></li>\n' +
+  '</ul>\n' +
+  '</li>\n' +
+  '</ul>\n' +
+  '<p style="padding-left: 20px;"><img alt="" src="https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/food-1.jpg" /></p>\n' +
+  '<h4 style="padding-left: 20px;">步骤：</h4>\n' +
+  '<ol>\n' +
+  '<li style="list-style-type: none;">\n' +
+  '<ol>\n' +
+  '<li>油，锅里放</li>\n' +
+  '<li>鸡蛋，锅里放</li>\n' +
+  '<li>西红柿，锅里放</li>\n' +
+  '<li>豁楞，出锅</li>\n' +
+  '</ol>\n' +
+  '</li>\n' +
+  '</ol>\n' +
+  '<p style="padding-left: 20px;"><img alt="" src="https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/food-2.jpg" /></p>'
+
 const pageData = {
   // pageTitle: 'Nice router 社区',
   pageTitle: '双11大促销',
@@ -330,7 +358,7 @@ const pageData = {
     { id: '66', type: 'fab', ...fab },
     { id: '0', type: 'carousel', ...carousel },
     { id: '1', type: 'box-bar', ...boxBar },
-    { id: '2', type: 'message-swiper', ...messageSwiper },
+    { id: '2', type: 'notice-bar', ...messageSwiper },
     { id: '3', type: 'break-line', text: '商家', ...breakLine },
     { id: '4', type: 'listof', ...shopList },
     { id: '5', type: 'break-line', text: '精品文章', ...breakLine, color: '#39a7fc', fontColor: '#39a7fc' },
@@ -343,10 +371,12 @@ const pageData = {
     { id: '13', type: 'break-line', text: '线下门店', ...breakLine },
     { id: '14', type: 'store-location', ...storeLocation },
     { id: '14.1', type: 'break-line' },
+    { id: '15', type: 'rich-text', ...richText },
+    { id: '15.1', type: 'break-line' },
     // { id: '41', type: 'popup', ...popup },
-    { id: '15.1', type: 'white-space' },
-    { id: '15.3', type: 'white-space' },
-    { id: '16', type: 'footer-tabs', ...footer },
+    { id: '9999.1', type: 'white-space' },
+    { id: '9999.2', type: 'white-space' },
+    { id: '9999.3', type: 'footer-tabs', ...footer },
   ],
 }
 

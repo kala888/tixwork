@@ -23,7 +23,7 @@ import { isEmpty } from '@/nice-router/nice-router-util'
 
 // const TYPE_MAPPING = {
 //   text: 'string',
-//   longtext: 'string',
+//   'long-text': 'string',
 //   textarea: 'string',
 //   phone: 'string',
 //   money: 'integer',
