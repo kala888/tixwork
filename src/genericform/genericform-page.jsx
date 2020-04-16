@@ -5,9 +5,10 @@ import { AtButton } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 import isNil from 'lodash/isNil'
 
-import { isEmpty } from '@/nice-router/nice-router-util'
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import NavigationService from '@/nice-router/navigation.service'
 import FormSteps from '@/genericform/form-steps'
+import EleRichText from '@/genericpage/elements/ele-rich-text'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 
 import './index.scss'
@@ -16,7 +17,7 @@ function GenericformPage(props) {
   const formRef = useRef(null)
 
   const { pageTitle } = props
-  const { id, groupList = [], fieldList = [], stepList = [], actionList = [] } = props
+  const { id, groupList = [], fieldList = [], stepList = [], actionList = [], content } = props
 
   usePageTitle(pageTitle)
   usePullDown(props)
@@ -74,6 +75,7 @@ function GenericformPage(props) {
   console.log('generic-form fieldList', fieldList)
   return (
     <View className='generic-form-page'>
+      {isNotEmpty(content) && <EleRichText content={content} />}
       {stepList.length > 0 && <FormSteps steps={stepList} />}
       <EleForm formKey={id} ref={formRef} groupList={groupList} fieldList={fieldList} defaultValues={defaultValues} />
 
