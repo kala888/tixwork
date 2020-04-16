@@ -67,7 +67,6 @@ class App extends Component {
   config = {
     pages: [
       'pages/home/home-page',
-      'pages/login/login-page',
       'pages/me/me-page',
 
       // base
@@ -78,6 +77,8 @@ class App extends Component {
       'listof/listof-page2',
       'listof/listof-page3',
       'listof/listof-page4',
+      //biz
+      'pages/login/login-page',
     ],
     subPackages: [
       {
