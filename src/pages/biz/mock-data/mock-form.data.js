@@ -53,7 +53,7 @@ const pageData = {
   ],
   actionList: [
     { code: 'preStep', title: '上一步' },
-    { code: 'nextStep', title: '下一步', linkToUrl: 'mock-generic-form2/' },
+    { code: 'nextStep', title: '下一步', linkToUrl: 'mock-generic-form-2/' },
   ],
   groupList: [
     {
@@ -325,11 +325,11 @@ const pageData = {
   ],
 }
 
-const mockFormData = {
+const mockForm1Data = {
   xclass: 'com.terapico.caf.viewcomponent.GenericFormPage',
   success: true,
   xredirect: null,
   data: pageData,
 }
 
-export default mockFormData
+export default mockForm1Data

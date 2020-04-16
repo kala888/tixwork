@@ -76,5 +76,7 @@ export function useCountdown(maxCount = 60) {
 }
 
 // 纯粹因为IDE不能自动导入Taro的useState
-export const useAsyncEffect = useEffect
+export const useAsyncEffect = (callback, watch = []) => {
+  useEffect(callback, watch)
+}
 export const useAsyncState = useState

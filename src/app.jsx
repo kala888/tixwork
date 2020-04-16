@@ -69,7 +69,6 @@ class App extends Component {
       'pages/home/home-page',
       'pages/login/login-page',
       'pages/me/me-page',
-      'pages/biz/hello-daas-page',
 
       // base
       'nice-router/h5-page',
@@ -84,10 +83,14 @@ class App extends Component {
       'listof/listof-page2',
       'listof/listof-page3',
       'listof/listof-page4',
-      // biz
-      'pages/biz/listof-test-page',
     ],
-    //
+    subPackages: [
+      {
+        root: 'pages/biz',
+        pages: ['listof-test-page', 'hello-daas-page'],
+      },
+    ],
+
     // permission: {
     //   'scope.userLocation': {
     //     desc: '你的位置信息将用于小程序位置接口的效果展示',

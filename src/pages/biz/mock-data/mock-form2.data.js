@@ -63,11 +63,11 @@ const pageData = {
   ],
 }
 
-const mockFormData = {
+const mockForm2Data = {
   xclass: 'com.terapico.caf.viewcomponent.GenericFormPage',
   success: true,
   xredirect: null,
   data: pageData,
 }
 
-export default mockFormData
+export default mockForm2Data

@@ -1,8 +1,8 @@
 import { View } from '@tarojs/components'
 import { AtActionSheet, AtIcon } from 'taro-ui'
-import ActionField from '@/genericform/field/action-field'
 import { useVisible } from '@/service/use.service'
-import Tree from '../field/tree/tree'
+import Tree from './tree/tree'
+import ActionField from './action-field'
 import './styles.scss'
 
 function findValueFromTheTree(value, treeItem = {}) {

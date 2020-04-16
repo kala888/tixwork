@@ -7,10 +7,10 @@ import isNil from 'lodash/isNil'
 
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import NavigationService from '@/nice-router/navigation.service'
-import FormSteps from '@/genericform/form-steps'
 import EleRichText from '@/genericpage/elements/ele-rich-text'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 
+import FormSteps from './form-steps'
 import './index.scss'
 
 function GenericformPage(props) {
