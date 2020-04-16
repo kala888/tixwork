@@ -37,6 +37,7 @@
 
   &-action {
     @extend %flex-row;
+    align-items: center;
 
     &-txt {
       font-size: 24px;
@@ -46,7 +47,7 @@
     }
 
     &-icon {
-      // TODO
+      color: $text-color-light;
     }
   }
 }

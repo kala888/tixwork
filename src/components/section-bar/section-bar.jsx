@@ -4,6 +4,7 @@ import { AtIcon } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 
 import './styles.scss'
+import NavigationBoxBar from '@/components/navigation/navigation-box-bar'
 
 function SectionBar(props) {
   const { title, brief = '', secondTitle, className, customStyle = {} } = props
@@ -25,11 +26,17 @@ function SectionBar(props) {
       {showMore && (
         <View className='section-bar-action' onClick={onClick}>
           <Text className='section-bar-action-txt'>MORE</Text>
-          <AtIcon className='section-bar-action-icon' value='chevron-right' size={20} />
+          <View className='section-bar-action-icon'>
+            <AtIcon  value='chevron-right' size={18} />
+          </View>
         </View>
       )}
     </View>
   )
+}
+
+SectionBar.options = {
+  addGlobalClass: true,
 }
 
 export default SectionBar
