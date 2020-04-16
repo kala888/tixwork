@@ -323,7 +323,8 @@ const horizontalList = {
   },
 }
 
-const richText = '<h2 style="padding-left: 20px;margin-top:20px;text-align:center"><strong>西红柿炒鸡蛋的家庭做法</strong></h2>\n' +
+const richText =
+  '<h2 style="padding-left: 20px;margin-top:20px;text-align:center"><strong>西红柿炒鸡蛋的家庭做法</strong></h2>\n' +
   '<h4 style="padding-left: 20px;margin-top:20px">原料：</h4>\n' +
   '<ul>\n' +
   '<li style="list-style-type: none;">\n' +

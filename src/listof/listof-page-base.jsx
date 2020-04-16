@@ -4,6 +4,8 @@ import { AtButton } from 'taro-ui'
 import CustomerTabs from '@/components/common/customer-tabs'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 import Config from '@/utils/config'
+import EleRichText from '@/genericpage/elements/ele-rich-text'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 import Listof from './listof'
 import './styles.scss'
 
@@ -27,6 +29,7 @@ function ListofPageBase(props) {
     articleList,
     articleListMeta,
     actionList,
+    content, // rich-text
   } = props
 
   return (
@@ -34,6 +37,7 @@ function ListofPageBase(props) {
       <View>
         <CustomerTabs tabs={tabs} />
       </View>
+      {isNotEmpty(content) && <EleRichText content={content} />}
       <Listof
         dataContainer={dataContainer}
         list={list || articleList}
