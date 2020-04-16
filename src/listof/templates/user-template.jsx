@@ -1,5 +1,6 @@
 import { Text, View } from '@tarojs/components'
 import ServerImage from '@/server-image/server-image'
+
 import './styles.scss'
 
 function UserTemplate(props) {

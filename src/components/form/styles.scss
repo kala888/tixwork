@@ -1,0 +1,128 @@
+@import 'src/styles/theme';
+
+$error-color: $orange-color;
+
+.ele-form {
+  &-fields {
+    padding: 0 20px;
+  }
+
+  .section-bar {
+    padding: 20px;
+    margin: 20px 0;
+    @include hairline-bottom($under-line-color);
+
+    &-preicon {
+      width: 4px;
+    }
+
+    &-title-txt {
+      color: #6a6a77;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+  }
+}
+
+.form-item {
+  color: $text-color;
+
+  .at-input,
+  .at-switch {
+    padding: 0;
+    margin-left: 0;
+  }
+
+  &-flex-field {
+    width: 100%;
+  }
+}
+
+.form-item-horizontal {
+  display: flex;
+  align-items: center;
+}
+
+.form-item-error {
+  color: $error-color;
+
+  .at-input input {
+    color: $error-color;
+  }
+}
+
+.item-wrapper {
+  padding: 22px 0;
+  font-size: 32px;
+  min-height: 1.4rem;
+  @extend %flex;
+  align-items: center;
+
+  &-children {
+    flex: 1;
+  }
+
+  &-tail {
+    padding-right: 16px;
+    width: 60px;
+    display: flex;
+    justify-content: flex-end;
+
+    &-alert {
+      color: $error-color;
+    }
+
+    &-clear {
+      color: #999;
+    }
+  }
+}
+
+.item-wrapper-bordered {
+  @include hairline-bottom($under-line-color);
+}
+
+.item-label {
+  width: 190px;
+  padding-right: 24px;
+
+  &-title {
+    position: relative;
+
+    &-required {
+      color: $error-color;
+      padding-right: 5px;
+    }
+  }
+
+  &-tips-icon {
+    padding: 0 10px;
+    color: #999;
+  }
+
+  &-tips-view {
+    padding: 20px 20px 100px;
+    color: $text-color-light;
+
+    &-title {
+      min-height: 1em;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+    &-content {
+      text-align: left;
+      font-size: 22px;
+    }
+  }
+}
+
+.item-label-vertical {
+  width: 100%;
+  padding-bottom: 12px;
+}
+
+.error-message {
+  color: $error-color;
+  font-size: 22px;
+}

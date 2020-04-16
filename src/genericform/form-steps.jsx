@@ -1,6 +1,7 @@
-import NavigationService from '@/nice-router/navigation.service'
 import { AtSteps } from 'taro-ui'
 import { View } from '@tarojs/components'
+
+import NavigationService from '@/nice-router/navigation.service'
 
 import './styles.scss'
 

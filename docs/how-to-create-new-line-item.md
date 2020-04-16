@@ -25,7 +25,7 @@ line-item是为了配合listof和ListofPage做展示用的，这里以增加一�
    }
    ```
 
-2. 将line-item注册到./src/listof/templates/line-item-wrapper.jsx
+2. 将line-item注册到./src/listof/templates/flex-line-item.jsx
 
 ```javascript
 import JustALine from './biz/just-a-line-template'

@@ -1,12 +1,13 @@
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import EleCarousel from '@/genericpage/elements/ele-carousel'
-import ActionFloor from '@/components/common/action-floor'
+import EleCarousel from '@/components/elements/ele-carousel'
+import ActionFloor from '@/components/navigation/action-floor'
 import { usePageTitle, usePullDown } from '@/service/use.service'
-import SectionBar from '@/components/common/section-bar'
+import SectionBar from '@/components/section-bar/section-bar'
 import Listof from '@/listof/listof'
 
 import MockService from '@/nice-router/request/mock-service'
+
 import './home.scss'
 import mockGenericPageData from '../biz/mock-data/mock-genericpage.data'
 import mockForm1Data from '../biz/mock-data/mock-form.data'

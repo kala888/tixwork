@@ -1,8 +1,8 @@
 import { View } from '@tarojs/components'
 import { AtDivider } from 'taro-ui'
+import classNames from 'classnames'
 
 import { toRpx } from '@/utils/index'
-import classNames from 'classnames'
 
 function EleBreakLine({ color, height, text, fontColor, customStyle, className }) {
   const fixedHeight = toRpx(height)

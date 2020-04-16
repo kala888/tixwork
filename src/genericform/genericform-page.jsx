@@ -1,17 +1,17 @@
 import { useRef } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import EleForm from '@/genericform/form/ele-form'
 import { AtButton } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 import isNil from 'lodash/isNil'
 
+import EleForm from '@/components/form/ele-form'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import NavigationService from '@/nice-router/navigation.service'
-import EleRichText from '@/genericpage/elements/ele-rich-text'
+import EleRichText from '@/components/elements/ele-rich-text'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 
 import FormSteps from './form-steps'
-import './index.scss'
+import './styles.scss'
 
 function GenericformPage(props) {
   const formRef = useRef(null)

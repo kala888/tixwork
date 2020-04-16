@@ -6,7 +6,7 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import SectionBar from '@/components/biz/section-bar'
-import EleBreakLine from '@/genericpage/elements/ele-break-line'
+import EleBreakLine from '@/elements/common/ele-break-line'
 import Listof from '../../listof/listof'
 
 export default class HelloDaasPage extends Taro.PureComponent {

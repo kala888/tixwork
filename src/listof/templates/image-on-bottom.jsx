@@ -1,5 +1,6 @@
 import { Text, View } from '@tarojs/components'
 import ServerImage from '@/server-image/server-image'
+
 import { getImageUrl } from '../listof-helper'
 import './styles.scss'
 

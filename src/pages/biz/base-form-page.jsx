@@ -1,8 +1,8 @@
 import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import FormItem from '@/genericform/form/form-item'
 import { AtButton, AtInput } from 'taro-ui'
-import FormUtil from '@/genericform/form-util'
+import FormItem from '@/components/form/form-item'
+import FormUtil from '@/components/form/form-util'
 
 export default class BaseFormPage extends Taro.PureComponent {
   //以name为key

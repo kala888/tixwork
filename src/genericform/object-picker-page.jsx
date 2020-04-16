@@ -1,7 +1,7 @@
 import { useState } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import NavigationService from '@/nice-router/navigation.service'
 import { AtSearchBar } from 'taro-ui'
+import NavigationService from '@/nice-router/navigation.service'
 import Listof from '@/listof/listof'
 import { connect } from '@tarojs/redux'
 import { useAsyncEffect } from '@/service/use.service'

@@ -5,7 +5,7 @@ import Config from '@/utils/config'
 import { useAsyncEffect, usePageTitle, usePullDown } from '@/service/use.service'
 import NavigationService from '@/nice-router/navigation.service'
 
-import EleFlex from './container/ele-flex'
+import EleFlex from './ele-flex'
 import './styles.scss'
 
 function GenericPageBase(props) {

@@ -1,5 +1,6 @@
-import EleCard from '@/genericpage/elements/ele-card'
+import EleCard from '@/components/elements/ele-card'
 import { View } from '@tarojs/components'
+
 import './styles.scss'
 
 function CardTemplate(props) {

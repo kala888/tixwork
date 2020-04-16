@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import NavigationService from '@/nice-router/navigation.service'
 import { getNumberColumns } from '@/listof/listof-helper'
 import { enrichListOfEntity, toRpx } from '../utils'
-import LineItemWrapper from './templates/line-item-wrapper'
+import FlexLineItem from './templates/flex-line-item'
 
 import './styles.scss'
 import FooterTips from './footer-tips'
@@ -78,7 +78,7 @@ function Listof({
           const { id } = item
           return (
             <View key={id} className={itemContainerClass} style={listofContainerItemContainerStyle}>
-              <LineItemWrapper
+              <FlexLineItem
                 my-class='listof-container-item-wrapper'
                 index={index}
                 item={item}

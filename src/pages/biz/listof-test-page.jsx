@@ -1,5 +1,5 @@
 import Listof from '@/listof/listof'
-import SectionBar from '@/components/common/section-bar'
+import SectionBar from '@/components/section-bar/section-bar'
 import { View } from '@tarojs/components'
 import './styles.scss'
 import {

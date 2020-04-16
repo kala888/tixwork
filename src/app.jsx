@@ -73,11 +73,6 @@ class App extends Component {
       // base
       'nice-router/h5-page',
       'nice-router/network-exception-page',
-      'genericpage/generic-page',
-      'genericpage/generic-page2',
-
-      'genericform/genericform-page',
-      'genericform/object-picker-page',
 
       'listof/listof-page',
       'listof/listof-page2',
@@ -86,8 +81,19 @@ class App extends Component {
     ],
     subPackages: [
       {
-        root: 'pages/biz',
+        root: 'pages/biz/',
+        name: 'biz',
         pages: ['listof-test-page', 'hello-daas-page'],
+      },
+      {
+        root: 'genericpage/',
+        name: 'genericpage',
+        pages: ['generic-page', 'generic-page2'],
+      },
+      {
+        root: 'genericform/',
+        name: 'genericform',
+        pages: ['genericform-page', 'object-picker-page'],
       },
     ],
 

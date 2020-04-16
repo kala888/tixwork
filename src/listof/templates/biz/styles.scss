@@ -1,5 +1,4 @@
 @import 'src/styles/theme';
-@import '~taro-ui/dist/style/mixins/libs/hairline';
 
 .just-a-line {
   @include hairline-bottom($under-line-color);

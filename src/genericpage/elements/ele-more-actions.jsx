@@ -1,9 +1,9 @@
 import Taro from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
+import classNames from 'classnames'
 import ServerImage from '@/server-image/server-image'
 import NavigationService from '@/nice-router/navigation.service'
-import classNames from 'classnames'
 
 import './styles.scss'
 

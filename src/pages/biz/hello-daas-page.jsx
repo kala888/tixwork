@@ -1,5 +1,5 @@
-import { useAsyncEffect, useAsyncState } from '@/service/use.service'
 import { View } from '@tarojs/components'
+import { useAsyncEffect, useAsyncState } from '@/service/use.service'
 import FilterTabs from '@/components/filter/filter-tabs'
 import FilterBar from '@/components/filter/filter-bar'
 import mockFacetData from './mock-data/mock-facet-data'

@@ -50,7 +50,7 @@
 > 
 > 更多细节可以参考
 > 
-> src/service/file-upload/file-upload.service.js 
+> src/service/file-upload/upload-files.js 
 > 
 > src/genericpage/field/ele-image-picker.jsx
 

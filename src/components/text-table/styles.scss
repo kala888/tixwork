@@ -1,0 +1,41 @@
+@import 'src/styles/theme';
+
+.txt-table {
+  @extend %flex-column;
+  font-size: 28px;
+  background-color: transparent;
+  color: $text-color-lighter;
+
+  .info-row {
+    @extend %flex-row;
+    padding: 5px 10px;
+    word-break: break-all;
+
+    &-cell {
+      @extend %flex-1;
+      flex-direction: row;
+
+      &-title {
+        min-width: 60px;
+      }
+
+      &-value {
+        @extend %flex-1;
+        padding-left: 20px;
+        color: $text-color-light;
+      }
+
+      &-2lines {
+        @include lamp-clamp(2);
+      }
+
+      &-3lines {
+        @include lamp-clamp(3);
+      }
+
+      &-4lines {
+        @include lamp-clamp(4);
+      }
+    }
+  }
+}

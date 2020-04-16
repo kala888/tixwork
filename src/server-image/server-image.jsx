@@ -1,6 +1,7 @@
 import { Image } from '@tarojs/components'
 import classNames from 'classnames'
 import ImageTools from './image-tools'
+
 import './styles.scss'
 
 function ServerImage(props) {

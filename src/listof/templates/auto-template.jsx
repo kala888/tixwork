@@ -1,7 +1,9 @@
 import { Text, View } from '@tarojs/components'
+import classNames from 'classnames'
+
 import ServerImage from '@/server-image/server-image'
 import { formatTime } from '@/utils/index'
-import classNames from 'classnames'
+
 import { getImageList } from '../listof-helper'
 import './styles.scss'
 
