@@ -7,9 +7,9 @@ import isNil from 'lodash/isNil'
 import { isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
 import HttpRequest from './http-request'
 
-import mockFormData from '../mock-data/mock-form.data'
-import mockFormData2 from '../mock-data/mock-form2.data'
-import mockGenericPageData from '../mock-data/mock-genericpage.data'
+import mockFormData from '../../mock-data/mock-form.data'
+import mockFormData2 from '../../mock-data/mock-form2.data'
+import mockGenericPageData from '../../mock-data/mock-genericpage.data'
 
 const EMPTY_PARAMETER_TOKEN = '+'
 const BackendService = {}
