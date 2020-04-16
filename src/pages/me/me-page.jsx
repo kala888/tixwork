@@ -11,20 +11,17 @@ import ServerImage from '@/server-image/server-image'
 
 import './me.scss'
 
-import buildingIcon from '../../assets/icon/icon_loupan@2x.png'
-import commerceIcon from '../../assets/icon/icon_liansuo@2x.png'
-
 const defaultAvatar = 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg'
 
 const Box_Navigator_List = [
   {
     code: 'FINE_DECORATION',
-    icon: buildingIcon,
+    icon: 'app',
     title: '发起申请',
   },
   {
     code: 'BIZ_CHAIN',
-    icon: commerceIcon,
+    icon: 'app-2',
     title: '我发起',
   },
 ]
@@ -37,7 +34,7 @@ const LineItem_Navigator_List = [
   },
   {
     code: 'my-favorite-list',
-    icon: commerceIcon,
+    icon: 'app',
     title: '我的收藏',
   },
 ]

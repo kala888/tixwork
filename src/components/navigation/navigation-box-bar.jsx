@@ -5,8 +5,6 @@ import classNames from 'classnames'
 import NavigationService from '@/nice-router/navigation.service'
 import './styles.scss'
 
-import commerceIcon from '../../assets/icon/icon_liansuo@2x.png'
-
 function NavigationBoxBar(props) {
   const { list = [], className, customStyle = {} } = props
 
@@ -26,7 +24,7 @@ function NavigationBoxBar(props) {
               <View className='navigation-box' onClick={handleClick.bind(this, it)}>
                 <View className='navigation-box-badge'>
                   <AtBadge value={badge}>
-                    <Image className='navigation-box-img' mode='widthFix' src={icon || imageUrl || commerceIcon} />
+                    <Image className='navigation-box-img' mode='widthFix' src={icon || imageUrl} />
                   </AtBadge>
                 </View>
                 <View className='navigation-box-txt'>{title}</View>
