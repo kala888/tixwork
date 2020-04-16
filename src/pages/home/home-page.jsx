@@ -12,7 +12,7 @@ import './home.scss'
 import mockGenericPageData from '../biz/mock-data/mock-genericpage.data'
 import mockForm1Data from '../biz/mock-data/mock-form.data'
 import mockForm2Data from '../biz/mock-data/mock-form2.data'
-import { mockProductList, mockUserList } from '../biz/mock-data/list.data'
+import { mockProductList, mockUserList } from '../biz/mock-data/mock-list.data'
 
 function HomePage(props) {
   const { pageTitle } = props

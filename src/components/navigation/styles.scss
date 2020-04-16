@@ -106,7 +106,7 @@
 
 .navigation-line-item {
   margin-top: 20px;
-  height: 120px;
+  height: 100px;
   padding: 20px;
   background-color: $white;
   border-radius: 10px;
@@ -118,6 +118,10 @@
     width: 10px;
     background-color: $primary-color;
     border-radius: 5px;
+  }
+  &-tailicon {
+    height: 100%;
+    @extend %flex-center;
   }
 
   &-content {
@@ -134,12 +138,6 @@
     &-title {
       font-size: 22px;
     }
-  }
-
-  &-image {
-    width: 80px;
-    height: 80px;
-    padding: 0 20px;
   }
 }
 
@@ -190,4 +188,8 @@
       align-self: center;
     }
   }
+}
+
+.action-icon {
+  width: 40px;
 }

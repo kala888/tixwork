@@ -9,7 +9,7 @@ import {
   mockNewsList,
   mockProductList,
   mockUserList,
-} from './mock-data/list.data'
+} from './mock-data/mock-list.data'
 
 function HelloDaaSPage() {
   const mockList = mockUserList.map((it) => ({ ...it, linkToUrl: 'https://www.baidu.com/' }))

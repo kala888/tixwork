@@ -1,9 +1,10 @@
 import { AtBadge } from 'taro-ui'
-import { Image, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import classNames from 'classnames'
 
 import NavigationService from '@/nice-router/navigation.service'
 import './styles.scss'
+import ActionIcon from '@/components/navigation/action-icon'
 
 function NavigationBoxBar(props) {
   const { list = [], className, customStyle = {} } = props
@@ -13,6 +14,8 @@ function NavigationBoxBar(props) {
   }
 
   const rootClass = classNames('navigation-bar', className)
+
+  console.log('12312313', props)
   return (
     list.length > 0 && (
       <View className={rootClass} customStyle={customStyle}>
@@ -24,7 +27,7 @@ function NavigationBoxBar(props) {
               <View className='navigation-box' onClick={handleClick.bind(this, it)}>
                 <View className='navigation-box-badge'>
                   <AtBadge value={badge}>
-                    <Image className='navigation-box-img' mode='widthFix' src={icon || imageUrl} />
+                    <ActionIcon className='navigation-box-img' icon={icon} imageUrl={imageUrl} />
                   </AtBadge>
                 </View>
                 <View className='navigation-box-txt'>{title}</View>

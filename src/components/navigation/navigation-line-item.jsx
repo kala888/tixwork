@@ -1,10 +1,11 @@
-import { Image, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
+import ActionIcon from './action-icon'
 
 import './styles.scss'
 
 function NavigationLineItem(props) {
-  const { imageUrl, title, brief } = props
+  const { imageUrl, title, brief, icon } = props
 
   const onClick = () => {
     NavigationService.view(props)
@@ -17,7 +18,9 @@ function NavigationLineItem(props) {
         <View className='navigation-line-item-content-brief'>{brief}</View>
         <View className='navigation-line-item-content-title'>{title}</View>
       </View>
-      <Image className='navigation-line-item-image' src={imageUrl} />
+      <View className='navigation-line-item-tailicon'>
+        <ActionIcon imageUrl={imageUrl} icon={icon} />
+      </View>
     </View>
   )
 }
