@@ -45,7 +45,7 @@ export const useFilterTabs = (items = [], max, pinFirst) => {
     const tabsInViewport = findActiveTabs(tabs, selected, max, pinFirst)
     // 这里重新算一下key，不然偶尔会触发，两次渲染后，button的key重复的bug
     const result = tabsInViewport.map((it, idx) => ({
-      key: it.id + '_' + idx,
+      key: it.id + '_' + idx + '_' + it.code,
       ...it,
     }))
     setActiveTabs(result)
