@@ -47,6 +47,11 @@
   }
 }
 
+.filter-tabs.bordered{
+  padding-bottom: 20px;
+  @include hairline-bottom($under-line-color);
+}
+
 .filter-draw {
   @extend %flex-column;
   text-align: center;

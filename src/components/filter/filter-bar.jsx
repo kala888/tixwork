@@ -11,7 +11,8 @@ import { useFacet, useFilterTabs } from './filter.use'
 const DEFAULT_CODE_4_MAIN = 'main'
 
 function FilterBar(props) {
-  const { title, items, facetList, pinFirst, max, onChange } = props
+  const { title, items, facetList, max, onChange } = props
+  const { pinFirst, bordered } = props
   const asATabBar = isEmpty(facetList)
 
   // filter
@@ -20,7 +21,7 @@ function FilterBar(props) {
     tabs,
     title,
     DEFAULT_CODE_4_MAIN,
-    facetList
+    facetList,
   )
 
   const { visible, show, close } = useVisible(false)
@@ -51,11 +52,14 @@ function FilterBar(props) {
 
   const clearFacetCondition = () => setSelectedFacet([])
 
-  const handleConfirm = () => {}
+  const handleConfirm = () => {
+  }
 
-  return (
+  const tabsClass = classNames('filter-tabs', { bordered })
+
+  return isEmpty(items) ? null : (
     <View>
-      <View className='filter-tabs'>
+      <View className={tabsClass}>
         {activeTabs.map((tab) => {
           const itemClass = classNames('filter-tabs-item', {
             'pin-first': pinFirst,

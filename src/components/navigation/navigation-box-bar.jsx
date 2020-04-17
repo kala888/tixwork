@@ -1,10 +1,10 @@
 import { AtBadge } from 'taro-ui'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
-
-import NavigationService from '@/nice-router/navigation.service'
-import './styles.scss'
 import ActionIcon from '@/components/navigation/action-icon'
+import NavigationService from '@/nice-router/navigation.service'
+
+import './styles.scss'
 
 function NavigationBoxBar(props) {
   const { list = [], className, customStyle = {} } = props

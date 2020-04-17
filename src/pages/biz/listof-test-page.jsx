@@ -2,14 +2,7 @@ import Listof from '@/listof/listof'
 import SectionBar from '@/components/section-bar/section-bar'
 import { View } from '@tarojs/components'
 import './styles.scss'
-import {
-  mockBusinessCardList,
-  mockImageOnBottomList,
-  mockMovieList,
-  mockNewsList,
-  mockProductList,
-  mockUserList,
-} from './mock-data/mock-list.data'
+import { mockBusinessCardList, mockImageOnBottomList, mockMovieList, mockNewsList, mockProductList, mockUserList } from './mock-data/mock-list.data'
 
 function HelloDaaSPage() {
   const mockList = mockUserList.map((it) => ({ ...it, linkToUrl: 'https://www.baidu.com/' }))
