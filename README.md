@@ -2,7 +2,6 @@
 
 多端统一开发体验 + 满足前端页面驱动和后端路由驱动的需求 + 给予后端开发页面控制权（方便实现客CS程序的千人千面，业务变更）
 
-[![B站视频](https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/docs/video-image.png)](https://www.bilibili.com/video/BV1F5411b74Q)
 
 ###### 已经上线的小程序(界面截图在最下面)
 
@@ -17,8 +16,6 @@
 
 
 
-
-
 # nice-router-taro
 
 #### 基础知识：React + DVA + Taro + TaroUI
@@ -30,13 +27,13 @@
 [DVA](https://github.com/dvajs/dva) 基于redux + saga的轻量级react开发框架
 
 
-
-
 [开始安装看效果](/docs/README.md)
 
 
 
 #### 部分项目截图
+
+[![B站视频](https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/docs/video-image.png)](https://www.bilibili.com/video/BV1F5411b74Q)
 
 <div>
   <img src='http://img14.360buyimg.com/img/jfs/t1/75655/32/15369/1497606/5dce1c26E27e2c759/031a033c857992a5.jpg!q60.webp'/>
