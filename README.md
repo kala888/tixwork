@@ -36,7 +36,7 @@
 [![B站视频](https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/docs/video-image.png)](https://www.bilibili.com/video/BV1F5411b74Q)
 
 <div>
-  <img src='http://img14.360buyimg.com/img/jfs/t1/75655/32/15369/1497606/5dce1c26E27e2c759/031a033c857992a5.jpg!q60.webp'/>
+  <img src='http://img20.360buyimg.com/img/jfs/t1/113507/6/1539/4384252/5e997650E55d4b847/041d5971880ead13.png.webp'/>
 </div>
 
 <div>
