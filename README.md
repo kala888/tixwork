@@ -39,16 +39,6 @@
   <img src='http://img20.360buyimg.com/img/jfs/t1/113507/6/1539/4384252/5e997650E55d4b847/041d5971880ead13.png.webp'/>
 </div>
 
-<div>
-  <img src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/nice-router-2.png?x-oss-process=style/xlarge'/>
-<div>
-  
-<div>
-  <img src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/nice-router-3.png?x-oss-process=style/xlarge'/>
-<div>
-
-
-
 ### nice-router 已经组件共享提供了基础的支持。希望各位兄弟贡献各种常用的组件，尤其是那些促销组件。让体力活变为OOTB。
 
 nice-router 包含两部分：
