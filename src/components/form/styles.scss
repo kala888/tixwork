@@ -46,7 +46,8 @@ $error-color: $orange-color;
 .form-item-error {
   color: $error-color;
 
-  .at-input input {
+  //.at-input input {
+  .at-input {
     color: $error-color;
   }
 }

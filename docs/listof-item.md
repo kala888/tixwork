@@ -109,7 +109,7 @@ const productList = [
     preTag: '柴',
     tags: ['香', '五常'],
     brand: '柴火大院',
-    name: '五常稻花香米',
+    name: '真五常稻花香香米',
     price: 72.99,
     imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-2.jpg',
   },
