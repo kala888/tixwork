@@ -6,7 +6,7 @@ import { usePageTitle, usePullDown } from '@/service/use.service'
 import Config from '@/utils/config'
 import EleRichText from '@/components/elements/ele-rich-text'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-import FilterTabs from '@/components/filter/filter-tabs'
+import EleTabs from '@/components/elements/ele-tabs'
 import Listof from './listof'
 import './styles.scss'
 
@@ -35,7 +35,7 @@ function ListofPageBase(props) {
 
   return (
     <View className='listof-page'>
-      <FilterTabs items={tabs} pinFirst={false} />
+      <EleTabs items={tabs} />
       {isNotEmpty(content) && <EleRichText content={content} />}
       <Listof
         dataContainer={dataContainer}

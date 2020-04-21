@@ -9,15 +9,13 @@ import './styles.scss'
 
 function ProductTemplate(props) {
   const { item = {} } = props
-  const { preTag = '', tags = [], brand, name, price } = item
+  const { preTag = '', tags = [], brand = '', name, price } = item
   const src = getImageUrl(item)
 
   return (
     <View className='product'>
-      <View className='product-img'>
-        <View className='product-img-container'>
-          <ServerImage src={src} mode='heightFix' />
-        </View>
+      <View className='product-cover'>
+        <ServerImage className='product-cover-image' my-class='product-image-img' src={src} mode='widthFix' />
       </View>
 
       <View class='product-content'>
@@ -35,7 +33,7 @@ function ProductTemplate(props) {
           {tags.map(
             (it) =>
               isNotEmpty(it) && (
-                <AtTag className='red-tag-tiny' key={it} size='small' active>
+                <AtTag className='tag-tiny' key={it} size='small' active>
                   {it}
                 </AtTag>
               )

@@ -21,7 +21,7 @@ function FilterBar(props) {
     tabs,
     title,
     DEFAULT_CODE_4_MAIN,
-    facetList,
+    facetList
   )
 
   const { visible, show, close } = useVisible(false)
@@ -52,8 +52,7 @@ function FilterBar(props) {
 
   const clearFacetCondition = () => setSelectedFacet([])
 
-  const handleConfirm = () => {
-  }
+  const handleConfirm = () => {}
 
   const tabsClass = classNames('filter-tabs', { bordered })
 

@@ -18,7 +18,7 @@ function ImageOnBottom(props) {
           {brief}
         </Text>
       </View>
-      <View  className='auto-content-image'>
+      <View className='auto-content-image'>
         <ServerImage src={src} />
       </View>
     </View>

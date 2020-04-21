@@ -49,6 +49,15 @@
   color: $text-color-light;
 }
 
+.tag-tiny {
+  color: $primary-color;
+  border-color: $primary-color;
+  height: 35px;
+  line-height: 32px;
+  padding: 2px 5px;
+  margin-left: 10px;
+}
+
 .red-tag {
   color: $red-color;
   border-color: $red-color;

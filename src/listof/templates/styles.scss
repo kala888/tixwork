@@ -100,16 +100,15 @@
   padding: 0 0 10px 0;
   border-radius: 30px;
 
-  &-img {
+  .product-cover {
     @extend %flex-center;
+    height: 350px;
 
-    &-container {
+    &-image {
       height: 350px;
-
-      .server-image {
-        border-top-right-radius: 30px;
-        border-top-left-radius: 30px;
-      }
+      width: 350px;
+      border-top-right-radius: 30px;
+      border-top-left-radius: 30px;
     }
   }
 
@@ -130,7 +129,7 @@
 
     &-brief {
       font-size: 32px;
-      color: #f23030;
+      color: $red-color;
       @extend %flex-row;
       align-items: center;
     }
