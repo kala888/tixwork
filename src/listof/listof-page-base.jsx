@@ -35,7 +35,7 @@ function ListofPageBase(props) {
 
   return (
     <View className='listof-page'>
-      <EleTabs items={tabs} />
+      {isNotEmpty(tabs) && <EleTabs tabs={tabs} />}
       {isNotEmpty(content) && <EleRichText content={content} />}
       <Listof
         dataContainer={dataContainer}
