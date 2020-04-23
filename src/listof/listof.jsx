@@ -2,7 +2,7 @@ import { useState } from '@tarojs/taro'
 import { ScrollView, Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import NavigationService from '@/nice-router/navigation.service'
-import { getNumberColumns } from '@/listof/listof-helper'
+import { getItemWidth } from '@/listof/listof-helper'
 import { enrichListOfEntity, toRpx } from '../utils'
 import FlexLineItem from './templates/flex-line-item'
 
@@ -43,8 +43,7 @@ function Listof({
 
   const list = enrichListOfEntity({ dataContainer, targetList: listRefs })
 
-  const numColumns = getNumberColumns(displayMode)
-  const itemWidth = numColumns ? 100 / numColumns - 1 : null
+  const itemWidth = getItemWidth(displayMode)
 
   const scrollViewStyle = height ? { height: toRpx(height) } : {}
   const scrollViewClass = classNames(className, {

@@ -30,6 +30,9 @@ export function getImageList(item = {}) {
 
 const TWO_COLUMN_DISPLAY_MODE = ['product', 'image-on-top-waterfall', 'image-on-top-horizontal']
 
-export function getNumberColumns(displayMode) {
-  return TWO_COLUMN_DISPLAY_MODE.indexOf(displayMode) > -1 ? 2 : 1
+export function getItemWidth(displayMode) {
+  if (TWO_COLUMN_DISPLAY_MODE.indexOf(displayMode) > -1) {
+    return 49
+  }
+  return 100
 }
