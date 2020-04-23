@@ -1,11 +1,17 @@
-import { useState } from '@tarojs/taro'
 import { AtTabs } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import { LoadingType } from '@/nice-router/nice-router-util'
+import { useAsyncEffect, useAsyncState } from '@/service/use.service'
+import './styles.scss'
 
-function EleTabs({ tabs }) {
-  const selectedIdx = tabs.findIndex((it) => it.selected)
-  const { current, setCurrent } = useState(selectedIdx)
+function EleTabs(props) {
+  const { tabs } = props
+  const [current, setCurrent] = useAsyncState(0)
+
+  useAsyncEffect(() => {
+    const selectedIdx = tabs.findIndex((it) => it.selected)
+    setCurrent(selectedIdx > -1 ? selectedIdx : 0)
+  }, [tabs])
 
   const handelTabSwitch = (index) => {
     setCurrent(index)
@@ -15,19 +21,18 @@ function EleTabs({ tabs }) {
       {},
       {
         loading: LoadingType.barLoading,
-      }
+      },
     )
   }
 
   const scroll = tabs.length > 4
-  return (
-    tabs.length > 0 && (
-      <AtTabs animated={false} current={current} scroll={scroll} tabList={tabs} onClick={handelTabSwitch} />
-    )
-  )
+  return <AtTabs className='ele-tabs' current={current} scroll={scroll} tabList={tabs} onClick={handelTabSwitch}/>
 }
 
 EleTabs.defaultProps = {
   tabs: [],
+}
+EleTabs.options = {
+  addGlobalClass: true,
 }
 export default EleTabs
