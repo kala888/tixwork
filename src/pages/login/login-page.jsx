@@ -1,4 +1,4 @@
-import { Block, View } from '@tarojs/components'
+import { Block, Text, View } from '@tarojs/components'
 import EleButton from '@/components/elements/ele-button'
 import EleInput from '@/components/form/field/ele-input'
 import EleVcode from '@/components/form/field/ele-vcode'
@@ -31,7 +31,7 @@ export default function LoginPage() {
     <View className='login-page'>
       <View className='login-page-header'>
         <View className='login-page-header-txt'>
-          <View>{Config.name}</View>
+          <Text>{Config.name}</Text>
         </View>
         <ServerImage className='login-page-header-logo' src={loginLogo} />
       </View>
