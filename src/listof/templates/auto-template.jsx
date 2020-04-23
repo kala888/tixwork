@@ -33,7 +33,7 @@ function AutoTemplate(props) {
             const { id } = it
             return (
               <View key={id} className='auto-image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
-                <ServerImage src={it.imageUrl} />
+                <ServerImage customStyle={{ width: '100%', height: '100%' }} src={it.imageUrl} />
               </View>
             )
           })}

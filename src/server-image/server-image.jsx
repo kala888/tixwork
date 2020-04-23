@@ -1,21 +1,25 @@
-import { Image } from '@tarojs/components'
+import { Image, View } from '@tarojs/components'
 import classNames from 'classnames'
 import ImageTools from './image-tools'
 
 import './styles.scss'
 
+//scaleToFill, aspectFit, aspectFill, widthFix，heightFix, center, ...
 function ServerImage(props) {
-  //scaleToFill, aspectFit, aspectFill, widthFix
   const { mode = 'aspectFill', className, src, uri, size, customStyle = {} } = props
-  const rootCls = classNames('server-image', 'my-class', className)
-  // const style = { width: '100%', height: '100%', ...customStyle }
+  const rootCls = classNames('server-image', className)
   const remotePath = ImageTools.getServerImagUrl(src || uri, size)
-  return <Image className={rootCls} src={remotePath} mode={mode} style={customStyle} />
+
+  return (
+    <View className={rootCls} style={customStyle}>
+      <Image className='server-image-img' src={remotePath} mode={mode} />
+    </View>
+  )
 }
 
 ServerImage.options = {
   addGlobalClass: true,
 }
+// ServerImage.externalClasses = ['my-class'] //外部的新样式
 
-ServerImage.externalClasses = ['my-class']
 export default ServerImage

@@ -31,9 +31,10 @@
     @extend %flex;
     padding: 20px 0;
 
-    &-left {
+    &-image {
       border-radius: 50%;
       width: 120px;
+      height: 120px;
     }
 
     &-right {

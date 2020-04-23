@@ -22,9 +22,7 @@ function ActionFloorItem(props) {
   return (
     <View className={rootCls} onClick={onClick}>
       {imageUrl ? (
-        <View className='action-floor-item-image'>
-          <ServerImage mode='scaleToFill' src={imageUrl} />
-        </View>
+        <ServerImage className='action-floor-item-image' mode='scaleToFill' src={imageUrl} />
       ) : (
         <View className='action-floor-item-title'>{title}</View>
       )}

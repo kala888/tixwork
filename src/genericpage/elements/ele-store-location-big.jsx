@@ -17,9 +17,7 @@ function EleStoreLocationBig(props) {
 
   return (
     <View className='store-location-big'>
-      <View className='store-location-big-face-image'>
-        <ServerImage src={imageUrl} />
-      </View>
+      <ServerImage className='store-location-big-face-image' src={imageUrl} />
       <View className='store-location-big-title'>
         <View className='store-location-big-title-logo'>
           <ServerImage customStyle={{ width: '100%', height: '100%' }} src={logo} />

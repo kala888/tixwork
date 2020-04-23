@@ -9,9 +9,7 @@ function UserTemplate(props) {
 
   return (
     <View className='user'>
-      <View className='user-avatar'>
-        <ServerImage my-class='user-avatar-image' src={imageUrl} size='middle' />
-      </View>
+      <ServerImage className='user-avatar' src={imageUrl} size='middle' />
       <View className='user-info'>
         <Text className='user-info-title'>{title}</Text>
         <Text className='user-info-brief'>{brief}</Text>

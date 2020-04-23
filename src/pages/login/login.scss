@@ -21,17 +21,13 @@
       color: $white;
       font-weight: bold;
       line-height: 100px;
+      @extend %flex-1;
     }
 
     &-logo {
-      @extend %flex-1;
-      justify-content: flex-end;
-      padding-bottom: 20px;
-
-      &-image {
-        width: 150px;
-        height: 82px;
-      }
+      margin-bottom: 20px;
+      width: 150px;
+      height: 82px;
     }
   }
 

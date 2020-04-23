@@ -9,9 +9,9 @@ function EleNavigationBox(props) {
   const { lineOfItems, bgColor, borderRadius, paddingHorizontal, kids, className } = props
 
   const width = (750 - paddingHorizontal * 2) / lineOfItems
-  const imageWidth = `${width - 12 * lineOfItems}rpx`
+  const itemSize = `${width - 12 * lineOfItems}rpx`
   const boxStyle = { width: `${width}rpx`, height: `${width + 40}rpx` }
-  const imageStyle = { width: imageWidth, height: imageWidth, borderRadius }
+  const imageStyle = { width: itemSize, height: itemSize, borderRadius }
   const rootClass = classNames('ele-navigation-box-bar', className)
 
   return (

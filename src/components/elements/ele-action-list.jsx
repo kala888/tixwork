@@ -26,11 +26,7 @@ function EleActionList({ list, customStyle, className }) {
             extraData={extraData}
           >
             <View className='ele-action-list-btn'>
-              {it.imageUrl && (
-                <View className='ele-action-list-btn-image'>
-                  <ServerImage src={it.imageUrl} />
-                </View>
-              )}
+              {it.imageUrl && <ServerImage className='ele-action-list-btn-image' src={it.imageUrl} />}
               <Text> {it.title}</Text>
             </View>
           </EleButton>

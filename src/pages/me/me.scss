@@ -14,15 +14,12 @@
       padding-bottom: 40px;
 
       &-avatar {
-        padding: 40px;
-        .avatar-image {
-          margin-top: 20px;
-          width: 150px;
-          height: 150px;
-          border-radius: 50%;
-          border: 8px solid darken($primary-color, 10%);
-          box-shadow: 0 0 20px #fff;
-        }
+        margin: 20px 40px 40px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 8px solid darken($primary-color, 10%);
+        box-shadow: 0 0 20px #fff;
       }
 
       &-title {

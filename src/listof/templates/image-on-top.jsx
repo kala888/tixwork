@@ -14,11 +14,7 @@ function ImageOnTop(props) {
 
   return (
     <View className={rootClass}>
-      {src && (
-        <View className='auto-content-image'>
-          <ServerImage src={src} />
-        </View>
-      )}
+      {src && <ServerImage className='auto-content-image' src={src} />}
       <View class='auto-content'>
         <Text className='auto-content-title' numberOfLines={1}>
           {title}

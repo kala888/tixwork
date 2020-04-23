@@ -57,9 +57,7 @@ function MePage(props) {
       <View className='me-page-header'>
         <View className='me-page-header-top'>
           <AtButton openType='getUserInfo' className='transparent-btn' onGetUserInfo={handleUpdateProfileInfo}>
-            <View className='me-page-header-top-avatar'>
-              <ServerImage my-class='avatar-image' src={avatar || defaultAvatar} />
-            </View>
+            <ServerImage className='me-page-header-top-avatar' src={avatar || defaultAvatar} />
           </AtButton>
 
           <View className='me-page-header-top-title'>

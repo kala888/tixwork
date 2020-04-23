@@ -21,12 +21,12 @@ function EleTabs(props) {
       {},
       {
         loading: LoadingType.barLoading,
-      },
+      }
     )
   }
 
   const scroll = tabs.length > 4
-  return <AtTabs className='ele-tabs' current={current} scroll={scroll} tabList={tabs} onClick={handelTabSwitch}/>
+  return <AtTabs className='ele-tabs' current={current} scroll={scroll} tabList={tabs} onClick={handelTabSwitch} />
 }
 
 EleTabs.defaultProps = {

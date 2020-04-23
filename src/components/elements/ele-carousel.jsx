@@ -77,9 +77,7 @@ function EleCarousel(props) {
                   style={style}
                 />
               ) : (
-                <View className='ele-carousel-item'>
-                  <ServerImage src={it.imageUrl} mode={mode} size='large' />
-                </View>
+                <ServerImage className='ele-carousel-item' src={it.imageUrl} mode={mode} size='large' />
               )}
             </SwiperItem>
           )

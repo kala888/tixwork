@@ -15,7 +15,7 @@ function ProductTemplate(props) {
   return (
     <View className='product'>
       <View className='product-cover'>
-        <ServerImage className='product-cover-image' my-class='product-image-img' src={src} mode='widthFix' />
+        <ServerImage className='product-cover-image' src={src} mode='heightFix' />
       </View>
 
       <View class='product-content'>

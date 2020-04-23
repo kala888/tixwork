@@ -68,6 +68,7 @@ class App extends Component {
     pages: [
       'pages/home/home-page',
       'pages/me/me-page',
+      'pages/test-page',
 
       // base
       'nice-router/h5-page',
