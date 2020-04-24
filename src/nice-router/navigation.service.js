@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import parse from 'url-parse'
 import qs from 'qs'
+import { isH5 } from '@/utils/index'
 import isObject from 'lodash/isObject'
 import localCacheService from './local-cache.service'
 import { isNotEmpty, LoadingType, log, toTaroUrl } from './nice-router-util'
@@ -158,7 +159,7 @@ const NavigationService = {
     }
 
     // 2, H5 页面跳转
-    if (isH5Path(uri)) {
+    if (!isH5() && isH5Path(uri)) {
       this.navigate('/nice-router/h5-page', { uri })
       return
     }

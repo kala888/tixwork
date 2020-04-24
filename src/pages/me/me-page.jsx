@@ -9,7 +9,7 @@ import ServerImage from '@/server-image/server-image'
 
 import './me.scss'
 
-const defaultAvatar = 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/avatar-3.jpg'
+const defaultAvatar = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-3.jpg'
 
 const Box_Navigator_List = [
   {

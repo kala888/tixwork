@@ -40,7 +40,7 @@ function AutoTemplate(props) {
         </View>
       )}
 
-      <View class='auto-content'>
+      <View className='auto-content'>
         <Text className='auto-content-title' numberOfLines={1}>
           {title}
         </Text>

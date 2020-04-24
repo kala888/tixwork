@@ -339,7 +339,7 @@ const richText = {
     '</ul>\n' +
     '</li>\n' +
     '</ul>\n' +
-    '<p style="padding-left: 20px;"><img alt="" src="https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/food-1.jpg" /></p>\n' +
+    '<p style="padding-left: 20px;"><img alt="" src="https://nice-router.oss-cn-chengdu.aliyuncs.com/food-1.jpg" /></p>\n' +
     '<h4 style="padding-left: 20px;">步骤：</h4>\n' +
     '<ol>\n' +
     '<li style="list-style-type: none;">\n' +
@@ -351,7 +351,7 @@ const richText = {
     '</ol>\n' +
     '</li>\n' +
     '</ol>\n' +
-    '<p style="padding-left: 20px;"><img alt="" src="https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/food-2.jpg" /></p>',
+    '<p style="padding-left: 20px;"><img alt="" src="https://nice-router.oss-cn-chengdu.aliyuncs.com/food-2.jpg" /></p>',
 }
 
 const pageData = {

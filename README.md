@@ -33,7 +33,7 @@
 
 #### 部分项目截图
 
-[![B站视频](https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/docs/video-image.png)](https://www.bilibili.com/video/BV1F5411b74Q)
+[![B站视频](https://nice-router.oss-cn-chengdu.aliyuncs.com/docs/video-image.png)](https://www.bilibili.com/video/BV1F5411b74Q)
 
 <div>
   <img src='http://img20.360buyimg.com/img/jfs/t1/113507/6/1539/4384252/5e997650E55d4b847/041d5971880ead13.png.webp'/>

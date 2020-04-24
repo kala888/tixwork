@@ -44,7 +44,7 @@ const newsList = [
   {
     id: '11',
     title: '美国众议长称第四轮经济救助计划至少1万亿美元',
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/news-7.jpeg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-7.jpeg',
   },
   {
     id: '22',
@@ -53,11 +53,11 @@ const newsList = [
     imageList: [
       {
         id: '1',
-        imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/news-1.jpeg',
+        imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-1.jpeg',
       },
       {
         id: '2',
-        imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/news-2.jpeg',
+        imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-2.jpeg',
       },
     ],
   },
@@ -68,15 +68,15 @@ const newsList = [
     imageList: [
       {
         id: '1',
-        imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/news-3.jpeg',
+        imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-3.jpeg',
       },
       {
         id: '2',
-        imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/news-4.jpeg',
+        imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-4.jpeg',
       },
       {
         id: '3',
-        imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/news-5.jpeg',
+        imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-5.jpeg',
       },
     ],
   },
@@ -90,7 +90,7 @@ const imageOnBottomList = [
     id: '11',
     title: '震撼！武汉230组高铁动车整装待发',
     displayMode: 'image-on-bottom',
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/news-6.jpeg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-6.jpeg',
   },
 ]
 
@@ -102,7 +102,7 @@ const productList = [
     brand: '3M',
     name: '成人雨衣半透明',
     price: 13.8,
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-1.jpg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-1.jpg',
   },
   {
     id: 2,
@@ -111,7 +111,7 @@ const productList = [
     brand: '柴火大院',
     name: '真五常稻花香香米',
     price: 72.99,
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-2.jpg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-2.jpg',
   },
   {
     id: 3,
@@ -120,7 +120,7 @@ const productList = [
     brand: '苹果',
     name: '新品 iPhone11 Pro',
     price: 9088.0,
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-3.png',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-3.png',
   },
   {
     id: 4,
@@ -129,11 +129,11 @@ const productList = [
     brand: '必胜客',
     name: '想吃披萨又觉得外面的披萨不卫生又贵',
     price: 39.2,
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/product-4.jpg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-4.jpg',
   },
 ]
 
-const defaultDocument = 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/README.docx'
+const defaultDocument = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/README.docx'
 const movieList = [
   {
     id: 1,
@@ -143,7 +143,7 @@ const movieList = [
     createTime: new Date('2019-10-11'),
     status: '韩剧',
     documentUrl: defaultDocument,
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/movie-1.jpg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/movie-1.jpg',
   },
   {
     id: 2,
@@ -153,7 +153,7 @@ const movieList = [
     createTime: new Date('2020-02-05'),
     status: '喜剧',
     documentUrl: defaultDocument,
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/movie-2.jpg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/movie-2.jpg',
   },
 ]
 const businessCardList = [
@@ -162,14 +162,14 @@ const businessCardList = [
     title: '和珅',
     brief: '职位：总经理\n电话:13888888888\n 成都双链科技有限责任公司',
     status: 'VIP',
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/avatar-1.png',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
   },
   {
     id: 2,
     title: '张无忌',
     brief: '职位：CEO\n电话:13900000001\n 中国三条腿（集团）公司',
     status: 'VP',
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/avatar-2.jpg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-2.jpg',
   },
 ]
 
@@ -178,19 +178,19 @@ const userList = [
     id: 1,
     title: '小陈不哭',
     brief: '欢迎打赏人气主播',
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/avatar-3.jpg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-3.jpg',
   },
   {
     id: 2,
     title: '柠檬',
     brief: '少女风，直播中。。。。',
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/avatar-4.jpg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-4.jpg',
   },
   {
     id: 3,
     title: '嗯嗯嗯',
     brief: '关注我，嗯嗯嗯',
-    imageUrl: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/avatar-5.jpg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-5.jpg',
   },
 ]
 

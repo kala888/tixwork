@@ -18,7 +18,7 @@ function ProductTemplate(props) {
         <ServerImage className='product-cover-image' src={src} mode='heightFix' />
       </View>
 
-      <View class='product-content'>
+      <View className='product-content'>
         <View className='product-content-title'>
           {isNotEmpty(preTag) && (
             <AtTag className='red-tag' size='small' active>

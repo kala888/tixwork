@@ -267,7 +267,7 @@ const pageData = {
           type: 'image',
           placeholder: '请详细描述一下你所有的学习经历',
           maxLength: 8,
-          value: 'https://doublechain.oss-cn-hangzhou.aliyuncs.com/nice-router/avatar-3.jpg',
+          value: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-3.jpg',
           rules: [
             {
               required: true,
