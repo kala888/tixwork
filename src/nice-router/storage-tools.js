@@ -34,7 +34,12 @@ const StorageTools = {
     return value ? JSON.parse(value) : defaultValue
   },
 
-  // time unit: second
+  /**
+   *
+   * @param key
+   * @param value
+   * @param time unit: second
+   */
   set(key, value = '', time) {
     const { exprKey, theKey } = getKeys(key)
     if (time) {

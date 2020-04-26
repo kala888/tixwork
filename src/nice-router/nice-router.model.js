@@ -42,10 +42,8 @@ export default {
       log('niceRouter/router payload', payload)
       const {
         statInPage = false,
-        method,
         uri,
         params = {},
-        cache,
         asForm,
         arrayMerge = 'replace',
         onSuccess = noop,
@@ -73,13 +71,8 @@ export default {
 
       yield put(createAction('saveLatestRoute')(payload))
 
-      const requestParams = {
-        method,
-        uri,
-        params,
-        asForm,
-        loading: withLoading,
-      }
+      const requestParams = { ...payload, loading: withLoading }
+
       const resp = yield call(BackendService.send, requestParams)
 
       const { success, xclass, xredirect, data } = resp
@@ -132,7 +125,7 @@ export default {
           NavigationService.navigate(pageName, {}, { navigationOptions })
         }
 
-        if (cache || !asForm) {
+        if (!asForm) {
           LocalCache.saveBackendRouter(uri, pageName)
         }
         if (success && asForm) {
