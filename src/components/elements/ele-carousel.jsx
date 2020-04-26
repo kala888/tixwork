@@ -2,7 +2,6 @@ import Taro from '@tarojs/taro'
 import { Swiper, SwiperItem, Video, View } from '@tarojs/components'
 
 import NavigationService from '@/nice-router/navigation.service'
-import { toRpx } from '@/utils/index'
 import ServerImage from '@/server-image/server-image'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import classNames from 'classnames'
@@ -12,7 +11,6 @@ import './styles.scss'
 function EleCarousel(props) {
   const {
     items,
-    height,
     autoplay,
     interval,
     duration,
@@ -43,13 +41,11 @@ function EleCarousel(props) {
     }
   }
 
-  const style = { ...customStyle, height: toRpx(height) }
-
   const showDots = indicatorDots === null ? items.length > 1 : indicatorDots
 
   const rootClass = classNames('ele-carousel', className)
-  return (
-    <View className={rootClass} style={style}>
+  return isEmpty(items) ? null : (
+    <View className={rootClass} style={customStyle}>
       <Swiper
         autoplay={autoplay}
         interval={interval}
@@ -58,12 +54,12 @@ function EleCarousel(props) {
         indicatorColor={indicatorColor}
         indicatorActiveColor={indicatorActiveColor}
         indicatorDots={showDots}
-        style={style}
+        className='ele-carousel-item'
       >
         {items.map((it) => {
           const { videoUrl = '', imageUrl, id } = it
           return (
-            <SwiperItem key={id} onClick={handleClick.bind(this, it)} className='ele-carousel-item' customStyle={style}>
+            <SwiperItem key={id} onClick={handleClick.bind(this, it)} className='ele-carousel-item'>
               {videoUrl.length > 0 ? (
                 <Video
                   className='ele-carousel-item'
@@ -74,7 +70,6 @@ function EleCarousel(props) {
                   initialTime='0'
                   loop
                   muted={false}
-                  style={style}
                 />
               ) : (
                 <ServerImage className='ele-carousel-item' src={it.imageUrl} mode={mode} size='large' />
@@ -93,7 +88,6 @@ EleCarousel.options = {
 
 EleCarousel.defaultProps = {
   items: [],
-  height: 167,
   autoplay: false,
   interval: 5000,
   duration: 1000,

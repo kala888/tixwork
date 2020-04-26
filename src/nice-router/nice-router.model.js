@@ -1,6 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Taro from '@tarojs/taro'
 import last from 'lodash/last'
+import trim from 'lodash/trim'
+import memoize from 'lodash/memoize'
+import { isH5 } from '@/utils/index'
 import { createAction, LoadingType, log, noop } from './nice-router-util'
 import ViewMappingService from './viewmapping.service'
 import BackendService from './request/backend.service'
@@ -143,20 +146,25 @@ export default {
 function getCurrentPage() {
   const pages = Taro.getCurrentPages()
   const currentPage = last(pages) || { route: '' }
-  return '/' + currentPage.route
+  return isH5() ? currentPage.$router.path : '/' + currentPage.route
 }
 
-function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPage }) {
-  const currentPage = getCurrentPage()
+const getNextView = memoize((xclass, currentPage, statInPage) => {
   let nextView = ViewMappingService.getView(xclass)
   if (Array.isArray(nextView)) {
-    const currentIndex = nextView.findIndex((it) => it.pageName === currentPage)
+    const currentIndex = nextView.findIndex((it) => trim(it.pageName) === currentPage)
     let nextPageIndex = currentIndex
     if (!statInPage) {
       nextPageIndex = currentIndex + 1 >= nextView.length ? 0 : currentIndex + 1
     }
     nextView = nextView[nextPageIndex]
   }
+  return nextView || {}
+})
+
+function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPage }) {
+  const currentPage = getCurrentPage()
+  const nextView = getNextView(xclass, currentPage, statInPage)
 
   const nextPage = nextView.pageName
   const newStateAction = stateAction || nextView.stateAction
@@ -173,7 +181,7 @@ function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPa
   // console.log("latest page is", LATEST_PAGE, "current url is", url, "sameAsCurrentPage", sameAsCurrentPage)
 
   if (nextPage && (xredirect || (!xredirect && !statInPage))) {
-    if (nextPage !== currentPage) {
+    if (trim(nextPage, '/') !== trim(currentPage, '/')) {
       doRedirect = true
     }
   }

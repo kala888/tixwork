@@ -3,7 +3,8 @@ import { AtTag } from 'taro-ui'
 
 import ServerImage from '@/server-image/server-image'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-
+import { isH5 } from '@/utils/index'
+import classNames from 'classnames'
 import { getImageUrl } from '../listof-helper'
 import './styles.scss'
 
@@ -12,8 +13,9 @@ function ProductTemplate(props) {
   const { preTag = '', tags = [], brand = '', name, price } = item
   const src = getImageUrl(item)
 
+  const rootClass = classNames('product', { 'product-h5': isH5() })
   return (
-    <View className='product'>
+    <View className={rootClass}>
       <View className='product-cover'>
         <ServerImage className='product-cover-image' src={src} mode='heightFix' />
       </View>

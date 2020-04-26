@@ -21,6 +21,7 @@
 }
 
 %template {
+  font-size: 32px;
   background-color: $white;
   @extend %flex-column;
   justify-content: center;
@@ -101,20 +102,20 @@
   padding: 0 0 10px 0;
   border-radius: 30px;
 
-  .product-cover {
-    @extend %flex-center;
+  &-cover {
     height: 350px;
+    width: 350px;
+    @extend %flex-center;
 
     &-image {
       height: 350px;
-      width: 350px;
       border-top-right-radius: 30px;
       border-top-left-radius: 30px;
     }
   }
 
   &-content {
-    padding: 10px;
+    padding: 10px 15px;
 
     &-title {
       @extend %flex-row;
@@ -133,7 +134,19 @@
       color: $red-color;
       @extend %flex-row;
       align-items: center;
+
+      .tag-tiny {
+        @include text-ellipsis;
+      }
     }
+  }
+}
+
+.product-h5 {
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
   }
 }
 

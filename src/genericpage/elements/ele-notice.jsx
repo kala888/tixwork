@@ -1,14 +1,12 @@
 import { Swiper, SwiperItem, Text, View } from '@tarojs/components'
-import { AtIcon } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
-import classNames from 'classnames'
-import { toRpx } from '@/utils/index'
-import ServerImage from '@/server-image/server-image'
+import ActionIcon from '@/components/navigation/action-icon'
 
+import classNames from 'classnames'
 import './styles.scss'
 
-function EleNoticeBar(props) {
-  const { items, imageUrl, customStyle, imageHeight, imageWidth, className } = props
+function EleNotice(props) {
+  const { items, icon, imageUrl, customStyle, className } = props
 
   const handleItemClick = (item) => {
     NavigationService.view(item)
@@ -18,16 +16,7 @@ function EleNoticeBar(props) {
 
   return (
     <View className={rootClass} style={customStyle}>
-      <View className='ele-notice-bar-preicon'>
-        {imageUrl.length > 0 ? (
-          <ServerImage
-            src={imageUrl}
-            customStyle={{ verticalAlign: 'middle', width: `${toRpx(imageWidth)}`, height: `${toRpx(imageHeight)}` }}
-          />
-        ) : (
-          <AtIcon value='volume-plus' size={22} />
-        )}
-      </View>
+      <ActionIcon icon={icon} imageUrl={imageUrl} />
       <Swiper className='ele-notice-bar-messages' autoplay circular vertical>
         {items.map((it) => {
           const { id } = it
@@ -42,11 +31,11 @@ function EleNoticeBar(props) {
   )
 }
 
-EleNoticeBar.options = {
+EleNotice.options = {
   addGlobalClass: true,
 }
 
-EleNoticeBar.defaultProps = {
+EleNotice.defaultProps = {
   items: [],
   imageUrl: '',
   customStyle: {},
@@ -55,4 +44,4 @@ EleNoticeBar.defaultProps = {
   className: null,
 }
 
-export default EleNoticeBar
+export default EleNotice

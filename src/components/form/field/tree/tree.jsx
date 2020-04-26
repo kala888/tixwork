@@ -3,8 +3,9 @@ import { AtIcon } from 'taro-ui'
 import classNames from 'classnames'
 
 import { useVisible } from '@/service/use.service'
-import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
+import { isH5 } from '@/utils/index'
 
+import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import './style.scss'
 
 function Tree(props) {
@@ -50,6 +51,9 @@ function Tree(props) {
       <View className={subTreeClass}>
         {nodes.map((it) => {
           const { id } = it
+          if (isH5()) {
+            return <Tree key={id} selected={selected} onChange={onChange} expandAll={expandAll} {...it} />
+          }
           return (
             // eslint-disable-next-line react/jsx-no-undef
             <SubTree key={id} selected={selected} onChange={onChange} expandAll={expandAll} {...it} />

@@ -154,16 +154,21 @@ const NavigationService = {
       const pageName = pathname
       // const pageName = trim(pathname, '/')
       log('.......', protocol, pathname, pageName)
-      this.navigate(pageName, { ...params, ...queryParams })
+      await this.navigate(pageName, { ...params, ...queryParams })
       return
     }
 
-    // 2, H5 页面跳转
-    if (!isH5() && isH5Path(uri)) {
-      this.navigate('/nice-router/h5-page', { uri })
+    // 2, H5跳转：目标页面是Http页面，小程序中需要跳转到webview
+    if (isH5Path(uri)) {
+      let h5PageTarget = uri
+      const h5Param = {}
+      if (!isH5()) {
+        h5PageTarget = '/nice-router/h5-page'
+        h5Param.uri = uri
+      }
+      await this.navigate(h5PageTarget, h5Param)
       return
     }
-
     // 3, 后端路由, 获取后端路由缓存
     const cachedPage = await localCacheService.getCachedPage(uri)
     log('go to cached page first', cachedPage)

@@ -6,23 +6,6 @@
   @extend %flex-center;
 }
 
-.ele-navigation-box-bar {
-  @extend %flex-1;
-  flex-flow: row wrap;
-
-  &-item {
-    @extend %flex-center;
-    flex-direction: column;
-
-    &-txt {
-      font-size: 26px;
-      line-height: 40px;
-      text-align: center;
-      color: $text-color-lighter;
-    }
-  }
-}
-
 .ele-store-location {
   padding: 0 20px;
   background-color: $white;
@@ -133,6 +116,18 @@
   bottom: 160px;
   z-index: 99999;
   opacity: 0.8;
+
+  .action-icon {
+    width: 80px;
+
+    .iconfont {
+      font-size: 60px !important;
+    }
+  }
+
+  &-txt {
+    color: $white;
+  }
 }
 
 .ele-more-actions {
@@ -147,10 +142,12 @@
 .ele-notice-bar {
   @extend %flex-row;
   justify-content: center;
+  align-items: center;
   padding: 10px 40px 10px 40px;
 
-  &-preicon {
+  .action-icon {
     color: $orange-color;
+    width: 150px;
   }
 
   &-messages {
@@ -167,5 +164,12 @@
         font-size: 30px;
       }
     }
+  }
+}
+
+.ele-navigation-box {
+  .navigation-box-img {
+    margin-bottom: 20px;
+    width: 80px !important;
   }
 }

@@ -5,15 +5,18 @@
 
   &-header {
     background-color: #fff;
+    @extend %flex-column;
 
-    &-top {
-      background-color: $primary-color;
+    &-info {
       @extend %flex-row;
+      background-color: $primary-color;
       align-items: center;
       border-bottom-left-radius: 50px;
       padding-bottom: 40px;
+      padding-top: 30px;
+      width: 100%;
 
-      &-avatar {
+      .me-avatar {
         margin: 20px 40px 40px;
         width: 150px;
         height: 150px;
@@ -22,7 +25,11 @@
         box-shadow: 0 0 20px #fff;
       }
 
-      &-title {
+      .at-button {
+        margin: 0;
+      }
+
+      .me-title {
         color: $white;
         @extend %flex-column;
         justify-content: center;
@@ -36,10 +43,6 @@
           font-size: 24px;
         }
       }
-    }
-
-    &-footer {
-      padding-top: 20px;
     }
   }
 

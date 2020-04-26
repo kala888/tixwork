@@ -23,7 +23,7 @@ function HomePage(props) {
 
   return (
     <View className='home-page'>
-      <EleCarousel items={slideList} height={220} />
+      <EleCarousel className='home-page-carousel' items={slideList} />
       <View className='home-page-action-floor'>
         <ActionFloor actions={actionList} />
         <SectionBar title='促销抢购' />

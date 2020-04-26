@@ -15,7 +15,6 @@ function NavigationBoxBar(props) {
 
   const rootClass = classNames('navigation-bar', className)
 
-  console.log('12312313', props)
   return (
     list.length > 0 && (
       <View className={rootClass} customStyle={customStyle}>

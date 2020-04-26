@@ -71,6 +71,7 @@
   }
 
   &-brief {
+    font-size: 30px;
     height: 0;
     border-top: 20px solid #b18a4c;
     border-bottom: 20px solid #b18a4c;
@@ -119,6 +120,7 @@
     background-color: $primary-color;
     border-radius: 5px;
   }
+
   &-tailicon {
     height: 100%;
     @extend %flex-center;

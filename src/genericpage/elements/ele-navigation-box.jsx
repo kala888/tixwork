@@ -1,41 +1,19 @@
-import { View } from '@tarojs/components'
+/*
+ * Copyright(c) 2020 nice-router
+ *    Date: 2020/4/26 下午12:05
+ *    Author: Kala
+ */
+
+import NavigationBoxBar from '@/components/navigation/navigation-box-bar'
 import classNames from 'classnames'
-
-import ServerImage from '@/server-image/server-image'
-
 import './styles.scss'
 
 function EleNavigationBox(props) {
-  const { lineOfItems, bgColor, borderRadius, paddingHorizontal, kids, className } = props
+  const { kids, className } = props
 
-  const width = (750 - paddingHorizontal * 2) / lineOfItems
-  const itemSize = `${width - 12 * lineOfItems}rpx`
-  const boxStyle = { width: `${width}rpx`, height: `${width + 40}rpx` }
-  const imageStyle = { width: itemSize, height: itemSize, borderRadius }
-  const rootClass = classNames('ele-navigation-box-bar', className)
+  const rootClass = classNames('ele-navigation-box', className)
 
-  return (
-    <View
-      className={rootClass}
-      style={{
-        backgroundColor: bgColor,
-        paddingLeft: `${paddingHorizontal}rpx`,
-        paddingRight: `${paddingHorizontal}rpx`,
-      }}
-    >
-      {kids.map((it) => {
-        const { id } = it
-        return (
-          <View key={id} className='ele-navigation-box-bar-item' style={boxStyle}>
-            <ServerImage customStyle={imageStyle} src={it.imageUrl} />
-            <View className='ele-navigation-box-bar-item-txt' style={{ color: it.color }}>
-              {it.title}
-            </View>
-          </View>
-        )
-      })}
-    </View>
-  )
+  return <NavigationBoxBar list={kids} className={rootClass} />
 }
 
 EleNavigationBox.options = {
@@ -43,12 +21,8 @@ EleNavigationBox.options = {
 }
 
 EleNavigationBox.defaultProps = {
-  lineOfItems: 3,
-  bgColor: '#fff',
-  borderRadius: '50%',
-  paddingHorizontal: 20,
-  kids: [],
   className: null,
+  kids: [],
 }
 
 export default EleNavigationBox

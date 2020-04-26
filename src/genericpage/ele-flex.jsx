@@ -8,7 +8,7 @@ import EleQrcode from '@/components/elements/ele-qrcode'
 import EleRichText from '@/components/elements/ele-rich-text'
 //generic-page 专用，不分享给其他包的
 import EleMoreActions from './elements/ele-more-actions'
-import EleNoticeBar from './elements/ele-notice-bar'
+import EleNotice from './elements/ele-notice'
 import EleFab from './elements/ele-fab'
 import EleFooterTabs from './elements/ele-footer-tabs'
 import EleListof from './elements/ele-listof'
@@ -21,6 +21,7 @@ import EleImage from './elements/ele-image'
 import ElePopup from './ele-popup'
 
 import './styles.scss'
+import { isH5 } from '@/utils/index'
 
 /**
  * 其他组件模块用的ui组件，要扔到主App去share
@@ -36,7 +37,7 @@ function EleFlex(props) {
         if (it.type === 'image') return <EleImage key={id} {...it} />
         if (it.type === 'button') return <EleButton key={id} {...it} />
         if (it.type === 'carousel') return <EleCarousel key={id} {...it} />
-        if (it.type === 'notice-bar') return <EleNoticeBar key={id} {...it} />
+        if (it.type === 'notice-bar') return <EleNotice key={id} {...it} />
         if (it.type === 'break-line') return <EleBreakLine key={id} {...it} />
         if (it.type === 'white-space') return <EleWhiteSpace key={id} {...it} />
         if (it.type === 'box-bar') return <EleNavigationBox key={id} {...it} />
@@ -56,8 +57,8 @@ function EleFlex(props) {
             // Taro && wechat-mini-program could not support self reference, using it as mini-program component
             <View key={id} className='flex-row' style={{ flex: itemFlex }}>
               <View style={{ width: '100%', height: '100%' }}>
-                {/* eslint-disable-next-line react/jsx-no-undef */}
-                <EleFlexBox {...it} />
+                {/* eslint-disable-next-line react/jsx-no-undef */
+                isH5() ? <EleFlex {...it} /> : <EleFlexBox {...it} />}
               </View>
             </View>
           )

@@ -1,13 +1,12 @@
-import { Text, View } from '@tarojs/components'
-import { AtFab, AtIcon } from 'taro-ui'
+import { View } from '@tarojs/components'
+import { AtFab } from 'taro-ui'
 import classNames from 'classnames'
-
-import ServerImage from '@/server-image/server-image'
 import NavigationService from '@/nice-router/navigation.service'
-
+import ActionIcon from '@/components/navigation/action-icon'
 import './styles.scss'
 
-function EleFab({ onClick, linkToUrl, imageUrl, text, icon, customStyle, className, size }) {
+function EleFab(props) {
+  const { onClick, linkToUrl, imageUrl, text, icon, className, size, customStyle } = props
   const handleClick = () => {
     if (onClick) {
       onClick()
@@ -18,16 +17,10 @@ function EleFab({ onClick, linkToUrl, imageUrl, text, icon, customStyle, classNa
 
   const rootClass = classNames('ele-fab', className)
   return (
-    <View className={rootClass}>
+    <View className={rootClass} style={customStyle}>
       <AtFab size={size} onClick={handleClick}>
-        {icon ? (
-          <AtIcon className='more-action-icon' value={icon} size={24} color='grey' />
-        ) : (
-          <View style={{ width: '25px', height: '25px' }}>
-            {imageUrl && <ServerImage src={imageUrl} customStyle={{ width: '100%', height: '100%' }} />}
-            {text && <Text style={{ width: '20px', height: '20px', ...customStyle }}>{text}</Text>}
-          </View>
-        )}
+        <ActionIcon icon={icon} imageUrl={imageUrl} />
+        <View className='ele-fab-txt'>{text}</View>
       </AtFab>
     </View>
   )

@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-import { isWeapp } from '@/utils/index'
+import { isH5, isWeapp } from '@/utils/index'
 import Config from '@/utils/config'
 
 import NiceRouter from '@/nice-router/nice-router'
@@ -9,12 +9,21 @@ import './app.scss'
 import dva from './dva'
 import models from './models/model-center'
 import HomePage from './pages/home/home-page'
+import { noop } from '@/nice-router/nice-router-util'
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (isDevEnv() && isH5()) {
 //   require('nerv-devtools')
 // }
+
+if (isH5()) {
+  // h5中useShareAppMessage不支持，临时设置不报错处理
+  // TODO  未来某个版本可能会支持share，再移除
+  if (!Taro.useShareAppMessage) {
+    Taro.useShareAppMessage = noop
+  }
+}
 
 const dvaApp = dva.createApp({
   initialState: {},

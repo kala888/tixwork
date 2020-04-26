@@ -55,21 +55,22 @@ function MePage(props) {
   return (
     <View className='me-page'>
       <View className='me-page-header'>
-        <View className='me-page-header-top'>
+        <View className='me-page-header-info'>
           <AtButton openType='getUserInfo' className='transparent-btn' onGetUserInfo={handleUpdateProfileInfo}>
-            <ServerImage className='me-page-header-top-avatar' src={avatar || defaultAvatar} />
+            <ServerImage className='me-avatar' src={avatar || defaultAvatar} />
           </AtButton>
 
-          <View className='me-page-header-top-title'>
-            <View className='me-page-header-top-title-name'>{name}</View>
-            <View className='me-page-header-top-title-brief'>{brief}</View>
+          <View className='me-title'>
+            <View className='me-title-name'>{name}</View>
+            <View className='me-title-brief'>{brief}</View>
           </View>
         </View>
 
-        <View className='me-page-header-footer'>
+        <View className='me-page-header-actions'>
           <NavigationBoxBar list={boxNavigatorList} />
         </View>
       </View>
+
       <View className='me-page-body'>
         {lineItemNavigatorList.map((it) => {
           const { id } = it

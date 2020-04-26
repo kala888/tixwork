@@ -41,7 +41,7 @@ const getGroups = (groupList, fieldList) => {
 
 function EleForm(props) {
   const { defaultValues, onFieldChange, fieldList, groupList, layout, showRequired, bordered } = props
-  console.log('generic-form initial defaultValues,eeeeee', defaultValues)
+  // console.log('generic-form initial defaultValues,eeeeee', defaultValues)
   //以name为key
   const [fieldValues, setFieldValues] = useState(defaultValues)
   const [fieldErrors, setFieldErrors] = useState({})
@@ -119,7 +119,7 @@ function EleForm(props) {
       {groups.map((groupItem) => {
         const { name: groupId, title, brief, fieldList: fields = [] } = groupItem
         return (
-          <Block key={groupId}>
+          <View key={groupId}>
             {isNotEmpty(title) && <SectionBar title={title} brief={brief} />}
 
             <View className='ele-form-fields'>
@@ -128,8 +128,6 @@ function EleForm(props) {
                 const { name } = field
                 const value = fieldValues[name]
                 const errors = fieldErrors[name]
-
-                console.log('get v', name, fieldValues, defaultValues)
 
                 return (
                   <FormItem
@@ -146,7 +144,7 @@ function EleForm(props) {
                 )
               })}
             </View>
-          </Block>
+          </View>
         )
       })}
     </View>
