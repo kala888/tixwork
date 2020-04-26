@@ -10,7 +10,6 @@ import dva from './dva'
 import models from './models/model-center'
 import HomePage from './pages/home/home-page'
 
-
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (isDevEnv() && isH5()) {

@@ -30,7 +30,9 @@ function mergeState(preState = {}, newState = {}, doMerge = false, arrayMerge = 
 
   // merge 对象, 不指定array的merge方法，默认为concat data to legacy array
   const processor = arrayMerge === 'replace' ? replaceArray : concatArray
-  const result = mergeWith(preState, newState, processor)
+  // 小程序下没问题，但是H5中，redux做的浅比较，ajax会有问题
+  // const result = mergeWith(preState, newState, processor)
+  const result = mergeWith({}, preState, newState, processor)
   console.log('merged result', result)
 
   return result
