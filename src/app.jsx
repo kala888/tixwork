@@ -2,14 +2,14 @@ import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 import { isH5, isWeapp } from '@/utils/index'
 import Config from '@/utils/config'
-
+import { noop } from '@/nice-router/nice-router-util'
 import NiceRouter from '@/nice-router/nice-router'
-import './app.scss'
 
+import './app.scss'
 import dva from './dva'
 import models from './models/model-center'
 import HomePage from './pages/home/home-page'
-import { noop } from '@/nice-router/nice-router-util'
+
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
