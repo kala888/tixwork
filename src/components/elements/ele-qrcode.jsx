@@ -1,6 +1,7 @@
 /* eslint-disable taro/no-spread-in-props */
 import Taro from '@tarojs/taro'
 import QRCodeImpl from 'qr.js/lib/QRCode'
+import isNil from 'lodash/isNil'
 import ErrorCorrectLevel from 'qr.js/lib/ErrorCorrectLevel'
 import { Canvas } from '@tarojs/components'
 import { toRpx } from '@/utils/index'
@@ -14,6 +15,8 @@ export default class EleQrcode extends Taro.PureComponent {
     level: 'L',
     bgColor: '#fff',
     fgColor: '#000000',
+    logoSize: 100,
+    logo: null,
     text: 'https://www.github.com/kala888',
   }
 
@@ -53,14 +56,15 @@ export default class EleQrcode extends Taro.PureComponent {
   }
 
   update() {
-    const { text, size, level, bgColor, fgColor } = this.props
+    const { text, size, level, bgColor, fgColor, logoSize, logo } = this.props
     const qrcode = new QRCodeImpl(-1, ErrorCorrectLevel[level])
     qrcode.addData(this.convertStr(text))
     qrcode.make()
-    const ctx = Taro.createCanvasContext(defaultCanvasId, this.$scope)
-    if (!ctx) {
+    const canvas = Taro.createCanvasContext(defaultCanvasId, this.$scope)
+    if (!canvas) {
       return
     }
+
     const cells = qrcode.modules
     if (cells === null) {
       return
@@ -72,14 +76,17 @@ export default class EleQrcode extends Taro.PureComponent {
 
     cells.forEach(function(row, rdx) {
       row.forEach(function(cell, cdx) {
-        ctx && (ctx.fillStyle = cell ? fgColor : bgColor)
+        canvas && (canvas.fillStyle = cell ? fgColor : bgColor)
         const w = Math.ceil((cdx + 1) * tileW) - Math.floor(cdx * tileW)
         const h = Math.ceil((rdx + 1) * tileH) - Math.floor(rdx * tileH)
-        ctx && ctx.fillRect(Math.round(cdx * tileW), Math.round(rdx * tileH), w, h)
+        canvas && canvas.fillRect(Math.round(cdx * tileW), Math.round(rdx * tileH), w, h)
       })
     })
-    ctx.save()
-    ctx.draw()
+    canvas.save()
+    if (!isNil(logo)) {
+      canvas.drawImage(logo, (size - logoSize) / 2, (size - logoSize) / 2, logoSize, logoSize)
+    }
+    canvas.draw()
   }
 
   render() {

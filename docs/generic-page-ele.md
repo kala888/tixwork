@@ -334,13 +334,17 @@ type=qrcode
 | size    | size={150}                   | 二维码大小                    |
 | bgColor | bgColor='#fff'               | 背景颜色                     |
 | color   | color='#000'                 | 二维码的颜色                   |
+| logo   | logo={image}                 |  中间logo的图片，网络图片需要先下载                   |
+| logoSize   | logoSize={100}                 |  中间logo的图片大小                  |
 
 ```javascript
-   <EleQrcode
-          size={150}
-          text='第0适合后端程序员的前端小程序开发框架'
-          color='#f23030'
-   />
+  <EleQrcode
+        size={300}
+        logoSize={100}
+        logo={logo}
+        text='第0适合后端程序员的前端小程序开发框架'
+        color='#f23030'
+      />
 ```
 
 ![](/docs/assets/qrcode.png)
