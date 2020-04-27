@@ -8,6 +8,7 @@
 
 .ele-carousel {
   height: 400px;
+
   .swiper-container {
     width: 100%;
     height: 100%;
@@ -146,5 +147,7 @@
 }
 
 .ele-tabs {
-  height: unset !important;
+  .at-tabs__body {
+    display: none !important;
+  }
 }
