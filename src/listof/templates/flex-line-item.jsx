@@ -3,13 +3,13 @@ import { View } from '@tarojs/components'
 import { AtActivityIndicator } from 'taro-ui'
 import classNames from 'classnames'
 import NavigationService from '@/nice-router/navigation.service'
-import UserTemplate from '@/listof/templates/user-template'
 
 import AutoTemplate from './auto-template'
 import CardTemplate from './card-template'
 import ImageOnTop from './image-on-top'
 import ProductTemplate from './product-template'
 import ImageOnBottom from './image-on-bottom'
+import UserTemplate from './user-template'
 
 import './styles.scss'
 
@@ -92,7 +92,7 @@ export default class FlexLineItem extends Taro.PureComponent {
   }
 
   render() {
-    const { item = {}, displayMode, bordered = true, shadow = true, horizontal, onItemPress } = this.props
+    const { item = {}, displayMode, bordered = true, shadow = true, horizontal } = this.props
     const { displayMode: itemDisplayMode } = item
 
     // const debouncePress = _.debounce(

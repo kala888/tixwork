@@ -6,6 +6,8 @@ import EleButton from '@/components/elements/ele-button'
 import EleCarousel from '@/components/elements/ele-carousel'
 import EleQrcode from '@/components/elements/ele-qrcode'
 import EleRichText from '@/components/elements/ele-rich-text'
+import { isH5 } from '@/utils/index'
+
 //generic-page 专用，不分享给其他包的
 import EleMoreActions from './elements/ele-more-actions'
 import EleNotice from './elements/ele-notice'
@@ -21,7 +23,6 @@ import EleImage from './elements/ele-image'
 import ElePopup from './ele-popup'
 
 import './styles.scss'
-import { isH5 } from '@/utils/index'
 
 /**
  * 其他组件模块用的ui组件，要扔到主App去share

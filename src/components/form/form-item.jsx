@@ -29,7 +29,7 @@ function FormItem(props) {
   } = props
 
   const handleChange = (v, e) => {
-    // console.log('item event maybe you needed', e)
+    console.log('item event maybe you needed', e)
     let fieldValue = FormUtil.getValue(v)
     onChange(name, fieldValue)
   }

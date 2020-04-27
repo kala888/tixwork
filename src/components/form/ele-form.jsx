@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from '@tarojs/taro'
-import { Block, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import isFunction from 'lodash/isFunction'
 import omit from 'lodash/omit'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
