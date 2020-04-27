@@ -31,7 +31,7 @@ EleFab.options = {
 }
 EleFab.defaultProps = {
   imageUrl: null,
-  text: null,
+  text: '',
   icon: null,
   customStyle: {},
   className: null,
