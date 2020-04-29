@@ -150,6 +150,7 @@ const NavigationService = {
     const confirmContent = ActionUtil.getConfirmContent(action)
     if (isNotEmpty(confirmContent)) {
       const confirmResp = await Taro.showModal({
+        title: action.title,
         content: confirmContent,
       })
       if (!confirmResp.confirm) {
