@@ -2,6 +2,8 @@ import Taro from '@tarojs/taro'
 import isNumber from 'lodash/isNumber'
 import forEach from 'lodash/forEach'
 import isNaN from 'lodash/isNaN'
+import remove from 'lodash/remove'
+import clone from 'lodash/clone'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 
 let device = {}
@@ -97,6 +99,9 @@ export function formatTime(time, fmt = 'yyyy-MM-dd') {
 }
 
 export function formatMoney(money) {
+  if (isEmpty(money)) {
+    return ''
+  }
   if (isNumber(money)) {
     return money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
   }
@@ -113,6 +118,15 @@ export function isWeapp() {
 
 export function isDevEnv() {
   return process.env.NODE_ENV === 'development'
+}
+
+export function removeOrPush(list = [], item, withClone = false) {
+  const result = withClone ? clone(list) : list
+  const target = remove(result, item)
+  if (target.length === 0) {
+    result.push(item)
+  }
+  return result
 }
 
 // export function transCandidateValuesToRange(field = {}) {

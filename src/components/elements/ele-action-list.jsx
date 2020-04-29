@@ -12,24 +12,27 @@ function EleActionList({ list, customStyle, className }) {
     <View className={rootClass} style={customStyle}>
       {list.map((it) => {
         const { customStyle: actionStyle = {}, id, extraData } = it
+
         return (
-          <EleButton
-            key={id}
-            uiType={it.uiType}
-            btnType={it.btnType}
-            linkToUrl={it.linkToUrl}
-            size='small'
-            circle
-            customStyle={{ ...actionStyle }}
-            disabled={it.disabled}
-            onClick={it.onClick}
-            extraData={extraData}
-          >
-            <View className='ele-action-list-btn'>
-              {it.imageUrl && <ServerImage className='ele-action-list-btn-image' src={it.imageUrl} />}
-              <Text> {it.title}</Text>
-            </View>
-          </EleButton>
+          <View className='ele-action-list-btn'>
+            <EleButton
+              key={id}
+              uiType={it.uiType}
+              btnType={it.btnType}
+              linkToUrl={it.linkToUrl}
+              size='small'
+              circle
+              customStyle={{ ...actionStyle }}
+              disabled={it.disabled}
+              onClick={it.onClick}
+              extraData={extraData}
+            >
+              <View>
+                {it.imageUrl && <ServerImage className='ele-action-list-btn-image' src={it.imageUrl} />}
+                <Text> {it.title}</Text>
+              </View>
+            </EleButton>
+          </View>
         )
       })}
     </View>

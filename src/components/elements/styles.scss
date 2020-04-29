@@ -142,11 +142,13 @@
   justify-content: flex-end;
 
   .ele-action-list-btn {
-    margin-left: 10px;
+    margin-left: 20px;
   }
 }
 
 .ele-tabs {
+  height: unset !important;
+
   .at-tabs__body {
     display: none !important;
   }

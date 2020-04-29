@@ -142,22 +142,27 @@ function getCurrentPage() {
   return isH5() ? currentPage.$router.path : '/' + currentPage.route
 }
 
-const getNextView = memoize((xclass, currentPage, statInPage) => {
-  let nextView = ViewMappingService.getView(xclass)
-  if (Array.isArray(nextView)) {
-    const currentIndex = nextView.findIndex((it) => trim(it.pageName) === currentPage)
-    let nextPageIndex = currentIndex
-    if (!statInPage) {
-      nextPageIndex = currentIndex + 1 >= nextView.length ? 0 : currentIndex + 1
+const getNextView = memoize(
+  (xclass, currentPage, statInPage) => {
+    let nextView = ViewMappingService.getView(xclass)
+    if (Array.isArray(nextView)) {
+      const currentIndex = nextView.findIndex((it) => trim(it.pageName) === currentPage)
+      let nextPageIndex = currentIndex
+      if (!statInPage) {
+        nextPageIndex = currentIndex + 1 >= nextView.length ? 0 : currentIndex + 1
+      }
+      nextView = nextView[nextPageIndex]
     }
-    nextView = nextView[nextPageIndex]
+    return nextView || {}
+  },
+  (xclass, currentPage, statInPage) => {
+    return `${xclass}-${currentPage}-${statInPage}`
   }
-  return nextView || {}
-})
+)
 
 function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPage }) {
   const currentPage = getCurrentPage()
-  const nextView = getNextView(xclass, currentPage, statInPage)
+  const nextView = getNextView({ xclass, currentPage, statInPage })
 
   const nextPage = nextView.pageName
   const newStateAction = stateAction || nextView.stateAction

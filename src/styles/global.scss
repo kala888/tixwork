@@ -36,16 +36,27 @@
 }
 
 // text
-//$text-sizes: 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42;
-//@each $size in $text-sizes {
-//  .f#{$size} {
-//    font-size: #{$size}px;
-//    color: $text-color;
-//  }
-//}
+$text-sizes: 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42;
+@each $size in $text-sizes {
+  .f#{$size} {
+    font-size: #{$size}px;
+  }
+}
+
+$text-weight: 400, 500, 600, 700, 800;
+@each $weight in $text-weight {
+  .f#{$weight} {
+    font-weight: #{$weight};
+  }
+}
 
 .note {
-  font-size: 22px;
+  font-size: 28px;
+  color: $text-color-light;
+}
+
+.note-tiny {
+  font-size: 24px;
   color: $text-color-light;
 }
 
@@ -103,4 +114,20 @@
 
 .hidden {
   display: none;
+}
+
+.flex-row {
+  @extend %flex-row;
+}
+
+.flex-column {
+  @extend %flex-column;
+}
+
+.flex-center {
+  @extend %flex-center;
+}
+
+.flex-1 {
+  @extend %flex-1;
 }
