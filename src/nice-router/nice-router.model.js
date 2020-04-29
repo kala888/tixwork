@@ -162,7 +162,7 @@ const getNextView = memoize(
 
 function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPage }) {
   const currentPage = getCurrentPage()
-  const nextView = getNextView({ xclass, currentPage, statInPage })
+  const nextView = getNextView(xclass, currentPage, statInPage)
 
   const nextPage = nextView.pageName
   const newStateAction = stateAction || nextView.stateAction
