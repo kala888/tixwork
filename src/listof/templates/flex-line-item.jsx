@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 import { AtActivityIndicator } from 'taro-ui'
 import classNames from 'classnames'
 import NavigationService from '@/nice-router/navigation.service'
+import ActionUtil from '@/nice-router/action-util'
 
 import AutoTemplate from './auto-template'
 import CardTemplate from './card-template'
@@ -84,7 +85,7 @@ export default class FlexLineItem extends Taro.PureComponent {
     if (ITEM_SELF_PROCESS_WHITELIST.indexOf(template) > -1) {
       return
     }
-    if (NavigationService.isActionLike(item)) {
+    if (ActionUtil.isActionLike(item)) {
       this.startLoading()
       // NavigationService.view('page://pages/test-page', item, { onSuccess: this.stopLoading })
       NavigationService.view(item, {}, { onSuccess: this.stopLoading })

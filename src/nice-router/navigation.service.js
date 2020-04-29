@@ -2,24 +2,16 @@ import Taro from '@tarojs/taro'
 import parse from 'url-parse'
 import qs from 'qs'
 import { isH5 } from '@/utils/index'
-import isObject from 'lodash/isObject'
+
 import localCacheService from './local-cache.service'
-import { isNotEmpty, LoadingType, log, toTaroUrl } from './nice-router-util'
+import { isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util'
+import ActionUtil from './action-util'
 
 const PAGE_LEVEL_LIMIT = 10
 
 let _container = {} // eslint-disable-line
 
 const isH5Path = (uri = '') => uri.startsWith('https://') || uri.startsWith('http://')
-
-const getActionUri = (action) => {
-  let result = action
-  if (isObject(action)) {
-    const { linkToUrl, uri } = action
-    result = linkToUrl || uri
-  }
-  return result || ''
-}
 
 const NavigationService = {
   pagesResolves: {}, // 记得清空这个玩意，小心内存泄露
@@ -35,19 +27,13 @@ const NavigationService = {
     _container = container
   },
 
-  isActionLike(action) {
-    return isNotEmpty(getActionUri(action))
-  },
-
   dispatch(action, params) {
     const { dispatch, props = {} } = _container || {}
-    const dispatchFunc = dispatch || props.dispatch
-    if (dispatchFunc) {
-      dispatchFunc({
-        type: action,
-        payload: params,
-      })
-    }
+    const func = dispatch || props.dispatch || noop
+    func({
+      type: action,
+      payload: params,
+    })
   },
 
   reset(routeName, params) {
@@ -89,7 +75,7 @@ const NavigationService = {
   navigate(routeName, params, options = {}) {
     return new Promise((resolve, reject) => {
       const pages = Taro.getCurrentPages()
-      const url = toTaroUrl(routeName, params)
+      const url = ActionUtil.toTaroUrl(routeName, params)
       if (routeName) {
         let { navigationOptions: { method = 'navigateTo' } = {} } = options
         if (
@@ -121,32 +107,58 @@ const NavigationService = {
     })
   },
 
-  view(uri, params = {}, options = {}) {
-    this.routeTo({ uri, params, ...options })
+  view(action, params = {}, options = {}) {
+    this.routeTo({ action, params, ...options })
   },
 
-  ajax(uri, params, options = {}) {
-    this.routeTo({ uri, loading: LoadingType.none, params, ...options, statInPage: true })
+  ajax(action, params, options = {}) {
+    this.routeTo({
+      action,
+      params,
+      loading: LoadingType.none,
+      ...options,
+      statInPage: true,
+    })
   },
 
-  post(uri, params, options = {}) {
-    this.routeTo({ uri, params, ...options, method: 'post' })
+  post(action, params, options = {}) {
+    this.routeTo({
+      action,
+      params,
+      ...options,
+      method: 'post',
+    })
   },
 
-  put(uri, params, options = {}) {
-    this.routeTo({ uri, params, ...options, method: 'put' })
+  put(action, params, options = {}) {
+    this.routeTo({
+      action,
+      params,
+      ...options,
+      method: 'put',
+    })
   },
 
-  async routeTo(action) {
-    const { uri: actionUri = '', cache = false, params } = action
-
-    const uri = getActionUri(actionUri)
-    if (uri.length === 0) {
+  async routeTo(routerParams) {
+    const action = ActionUtil.trans2Action(routerParams)
+    const { linkToUrl, cache = false, params } = action
+    if (isEmpty(linkToUrl)) {
       return
     }
 
-    // 1, 前端页面跳转, page:ArticleForm?type=qa 或跳转到Article的screen
-    const urlData = parse(uri)
+    // action上带有属性，confirmContent, 触发先confirm再执行相关动作
+    const confirmContent = ActionUtil.getConfirmContent(action)
+    if (isNotEmpty(confirmContent)) {
+      const confirmResp = await Taro.showModal({
+        content: confirmContent,
+      })
+      if (!confirmResp.confirm) {
+        return
+      }
+    }
+
+    // 1, 前端页面跳转, page:///pages/home/home-page?type=qa 或跳转到HomePage的screen
+    const urlData = parse(linkToUrl)
     const { protocol } = urlData
     if (protocol === 'page:') {
       const { query, pathname } = urlData
@@ -154,23 +166,22 @@ const NavigationService = {
       const pageName = pathname
       // const pageName = trim(pathname, '/')
       log('.......', protocol, pathname, pageName)
-      await this.navigate(pageName, { ...params, ...queryParams })
-      return
+      return this.navigate(pageName, { ...params, ...queryParams })
     }
 
     // 2, H5跳转：目标页面是Http页面，小程序中需要跳转到webview
-    if (isH5Path(uri)) {
-      let h5PageTarget = uri
+    if (isH5Path(linkToUrl)) {
+      let h5PageTarget = linkToUrl
       const h5Param = {}
       if (!isH5()) {
         h5PageTarget = '/nice-router/h5-page'
-        h5Param.uri = uri
+        h5Param.uri = linkToUrl
       }
-      await this.navigate(h5PageTarget, h5Param)
-      return
+      return this.navigate(h5PageTarget, h5Param)
     }
+
     // 3, 后端路由, 获取后端路由缓存
-    const cachedPage = await localCacheService.getCachedPage(uri)
+    const cachedPage = localCacheService.getCachedPage(linkToUrl)
     log('go to cached page first', cachedPage)
     // 如果缓存存在，做页面跳转
     if (cachedPage) {
@@ -183,10 +194,7 @@ const NavigationService = {
     }
 
     // 发送请求
-    this.dispatch('niceRouter/route', {
-      ...action,
-      uri,
-    })
+    this.dispatch('niceRouter/route', action)
   },
 }
 

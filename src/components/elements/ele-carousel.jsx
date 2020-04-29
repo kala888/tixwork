@@ -5,6 +5,7 @@ import NavigationService from '@/nice-router/navigation.service'
 import ServerImage from '@/server-image/server-image'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import classNames from 'classnames'
+import ActionUtil from '@/nice-router/action-util'
 
 import './styles.scss'
 
@@ -31,7 +32,7 @@ function EleCarousel(props) {
       return
     }
 
-    if (NavigationService.isActionLike(item)) {
+    if (ActionUtil.isActionLike(item)) {
       NavigationService.view(item)
       return
     }

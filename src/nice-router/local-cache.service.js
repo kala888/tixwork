@@ -34,10 +34,9 @@ LocalCache.saveBackendRouter = async (uri, page) => {
 }
 
 // 后端路由缓存
-LocalCache.getCachedPage = async (uri) => {
+LocalCache.getCachedPage = (uri) => {
   const key = getPageKeyByUri(uri)
-  const pageName = await StorageTools.get(key)
-  return pageName
+  return StorageTools.get(key)
 }
 
 // 查看 Form是否被提交成功

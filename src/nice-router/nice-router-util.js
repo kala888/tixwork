@@ -1,4 +1,3 @@
-import qs from 'qs'
 import lodashIsEmpty from 'lodash/isEmpty'
 import isNumber from 'lodash/isNumber'
 import isBoolean from 'lodash/isBoolean'
@@ -16,14 +15,6 @@ export const createAction = (type) => (payload) => ({ type, payload })
 export const noop = () => {}
 
 export const sleep = async (longTime) => new Promise((resolve) => setTimeout(resolve, longTime))
-
-export function toTaroUrl(uri, params) {
-  if (isNotEmpty(params)) {
-    const p = qs.stringify(params)
-    return `${uri}?${p}`
-  }
-  return uri
-}
 
 export function log(...params) {
   console.log('%c nice-router: ', 'color:#8add4c; text-shadow: 0.5px 0.5px 0.5px grey', ...params)

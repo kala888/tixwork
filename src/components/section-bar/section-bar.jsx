@@ -2,6 +2,7 @@ import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import { AtIcon } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
+import ActionUtil from '@/nice-router/action-util'
 
 import './styles.scss'
 
@@ -11,7 +12,7 @@ function SectionBar(props) {
     NavigationService.view(props)
   }
 
-  const showMore = NavigationService.isActionLike(props)
+  const showMore = ActionUtil.isActionLike(props)
   const rootClass = classNames('section-bar', className)
 
   return (
