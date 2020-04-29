@@ -4,7 +4,7 @@ import last from 'lodash/last'
 import trim from 'lodash/trim'
 import memoize from 'lodash/memoize'
 import { isH5 } from '@/utils/index'
-import { createAction, LoadingType, log, noop } from './nice-router-util'
+import { createAction, isEmpty, LoadingType, log, noop } from './nice-router-util'
 import ViewMappingService from './viewmapping.service'
 import BackendService from './request/backend.service'
 import LocalCache from './local-cache.service'
@@ -38,20 +38,20 @@ export default {
     },
 
     // 主路由逻辑
-    *route({ payload }, { call, put }) {
-      log('niceRouter/router payload', payload)
+    *route({ payload: action }, { call, put }) {
+      log('niceRouter/router action', action)
       const {
         statInPage = false,
-        uri,
+        linkToUrl,
         params = {},
         asForm,
         arrayMerge = 'replace',
         onSuccess = noop,
         loading,
         navigationOptions,
-      } = payload
+      } = action
 
-      if (!uri) {
+      if (isEmpty(linkToUrl)) {
         console.warn('store.modules.router.route","can not send empty url to backend')
         return
       }
@@ -59,7 +59,7 @@ export default {
       const withLoading = loading || (asForm ? LoadingType.modal : LoadingType.none)
 
       if (asForm) {
-        const cached = yield LocalCache.isCachedForm(uri, params)
+        const cached = yield LocalCache.isCachedForm(linkToUrl, params)
         if (cached) {
           GlobalToast.show({
             text: '操作太快了，换句话试试',
@@ -69,9 +69,9 @@ export default {
         }
       }
 
-      yield put(createAction('saveLatestRoute')(payload))
+      yield put(createAction('saveLatestRoute')(action))
 
-      const requestParams = { ...payload, loading: withLoading }
+      const requestParams = { ...action, uri: linkToUrl, loading: withLoading }
 
       const resp = yield call(BackendService.send, requestParams)
 
@@ -99,8 +99,8 @@ export default {
           xclass,
           xredirect,
           statInPage,
-          effectAction: payload.effectAction,
-          stateAction: payload.stateAction,
+          effectAction: action.effectAction,
+          stateAction: action.stateAction,
         }
         // onSuccess回调
         const viewMapping = getViewMapping(viewMappingParams)
@@ -126,10 +126,10 @@ export default {
         }
 
         if (!asForm) {
-          LocalCache.saveBackendRouter(uri, pageName)
+          LocalCache.saveBackendRouter(linkToUrl, pageName)
         }
         if (success && asForm) {
-          LocalCache.cacheForm(uri, params)
+          LocalCache.cacheForm(linkToUrl, params)
         }
       }
     },

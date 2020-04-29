@@ -14,9 +14,8 @@ function EleActionList({ list, customStyle, className }) {
         const { customStyle: actionStyle = {}, id, extraData } = it
 
         return (
-          <View className='ele-action-list-btn'>
+          <View key={id} className='ele-action-list-btn'>
             <EleButton
-              key={id}
               uiType={it.uiType}
               btnType={it.btnType}
               linkToUrl={it.linkToUrl}

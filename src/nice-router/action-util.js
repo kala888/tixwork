@@ -7,6 +7,15 @@
  *  icon, // icon和imageUrl, imageUrl优先
  *  linkToUrl,  //支持h5，page://, request请求
  *  confirmContent, //如果不为空，则在点击后提出confirm要求
+ *  statInPage , //true为Ajax
+ *  params = {}, //用来构造请求参数的列表
+ *  asForm,//用form的形式来提交数据, 说白了就是，提交以form的形式提交一个字段，供后台使用: formData=JSON.stringify(params)
+ *  arrayMerge = 'replace', // dva model merge的时候，数组如何处理
+ *  onSuccess = noop, // onSuccess的回调
+ *  loading,  // 怎么处理loading，需要设置为LoadingType
+ * navigationOptions,  // Taro 在做页面跳转时候强制用和方法，例如  navigationOptions.method = 'reLaunch'
+ * effectAction // action还能指定获得结果后，触发哪个effect
+ * stateAction  // action还能指定获得结果后，触发哪个state
  */
 import isObject from 'lodash/isObject'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
