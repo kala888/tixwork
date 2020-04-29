@@ -1,7 +1,12 @@
-/*
- * Copyright(c) 2020 nice-router
- *    Date: 2020/4/29 下午2:29
- *    Author: Kala
+/**
+ * Action 属性
+ *  id, //一般用来做来循环的唯一key
+ *  title, 用于button的展示
+ *  code, 语义化id
+ *  imageToUrl, // icon和imageUrl, imageUrl优先
+ *  icon, // icon和imageUrl, imageUrl优先
+ *  linkToUrl,  //支持h5，page://, request请求
+ *  confirmContent, //如果不为空，则在点击后提出confirm要求
  */
 import isObject from 'lodash/isObject'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
