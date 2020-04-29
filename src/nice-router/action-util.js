@@ -13,9 +13,9 @@
  *  arrayMerge = 'replace', // dva model merge的时候，数组如何处理
  *  onSuccess = noop, // onSuccess的回调
  *  loading,  // 怎么处理loading，需要设置为LoadingType
- * navigationOptions,  // Taro 在做页面跳转时候强制用和方法，例如  navigationOptions.method = 'reLaunch'
- * effectAction // action还能指定获得结果后，触发哪个effect
- * stateAction  // action还能指定获得结果后，触发哪个state
+ *  navigationOptions,  // Taro 在做页面跳转时候的option参数，例如  navigationOptions: { method: 'redirectTo' },
+ *  effectAction // action还能指定获得结果后，触发哪个effect
+ *  stateAction  // action还能指定获得结果后，触发哪个state
  */
 import isObject from 'lodash/isObject'
 import { isNotEmpty } from '@/nice-router/nice-router-util'

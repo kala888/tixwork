@@ -22,6 +22,8 @@ function GenericformPage(props) {
   usePageTitle(pageTitle)
   usePullDown(props)
 
+  const isSubmitAction = (code) => code === 'nextStep' || code === 'submit' || code === 'commit'
+
   const handleActionClick = async (action = {}) => {
     const { code } = action
     if (code === 'reset') {
@@ -32,7 +34,8 @@ function GenericformPage(props) {
       await handleSubmit(action)
       return
     }
-    NavigationService.view(action)
+    // 其他请求，就直接执行action，把defaultValues传回去
+    NavigationService.post(action, defaultValues())
   }
 
   const handleSubmit = async (action) => {
@@ -43,6 +46,7 @@ function GenericformPage(props) {
       console.log('form-values', values)
       NavigationService.post(action, values, {
         asForm: true,
+        navigationOptions: { method: 'redirectTo' },
       })
       return
     }
@@ -62,9 +66,6 @@ function GenericformPage(props) {
     }
     return defaultValues
   }
-
-  const isSubmitAction = (code) => code === 'nextStep' || code === 'submit' || code === 'commit'
-
   const footerActionList = actionList.map((it) => ({
     type: isSubmitAction(it.code) ? 'primary' : null,
     ...it,
