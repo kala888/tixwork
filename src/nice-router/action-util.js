@@ -6,7 +6,7 @@
  *  imageToUrl, // icon和imageUrl, imageUrl优先
  *  icon, // icon和imageUrl, imageUrl优先
  *  linkToUrl,  //支持h5，page://, request请求
- *  confirmContent, //如果不为空，则在点击后提出confirm要求
+ *  confirm, //如果不为空，则在点击后弹出confirm的popup
  *  statInPage , //true为Ajax
  *  params = {}, //用来构造请求参数的列表
  *  asForm,//用form的形式来提交数据, 说白了就是，提交以form的形式提交一个字段，供后台使用: formData=JSON.stringify(params)
@@ -53,7 +53,7 @@ const trans2Action = (routerAction = {}) => {
 }
 
 const getConfirmContent = (action = {}) => {
-  return action.confirmContent
+  return action.confirm
 }
 
 const ActionUtil = {
