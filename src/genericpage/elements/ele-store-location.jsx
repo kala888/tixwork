@@ -51,7 +51,7 @@ function EleStoreLocation(props) {
     <View className={rootClass} style={{ margin: `0 ${toRpx(padding)}` }}>
       {showBrief && (
         <View className='header'>
-          <ServerImage className='header-image' src={imageUrl} mode='widthFix' />
+          <ServerImage my-class='header-image' src={imageUrl} mode='widthFix' />
 
           <View className='header-right'>
             <View className='header-right-name'>{name}</View>

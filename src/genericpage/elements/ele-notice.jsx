@@ -16,7 +16,7 @@ function EleNotice(props) {
 
   return (
     <View className={rootClass} style={customStyle}>
-      <ActionIcon icon={icon} imageUrl={imageUrl} />
+      <ActionIcon className='ele-notice-bar-icon' mode='heightFix' icon={icon} imageUrl={imageUrl} />
       <Swiper className='ele-notice-bar-messages' autoplay circular vertical>
         {items.map((it) => {
           const { id } = it

@@ -26,7 +26,12 @@ function NavigationBoxBar(props) {
               <View className='navigation-box' onClick={handleClick.bind(this, it)}>
                 <View className='navigation-box-badge'>
                   <AtBadge value={badge}>
-                    <ActionIcon className='navigation-box-img' icon={icon} imageUrl={imageUrl} />
+                    <ActionIcon
+                      className='navigation-box-badge-image'
+                      mode='widthFix'
+                      icon={icon}
+                      imageUrl={imageUrl}
+                    />
                   </AtBadge>
                 </View>
                 <View className='navigation-box-txt'>{title}</View>

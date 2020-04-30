@@ -14,7 +14,7 @@ function ImageOnLeft(props) {
 
   return (
     <View className={rootClass}>
-      {src && <ServerImage className='auto-content-image' src={src} />}
+      {src && <ServerImage my-class='auto-content-image' src={src} />}
       <View className='auto-content'>
         <Text className='auto-content-title' numberOfLines={1}>
           {title}

@@ -168,16 +168,18 @@
       justify-content: center;
       align-items: center;
 
-      &-img {
-        width: 44px;
+      &-badge {
+        &-image {
+          width: 44px;
+        }
       }
 
       &-txt {
-        margin-top: -3px;
         color: $text-color-light;
         font-size: 20px;
         font-weight: 400;
         line-height: 36px;
+        margin-top: 5px;
       }
     }
 
@@ -193,5 +195,6 @@
 }
 
 .action-icon {
-  width: 40px;
+  min-width: 44px;
+  min-height: 44px;
 }

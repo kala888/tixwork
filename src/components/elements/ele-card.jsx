@@ -34,7 +34,7 @@ function EleCard(props) {
           </View>
         )}
 
-        {isNotEmpty(imageUrl) && <ServerImage className='ele-card-body-image' src={imageUrl} />}
+        {isNotEmpty(imageUrl) && <ServerImage my-class='ele-card-body-image' src={imageUrl} />}
         <View className='ele-card-body_content'>
           <Text className='ele-card-body_content-title'>{title}</Text>
           <View className='ele-card-body_content-brief'>

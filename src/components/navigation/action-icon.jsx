@@ -6,14 +6,14 @@ import ServerImage from '@/server-image/server-image'
 
 import './styles.scss'
 
-function ActionIcon({ icon, imageUrl, className }) {
+function ActionIcon({ icon, imageUrl, className, mode }) {
   const rootClass = classNames('action-icon', className)
   return (
     <View className={rootClass}>
       {isNotEmpty(icon) ? (
-        <AtIcon prefixClass='iconfont' value={icon} />
+        <AtIcon className={rootClass} prefixClass='iconfont' value={icon} />
       ) : (
-        <ServerImage mode='widthFix' src={imageUrl} />
+        <ServerImage customStyle={{ width: '100%', height: '100%' }} mode={mode} src={imageUrl} />
       )}
     </View>
   )
