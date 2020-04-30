@@ -1,3 +1,5 @@
+// 注意这里只需要放变量，不要放带有网络请求的东西，不然，请求n次网络，例如字体文件。
+// https://github.com/NervJS/taro/issues/6034
 @import './mixins.scss';
 @import 'node_modules/taro-ui/dist/style/mixins/libs/hairline';
 // Custom Theme 通过https://nervjs.github.io/taro-ui-theme-preview/ 处理
@@ -43,11 +45,6 @@ $image-bg: #f4f4f4;
 $color-page-bg: #f0f2f5;
 
 $under-line-color: #c4d8e7;
-
-@font-face {
-  font-family: 'Brother-1816-Black';
-  src: url('https://nice-router.oss-cn-chengdu.aliyuncs.com/Brother-1816-Black.woff') format('woff');
-}
 
 $b181black: Brother-1816-Black, -apple-system, system-ui !important;
 .b181black {

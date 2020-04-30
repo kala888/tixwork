@@ -77,6 +77,7 @@ class App extends Component {
       'pages/home/home-page',
       'pages/me/me-page',
       'pages/test-page',
+      // 'pages/biz/listof-test-page', // 有问题
 
       // base
       'nice-router/h5-page',
@@ -93,7 +94,7 @@ class App extends Component {
       {
         root: 'pages/biz/',
         name: 'biz',
-        pages: ['listof-test-page', 'hello-daas-page'],
+        pages: ['listof-test-page', 'hello-daas-page'], // 没问题
       },
       {
         root: 'genericpage/',
