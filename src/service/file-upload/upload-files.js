@@ -108,7 +108,7 @@ function uploadFiles2OSS(params = {}) {
       },
       fail: (err) => {
         Taro.showToast({
-          title: `上传失败: ${err}`,
+          title: `上传失败: ${JSON.stringify(err)}`,
           icon: 'none',
           duration: 2 * 1000,
         })

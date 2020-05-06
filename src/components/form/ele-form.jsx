@@ -34,7 +34,7 @@ const getGroups = (groupList, fieldList) => {
       const fields = groupFields.filter((field) => !field.hidden)
       return {
         ...group,
-        fieldsList: fields,
+        fieldList: fields,
       }
     })
 }

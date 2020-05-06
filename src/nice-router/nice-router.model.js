@@ -2,7 +2,6 @@
 import Taro from '@tarojs/taro'
 import last from 'lodash/last'
 import trim from 'lodash/trim'
-import memoize from 'lodash/memoize'
 import { isH5 } from '@/utils/index'
 import { createAction, isEmpty, LoadingType, log, noop } from './nice-router-util'
 import ViewMappingService from './viewmapping.service'
@@ -142,33 +141,13 @@ function getCurrentPage() {
   return isH5() ? currentPage.$router.path : '/' + currentPage.route
 }
 
-const getNextView = memoize(
-  (xclass, currentPage, statInPage) => {
-    let nextView = ViewMappingService.getView(xclass)
-    if (Array.isArray(nextView)) {
-      const currentIndex = nextView.findIndex((it) => trim(it.pageName) === currentPage)
-      let nextPageIndex = currentIndex
-      if (!statInPage) {
-        nextPageIndex = currentIndex + 1 >= nextView.length ? 0 : currentIndex + 1
-      }
-      nextView = nextView[nextPageIndex]
-    }
-    return nextView || {}
-  },
-  (xclass, currentPage, statInPage) => {
-    return `${xclass}-${currentPage}-${statInPage}`
-  }
-)
-
 function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPage }) {
-  const currentPage = getCurrentPage()
-  const nextView = getNextView(xclass, currentPage, statInPage)
+  const nextView = ViewMappingService.getView(xclass, statInPage)
 
   const nextPage = nextView.pageName
   const newStateAction = stateAction || nextView.stateAction
   const newEffectAction = effectAction || nextView.effectAction
 
-  log('current page is', currentPage, ', next page is', nextView)
   let doRedirect = false
   // if ((xredirect || (!xredirect && !statInPage))
   // && currentPage !== `pages${viewMapping}`) {
@@ -178,6 +157,8 @@ function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPa
   // const sameAsCurrentPage = LATEST_PAGE === url
   // console.log("latest page is", LATEST_PAGE, "current url is", url, "sameAsCurrentPage", sameAsCurrentPage)
 
+  const currentPage = getCurrentPage()
+  log('current page is', currentPage, ', next page is', nextView)
   if (nextPage && (xredirect || (!xredirect && !statInPage))) {
     if (trim(nextPage, '/') !== trim(currentPage, '/')) {
       doRedirect = true

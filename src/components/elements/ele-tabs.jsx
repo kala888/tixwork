@@ -2,7 +2,6 @@ import { AtTabs } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import { LoadingType } from '@/nice-router/nice-router-util'
 import { useAsyncEffect, useAsyncState } from '@/service/use.service'
-import './styles.scss'
 
 function EleTabs(props) {
   const { tabs } = props
@@ -26,13 +25,10 @@ function EleTabs(props) {
   }
 
   const scroll = tabs.length > 4
-  return <AtTabs className='ele-tabs' current={current} scroll={scroll} tabList={tabs} onClick={handelTabSwitch} />
+  return <AtTabs height='50px' current={current} scroll={scroll} tabList={tabs} onClick={handelTabSwitch} />
 }
 
 EleTabs.defaultProps = {
   tabs: [],
-}
-EleTabs.options = {
-  addGlobalClass: true,
 }
 export default EleTabs

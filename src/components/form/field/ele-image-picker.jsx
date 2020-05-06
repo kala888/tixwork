@@ -1,4 +1,4 @@
-import Taro, { useState } from '@tarojs/taro'
+import Taro, { useEffect, useState } from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import { AtImagePicker, AtProgress } from 'taro-ui'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
@@ -17,13 +17,13 @@ function EleImagePicker(props) {
   const [files, setFiles] = useState(defaultImages)
   const [progress, setProgress] = useState(0)
 
-  const saveImageToForm = () => {
+  useEffect(() => {
     const images = files.map((it) => ({ imageUrl: it.url }))
     onChange(images)
-  }
+  }, [files])
 
-  const uploadNewFiles = () => {
-    const todoList = files.filter((it) => {
+  const uploadNewFiles = (currentFiles) => {
+    const todoList = currentFiles.filter((it) => {
       const { url = '' } = it
       return url.startsWith('http://tmp') || url.startsWith('wxfile://tmp')
     })
@@ -44,8 +44,6 @@ function EleImagePicker(props) {
           return it
         })
       })
-
-      saveImageToForm()
     }
 
     const uploadFileOption = {
@@ -71,14 +69,13 @@ function EleImagePicker(props) {
 
     if (operationType === 'remove') {
       setFiles(changedFiles)
-      saveImageToForm()
       return
     }
 
     if (operationType === 'add') {
       if (changedFiles.length < files.length || changedFiles.length <= maxLength) {
         setFiles(changedFiles)
-        uploadNewFiles()
+        uploadNewFiles(changedFiles)
       } else {
         Taro.showModal({
           title: '提示',
@@ -99,6 +96,7 @@ function EleImagePicker(props) {
   const briefText = brief || (multiple ? `最多可以上传 ${maxLength} 个文件` : '')
   const showAddBtn = files.length < maxLength
   const count = maxLength - files.length
+  console.log('render image picker')
 
   return (
     <View>
