@@ -2,7 +2,7 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { AtButton } from 'taro-ui'
 import NavigationLineItem from '@/components/navigation/navigation-line-item'
-import NavigationBoxBar from '@/components/navigation/navigation-box-bar'
+import NavigationBox from '@/components/navigation/navigation-box'
 import Config from '@/utils/config'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 import ServerImage from '@/server-image/server-image'
@@ -67,7 +67,7 @@ function MePage(props) {
         </View>
 
         <View className='me-page-header-actions'>
-          <NavigationBoxBar list={boxNavigatorList} />
+          <NavigationBox list={boxNavigatorList} />
         </View>
       </View>
 

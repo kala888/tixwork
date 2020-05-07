@@ -4,7 +4,7 @@
  *    Author: Kala
  */
 
-import NavigationBoxBar from '@/components/navigation/navigation-box-bar'
+import NavigationBox from '@/components/navigation/navigation-box'
 import classNames from 'classnames'
 import './styles.scss'
 
@@ -13,7 +13,7 @@ function EleNavigationBox(props) {
 
   const rootClass = classNames('ele-navigation-box', className)
 
-  return <NavigationBoxBar list={kids} className={rootClass} />
+  return <NavigationBox list={kids} className={rootClass} />
 }
 
 EleNavigationBox.options = {
