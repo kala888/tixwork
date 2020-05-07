@@ -3,11 +3,13 @@ import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import ActionIcon from '@/components/navigation/action-icon'
 import NavigationService from '@/nice-router/navigation.service'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 import './styles.scss'
 
 function NavigationBox(props) {
-  const { list = [], className, customStyle = {} } = props
+  const { title: actionBarTitle = '', list = [] } = props
+  const { className, customStyle = {}, roundBottom = true, roundTop = true } = props
 
   const handleClick = (item) => {
     NavigationService.view(item)
@@ -15,11 +17,14 @@ function NavigationBox(props) {
 
   const rootClass = classNames('navigation-box', className, {
     'navigation-box-center': list.length <= 5,
+    'round-bottom': roundBottom,
+    'round-top': roundTop,
   })
 
   return (
-    list.length > 0 && (
-      <View className={rootClass} customStyle={customStyle}>
+    <View className={rootClass} customStyle={customStyle}>
+      {isNotEmpty(actionBarTitle) && <View className='navigation-box-title'>{actionBarTitle}</View>}
+      <View className='navigation-box-actions'>
         {list.map((it) => {
           const { icon, imageUrl, title, badge, id } = it
           return (
@@ -34,7 +39,7 @@ function NavigationBox(props) {
           )
         })}
       </View>
-    )
+    </View>
   )
 }
 
