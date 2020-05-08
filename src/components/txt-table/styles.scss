@@ -9,18 +9,21 @@
   .info-row {
     @extend %flex-row;
     padding: 5px 10px;
-    word-break: break-all;
 
     &-cell {
       @extend %flex-1;
       flex-direction: row;
-
+      word-break: break-all;
       &-title {
-        min-width: 60px;
+        font-size: 28px;
+        vertical-align: center;
+        width: 5rem;
       }
 
       &-value {
         @extend %flex-1;
+        font-size: 28px;
+        vertical-align: center;
         padding-left: 20px;
         color: $text-color-light;
       }
