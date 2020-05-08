@@ -19,7 +19,7 @@ function NavigationLineItem(props) {
         <View className='navigation-line-item-content-title'>{title}</View>
       </View>
       <View className='navigation-line-item-tailicon'>
-        <ActionIcon imageUrl={imageUrl} icon={icon} />
+        <ActionIcon imageUrl={imageUrl} icon={icon} mode='widthFix' />
       </View>
     </View>
   )
