@@ -10,7 +10,7 @@ import CardTemplate from './card-template'
 import ImageOnTop from './image-on-top'
 import ProductTemplate from './product-template'
 import ImageOnBottom from './image-on-bottom'
-import UserTemplate from './user-template'
+import ImageOnLeft from './image-on-left/image-on-left'
 
 import './styles.scss'
 
@@ -122,13 +122,15 @@ export default class FlexLineItem extends Taro.PureComponent {
         {template === 'double-image' && <AutoTemplate showImageCount={2} {...itemProps} />}
         {template === 'three-image' && <AutoTemplate showImageCount={3} {...itemProps} />}
 
+        {template === 'image-on-left' && <ImageOnLeft {...itemProps} />}
+        {template === 'user' && <ImageOnLeft {...itemProps} mode={['circle', 'bordered']} />}
+
         {template === 'image-on-bottom' && <ImageOnBottom {...itemProps} />}
 
         {template === 'image-on-top' && <ImageOnTop {...itemProps} />}
         {template === 'image-on-top-waterfall' && <ImageOnTop {...itemProps} waterfall />}
         {template === 'image-on-top-horizontal' && <ImageOnTop {...itemProps} horizontal />}
 
-        {template === 'user' && <UserTemplate {...itemProps} />}
         {template === 'product' && <ProductTemplate {...itemProps} />}
         {template === 'card' && <CardTemplate {...itemProps} />}
       </View>

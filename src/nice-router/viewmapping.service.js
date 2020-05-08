@@ -1,5 +1,5 @@
 import trim from 'lodash/trim'
-import isNil from 'lodash/isNil'
+import get from 'lodash/get'
 import { isEmpty, log } from './nice-router-util'
 import NiceRouter from './nice-router'
 
@@ -13,9 +13,9 @@ const ViewMappingService = {
       log('the key for class', key, 'not found, try to map with shortKey', shortKey)
       view = NiceRouter.config.viewConfig[shortKey] || {}
     }
-    if (Array.isArray(view) && !stageInPage) {
-      const pointer = POINTER[backendKey]
-      const nextPageIndex = isNil(pointer) || pointer + 1 >= view.length ? 0 : pointer + 1
+    if (Array.isArray(view)) {
+      const pointer = get(POINTER, backendKey, -1)
+      const nextPageIndex = stageInPage ? pointer : pointer + 1 >= view.length ? 0 : pointer + 1
       POINTER[backendKey] = nextPageIndex
       return view[nextPageIndex]
     }
