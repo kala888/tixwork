@@ -1,0 +1,209 @@
+@import 'src/styles/theme';
+.card-container {
+  @extend %flex-center;
+  flex-direction: column;
+}
+
+.ele-card {
+  //background-color: #5ebfff;
+  background-color: $white;
+  font-size: 32px;
+  color: $text-color;
+  box-shadow: 0 10px 19px 1px $shadow-color;
+  margin-bottom: 20px;
+
+  @extend %flex-row;
+  width: 100%;
+  padding: 20px 10px 20px 30px;
+}
+//border-radius: 10px;
+
+.card-action-list {
+  border-top: 2px solid #f3f5f7;
+  padding-top: 20px;
+  width: 100%;
+  @extend %flex-row;
+  justify-content: flex-end;
+}
+
+.ele-card-cover {
+  @extend %flex-center;
+  height: 100px;
+  width: 100px;
+
+  &-image {
+    height: 100px;
+    width: 100px;
+  }
+
+  &-txt {
+    @extend %flex-center;
+    height: 100px;
+    width: 100px;
+    color: $white;
+    font-size: 34px;
+    font-weight: 600;
+  }
+}
+
+.ele-card-info {
+  @extend %flex-column;
+  flex: 1;
+  padding: 0 30px;
+  height: 100%;
+
+  &-title {
+    padding-bottom: 10px;
+    @include lamp-clamp(1);
+  }
+
+  &-brief {
+    color: $text-color-light;
+    font-size: 26px;
+    @include lamp-clamp(1);
+  }
+}
+
+.ele-card_horizontal {
+  // as horizontal
+  .ele-card-cover {
+    width: 100px;
+    height: 100px;
+
+    .ele-card-cover-image {
+      margin-bottom: -5px;
+      height: 100px;
+      width: 100px;
+      border-radius: 5px;
+    }
+  }
+}
+
+.ele-card_circle {
+  .ele-card-cover-image {
+    border-radius: 50% !important;
+  }
+
+  .ele-card-cover-txt {
+    border-radius: 50% !important;
+  }
+}
+
+.ele-card_large {
+  .ele-card-cover {
+    width: 180px;
+    height: 180px;
+
+    .ele-card-cover-image {
+      height: 180px;
+      width: 180px;
+    }
+
+    .ele-card-cover-txt {
+      height: 180px;
+      width: 180px;
+    }
+  }
+
+  .ele-card-info-brief {
+    @include lamp-clamp(3);
+  }
+}
+
+.ele-card_as-text {
+  .ele-card-cover-txt {
+    background-color: $level-default;
+    border-radius: 50%;
+  }
+}
+
+.ele-card_small {
+  .ele-card-cover {
+    width: 60px;
+    height: 60px;
+
+    .ele-card-cover-image {
+      width: 60px;
+      height: 60px;
+    }
+
+    .ele-card-cover-txt {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}
+
+.ele-card_avatar {
+  .ele-card-cover-image {
+    border: 4px solid darken($primary-color, 10%);
+    box-shadow: 0 0 20px #fff;
+  }
+}
+
+.ele-card_default {
+  .ele-card-cover-txt {
+    background-color: $level-default;
+  }
+}
+
+.ele-card_normal {
+  .ele-card-cover-txt {
+    background-color: $level-normal;
+  }
+}
+
+.ele-card_primary {
+  .ele-card-cover-txt {
+    background-color: $level-primary;
+  }
+}
+
+.ele-card_warn {
+  .ele-card-cover-txt {
+    background-color: $level-warn;
+  }
+}
+
+.ele-card_danger {
+  .ele-card-cover-txt {
+    background-color: $level-danger;
+  }
+}
+
+.ele-card_vertical {
+  @extend %flex-column;
+  justify-content: center;
+  padding: 0 0 10px 0;
+  border-radius: 30px;
+  width: 350px;
+
+  .ele-card-cover {
+    height: 350px;
+    width: 350px;
+
+    .ele-card-cover-image {
+      height: 350px;
+      width: 350px;
+      border-top-right-radius: 30px;
+      border-top-left-radius: 30px;
+    }
+
+    .ele-card-cover-txt {
+      height: 250px;
+      width: 250px;
+    }
+  }
+}
+
+.ele-card_vertical-small {
+  .ele-card-cover-image {
+    height: 250px !important;
+    width: 250px !important;
+  }
+
+  .ele-card-cover-txt {
+    height: 150px !important;
+    width: 150px !important;
+  }
+}

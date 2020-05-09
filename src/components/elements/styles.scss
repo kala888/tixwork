@@ -119,16 +119,18 @@
   @extend %flex-row;
   justify-content: space-around;
   align-items: center;
-  padding-right: 40px;
-  padding-left: 40px;
+  &-btn-wrapper {
+    margin-left: 20px;
+  }
 
   &-btn {
     @extend %flex-center;
     flex-direction: row;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 600;
-    min-width: 150px;
     width: 100%;
+    padding: 0;
+    height: 1.5rem;
 
     &-image {
       //margin-top: -25px;

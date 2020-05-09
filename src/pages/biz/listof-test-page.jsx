@@ -156,21 +156,45 @@ const userList = [
 ]
 
 const imageOnLeftList = [
-  { id: 'user1', imageUrl: MockService.randomImage(), title: '我看好的ETF', brief: '亏钱，割韭菜', displayMode: 'user' },
+  {
+    id: 'user1',
+    imageUrl: MockService.randomImage(),
+    title: '我看好的ETF',
+    brief: '亏钱，割韭菜',
+    displayMode: 'user',
+  },
 
   { id: 10, imageUrl: MockService.randomImage(), title: '我看好的ETF', brief: '亏钱，割韭菜' },
-  { id: 11, imageUrl: MockService.randomImage(), title: '吃饱了喝足了', brief: '其实就是吃饱了撑的没事干', mode: 'circle' },
+  {
+    id: 11,
+    imageUrl: MockService.randomImage(),
+    title: '吃饱了喝足了',
+    brief: '其实就是吃饱了撑的没事干',
+    mode: 'circle',
+  },
   { id: 12, imageUrl: MockService.randomImage(), title: '川普哈哈哈哈', brief: '据说川普火了', mode: 'large' },
-  { id: 13, imageUrl: MockService.randomImage(), title: '大+圆-图', brief: '组件的外部样式如何', mode: ['large', 'circle'] },
+  {
+    id: 13,
+    imageUrl: MockService.randomImage(),
+    title: '大+圆-图',
+    brief: '组件的外部样式如何',
+    mode: ['large', 'circle'],
+  },
   { id: 14, imageUrl: MockService.randomImage(), title: '小-圆-图', mode: ['small', 'circle'] },
 
   { id: 21, flag: '急', level: 'default', title: '我看好的ETF', brief: '亏钱，割韭菜' },
   { id: 22, flag: '急', level: 'normal', title: '我看好的ETF', brief: '亏钱，割韭菜' },
   { id: 23, flag: '如', level: 'primary', title: '川普哈哈哈哈', brief: '据说川普火了', mode: 'circle' },
   { id: 24, flag: '律', level: 'warn', title: '组件的外部样式如何', mode: 'small' },
-  { id: 25, flag: '令', level: 'danger', title: '组件的外部样式如何', brief: '哈哈哈哈哈哦哦哦', mode: ['large', 'circle'] },
+  {
+    id: 25,
+    flag: '令',
+    level: 'danger',
+    title: '组件的外部样式如何',
+    brief: '哈哈哈哈哈哦哦哦',
+    mode: ['large', 'circle'],
+  },
 ]
-
 
 function HelloDaaSPage() {
   return (

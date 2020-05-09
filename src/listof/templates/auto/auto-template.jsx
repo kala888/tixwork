@@ -4,11 +4,11 @@ import classNames from 'classnames'
 import ServerImage from '@/server-image/server-image'
 import { formatTime } from '@/utils/index'
 
-import { getImageList } from '../listof-helper'
+import { getImageList } from '../../listof-helper'
 import './styles.scss'
 
 function AutoTemplate(props) {
-  const { item, showImageCount } = props
+  const { item, showImageCount, mode = [] } = props
   const { title, brief, displayTime } = item
 
   let list = []
@@ -16,14 +16,16 @@ function AutoTemplate(props) {
     const tempList = getImageList(item)
     const size = Math.min(showImageCount, tempList.length)
     list = tempList.slice(0, size)
-    // const list = m_.concat(m_.slice(tempList, 0, size), m_.slice(tempList, 0, size), m_.slice(tempList, 0, size))
-    // console.log('list', list)
   }
 
   const onlyTitleCls = !(brief || displayTime)
-  const rootCls = classNames('auto', {
-    'only-title': onlyTitleCls,
-  })
+  const rootCls = classNames(
+    'auto',
+    {
+      'only-title': onlyTitleCls,
+    },
+    mode
+  )
 
   return (
     <View className={rootCls}>

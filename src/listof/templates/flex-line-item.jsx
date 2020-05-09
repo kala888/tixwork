@@ -5,12 +5,9 @@ import classNames from 'classnames'
 import NavigationService from '@/nice-router/navigation.service'
 import ActionUtil from '@/nice-router/action-util'
 
-import AutoTemplate from './auto-template'
-import CardTemplate from './card-template'
-import ImageOnTop from './image-on-top'
+import AutoTemplate from './auto/auto-template'
 import ProductTemplate from './product-template'
-import ImageOnBottom from './image-on-bottom'
-import ImageOnLeft from './image-on-left/image-on-left'
+import EleCardTemplate from './card/ele-card-template'
 
 import './styles.scss'
 
@@ -122,17 +119,17 @@ export default class FlexLineItem extends Taro.PureComponent {
         {template === 'double-image' && <AutoTemplate showImageCount={2} {...itemProps} />}
         {template === 'three-image' && <AutoTemplate showImageCount={3} {...itemProps} />}
 
-        {template === 'image-on-left' && <ImageOnLeft {...itemProps} />}
-        {template === 'user' && <ImageOnLeft {...itemProps} mode={['circle', 'bordered']} />}
+        {template === 'image-on-top' && <AutoTemplate {...itemProps} />}
+        {template === 'image-on-bottom' && <AutoTemplate {...itemProps} mode='image-on-bottom' />}
 
-        {template === 'image-on-bottom' && <ImageOnBottom {...itemProps} />}
+        {template === 'card' && <EleCardTemplate {...itemProps} mode={['horizontal', 'large']} />}
+        {template === 'user' && <EleCardTemplate {...itemProps} mode={['horizontal', 'circle', 'avatar']} />}
+        {template === 'image-on-left' && <EleCardTemplate {...itemProps} />}
 
-        {template === 'image-on-top' && <ImageOnTop {...itemProps} />}
-        {template === 'image-on-top-waterfall' && <ImageOnTop {...itemProps} waterfall />}
-        {template === 'image-on-top-horizontal' && <ImageOnTop {...itemProps} horizontal />}
+        {/*{template === 'image-on-top-waterfall' && <ImageOnTop {...itemProps} waterfall />}TODO switch to card*/}
+        {/*{template === 'image-on-top-horizontal' && <ImageOnTop {...itemProps} horizontal />}TODO switch to card*/}
 
         {template === 'product' && <ProductTemplate {...itemProps} />}
-        {template === 'card' && <CardTemplate {...itemProps} />}
       </View>
     )
   }
