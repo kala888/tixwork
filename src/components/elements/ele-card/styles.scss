@@ -1,4 +1,11 @@
+/*!
+ * Copyright(c) 2020 nice-router
+ *    Date: 2020/5/9 下午4:58
+ *    Author: Kala
+ */
+
 @import 'src/styles/theme';
+
 .card-container {
   @extend %flex-center;
   flex-direction: column;
@@ -6,17 +13,20 @@
 
 .ele-card {
   //background-color: #5ebfff;
+  @extend %flex-row;
   background-color: $white;
   font-size: 32px;
   color: $text-color;
   box-shadow: 0 10px 19px 1px $shadow-color;
   margin-bottom: 20px;
 
-  @extend %flex-row;
   width: 100%;
   padding: 20px 10px 20px 30px;
+  border-radius: 20px;
+
+  position: relative;
+  overflow: hidden;
 }
-//border-radius: 10px;
 
 .card-action-list {
   border-top: 2px solid #f3f5f7;
@@ -64,8 +74,8 @@
   }
 }
 
+// as horizontal
 .ele-card_horizontal {
-  // as horizontal
   .ele-card-cover {
     width: 100px;
     height: 100px;
@@ -175,7 +185,6 @@
   @extend %flex-column;
   justify-content: center;
   padding: 0 0 10px 0;
-  border-radius: 30px;
   width: 350px;
 
   .ele-card-cover {
@@ -185,14 +194,16 @@
     .ele-card-cover-image {
       height: 350px;
       width: 350px;
-      border-top-right-radius: 30px;
-      border-top-left-radius: 30px;
     }
 
     .ele-card-cover-txt {
       height: 250px;
       width: 250px;
     }
+  }
+
+  .ele-card-info {
+    margin-top: 10px;
   }
 }
 

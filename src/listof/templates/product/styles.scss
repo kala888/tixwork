@@ -1,0 +1,54 @@
+@import '../styles';
+
+.product {
+  @extend %template;
+  padding: 0 0 10px 0;
+  border-radius: 30px;
+
+  &-cover {
+    @extend %flex-center;
+    height: 350px;
+    width: 350px;
+
+    &-image {
+      height: 350px;
+      border-top-right-radius: 30px;
+      border-top-left-radius: 30px;
+    }
+  }
+
+  &-info {
+    padding: 10px 15px;
+
+    &-title {
+      @extend %flex-row;
+      color: $text-color;
+      @include lamp-clamp(2);
+
+      &-txt {
+        font-size: 26px;
+        line-height: 32px;
+        margin-left: 10px;
+      }
+    }
+
+    &-brief {
+      font-size: 32px;
+      color: $red-color;
+      @extend %flex-row;
+      align-items: center;
+
+      .tag-tiny {
+        @include text-ellipsis;
+      }
+    }
+  }
+}
+
+.product-h5 {
+  .img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}

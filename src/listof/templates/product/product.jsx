@@ -5,10 +5,10 @@ import ServerImage from '@/server-image/server-image'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { isH5 } from '@/utils/index'
 import classNames from 'classnames'
-import { getImageUrl } from '../listof-helper'
+import { getImageUrl } from '../../listof-helper'
 import './styles.scss'
 
-function ProductTemplate(props) {
+function Product(props) {
   const { item = {} } = props
   const { preTag = '', tags = [], brand = '', name, price } = item
   const src = getImageUrl(item)
@@ -20,17 +20,17 @@ function ProductTemplate(props) {
         <ServerImage my-class='product-cover-image' src={src} mode='heightFix' />
       </View>
 
-      <View className='product-content'>
-        <View className='product-content-title'>
+      <View className='product-info'>
+        <View className='product-info-title'>
           {isNotEmpty(preTag) && (
             <AtTag className='red-tag' size='small' active>
               {preTag}
             </AtTag>
           )}
-          <Text className='product-content-title-txt'>{`${brand} ${name}`}</Text>
+          <Text className='product-info-title-txt'>{`${brand} ${name}`}</Text>
         </View>
 
-        <View className='product-content-brief'>
+        <View className='product-info-brief'>
           <Text numberOfLines={1}>{`￥${price}`}</Text>
           {tags.map(
             (it) =>
@@ -46,7 +46,4 @@ function ProductTemplate(props) {
   )
 }
 
-ProductTemplate.options = {
-  addGlobalClass: true,
-}
-export default ProductTemplate
+export default Product

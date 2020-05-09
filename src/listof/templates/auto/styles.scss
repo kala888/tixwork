@@ -50,22 +50,11 @@
 }
 
 .only-title {
-  .auto-content {
-    .auto-content-title {
-      font-weight: 400;
-    }
+  .auto-info-title {
+    font-weight: 400;
   }
 }
 
 .image-on-bottom {
   flex-direction: column-reverse;
-}
-
-.image-on-top {
-  padding: 0 0 10px 0;
-
-  .auto-content-image {
-    height: 350px;
-    width: 100%;
-  }
 }

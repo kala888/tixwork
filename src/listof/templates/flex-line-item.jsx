@@ -6,8 +6,8 @@ import NavigationService from '@/nice-router/navigation.service'
 import ActionUtil from '@/nice-router/action-util'
 
 import AutoTemplate from './auto/auto-template'
-import ProductTemplate from './product-template'
-import EleCardTemplate from './card/ele-card-template'
+import Product from './product/product'
+import CardTemplate from './card/card-template'
 
 import './styles.scss'
 
@@ -113,23 +113,21 @@ export default class FlexLineItem extends Taro.PureComponent {
           </View>
         )}
 
-        {template === 'auto' && <AutoTemplate {...itemProps} />}
+        {(template === 'auto' || template === 'image-on-top') && <AutoTemplate {...itemProps} />}
         {template === 'only-title' && <AutoTemplate showImageCount={0} {...itemProps} />}
         {template === 'single-image' && <AutoTemplate showImageCount={1} {...itemProps} />}
         {template === 'double-image' && <AutoTemplate showImageCount={2} {...itemProps} />}
         {template === 'three-image' && <AutoTemplate showImageCount={3} {...itemProps} />}
-
-        {template === 'image-on-top' && <AutoTemplate {...itemProps} />}
         {template === 'image-on-bottom' && <AutoTemplate {...itemProps} mode='image-on-bottom' />}
 
-        {template === 'card' && <EleCardTemplate {...itemProps} mode={['horizontal', 'large']} />}
-        {template === 'user' && <EleCardTemplate {...itemProps} mode={['horizontal', 'circle', 'avatar']} />}
-        {template === 'image-on-left' && <EleCardTemplate {...itemProps} />}
+        {(template === 'card' || template === 'image-on-left') && <CardTemplate {...itemProps} />}
+        {template === 'big-card' && <CardTemplate {...itemProps} mode={['horizontal', 'large']} />}
+        {template === 'h-card' && <CardTemplate {...itemProps} mode={['horizontal']} />}
+        {template === 'v-card' && <CardTemplate {...itemProps} mode={['vertical']} />}
 
-        {/*{template === 'image-on-top-waterfall' && <ImageOnTop {...itemProps} waterfall />}TODO switch to card*/}
-        {/*{template === 'image-on-top-horizontal' && <ImageOnTop {...itemProps} horizontal />}TODO switch to card*/}
+        {template === 'user' && <CardTemplate {...itemProps} mode={['horizontal', 'circle', 'avatar']} />}
 
-        {template === 'product' && <ProductTemplate {...itemProps} />}
+        {template === 'product' && <Product {...itemProps} />}
       </View>
     )
   }

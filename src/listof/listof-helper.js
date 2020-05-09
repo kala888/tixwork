@@ -28,7 +28,7 @@ export function getImageList(item = {}) {
   return list
 }
 
-const TWO_COLUMN_DISPLAY_MODE = ['product', 'image-on-top-waterfall', 'image-on-top-horizontal']
+const TWO_COLUMN_DISPLAY_MODE = ['product', 'v-card']
 
 export function getItemWidth(displayMode) {
   if (TWO_COLUMN_DISPLAY_MODE.indexOf(displayMode) > -1) {

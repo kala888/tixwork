@@ -1,66 +1,73 @@
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import MockService from '@/nice-router/request/mock-service'
+import EleCarousel from '@/components/elements/ele-carousel'
+import ActionFloor from '@/components/navigation/action-floor'
+import { usePageTitle, usePullDown } from '@/service/use.service'
+import SectionBar from '@/components/section-bar/section-bar'
 import Listof from '@/listof/listof'
-import { AtButton } from 'taro-ui'
+
+import MockService from '@/nice-router/request/mock-service'
 
 import './home.scss'
+import mockGenericPageData from '../biz/mock-data/mock-genericpage.data'
+import mockForm1Data from '../biz/mock-data/mock-form.data'
+import mockForm2Data from '../biz/mock-data/mock-form2.data'
+import { mockProductList, mockUserList } from '../biz/mock-data/mock-list.data'
 
-const obj = {
-  title: '我看好的ETF',
-  brief: '亏钱，割韭菜',
-  flag: '牛',
-  imageUrl: MockService.defaultImage,
-  status: '待处理',
-}
-const mockList = [
-  //竖版
-  //横版-没图
-  { id: '31', ...obj, mode: ['vertical', 'default', 'vertical-small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '32', ...obj, mode: ['vertical', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '33', ...obj, mode: ['vertical', 'primary'], imageUrl: '', flag: '如' }, // 默认的 horizontal
-  { id: '34', ...obj, mode: ['vertical', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
-  { id: '35', ...obj, mode: ['vertical', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
+function HomePage(props) {
+  const { pageTitle } = props
+  usePageTitle(pageTitle)
+  usePullDown(props)
 
-  //默认，imageOnLeft
-  { id: '1', ...obj, status: '待处理' }, //方图，一行title，一行brief，小的flag+最多3个字
+  const { slideList = mockUserList, actionList = defaultActionList } = props
 
-  //竖版
-  { id: '11', ...obj, mode: ['vertical'] }, // 竖版，1/2屏幕宽，小的flag+最多3个字
-  { id: '12', ...obj, mode: ['vertical', 'vertical-small', 'circle'] }, // 竖版，小圆图，1/2屏幕宽，小的flag+最多3个字
-
-  //横版-有图
-  { id: '21', ...obj, mode: ['horizontal'] }, // 默认的 horizontal
-  { id: '22', ...obj, mode: ['horizontal', 'circle', 'small'] }, //小圆图
-  { id: '23', ...obj, mode: ['horizontal', 'circle', 'avatar'] }, //头像，带光圈
-  { id: '24', ...obj, mode: ['horizontal', 'circle', 'large'] }, //大圆图
-  {
-    id: '25',
-    ...obj,
-    mode: ['horizontal', 'large'],
-    brief: '真的牛逼不需要解释\n真的牛逼不需要解释\n真的牛逼不需要解释\n真的牛逼不需要解释',
-  }, //大方图
-
-  //横版-没图
-  { id: '31', ...obj, mode: ['horizontal', 'default', 'small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '32', ...obj, mode: ['horizontal', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '33', ...obj, mode: ['horizontal', 'primary', 'large'], imageUrl: '', flag: '如' }, // 默认的 horizontal
-  { id: '34', ...obj, mode: ['horizontal', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
-  { id: '35', ...obj, mode: ['horizontal', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
-]
-
-function HomePage() {
   return (
     <View className='home-page'>
-      <View style={{ width: '10px' }}>
-        <AtButton size='small' full={false}>
-          提交
-        </AtButton>
+      <EleCarousel className='home-page-carousel' items={slideList} />
+      <View className='home-page-action-floor'>
+        <ActionFloor actions={actionList} />
+        <SectionBar title='促销抢购' />
+        <Listof list={mockProductList} displayMode='product' />
       </View>
-
-      <Listof list={mockList} displayMode='ele-card' />
     </View>
   )
 }
 
 export default connect(({ home }) => ({ ...home }))(HomePage)
+
+MockService.mockResp('mock-generic-page/', mockGenericPageData)
+MockService.mockResp('mock-generic-form/', mockForm1Data)
+MockService.mockResp('mock-generic-form-2/', mockForm2Data)
+
+const defaultActionList = [
+  {
+    id: 1,
+    title: 'Listof 测试',
+    brief: '有惊喜',
+    linkToUrl: 'page:///pages/biz/listof-test-page',
+  },
+  {
+    id: 2,
+    title: 'GenericPage 测试',
+    brief: '省心',
+    linkToUrl: 'mock-generic-page/',
+  },
+  {
+    id: 3,
+    title: 'GenericForm 测试',
+    brief: '牛逼',
+    linkToUrl: 'mock-generic-form/',
+  },
+  {
+    id: 4,
+    title: 'H5 测试',
+    brief: '某度',
+    linkToUrl: 'https://www.baidu.com',
+  },
+  {
+    id: 5,
+    title: 'Login 页面',
+    brief: '通用',
+    linkToUrl: 'page:///pages/login/login-page',
+  },
+]

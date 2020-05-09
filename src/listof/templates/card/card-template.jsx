@@ -1,12 +1,12 @@
 import { getImageUrl } from '@/listof/listof-helper'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-import EleCard from '@/listof/templates/card/ele-card'
-import './styles.scss'
+import EleCard from '@/components/elements/ele-card/ele-card'
+import '@/components/elements/ele-card/styles.scss'
 
-function EleCardTemplate(props) {
+function CardTemplate(props) {
   const { item = {}, mode: globalMode = [] } = props
   const { title, brief, flag = '', status, actionList = [], documentUrl, linkToUrl } = item
-  const { level = 'default', mode = 'square' } = item
+  const { level = '', mode = '' } = item
 
   const imageUrl = getImageUrl(item)
   const hasImage = isNotEmpty(imageUrl)
@@ -45,8 +45,9 @@ function EleCardTemplate(props) {
       status={status}
       flag={flag}
       actionList={cardActionList}
+      linkToUrl={linkToUrl}
     />
   )
 }
 
-export default EleCardTemplate
+export default CardTemplate

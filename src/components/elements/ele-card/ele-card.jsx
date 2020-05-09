@@ -1,10 +1,16 @@
-import { Text, View } from '@tarojs/components'
+/*
+ * Copyright(c) 2020 nice-router
+ *    Date: 2020/5/9 下午4:48
+ *    Author: Kala
+ */
+
+import { Block, Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import ServerImage from '@/server-image/server-image'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import NavigationService from '@/nice-router/navigation.service'
 import EleActionList from '@/components/elements/ele-action-list'
-import StatusFlag from '../../status-flag'
+import StatusFlag from '@/listof/status-flag'
 import './styles.scss'
 
 //mode=small,large
@@ -20,6 +26,7 @@ function EleCard(props) {
       { id: 1, title: '提交' },
       { id: 1, title: '收藏' },
     ],
+    customized = false,
   } = props
   const { mode = [] } = props
   const flagSize = mode.includes('large') ? 'large' : 'small'
@@ -42,7 +49,7 @@ function EleCard(props) {
       <View className={rootClass}>
         <StatusFlag title={status} mode={flagSize} />
 
-        <View className='ele-card-cover'>
+        <View className='ele-card-cover' onClick={onClick}>
           {hasImage ? (
             <ServerImage my-class='ele-card-cover-image' src={imageUrl} size='middle' />
           ) : (
@@ -51,21 +58,22 @@ function EleCard(props) {
         </View>
 
         <View className='ele-card-info'>
-          <Text className='ele-card-info-title'>{title}</Text>
-          <Text className='ele-card-info-brief'>{brief}</Text>
-          {actionList.length > 0 && (
-            <View className='card-action-list'>
-              <EleActionList list={actionList} />
-            </View>
+          {props.children}
+          {!customized && (
+            <Block>
+              <Text className='ele-card-info-title'>{title}</Text>
+              <Text className='ele-card-info-brief'>{brief}</Text>
+              {actionList.length > 0 && (
+                <View className='card-action-list'>
+                  <EleActionList list={actionList} />
+                </View>
+              )}
+            </Block>
           )}
         </View>
       </View>
     </View>
   )
-}
-
-EleCard.options = {
-  addGlobalClass: true,
 }
 
 export default EleCard

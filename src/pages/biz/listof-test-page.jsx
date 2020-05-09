@@ -196,6 +196,49 @@ const imageOnLeftList = [
   },
 ]
 
+const obj = {
+  title: '我看好的ETF',
+  brief: '亏钱，割韭菜',
+  flag: '牛',
+  imageUrl: MockService.defaultImage,
+  status: '待处理',
+}
+const cardList = [
+  //竖版
+  //横版-没图
+  { id: '31', ...obj, mode: ['vertical', 'default', 'vertical-small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  { id: '32', ...obj, mode: ['vertical', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  { id: '33', ...obj, mode: ['vertical', 'primary'], imageUrl: '', flag: '如' }, // 默认的 horizontal
+  { id: '34', ...obj, mode: ['vertical', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
+  { id: '35', ...obj, mode: ['vertical', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
+
+  //默认，imageOnLeft
+  { id: '1', ...obj, status: '待处理' }, //方图，一行title，一行brief，小的flag+最多3个字
+
+  //竖版
+  { id: '11', ...obj, mode: ['vertical'] }, // 竖版，1/2屏幕宽，小的flag+最多3个字
+  { id: '12', ...obj, mode: ['vertical', 'vertical-small', 'circle'] }, // 竖版，小圆图，1/2屏幕宽，小的flag+最多3个字
+
+  //横版-有图
+  { id: '21', ...obj, mode: ['horizontal'] }, // 默认的 horizontal
+  { id: '22', ...obj, mode: ['horizontal', 'circle', 'small'] }, //小圆图
+  { id: '23', ...obj, mode: ['horizontal', 'circle', 'avatar'] }, //头像，带光圈
+  { id: '24', ...obj, mode: ['horizontal', 'circle', 'large'] }, //大圆图
+  {
+    id: '25',
+    ...obj,
+    mode: ['horizontal', 'large'],
+    brief: '真的牛逼不需要解释\n真的牛逼不需要解释\n真的牛逼不需要解释\n真的牛逼不需要解释',
+  }, //大方图
+
+  //横版-没图
+  { id: '31', ...obj, mode: ['horizontal', 'default', 'small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  { id: '32', ...obj, mode: ['horizontal', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  { id: '33', ...obj, mode: ['horizontal', 'primary', 'large'], imageUrl: '', flag: '如' }, // 默认的 horizontal
+  { id: '34', ...obj, mode: ['horizontal', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
+  { id: '35', ...obj, mode: ['horizontal', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
+]
+
 function HelloDaaSPage() {
   return (
     <View className='hello-daas'>
@@ -204,14 +247,15 @@ function HelloDaaSPage() {
       <SectionBar title='卡片' brief='displayMode：card' />
       <Listof list={businessCardList} displayMode='card' />
       <SectionBar title='文件卡片' brief='displayMode：card，documentUrl不为空' />
-      <Listof list={movieList} displayMode='card' />
-      <SectionBar title='上图+下文字，水平滑动' brief='displayMode：image-on-top-horizontal' />
-      <Listof list={newsList.slice(0, 3)} horizontal displayMode='image-on-top-horizontal' />
-      <SectionBar title='上图+下文字 两排' brief='displayMode：image-on-top-waterfall' />
-      <Listof list={newsList.slice(0, 3)} displayMode='image-on-top-waterfall' />
+      <Listof list={movieList} displayMode='big-card' />
+      {/*<SectionBar title='上图+下文字，水平滑动' brief='displayMode：image-on-top-horizontal' />*/}
+      {/*<Listof list={newsList.slice(0, 3)} horizontal displayMode='image-on-top-horizontal' />*/}
+      <SectionBar title='上图+下文字 两排' brief='displayMode：v-card' />
+      <Listof list={newsList.slice(0, 3)} displayMode='v-card' />
       <SectionBar title='上图+下文字' brief='displayMode：image-on-top' />
       <Listof list={newsList.slice(0, 2)} displayMode='image-on-top' />
       <SectionBar title='上文字+下图' brief='displayMode：image-on-bottom' />
+      <Listof list={newsList.slice(0, 2)} displayMode='image-on-bottom' />
 
       <SectionBar title='左边图' brief='displayMode：image-on-left' />
       <Listof list={imageOnLeftList} displayMode='image-on-left' />
@@ -221,6 +265,9 @@ function HelloDaaSPage() {
       <Listof list={productList} displayMode='product' />
       <SectionBar title='Auto系列' brief='displayMode：auto|single-image|double-image|three-image' />
       <Listof list={newsList} displayMode='auto' />
+
+      <SectionBar title='Card系列' brief='displayMode：user，document，imageOnLeft,v-card,h-card' />
+      <Listof list={cardList} displayMode='card' />
     </View>
   )
 }
