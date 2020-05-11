@@ -1,7 +1,7 @@
 import { isEmpty } from '@/nice-router/nice-router-util'
 import { useEffect, useState } from '@tarojs/taro'
-import remove from 'lodash/remove'
 import clone from 'lodash/clone'
+import remove from 'lodash/remove'
 
 export const useFacet = (tabs = [], title, code, facetList = []) => {
   const [facetGroup, setFaceGroup] = useState(facetList)

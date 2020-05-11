@@ -1,11 +1,11 @@
-import Taro from '@tarojs/taro'
-import parse from 'url-parse'
-import qs from 'qs'
 import { isH5 } from '@/utils/index'
+import Taro from '@tarojs/taro'
+import qs from 'qs'
+import parse from 'url-parse'
+import ActionUtil from './action-util'
 
 import localCacheService from './local-cache.service'
 import { isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util'
-import ActionUtil from './action-util'
 
 const PAGE_LEVEL_LIMIT = 10
 
@@ -36,9 +36,11 @@ const NavigationService = {
     })
   },
 
-  reset(routeName, params) {
-    Taro.navigateBack(20)
-    this.navigate(routeName, params)
+  async reset(routeName, params) {
+    await Taro.navigateBack({
+      delta: 20,
+    })
+    await this.navigate(routeName, params)
   },
 
   /**
@@ -108,11 +110,11 @@ const NavigationService = {
   },
 
   view(action, params = {}, options = {}) {
-    this.routeTo({ action, params, ...options })
+    return this.routeTo({ action, params, ...options })
   },
 
   ajax(action, params, options = {}) {
-    this.routeTo({
+    return this.routeTo({
       action,
       params,
       loading: LoadingType.none,
@@ -122,7 +124,7 @@ const NavigationService = {
   },
 
   post(action, params, options = {}) {
-    this.routeTo({
+    return this.routeTo({
       action,
       params,
       ...options,
@@ -131,7 +133,7 @@ const NavigationService = {
   },
 
   put(action, params, options = {}) {
-    this.routeTo({
+    return this.routeTo({
       action,
       params,
       ...options,

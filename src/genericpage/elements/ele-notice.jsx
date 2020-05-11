@@ -1,6 +1,6 @@
-import { Swiper, SwiperItem, Text, View } from '@tarojs/components'
-import NavigationService from '@/nice-router/navigation.service'
 import ActionIcon from '@/components/navigation/action-icon'
+import NavigationService from '@/nice-router/navigation.service'
+import { Swiper, SwiperItem, Text, View } from '@tarojs/components'
 
 import classNames from 'classnames'
 import './styles.scss'

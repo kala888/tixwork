@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode'
-import StorageTools from './storage-tools'
 import { isNotEmpty, log } from './nice-router-util'
+import StorageTools from './storage-tools'
 
 const TOKEN = 'TOKEN'
 const AUTH_INFO = 'AUTH_INFO'
@@ -27,12 +27,11 @@ async function isValidateToken() {
 }
 
 async function getAuthInfoAsync() {
-  return await StorageTools.get(AUTH_INFO, {})
+  return StorageTools.get(AUTH_INFO, {})
 }
 
 async function getTokenAsync() {
-  const token = await StorageTools.get(TOKEN, '')
-  return token
+  return StorageTools.get(TOKEN, '')
 }
 
 async function logout() {

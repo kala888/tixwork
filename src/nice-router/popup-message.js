@@ -1,10 +1,10 @@
 import Taro from '@tarojs/taro'
 import ActionUtil from './action-util'
-import { isNotEmpty } from './nice-router-util'
 import NavigationService from './navigation.service'
+import { isNotEmpty } from './nice-router-util'
 
 export default class PopupMessage {
-  static show(options = {}) {
+  static async show(options = {}) {
     const { title, text, actionList = [], closeActionText = '关闭' } = options
     const action = actionList.length > 0 ? actionList[0] : null
     const confirmContent = ActionUtil.getConfirmContent(action)
@@ -26,7 +26,7 @@ export default class PopupMessage {
       return
     }
 
-    Taro.showModal({
+    await Taro.showModal({
       title,
       content: text,
       cancelText: closeActionText,

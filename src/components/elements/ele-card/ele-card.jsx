@@ -4,13 +4,13 @@
  *    Author: Kala
  */
 
-import { Block, Text, View } from '@tarojs/components'
-import classNames from 'classnames'
-import ServerImage from '@/server-image/server-image'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
-import NavigationService from '@/nice-router/navigation.service'
 import EleActionList from '@/components/elements/ele-action-list'
 import StatusFlag from '@/components/elements/ele-card/status-flag'
+import NavigationService from '@/nice-router/navigation.service'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
+import ServerImage from '@/server-image/server-image'
+import { Block, Text, View } from '@tarojs/components'
+import classNames from 'classnames'
 import './styles.scss'
 
 //mode=small,large

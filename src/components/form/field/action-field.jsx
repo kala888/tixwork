@@ -1,6 +1,6 @@
+import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
-import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import './styles.scss'
 
 function ActionField(props) {

@@ -1,9 +1,8 @@
+import NavigationService from '@/nice-router/navigation.service'
+import { isEmpty } from '@/nice-router/nice-router-util'
+import ServerImage from '@/server-image/server-image'
 import { Block, View } from '@tarojs/components'
 import classNames from 'classnames'
-
-import NavigationService from '@/nice-router/navigation.service'
-import ServerImage from '@/server-image/server-image'
-import { isEmpty } from '@/nice-router/nice-router-util'
 
 import './styles.scss'
 

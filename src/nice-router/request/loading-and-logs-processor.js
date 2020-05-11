@@ -1,8 +1,8 @@
-import Taro from '@tarojs/taro'
+import GlobalToast from '@/nice-router/global-toast'
 import { isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
 import OverlayLoading from '@/nice-router/overlay-loading'
 import ViewMappingService from '@/nice-router/viewmapping.service'
-import GlobalToast from '@/nice-router/global-toast'
+import Taro from '@tarojs/taro'
 
 const systemErrorXClass = 'com.terapico.caf.local.NetworkException'
 

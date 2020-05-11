@@ -1,6 +1,6 @@
+import NiceRouter from '@/nice-router/nice-router'
 import cloneDeep from 'lodash/cloneDeep'
 import pathToRegexp from 'path-to-regexp'
-import NiceRouter from '@/nice-router/nice-router'
 
 function getUrlAndParam({ uri, params }) {
   const processedParams = cloneDeep(params)

@@ -1,15 +1,15 @@
-import { Block, Text, View } from '@tarojs/components'
 import EleButton from '@/components/elements/ele-button'
 import EleInput from '@/components/form/field/ele-input'
 import EleVcode from '@/components/form/field/ele-vcode'
-import NavigationService from '@/nice-router/navigation.service'
-import Config from '@/utils/config'
-import ServerImage from '@/server-image/server-image'
 import FormUtil from '@/components/form/form-util'
+import NavigationService from '@/nice-router/navigation.service'
+import ServerImage from '@/server-image/server-image'
 import { useAsyncState } from '@/service/use.service'
+import Config from '@/utils/config'
+import { Block, Text, View } from '@tarojs/components'
+import loginLogo from '../../assets/login-logo.png'
 
 import './login.scss'
-import loginLogo from '../../assets/login-logo.png'
 
 export default function LoginPage() {
   const [fieldValues, setFieldValues] = useAsyncState({})

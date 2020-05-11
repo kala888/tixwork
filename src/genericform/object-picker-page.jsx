@@ -1,10 +1,10 @@
-import { useState } from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import { AtSearchBar } from 'taro-ui'
-import NavigationService from '@/nice-router/navigation.service'
 import Listof from '@/listof/listof'
-import { connect } from '@tarojs/redux'
+import NavigationService from '@/nice-router/navigation.service'
 import { useAsyncEffect } from '@/service/use.service'
+import { View } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
+import { useState } from '@tarojs/taro'
+import { AtSearchBar } from 'taro-ui'
 
 // TODO 这页面应该是一个特殊的listof
 
@@ -32,8 +32,8 @@ function ObjectPickerPage(props) {
     }
   }, [q])
 
-  const handleItemPress = (item) => {
-    NavigationService.back({ data: item }, this)
+  const handleItemPress = async (item) => {
+    await NavigationService.back({ data: item }, this)
   }
 
   const onSearchActionClick = () => {

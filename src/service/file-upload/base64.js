@@ -5,9 +5,9 @@ const Base64 = {
 
   // public method for encoding
   encode: function(input) {
-    var output = ''
-    var chr1, chr2, chr3, enc1, enc2, enc3, enc4
-    var i = 0
+    let output = ''
+    let chr1, chr2, chr3, enc1, enc2, enc3, enc4
+    let i = 0
 
     input = Base64._utf8_encode(input)
 
@@ -40,10 +40,10 @@ const Base64 = {
 
   // public method for decoding
   decode: function(input) {
-    var output = ''
-    var chr1, chr2, chr3
-    var enc1, enc2, enc3, enc4
-    var i = 0
+    let output = ''
+    let chr1, chr2, chr3
+    let enc1, enc2, enc3, enc4
+    let i = 0
 
     input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '')
 
@@ -75,10 +75,10 @@ const Base64 = {
   // private method for UTF-8 encoding
   _utf8_encode: function(string) {
     string = string.replace(/\r\n/g, '\n')
-    var utftext = ''
+    let utftext = ''
 
-    for (var n = 0; n < string.length; n++) {
-      var c = string.charCodeAt(n)
+    for (let n = 0; n < string.length; n++) {
+      let c = string.charCodeAt(n)
 
       if (c < 128) {
         utftext += String.fromCharCode(c)
@@ -97,9 +97,9 @@ const Base64 = {
 
   // private method for UTF-8 decoding
   _utf8_decode: function(utftext) {
-    var string = ''
-    var i = 0
-    var c = (c1 = c2 = 0)
+    let string = ''
+    let i = 0
+    let c = (c1 = c2 = 0)
 
     while (i < utftext.length) {
       c = utftext.charCodeAt(i)

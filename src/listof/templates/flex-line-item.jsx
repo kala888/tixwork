@@ -63,7 +63,7 @@ export default class FlexLineItem extends Taro.PureComponent {
       },
       () => {
         this.timer = setTimeout(() => this.stopLoading(), 3000)
-      },
+      }
     )
   }
   stopLoading = () => {

@@ -1,11 +1,11 @@
-import Taro from '@tarojs/taro'
-import { Swiper, SwiperItem, Video, View } from '@tarojs/components'
+import ActionUtil from '@/nice-router/action-util'
 
 import NavigationService from '@/nice-router/navigation.service'
-import ServerImage from '@/server-image/server-image'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
+import ServerImage from '@/server-image/server-image'
+import { Swiper, SwiperItem, Video, View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import classNames from 'classnames'
-import ActionUtil from '@/nice-router/action-util'
 
 import './styles.scss'
 
@@ -24,7 +24,7 @@ function EleCarousel(props) {
     mode,
   } = props
 
-  const handleClick = (item = {}) => {
+  const handleClick = async (item = {}) => {
     const { videoUrl = '', imageUrl } = item
     console.log('carousel viewed', item)
 
@@ -38,7 +38,7 @@ function EleCarousel(props) {
     }
 
     if (isEmpty(videoUrl) && isNotEmpty(imageUrl)) {
-      Taro.previewImage({ urls: [imageUrl] })
+      await Taro.previewImage({ urls: [imageUrl] })
     }
   }
 

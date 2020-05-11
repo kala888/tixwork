@@ -1,7 +1,7 @@
-import Taro, { useEffect, usePullDownRefresh, useRef, useState } from '@tarojs/taro'
-import Config from '@/utils/config'
 import NavigationService from '@/nice-router/navigation.service'
 import { LoadingType } from '@/nice-router/nice-router-util'
+import Config from '@/utils/config'
+import Taro, { useEffect, usePullDownRefresh, useRef, useState } from '@tarojs/taro'
 
 // boolean类型的控制属性，show，close，toggle
 export function useVisible(initial = false) {

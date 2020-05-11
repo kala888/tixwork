@@ -1,7 +1,7 @@
 /* eslint-disable */
+import AuthTools from '@/nice-router/auth-tools'
 import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
-import AuthTools from '@/nice-router/auth-tools'
 import Taro from '@tarojs/taro'
 
 function wxLogin(wxObj, loginMethod, options) {
@@ -36,6 +36,7 @@ function remoteLogin(params = {}, options = {}) {
         const { authorization } = headers
         console.log('wx login response, headers', headers)
         if (authorization) {
+          // noinspection JSIgnoredPromiseFromCall
           AuthTools.saveTokenAsync(authorization)
         }
       },
@@ -69,6 +70,7 @@ export default {
         loginMethod = 'wechat_app'
       }
 
+      // noinspection JSIgnoredPromiseFromCall
       wxObj.checkSession({
         success: async () => {
           const isValidate = await AuthTools.isValidateToken()

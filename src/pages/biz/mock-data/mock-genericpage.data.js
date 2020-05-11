@@ -296,7 +296,7 @@ const waterfallList = {
 }
 
 const horizontalList = {
-  displayMode: 'image-on-top-horizontal',
+  displayMode: 'image-on-top',
   horizontal: true,
   list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
   dataContainer: {

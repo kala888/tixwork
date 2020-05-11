@@ -15,25 +15,25 @@ function CardTemplate(props) {
 
   const documentActions = isNotEmpty(documentUrl)
     ? [
-      {
-        id: 'open-document',
-        btnType: 'open-document',
-        linkToUrl: documentUrl,
-        title: '查看',
-      },
-      {
-        id: 'download-document',
-        btnType: 'download',
-        linkToUrl: documentUrl,
-        title: '下载',
-      },
-      {
-        id: 'download-document',
-        btnType: 'copy',
-        linkToUrl: documentUrl,
-        title: '复制连接',
-      },
-    ]
+        {
+          id: 'open-document',
+          btnType: 'open-document',
+          linkToUrl: documentUrl,
+          title: '查看',
+        },
+        {
+          id: 'download-document',
+          btnType: 'download',
+          linkToUrl: documentUrl,
+          title: '下载',
+        },
+        {
+          id: 'download-document',
+          btnType: 'copy',
+          linkToUrl: documentUrl,
+          title: '复制连接',
+        },
+      ]
     : []
   const cardActionList = actionList.concat(documentActions).slice(0, 4)
 

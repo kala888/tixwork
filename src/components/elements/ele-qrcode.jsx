@@ -1,10 +1,10 @@
 /* eslint-disable taro/no-spread-in-props */
+import { toRpx } from '@/utils/index'
+import { Canvas } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import QRCodeImpl from 'qr.js/lib/QRCode'
 import isNil from 'lodash/isNil'
 import ErrorCorrectLevel from 'qr.js/lib/ErrorCorrectLevel'
-import { Canvas } from '@tarojs/components'
-import { toRpx } from '@/utils/index'
+import QRCodeImpl from 'qr.js/lib/QRCode'
 
 // 修改自 https://github.com/xueyida/QRcode.taro/blob/master/QRCodeCanvas.js
 const defaultCanvasId = 'qrcode-canvase'

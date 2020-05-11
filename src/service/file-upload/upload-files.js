@@ -1,8 +1,8 @@
-import Taro from '@tarojs/taro'
 import NavigationService from '@/nice-router/navigation.service'
-import { formatTime } from '@/utils/index'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import Config from '@/utils/config'
+import { formatTime } from '@/utils/index'
+import Taro from '@tarojs/taro'
 import getAliyunConfig from './aliyun-oss-helper'
 
 let ossToken = {
@@ -84,7 +84,7 @@ function uploadFiles2OSS(params = {}) {
     const { url: sourceFile = '' } = it
     const fileName = getFileName(sourceFile)
     const key = `${userHome}/${fileName}`
-    Taro.showLoading({ title: '上传凭证中' })
+    await Taro.showLoading({ title: '上传凭证中' })
 
     const uploadTask = Taro.uploadFile({
       url: uploadPrefix || prefix,

@@ -1,6 +1,6 @@
-import { View } from '@tarojs/components'
-import { useAsyncEffect } from '@/service/use.service'
 import NavigationService from '@/nice-router/navigation.service'
+import { useAsyncEffect } from '@/service/use.service'
+import { View } from '@tarojs/components'
 
 function TestPage() {
   useAsyncEffect(() => {

@@ -1,9 +1,8 @@
-import Taro from '@tarojs/taro'
-import { AtButton } from 'taro-ui'
-import classNames from 'classnames'
-
 import NavigationService from '@/nice-router/navigation.service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
+import Taro from '@tarojs/taro'
+import classNames from 'classnames'
+import { AtButton } from 'taro-ui'
 
 import './styles.scss'
 
@@ -40,7 +39,7 @@ function EleButton({
   const formType = btnType === 'submit' || btnType === 'reset' ? btnType : null
 
   const handleScan = async () => {
-    const res = Taro.scanCode()
+    const res = await Taro.scanCode()
     const arg = encodeURIComponent(res.result)
     const actionPath = `${linkToUrl}${arg}/`
     console.log('I want to access ', actionPath)
@@ -53,11 +52,11 @@ function EleButton({
       return
     }
     try {
-      Taro.showLoading({ title: '正在打开文件...', mask: true })
+      await Taro.showLoading({ title: '正在打开文件...', mask: true })
       const res = await Taro.downloadFile({ url: linkToUrl })
       await Taro.openDocument({ filePath: res.tempFilePath })
     } catch (e) {
-      Taro.showToast({ title: '文件打开失败，稍后重试', icon: 'none' })
+      await Taro.showToast({ title: '文件打开失败，稍后重试', icon: 'none' })
     } finally {
       Taro.hideLoading()
     }
@@ -68,10 +67,10 @@ function EleButton({
       return
     }
     try {
-      Taro.showLoading({ title: '正在下载文件...', mask: true })
+      await Taro.showLoading({ title: '正在下载文件...', mask: true })
       await Taro.downloadFile({ url: linkToUrl })
     } catch (e) {
-      Taro.showToast({ title: '下载文件失败，稍后重试', icon: 'none' })
+      await Taro.showToast({ title: '下载文件失败，稍后重试', icon: 'none' })
     } finally {
       Taro.hideLoading()
     }
@@ -79,6 +78,7 @@ function EleButton({
 
   const handleCopy = () => {
     if (isNotEmpty(extraData)) {
+      // noinspection JSIgnoredPromiseFromCall
       Taro.setClipboardData({
         data: JSON.stringify(extraData),
         success: () =>
@@ -87,7 +87,7 @@ function EleButton({
     }
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (onClick) {
       onClick()
       return
@@ -98,11 +98,11 @@ function EleButton({
     }
 
     if (btnType === 'open-document') {
-      handlePreview()
+      await handlePreview()
       return
     }
     if (btnType === 'download') {
-      handleDownload()
+      await handleDownload()
       return
     }
     if (btnType === 'copy') {
@@ -110,7 +110,7 @@ function EleButton({
       return
     }
     if (btnType === 'scanner') {
-      handleScan()
+      await handleScan()
       return
     }
 

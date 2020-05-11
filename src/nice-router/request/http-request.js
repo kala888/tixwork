@@ -1,9 +1,9 @@
 import Taro from '@tarojs/taro'
-import OptionsProcessor from './options-processor'
-import AuthTokenProcessor from './auth-token-processor'
-import loadingAndLogsProcessor from './loading-and-logs-processor'
-import customProcessor from './custom-processor'
 import { log } from '../nice-router-util'
+import AuthTokenProcessor from './auth-token-processor'
+import customProcessor from './custom-processor'
+import loadingAndLogsProcessor from './loading-and-logs-processor'
+import OptionsProcessor from './options-processor'
 
 const interceptors = [
   OptionsProcessor,

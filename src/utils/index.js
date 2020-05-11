@@ -1,17 +1,16 @@
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import Taro from '@tarojs/taro'
-import isNumber from 'lodash/isNumber'
+import clone from 'lodash/clone'
 import forEach from 'lodash/forEach'
 import isNaN from 'lodash/isNaN'
+import isNumber from 'lodash/isNumber'
 import remove from 'lodash/remove'
-import clone from 'lodash/clone'
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 
 let device = {}
 
 function getDevice() {
   if (isEmpty(device)) {
-    const res = Taro.getSystemInfoSync()
-    device = res
+    device = Taro.getSystemInfoSync()
   }
   return device
 }

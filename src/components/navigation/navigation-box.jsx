@@ -1,9 +1,9 @@
-import { AtBadge } from 'taro-ui'
-import { View } from '@tarojs/components'
-import classNames from 'classnames'
 import ActionIcon from '@/components/navigation/action-icon'
 import NavigationService from '@/nice-router/navigation.service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { View } from '@tarojs/components'
+import classNames from 'classnames'
+import { AtBadge } from 'taro-ui'
 
 import './styles.scss'
 

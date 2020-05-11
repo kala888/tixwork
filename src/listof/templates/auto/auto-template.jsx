@@ -1,7 +1,6 @@
+import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
-
-import ServerImage from '@/server-image/server-image'
 
 import ListofUtil from '../../listof-util'
 import './styles.scss'

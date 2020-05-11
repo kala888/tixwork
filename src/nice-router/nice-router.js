@@ -1,6 +1,6 @@
 import forEach from 'lodash/forEach'
-import trim from 'lodash/trim'
 import merge from 'lodash/merge'
+import trim from 'lodash/trim'
 
 import NavigationService from './navigation.service'
 

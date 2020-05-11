@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
-import mergeWith from 'lodash/mergeWith'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
+import mergeWith from 'lodash/mergeWith'
 
 function replaceArray(objValue, srcValue) {
   if (Array.isArray(objValue)) {

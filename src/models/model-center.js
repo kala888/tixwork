@@ -1,14 +1,14 @@
 // https://github.com/Meituan-Dianping/mpvue/issues/736
-import isString from 'lodash/isString'
-import isObject from 'lodash/isObject'
-import values from 'lodash/values'
-import merge from 'lodash/merge'
-import forEach from 'lodash/forEach'
 import niceRouter from '@/nice-router/nice-router.model'
+import forEach from 'lodash/forEach'
+import isObject from 'lodash/isObject'
+import isString from 'lodash/isString'
+import merge from 'lodash/merge'
+import values from 'lodash/values'
+import listof from '../listof/listof.model'
+import app from './app.model'
 
 import ModelTools from './model-tools'
-import app from './app.model'
-import listof from '../listof/listof.model'
 
 const modelListOOTB = [
   niceRouter,

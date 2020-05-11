@@ -1,6 +1,6 @@
+import NavigationService from '@/nice-router/navigation.service'
 import { Text } from '@tarojs/components'
 import classNames from 'classnames'
-import NavigationService from '@/nice-router/navigation.service'
 
 function EleText(props) {
   const { text, action, customStyle, className } = props

@@ -1,10 +1,10 @@
+import { useVisible } from '@/service/use.service'
 import { View } from '@tarojs/components'
 import { AtActionSheet, AtIcon } from 'taro-ui'
-import { useVisible } from '@/service/use.service'
-
-import Tree from './tree/tree'
 import ActionField from './action-field'
 import './styles.scss'
+
+import Tree from './tree/tree'
 
 function findValueFromTheTree(value, treeItem = {}) {
   const { value: currentValue, title: currentTitle, nodes = [] } = treeItem

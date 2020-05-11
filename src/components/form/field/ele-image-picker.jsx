@@ -1,8 +1,8 @@
-import Taro, { useEffect, useState } from '@tarojs/taro'
-import { Text, View } from '@tarojs/components'
-import { AtImagePicker, AtProgress } from 'taro-ui'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import uploadFiles from '@/service/file-upload/upload-files'
+import { Text, View } from '@tarojs/components'
+import Taro, { useEffect, useState } from '@tarojs/taro'
+import { AtImagePicker, AtProgress } from 'taro-ui'
 
 import './styles.scss'
 
@@ -20,7 +20,7 @@ function EleImagePicker(props) {
   useEffect(() => {
     const images = files.map((it) => ({ imageUrl: it.url }))
     onChange(images)
-  }, [files])
+  }, [files, onChange])
 
   const uploadNewFiles = (currentFiles) => {
     const todoList = currentFiles.filter((it) => {
@@ -59,6 +59,7 @@ function EleImagePicker(props) {
   const handleFileChange = (changedFiles, operationType) => {
     console.log('the item disabled', disabled)
     if (disabled) {
+      // noinspection JSIgnoredPromiseFromCall
       Taro.showModal({
         title: '提示',
         content: `该字段不可编辑`,
@@ -77,6 +78,7 @@ function EleImagePicker(props) {
         setFiles(changedFiles)
         uploadNewFiles(changedFiles)
       } else {
+        // noinspection JSIgnoredPromiseFromCall
         Taro.showModal({
           title: '提示',
           content: `最多可以上传 ${maxLength} 张图片`,
@@ -89,6 +91,7 @@ function EleImagePicker(props) {
   }
 
   const onImageClick = (index, file) => {
+    // noinspection JSIgnoredPromiseFromCall
     Taro.previewImage({ urls: [file.url] })
   }
 

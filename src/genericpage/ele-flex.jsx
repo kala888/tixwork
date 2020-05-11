@@ -1,26 +1,26 @@
-import { View } from '@tarojs/components'
-import classNames from 'classnames'
-//从主要包中引入
-import EleForm from '@/components/form/ele-form'
 import EleButton from '@/components/elements/ele-button'
+import EleCard from '@/components/elements/ele-card/ele-card'
 import EleCarousel from '@/components/elements/ele-carousel'
 import EleQrcode from '@/components/elements/ele-qrcode'
 import EleRichText from '@/components/elements/ele-rich-text'
-import EleCard from '@/components/elements/ele-card/ele-card'
+//从主要包中引入
+import EleForm from '@/components/form/ele-form'
 import { isH5 } from '@/utils/index'
-//generic-page 专用，不分享给其他包的
-import EleMoreActions from './elements/ele-more-actions'
-import EleNotice from './elements/ele-notice'
+import { View } from '@tarojs/components'
+import classNames from 'classnames'
+import ElePopup from './ele-popup'
+import EleBreakLine from './elements/ele-break-line'
 import EleFab from './elements/ele-fab'
 import EleFooterTabs from './elements/ele-footer-tabs'
+import EleImage from './elements/ele-image'
 import EleListof from './elements/ele-listof'
+//generic-page 专用，不分享给其他包的
+import EleMoreActions from './elements/ele-more-actions'
 import EleNavigationBox from './elements/ele-navigation-box'
-import EleBreakLine from './elements/ele-break-line'
-import EleWhiteSpace from './elements/ele-white-space'
+import EleNotice from './elements/ele-notice'
 import EleStoreLocation from './elements/ele-store-location'
 import EleText from './elements/ele-text'
-import EleImage from './elements/ele-image'
-import ElePopup from './ele-popup'
+import EleWhiteSpace from './elements/ele-white-space'
 
 import './styles.scss'
 

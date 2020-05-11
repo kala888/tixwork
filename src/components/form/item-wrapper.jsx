@@ -1,9 +1,8 @@
-import { View } from '@tarojs/components'
-import { AtIcon, AtToast } from 'taro-ui'
-import classNames from 'classnames'
-
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use.service'
+import { View } from '@tarojs/components'
+import classNames from 'classnames'
+import { AtIcon, AtToast } from 'taro-ui'
 
 import './styles.scss'
 

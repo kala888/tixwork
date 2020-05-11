@@ -1,11 +1,11 @@
+import NavigationBox from '@/components/navigation/navigation-box'
+import NavigationLineItem from '@/components/navigation/navigation-line-item'
+import ServerImage from '@/server-image/server-image'
+import { usePageTitle, usePullDown } from '@/service/use.service'
+import Config from '@/utils/config'
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { AtButton } from 'taro-ui'
-import NavigationLineItem from '@/components/navigation/navigation-line-item'
-import NavigationBox from '@/components/navigation/navigation-box'
-import Config from '@/utils/config'
-import { usePageTitle, usePullDown } from '@/service/use.service'
-import ServerImage from '@/server-image/server-image'
 
 import './me.scss'
 

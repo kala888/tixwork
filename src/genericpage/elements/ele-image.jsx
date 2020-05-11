@@ -1,7 +1,7 @@
-import { View } from '@tarojs/components'
-import { AtIcon } from 'taro-ui'
 import ServerImage from '@/server-image/server-image'
+import { View } from '@tarojs/components'
 import classNames from 'classnames'
+import { AtIcon } from 'taro-ui'
 
 import './styles.scss'
 

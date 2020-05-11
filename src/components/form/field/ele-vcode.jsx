@@ -1,26 +1,27 @@
-import Taro, { useState } from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import { AtInput } from 'taro-ui'
-import classNames from 'classnames'
+import NavigationService from '@/nice-router/navigation.service'
 import { noop } from '@/nice-router/nice-router-util'
 import { useCountdown } from '@/service/use.service'
-import NavigationService from '@/nice-router/navigation.service'
 import Config from '@/utils/config'
+import { View } from '@tarojs/components'
+import Taro, { useState } from '@tarojs/taro'
+import classNames from 'classnames'
+import { AtInput } from 'taro-ui'
 
 import './styles.scss'
 
 function EleVcode(props) {
   const [mobile, setMobile] = useState(null)
+
   const { second, counting, startCount } = useCountdown(props.maxCount)
 
   const { onChange, name, value, placeholder, className } = props
 
-  const sendCode = () => {
+  const sendCode = async () => {
     if (counting) {
       return
     }
     if (!/^1\d{10}$/.test(mobile)) {
-      Taro.showToast({ title: '请输入正确的手机号' })
+      await Taro.showToast({ title: '请输入正确的手机号' })
       return
     }
     startCount()

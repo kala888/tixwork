@@ -1,5 +1,5 @@
-import { useState } from '@tarojs/taro'
 import { ScrollView } from '@tarojs/components'
+import { useState } from '@tarojs/taro'
 import { AtCurtain } from 'taro-ui'
 
 import EleFlex from './ele-flex'

@@ -1,9 +1,9 @@
-import Taro, { Component } from '@tarojs/taro'
-import { Provider } from '@tarojs/redux'
-import { isH5, isWeapp } from '@/utils/index'
-import Config from '@/utils/config'
-import { noop } from '@/nice-router/nice-router-util'
 import NiceRouter from '@/nice-router/nice-router'
+import { noop } from '@/nice-router/nice-router-util'
+import Config from '@/utils/config'
+import { isH5, isWeapp } from '@/utils/index'
+import { Provider } from '@tarojs/redux'
+import Taro, { Component } from '@tarojs/taro'
 
 import './app.scss'
 import dva from './dva'
@@ -46,6 +46,7 @@ class App extends Component {
         console.log('checking.......')
       })
       updateManager.onUpdateReady(() => {
+        // noinspection JSIgnoredPromiseFromCall
         Taro.showModal({
           title: '更新提示',
           content: '新版本已经准备好，是否重启应用？',
@@ -57,6 +58,7 @@ class App extends Component {
         })
       })
       updateManager.onUpdateFailed(() => {
+        // noinspection JSIgnoredPromiseFromCall
         Taro.showModal({
           title: '更新提示',
           content: '新版本下载失败，请检查你的微信',
@@ -64,6 +66,7 @@ class App extends Component {
         })
       })
     } else {
+      // noinspection JSIgnoredPromiseFromCall
       Taro.showModal({
         title: '微信升级',
         content: '当前微信版本过低，部分功能无法使用，请升级到最新版本',

@@ -1,10 +1,9 @@
+import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { useVisible } from '@/service/use.service'
+import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import isObject from 'lodash/isObject'
 import { AtActionSheet, AtIcon } from 'taro-ui'
-
-import { isNotEmpty } from '@/nice-router/nice-router-util'
-import { Text, View } from '@tarojs/components'
-import { useVisible } from '@/service/use.service'
 import './styles.scss'
 
 function ItemLabel(props) {

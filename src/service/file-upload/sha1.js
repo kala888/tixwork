@@ -9,11 +9,11 @@
 const Crypto = require('./crypto.js')
 ;(function() {
   // Shortcut
-  var util = Crypto.util
+  let util = Crypto.util
 
   // Public API
-  var SHA1 = (Crypto.SHA1 = function(message, options) {
-    var digestbytes = util.wordsToBytes(SHA1._sha1(message))
+  let SHA1 = (Crypto.SHA1 = function(message, options) {
+    let digestbytes = util.wordsToBytes(SHA1._sha1(message))
     return options && options.asBytes
       ? digestbytes
       : options && options.asString
@@ -23,7 +23,7 @@ const Crypto = require('./crypto.js')
 
   // The core
   SHA1._sha1 = function(message) {
-    var m = util.stringToWords(message),
+    let m = util.stringToWords(message),
       l = message.length * 8,
       w = [],
       H0 = 1732584193,
@@ -36,21 +36,21 @@ const Crypto = require('./crypto.js')
     m[l >> 5] |= 0x80 << (24 - (l % 32))
     m[(((l + 64) >>> 9) << 4) + 15] = l
 
-    for (var i = 0; i < m.length; i += 16) {
-      var a = H0,
+    for (let i = 0; i < m.length; i += 16) {
+      let a = H0,
         b = H1,
         c = H2,
         d = H3,
         e = H4
 
-      for (var j = 0; j < 80; j++) {
+      for (let j = 0; j < 80; j++) {
         if (j < 16) w[j] = m[i + j]
         else {
-          var n = w[j - 3] ^ w[j - 8] ^ w[j - 14] ^ w[j - 16]
+          let n = w[j - 3] ^ w[j - 8] ^ w[j - 14] ^ w[j - 16]
           w[j] = (n << 1) | (n >>> 31)
         }
 
-        var t =
+        let t =
           ((H0 << 5) | (H0 >>> 27)) +
           H4 +
           (w[j] >>> 0) +

@@ -17,8 +17,8 @@
  *  effectAction // action还能指定获得结果后，触发哪个effect
  *  stateAction  // action还能指定获得结果后，触发哪个state
  */
-import isObject from 'lodash/isObject'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
+import isObject from 'lodash/isObject'
 import qs from 'qs'
 
 const getActionUri = (action) => {

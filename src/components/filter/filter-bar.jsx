@@ -1,9 +1,9 @@
+import { isEmpty, noop } from '@/nice-router/nice-router-util'
+import { useVisible } from '@/service/use.service'
 import { View } from '@tarojs/components'
+import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { AtDrawer, AtIcon } from 'taro-ui'
-import classNames from 'classnames'
-import { useVisible } from '@/service/use.service'
-import { isEmpty, noop } from '@/nice-router/nice-router-util'
 
 import './filter-bar.scss'
 import { useFacet, useFilterTabs } from './filter.use'

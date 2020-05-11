@@ -1,11 +1,10 @@
-import { Text, View } from '@tarojs/components'
-import { AtIcon } from 'taro-ui'
-import classNames from 'classnames'
+import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 
 import { useVisible } from '@/service/use.service'
 import { isH5 } from '@/utils/index'
-
-import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
+import { Text, View } from '@tarojs/components'
+import classNames from 'classnames'
+import { AtIcon } from 'taro-ui'
 import './style.scss'
 
 function Tree(props) {

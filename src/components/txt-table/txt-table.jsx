@@ -1,7 +1,6 @@
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
-
-import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 import './styles.scss'
 

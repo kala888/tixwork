@@ -9,10 +9,10 @@
 const Crypto = {}
 
 ;(function() {
-  var base64map = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  let base64map = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
   // Crypto utilities
-  var util = (Crypto.util = {
+  let util = (Crypto.util = {
     // Bit-wise rotate left
     rotl: function(n, b) {
       return (n << b) | (n >>> (32 - b))
@@ -31,55 +31,55 @@ const Crypto = {}
       }
 
       // Else, assume array and swap all items
-      for (var i = 0; i < n.length; i++) n[i] = util.endian(n[i])
+      for (let i = 0; i < n.length; i++) n[i] = util.endian(n[i])
       return n
     },
 
     // Generate an array of any length of random bytes
     randomBytes: function(n) {
-      for (var bytes = []; n > 0; n--) bytes.push(Math.floor(Math.random() * 256))
+      for (let bytes = []; n > 0; n--) bytes.push(Math.floor(Math.random() * 256))
       return bytes
     },
 
     // Convert a string to a byte array
     stringToBytes: function(str) {
-      var bytes = []
-      for (var i = 0; i < str.length; i++) bytes.push(str.charCodeAt(i))
+      let bytes = []
+      for (let i = 0; i < str.length; i++) bytes.push(str.charCodeAt(i))
       return bytes
     },
 
     // Convert a byte array to a string
     bytesToString: function(bytes) {
-      var str = []
-      for (var i = 0; i < bytes.length; i++) str.push(String.fromCharCode(bytes[i]))
+      let str = []
+      for (let i = 0; i < bytes.length; i++) str.push(String.fromCharCode(bytes[i]))
       return str.join('')
     },
 
     // Convert a string to big-endian 32-bit words
     stringToWords: function(str) {
-      var words = []
-      for (var c = 0, b = 0; c < str.length; c++, b += 8) words[b >>> 5] |= str.charCodeAt(c) << (24 - (b % 32))
+      let words = []
+      for (let c = 0, b = 0; c < str.length; c++, b += 8) words[b >>> 5] |= str.charCodeAt(c) << (24 - (b % 32))
       return words
     },
 
     // Convert a byte array to big-endian 32-bits words
     bytesToWords: function(bytes) {
-      var words = []
-      for (var i = 0, b = 0; i < bytes.length; i++, b += 8) words[b >>> 5] |= bytes[i] << (24 - (b % 32))
+      let words = []
+      for (let i = 0, b = 0; i < bytes.length; i++, b += 8) words[b >>> 5] |= bytes[i] << (24 - (b % 32))
       return words
     },
 
     // Convert big-endian 32-bit words to a byte array
     wordsToBytes: function(words) {
-      var bytes = []
-      for (var b = 0; b < words.length * 32; b += 8) bytes.push((words[b >>> 5] >>> (24 - (b % 32))) & 0xff)
+      let bytes = []
+      for (let b = 0; b < words.length * 32; b += 8) bytes.push((words[b >>> 5] >>> (24 - (b % 32))) & 0xff)
       return bytes
     },
 
     // Convert a byte array to a hex string
     bytesToHex: function(bytes) {
-      var hex = []
-      for (var i = 0; i < bytes.length; i++) {
+      let hex = []
+      for (let i = 0; i < bytes.length; i++) {
         hex.push((bytes[i] >>> 4).toString(16))
         hex.push((bytes[i] & 0xf).toString(16))
       }
@@ -88,8 +88,8 @@ const Crypto = {}
 
     // Convert a hex string to a byte array
     hexToBytes: function(hex) {
-      var bytes = []
-      for (var c = 0; c < hex.length; c += 2) bytes.push(parseInt(hex.substr(c, 2), 16))
+      let bytes = []
+      for (let c = 0; c < hex.length; c += 2) bytes.push(parseInt(hex.substr(c, 2), 16))
       return bytes
     },
 
@@ -98,10 +98,10 @@ const Crypto = {}
       // Use browser-native function if it exists
       if (typeof btoa == 'function') return btoa(util.bytesToString(bytes))
 
-      var base64 = [],
+      let base64 = [],
         overflow
 
-      for (var i = 0; i < bytes.length; i++) {
+      for (let i = 0; i < bytes.length; i++) {
         switch (i % 3) {
           case 0:
             base64.push(base64map.charAt(bytes[i] >>> 2))
@@ -135,9 +135,9 @@ const Crypto = {}
       // Remove non-base-64 characters
       base64 = base64.replace(/[^A-Z0-9+\/]/gi, '')
 
-      var bytes = []
+      let bytes = []
 
-      for (var i = 0; i < base64.length; i++) {
+      for (let i = 0; i < base64.length; i++) {
         switch (i % 4) {
           case 1:
             bytes.push((base64map.indexOf(base64.charAt(i - 1)) << 2) | (base64map.indexOf(base64.charAt(i)) >>> 4))

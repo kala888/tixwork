@@ -1,7 +1,7 @@
-import { View } from '@tarojs/components'
-import { AtSwitch } from 'taro-ui'
-import classNames from 'classnames'
 import { toBoolean } from '@/nice-router/nice-router-util'
+import { View } from '@tarojs/components'
+import classNames from 'classnames'
+import { AtSwitch } from 'taro-ui'
 
 // candidateValues 就是 options
 // candidateValues = [{

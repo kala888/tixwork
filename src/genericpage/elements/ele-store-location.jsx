@@ -1,9 +1,9 @@
+import ServerImage from '@/server-image/server-image'
+import { toRpx } from '@/utils/index'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
 import { AtIcon, AtTag } from 'taro-ui'
-import { toRpx } from '@/utils/index'
-import ServerImage from '@/server-image/server-image'
 
 import './styles.scss'
 
@@ -27,6 +27,7 @@ function EleStoreLocation(props) {
 
   const makePhoneCall = () => {
     if (phoneNumber) {
+      // noinspection JSIgnoredPromiseFromCall
       Taro.makePhoneCall({
         phoneNumber,
       })
@@ -41,6 +42,7 @@ function EleStoreLocation(props) {
         scale: 18,
         name: address,
       }
+      // noinspection JSIgnoredPromiseFromCall
       Taro.openLocation(location)
     }
   }

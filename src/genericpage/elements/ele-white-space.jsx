@@ -1,5 +1,5 @@
-import { View } from '@tarojs/components'
 import { toRpx } from '@/utils/index'
+import { View } from '@tarojs/components'
 
 function EleWhiteSpace({ height, color }) {
   return <View style={{ height: toRpx(height), backgroundColor: color }} />

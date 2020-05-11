@@ -1,15 +1,15 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
+import { isH5 } from '@/utils/index'
 import Taro from '@tarojs/taro'
 import last from 'lodash/last'
 import trim from 'lodash/trim'
-import { isH5 } from '@/utils/index'
-import { createAction, isEmpty, LoadingType, log, noop } from './nice-router-util'
-import ViewMappingService from './viewmapping.service'
-import BackendService from './request/backend.service'
-import LocalCache from './local-cache.service'
-import PopupMessage from './popup-message'
-import NavigationService from './navigation.service'
 import GlobalToast from './global-toast'
+import LocalCache from './local-cache.service'
+import NavigationService from './navigation.service'
+import { createAction, isEmpty, LoadingType, log, noop } from './nice-router-util'
+import PopupMessage from './popup-message'
+import BackendService from './request/backend.service'
+import ViewMappingService from './viewmapping.service'
 
 export default {
   namespace: 'niceRouter',
@@ -125,9 +125,11 @@ export default {
         }
 
         if (!asForm) {
+          // noinspection JSIgnoredPromiseFromCall
           LocalCache.saveBackendRouter(linkToUrl, pageName)
         }
         if (success && asForm) {
+          // noinspection JSIgnoredPromiseFromCall
           LocalCache.cacheForm(linkToUrl, params)
         }
       }

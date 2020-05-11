@@ -1,19 +1,18 @@
-import NavigationService from '@/nice-router/navigation.service'
-import { View } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
 import EleCarousel from '@/components/elements/ele-carousel'
 import ActionFloor from '@/components/navigation/action-floor'
-import { usePageTitle, usePullDown } from '@/service/use.service'
 import SectionBar from '@/components/section-bar/section-bar'
 import Listof from '@/listof/listof'
 
 import MockService from '@/nice-router/request/mock-service'
-
-import './home.scss'
-import mockGenericPageData from '../biz/mock-data/mock-genericpage.data'
+import { usePageTitle, usePullDown } from '@/service/use.service'
+import { View } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
 import mockForm1Data from '../biz/mock-data/mock-form.data'
 import mockForm2Data from '../biz/mock-data/mock-form2.data'
+import mockGenericPageData from '../biz/mock-data/mock-genericpage.data'
 import { mockProductList, mockUserList } from '../biz/mock-data/mock-list.data'
+
+import './home.scss'
 
 function HomePage(props) {
   const { pageTitle } = props

@@ -1,5 +1,5 @@
-import { AtInput } from 'taro-ui'
 import { View } from '@tarojs/components'
+import { AtInput } from 'taro-ui'
 
 // type: text, password, number, idcard, digit, phone
 // type: money

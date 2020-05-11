@@ -1,6 +1,6 @@
+import isBoolean from 'lodash/isBoolean'
 import lodashIsEmpty from 'lodash/isEmpty'
 import isNumber from 'lodash/isNumber'
-import isBoolean from 'lodash/isBoolean'
 import isString from 'lodash/isString'
 
 export const LoadingType = {

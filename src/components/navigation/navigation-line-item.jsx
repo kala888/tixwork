@@ -1,5 +1,5 @@
-import { View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation.service'
+import { View } from '@tarojs/components'
 import ActionIcon from './action-icon'
 
 import './styles.scss'

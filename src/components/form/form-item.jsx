@@ -1,7 +1,7 @@
+import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import isNil from 'lodash/isNil'
-import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 
 import FormUtil from '../form/form-util'
 import FlexField from './field/flex-field'

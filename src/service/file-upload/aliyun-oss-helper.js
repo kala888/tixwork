@@ -1,7 +1,7 @@
 import Base64 from './base64'
 import Crypto from './crypto'
-import './sha1'
 import './hmac'
+import './sha1'
 
 function getAliyunConfig(ossToken = {}) {
   const { accessKeyId, accessKeySecret, securityToken } = ossToken

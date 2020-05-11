@@ -1,14 +1,14 @@
-import { useEffect, useMemo, useState } from '@tarojs/taro'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
+import { useEffect, useMemo, useState } from '@tarojs/taro'
 import isFunction from 'lodash/isFunction'
 import omit from 'lodash/omit'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 import SectionBar from '../section-bar/section-bar'
 import FormItem from './form-item'
-import validator from './validator'
 import FormUtil from './form-util'
 import './styles.scss'
+import validator from './validator'
 
 // 参考 https://github.com/react-component/form
 

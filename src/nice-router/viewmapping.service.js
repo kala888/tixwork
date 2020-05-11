@@ -1,7 +1,7 @@
-import trim from 'lodash/trim'
 import get from 'lodash/get'
-import { isEmpty, log } from './nice-router-util'
+import trim from 'lodash/trim'
 import NiceRouter from './nice-router'
+import { isEmpty, log } from './nice-router-util'
 
 const POINTER = {}
 const ViewMappingService = {

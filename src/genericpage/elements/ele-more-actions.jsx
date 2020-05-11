@@ -1,9 +1,9 @@
-import Taro from '@tarojs/taro'
-import { Text, View } from '@tarojs/components'
-import { AtIcon } from 'taro-ui'
-import classNames from 'classnames'
-import ServerImage from '@/server-image/server-image'
 import NavigationService from '@/nice-router/navigation.service'
+import ServerImage from '@/server-image/server-image'
+import { Text, View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
+import classNames from 'classnames'
+import { AtIcon } from 'taro-ui'
 
 import './styles.scss'
 
@@ -12,6 +12,7 @@ function EleMoreActions(props) {
 
   const showSheet = () => {
     const itemList = actionList.map((it) => it.title)
+    // noinspection JSIgnoredPromiseFromCall
     Taro.showActionSheet({
       itemList,
       success: ({ tapIndex }) => {

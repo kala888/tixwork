@@ -1,8 +1,8 @@
-import { View } from '@tarojs/components'
-import { AtFab } from 'taro-ui'
-import classNames from 'classnames'
-import NavigationService from '@/nice-router/navigation.service'
 import ActionIcon from '@/components/navigation/action-icon'
+import NavigationService from '@/nice-router/navigation.service'
+import { View } from '@tarojs/components'
+import classNames from 'classnames'
+import { AtFab } from 'taro-ui'
 import './styles.scss'
 
 function EleFab(props) {

@@ -1,7 +1,7 @@
 /* eslint-disable prefer-promise-reject-errors */
 import Taro from '@tarojs/taro'
-import memoize from 'lodash/memoize'
 import md5 from 'blueimp-md5'
+import memoize from 'lodash/memoize'
 import { log } from './nice-router-util'
 
 const CACHE_PREFIX = 'cachestore-'
@@ -73,6 +73,7 @@ const StorageTools = {
     keys.map((key) => {
       const remove = key.indexOf(CACHE_PREFIX) === 0 || key.indexOf(CACHE_EXPIRATION_PREFIX) === 0
       if (remove) {
+        // noinspection JSIgnoredPromiseFromCall
         Taro.removeStorage({ key })
       }
     })
@@ -84,6 +85,7 @@ const StorageTools = {
       const remove =
         key.indexOf(`${CACHE_PREFIX}${prefix}`) === 0 || key.indexOf(`${CACHE_EXPIRATION_PREFIX}${prefix}`) === 0
       if (remove) {
+        // noinspection JSIgnoredPromiseFromCall
         Taro.removeStorage({ key })
       }
     })

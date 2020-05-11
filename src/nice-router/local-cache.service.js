@@ -1,6 +1,6 @@
 import NiceRouter from './nice-router'
-import StorageTools from './storage-tools'
 import { isEmpty, isNotEmpty, log } from './nice-router-util'
+import StorageTools from './storage-tools'
 
 function getPageKeyByUri(uri = '') {
   let key = uri

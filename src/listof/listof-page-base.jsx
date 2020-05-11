@@ -1,12 +1,12 @@
-import { View } from '@tarojs/components'
+import EleRichText from '@/components/elements/ele-rich-text'
+import EleTabs from '@/components/elements/ele-tabs'
 import NavigationService from '@/nice-router/navigation.service'
-import { AtButton } from 'taro-ui'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 import { usePageTitle, usePullDown } from '@/service/use.service'
 import Config from '@/utils/config'
-import EleRichText from '@/components/elements/ele-rich-text'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
-import EleTabs from '@/components/elements/ele-tabs'
+import { View } from '@tarojs/components'
+import { AtButton } from 'taro-ui'
 import Listof from './listof'
 import './styles.scss'
 

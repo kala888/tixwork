@@ -1,4 +1,3 @@
-
 import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty } from '@/nice-router/nice-router-util'
 import { Block, ScrollView, Text, View } from '@tarojs/components'

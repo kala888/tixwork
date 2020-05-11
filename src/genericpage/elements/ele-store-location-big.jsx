@@ -1,9 +1,8 @@
+import ServerImage from '@/server-image/server-image'
+import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import PropTypes from 'prop-types'
-import { View } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
-
-import ServerImage from '@/server-image/server-image'
 import EleBreakLine from './ele-break-line'
 import './styles.scss'
 
@@ -11,6 +10,7 @@ function EleStoreLocationBig(props) {
   const { phoneNumber, imageUrl, logo, name, address } = props
   const handleMakeCall = () => {
     if (phoneNumber) {
+      // noinspection JSIgnoredPromiseFromCall
       Taro.makePhoneCall({ phoneNumber })
     }
   }

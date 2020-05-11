@@ -1,6 +1,6 @@
-import { AtTabBar } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 import { useAsyncState } from '@/service/use.service'
+import { AtTabBar } from 'taro-ui'
 
 function EleFooterTabs({ tabs, onClick }) {
   const [selectedIndex, setSelected] = useAsyncState(null)

@@ -1,5 +1,5 @@
-import { AtInput } from 'taro-ui'
 import { noop } from '@/nice-router/nice-router-util'
+import { AtInput } from 'taro-ui'
 
 //'text' | 'number' | 'password' | 'phone' | 'idcard' | 'digit'
 const defaultFormatter = (v) => v
