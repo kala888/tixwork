@@ -1,8 +1,8 @@
+import ActionIcon from '@/components/navigation/action-icon'
 import ActionUtil from '@/nice-router/action-util'
 import NavigationService from '@/nice-router/navigation.service'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
-import { AtIcon } from 'taro-ui'
 
 import './styles.scss'
 
@@ -25,7 +25,7 @@ function SectionBar(props) {
         <Text className='section-bar-action-title'>{actionTitle}</Text>
         {hasMore && (
           <View className='section-bar-action-icon'>
-            <AtIcon prefixClass='iconfont' value='more' size={18} />
+            <ActionIcon value='iconfont-more' />
           </View>
         )}
       </View>

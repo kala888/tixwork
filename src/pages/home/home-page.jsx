@@ -27,7 +27,7 @@ function HomePage(props) {
       <EleCarousel className='home-page-carousel' items={slideList} />
       <View className='home-page-action-floor'>
         <ActionFloor actions={actionList} />
-        <SectionBar title='促销抢购' />
+        <SectionBar title='促销抢购' linkToUrl='page:///pages/biz/listof-test-page' />
         <Listof list={mockProductList} displayMode='product' />
       </View>
     </View>
