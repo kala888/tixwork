@@ -125,6 +125,7 @@ export default class FlexLineItem extends Taro.PureComponent {
         {template === 'card' && <CardTemplate {...itemProps} />}
         {template === 'image-on-left' && <CardTemplate {...itemProps} />}
         {template === 'document' && <CardTemplate {...itemProps} />}
+
         {template === 'big-card' && <CardTemplate {...itemProps} mode={['horizontal', 'large']} />}
         {template === 'h-card' && <CardTemplate {...itemProps} mode={['horizontal']} />}
         {template === 'v-card' && <CardTemplate {...itemProps} mode={['vertical']} />}

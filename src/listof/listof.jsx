@@ -1,4 +1,4 @@
-import ListofUtil from './listof-util'
+
 import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty } from '@/nice-router/nice-router-util'
 import { Block, ScrollView, Text, View } from '@tarojs/components'
@@ -6,7 +6,7 @@ import { useState } from '@tarojs/taro'
 import classNames from 'classnames'
 import { enrichListOfEntity, toRpx } from '../utils'
 import FooterTips from './footer-tips'
-
+import ListofUtil from './listof-util'
 import './styles.scss'
 import FlexLineItem from './templates/flex-line-item'
 
