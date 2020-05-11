@@ -1,6 +1,8 @@
+import { isNotEmpty } from '@/nice-router/nice-router-util'
+
 const defaultImage = null
 
-export function getImageUrl(item = {}) {
+function getImageUrl(item = {}) {
   const { imageList = [], editorSuggestionImageList = [], imageUrl, coverImage } = item
   if (coverImage) {
     return coverImage
@@ -17,7 +19,7 @@ export function getImageUrl(item = {}) {
   return defaultImage
 }
 
-export function getImageList(item = {}) {
+function getImageList(item = {}) {
   const { imageList = [], editorSuggestionImageList = [], imageUrl } = item
   let list = []
   if (imageUrl) {
@@ -28,11 +30,25 @@ export function getImageList(item = {}) {
   return list
 }
 
-const TWO_COLUMN_DISPLAY_MODE = ['product', 'v-card']
-
-export function getItemWidth(displayMode) {
-  if (TWO_COLUMN_DISPLAY_MODE.indexOf(displayMode) > -1) {
+function getItemWidth(displayMode) {
+  if (['product', 'v-card'].indexOf(displayMode) > -1) {
     return 49
   }
   return 100
 }
+
+function isSelfHoldClickTemplate(displayMode, item = {}) {
+  if ('card' === displayMode) {
+    return isNotEmpty(item.documentUrl) || isNotEmpty(item.actionList)
+  }
+  return false
+}
+
+const ListofUtil = {
+  getItemWidth,
+  getImageList,
+  getImageUrl,
+  isSelfHoldClickTemplate,
+}
+
+export default ListofUtil

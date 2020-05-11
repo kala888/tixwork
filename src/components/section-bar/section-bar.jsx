@@ -1,36 +1,34 @@
+import ActionUtil from '@/nice-router/action-util'
+import NavigationService from '@/nice-router/navigation.service'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import { AtIcon } from 'taro-ui'
-import NavigationService from '@/nice-router/navigation.service'
-import ActionUtil from '@/nice-router/action-util'
 
 import './styles.scss'
 
 function SectionBar(props) {
-  const { title, brief = '', secondTitle, className, customStyle = {} } = props
+  const { title, brief, className, customStyle = {} } = props
   const onClick = () => {
     NavigationService.view(props)
   }
 
-  const showMore = ActionUtil.isActionLike(props)
+  const hasMore = ActionUtil.isActionLike(props)
+
   const rootClass = classNames('section-bar', className)
+  const actionTitle = brief || (hasMore ? 'MORE' : '')
 
   return (
     <View className={rootClass} style={customStyle}>
       <View className='section-bar-preicon' />
-      <View className='section-bar-title'>
-        <View className='section-bar-title-txt-en'>{brief}</View>
-        <View className='section-bar-title-txt'>{title}</View>
-        {secondTitle && <View className='section-bar-title-second'>{secondTitle}</View>}
-      </View>
-      {showMore && (
-        <View className='section-bar-action' onClick={onClick}>
-          <Text className='section-bar-action-txt'>MORE</Text>
+      <View className='section-bar-title'>{title}</View>
+      <View className='section-bar-action' onClick={onClick}>
+        <Text className='section-bar-action-title'>{actionTitle}</Text>
+        {hasMore && (
           <View className='section-bar-action-icon'>
-            <AtIcon prefixClass='iconfont' value='chevron-right-double' size={18} />
+            <AtIcon prefixClass='iconfont' value='more' size={18} />
           </View>
-        </View>
-      )}
+        )}
+      </View>
     </View>
   )
 }

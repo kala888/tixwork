@@ -38,6 +38,10 @@
   color: $text-color-light;
 }
 
+.listof-empty-message.hidden {
+  display: none;
+}
+
 .scroll-view-horizontal {
   white-space: nowrap;
 }

@@ -1,18 +1,17 @@
-import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import { AtActivityIndicator } from 'taro-ui'
-import classNames from 'classnames'
-import NavigationService from '@/nice-router/navigation.service'
 import ActionUtil from '@/nice-router/action-util'
+import NavigationService from '@/nice-router/navigation.service'
+import { View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
+import classNames from 'classnames'
+import { AtActivityIndicator } from 'taro-ui'
 
 import AutoTemplate from './auto/auto-template'
-import Product from './product/product'
 import CardTemplate from './card/card-template'
 
-import './styles.scss'
+import ListofUtil from '../listof-util'
+import Product from './product/product'
 
-//不触发click事件的模板
-const ITEM_SELF_PROCESS_WHITELIST = ['document']
+import './styles.scss'
 
 export default class FlexLineItem extends Taro.PureComponent {
   static options = {
@@ -79,9 +78,11 @@ export default class FlexLineItem extends Taro.PureComponent {
       onItemPress(item)
       return
     }
-    if (ITEM_SELF_PROCESS_WHITELIST.indexOf(template) > -1) {
+
+    if (ListofUtil.isSelfHoldClickTemplate(template, item)) {
       return
     }
+
     if (ActionUtil.isActionLike(item)) {
       this.startLoading()
       // NavigationService.view('page://pages/test-page', item, { onSuccess: this.stopLoading })
@@ -97,7 +98,7 @@ export default class FlexLineItem extends Taro.PureComponent {
     //   this.handlePress,
     //   this.props.delay || 300,
     // )
-    const template = (itemDisplayMode || displayMode).toLowerCase()
+    const template = (itemDisplayMode || displayMode).toLowerCase().trim()
     // console.log(`line-item show with "${template}, item is`, item)
 
     const wrapperClass = classNames('line-item-wrapper', 'my-class', {
@@ -106,7 +107,7 @@ export default class FlexLineItem extends Taro.PureComponent {
     })
     const itemProps = { horizontal, item }
     return (
-      <View onClick={this.handlePress.bind(this, template)} className={wrapperClass}>
+      <View onClick={this.handlePress.bind(this, template, item)} className={wrapperClass}>
         {this.state.loading && (
           <View className='item-loading'>
             <AtActivityIndicator size={50} mode='center' />
@@ -124,7 +125,6 @@ export default class FlexLineItem extends Taro.PureComponent {
         {template === 'big-card' && <CardTemplate {...itemProps} mode={['horizontal', 'large']} />}
         {template === 'h-card' && <CardTemplate {...itemProps} mode={['horizontal']} />}
         {template === 'v-card' && <CardTemplate {...itemProps} mode={['vertical']} />}
-
         {template === 'user' && <CardTemplate {...itemProps} mode={['horizontal', 'circle', 'avatar']} />}
 
         {template === 'product' && <Product {...itemProps} />}

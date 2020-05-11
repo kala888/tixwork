@@ -53,24 +53,6 @@ const mockImageOnBottomList = [
 ]
 const mockProductList = [
   {
-    id: 1,
-    preTag: '促',
-    tags: ['专业', '防水'],
-    brand: '3M',
-    name: '成人雨衣半透明',
-    price: 13.8,
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-1.jpg',
-  },
-  {
-    id: 2,
-    preTag: '快',
-    tags: ['Enjoy', '厨房切菜刀'],
-    brand: '双立人',
-    name: '红点',
-    price: 329.0,
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-5.jpg',
-  },
-  {
     id: 3,
     preTag: '柴',
     tags: ['香', '五常'],
@@ -87,6 +69,24 @@ const mockProductList = [
     name: '新品 iPhone11 Pro',
     price: 9088.0,
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-3.png',
+  },
+  {
+    id: 1,
+    preTag: '促',
+    tags: ['专业', '防水'],
+    brand: '3M',
+    name: '成人雨衣半透明',
+    price: 13.8,
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-1.jpg',
+  },
+  {
+    id: 2,
+    preTag: '快',
+    tags: ['Enjoy', '厨房切菜刀'],
+    brand: '双立人',
+    name: '红点',
+    price: 329.0,
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-5.jpg',
   },
   {
     id: 5,

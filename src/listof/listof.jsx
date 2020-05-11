@@ -1,13 +1,14 @@
-import { useState } from '@tarojs/taro'
-import { ScrollView, Text, View } from '@tarojs/components'
-import classNames from 'classnames'
+import ListofUtil from './listof-util'
 import NavigationService from '@/nice-router/navigation.service'
-import { getItemWidth } from '@/listof/listof-helper'
+import { isEmpty } from '@/nice-router/nice-router-util'
+import { Block, ScrollView, Text, View } from '@tarojs/components'
+import { useState } from '@tarojs/taro'
+import classNames from 'classnames'
 import { enrichListOfEntity, toRpx } from '../utils'
-import FlexLineItem from './templates/flex-line-item'
+import FooterTips from './footer-tips'
 
 import './styles.scss'
-import FooterTips from './footer-tips'
+import FlexLineItem from './templates/flex-line-item'
 
 function Listof({
   list: listRefs,
@@ -43,7 +44,7 @@ function Listof({
 
   const list = enrichListOfEntity({ dataContainer, targetList: listRefs })
 
-  const itemWidth = getItemWidth(displayMode)
+  const itemWidth = ListofUtil.getItemWidth(displayMode)
 
   const scrollViewStyle = height ? { height: toRpx(height) } : {}
   const scrollViewClass = classNames(className, {
@@ -61,43 +62,46 @@ function Listof({
   const itemContainerClass = classNames('listof-container-item', { horizontal })
 
   const listofContainerItemContainerStyle = itemWidth ? { width: `${itemWidth}%` } : {}
-
-  return list.length === 0 ? (
-    <Text className='listof-empty-message'>{emptyMessage}</Text>
-  ) : (
-    <ScrollView
-      scrollY={!horizontal}
-      scrollX={horizontal}
-      onScrollToLower={loadMore}
-      className={scrollViewClass}
-      style={{ ...scrollViewStyle }}
-    >
-      <View className={listofContainerClass} style={style}>
-        {list.map((item, index) => {
-          const { id } = item
-          return (
-            <View key={id} className={itemContainerClass} style={listofContainerItemContainerStyle}>
-              <FlexLineItem
-                my-class='listof-container-item-wrapper'
-                index={index}
-                item={item}
-                onItemPress={onItemPress}
-                displayMode={displayMode}
-                bordered={bordered}
-                horizontal={horizontal}
-              />
-            </View>
-          )
-        })}
-      </View>
-      <FooterTips
-        isBigList={isBigList}
-        listMeta={listMeta}
-        loading={loading}
-        listLength={list.length}
-        loadMore={loadMore}
-      />
-    </ScrollView>
+  const emptyMessageClass = classNames('listof-empty-message', {
+    hidden: list.length > 0 || isEmpty(emptyMessage),
+  })
+  return (
+    <Block>
+      <Text className={emptyMessageClass}>{emptyMessage}</Text>
+      <ScrollView
+        scrollY={!horizontal}
+        scrollX={horizontal}
+        onScrollToLower={loadMore}
+        className={scrollViewClass}
+        style={{ ...scrollViewStyle }}
+      >
+        <View className={listofContainerClass} style={style}>
+          {list.map((item, index) => {
+            const { id } = item
+            return (
+              <View key={id} className={itemContainerClass} style={listofContainerItemContainerStyle}>
+                <FlexLineItem
+                  my-class='listof-container-item-wrapper'
+                  index={index}
+                  item={item}
+                  onItemPress={onItemPress}
+                  displayMode={displayMode}
+                  bordered={bordered}
+                  horizontal={horizontal}
+                />
+              </View>
+            )
+          })}
+        </View>
+        <FooterTips
+          isBigList={isBigList}
+          listMeta={listMeta}
+          loading={loading}
+          listLength={list.length}
+          loadMore={loadMore}
+        />
+      </ScrollView>
+    </Block>
   )
 }
 

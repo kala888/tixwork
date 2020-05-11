@@ -1,7 +1,8 @@
-import Listof from '@/listof/listof'
-import { View } from '@tarojs/components'
 import SectionBar from '@/components/section-bar/section-bar'
+import Listof from '@/listof/listof'
 import MockService from '@/nice-router/request/mock-service'
+import { View } from '@tarojs/components'
+
 import './styles.scss'
 
 const newsList = [
@@ -49,21 +50,13 @@ const newsList = [
     title: '中国发布新冠肺炎疫情信息、推进疫情防控国际合作纪事',
   },
 ]
-const imageOnBottomList = [
-  {
-    id: '11',
-    title: '震撼！武汉230组高铁动车整装待发',
-    displayMode: 'image-on-bottom',
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-6.jpeg',
-  },
-]
 const productList = [
   {
     id: 1,
     preTag: '促',
     tags: ['专业', '防水'],
     brand: '3M',
-    name: '成人雨衣半透明',
+    name: '成人雨衣半透明，粉色佳人',
     price: 13.8,
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-1.jpg',
   },
@@ -130,7 +123,7 @@ const businessCardList = [
     id: 2,
     title: '张无忌',
     brief: '职位：CEO\n电话:13900000001\n 中国三条腿（集团）公司',
-    status: 'VP',
+    status: '牛',
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-2.jpg',
   },
 ]
@@ -152,47 +145,6 @@ const userList = [
     title: '嗯嗯嗯',
     brief: '关注我，嗯嗯嗯',
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-5.jpg',
-  },
-]
-
-const imageOnLeftList = [
-  {
-    id: 'user1',
-    imageUrl: MockService.randomImage(),
-    title: '我看好的ETF',
-    brief: '亏钱，割韭菜',
-    displayMode: 'user',
-  },
-
-  { id: 10, imageUrl: MockService.randomImage(), title: '我看好的ETF', brief: '亏钱，割韭菜' },
-  {
-    id: 11,
-    imageUrl: MockService.randomImage(),
-    title: '吃饱了喝足了',
-    brief: '其实就是吃饱了撑的没事干',
-    mode: 'circle',
-  },
-  { id: 12, imageUrl: MockService.randomImage(), title: '川普哈哈哈哈', brief: '据说川普火了', mode: 'large' },
-  {
-    id: 13,
-    imageUrl: MockService.randomImage(),
-    title: '大+圆-图',
-    brief: '组件的外部样式如何',
-    mode: ['large', 'circle'],
-  },
-  { id: 14, imageUrl: MockService.randomImage(), title: '小-圆-图', mode: ['small', 'circle'] },
-
-  { id: 21, flag: '急', level: 'default', title: '我看好的ETF', brief: '亏钱，割韭菜' },
-  { id: 22, flag: '急', level: 'normal', title: '我看好的ETF', brief: '亏钱，割韭菜' },
-  { id: 23, flag: '如', level: 'primary', title: '川普哈哈哈哈', brief: '据说川普火了', mode: 'circle' },
-  { id: 24, flag: '律', level: 'warn', title: '组件的外部样式如何', mode: 'small' },
-  {
-    id: 25,
-    flag: '令',
-    level: 'danger',
-    title: '组件的外部样式如何',
-    brief: '哈哈哈哈哈哦哦哦',
-    mode: ['large', 'circle'],
   },
 ]
 
@@ -240,34 +192,39 @@ const cardList = [
 ]
 
 function HelloDaaSPage() {
+  const list = userList.slice(0, 1)
   return (
     <View className='hello-daas'>
-      <SectionBar title='用户卡片' brief='displayMode：user' />
-      <Listof list={userList} displayMode='user' />
-      <SectionBar title='卡片' brief='displayMode：card' />
-      <Listof list={businessCardList} displayMode='card' />
-      <SectionBar title='文件卡片' brief='displayMode：card，documentUrl不为空' />
+      <SectionBar title='卡片-大卡片' brief='big-card' />
+      <Listof list={businessCardList} displayMode='big-card' />
       <Listof list={movieList} displayMode='big-card' />
+
+      <SectionBar title='卡片-水平卡片' brief='h-card' />
+      <Listof list={list} displayMode='h-card' />
+
+      <SectionBar title='卡片-垂直卡片(两个装)' brief='v-card' />
+      <Listof list={newsList} displayMode='v-card' />
+
+      <SectionBar title='卡片-用户卡片' brief='user' />
+      <Listof list={userList} displayMode='user' />
+
+      <SectionBar title='基础卡片' brief='card' />
+      <View className='note'>通过mode来控制card，获取更多效果</View>
+      <View className='note'>
+        mode=horizontal|vertical, circle, avatar,vertical-small, small|large,default|normal|primary|warn|darger
+      </View>
+      <Listof list={cardList} displayMode='card' />
+
       {/*<SectionBar title='上图+下文字，水平滑动' brief='displayMode：image-on-top-horizontal' />*/}
-      {/*<Listof list={newsList.slice(0, 3)} horizontal displayMode='image-on-top-horizontal' />*/}
-      <SectionBar title='上图+下文字 两排' brief='displayMode：v-card' />
-      <Listof list={newsList.slice(0, 3)} displayMode='v-card' />
-      <SectionBar title='上图+下文字' brief='displayMode：image-on-top' />
-      <Listof list={newsList.slice(0, 2)} displayMode='image-on-top' />
-      <SectionBar title='上文字+下图' brief='displayMode：image-on-bottom' />
-      <Listof list={newsList.slice(0, 2)} displayMode='image-on-bottom' />
-
-      <SectionBar title='左边图' brief='displayMode：image-on-left' />
-      <Listof list={imageOnLeftList} displayMode='image-on-left' />
-
-      <Listof list={imageOnBottomList} displayMode='image-on-bottom' />
-      <SectionBar title='商品' brief='displayMode：product' />
+      <SectionBar title='电商-商品' brief='product' />
       <Listof list={productList} displayMode='product' />
-      <SectionBar title='Auto系列' brief='displayMode：auto|single-image|double-image|three-image' />
+
+      <SectionBar title='通用图文-Auto系列' />
+      <View className='note'> displayMode=auto|single-image|double-image|three-image</View>
       <Listof list={newsList} displayMode='auto' />
 
-      <SectionBar title='Card系列' brief='displayMode：user，document，imageOnLeft,v-card,h-card' />
-      <Listof list={cardList} displayMode='card' />
+      <SectionBar title='图片在下方的Auto' brief='image-on-bottom' />
+      <Listof list={newsList.slice(1, 2)} displayMode='image-on-bottom' />
     </View>
   )
 }

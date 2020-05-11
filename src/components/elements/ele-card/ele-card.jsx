@@ -10,24 +10,12 @@ import ServerImage from '@/server-image/server-image'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import NavigationService from '@/nice-router/navigation.service'
 import EleActionList from '@/components/elements/ele-action-list'
-import StatusFlag from '@/listof/status-flag'
+import StatusFlag from '@/components/elements/ele-card/status-flag'
 import './styles.scss'
 
 //mode=small,large
 function EleCard(props) {
-  const {
-    title,
-    brief,
-    imageUrl,
-    status,
-    flag,
-    level,
-    actionList = [
-      { id: 1, title: '提交' },
-      { id: 1, title: '收藏' },
-    ],
-    customized = false,
-  } = props
+  const { title, brief, imageUrl, status, flag, level, actionList = [], customized = false } = props
   const { mode = [] } = props
   const flagSize = mode.includes('large') ? 'large' : 'small'
   const hasImage = isNotEmpty(imageUrl)

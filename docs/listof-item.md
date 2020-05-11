@@ -2,44 +2,49 @@
 
 listof 列表中哪些一个一个的小组件
 
+目前包含两个比较通用的模板，Auto和Card，可以通过不同的配置或者数据进行变换
+
 #### 概念和对象
 
-| displayMode             | 说明                                                                                                        | 属性                                                                                                                                                                   |
-| ----------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| auto                    | 根据image的数量来自动展示未0，1，2，3图, 其中Image的数量遵循规则：如果有imageUrl，则判定为1图，否则拼接editorSuggestionImageList和imageList 这两个属性 | title，brief, displayTime,imageUrl (editorSuggestionImageList和imageList)                                                                                              |
-| only-title              | auto模板，强制指定图片数量=0                                                                                         |                                                                                                                                                                      |
-| single-image            | auto模板，强制指定图片数量=1                                                                                         |                                                                                                                                                                      |
-| double-image            | auto模板，强制指定图片数量=2                                                                                         |                                                                                                                                                                      |
-| three-image             | auto模板，强制指定图片数量=3                                                                                         |                                                                                                                                                                      |
-| image-on-bottom         | 类似auto，强制指定图片数量=1，但是图在下面                                                                                  |                                                                                                                                                                      |
-| image-on-top            | 类似auto，强制指定图片数量=1，但是图在在上面                                                                                 |                                                                                                                                                                      |
-| image-on-top-waterfall  | 两列的image-on-top                                                                                           |                                                                                                                                                                      |
-| image-on-top-horizontal | 横向滑动的image-on-top                                                                                         |                                                                                                                                                                      |
-| image-on-left           | 右边有图，或者文字,右边title和brief                                                                                   | title，brief, imageUrl, flag, mode=[square,circle,small,large,middle], level=[default,normal,primary,warn,danger],  如果有图，怎右边显示图，否则显示flag，level控制flag的颜色，mode控制图的大小和形状 |
-| user                    | image-on-left的一个特例                                                                                        | title, brief, imageUrl                                                                                                                                               |
-| product                 | 产品                                                                                                        | preTag = '', tags = [], brand, name, price，imageUrl                                                                                                                  |
-| card                    | 卡片，作图，右边文字，下面一坨actionList，右上角有一个状态的角标，当item中包含documentUrl的时候，会添加两个action（查看、下载）                           | imageUrl, title, brief, createTime, actionList, status（downloadUrl）                                                                                                  |
+| displayMode     | 说明                                                                                                        | 属性                                                                                                                                                                                                                                                             |
+| --------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| auto            | 根据image的数量来自动展示未0，1，2，3图, 其中Image的数量遵循规则：如果有imageUrl，则判定为1图，否则拼接editorSuggestionImageList和imageList 这两个属性 | title，brief, displayTime,imageUrl (editorSuggestionImageList和imageList)                                                                                                                                                                                        |
+| only-title      | auto模板，强制指定图片数量=0                                                                                         |                                                                                                                                                                                                                                                                |
+| single-image    | auto模板，强制指定图片数量=1                                                                                         |                                                                                                                                                                                                                                                                |
+| double-image    | auto模板，强制指定图片数量=2                                                                                         |                                                                                                                                                                                                                                                                |
+| three-image     | auto模板，强制指定图片数量=3                                                                                         |                                                                                                                                                                                                                                                                |
+| image-on-bottom | 类似auto，强制指定图片数量=1，但是图在下面                                                                                  |                                                                                                                                                                                                                                                                |
+| card            | 一张图，一个title还有一个brief,如果有图，怎右边显示图，否则显示flag，level控制flag的颜色，mode控制图的大小和形状,如果有documentUrl则展示下载和查看的action                                                                                      | 可以通过mode属性的变换组成一些模板title, brief, flag = '', status, actionList , documentUrl, linkToUrl,level=[default,normal,primary,warn,danger],  mode=[horizontal\|vertical, circle, avatar,vertical-small, small\|large] |
+| big-card        | 大一点的card，brief能展示3行文字                                                                                     |                                                                                                                                                                                                                                                                |
+| h-card          | 一行一个card，card内部水平排列，基本上和默认card一直                                                                          |                                                                                                                                                                                                                                                                |
+| v-card          | 一行能排列两个，card内部垂直排列                                                                                        |                                                                                                                                                                                                                                                                |
+| document        | 和big-card一致，可用通过actionList添加一些处理                                                                          | 注意需要有一个docuementUrl                                                                                                                                                                                                                                            |
+| user            | h-card的一个特例                                                                                               |                                                                                                                                                                                                                                                                |
+|                 |                                                                                                           |                                                                                                                                                                                                                                                                |
+| product         | 产品                                                                                                        | preTag = '', tags = [], brand, name, price，imageUrl                                                                                                                                                                                                            |
+|                 |                                                                                                           |                                                                                                                                                                                                                                                                |
 
 #### 测试页面和数据
 
-![](/docs/assets/listof-item-user.png)
-![](/docs/assets/listof-item-card.png)
-![](/docs/assets/listof-item-document-card.png)
-![](/docs/assets/listof-item-iotv.png)
-![](/docs/assets/listof-item-iol.png)
-![](/docs/assets/listof-item-ioth.png)
-![](/docs/assets/listof-item-iot.png)
-![](/docs/assets/listof-item-iob.png)
-![](/docs/assets/listof-item-product.png)
-![](/docs/assets/listof-item-auto.png)
+![](/docs/assets/listof-item_big-card.png)
+![](/docs/assets/listof-item_h-card.png)
+![](/docs/assets/listof-item_v-card.png)
+![](/docs/assets/listof-card_user.png)
+![](/docs/assets/listof-item_card-1.png)
+![](/docs/assets/listof-item_card-2.png)
+![](/docs/assets/listof-item_card-3.png)
+![](/docs/assets/listof-item_product.png)
+![](/docs/assets/listof-item_auto.png)
 
 各种displayMode
 
 ```javascript
-import Listof from '@/listof/listof'
-import { View } from '@tarojs/components'
 import SectionBar from '@/components/section-bar/section-bar'
+import Listof from '@/listof/listof'
 import MockService from '@/nice-router/request/mock-service'
+import { View } from '@tarojs/components'
+
+import './styles.scss'
 
 const newsList = [
   {
@@ -86,21 +91,13 @@ const newsList = [
     title: '中国发布新冠肺炎疫情信息、推进疫情防控国际合作纪事',
   },
 ]
-const imageOnBottomList = [
-  {
-    id: '11',
-    title: '震撼！武汉230组高铁动车整装待发',
-    displayMode: 'image-on-bottom',
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-6.jpeg',
-  },
-]
 const productList = [
   {
     id: 1,
     preTag: '促',
     tags: ['专业', '防水'],
     brand: '3M',
-    name: '成人雨衣半透明',
+    name: '成人雨衣半透明，粉色佳人',
     price: 13.8,
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-1.jpg',
   },
@@ -167,7 +164,7 @@ const businessCardList = [
     id: 2,
     title: '张无忌',
     brief: '职位：CEO\n电话:13900000001\n 中国三条腿（集团）公司',
-    status: 'VP',
+    status: '牛',
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-2.jpg',
   },
 ]
@@ -192,48 +189,85 @@ const userList = [
   },
 ]
 
-const imageOnLeftList = [
-  { id: 'user1', imageUrl: MockService.randomImage(), title: '我看好的ETF', brief: '亏钱，割韭菜', displayMode: 'user' },
+const obj = {
+  title: '我看好的ETF',
+  brief: '亏钱，割韭菜',
+  flag: '牛',
+  imageUrl: MockService.defaultImage,
+  status: '待处理',
+}
+const cardList = [
+  //竖版
+  //横版-没图
+  { id: '31', ...obj, mode: ['vertical', 'default', 'vertical-small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  { id: '32', ...obj, mode: ['vertical', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  { id: '33', ...obj, mode: ['vertical', 'primary'], imageUrl: '', flag: '如' }, // 默认的 horizontal
+  { id: '34', ...obj, mode: ['vertical', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
+  { id: '35', ...obj, mode: ['vertical', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
 
-  { id: 10, imageUrl: MockService.randomImage(), title: '我看好的ETF', brief: '亏钱，割韭菜' },
-  { id: 11, imageUrl: MockService.randomImage(), title: '吃饱了喝足了', brief: '其实就是吃饱了撑的没事干', mode: 'circle' },
-  { id: 12, imageUrl: MockService.randomImage(), title: '川普哈哈哈哈', brief: '据说川普火了', mode: 'large' },
-  { id: 13, imageUrl: MockService.randomImage(), title: '大+圆-图', brief: '组件的外部样式如何', mode: ['large', 'circle'] },
-  { id: 14, imageUrl: MockService.randomImage(), title: '小-圆-图', mode: ['small', 'circle'] },
+  //默认，imageOnLeft
+  { id: '1', ...obj, status: '待处理' }, //方图，一行title，一行brief，小的flag+最多3个字
 
-  { id: 21, flag: '急', level: 'default', title: '我看好的ETF', brief: '亏钱，割韭菜' },
-  { id: 22, flag: '急', level: 'normal', title: '我看好的ETF', brief: '亏钱，割韭菜' },
-  { id: 23, flag: '如', level: 'primary', title: '川普哈哈哈哈', brief: '据说川普火了', mode: 'circle' },
-  { id: 24, flag: '律', level: 'warn', title: '组件的外部样式如何', mode: 'small' },
-  { id: 25, flag: '令', level: 'danger', title: '组件的外部样式如何', brief: '哈哈哈哈哈哦哦哦', mode: ['large', 'circle'] },
+  //竖版
+  { id: '11', ...obj, mode: ['vertical'] }, // 竖版，1/2屏幕宽，小的flag+最多3个字
+  { id: '12', ...obj, mode: ['vertical', 'vertical-small', 'circle'] }, // 竖版，小圆图，1/2屏幕宽，小的flag+最多3个字
+
+  //横版-有图
+  { id: '21', ...obj, mode: ['horizontal'] }, // 默认的 horizontal
+  { id: '22', ...obj, mode: ['horizontal', 'circle', 'small'] }, //小圆图
+  { id: '23', ...obj, mode: ['horizontal', 'circle', 'avatar'] }, //头像，带光圈
+  { id: '24', ...obj, mode: ['horizontal', 'circle', 'large'] }, //大圆图
+  {
+    id: '25',
+    ...obj,
+    mode: ['horizontal', 'large'],
+    brief: '真的牛逼不需要解释\n真的牛逼不需要解释\n真的牛逼不需要解释\n真的牛逼不需要解释',
+  }, //大方图
+
+  //横版-没图
+  { id: '31', ...obj, mode: ['horizontal', 'default', 'small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  { id: '32', ...obj, mode: ['horizontal', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  { id: '33', ...obj, mode: ['horizontal', 'primary', 'large'], imageUrl: '', flag: '如' }, // 默认的 horizontal
+  { id: '34', ...obj, mode: ['horizontal', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
+  { id: '35', ...obj, mode: ['horizontal', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
 ]
 
-
 function HelloDaaSPage() {
+  const list = userList.slice(0, 1)
   return (
     <View className='hello-daas'>
-      <SectionBar title='用户卡片' brief='displayMode：user' />
+      <SectionBar title='卡片-大卡片' brief='big-card' />
+      <Listof list={businessCardList} displayMode='big-card' />
+
+      <SectionBar title='卡片-水平卡片' brief='h-card' />
+      <Listof list={list} displayMode='h-card' />
+
+      <SectionBar title='卡片-垂直卡片(两个装)' brief='v-card' />
+      <Listof list={newsList} displayMode='v-card' />
+
+      <SectionBar title='卡片-用户卡片' brief='user' />
       <Listof list={userList} displayMode='user' />
-      <SectionBar title='卡片' brief='displayMode：card' />
-      <Listof list={businessCardList} displayMode='card' />
-      <SectionBar title='文件卡片' brief='displayMode：card，documentUrl不为空' />
-      <Listof list={movieList} displayMode='card' />
-      <SectionBar title='上图+下文字，水平滑动' brief='displayMode：image-on-top-horizontal' />
-      <Listof list={newsList.slice(0, 3)} horizontal displayMode='image-on-top-horizontal' />
-      <SectionBar title='上图+下文字 两排' brief='displayMode：image-on-top-waterfall' />
-      <Listof list={newsList.slice(0, 3)} displayMode='image-on-top-waterfall' />
-      <SectionBar title='上图+下文字' brief='displayMode：image-on-top' />
-      <Listof list={newsList.slice(0, 2)} displayMode='image-on-top' />
-      <SectionBar title='上文字+下图' brief='displayMode：image-on-bottom' />
 
-      <SectionBar title='左边图' brief='displayMode：image-on-left' />
-      <Listof list={imageOnLeftList} displayMode='image-on-left' />
+      <SectionBar title='卡片-文件卡片' brief='document' />
+      <Listof list={movieList} displayMode='document' />
 
-      <Listof list={imageOnBottomList} displayMode='image-on-bottom' />
-      <SectionBar title='商品' brief='displayMode：product' />
+      <SectionBar title='基础卡片' brief='card' />
+      <View className='note'>通过mode来控制card，获取更多效果</View>
+      <View className='note'>
+        mode=horizontal|vertical, circle, avatar,vertical-small, small|large,default|normal|primary|warn|darger
+      </View>
+      <Listof list={cardList} displayMode='card' />
+
+      {/*<SectionBar title='上图+下文字，水平滑动' brief='displayMode：image-on-top-horizontal' />*/}
+      <SectionBar title='电商-商品' brief='product' />
       <Listof list={productList} displayMode='product' />
-      <SectionBar title='Auto系列' brief='displayMode：auto|single-image|double-image|three-image' />
+
+      <SectionBar title='通用图文-Auto系列' />
+      <View className='note'> displayMode=auto|single-image|double-image|three-image</View>
       <Listof list={newsList} displayMode='auto' />
+
+      <SectionBar title='图片在下方的Auto' brief='image-on-bottom' />
+      <Listof list={newsList.slice(1, 2)} displayMode='image-on-bottom' />
     </View>
   )
 }
@@ -242,5 +276,4 @@ HelloDaaSPage.options = {
   addGlobalClass: true,
 }
 export default HelloDaaSPage
-
 ```

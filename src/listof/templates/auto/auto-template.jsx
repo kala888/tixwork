@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import ServerImage from '@/server-image/server-image'
 
-import { getImageList } from '../../listof-helper'
+import ListofUtil from '../../listof-util'
 import './styles.scss'
 
 function AutoTemplate(props) {
@@ -12,7 +12,7 @@ function AutoTemplate(props) {
 
   let list = []
   if (showImageCount > 0) {
-    const tempList = getImageList(item)
+    const tempList = ListofUtil.getImageList(item)
     const size = Math.min(showImageCount, tempList.length)
     list = tempList.slice(0, size)
   }

@@ -2,52 +2,38 @@
 
 .section-bar {
   padding: 20px 0;
-  display: flex;
-  flex-direction: row;
-  color: $text-color;
+  @extend %flex-row;
+  align-items: center;
 
   &-preicon {
-    width: 10px;
-    min-height: 0.8em;
+    width: 8px;
+    min-height: 1.2em;
     background-color: $primary-color;
     margin-right: 20px;
   }
 
   &-title {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-
-    &-txt-en {
-      font-family: $b181black;
-      font-size: 26px;
-    }
-
-    &-txt {
-      font-size: 32px;
-      font-weight: 600;
-    }
-
-    &-second {
-      font-size: 28px;
-      font-weight: 500;
-      margin-top: 10px;
-    }
+    color: $text-color;
+    font-size: 32px;
+    font-weight: 600;
   }
 
   &-action {
     @extend %flex-row;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex: 1;
+    color: $text-color-light;
+    height: 100%;
 
-    &-txt {
+    &-title {
       font-size: 24px;
-      align-self: flex-end;
+      font-weight: 500;
       font-family: $b181black;
-      color: $text-color-light;
     }
 
     &-icon {
-      margin-bottom: -2px;
+      margin-bottom: -4px;
     }
   }
 }

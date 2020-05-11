@@ -1,3 +1,4 @@
+import NavigationService from '@/nice-router/navigation.service'
 import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import EleCarousel from '@/components/elements/ele-carousel'
@@ -18,6 +19,7 @@ function HomePage(props) {
   const { pageTitle } = props
   usePageTitle(pageTitle)
   usePullDown(props)
+  // useAsyncEffect(() => NavigationService.view('page:///pages/biz/listof-test-page'))
 
   const { slideList = mockUserList, actionList = defaultActionList } = props
 

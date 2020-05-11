@@ -4,8 +4,8 @@
   &-bg {
     width: 0;
     height: 0;
-    border-top: 120px solid #d2ab66;
-    border-left: 120px solid transparent;
+    border-top: 110px solid #d2ab66;
+    border-left: 110px solid transparent;
     position: absolute;
     top: 0;
     right: 0;
@@ -14,25 +14,26 @@
 
   &-txt {
     @extend %flex;
-    align-items: flex-end;
     justify-content: center;
+    align-items: flex-end;
+
     transform: rotate(45deg);
-
     position: absolute;
-    top: 10px;
-    right: -20px;
-
-    font-size: 30px;
+    top: 9px;
+    right: -35px;
+    width: 143px;
+    height: 55px;
     @include text-ellipsis;
-
     color: #fff;
     font-weight: 600;
-    height: 60px;
-    width: 120px;
   }
 
   &-txt_large {
-    font-size: 36px;
+    font-size: 32px;
+  }
+
+  &-txt_normal {
+    font-size: 30px;
   }
 
   &-txt_small {
@@ -52,6 +53,8 @@
   .status-flag-txt {
     font-size: 22px;
     height: 40px;
-    width: 90px;
+    width: 120px;
+    right: -33px;
+    top: 9px;
   }
 }

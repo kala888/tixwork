@@ -59,17 +59,21 @@
 .ele-card-info {
   @extend %flex-column;
   flex: 1;
-  padding: 0 30px;
+  padding: 0 15px;
   height: 100%;
 
   &-title {
     padding-bottom: 10px;
+    font-size: 32px;
+    height: 1.2rem;
     @include lamp-clamp(1);
   }
 
   &-brief {
+    padding: 0 10px;
     color: $text-color-light;
     font-size: 26px;
+    min-height: 1rem;
     @include lamp-clamp(1);
   }
 }
