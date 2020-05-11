@@ -5,10 +5,10 @@ import Taro from '@tarojs/taro'
 import classNames from 'classnames'
 import { AtActivityIndicator } from 'taro-ui'
 
+import ListofUtil from '../listof-util'
+
 import AutoTemplate from './auto/auto-template'
 import CardTemplate from './card/card-template'
-
-import ListofUtil from '../listof-util'
 import Product from './product/product'
 
 import './styles.scss'
@@ -63,7 +63,7 @@ export default class FlexLineItem extends Taro.PureComponent {
       },
       () => {
         this.timer = setTimeout(() => this.stopLoading(), 3000)
-      }
+      },
     )
   }
   stopLoading = () => {
@@ -114,14 +114,17 @@ export default class FlexLineItem extends Taro.PureComponent {
           </View>
         )}
 
-        {(template === 'auto' || template === 'image-on-top') && <AutoTemplate {...itemProps} />}
+        {template === 'auto' && <AutoTemplate {...itemProps} />}
         {template === 'only-title' && <AutoTemplate showImageCount={0} {...itemProps} />}
         {template === 'single-image' && <AutoTemplate showImageCount={1} {...itemProps} />}
         {template === 'double-image' && <AutoTemplate showImageCount={2} {...itemProps} />}
         {template === 'three-image' && <AutoTemplate showImageCount={3} {...itemProps} />}
         {template === 'image-on-bottom' && <AutoTemplate {...itemProps} mode='image-on-bottom' />}
+        {template === 'image-on-top' && <AutoTemplate {...itemProps} />}
 
-        {(template === 'card' || template === 'image-on-left') && <CardTemplate {...itemProps} />}
+        {template === 'card' && <CardTemplate {...itemProps} />}
+        {template === 'image-on-left' && <CardTemplate {...itemProps} />}
+        {template === 'document' && <CardTemplate {...itemProps} />}
         {template === 'big-card' && <CardTemplate {...itemProps} mode={['horizontal', 'large']} />}
         {template === 'h-card' && <CardTemplate {...itemProps} mode={['horizontal']} />}
         {template === 'v-card' && <CardTemplate {...itemProps} mode={['vertical']} />}
