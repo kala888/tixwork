@@ -3,13 +3,13 @@
 在hello-daas-page的基础上增加展示两个list：一个水平的list，一个垂直的list
 
 ```javascript
-import Taro from '@tarojs/taro'
+import React from 'react'
 import { View } from '@tarojs/components'
 import SectionBar from '@/components/biz/section-bar'
 import EleBreakLine from '@/elements/common/ele-break-line'
 import Listof from '../../listof/listof'
 
-export default class HelloDaasPage extends Taro.PureComponent {
+export default class HelloDaasPage extends React.PureComponent {
 
   render() {
     return (

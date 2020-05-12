@@ -1,6 +1,8 @@
-import { connect } from '@tarojs/redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import ListofPageBase from './listof-page-base'
 
-const AbsPage = (props) => <ListofPageBase {...props} />
-
-export default connect(({ listofpage4 }) => ({ ...listofpage4 }))(AbsPage)
+export default () => {
+  const root = useSelector((state) => state.listofpage4)
+  return <ListofPageBase {...root} />
+}

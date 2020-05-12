@@ -1,3 +1,4 @@
+import React from 'react'
 import { toRpx } from '@/utils/index'
 import { View } from '@tarojs/components'
 

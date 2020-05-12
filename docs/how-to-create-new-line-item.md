@@ -5,11 +5,11 @@ line-item是为了配合listof和ListofPage做展示用的，这里以增加一�
 1. 在./src/listof/templates/biz下新增文件just-a-line-template.js
    
    ```javascript
-   import Taro from '@tarojs/taro'
+   import React from 'react'
    import { formatMoney } from '@/utils/index'
    import { View } from '@tarojs/components'
    
-   export default class JustALineTemplate extends Taro.PureComponent {
+   export default class JustALineTemplate extends React.PureComponent {
      render() {
        const { item = {} } = this.props
        const {

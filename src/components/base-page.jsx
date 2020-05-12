@@ -1,3 +1,4 @@
+import React from 'react'
 import { View } from '@tarojs/components'
 import PropTypes from 'prop-types'
 import './base-page.scss'

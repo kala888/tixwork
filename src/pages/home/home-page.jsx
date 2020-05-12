@@ -1,12 +1,13 @@
+import React from 'react'
 import EleCarousel from '@/components/elements/ele-carousel'
 import ActionFloor from '@/components/navigation/action-floor'
 import SectionBar from '@/components/section-bar/section-bar'
 import Listof from '@/listof/listof'
-
 import MockService from '@/nice-router/request/mock-service'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 import { View } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+
+import { useSelector } from 'react-redux'
 import mockForm1Data from '../biz/mock-data/mock-form.data'
 import mockForm2Data from '../biz/mock-data/mock-form2.data'
 import mockGenericPageData from '../biz/mock-data/mock-genericpage.data'
@@ -15,12 +16,14 @@ import { mockProductList, mockUserList } from '../biz/mock-data/mock-list.data'
 import './home.scss'
 
 function HomePage(props) {
-  const { pageTitle } = props
+  const root = useSelector((state) => state.home)
+  const { pageTitle } = root
   usePageTitle(pageTitle)
   usePullDown(props)
+
   // useAsyncEffect(() => NavigationService.view('page:///pages/biz/listof-test-page'))
 
-  const { slideList = mockUserList, actionList = defaultActionList } = props
+  const { slideList = mockUserList, actionList = defaultActionList } = root
 
   return (
     <View className='home-page'>
@@ -34,7 +37,7 @@ function HomePage(props) {
   )
 }
 
-export default connect(({ home }) => ({ ...home }))(HomePage)
+export default HomePage
 
 MockService.mockResp('mock-generic-page/', mockGenericPageData)
 MockService.mockResp('mock-generic-form/', mockForm1Data)

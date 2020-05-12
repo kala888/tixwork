@@ -1,8 +1,9 @@
+import React from 'react'
 import NavigationService from '@/nice-router/navigation.service'
 import { useAsyncEffect, usePageTitle, usePullDown } from '@/service/use.service'
 import Config from '@/utils/config'
 import { View } from '@tarojs/components'
-import { useShareAppMessage } from '@tarojs/taro'
+import { Current, useShareAppMessage } from '@tarojs/taro'
 import classNames from 'classnames'
 
 import EleFlex from './ele-flex'
@@ -14,7 +15,7 @@ function GenericPageBase(props) {
   usePullDown(props)
 
   // q如果变化了，就发送一个后台请求
-  const { q } = this.$router.params
+  const { q } = Current.router.params
   useAsyncEffect(() => {
     if (q) {
       const uri = decodeURIComponent(q)

@@ -1,3 +1,4 @@
+import React from 'react'
 import NavigationService from '@/nice-router/navigation.service'
 import { useAsyncEffect } from '@/service/use.service'
 import { View } from '@tarojs/components'

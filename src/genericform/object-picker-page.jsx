@@ -1,14 +1,16 @@
+import React, { useState } from 'react'
 import Listof from '@/listof/listof'
 import NavigationService from '@/nice-router/navigation.service'
 import { useAsyncEffect } from '@/service/use.service'
 import { View } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-import { useState } from '@tarojs/taro'
+import { useSelector } from 'react-redux'
 import { AtSearchBar } from 'taro-ui'
+import { Current } from '@tarojs/taro'
 
 // TODO 这页面应该是一个特殊的listof
 
-function ObjectPickerPage(props) {
+function ObjectPickerPage() {
+  const root = useSelector((state) => state.objectPicker)
   const [keyword, setKeyword] = useState('')
 
   const {
@@ -21,10 +23,10 @@ function ObjectPickerPage(props) {
     dataContainer,
     articleList,
     articleListMeta,
-  } = props
+  } = root
 
   // q如果变化了，就发送一个后台请求
-  const { q } = this.$router.params
+  const { q } = Current.router.params
   useAsyncEffect(() => {
     if (q) {
       const uri = decodeURIComponent(q)
@@ -70,4 +72,4 @@ ObjectPickerPage.options = {
   addGlobalClass: true,
 }
 
-export default connect(({ objectPicker }) => ({ ...objectPicker }))(ObjectPickerPage)
+export default ObjectPickerPage

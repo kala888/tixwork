@@ -1,10 +1,12 @@
+import React from 'react'
 import NavigationService from '@/nice-router/navigation.service'
 import { noop } from '@/nice-router/nice-router-util'
 import { useCountdown } from '@/service/use.service'
 import Config from '@/utils/config'
 import { View } from '@tarojs/components'
-import Taro, { useState } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import classNames from 'classnames'
+import { useState } from 'react'
 import { AtInput } from 'taro-ui'
 
 import './styles.scss'

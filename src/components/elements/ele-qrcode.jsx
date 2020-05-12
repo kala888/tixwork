@@ -1,4 +1,4 @@
-/* eslint-disable taro/no-spread-in-props */
+import React from 'react'
 import { toRpx } from '@/utils/index'
 import { Canvas } from '@tarojs/components'
 import Taro from '@tarojs/taro'
@@ -9,7 +9,7 @@ import QRCodeImpl from 'qr.js/lib/QRCode'
 // 修改自 https://github.com/xueyida/QRcode.taro/blob/master/QRCodeCanvas.js
 const defaultCanvasId = 'qrcode-canvase'
 
-export default class EleQrcode extends Taro.PureComponent {
+export default class EleQrcode extends React.PureComponent {
   static defaultProps = {
     size: 200,
     level: 'L',

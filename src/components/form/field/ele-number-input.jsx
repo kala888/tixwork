@@ -1,3 +1,4 @@
+import React from 'react'
 import { noop } from '@/nice-router/nice-router-util'
 import { AtInput } from 'taro-ui'
 

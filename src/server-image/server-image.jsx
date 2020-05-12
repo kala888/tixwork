@@ -1,3 +1,4 @@
+import React from 'react'
 import { Image } from '@tarojs/components'
 import classNames from 'classnames'
 import ImageTools from './image-tools'

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Image, View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 

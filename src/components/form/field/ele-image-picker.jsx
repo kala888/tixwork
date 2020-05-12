@@ -1,7 +1,9 @@
+import React from 'react'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import uploadFiles from '@/service/file-upload/upload-files'
 import { Text, View } from '@tarojs/components'
-import Taro, { useEffect, useState } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
+import { useEffect, useState } from 'react'
 import { AtImagePicker, AtProgress } from 'taro-ui'
 
 import './styles.scss'

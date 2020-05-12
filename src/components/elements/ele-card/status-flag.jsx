@@ -1,3 +1,4 @@
+import React from 'react'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import './status-flag.scss'

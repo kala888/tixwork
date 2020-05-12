@@ -1,3 +1,4 @@
+import React from 'react'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use.service'
 import { View } from '@tarojs/components'

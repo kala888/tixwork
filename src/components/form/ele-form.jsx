@@ -1,6 +1,6 @@
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
-import { useEffect, useMemo, useState } from '@tarojs/taro'
+import { useEffect, useMemo, useState } from 'react'
 import isFunction from 'lodash/isFunction'
 import omit from 'lodash/omit'
 

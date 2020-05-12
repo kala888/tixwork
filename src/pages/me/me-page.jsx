@@ -1,3 +1,4 @@
+import React from 'react'
 import NavigationBox from '@/components/navigation/navigation-box'
 import NavigationLineItem from '@/components/navigation/navigation-line-item'
 import MockService from '@/nice-router/request/mock-service'
@@ -5,7 +6,7 @@ import ServerImage from '@/server-image/server-image'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 import Config from '@/utils/config'
 import { View } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { useSelector } from 'react-redux'
 import { AtButton } from 'taro-ui'
 
 import './me.scss'
@@ -36,8 +37,9 @@ const LineItem_Navigator_List = [
   },
 ]
 
-function MePage(props) {
-  const { pageTitle } = props
+function MePage() {
+  const root = useSelector((state) => state.me)
+  const { pageTitle } = root
   usePageTitle(pageTitle)
   usePullDown(Config.api.FooterMe)
 
@@ -49,7 +51,7 @@ function MePage(props) {
     name = '用户A',
     brief = '超级管理员',
     avatar,
-  } = props
+  } = root
 
   return (
     <View className='me-page'>
@@ -80,4 +82,4 @@ function MePage(props) {
   )
 }
 
-export default connect(({ me }) => ({ ...me }))(MePage)
+export default MePage

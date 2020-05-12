@@ -5,12 +5,12 @@
 1. IDE中修改`hello-daas-page.jsx`
    
    ```javascript
-   import Taro from '@tarojs/taro'
+   import React from 'react'
    import { Button, View } from '@tarojs/components'
    import NavigationService from '@/nice-router/navigation.service'
    import Config from '@/utils/config'
    
-   export default class HelloDaasPage extends Taro.PureComponent {
+   export default class HelloDaasPage extends React.PureComponent {
    
      state = {
        pageTitle: '等着。。。还在请求',

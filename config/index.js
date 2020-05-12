@@ -12,6 +12,14 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
+  plugins: [],
+  defineConstants: {},
+  copy: {
+    patterns: [
+      { from: 'src/sitemap.json', to: 'dist/' },
+    ],
+  },
+  framework: 'react',
   babel: {
     sourceMap: true,
     presets: [
@@ -32,12 +40,7 @@ const config = {
       ],
     ],
   },
-  copy: {
-    patterns: [
-      { from: 'src/sitemap.json', to: 'dist/' },
-    ],
-  },
-  defineConstants: {},
+
   alias: {
     '@/components': path.resolve(__dirname, '..', 'src/components'),
     '@/utils': path.resolve(__dirname, '..', 'src/utils'),
@@ -52,16 +55,6 @@ const config = {
   },
   mini: {
     postcss: {
-      autoprefixer: {
-        enable: true,
-        config: {
-          browsers: [
-            'last 3 versions',
-            'Android >= 4.1',
-            'ios >= 8',
-          ],
-        },
-      },
       pxtransform: {
         enable: true,
         config: {},
@@ -111,12 +104,7 @@ const config = {
       autoprefixer: {
         enable: true,
         config: {
-          browsers: [
-            'last 3 versions',
-            'Android >= 4.1',
-            'ios >= 8',
-          ],
-        },
+        }
       },
       cssModules: {
         enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true

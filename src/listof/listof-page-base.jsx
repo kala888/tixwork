@@ -1,3 +1,4 @@
+import React from 'react'
 import EleRichText from '@/components/elements/ele-rich-text'
 import EleTabs from '@/components/elements/ele-tabs'
 import NavigationService from '@/nice-router/navigation.service'

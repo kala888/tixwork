@@ -1,3 +1,4 @@
+import React from 'react'
 import { View } from '@tarojs/components'
 import NumberInput from './ele-number-input'
 import './styles.scss'

@@ -1,7 +1,8 @@
 import NavigationService from '@/nice-router/navigation.service'
 import { LoadingType } from '@/nice-router/nice-router-util'
 import Config from '@/utils/config'
-import Taro, { useEffect, usePullDownRefresh, useRef, useState } from '@tarojs/taro'
+import Taro, { usePullDownRefresh } from '@tarojs/taro'
+import { useEffect, useRef, useState } from 'react'
 
 // boolean类型的控制属性，show，close，toggle
 export function useVisible(initial = false) {
@@ -77,6 +78,7 @@ export function useCountdown(maxCount = 60) {
 
 // 纯粹因为IDE不能自动导入Taro的useState
 export const useAsyncEffect = (callback, watch = []) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(callback, watch)
 }
 export const useAsyncState = useState

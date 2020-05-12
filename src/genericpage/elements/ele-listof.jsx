@@ -1,3 +1,4 @@
+import React from 'react'
 import Listof from '@/listof/listof'
 
 function EleListof(props) {

@@ -1,3 +1,4 @@
+import React, { useRef } from 'react'
 import EleRichText from '@/components/elements/ele-rich-text'
 
 import EleForm from '@/components/form/ele-form'
@@ -5,22 +6,21 @@ import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 import { View } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-import { useRef } from '@tarojs/taro'
+import { useSelector } from 'react-redux'
 import isNil from 'lodash/isNil'
 import { AtButton } from 'taro-ui'
 
 import FormSteps from './form-steps'
 import './styles.scss'
 
-function GenericformPage(props) {
+function GenericformPage() {
   const formRef = useRef(null)
-
-  const { pageTitle } = props
-  const { id, groupList = [], fieldList = [], stepList = [], actionList = [], content } = props
+  const root = useSelector((state) => state.genericform)
+  const { pageTitle } = root
+  const { id, groupList = [], fieldList = [], stepList = [], actionList = [], content } = root
 
   usePageTitle(pageTitle)
-  usePullDown(props)
+  usePullDown(root)
 
   const isSubmitAction = (code) => code === 'nextStep' || code === 'submit' || code === 'commit'
 
@@ -98,11 +98,4 @@ GenericformPage.options = {
   addGlobalClass: true,
 }
 
-GenericformPage.defaultProps = {
-  groupList: [],
-  stepList: [],
-  actionList: [],
-  fieldList: [],
-}
-
-export default connect(({ genericform }) => ({ ...genericform }))(GenericformPage)
+export default GenericformPage

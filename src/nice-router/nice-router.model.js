@@ -140,6 +140,7 @@ export default {
 function getCurrentPage() {
   const pages = Taro.getCurrentPages()
   const currentPage = last(pages) || { route: '' }
+  //TODO
   return isH5() ? currentPage.$router.path : '/' + currentPage.route
 }
 

@@ -1,6 +1,8 @@
-import { connect } from '@tarojs/redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import GenericPageBase from './generic-page-base'
 
-const AbsPage = (props) => <GenericPageBase {...props} />
-
-export default connect(({ genericpage2 }) => ({ ...genericpage2 }))(AbsPage)
+export default () => {
+  const root = useSelector((state) => state.genericpage2)
+  return <GenericPageBase {...root} />
+}

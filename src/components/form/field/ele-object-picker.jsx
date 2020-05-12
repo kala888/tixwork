@@ -1,3 +1,4 @@
+import React from 'react'
 import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'

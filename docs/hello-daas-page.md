@@ -9,10 +9,10 @@
    在./src/pages/biz目录下新建文件hello-daas-page.js文件
    
    ```javascript
-   import Taro from '@tarojs/taro'
+   import React from 'react'
    import { Button, View } from '@tarojs/components'
    
-   export default class HelloDaasPage extends Taro.PureComponent {
+   export default class HelloDaasPage extends React.PureComponent {
      handleClick = () => {
        Taro.showToast({ title: 'Hello....' })
      }

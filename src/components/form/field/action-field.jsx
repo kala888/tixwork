@@ -1,3 +1,4 @@
+import React from 'react'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'

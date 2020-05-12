@@ -1,3 +1,4 @@
+import React from 'react'
 import ServerImage from '@/server-image/server-image'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'

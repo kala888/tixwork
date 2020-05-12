@@ -1,3 +1,4 @@
+import React from 'react'
 import ServerImage from '@/server-image/server-image'
 import { toRpx } from '@/utils/index'
 import { View } from '@tarojs/components'

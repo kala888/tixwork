@@ -1,7 +1,7 @@
+import React from 'react'
 import ActionUtil from '@/nice-router/action-util'
 import NavigationService from '@/nice-router/navigation.service'
 import { View } from '@tarojs/components'
-import Taro from '@tarojs/taro'
 import classNames from 'classnames'
 import { AtActivityIndicator } from 'taro-ui'
 
@@ -13,7 +13,7 @@ import Product from './product/product'
 
 import './styles.scss'
 
-export default class FlexLineItem extends Taro.PureComponent {
+export default class FlexLineItem extends React.Component {
   static options = {
     addGlobalClass: true,
   }

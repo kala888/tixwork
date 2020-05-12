@@ -1,3 +1,4 @@
+import React from 'react'
 /*
  * Copyright(c) 2020 nice-router
  *    Date: 2020/4/26 下午12:05
