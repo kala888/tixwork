@@ -11,9 +11,14 @@ function CardTemplate(props) {
 
   const imageUrl = ListofUtil.getImageUrl(item)
   const hasImage = isNotEmpty(imageUrl)
-  let extClass = globalMode.concat(mode, hasImage ? 'no-bg' : level)
+  const isDocument = isNotEmpty(documentUrl)
+  let extClass = globalMode.concat(mode, {
+    'no-bg': hasImage,
+    [level]: !hasImage,
+    large: isDocument,
+  })
 
-  const documentActions = isNotEmpty(documentUrl)
+  const documentActions = isDocument
     ? [
         {
           id: 'open-document',
