@@ -58,7 +58,7 @@ function MePage() {
       <View className='me-page-header'>
         <View className='me-page-header-info'>
           <AtButton openType='getUserInfo' className='transparent-btn' onGetUserInfo={handleUpdateProfileInfo}>
-            <ServerImage my-class='me-avatar' src={avatar || MockService.randomImage()} />
+            <ServerImage className='me-avatar' src={avatar || MockService.randomImage()} />
           </AtButton>
 
           <View className='me-title'>

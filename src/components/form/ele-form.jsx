@@ -100,8 +100,8 @@ function EleForm(props) {
   }
 
   // 导出，外用
-  this.validateFields = validateFields
-  this.resetFields = resetFields
+  // this.validateFields = validateFields
+  // this.resetFields = resetFields
 
   const _validateField = (name, value) => {
     const fields = getFields(groupList, fieldList)

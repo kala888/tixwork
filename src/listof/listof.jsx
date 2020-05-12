@@ -80,7 +80,7 @@ function Listof({
             return (
               <View key={id} className={itemContainerClass} style={listofContainerItemContainerStyle}>
                 <FlexLineItem
-                  my-class='listof-container-item-wrapper'
+                  className='listof-container-item-wrapper'
                   index={index}
                   item={item}
                   onItemPress={onItemPress}

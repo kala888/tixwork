@@ -21,7 +21,6 @@ export default class FlexLineItem extends React.Component {
     displayMode: 'auto',
     onItemPress: null,
   }
-  static externalClasses = ['my-class']
 
   state = {
     loading: false,
@@ -91,7 +90,7 @@ export default class FlexLineItem extends React.Component {
   }
 
   render() {
-    const { item = {}, displayMode, bordered = true, shadow = true, horizontal } = this.props
+    const { item = {}, displayMode, bordered = true, shadow = true, horizontal, className } = this.props
     const { displayMode: itemDisplayMode } = item
 
     // const debouncePress = _.debounce(
@@ -101,7 +100,7 @@ export default class FlexLineItem extends React.Component {
     const template = (itemDisplayMode || displayMode).toLowerCase().trim()
     // console.log(`line-item show with "${template}, item is`, item)
 
-    const wrapperClass = classNames('line-item-wrapper', 'my-class', {
+    const wrapperClass = classNames('line-item-wrapper', className, {
       'no-border': !bordered,
       shadow,
     })
