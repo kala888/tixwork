@@ -1,5 +1,6 @@
 import NavigationBox from '@/components/navigation/navigation-box'
 import NavigationLineItem from '@/components/navigation/navigation-line-item'
+import MockService from '@/nice-router/request/mock-service'
 import ServerImage from '@/server-image/server-image'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 import Config from '@/utils/config'
@@ -9,12 +10,10 @@ import { AtButton } from 'taro-ui'
 
 import './me.scss'
 
-const defaultAvatar = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-3.jpg'
-
 const Box_Navigator_List = [
   {
     code: 'FINE_DECORATION',
-    imageUrl: defaultAvatar,
+    imageUrl: MockService.randomImage(),
     title: '发起申请',
   },
   {
@@ -50,14 +49,14 @@ function MePage(props) {
     name = '用户A',
     brief = '超级管理员',
     avatar,
-  } = this.props
+  } = props
 
   return (
     <View className='me-page'>
       <View className='me-page-header'>
         <View className='me-page-header-info'>
           <AtButton openType='getUserInfo' className='transparent-btn' onGetUserInfo={handleUpdateProfileInfo}>
-            <ServerImage my-class='me-avatar' src={avatar || defaultAvatar} />
+            <ServerImage my-class='me-avatar' src={avatar || MockService.randomImage()} />
           </AtButton>
 
           <View className='me-title'>
