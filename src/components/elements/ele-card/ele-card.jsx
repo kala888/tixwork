@@ -39,7 +39,7 @@ function EleCard(props) {
 
         <View className='ele-card-cover' onClick={onClick}>
           {hasImage ? (
-            <ServerImage my-class='ele-card-cover-image' src={imageUrl} size='middle' />
+            <ServerImage my-class='ele-card-cover-image' src={imageUrl} />
           ) : (
             <Text className='ele-card-cover-txt'>{flag}</Text>
           )}
