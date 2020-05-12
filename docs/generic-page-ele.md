@@ -96,7 +96,7 @@ type=button
       size='small'
       linkToUrl='https://www.baidu.com/'
 >
-    <AtIcon value='download-cloud' />
+    <ActionIcon value='download-cloud' />
 </EleButton>
 ```
 

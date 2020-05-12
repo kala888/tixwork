@@ -20,7 +20,7 @@ function EleImagePicker(props) {
   useEffect(() => {
     const images = files.map((it) => ({ imageUrl: it.url }))
     onChange(images)
-  }, [files, onChange])
+  }, [files]) //deps千万不要加onChange
 
   const uploadNewFiles = (currentFiles) => {
     const todoList = currentFiles.filter((it) => {
