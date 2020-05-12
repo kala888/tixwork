@@ -4,14 +4,14 @@ import { AtCurtain } from 'taro-ui'
 
 import EleFlex from './ele-flex'
 
-export default function ElePopup() {
+export default function ElePopup(props) {
   const [show, setShow] = useState(true)
   const onClose = () => setShow(false)
 
   return (
     <AtCurtain isOpened={show} onClose={onClose}>
       <ScrollView scrollY scrollWithAnimation scrollTop='0' style='max-height: 750rpx;'>
-        <EleFlex {...this.props} />
+        <EleFlex {...props} />
       </ScrollView>
     </AtCurtain>
   )
