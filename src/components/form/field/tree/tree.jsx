@@ -2,7 +2,6 @@ import React from 'react'
 import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 
 import { useVisible } from '@/service/use.service'
-import { isH5 } from '@/utils/index'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import { AtIcon } from 'taro-ui'
@@ -49,26 +48,12 @@ function Tree(props) {
       </View>
 
       <View className={subTreeClass}>
-        {nodes.map((it) => {
-          const { id } = it
-          if (isH5()) {
-            return <Tree key={id} selected={selected} onChange={onChange} expandAll={expandAll} {...it} />
-          }
-          return (
-            // eslint-disable-next-line react/jsx-no-undef
-            <SubTree key={id} selected={selected} onChange={onChange} expandAll={expandAll} {...it} />
-          )
-        })}
+        {nodes.map((it) => (
+          <Tree key={`${it.id}_${it.title}`} selected={selected} onChange={onChange} expandAll={expandAll} {...it} />
+        ))}
       </View>
     </View>
   )
-}
-
-Tree.config = {
-  component: true,
-  usingComponents: {
-    'sub-tree': './tree',
-  },
 }
 
 Tree.defaultProps = {

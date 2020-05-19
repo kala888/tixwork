@@ -12,7 +12,6 @@ import { isNotEmpty } from '@/nice-router/nice-router-util'
 import ServerImage from '@/server-image/server-image'
 import { Block, Text, View } from '@tarojs/components'
 import classNames from 'classnames'
-import './styles.scss'
 
 //mode=small,large
 function EleCard(props) {

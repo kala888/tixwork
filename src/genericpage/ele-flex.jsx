@@ -24,7 +24,6 @@ import EleText from './elements/ele-text'
 import EleWhiteSpace from './elements/ele-white-space'
 
 import './styles.scss'
-
 /**
  * 其他组件模块用的ui组件，要扔到主App去share
  */

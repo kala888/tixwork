@@ -1,17 +1,13 @@
-@import 'src/styles/theme';
-
 .auto {
   font-size: 32px;
-  background-color: $white;
-  @extend %flex-column;
+  background-color: #fff;
   justify-content: center;
   border-radius: 10px;
-  box-shadow: 0 10px 19px 1px $shadow-color;
-  color: $text-color;
+  box-shadow: 0 10px 19px 1px #ddd;
+  color: #ddd;
   margin-bottom: 20px;
 
   .auto-image-list {
-    @extend %flex-row;
     justify-content: space-between;
     width: 100%;
     height: 200px;
@@ -19,13 +15,12 @@
     &-item {
       height: 200px;
       width: 100%;
-      border: 0.5px solid $silver-grey-color;
+      border: 0.5px solid #ddd;
     }
   }
 
   &-info {
     padding: 10px;
-    @extend %flex-column;
     flex: 1;
 
     &-title {
@@ -33,18 +28,16 @@
       font-size: 32px;
       font-weight: 500;
       margin: 10px;
-      @include text-ellipsis;
       display: block;
     }
 
     &-brief {
       box-sizing: border-box;
       font-size: 25px;
-      color: $text-color-lighter;
+      color: #ddd;
       margin-left: 20px;
       margin-bottom: 10px;
       height: 1.2em;
-      @include text-ellipsis;
     }
   }
 }

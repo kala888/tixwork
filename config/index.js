@@ -54,6 +54,10 @@ const config = {
 
   },
   mini: {
+    enableExtract: true,
+    miniCssExtractPluginOption: {
+      ignoreOrder: true,
+    },
     postcss: {
       pxtransform: {
         enable: true,

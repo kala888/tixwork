@@ -39,6 +39,7 @@ function GenericformPage() {
   }
 
   const handleSubmit = async (action) => {
+    console.log('11111', formRef)
     const result = await formRef.current.validateFields()
     const { errors, values } = result
     console.log('resultresultresult', errors, isEmpty(errors))

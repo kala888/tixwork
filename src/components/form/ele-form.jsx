@@ -1,6 +1,6 @@
+import React, { useEffect, useImperativeHandle, useMemo, useState, forwardRef } from 'react'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
-import { useEffect, useMemo, useState } from 'react'
 import isFunction from 'lodash/isFunction'
 import omit from 'lodash/omit'
 
@@ -39,8 +39,16 @@ const getGroups = (groupList, fieldList) => {
     })
 }
 
-function EleForm(props) {
-  const { defaultValues, onFieldChange, fieldList, groupList, layout, showRequired, bordered } = props
+function EleForm(props, ref) {
+  const {
+    defaultValues = {},
+    onFieldChange = null,
+    fieldList = [],
+    groupList = [],
+    layout,
+    showRequired = true,
+    bordered = true,
+  } = props
   // console.log('generic-form initial defaultValues,eeeeee', defaultValues)
   //以name为key
   const [fieldValues, setFieldValues] = useState(defaultValues)
@@ -80,7 +88,7 @@ function EleForm(props) {
     setFieldErrors({})
   }
 
-  async function validateFields() {
+  const validateFields = async () => {
     const fields = getFields(groupList, fieldList)
     const errors = {}
     for (const field of fields) {
@@ -98,6 +106,11 @@ function EleForm(props) {
       values: fieldValues,
     }
   }
+
+  useImperativeHandle(ref, () => ({
+    validateFields,
+    resetFields,
+  }))
 
   // 导出，外用
   // this.validateFields = validateFields
@@ -155,12 +168,4 @@ EleForm.options = {
   addGlobalClass: true,
 }
 
-EleForm.defaultProps = {
-  fieldList: [],
-  groupList: [],
-  bordered: true,
-  showRequired: true,
-  onFieldChange: null,
-  defaultValues: {},
-}
-export default EleForm
+export default forwardRef(EleForm)

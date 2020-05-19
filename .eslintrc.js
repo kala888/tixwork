@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": ["taro/react"],
   "rules": {
     "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],

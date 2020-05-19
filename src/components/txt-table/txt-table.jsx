@@ -4,6 +4,7 @@ import { View } from '@tarojs/components'
 import classNames from 'classnames'
 
 import './styles.scss'
+import TxtTableCell from '@/components/txt-table/txt-table-cell'
 
 function transToDoubleItemList(list = []) {
   const newList = []
@@ -35,19 +36,10 @@ export default function TxtTable({ list = [], maxLine }) {
     <View className='txt-table'>
       {doubleItemList.map((it) => {
         const { id, left, right } = it
-
         return (
           <View key={id} className='info-row'>
-            <View className='info-row-cell'>
-              <View className='info-row-cell-title'>{left.title}</View>
-              <View className={valueCls}>{left.value}</View>
-            </View>
-            {isNotEmpty(right) && (
-              <View className='info-row-cell'>
-                <View className='info-row-cell-title'>{right.title}</View>
-                <View className={valueCls}>{right.value}</View>
-              </View>
-            )}
+            <TxtTableCell title={left.title} value={left.value} valueClassName={valueCls} />
+            {isNotEmpty(right) && <TxtTableCell title={right.title} value={right.value} valueClassName={valueCls} />}
           </View>
         )
       })}

@@ -40,5 +40,10 @@
         @include lamp-clamp(4);
       }
     }
+    &-cell.small {
+      .info-row-cell-title {
+        font-size: 24px;
+      }
+    }
   }
 }

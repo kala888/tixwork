@@ -3,30 +3,36 @@ const treeRoot = {
   value: '1',
   nodes: [
     {
+      id: 1,
       title: '麻将',
       value: '麻将1-1',
     },
     {
+      id: 2,
       title: '火锅串串',
       value: '火锅串串1-2',
       nodes: [
         {
+          id: 3,
           title: '魏蜀吴火锅',
           value: '魏蜀吴火锅1-2-1',
           nodes: [
             {
+              id: 4,
               title: '鸭血',
               value: '鸭血1-2-1-1',
               brief: '缺货',
               disabled: true,
             },
             {
+              id: 5,
               title: '猪脑',
               value: '猪脑1-2-1-2',
             },
           ],
         },
         {
+          id: 6,
           title: '马路边边',
           value: '马路边边1-2-2',
           brief: '暂停营业',

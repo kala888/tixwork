@@ -3,7 +3,7 @@ import EleCard from '@/components/elements/ele-card/ele-card'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 import ListofUtil from '../../listof-util'
-import '../styles.scss'
+// import '../styles.scss'
 
 function CardTemplate(props) {
   const { item = {}, mode: globalMode = [] } = props
