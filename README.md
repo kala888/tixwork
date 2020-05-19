@@ -18,7 +18,7 @@
 
 # nice-router-taro
 
-#### 基础知识：React + DVA + Taro + TaroUI
+#### 基础知识：React + DVA + Taro3 + TaroUI
 
 [Taro(读音：泰罗)](https://github.com/NervJS/taro) 是京东家的小程序开发框架，基于react的语法，跨多端开发框架（微信小程序，支付宝小程序，RN，抖音小程序......）
 
