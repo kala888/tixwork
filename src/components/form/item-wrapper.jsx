@@ -3,7 +3,7 @@ import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use.service'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
-import { AtIcon, AtToast } from 'taro-ui'
+import { AtToast } from 'taro-ui'
 
 import './styles.scss'
 
@@ -25,9 +25,14 @@ function ItemWrapper(props) {
       {inline && (
         <View className='item-wrapper-tail'>
           {showClearAction && (
-            <AtIcon className='item-wrapper-tail-clear' onClick={onClear} value='close-circle' size={20} />
+            <View
+              className='iconfont iconfont-close-circle item-wrapper-tail-clear'
+              onClick={onClear}
+              value='close-circle'
+              size={20}
+            />
           )}
-          {hasError && <AtIcon className='item-wrapper-tail-alert' onClick={show} value='alert-circle' size={20} />}
+          {hasError && <View className='iconfont iconfont-warning-circle item-wrapper-tail-alert' onClick={show} />}
         </View>
       )}
 

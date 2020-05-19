@@ -357,7 +357,7 @@ type=more-actions
 | ---------- | ------------------------- | --------------------------------------------- |
 | text       |                           | 可选，文字描述, 例如"更多"，"操作"                          |
 | imageUrl   |                           | 可选，icon图片，例如"..."的图                           |
-| icon       |                           | 可选，AtIcon中的value                              |
+| icon       |                           | 可选，Iconfont中的value                              |
 | actionList | actionList=["取消关注","举报"}] | 一组用来展示成ActionSheet的Action                     |
 | mode       |                           | 默认值auto，可选值 actionSheet，link                  |
 | linkToUrl  |                           | 当配置了linkToUrl的时候，优先使用它做页面跳转（常常是跳转到ListofPage） |

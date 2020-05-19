@@ -3,7 +3,7 @@ import { isEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use.service'
 import { View } from '@tarojs/components'
 import _ from 'lodash'
-import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtIcon, AtRadio } from 'taro-ui'
+import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtRadio } from 'taro-ui'
 
 import ActionField from './action-field'
 import './styles.scss'
@@ -52,9 +52,9 @@ function ElePopupSelect(props) {
     <ActionField onClick={show} disabled={disabled} value={displayValue} placeholder={placeholder}>
       <View className='action-field-picker' onClick={toggle}>
         {visible ? (
-          <AtIcon className='action-field-picker-icon' value='chevron-down' size={20} />
+          <View className='iconfont iconfont-down action-field-picker-icon' />
         ) : (
-          <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
+          <View className='iconfont iconfont-right action-field-picker-icon' />
         )}
       </View>
 

@@ -4,7 +4,7 @@ import { toRpx } from '@/utils/index'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
-import { AtIcon, AtTag } from 'taro-ui'
+import { AtTag } from 'taro-ui'
 
 import './styles.scss'
 
@@ -79,14 +79,14 @@ function EleStoreLocation(props) {
 
       {showAddress && (
         <View className='info-item' onClick={showLocation}>
-          <AtIcon value='map-pin' size={18} color={iconColor} />
+          <View className='iconfont iconfont-location' style={{ color: iconColor }} />
           <View className='info-item-txt'>{address}</View>
         </View>
       )}
 
       {showPhoneNumber && (
         <View className='info-item' onClick={makePhoneCall}>
-          <AtIcon value='phone' size={18} color={iconColor} />
+          <View className='iconfont iconfont-phone' style={{ color: iconColor }} />
           <View className='info-item-txt'>{phoneNumber}</View>
         </View>
       )}

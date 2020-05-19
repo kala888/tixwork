@@ -4,7 +4,7 @@ import { useVisible } from '@/service/use.service'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { AtDrawer, AtIcon } from 'taro-ui'
+import { AtDrawer } from 'taro-ui'
 
 import './filter-bar.scss'
 import { useFacet, useFilterTabs } from './filter.use'
@@ -73,7 +73,7 @@ function FilterBar(props) {
         })}
 
         <View className='filter-tabs-icon' onClick={show}>
-          {visible ? <AtIcon value='chevron-up' size={20} /> : <AtIcon value='chevron-down' size={20} />}
+          {visible ? <View className='iconfont iconfont-up' /> : <View className='iconfont iconfont-down' />}
         </View>
       </View>
 

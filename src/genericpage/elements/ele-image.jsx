@@ -2,7 +2,6 @@ import React from 'react'
 import ServerImage from '@/server-image/server-image'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
-import { AtIcon } from 'taro-ui'
 
 import './styles.scss'
 
@@ -16,7 +15,7 @@ function EleImage(props) {
         <ServerImage src={path} customStyle={customStyle} mode={mode} />
       ) : (
         <View className='image-placeholder' style={customStyle}>
-          <AtIcon value='image' />
+          <View className='iconfont file-image' />
         </View>
       )}
     </View>

@@ -4,7 +4,6 @@ import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
-import { AtIcon } from 'taro-ui'
 
 import './styles.scss'
 
@@ -50,7 +49,9 @@ function EleMoreActions(props) {
           src={imageUrl}
         />
       )}
-      {icon.length > 0 && <AtIcon className='ele-more-actions-icon' value={icon} size={20} color='grey' />}
+      {icon.length > 0 && (
+        <View className={`iconfont iconfont-${icon} ele-more-actions-icon`} style={{ color: 'grey' }} />
+      )}
     </View>
   )
 }

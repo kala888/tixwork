@@ -1,7 +1,7 @@
 import React from 'react'
 import { useVisible } from '@/service/use.service'
 import { View } from '@tarojs/components'
-import { AtActionSheet, AtIcon } from 'taro-ui'
+import { AtActionSheet } from 'taro-ui'
 import ActionField from './action-field'
 import './styles.scss'
 
@@ -44,9 +44,9 @@ function EleTree(props) {
     <ActionField onClick={show} disabled={disabled} value={displayValue} placeholder={placeholder}>
       <View className='action-field-picker' onClick={toggle}>
         {visible ? (
-          <AtIcon className='action-field-picker-icon' value='chevron-down' size={20} />
+          <View className='iconfont iconfont-down action-field-picker-icon' />
         ) : (
-          <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
+          <View className='iconfont iconfont-right action-field-picker-icon' />
         )}
       </View>
 

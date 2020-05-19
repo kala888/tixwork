@@ -38,7 +38,7 @@ NiceRouter.start = ({ config = {}, container }) => {
 
   const tempViewConfig = {}
   const vcfg = NiceRouter.config.viewConfig
-  Object.keys(vcfg).map(key => {
+  Object.keys(vcfg).map((key) => {
     tempViewConfig[key.trim()] = vcfg[key]
   })
   NiceRouter.config.viewConfig = tempViewConfig

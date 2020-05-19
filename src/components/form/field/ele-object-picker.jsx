@@ -3,7 +3,6 @@ import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import _ from 'lodash'
-import { AtIcon } from 'taro-ui'
 import ActionField from './action-field'
 import './styles.scss'
 
@@ -22,7 +21,7 @@ function EleObjectPicker(props) {
   return (
     <ActionField onClick={goObjectPickerPage} disabled={disabled} value={displayName} placeholder={placeholder}>
       <View className='action-field-picker' onClick={goObjectPickerPage}>
-        <AtIcon className='action-field-picker-icon' value='chevron-right' size={20} />
+        <View className='iconfont iconfont-right action-field-picker-icon' />
       </View>
     </ActionField>
   )

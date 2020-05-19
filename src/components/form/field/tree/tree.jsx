@@ -4,7 +4,6 @@ import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use.service'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
-import { AtIcon } from 'taro-ui'
 import './style.scss'
 
 function Tree(props) {
@@ -24,7 +23,6 @@ function Tree(props) {
 
   const isTrunk = isNotEmpty(nodes)
   const isSelected = selected === value
-  const actionIcon = visible ? 'chevron-down' : 'chevron-right'
   const subTreeClass = classNames('tree-subtree', { hidden: !visible })
   const treeItemClass = classNames('tree-item', { selected: isSelected, disabled })
 
@@ -33,7 +31,7 @@ function Tree(props) {
       <View className={treeItemClass} onClick={handleItemSelect}>
         {isTrunk && (
           <View className='tree-item-action-icon'>
-            <AtIcon value={actionIcon} size='18' />
+            {visible ? <View className='iconfont iconfont-down' /> : <View className='iconfont iconfont-right' />}
           </View>
         )}
 
@@ -42,7 +40,7 @@ function Tree(props) {
 
         {isSelected && (
           <View className='tree-item-selected-icon'>
-            <AtIcon value='check' size='18' />
+            <View className='iconfont iconfont-check' />
           </View>
         )}
       </View>

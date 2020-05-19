@@ -4,7 +4,7 @@ import { useVisible } from '@/service/use.service'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import _ from 'lodash'
-import { AtActionSheet, AtIcon } from 'taro-ui'
+import { AtActionSheet } from 'taro-ui'
 import './styles.scss'
 
 function ItemLabel(props) {
@@ -24,7 +24,7 @@ function ItemLabel(props) {
             {props.children}
           </Text>
 
-          {isNotEmpty(tips) && <AtIcon className='item-label-tips-icon' size={15} value='help' />}
+          {isNotEmpty(tips) && <View className='iconfont iconfont-question-circle item-label-tips-icon' />}
         </View>
 
         <AtActionSheet onClose={close} isOpened={visible}>

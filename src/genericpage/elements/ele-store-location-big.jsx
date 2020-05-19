@@ -3,7 +3,6 @@ import ServerImage from '@/server-image/server-image'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import PropTypes from 'prop-types'
-import { AtIcon } from 'taro-ui'
 import EleBreakLine from './ele-break-line'
 import './styles.scss'
 
@@ -27,10 +26,10 @@ function EleStoreLocationBig(props) {
       </View>
       <EleBreakLine />
       <View className='store-location-big-content' onClick={handleMakeCall}>
-        <AtIcon value='map-pin' size={18} color='orangered' />
+        <View className='iconfont iconfont-location' style={{ color: 'orangered' }} />
         <View className='store-location-big-content-address'>{address}</View>
         <View className='store-location-big-content-icon'>
-          <AtIcon value='phone' size={18} />
+          <View className='iconfont iconfont-phone' />
         </View>
       </View>
     </View>
