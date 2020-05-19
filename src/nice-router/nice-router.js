@@ -1,5 +1,4 @@
 import _ from 'lodash'
-
 import NavigationService from './navigation.service'
 
 const defaultViewConfig = {
@@ -37,11 +36,12 @@ NiceRouter.start = ({ config = {}, container }) => {
 
   NiceRouter.config = _.merge(defaultConfig, config)
 
-  const processedViewConfig = {}
-  _.forEach(NiceRouter.config.viewConfig, (value, key) => {
-    processedViewConfig[_.trim(key)] = value
+  const tempViewConfig = {}
+  const vcfg = NiceRouter.config.viewConfig
+  Object.keys(vcfg).map(key => {
+    tempViewConfig[key.trim()] = vcfg[key]
   })
-  NiceRouter.config.viewConfig = processedViewConfig
+  NiceRouter.config.viewConfig = tempViewConfig
 
   NiceRouter.status = NiceRouterStatus.done
 
