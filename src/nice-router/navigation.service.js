@@ -1,17 +1,27 @@
 import { isH5 } from '@/utils/index'
 import Taro from '@tarojs/taro'
-import qs from 'qs'
-import parse from 'url-parse'
 import ActionUtil from './action-util'
 
 import localCacheService from './local-cache.service'
-import { isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util'
+import {
+  isEmpty,
+  isLocalPagePath,
+  isNotEmpty,
+  LoadingType,
+  log,
+  noop,
+  parseTaroUri,
+  toTaroUrl,
+} from './nice-router-util'
 
 const PAGE_LEVEL_LIMIT = 10
 
 let _container = {} // eslint-disable-line
 
-const isH5Path = (uri = '') => uri.startsWith('https://') || uri.startsWith('http://')
+const isH5Path = (uri = '') => {
+  const str = uri.trim().toLowerCase()
+  return str.startsWith('https://') || str.startsWith('http://')
+}
 
 const NavigationService = {
   pagesResolves: {}, // 记得清空这个玩意，小心内存泄露
@@ -78,7 +88,10 @@ const NavigationService = {
   navigate(routeName, params, options = {}) {
     return new Promise((resolve, reject) => {
       const pages = Taro.getCurrentPages()
-      const url = ActionUtil.toTaroUrl(routeName, params)
+      const url = toTaroUrl(routeName, params)
+
+      console.log('taro-redirect', url)
+
       if (routeName) {
         let { navigationOptions: { method = 'navigateTo' } = {} } = options
         if (
@@ -162,15 +175,9 @@ const NavigationService = {
     }
 
     // 1, 前端页面跳转, page:///pages/home/home-page?type=qa 或跳转到HomePage的screen
-    const urlData = parse(linkToUrl)
-    const { protocol } = urlData
-    if (protocol === 'page:') {
-      const { query, pathname } = urlData
-      const queryParams = qs.parse(query)
-      const pageName = pathname
-      // const pageName = trim(pathname, '/')
-      log('.......', protocol, pathname, pageName)
-      return this.navigate(pageName, { ...params, ...queryParams })
+    if (isLocalPagePath(linkToUrl)) {
+      const { queryParams, pathname } = parseTaroUri(linkToUrl)
+      return this.navigate(pathname, { ...params, ...queryParams })
     }
 
     // 2, H5跳转：目标页面是Http页面，小程序中需要跳转到webview

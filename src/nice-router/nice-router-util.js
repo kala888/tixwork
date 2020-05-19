@@ -1,5 +1,6 @@
 import _ from 'lodash'
 
+const TARO_PROTOCOL_PRIFIX = 'page://'
 export const LoadingType = {
   none: 100,
   top: 1,
@@ -46,4 +47,49 @@ export const toBoolean = (value) => {
     }
   }
   return value
+}
+
+function trimProtocal(uri = '') {
+  const str = uri.trim()
+  const idx = str.indexOf(TARO_PROTOCOL_PRIFIX)
+  if (idx > -1) {
+    return str.slice(idx + 7)
+  }
+  return str
+}
+
+export function toTaroUrl(uri = '', params) {
+  const url = trimProtocal(uri)
+  if (isNotEmpty(params)) {
+    const postFix = _.map(params, (key, value) => key + '=' + value).join('&')
+    if (uri.indexOf('?') > -1) {
+      return `${url}&${postFix}`
+    }
+    return `${url}?${postFix}`
+  }
+  return url
+}
+
+/**
+ *
+ * @param uri 以/开头
+ * @returns {{params: {}, pathname: (string|string)}}
+ */
+export function parseTaroUri(uri = '') {
+  const url = trimProtocal(uri)
+  const urlData = url.split('?')
+  let params = {}
+  if (urlData.length > 1) {
+    const strAry = _.split(urlData[1], '&').map((i) => i.split('='))
+    params = _.fromPairs(strAry)
+  }
+  const page = urlData[0]
+  return {
+    pathname: page.startsWith('/') ? page : '/' + page,
+    params,
+  }
+}
+
+export function isLocalPagePath(uri = '') {
+  return uri.trim().startsWith(TARO_PROTOCOL_PRIFIX)
 }

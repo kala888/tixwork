@@ -63,8 +63,6 @@
     "nervjs": "^1.5.6",
     "path-to-regexp": "^3.0.0",
     "qr.js": "^0.0.0",
-    "qs": "^6.7.0",
-    "url-parse": "^1.4.7",
     "taro-ui": "^3.0.0-alpha"
   },
   "devDependencies": {

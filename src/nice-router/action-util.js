@@ -19,7 +19,6 @@
  */
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import _ from 'lodash'
-import qs from 'qs'
 
 const getActionUri = (action) => {
   let result = action
@@ -31,14 +30,6 @@ const getActionUri = (action) => {
 }
 const isActionLike = (action) => {
   return isNotEmpty(getActionUri(action))
-}
-
-const toTaroUrl = (uri, params) => {
-  if (isNotEmpty(params)) {
-    const p = qs.stringify(params)
-    return `${uri}?${p}`
-  }
-  return uri
 }
 
 const trans2Action = (routerAction = {}) => {
@@ -59,7 +50,6 @@ const getConfirmContent = (action = {}) => {
 const ActionUtil = {
   getActionUri,
   isActionLike,
-  toTaroUrl,
   trans2Action,
   getConfirmContent,
 }
