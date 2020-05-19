@@ -13,6 +13,8 @@ import ServerImage from '@/server-image/server-image'
 import { Block, Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 
+import './styles.scss'
+
 //mode=small,large
 function EleCard(props) {
   const { title, brief, imageUrl, status, flag, level, actionList, customized } = props

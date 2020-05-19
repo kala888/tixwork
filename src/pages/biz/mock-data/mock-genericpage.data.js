@@ -73,13 +73,13 @@ const boxBar = {
         'https://m.360buyimg.com/babel/s153x153_jfs/t23413/313/491967629/14808/517b7d49/5b31e8d1N985ae7e3.jpg!q70.dpg',
     },
     {
-      id: '333',
+      id: '444',
       title: '装修辅料',
       imageUrl:
         'https://m.360buyimg.com/babel/s153x153_jfs/t1/3933/33/9211/13517/5bac4845E11fbdd46/985d7735e419766b.jpg!q70.dpg',
     },
     {
-      id: '333',
+      id: '555',
       title: '装修攻略',
       imageUrl:
         'https://m.360buyimg.com/babel/s153x153_jfs/t23554/365/505863911/13001/735a7073/5b31e8e5N91dc44e7.jpg!q70.dpg',
@@ -89,6 +89,8 @@ const boxBar = {
 const footer = {
   tabs: [
     {
+      code: '1',
+      id: '1',
       title: '领取中心',
       imageUrl:
         'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
@@ -97,12 +99,16 @@ const footer = {
       text: 'new',
     },
     {
+      code: '2',
+      id: '2',
       title: '找折扣',
       imageUrl:
         'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
       selected: true,
     },
     {
+      code: '3',
+      id: '3',
       title: '领会员',
       imageUrl:
         'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
@@ -121,12 +127,14 @@ const breakLine = {
 const shopList = {
   dataContainer: {
     shop1: {
+      id: 'shop1',
       title: '百安居天府新区店',
       brief: '【装修旗舰店】免费测量，预定送智能家居',
       displayMode: 'auto',
       imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
     },
     shop2: {
+      id: 'shop2',
       title: '湛蓝科技',
       brief: '【空气治理专家】持牌机构，空气治理去甲醛',
       displayMode: 'image-on-left',
@@ -134,6 +142,7 @@ const shopList = {
         'https://m.360buyimg.com/babel/s370x259_jfs/t1/20729/24/4177/80676/5c2f1aeaE062589aa/ee7cc78db75d62ed.jpg!q70.dpg',
     },
     shop3: {
+      id: 'shop3',
       title: '小金狗回收',
       brief: '高科技环保企业，可再生资源再利用',
       displayMode: 'image-on-bottom',
@@ -147,6 +156,7 @@ const shopList = {
 const articleList = {
   dataContainer: {
     article1: {
+      id: 'article1',
       title: '装修如何高质量又省钱',
       displayMode: 'auto',
       imageList: [
@@ -164,6 +174,7 @@ const articleList = {
       ],
     },
     article2: {
+      id: 'article2',
       title: '挑选电器有技巧',
       displayMode: 'only-title',
       imageList: [
@@ -181,6 +192,7 @@ const articleList = {
       ],
     },
     article3: {
+      id: 'article3',
       title: '水电改造攻略',
       brief: '水电改造是坑货么？会不会被装修公司坑？难道没有合理的高质量水电改造？让我们一起来给大家分析一下',
       displayMode: 'single-image',
@@ -200,6 +212,7 @@ const articleList = {
     },
 
     article4: {
+      id: 'article4',
       title: '吊顶么？',
       displayMode: 'double-image',
       imageList: [
@@ -234,6 +247,7 @@ const productList = {
   list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }, { id: 'p4' }],
   dataContainer: {
     p1: {
+      id: 'p1',
       preTag: '自营',
       tags: ['618'],
       brand: '西门子',
@@ -242,6 +256,7 @@ const productList = {
       imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
     },
     p2: {
+      id: 'p2',
       preTag: '双链小超',
       tags: ['券'],
       brand: '可口可乐',
@@ -251,6 +266,7 @@ const productList = {
         'https://m.360buyimg.com/babel/s823x404_jfs/t21784/201/795134266/176047/3dad2026/5b18c66eN8c4deacf.jpg!q70.dpg',
     },
     p3: {
+      id: 'p3',
       preTag: '',
       tags: [''],
       brand: '靓家私',
@@ -260,6 +276,7 @@ const productList = {
         'https://m.360buyimg.com/babel/s370x259_jfs/t1/20729/24/4177/80676/5c2f1aeaE062589aa/ee7cc78db75d62ed.jpg!q70.dpg',
     },
     p4: {
+      id: 'p4',
       preTag: '官方旗舰',
       tags: ['券'],
       brand: '美丽新时代',
@@ -276,17 +293,20 @@ const waterfallList = {
   list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
   dataContainer: {
     p1: {
+      id: 'p111',
       title: '大冰箱',
       brief: '￥ 200.12',
       imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
     },
     p2: {
+      id: 'p222',
       title: '电视',
       brief: '$ 120',
       imageUrl:
         'https://m.360buyimg.com/babel/s823x404_jfs/t21784/201/795134266/176047/3dad2026/5b18c66eN8c4deacf.jpg!q70.dpg',
     },
     p3: {
+      id: 'p333',
       title: '洗衣机',
       brief: '￥ 11.33',
       imageUrl:
@@ -301,17 +321,20 @@ const horizontalList = {
   list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
   dataContainer: {
     p1: {
+      id: 'p11',
       title: '暖水瓶',
       brief: '￥ 30.00',
       imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
     },
     p2: {
+      id: 'p22',
       title: '保温杯',
       brief: '$ 444.00',
       imageUrl:
         'https://m.360buyimg.com/babel/s823x404_jfs/t21784/201/795134266/176047/3dad2026/5b18c66eN8c4deacf.jpg!q70.dpg',
     },
     p3: {
+      id: 'p33',
       title: '垃圾处理器',
       brief: '￥ 1221.33',
       imageUrl:

@@ -76,9 +76,9 @@ function Listof({
       >
         <View className={listofContainerClass} style={style}>
           {list.map((item, index) => {
-            const { id } = item
+            const key = `${item.id}_${item.code}_${item.title}`
             return (
-              <View key={id} className={itemContainerClass} style={listofContainerItemContainerStyle}>
+              <View key={key} className={itemContainerClass} style={listofContainerItemContainerStyle}>
                 <FlexLineItem
                   className='listof-container-item-wrapper'
                   index={index}

@@ -27,9 +27,9 @@ function NavigationBox(props) {
       {isNotEmpty(actionBarTitle) && <View className='navigation-box-title'>{actionBarTitle}</View>}
       <View className='navigation-box-actions'>
         {list.map((it) => {
-          const { icon, imageUrl, title, badge, id } = it
+          const { icon, imageUrl, title, badge } = it
           return (
-            <View key={id} className='navigation-box-item' onClick={handleClick.bind(this, it)}>
+            <View key={`${it.id}_${it.code}`} className='navigation-box-item' onClick={handleClick.bind(this, it)}>
               <View className='navigation-box-item-box'>
                 <AtBadge value={badge}>
                   <ActionIcon className='navigation-box-item-image' icon={icon} imageUrl={imageUrl} />

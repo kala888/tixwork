@@ -1,3 +1,5 @@
+@import 'src/styles/theme';
+
 .status-flag {
   &-bg {
     width: 0;
@@ -11,6 +13,7 @@
   }
 
   &-txt {
+    @extend %flex;
     justify-content: center;
     align-items: flex-end;
 
@@ -20,6 +23,7 @@
     right: -35px;
     width: 143px;
     height: 55px;
+    @include text-ellipsis;
     color: #fff;
     font-weight: 600;
   }

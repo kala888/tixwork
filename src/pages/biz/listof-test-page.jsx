@@ -28,7 +28,7 @@ const newsList = [
     ],
   },
   {
-    id: '22',
+    id: '33',
     title: '我退役了，要专注练习龙吸水',
     brief: '退役专注龙吸水！“田径泥石流”张国伟的沙雕日常',
     imageList: [
@@ -47,7 +47,7 @@ const newsList = [
     ],
   },
   {
-    id: '333',
+    id: '44',
     title: '中国发布新冠肺炎疫情信息、推进疫情防控国际合作纪事',
   },
 ]
@@ -159,11 +159,11 @@ const obj = {
 const cardList = [
   //竖版
   //横版-没图
-  { id: '31', ...obj, mode: ['vertical', 'default', 'vertical-small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '32', ...obj, mode: ['vertical', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '33', ...obj, mode: ['vertical', 'primary'], imageUrl: '', flag: '如' }, // 默认的 horizontal
-  { id: '34', ...obj, mode: ['vertical', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
-  { id: '35', ...obj, mode: ['vertical', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
+  { id: '131', ...obj, mode: ['vertical', 'default', 'vertical-small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  { id: '132', ...obj, mode: ['vertical', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  { id: '133', ...obj, mode: ['vertical', 'primary'], imageUrl: '', flag: '如' }, // 默认的 horizontal
+  { id: '134', ...obj, mode: ['vertical', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
+  { id: '135', ...obj, mode: ['vertical', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
 
   //默认，imageOnLeft
   { id: '1', ...obj, status: '待处理' }, //方图，一行title，一行brief，小的flag+最多3个字
@@ -173,10 +173,10 @@ const cardList = [
   { id: '12', ...obj, mode: ['vertical', 'vertical-small', 'circle'] }, // 竖版，小圆图，1/2屏幕宽，小的flag+最多3个字
 
   //横版-有图
-  { id: '21', ...obj, mode: ['horizontal'] }, // 默认的 horizontal
-  { id: '22', ...obj, mode: ['horizontal', 'circle', 'small'] }, //小圆图
-  { id: '23', ...obj, mode: ['horizontal', 'circle', 'avatar'] }, //头像，带光圈
-  { id: '24', ...obj, mode: ['horizontal', 'circle', 'large'] }, //大圆图
+  { id: '231', ...obj, mode: ['horizontal'] }, // 默认的 horizontal
+  { id: '232', ...obj, mode: ['horizontal', 'circle', 'small'] }, //小圆图
+  { id: '243', ...obj, mode: ['horizontal', 'circle', 'avatar'] }, //头像，带光圈
+  { id: '254', ...obj, mode: ['horizontal', 'circle', 'large'] }, //大圆图
   {
     id: '25',
     ...obj,

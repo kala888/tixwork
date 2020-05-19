@@ -13,11 +13,13 @@ import './me.scss'
 
 const Box_Navigator_List = [
   {
+    id: '4',
     code: 'FINE_DECORATION',
     imageUrl: MockService.randomImage(),
     title: '发起申请',
   },
   {
+    id: '3',
     code: 'BIZ_CHAIN',
     icon: 'app-2',
     title: '我发起',
@@ -26,11 +28,13 @@ const Box_Navigator_List = [
 
 const LineItem_Navigator_List = [
   {
+    id: '1',
     code: 'my-wrong-list',
     icon: 'app',
     title: '我参与的项目',
   },
   {
+    id: '2',
     code: 'my-favorite-list',
     icon: 'app-2',
     title: '我的收藏',
@@ -73,10 +77,9 @@ function MePage() {
       </View>
 
       <View className='me-page-body'>
-        {lineItemNavigatorList.map((it) => {
-          const { id } = it
-          return <NavigationLineItem key={id} {...it} />
-        })}
+        {lineItemNavigatorList.map((it) => (
+          <NavigationLineItem key={`${it.id}_${it.code}`} {...it} />
+        ))}
       </View>
     </View>
   )
