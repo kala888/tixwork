@@ -2,7 +2,7 @@ import React from 'react'
 import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
-import isNil from 'lodash/isNil'
+import _ from 'lodash'
 
 import FormUtil from '../form/form-util'
 import FlexField from './field/flex-field'
@@ -41,7 +41,7 @@ function FormItem(props) {
 
   const showRequiredIcon = () => {
     if (showRequired) {
-      return isNil(required) ? !!rules.find((rule) => rule.required) : required
+      return _.isNil(required) ? !!rules.find((rule) => rule.required) : required
     }
     return false
   }

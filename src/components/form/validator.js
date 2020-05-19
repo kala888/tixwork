@@ -1,6 +1,6 @@
 import { isEmpty } from '@/nice-router/nice-router-util'
 import Schema from 'async-validator'
-import toNumber from 'lodash/toNumber'
+import _ from 'lodash'
 
 //valid OOTB type:
 // const VALIDATOR_OOTB_TYP = [
@@ -39,7 +39,7 @@ function transformValue(type, value) {
     return value
   }
   const isNumberLike = numberLikeType.includes(type)
-  return isNumberLike ? toNumber(value) : value
+  return isNumberLike ? _.toNumber(value) : value
 }
 
 // function getSpecialValidator(rule, type) {

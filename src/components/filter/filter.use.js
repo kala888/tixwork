@@ -1,7 +1,6 @@
 import { isEmpty } from '@/nice-router/nice-router-util'
 import { useEffect, useState } from 'react'
-import clone from 'lodash/clone'
-import remove from 'lodash/remove'
+import _ from 'lodash'
 
 export const useFacet = (tabs = [], title, code, facetList = []) => {
   const [facetGroup, setFaceGroup] = useState(facetList)
@@ -14,9 +13,9 @@ export const useFacet = (tabs = [], title, code, facetList = []) => {
 
   const onFacetChange = (item) => {
     setSelectedFacet((pre) => {
-      const list = clone(pre)
+      const list = _.clone(pre)
       const isUncheckAction = list.findIndex((it) => it.id === item.id) > -1
-      remove(list, (it) => it.facet === item.facet || it.id === item.id)
+      _.remove(list, (it) => it.facet === item.facet || it.id === item.id)
       const result = isUncheckAction ? [] : [item]
       return result.concat(list)
     })

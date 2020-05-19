@@ -2,7 +2,7 @@ import React from 'react'
 import { toRpx } from '@/utils/index'
 import { Canvas } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import isNil from 'lodash/isNil'
+import _ from 'lodash'
 import ErrorCorrectLevel from 'qr.js/lib/ErrorCorrectLevel'
 import QRCodeImpl from 'qr.js/lib/QRCode'
 
@@ -83,7 +83,7 @@ export default class EleQrcode extends React.PureComponent {
       })
     })
     canvas.save()
-    if (!isNil(logo)) {
+    if (!_.isNil(logo)) {
       canvas.drawImage(logo, (size - logoSize) / 2, (size - logoSize) / 2, logoSize, logoSize)
     }
     canvas.draw()

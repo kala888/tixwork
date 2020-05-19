@@ -1,7 +1,4 @@
-import isBoolean from 'lodash/isBoolean'
-import lodashIsEmpty from 'lodash/isEmpty'
-import isNumber from 'lodash/isNumber'
-import isString from 'lodash/isString'
+import _ from 'lodash'
 
 export const LoadingType = {
   none: 100,
@@ -27,10 +24,10 @@ export function log(...params) {
 // {} => true
 // {a:'1'} => false
 export const isEmpty = (value) => {
-  if (isNumber(value) || isBoolean(value)) {
+  if (_.isNumber(value) || _.isBoolean(value)) {
     return false
   }
-  return lodashIsEmpty(value)
+  return _.isEmpty(value)
 }
 export const isNotEmpty = (value) => {
   return !isEmpty(value)
@@ -39,7 +36,7 @@ export const toBoolean = (value) => {
   if (isEmpty(value)) {
     return false
   }
-  if (isString(value)) {
+  if (_.isString(value)) {
     const p = value.toLowerCase().trim()
     if (p === 'true') {
       return true

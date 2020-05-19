@@ -7,7 +7,7 @@ import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 import { View } from '@tarojs/components'
 import { useSelector } from 'react-redux'
-import isNil from 'lodash/isNil'
+import _ from 'lodash'
 import { AtButton } from 'taro-ui'
 
 import FormSteps from './form-steps'
@@ -60,7 +60,7 @@ function GenericformPage() {
       const { fieldList: fields = [] } = group
       for (const field of fields) {
         const { name, value } = field
-        if (!isNil(value)) {
+        if (!_.isNil(value)) {
           defaultValues[name] = value
         }
       }

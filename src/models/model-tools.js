@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-import mergeWith from 'lodash/mergeWith'
+import _ from 'lodash'
 
 function replaceArray(objValue, srcValue) {
   if (Array.isArray(objValue)) {
@@ -32,7 +32,7 @@ function mergeState(preState = {}, newState = {}, doMerge = false, arrayMerge = 
   const processor = arrayMerge === 'replace' ? replaceArray : concatArray
   // 小程序下没问题，但是H5中，redux做的浅比较，ajax会有问题
   // const result = mergeWith(preState, newState, processor)
-  const result = mergeWith({}, preState, newState, processor)
+  const result = _.mergeWith({}, preState, newState, processor)
   console.log('merged result', result)
 
   return result

@@ -1,6 +1,4 @@
-import forEach from 'lodash/forEach'
-import merge from 'lodash/merge'
-import trim from 'lodash/trim'
+import _ from 'lodash'
 
 import NavigationService from './navigation.service'
 
@@ -37,11 +35,11 @@ const NiceRouter = {
 NiceRouter.start = ({ config = {}, container }) => {
   NavigationService.setContainer(container)
 
-  NiceRouter.config = merge(defaultConfig, config)
+  NiceRouter.config = _.merge(defaultConfig, config)
 
   const processedViewConfig = {}
-  forEach(NiceRouter.config.viewConfig, (value, key) => {
-    processedViewConfig[trim(key)] = value
+  _.forEach(NiceRouter.config.viewConfig, (value, key) => {
+    processedViewConfig[_.trim(key)] = value
   })
   NiceRouter.config.viewConfig = processedViewConfig
 

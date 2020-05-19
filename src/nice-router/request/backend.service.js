@@ -1,10 +1,4 @@
-import cloneDeep from 'lodash/cloneDeep'
-import forIn from 'lodash/forIn'
-import isNil from 'lodash/isNil'
-import isObject from 'lodash/isObject'
-import keys from 'lodash/keys'
-import trim from 'lodash/trim'
-import unset from 'lodash/unset'
+import _ from 'lodash'
 import { isNotEmpty, LoadingType, log } from '../nice-router-util'
 import StorageTools from '../storage-tools'
 import HttpRequest from './http-request'
@@ -16,13 +10,13 @@ const BackendService = {}
 const replaceUrlPlaceholder = (pUri, params) => {
   let lastParams = params
   let uri = pUri
-  if (isNotEmpty(params) || trim(pUri)) {
-    lastParams = cloneDeep(params)
-    keys(params).forEach((key) => {
+  if (isNotEmpty(params) || _.trim(pUri)) {
+    lastParams = _.cloneDeep(params)
+    _.keys(params).forEach((key) => {
       const tmp = `:${key}`
       if (tmp && uri.indexOf(tmp) > -1) {
         uri = uri.replace(tmp, params[key] || EMPTY_PARAMETER_TOKEN)
-        unset(lastParams, key)
+        _.unset(lastParams, key)
       }
     })
   }
@@ -31,8 +25,8 @@ const replaceUrlPlaceholder = (pUri, params) => {
 
 function removeEmptyValues(params = {}) {
   const result = {}
-  forIn(params, (value, key) => {
-    if (!isNil(value)) {
+  _.forIn(params, (value, key) => {
+    if (!_.isNil(value)) {
       result[key] = value
     }
   })
@@ -86,7 +80,7 @@ BackendService.send = async (action = {}) => {
 }
 
 function isCacheable(resp) {
-  if (!isObject(resp)) {
+  if (!_.isObject(resp)) {
     return false
   }
   const { headers = {} } = resp

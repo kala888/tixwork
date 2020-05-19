@@ -1,8 +1,7 @@
 import React, { useEffect, useImperativeHandle, useMemo, useState, forwardRef } from 'react'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
-import isFunction from 'lodash/isFunction'
-import omit from 'lodash/omit'
+import _ from 'lodash'
 
 import SectionBar from '../section-bar/section-bar'
 import FormItem from './form-item'
@@ -69,7 +68,7 @@ function EleForm(props, ref) {
       }))
     } else {
       setFieldErrors((preState) => {
-        return omit(preState, name)
+        return _.omit(preState, name)
       })
     }
     // 记录值
@@ -78,7 +77,7 @@ function EleForm(props, ref) {
       [name]: value,
     }))
 
-    if (isFunction(onFieldChange)) {
+    if (_.isFunction(onFieldChange)) {
       onFieldChange(name, fieldValues)
     }
   }

@@ -2,7 +2,7 @@ import React from 'react'
 import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
-import isObject from 'lodash/isObject'
+import _ from 'lodash'
 import { AtIcon } from 'taro-ui'
 import ActionField from './action-field'
 import './styles.scss'
@@ -18,7 +18,7 @@ function EleObjectPicker(props) {
       onChange(item)
     }
   }
-  let displayName = isObject(value) ? value.title : value
+  let displayName = _.isObject(value) ? value.title : value
   return (
     <ActionField onClick={goObjectPickerPage} disabled={disabled} value={displayName} placeholder={placeholder}>
       <View className='action-field-picker' onClick={goObjectPickerPage}>

@@ -1,5 +1,4 @@
-import curryRight from 'lodash/curryRight'
-import trim from 'lodash/trim'
+import _ from 'lodash'
 
 // const logo = require('./images/default_id_icon.png')
 
@@ -21,7 +20,7 @@ function loadServerImage(uri, style) {
 }
 
 // taro 1.3以后才支持克里化
-const curriedLoadImgWithStyle = curryRight(loadServerImage)
+const curriedLoadImgWithStyle = _.curryRight(loadServerImage)
 const loadTinyImg = curriedLoadImgWithStyle('?x-oss-process=style/tiny')
 const loadSmallImg = curriedLoadImgWithStyle('?x-oss-process=style/small')
 const loadMiddleImg = curriedLoadImgWithStyle('?x-oss-process=style/middle')
@@ -32,7 +31,7 @@ const loadOriginImg = curriedLoadImgWithStyle('?x-oss-process=style/origin')
 const loadThumbnailImg = curriedLoadImgWithStyle('?x-oss-process=style/thumbnail')
 
 const getServerImagUrl = (uri, size = 'normal') => {
-  let url = trim(uri || '')
+  let url = _.trim(uri || '')
   let result = url
   if (url) {
     switch (size) {

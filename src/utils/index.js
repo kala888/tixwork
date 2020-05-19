@@ -1,10 +1,6 @@
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import Taro from '@tarojs/taro'
-import clone from 'lodash/clone'
-import forEach from 'lodash/forEach'
-import isNaN from 'lodash/isNaN'
-import isNumber from 'lodash/isNumber'
-import remove from 'lodash/remove'
+import _ from 'lodash'
 
 let device = {}
 
@@ -17,7 +13,7 @@ function getDevice() {
 
 export function toRpx(num) {
   // Taro.pxTransform
-  if (isNumber(num)) {
+  if (_.isNumber(num)) {
     const width = getDeviceWidth()
     const result = (num * (750 / width)).toFixed(2)
     return `${result}rpx`
@@ -49,7 +45,7 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
     return targetList ? doEnrichment(targetList) : []
   }
   const tempObj = {}
-  forEach(names, (it) => {
+  _.forEach(names, (it) => {
     const list = root[it] || []
     if (list.length > 0) {
       tempObj[it] = doEnrichment(list)
@@ -60,7 +56,7 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
 
 export function transToDate(value) {
   const dateValue = new Date(value)
-  const ifDateType = dateValue instanceof Date && !isNaN(dateValue)
+  const ifDateType = dateValue instanceof Date && !_.isNaN(dateValue)
   return ifDateType ? dateValue : null
 }
 
@@ -101,7 +97,7 @@ export function formatMoney(money) {
   if (isEmpty(money)) {
     return ''
   }
-  if (isNumber(money)) {
+  if (_.isNumber(money)) {
     return money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
   }
   return money
@@ -120,8 +116,8 @@ export function isDevEnv() {
 }
 
 export function removeOrPush(list = [], item, withClone = false) {
-  const result = withClone ? clone(list) : list
-  const target = remove(result, item)
+  const result = withClone ? _.clone(list) : list
+  const target = _.remove(result, item)
   if (target.length === 0) {
     result.push(item)
   }

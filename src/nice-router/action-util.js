@@ -18,12 +18,12 @@
  *  stateAction  // action还能指定获得结果后，触发哪个state
  */
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-import isObject from 'lodash/isObject'
+import _ from 'lodash'
 import qs from 'qs'
 
 const getActionUri = (action) => {
   let result = action
-  if (isObject(action)) {
+  if (_.isObject(action)) {
     const { linkToUrl, uri } = action
     result = linkToUrl || uri
   }
@@ -44,7 +44,7 @@ const toTaroUrl = (uri, params) => {
 const trans2Action = (routerAction = {}) => {
   const { action, ...others } = routerAction
   const linkToUrl = getActionUri(action)
-  const tmp = isObject(action) ? action : {}
+  const tmp = _.isObject(action) ? action : {}
   return {
     ...others,
     ...tmp,

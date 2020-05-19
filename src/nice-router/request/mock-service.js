@@ -1,4 +1,4 @@
-import sample from 'lodash/sample'
+import _ from 'lodash'
 
 const imageList = [
   'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
@@ -15,7 +15,7 @@ const MockService = {
     MockDataCache[uri] = data
   },
   getMockResp: (uri) => MockDataCache[uri],
-  randomImage: () => sample(imageList),
+  randomImage: () => _.sample(imageList),
   defaultImage: imageList[2],
 }
 // 凑活用

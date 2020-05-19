@@ -1,9 +1,8 @@
-import isObject from 'lodash/isObject'
-import merge from 'lodash/merge'
+import _ from 'lodash'
 
 function getValue(fileValue) {
   let value = fileValue
-  if (fileValue && isObject(fileValue.target)) {
+  if (fileValue && _.isObject(fileValue.target)) {
     value = fileValue.target.value
   }
   return value
@@ -25,7 +24,7 @@ const fieldConfig = {
 function mergeConfig(field) {
   // 注意使用merge的时候，是后面的merge到前面的对象上，所有不会新增对象，
   // 前面的对象如果是global，有单例问题
-  return merge({}, BaseField, fieldConfig[field.type], field)
+  return _.merge({}, BaseField, fieldConfig[field.type], field)
 }
 
 const FormUtil = {

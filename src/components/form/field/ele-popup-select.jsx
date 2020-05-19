@@ -2,7 +2,7 @@ import React from 'react'
 import { isEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use.service'
 import { View } from '@tarojs/components'
-import isString from 'lodash/isString'
+import _ from 'lodash'
 import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtIcon, AtRadio } from 'taro-ui'
 
 import ActionField from './action-field'
@@ -25,7 +25,7 @@ function ElePopupSelect(props) {
     if (isEmpty(value)) {
       currentValue = multiple ? [] : ''
     }
-    if (multiple && isString(value)) {
+    if (multiple && _.isString(value)) {
       currentValue = [value]
     }
     const displayValue = candidateValues
