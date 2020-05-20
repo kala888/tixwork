@@ -15,10 +15,6 @@ function EleText(props) {
   )
 }
 
-EleText.options = {
-  addGlobalClass: true,
-}
-
 EleText.defaultProps = {
   text: '',
   action: null,

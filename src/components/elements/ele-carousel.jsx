@@ -84,10 +84,6 @@ function EleCarousel(props) {
   )
 }
 
-EleCarousel.options = {
-  addGlobalClass: true,
-}
-
 EleCarousel.defaultProps = {
   items: [],
   autoplay: false,

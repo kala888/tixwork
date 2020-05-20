@@ -34,8 +34,4 @@ function SectionBar(props) {
   )
 }
 
-SectionBar.options = {
-  addGlobalClass: true,
-}
-
 export default SectionBar

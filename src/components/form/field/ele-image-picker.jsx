@@ -121,10 +121,6 @@ function EleImagePicker(props) {
   )
 }
 
-EleImagePicker.options = {
-  addGlobalClass: true,
-}
-
 EleImagePicker.defaultProps = {
   brief: '',
   maxLength: 4,

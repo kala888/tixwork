@@ -40,10 +40,6 @@ function EleActionList({ list, customStyle, className }) {
   )
 }
 
-EleActionList.options = {
-  addGlobalClass: true,
-}
-
 EleActionList.defaultProps = {
   list: [],
   className: null,

@@ -51,8 +51,4 @@ function GenericPageBase(props) {
   )
 }
 
-GenericPageBase.options = {
-  addGlobalClass: true,
-}
-
 export default GenericPageBase

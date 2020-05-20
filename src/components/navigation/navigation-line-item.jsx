@@ -26,7 +26,4 @@ function NavigationLineItem(props) {
   )
 }
 
-NavigationLineItem.options = {
-  addGlobalClass: true,
-}
 export default NavigationLineItem

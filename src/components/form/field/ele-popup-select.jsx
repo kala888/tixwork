@@ -71,10 +71,6 @@ function ElePopupSelect(props) {
   )
 }
 
-ElePopupSelect.options = {
-  addGlobalClass: true,
-}
-
 ElePopupSelect.defaultProps = {
   multiple: false,
   value: [],

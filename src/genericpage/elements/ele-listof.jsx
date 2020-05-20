@@ -16,7 +16,4 @@ function EleListof(props) {
   )
 }
 
-EleListof.options = {
-  addGlobalClass: true,
-}
 export default EleListof

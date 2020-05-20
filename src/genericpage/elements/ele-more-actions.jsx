@@ -56,9 +56,6 @@ function EleMoreActions(props) {
   )
 }
 
-EleMoreActions.options = {
-  addGlobalClass: true,
-}
 EleMoreActions.defaultProps = {
   text: '',
   imageUrl: '',

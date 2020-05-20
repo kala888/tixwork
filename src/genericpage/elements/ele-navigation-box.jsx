@@ -17,10 +17,6 @@ function EleNavigationBox(props) {
   return <NavigationBox list={kids} className={rootClass} />
 }
 
-EleNavigationBox.options = {
-  addGlobalClass: true,
-}
-
 EleNavigationBox.defaultProps = {
   className: null,
   kids: [],

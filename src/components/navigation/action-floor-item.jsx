@@ -33,9 +33,6 @@ function ActionFloorItem(props) {
   )
 }
 
-ActionFloorItem.options = {
-  addGlobalClass: true,
-}
 ActionFloorItem.defaultProps = {
   action: {},
 }

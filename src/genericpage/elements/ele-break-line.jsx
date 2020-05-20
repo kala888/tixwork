@@ -25,10 +25,6 @@ function EleBreakLine({ color, height, text, fontColor, customStyle, className }
   )
 }
 
-EleBreakLine.options = {
-  addGlobalClass: true,
-}
-
 EleBreakLine.defaultProps = {
   color: '#ddd',
   height: 1,

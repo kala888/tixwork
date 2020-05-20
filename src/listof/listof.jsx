@@ -104,10 +104,6 @@ function Listof({
   )
 }
 
-Listof.options = {
-  addGlobalClass: true,
-}
-
 Listof.defaultProps = {
   dataContainer: {},
   list: [],

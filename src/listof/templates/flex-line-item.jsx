@@ -14,9 +14,6 @@ import Product from './product/product'
 import './styles.scss'
 
 export default class FlexLineItem extends React.Component {
-  static options = {
-    addGlobalClass: true,
-  }
   static defaultProps = {
     displayMode: 'auto',
     onItemPress: null,

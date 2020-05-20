@@ -10,7 +10,4 @@ function TestPage() {
   return <View />
 }
 
-TestPage.options = {
-  addGlobalClass: true,
-}
 export default TestPage

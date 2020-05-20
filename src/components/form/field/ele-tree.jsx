@@ -59,9 +59,6 @@ function EleTree(props) {
   )
 }
 
-EleTree.options = {
-  addGlobalClass: true,
-}
 EleTree.defaultProps = {
   root: {},
 }

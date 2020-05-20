@@ -71,7 +71,6 @@ function EleFlex(props) {
 
 EleFlex.options = {
   multipleSlots: true,
-  addGlobalClass: true,
 }
 
 EleFlex.defaultProps = {

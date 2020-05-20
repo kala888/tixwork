@@ -17,8 +17,4 @@ BasePage.defaultProps = {
   shareAction: {},
 }
 
-BasePage.options = {
-  addGlobalClass: true,
-}
-
 export default BasePage

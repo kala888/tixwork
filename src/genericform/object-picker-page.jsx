@@ -68,8 +68,4 @@ function ObjectPickerPage() {
   )
 }
 
-ObjectPickerPage.options = {
-  addGlobalClass: true,
-}
-
 export default ObjectPickerPage

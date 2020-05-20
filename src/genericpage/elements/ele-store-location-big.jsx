@@ -36,10 +36,6 @@ function EleStoreLocationBig(props) {
   )
 }
 
-EleStoreLocationBig.options = {
-  addGlobalClass: true,
-}
-
 EleStoreLocationBig.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   logo: PropTypes.string,

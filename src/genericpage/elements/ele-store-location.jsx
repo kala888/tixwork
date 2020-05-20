@@ -94,10 +94,6 @@ function EleStoreLocation(props) {
   )
 }
 
-EleStoreLocation.options = {
-  addGlobalClass: true,
-}
-
 EleStoreLocation.defaultProps = {
   address: '店铺在这里',
   longitude: null,

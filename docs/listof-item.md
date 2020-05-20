@@ -272,8 +272,5 @@ function HelloDaaSPage() {
   )
 }
 
-HelloDaaSPage.options = {
-  addGlobalClass: true,
-}
 export default HelloDaaSPage
 ```

@@ -41,9 +41,6 @@ function ItemWrapper(props) {
   )
 }
 
-ItemWrapper.options = {
-  addGlobalClass: true,
-}
 ItemWrapper.defaultProps = {
   errors: [],
   clear: true,

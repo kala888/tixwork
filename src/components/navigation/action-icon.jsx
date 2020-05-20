@@ -23,7 +23,4 @@ function ActionIcon({ value, icon, imageUrl, className, mode }) {
   )
 }
 
-ActionIcon.options = {
-  addGlobalClass: true,
-}
 export default ActionIcon

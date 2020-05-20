@@ -67,8 +67,4 @@ function ListofPageBase(props) {
   )
 }
 
-ListofPageBase.options = {
-  addGlobalClass: true,
-}
-
 export default ListofPageBase

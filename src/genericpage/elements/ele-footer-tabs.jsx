@@ -25,9 +25,6 @@ function EleFooterTabs({ tabs, onClick }) {
   return <AtTabBar fixed tabList={tabList} onClick={selectTab} current={current} />
 }
 
-EleFooterTabs.options = {
-  addGlobalClass: true,
-}
 EleFooterTabs.defaultProps = {
   tabs: [],
 }

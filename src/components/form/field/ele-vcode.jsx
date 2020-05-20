@@ -55,10 +55,6 @@ function EleVcode(props) {
   )
 }
 
-EleVcode.options = {
-  addGlobalClass: true,
-}
-
 EleVcode.defaultProps = {
   name: '',
   placeholder: '请输入手机号码',

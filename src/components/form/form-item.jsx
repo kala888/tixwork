@@ -78,10 +78,6 @@ function FormItem(props) {
   )
 }
 
-FormItem.options = {
-  addGlobalClass: true,
-}
-
 FormItem.defaultProps = {
   errors: [],
   onChange: noop,

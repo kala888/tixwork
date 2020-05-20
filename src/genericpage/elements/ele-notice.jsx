@@ -32,10 +32,6 @@ function EleNotice(props) {
   )
 }
 
-EleNotice.options = {
-  addGlobalClass: true,
-}
-
 EleNotice.defaultProps = {
   items: [],
   imageUrl: '',

@@ -14,8 +14,4 @@ function ServerImage(props) {
   return <Image className={rootCls} style={customStyle} src={remotePath} mode={mode} />
 }
 
-ServerImage.options = {
-  addGlobalClass: true,
-}
-
 export default ServerImage

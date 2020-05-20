@@ -67,8 +67,4 @@ function ActionFloor({ actions = [] }) {
   )
 }
 
-ActionFloor.options = {
-  addGlobalClass: true,
-}
-
 export default ActionFloor

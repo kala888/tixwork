@@ -53,9 +53,6 @@ function FooterTips(props) {
   )
 }
 
-FooterTips.options = {
-  addGlobalClass: true,
-}
 FooterTips.defaultProps = {
   listMeta: null,
   loading: false,

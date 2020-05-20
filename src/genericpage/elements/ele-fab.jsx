@@ -27,9 +27,6 @@ function EleFab(props) {
   )
 }
 
-EleFab.options = {
-  addGlobalClass: true,
-}
 EleFab.defaultProps = {
   imageUrl: null,
   text: '',

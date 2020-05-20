@@ -95,8 +95,4 @@ function GenericformPage() {
   )
 }
 
-GenericformPage.options = {
-  addGlobalClass: true,
-}
-
 export default GenericformPage

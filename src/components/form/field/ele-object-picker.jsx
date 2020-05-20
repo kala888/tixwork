@@ -27,9 +27,6 @@ function EleObjectPicker(props) {
   )
 }
 
-EleObjectPicker.options = {
-  addGlobalClass: true,
-}
 EleObjectPicker.defaultProps = {
   onChange: noop,
 }

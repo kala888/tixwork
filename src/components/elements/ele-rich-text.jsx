@@ -16,8 +16,4 @@ EleRichText.defaultProps = {
   float: false,
 }
 
-EleRichText.options = {
-  addGlobalClass: true,
-}
-
 export default EleRichText

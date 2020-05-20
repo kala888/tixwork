@@ -22,10 +22,6 @@ function EleImage(props) {
   )
 }
 
-EleImage.options = {
-  addGlobalClass: true,
-}
-
 EleImage.defaultProps = {
   imageUrl: null,
   src: null,

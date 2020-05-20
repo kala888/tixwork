@@ -38,10 +38,6 @@ function ItemLabel(props) {
   )
 }
 
-ItemLabel.options = {
-  addGlobalClass: true,
-}
-
 ItemLabel.defaultProps = {
   required: true,
 }

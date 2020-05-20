@@ -25,10 +25,6 @@ function ActionField(props) {
   )
 }
 
-ActionField.options = {
-  addGlobalClass: true,
-}
-
 ActionField.defaultProps = {
   disabled: false,
   onClick: noop,

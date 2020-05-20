@@ -44,7 +44,4 @@ function NavigationBox(props) {
   )
 }
 
-NavigationBox.options = {
-  addGlobalClass: true,
-}
 export default NavigationBox

@@ -25,9 +25,6 @@ function FormSteps({ steps }) {
   )
 }
 
-FormSteps.options = {
-  addGlobalClass: true,
-}
 FormSteps.defaultProps = {
   steps: [],
 }

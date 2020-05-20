@@ -140,10 +140,6 @@ function EleButton({
   )
 }
 
-EleButton.options = {
-  addGlobalClass: true,
-}
-
 EleButton.defaultProps = {
   title: '',
   btnType: '',

@@ -148,8 +148,4 @@ FilterBar.defaultProps = {
   max: 4,
 }
 
-FilterBar.options = {
-  addGlobalClass: true,
-}
-
 export default FilterBar

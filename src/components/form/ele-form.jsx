@@ -163,8 +163,4 @@ function EleForm(props, ref) {
   )
 }
 
-EleForm.options = {
-  addGlobalClass: true,
-}
-
 export default forwardRef(EleForm)
