@@ -1,19 +1,18 @@
 import React from 'react'
-/*
- * Copyright(c) 2020 nice-router
- *    Date: 2020/5/9 下午4:48
- *    Author: Kala
- */
-
 import EleActionList from '@/components/elements/ele-action-list'
 import StatusFlag from '@/components/elements/ele-card/status-flag'
 import NavigationService from '@/nice-router/navigation.service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import ServerImage from '@/server-image/server-image'
-import { Block, Text, View } from '@tarojs/components'
+import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 
 import './styles.scss'
+/*
+ * Copyright(c) 2020 nice-router
+ *    Date: 2020/5/9 下午4:48
+ *    Author: Kala
+ */
 
 //mode=small,large
 function EleCard(props) {
@@ -46,21 +45,18 @@ function EleCard(props) {
             <Text className='ele-card-cover-txt'>{flag}</Text>
           )}
         </View>
-
-        <View className='ele-card-info'>
-          {props.children}
-          {!customized && (
-            <Block>
-              <Text className='ele-card-info-title'>{title}</Text>
-              <Text className='ele-card-info-brief'>{brief}</Text>
-              {actionList.length > 0 && (
-                <View className='card-action-list'>
-                  <EleActionList list={actionList} />
-                </View>
-              )}
-            </Block>
-          )}
-        </View>
+        {props.children}
+        {!customized && (
+          <View className='ele-card-info'>
+            <Text className='ele-card-info-title'>{title}</Text>
+            <Text className='ele-card-info-brief'>{brief}</Text>
+            {actionList.length > 0 && (
+              <View className='card-action-list'>
+                <EleActionList list={actionList} />
+              </View>
+            )}
+          </View>
+        )}
       </View>
     </View>
   )

@@ -1,7 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { isH5 } from '@/utils/index'
-import Taro from '@tarojs/taro'
+import Taro, { Current } from '@tarojs/taro'
 import _ from 'lodash'
+
 import GlobalToast from './global-toast'
 import LocalCache from './local-cache.service'
 import NavigationService from './navigation.service'
@@ -140,7 +141,7 @@ function getCurrentPage() {
   const pages = Taro.getCurrentPages()
   const currentPage = _.last(pages) || { route: '' }
   //TODO
-  return isH5() ? currentPage.$router.path : '/' + currentPage.route
+  return isH5() ? Current.router.path : '/' + currentPage.route
 }
 
 function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPage }) {

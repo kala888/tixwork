@@ -41,6 +41,8 @@
   }
 
   &-txt {
+    display: flex !important;
+    text-align: center;
     @extend %flex-center;
     height: 100px;
     width: 100px;
@@ -57,17 +59,17 @@
   height: 100%;
 
   &-title {
-    padding-bottom: 10px;
     font-size: 32px;
-    height: 1.2rem;
+    display: -webkit-box !important;
     @include lamp-clamp(1);
   }
 
   &-brief {
-    padding: 0 10px;
+    padding: 10px 10px 0;
     color: $text-color-light;
     font-size: 26px;
-    min-height: 1rem;
+    display: -webkit-box !important;
+    min-height: 0.9rem;
     @include lamp-clamp(1);
   }
 }
@@ -114,6 +116,8 @@
   }
 
   .ele-card-info-brief {
+    height: unset;
+    white-space: pre-wrap;
     @include lamp-clamp(3);
   }
 }

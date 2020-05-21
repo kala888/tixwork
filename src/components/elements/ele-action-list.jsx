@@ -28,7 +28,7 @@ function EleActionList({ list, customStyle, className }) {
               extraData={extraData}
               className='ele-action-list-btn'
             >
-              <View>
+              <View className='ele-action-list-btn-container'>
                 {it.imageUrl && <ServerImage className='ele-action-list-btn-image' src={it.imageUrl} />}
                 <Text> {it.title}</Text>
               </View>

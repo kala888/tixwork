@@ -45,7 +45,10 @@
     font-weight: 600;
     width: 100%;
     padding: 0;
-    height: 1.5rem;
+    height: 1.1rem;
+    &-container {
+      padding: 0 15px;
+    }
 
     &-image {
       //margin-top: -25px;

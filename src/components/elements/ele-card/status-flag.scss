@@ -16,7 +16,7 @@
     @extend %flex;
     justify-content: center;
     align-items: flex-end;
-
+    text-align: center;
     transform: rotate(45deg);
     position: absolute;
     top: 9px;
@@ -54,7 +54,7 @@
     font-size: 22px;
     height: 40px;
     width: 120px;
-    right: -33px;
-    top: 9px;
+    right: -26px;
+    top: 16px;
   }
 }
