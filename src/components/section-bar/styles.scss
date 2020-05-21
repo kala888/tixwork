@@ -21,10 +21,11 @@
   &-action {
     @extend %flex-row;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: center;
     flex: 1;
     color: $text-color-light;
     height: 100%;
+    text-align: center;
 
     &-title {
       font-size: 24px;
@@ -34,7 +35,7 @@
     }
 
     &-icon {
-      margin-bottom: -4px;
+      margin-bottom: -3px;
     }
   }
 }
