@@ -16,7 +16,7 @@ import './styles.scss'
 
 //mode=small,large
 function EleCard(props) {
-  const { title, brief, imageUrl, status, flag, level, actionList, customized } = props
+  const { title, brief, imageUrl, status, flag, level, actionList } = props
   const { mode = [] } = props
   const flagSize = mode.includes('large') ? 'large' : 'small'
   const hasImage = isNotEmpty(imageUrl)
@@ -45,8 +45,9 @@ function EleCard(props) {
             <Text className='ele-card-cover-txt'>{flag}</Text>
           )}
         </View>
-        {props.children}
-        {!customized && (
+        {props.children ? (
+          props.children
+        ) : (
           <View className='ele-card-info'>
             <Text className='ele-card-info-title'>{title}</Text>
             <Text className='ele-card-info-brief'>{brief}</Text>
@@ -70,7 +71,6 @@ EleCard.defaultProps = {
   flag: '',
   level: '',
   actionList: [],
-  customized: false,
 }
 
 export default EleCard

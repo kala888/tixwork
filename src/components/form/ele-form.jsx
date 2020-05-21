@@ -151,7 +151,6 @@ function EleForm(props, ref) {
                     value={value}
                     errors={errors}
                     onChange={handleFieldChange}
-                    customized={false}
                   />
                 )
               })}

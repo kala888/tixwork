@@ -25,7 +25,6 @@ function FormItem(props) {
     label,
     tips,
     layout,
-    customized,
     onChange,
   } = props
 
@@ -70,8 +69,7 @@ function FormItem(props) {
           {label}
         </ItemLabel>
         <View className='form-item-flex-field'>
-          {props.children}
-          {!customized && <FlexField {...props} onChange={handleChange} />}
+          {props.children ? props.children : <FlexField {...props} onChange={handleChange} />}
         </View>
       </View>
     </ItemWrapper>
@@ -81,7 +79,6 @@ function FormItem(props) {
 FormItem.defaultProps = {
   errors: [],
   onChange: noop,
-  customized: false,
   layout: 'horizontal', //'vertical','float'
   required: null,
   rules: [],

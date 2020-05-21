@@ -1,8 +1,8 @@
+import { useEffect, useRef, useState } from 'react'
 import NavigationService from '@/nice-router/navigation.service'
 import { LoadingType } from '@/nice-router/nice-router-util'
 import Config from '@/utils/config'
 import Taro, { usePullDownRefresh } from '@tarojs/taro'
-import { useEffect, useRef, useState } from 'react'
 
 // boolean类型的控制属性，show，close，toggle
 export function useVisible(initial = false) {
