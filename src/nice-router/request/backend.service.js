@@ -3,6 +3,9 @@ import { isNotEmpty, LoadingType, log } from '../nice-router-util'
 import StorageTools from '../storage-tools'
 import HttpRequest from './http-request'
 import MockService from './mock-service'
+import TestData from '../../pages/mock-data/test-data'
+
+TestData.initial()
 
 const EMPTY_PARAMETER_TOKEN = '+'
 const BackendService = {}

@@ -1,199 +1,36 @@
 import React from 'react'
 import SectionBar from '@/components/section-bar/section-bar'
 import Listof from '@/listof/listof'
-import MockService from '@/nice-router/request/mock-service'
 import { View } from '@tarojs/components'
+
+import { useAsyncEffect, useAsyncState } from '@/service/use.service'
+import NavigationService from '@/nice-router/navigation.service'
 
 import './styles.scss'
 
-const newsList = [
-  {
-    id: '11',
-    title: '美国众议长称第四轮经济救助计划至少1万亿美元',
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-7.jpeg',
-  },
-  {
-    id: '22',
-    title: '华为 P40 Pro+ 的十倍光变是怎样实现的？',
-    brief: '从过去的数字变焦、混合变焦，再到今天的光学变焦，手机的远摄能力正如它们的性能一样在不停变化',
-    imageList: [
-      {
-        id: '1',
-        imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-1.jpeg',
-      },
-      {
-        id: '2',
-        imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-2.jpeg',
-      },
-    ],
-  },
-  {
-    id: '33',
-    title: '我退役了，要专注练习龙吸水',
-    brief: '退役专注龙吸水！“田径泥石流”张国伟的沙雕日常',
-    imageList: [
-      {
-        id: '1',
-        imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-3.jpeg',
-      },
-      {
-        id: '2',
-        imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-4.jpeg',
-      },
-      {
-        id: '3',
-        imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/news-5.jpeg',
-      },
-    ],
-  },
-  {
-    id: '44',
-    title: '中国发布新冠肺炎疫情信息、推进疫情防控国际合作纪事',
-  },
-]
-const productList = [
-  {
-    id: 1,
-    preTag: '促',
-    tags: ['专业', '防水'],
-    brand: '3M',
-    name: '成人雨衣半透明，粉色佳人',
-    price: 13.8,
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-1.jpg',
-  },
-  {
-    id: 2,
-    preTag: '柴',
-    tags: ['香', '五常'],
-    brand: '柴火大院',
-    name: '真五常稻花香香米',
-    price: 72.99,
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-2.jpg',
-  },
-  {
-    id: 3,
-    preTag: '买',
-    tags: ['iPhone', 'HDR'],
-    brand: '苹果',
-    name: '新品 iPhone11 Pro',
-    price: 9088.0,
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-3.png',
-  },
-  {
-    id: 4,
-    preTag: '坑',
-    tags: ['半成品'],
-    brand: '必胜客',
-    name: '想吃披萨又觉得外面的披萨不卫生又贵',
-    price: 39.2,
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-4.jpg',
-  },
-]
-const defaultDocument = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/README.docx'
-const movieList = [
-  {
-    id: 1,
-    title: '始动/启动/青春催落去(台)',
-    brief:
-      '离家出走的叛逆儿泽日（朴正民饰）与盲目踏入社会并满腔热血的尚弼（丁海寅饰），在遇见长风饭馆的厨师长猛男哥（马东锡饰）后，让自己明白了什么是世间愉快与开心的故事。',
-    createTime: new Date('2019-10-11'),
-    status: '韩剧',
-    documentUrl: defaultDocument,
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/movie-1.jpg',
-  },
-  {
-    id: 2,
-    title: '《多力特的奇幻冒险》BD中英双字幕',
-    brief:
-      '失去妻子后的7年中，约翰·杜立德医生把自己关在庄园里与动物相伴。当时年轻的女王身患重病，杜立德医生不情愿出门冒险，前往神秘的岛屿寻找治疗方法，这让他重获勇气和智慧，因为他击败了老对手，还发现了奇妙的新生物。',
-    createTime: new Date('2020-02-05'),
-    status: '喜剧',
-    documentUrl: defaultDocument,
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/movie-2.jpg',
-  },
-]
-const businessCardList = [
-  {
-    id: 1,
-    title: '和珅',
-    brief: '职位：总经理\n电话:13888888888\n 成都双链科技有限责任公司',
-    status: 'VIP',
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
-  },
-  {
-    id: 2,
-    title: '张无忌',
-    brief: '职位：CEO\n电话:13900000001\n 中国三条腿（集团）公司',
-    status: '牛',
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-2.jpg',
-  },
-]
-const userList = [
-  {
-    id: 1,
-    title: '小陈不哭',
-    brief: '欢迎打赏人气主播',
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-3.jpg',
-  },
-  {
-    id: 2,
-    title: '柠檬',
-    brief: '少女风，直播中。。。。',
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-4.jpg',
-  },
-  {
-    id: 3,
-    title: '嗯嗯嗯',
-    brief: '关注我，嗯嗯嗯',
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-5.jpg',
-  },
-]
-
-const obj = {
-  title: '我看好的ETF',
-  brief: '亏钱，割韭菜',
-  flag: '牛',
-  imageUrl: MockService.defaultImage,
-  status: '待处理',
-}
-const cardList = [
-  //竖版
-  //横版-没图
-  { id: '131', ...obj, mode: ['vertical', 'default', 'vertical-small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '132', ...obj, mode: ['vertical', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '133', ...obj, mode: ['vertical', 'primary'], imageUrl: '', flag: '如' }, // 默认的 horizontal
-  { id: '134', ...obj, mode: ['vertical', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
-  { id: '135', ...obj, mode: ['vertical', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
-
-  //默认，imageOnLeft
-  { id: '1', ...obj, status: '待处理' }, //方图，一行title，一行brief，小的flag+最多3个字
-
-  //竖版
-  { id: '11', ...obj, mode: ['vertical'] }, // 竖版，1/2屏幕宽，小的flag+最多3个字
-  { id: '12', ...obj, mode: ['vertical', 'vertical-small', 'circle'] }, // 竖版，小圆图，1/2屏幕宽，小的flag+最多3个字
-
-  //横版-有图
-  { id: '231', ...obj, mode: ['horizontal'] }, // 默认的 horizontal
-  { id: '232', ...obj, mode: ['horizontal', 'circle', 'small'] }, //小圆图
-  { id: '243', ...obj, mode: ['horizontal', 'circle', 'avatar'] }, //头像，带光圈
-  { id: '254', ...obj, mode: ['horizontal', 'circle', 'large'] }, //大圆图
-  {
-    id: '25',
-    ...obj,
-    mode: ['horizontal', 'large'],
-    brief: '真的牛逼不需要解释\n真的牛逼不需要解释\n真的牛逼不需要解释\n真的牛逼不需要解释',
-  }, //大方图
-
-  //横版-没图
-  { id: '31', ...obj, mode: ['horizontal', 'default', 'small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '32', ...obj, mode: ['horizontal', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '33', ...obj, mode: ['horizontal', 'primary', 'large'], imageUrl: '', flag: '如' }, // 默认的 horizontal
-  { id: '34', ...obj, mode: ['horizontal', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
-  { id: '35', ...obj, mode: ['horizontal', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
-]
-
 function HelloDaaSPage() {
-  const list = userList.slice(0, 1)
+  const [root, setRoot] = useAsyncState({})
+
+  useAsyncEffect(() => {
+    NavigationService.ajax(
+      'mock-listof-test/',
+      {},
+      {
+        onSuccess: (resp) => {
+          setRoot(resp)
+        },
+      }
+    )
+  })
+  const {
+    singleItemList = [],
+    productList = [],
+    newsList = [],
+    cardList = [],
+    userList = [],
+    movieList = [],
+    businessCardList = [],
+  } = root
   return (
     <View className='hello-daas'>
       <SectionBar title='卡片-大卡片' brief='big-card' />
@@ -201,10 +38,10 @@ function HelloDaaSPage() {
       <Listof list={movieList} displayMode='big-card' />
 
       <SectionBar title='卡片-水平卡片' brief='h-card' />
-      <Listof list={list} displayMode='h-card' />
+      <Listof list={singleItemList} displayMode='h-card' />
 
       <SectionBar title='卡片-垂直卡片(两个装)' brief='v-card' />
-      <Listof list={newsList} displayMode='v-card' />
+      <Listof list={singleItemList} displayMode='v-card' />
 
       <SectionBar title='卡片-用户卡片' brief='user' />
       <Listof list={userList} displayMode='user' />

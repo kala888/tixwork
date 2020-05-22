@@ -20,7 +20,7 @@ export default {
     {
       root: 'pages/biz/',
       name: 'biz',
-      pages: ['listof-test-page', 'hello-daas-page'], // 没问题
+      pages: ['listof-test-page'],
     },
     {
       root: 'genericpage/',

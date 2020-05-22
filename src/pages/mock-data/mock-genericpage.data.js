@@ -374,7 +374,7 @@ const richText = {
     '<p style="padding-left: 20px;"><img alt="" src="https://nice-router.oss-cn-chengdu.aliyuncs.com/food-2.jpg" /></p>',
 }
 
-const pageData = {
+const mockGenericPageData = {
   // pageTitle: 'Nice router 社区',
   pageTitle: '双11大促销',
   kids: [
@@ -405,10 +405,4 @@ const pageData = {
   ],
 }
 
-const mockGenericPageData = {
-  xclass: 'com.terapico.caf.viewcomponent.GenericPage',
-  success: true,
-  xredirect: null,
-  data: pageData,
-}
 export default mockGenericPageData

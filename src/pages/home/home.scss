@@ -3,6 +3,12 @@
 .home-page {
   @extend %page;
 
+  .my-test {
+    .at-avatar__img {
+      width: 50px;
+    }
+  }
+
   &-action-floor {
     margin: 20px 10px;
   }

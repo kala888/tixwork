@@ -9,12 +9,18 @@ const imageList = [
 ]
 
 const MockDataCache = {}
-
+const mockResp = (uri = '', xclass, data) => {
+  const key = uri.toLowerCase().trim()
+  const value = {
+    xclass,
+    success: true,
+    data,
+  }
+  MockDataCache[key] = value
+}
 const MockService = {
-  mockResp: (uri, data) => {
-    MockDataCache[uri] = data
-  },
-  getMockResp: (uri) => MockDataCache[uri],
+  mockResp,
+  getMockResp: (uri = '') => MockDataCache[uri.toLowerCase().trim()],
   randomImage: () => _.sample(imageList),
   defaultImage: imageList[2],
 }

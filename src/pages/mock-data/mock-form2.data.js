@@ -1,4 +1,4 @@
-const pageData = {
+const mockForm2Data = {
   id: 'test-form2',
   pageTitle: '测试form2222222',
   stepList: [
@@ -62,12 +62,4 @@ const pageData = {
     },
   ],
 }
-
-const mockForm2Data = {
-  xclass: 'com.terapico.caf.viewcomponent.GenericFormPage',
-  success: true,
-  xredirect: null,
-  data: pageData,
-}
-
 export default mockForm2Data
