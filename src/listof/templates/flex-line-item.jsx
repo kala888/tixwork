@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import ActionUtil from '@/nice-router/action-util'
 import NavigationService from '@/nice-router/navigation.service'
 import { View } from '@tarojs/components'
@@ -59,7 +60,7 @@ export default class FlexLineItem extends React.Component {
       },
       () => {
         this.timer = setTimeout(() => this.stopLoading(), 3000)
-      }
+      },
     )
   }
   stopLoading = () => {
@@ -68,7 +69,8 @@ export default class FlexLineItem extends React.Component {
     }
   }
 
-  handlePress = (template) => {
+  // 使用节流，3面内的点击只算一次
+  handlePress = _.throttle((template) => {
     const { onItemPress, item } = this.props
     if (onItemPress) {
       onItemPress(item)
@@ -84,16 +86,12 @@ export default class FlexLineItem extends React.Component {
       // NavigationService.view('page://pages/test-page', item, { onSuccess: this.stopLoading })
       NavigationService.view(item, {}, { onSuccess: this.stopLoading })
     }
-  }
+  }, 3000)
 
   render() {
     const { item = {}, displayMode, bordered = true, shadow = true, horizontal, className } = this.props
     const { displayMode: itemDisplayMode } = item
 
-    // const debouncePress = _.debounce(
-    //   this.handlePress,
-    //   this.props.delay || 300,
-    // )
     const template = (itemDisplayMode || displayMode).toLowerCase().trim()
     // console.log(`line-item show with "${template}, item is`, item)
 
@@ -103,7 +101,7 @@ export default class FlexLineItem extends React.Component {
     })
     const itemProps = { horizontal, item }
     return (
-      <View onClick={this.handlePress.bind(this, template, item)} className={wrapperClass}>
+      <View onClick={this.bind(this, template, item)} className={wrapperClass}>
         {template === 'auto' && <AutoTemplate {...itemProps} />}
         {template === 'only-title' && <AutoTemplate showImageCount={0} {...itemProps} />}
         {template === 'single-image' && <AutoTemplate showImageCount={1} {...itemProps} />}
