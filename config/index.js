@@ -80,9 +80,7 @@ const config = {
     webpackChain(chain) { // 将 lodash 单独拆分出来 (防止vendors.js过大)
       // chain.plugin('analyzer')
       //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
-
-      chain.plugin('lodash-webpack-plugin').use(require('lodash-webpack-plugin'))
-
+      chain.plugin('lodash-webpack-plugin').use(require('lodash-webpack-plugin'),[{shorthands:true}])
       chain.merge({
         optimization: {
           splitChunks: {

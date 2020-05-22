@@ -12,10 +12,10 @@ function EleActionList({ list, customStyle, className }) {
   return (
     <View className={rootClass} style={customStyle}>
       {list.map((it) => {
-        const { customStyle: actionStyle = {}, id, extraData } = it
+        const { customStyle: actionStyle = {}, id, code, extraData } = it
 
         return (
-          <View key={id} className='ele-action-list-btn-wrapper'>
+          <View key={id + code} className='ele-action-list-btn-wrapper'>
             <EleButton
               uiType={it.uiType}
               btnType={it.btnType}
