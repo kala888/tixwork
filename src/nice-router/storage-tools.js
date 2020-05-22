@@ -1,6 +1,5 @@
 /* eslint-disable prefer-promise-reject-errors */
 import Taro from '@tarojs/taro'
-import md5 from 'blueimp-md5'
 import _ from 'lodash'
 import { log } from './nice-router-util'
 
@@ -8,7 +7,7 @@ const CACHE_PREFIX = 'cachestore-'
 const CACHE_EXPIRATION_PREFIX = 'cacheexpiration-'
 const EXPIRY_UNITS = 1000 // seconds
 
-const shortKey = (key) => (key.length > 100 ? md5(key) : key)
+const shortKey = (key = '') => key.slice(0, 200)
 
 const getKeys = _.memoize((key = '') => {
   const short = shortKey(key)
