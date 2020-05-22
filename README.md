@@ -16,11 +16,11 @@
 
 
 
-# nice-router-taro
+# nice-router-taro (现已升级到Taro3)
 
 #### 基础知识：React + DVA + Taro3 + TaroUI
 
-[Taro(读音：泰罗)](https://github.com/NervJS/taro) 是京东家的小程序开发框架，基于react的语法，跨多端开发框架（微信小程序，支付宝小程序，RN，抖音小程序......）
+[Taro(读音：泰罗)](https://github.com/NervJS/taro) 是京东家的小程序开发框架，基于react（vue也可以）实现的跨多端开发框架（微信小程序，支付宝小程序，RN，抖音小程序......）
 
 - 目前来说Taro可能是综合评分最高的第三方小程序开发框架（相比wepy和mpvue）
 
@@ -36,7 +36,7 @@
 [![B站视频](https://nice-router.oss-cn-chengdu.aliyuncs.com/docs/video-image.png)](https://www.bilibili.com/video/BV1F5411b74Q)
 
 <div>
-  <img src='http://img20.360buyimg.com/img/jfs/t1/113507/6/1539/4384252/5e997650E55d4b847/041d5971880ead13.png.webp'/>
+  <img src='http://img13.360buyimg.com/img/jfs/t1/112451/27/7969/1164755/5ec76253E3c56630a/b26b11c83f7062a1.png.webp'/>
 </div>
 
 ### nice-router 已经组件共享提供了基础的支持。希望各位兄弟贡献各种常用的组件，尤其是那些促销组件。让体力活变为OOTB。
