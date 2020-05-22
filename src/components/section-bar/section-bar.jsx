@@ -24,11 +24,7 @@ function SectionBar(props) {
       <View className='section-bar-title'>{title}</View>
       <View className='section-bar-action' onClick={onClick}>
         <Text className='section-bar-action-title'>{actionTitle}</Text>
-        {hasMore && (
-          <View className='section-bar-action-icon'>
-            <ActionIcon value='more' />
-          </View>
-        )}
+        {hasMore && <ActionIcon value='more' className='section-bar-action-icon' />}
       </View>
     </View>
   )

@@ -15,7 +15,7 @@ function ActionIcon({ value, icon, imageUrl, className, mode }) {
   return (
     <View className={rootClass}>
       {isNotEmpty(actionValue) ? (
-        <View className={`iconfont iconfont-${actionValue}`} />
+        <View className={`iconfont iconfont-${actionValue} large`} />
       ) : (
         <ServerImage customStyle={{ width: '100%', height: '100%' }} mode={mode} src={imageUrl} />
       )}

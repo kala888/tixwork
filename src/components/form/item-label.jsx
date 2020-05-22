@@ -24,7 +24,7 @@ function ItemLabel(props) {
             {props.children}
           </Text>
 
-          {isNotEmpty(tips) && <View className='iconfont iconfont-question-circle item-label-tips-icon' />}
+          {isNotEmpty(tips) && <Text className='iconfont iconfont-question-circle item-label-tips-icon' />}
         </View>
 
         <AtActionSheet onClose={close} isOpened={visible}>

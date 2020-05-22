@@ -8,10 +8,14 @@ $icon-font-data: 'data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAA
 
 .iconfont {
   font-family: 'iconfont', serif !important;
-  font-size: 56px;
+  font-size: 34px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.iconfont.large {
+  font-size: 54px;
 }
 
 // 下面是icon的css
