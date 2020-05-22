@@ -60,7 +60,7 @@ export default class FlexLineItem extends React.Component {
       },
       () => {
         this.timer = setTimeout(() => this.stopLoading(), 3000)
-      },
+      }
     )
   }
   stopLoading = () => {
@@ -101,7 +101,7 @@ export default class FlexLineItem extends React.Component {
     })
     const itemProps = { horizontal, item }
     return (
-      <View onClick={this.bind(this, template, item)} className={wrapperClass}>
+      <View onClick={this.handlePress.bind(this, template, item)} className={wrapperClass}>
         {template === 'auto' && <AutoTemplate {...itemProps} />}
         {template === 'only-title' && <AutoTemplate showImageCount={0} {...itemProps} />}
         {template === 'single-image' && <AutoTemplate showImageCount={1} {...itemProps} />}

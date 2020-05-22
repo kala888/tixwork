@@ -18,21 +18,21 @@ import './styles.scss'
 //   uiType:'primary'
 // }
 function EleButton({
-                     linkToUrl,
-                     openType,
-                     onClick,
-                     extraData,
-                     title,
-                     btnType,
-                     size,
-                     uiType,
-                     customStyle,
-                     className,
-                     full,
-                     circle,
-                     onGetUserInfo,
-                     children,
-                   }) {
+  linkToUrl,
+  openType,
+  onClick,
+  extraData,
+  title,
+  btnType,
+  size,
+  uiType,
+  customStyle,
+  className,
+  full,
+  circle,
+  onGetUserInfo,
+  children,
+}) {
   let wxOpenType = openType
   if (!openType && (btnType === 'share' || btnType === 'getPhoneNumber' || btnType === 'getUserInfo')) {
     wxOpenType = btnType
@@ -89,38 +89,36 @@ function EleButton({
     }
   }
 
-
   const handleClick = _.debounce(async () => {
-      if (onClick) {
-        onClick()
-        return
-      }
+    if (onClick) {
+      onClick()
+      return
+    }
 
-      if (btnType === 'submit' || btnType === 'share' || btnType === 'getUserInfo') {
-        return
-      }
+    if (btnType === 'submit' || btnType === 'share' || btnType === 'getUserInfo') {
+      return
+    }
 
-      if (btnType === 'open-document') {
-        await handlePreview()
-        return
-      }
-      if (btnType === 'download') {
-        await handleDownload()
-        return
-      }
-      if (btnType === 'copy') {
-        handleCopy()
-        return
-      }
-      if (btnType === 'scanner') {
-        await handleScan()
-        return
-      }
+    if (btnType === 'open-document') {
+      await handlePreview()
+      return
+    }
+    if (btnType === 'download') {
+      await handleDownload()
+      return
+    }
+    if (btnType === 'copy') {
+      handleCopy()
+      return
+    }
+    if (btnType === 'scanner') {
+      await handleScan()
+      return
+    }
 
-      console.log('btnType is', btnType, 'just do view action')
-      NavigationService.view(linkToUrl)
-    }, 300,
-  )
+    console.log('btnType is', btnType, 'just do view action')
+    NavigationService.view(linkToUrl)
+  }, 300)
 
   const rootClass = classNames('ele-button', className)
 
