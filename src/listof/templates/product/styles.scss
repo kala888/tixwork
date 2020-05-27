@@ -9,7 +9,7 @@
     @extend %flex-center;
     height: 350px;
     width: 350px;
-
+    max-width: 700px;
     &-image {
       height: 350px;
       border-top-right-radius: 40px;
