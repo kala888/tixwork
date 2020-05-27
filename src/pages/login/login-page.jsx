@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import EleButton from '@/components/elements/ele-button'
 import EleInput from '@/components/form/field/ele-input'
 import EleVcode from '@/components/form/field/ele-vcode'
@@ -15,15 +16,21 @@ import './login.scss'
 export default function LoginPage() {
   const [fieldValues, setFieldValues] = useAsyncState({})
 
-  const handleChange = (name, value, event) => {
-    console.log('item event maybe you needed', event)
-    const fieldValue = FormUtil.getValue(value)
-    setFieldValues((preState) => ({
-      ...preState,
-      [name]: fieldValue,
-    }))
-  }
+  const handleChange = _.curryRight(
+    (value, event, name) => {
+      console.log('item event maybe you needed', event)
+      const fieldValue = FormUtil.getValue(value)
+      setFieldValues((preState) => ({
+        ...preState,
+        [name]: fieldValue,
+      }))
+    },
+  )
 
+  const handleMobileChange = handleChange('mobile')
+  const handleVerifyCodeChange = handleChange('verifyCode')
+  const handleLoginChange = handleChange('login')
+  const handlePasswordChange = handleChange('password')
   const handleSubmit = () => {
     NavigationService.dispatch('app/login', fieldValues)
   }
@@ -49,14 +56,14 @@ export default function LoginPage() {
                   placeholder='请输入手机号'
                   name='mobile'
                   type='phone'
-                  onChange={handleChange.bind(this, 'mobile')}
+                  onChange={handleMobileChange}
                 />
                 <EleInput
                   className='login-form-fields-txt-input,login-form-fields-vcode-value'
                   placeholder='请输入验证码'
                   type='number'
                   name='verifyCode'
-                  onChange={handleChange.bind(this, 'verifyCode')}
+                  onChange={handleVerifyCodeChange}
                 />
               </Block>
             )}
@@ -67,14 +74,14 @@ export default function LoginPage() {
                   className='login-form-fields-txt-input'
                   placeholder='请输入用户名'
                   name='login'
-                  onChange={handleChange.bind(this, 'login')}
+                  onChange={handleLoginChange}
                 />
                 <EleInput
                   className='login-form-fields-txt-input'
                   placeholder='请输入密码'
                   name='password'
                   type='password'
-                  onChange={handleChange.bind(this, 'password')}
+                  onChange={handlePasswordChange}
                 />
               </Block>
             )}
