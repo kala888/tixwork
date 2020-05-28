@@ -2,7 +2,7 @@
 const path = require('path')  // 加在最上面
 
 const config = {
-  projectName: 'nice-router-taro',
+  projectName: 'nice-router',
   date: '2019-5-14',
   designWidth: 750,
   deviceRatio: {
@@ -18,29 +18,10 @@ const config = {
     patterns: [
       { from: 'src/sitemap.json', to: 'dist/' },
     ],
+    options: {
+    }
   },
   framework: 'react',
-  babel: {
-    sourceMap: true,
-    presets: [
-      ['env', {
-        modules: false,
-      }],
-    ],
-    plugins: [
-      'transform-decorators-legacy',
-      'transform-class-properties',
-      'transform-object-rest-spread',
-      ['transform-runtime', {
-        helpers: false,
-        polyfill: false,
-        regenerator: true,
-        moduleName: 'babel-runtime',
-      },
-      ],
-    ],
-  },
-
   alias: {
     '@/components': path.resolve(__dirname, '..', 'src/components'),
     '@/utils': path.resolve(__dirname, '..', 'src/utils'),
@@ -80,7 +61,7 @@ const config = {
     webpackChain(chain) { // 将 lodash 单独拆分出来 (防止vendors.js过大)
       // chain.plugin('analyzer')
       //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
-      chain.plugin('lodash-webpack-plugin').use(require('lodash-webpack-plugin'),[{shorthands:true}])
+      chain.plugin('lodash-webpack-plugin').use(require('lodash-webpack-plugin'), [{ shorthands: true }])
       chain.merge({
         optimization: {
           splitChunks: {
@@ -108,8 +89,7 @@ const config = {
     postcss: {
       autoprefixer: {
         enable: true,
-        config: {
-        }
+        config: {},
       },
       cssModules: {
         enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true

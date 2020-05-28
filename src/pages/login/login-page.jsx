@@ -16,16 +16,14 @@ import './login.scss'
 export default function LoginPage() {
   const [fieldValues, setFieldValues] = useAsyncState({})
 
-  const handleChange = _.curryRight(
-    (value, event, name) => {
-      console.log('item event maybe you needed', event)
-      const fieldValue = FormUtil.getValue(value)
-      setFieldValues((preState) => ({
-        ...preState,
-        [name]: fieldValue,
-      }))
-    },
-  )
+  const handleChange = _.curryRight((value, event, name) => {
+    console.log('item event maybe you needed', event)
+    const fieldValue = FormUtil.getValue(value)
+    setFieldValues((preState) => ({
+      ...preState,
+      [name]: fieldValue,
+    }))
+  })
 
   const handleMobileChange = handleChange('mobile')
   const handleVerifyCodeChange = handleChange('verifyCode')

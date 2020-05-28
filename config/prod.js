@@ -2,11 +2,6 @@ module.exports = {
   env: {
     NODE_ENV: '"production"'
   },
-  babel: {
-    plugins: [
-      'transform-remove-console',
-      ]
-  },
   defineConstants: {
   },
   mini: {},
@@ -21,7 +16,3 @@ module.exports = {
      */
   }
 }
-
-
-
-
