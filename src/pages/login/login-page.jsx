@@ -54,6 +54,7 @@ export default function LoginPage() {
                   placeholder='请输入手机号'
                   name='mobile'
                   type='phone'
+                  value={fieldValues.phone}
                   onChange={handleMobileChange}
                 />
                 <EleInput
@@ -61,6 +62,7 @@ export default function LoginPage() {
                   placeholder='请输入验证码'
                   type='number'
                   name='verifyCode'
+                  value={fieldValues.verifyCode}
                   onChange={handleVerifyCodeChange}
                 />
               </Block>
@@ -72,6 +74,7 @@ export default function LoginPage() {
                   className='login-form-fields-txt-input'
                   placeholder='请输入用户名'
                   name='login'
+                  value={fieldValues.login}
                   onChange={handleLoginChange}
                 />
                 <EleInput
@@ -79,6 +82,7 @@ export default function LoginPage() {
                   placeholder='请输入密码'
                   name='password'
                   type='password'
+                  value={fieldValues.password}
                   onChange={handlePasswordChange}
                 />
               </Block>

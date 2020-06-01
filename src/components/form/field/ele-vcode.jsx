@@ -6,14 +6,11 @@ import Config from '@/utils/config'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
-import { useState } from 'react'
 import { AtInput } from 'taro-ui'
 
 import './styles.scss'
 
 function EleVcode(props) {
-  const [mobile, setMobile] = useState(null)
-
   const { second, counting, startCount } = useCountdown(props.maxCount)
 
   const { onChange, name, value, placeholder, className } = props
@@ -22,17 +19,12 @@ function EleVcode(props) {
     if (counting) {
       return
     }
-    if (!/^1\d{10}$/.test(mobile)) {
+    if (!/^1\d{10}$/.test(value)) {
       await Taro.showToast({ title: '请输入正确的手机号' })
       return
     }
     startCount()
-    NavigationService.ajax(Config.api.VerifyCode, { mobile })
-  }
-
-  const handleChange = (v) => {
-    setMobile(v)
-    onChange(v)
+    NavigationService.ajax(Config.api.VerifyCode, { mobile: value })
   }
 
   const tips = counting ? `${second}秒...` : '获取验证码'
@@ -45,7 +37,7 @@ function EleVcode(props) {
       type='phone'
       placeholder={placeholder}
       value={value}
-      onChange={handleChange}
+      onChange={onChange}
       className={rootClass}
     >
       <View className={txtClass} onClick={sendCode}>
