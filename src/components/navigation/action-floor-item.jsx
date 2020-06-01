@@ -5,7 +5,7 @@ import ServerImage from '@/server-image/server-image'
 import { Block, View } from '@tarojs/components'
 import classNames from 'classnames'
 
-import './styles.scss'
+import './action-floor.scss'
 
 function ActionFloorItem(props) {
   const { action, className } = props

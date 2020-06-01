@@ -1,0 +1,41 @@
+@import 'src/styles/theme';
+
+.navigation-line-item {
+  margin-top: 20px;
+  height: 100px;
+  padding: 20px;
+  background-color: $white;
+  border-radius: 10px;
+  //box-shadow: 0 6px 13px 1px rgba(0, 0, 0, 0.08);
+  @extend %flex-row;
+  align-items: center;
+
+  &-preicon {
+    height: 100%;
+    width: 10px;
+    background-color: $primary-color;
+    border-radius: 5px;
+  }
+
+  &-tailicon {
+    width: 44px;
+    height: 44px;
+    @extend %flex-center;
+  }
+
+  &-content {
+    margin-left: 46px;
+    @extend %flex-1;
+    flex-direction: column;
+    justify-content: center;
+
+    &-brief {
+      font-family: $b181black;
+      font-size: 30px;
+    }
+
+    &-title {
+      font-size: 26px;
+    }
+  }
+}

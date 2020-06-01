@@ -4,7 +4,7 @@ import ServerImage from '@/server-image/server-image'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 
-import './styles.scss'
+import './action-icon.scss'
 
 /**
  *  有icon，优先展示ICON

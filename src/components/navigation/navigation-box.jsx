@@ -6,7 +6,7 @@ import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { AtBadge } from 'taro-ui'
 
-import './styles.scss'
+import './navigation-box.scss'
 
 function NavigationBox(props) {
   const { title: actionBarTitle = '', list = [] } = props

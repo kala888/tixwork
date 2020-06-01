@@ -2,7 +2,7 @@ import React from 'react'
 import { Block, View } from '@tarojs/components'
 import ActionFloorItem from './action-floor-item'
 
-import './styles.scss'
+import './action-floor.scss'
 
 function ActionFloor({ actions = [] }) {
   if (actions.length === 0) {

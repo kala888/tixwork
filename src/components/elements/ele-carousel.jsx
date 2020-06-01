@@ -45,8 +45,10 @@ function EleCarousel(props) {
 
   const showDots = indicatorDots === null ? items.length > 1 : indicatorDots
 
+  const list = items.map((it, idx) => ({ ...it, key: idx })) // 临时处理，taro bug，用原来的id，部分图展示不出来
+
   const rootClass = classNames('ele-carousel', className)
-  return isEmpty(items) ? null : (
+  return (
     <View className={rootClass} style={customStyle}>
       <Swiper
         autoplay={autoplay}
@@ -58,10 +60,10 @@ function EleCarousel(props) {
         indicatorDots={showDots}
         className='ele-carousel-item'
       >
-        {items.map((it) => {
-          const { videoUrl = '', imageUrl, id } = it
+        {list.map((it) => {
+          const { videoUrl = '', imageUrl, key } = it
           return (
-            <SwiperItem key={id} onClick={handleClick.bind(this, it)} className='ele-carousel-item'>
+            <SwiperItem key={key} onClick={handleClick.bind(this, it)} className='ele-carousel-item'>
               {videoUrl.length > 0 ? (
                 <Video
                   className='ele-carousel-item'
