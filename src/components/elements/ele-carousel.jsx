@@ -63,7 +63,7 @@ function EleCarousel(props) {
         {list.map((it) => {
           const { videoUrl = '', imageUrl, key } = it
           return (
-            <SwiperItem key={key} onClick={handleClick.bind(this, it)} className='ele-carousel-item'>
+            <SwiperItem key={key} onClick={() => handleClick(it)} className='ele-carousel-item'>
               {videoUrl.length > 0 ? (
                 <Video
                   className='ele-carousel-item'
