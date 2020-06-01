@@ -52,9 +52,9 @@ export default function LoginPage() {
                 <EleVcode
                   className='login-form-fields-txt-input'
                   placeholder='请输入手机号'
-                  name='mobile'
                   type='phone'
-                  value={fieldValues.phone}
+                  name='mobile'
+                  value={fieldValues.mobile}
                   onChange={handleMobileChange}
                 />
                 <EleInput
