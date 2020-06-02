@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState }  from 'react'
 import { ScrollView } from '@tarojs/components'
-import { useState } from 'react'
 import { AtCurtain } from 'taro-ui'
 
 import EleFlex from './ele-flex'

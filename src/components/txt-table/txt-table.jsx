@@ -2,9 +2,10 @@ import React from 'react'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
+import TxtTableCell from '@/components/txt-table/txt-table-cell'
 
 import './styles.scss'
-import TxtTableCell from '@/components/txt-table/txt-table-cell'
+
 
 function transToDoubleItemList(list = []) {
   const newList = []
