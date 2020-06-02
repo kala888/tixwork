@@ -46,15 +46,6 @@ $color-page-bg: #f0f2f5;
 
 $under-line-color: #c4d8e7;
 
-$b181black: Brother-1816-Black, -apple-system, system-ui !important;
-.b181black {
-  font-family: $b181black;
-  font-style: normal;
-  font-size: 40px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 %page {
   display: flex;
   flex-direction: column;

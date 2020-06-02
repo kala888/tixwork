@@ -17,7 +17,6 @@
       @extend %flex-column;
       flex: 1;
       font-size: 80px;
-      font-family: $b181black;
       color: $white;
       font-weight: bold;
       line-height: 100px;
@@ -41,7 +40,6 @@
       padding-top: 20px;
 
       &-brief {
-        font-family: $b181black;
         font-size: 32px;
         font-weight: 900;
         line-height: 36px;

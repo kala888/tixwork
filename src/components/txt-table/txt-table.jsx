@@ -6,7 +6,6 @@ import TxtTableCell from '@/components/txt-table/txt-table-cell'
 
 import './styles.scss'
 
-
 function transToDoubleItemList(list = []) {
   const newList = []
   const sourceLength = list.length
