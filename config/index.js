@@ -78,10 +78,6 @@ const config = {
         },
       })
     },
-    commonChunks(commonChunks) { // 添加 lodash 公共文件
-      commonChunks.push('lodash')
-      return commonChunks
-    },
   },
   h5: {
     publicPath: '/',
