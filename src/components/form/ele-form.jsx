@@ -1,13 +1,14 @@
-import React, { useEffect, useImperativeHandle, useMemo, useState, forwardRef } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import _ from 'lodash'
-
+import EleFlex from '@/genericpage/ele-flex'
 import SectionBar from '../section-bar/section-bar'
 import FormItem from './form-item'
 import FormUtil from './form-util'
 import './styles.scss'
 import validator from './validator'
+import EleActionList from '@/components/elements/ele-action-list'
 
 // 参考 https://github.com/react-component/form
 
@@ -129,7 +130,7 @@ function EleForm(props, ref) {
   return (
     <View className='ele-form'>
       {groups.map((groupItem) => {
-        const { name: groupId, title, brief, fieldList: fields = [] } = groupItem
+        const { name: groupId, title, brief, fieldList: fields = [], actionList: groupActionList = [] } = groupItem
         return (
           <View key={groupId}>
             {isNotEmpty(title) && <SectionBar title={title} brief={brief} />}
@@ -137,8 +138,14 @@ function EleForm(props, ref) {
             <View className='ele-form-fields'>
               {fields.map((it) => {
                 const field = FormUtil.mergeConfig(it)
-                const { name } = field
+                const { name, type } = field
                 const value = fieldValues[name]
+
+                if (type === 'display-field' && isNotEmpty(value)) {
+                  const ele = _.isString(value) ? JSON.parse(value) : value
+                  return <EleFlex {...ele} />
+                }
+
                 const errors = fieldErrors[name]
 
                 return (
@@ -155,6 +162,12 @@ function EleForm(props, ref) {
                 )
               })}
             </View>
+
+            {isNotEmpty(groupActionList) && (
+              <View className='ele-form-group-actions'>
+                <EleActionList list={groupActionList} />
+              </View>
+            )}
           </View>
         )
       })}

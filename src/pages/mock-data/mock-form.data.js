@@ -43,6 +43,53 @@ const treeRoot = {
   ],
 }
 
+const productList = {
+  displayMode: 'product',
+  numColumns: 2,
+  list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }, { id: 'p4' }],
+  dataContainer: {
+    p1: {
+      id: 'p1',
+      preTag: '自营',
+      tags: ['618'],
+      brand: '西门子',
+      name: '大冰箱，超级大，610L让你生活无忧，心情好才是真的好',
+      price: 500.12,
+      imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
+    },
+    p2: {
+      id: 'p2',
+      preTag: '双链小超',
+      tags: ['券'],
+      brand: '可口可乐',
+      name: '300ml，冰霜开心',
+      price: 2.5,
+      imageUrl:
+        'https://m.360buyimg.com/babel/s823x404_jfs/t21784/201/795134266/176047/3dad2026/5b18c66eN8c4deacf.jpg!q70.dpg',
+    },
+    p3: {
+      id: 'p3',
+      preTag: '',
+      tags: [''],
+      brand: '靓家私',
+      name: '这是一个超级大的家居',
+      price: 200.12,
+      imageUrl:
+        'https://m.360buyimg.com/babel/s370x259_jfs/t1/20729/24/4177/80676/5c2f1aeaE062589aa/ee7cc78db75d62ed.jpg!q70.dpg',
+    },
+    p4: {
+      id: 'p4',
+      preTag: '官方旗舰',
+      tags: ['券'],
+      brand: '美丽新时代',
+      name: '毛巾被，超级大的那么中，估计有100斤，全国包邮',
+      price: 30000.55,
+      imageUrl:
+        'https://m.360buyimg.com/babel/s370x259_jfs/t1/20729/24/4177/80676/5c2f1aeaE062589aa/ee7cc78db75d62ed.jpg!q70.dpg',
+    },
+  },
+}
+
 const mockForm1Data = {
   id: 'test-form',
   pageTitle: '测试form1',
@@ -65,6 +112,11 @@ const mockForm1Data = {
     {
       name: 'fist-group',
       title: '第一组',
+      actionList: [
+        { id: 1, code: 1, title: '上一步' },
+        { id: 2, code: 2, title: '删除记录' },
+        { id: 3, code: 3, title: '下一步' },
+      ],
       fieldList: [
         {
           name: '-1-team-building',
@@ -81,6 +133,17 @@ const mockForm1Data = {
             },
           ],
         },
+
+        {
+          name: '111-display',
+          label: '这个不应该展示',
+          type: 'display-field',
+          disabled: true,
+          value: {
+            kids: [{ id: '8', type: 'listof', ...productList }],
+          },
+        },
+
         {
           name: '0-phone',
           label: '手机号',

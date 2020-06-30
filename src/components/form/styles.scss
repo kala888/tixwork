@@ -3,6 +3,14 @@
 $error-color: $orange-color;
 
 .ele-form {
+  &-group-actions {
+    border-top: 2px solid #f3f5f7;
+    padding-top: 20px;
+    width: 100%;
+    @extend %flex-row;
+    justify-content: flex-end;
+  }
+
   &-fields {
     padding: 0 20px;
   }

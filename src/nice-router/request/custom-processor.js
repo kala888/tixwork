@@ -18,8 +18,8 @@ const CustomProcessor = async (chain) => {
         responseHeaders[key.toLocaleLowerCase()] = header[key]
       })
 
-      const xclass = _.get(responseHeaders,'x-class','')
-      const xredirect = _.get(responseHeaders,'x-redirect','')
+      const xclass = _.get(responseHeaders, 'x-class', '')
+      const xredirect = _.get(responseHeaders, 'x-redirect', '')
       // 返回response的body是对象，并且xclass不是Exception结尾，那么应该就是正常 biz的数据
       const success = _.isObjectLike(data) && !xclass.endsWith('Exception')
       return {
