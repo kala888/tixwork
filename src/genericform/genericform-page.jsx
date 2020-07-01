@@ -22,7 +22,11 @@ function GenericformPage() {
   usePageTitle(pageTitle)
   usePullDown(root)
 
-  const isSubmitAction = (code) => code === 'nextStep' || code === 'submit' || code === 'commit'
+  const isSubmitAction = (code = '') => {
+    const submitCodeList = ['nextStep', 'submit', 'commit', 'next', 'nextRecord']
+    const result = _.find(submitCodeList, (it) => it.toLowerCase() === code.toLowerCase())
+    return !!result
+  }
 
   const handleActionClick = async (action = {}) => {
     const { code } = action
@@ -79,7 +83,14 @@ function GenericformPage() {
     <View className='generic-form-page'>
       {isNotEmpty(content) && <EleRichText content={content} />}
       {stepList.length > 0 && <FormSteps steps={stepList} />}
-      <EleForm formKey={id} ref={formRef} groupList={groupList} fieldList={fieldList} defaultValues={defaultValues} />
+      <EleForm
+        formKey={id}
+        ref={formRef}
+        groupList={groupList}
+        fieldList={fieldList}
+        defaultValues={defaultValues}
+        handleActionClick={handleActionClick}
+      />
 
       <View className='footer-button-list'>
         {footerActionList.map((it) => {

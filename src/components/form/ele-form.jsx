@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import _ from 'lodash'
 import EleFlex from '@/genericpage/ele-flex'
@@ -127,10 +127,18 @@ function EleForm(props, ref) {
     })
   }
 
+  const { handleActionClick = noop } = props
+
   return (
     <View className='ele-form'>
       {groups.map((groupItem) => {
         const { name: groupId, title, brief, fieldList: fields = [], actionList: groupActionList = [] } = groupItem
+
+        const actionList = groupActionList.map((it) => ({
+          ...it,
+          onClick: () => handleActionClick(it),
+        }))
+
         return (
           <View key={groupId}>
             {isNotEmpty(title) && <SectionBar title={title} brief={brief} />}
@@ -165,7 +173,7 @@ function EleForm(props, ref) {
 
             {isNotEmpty(groupActionList) && (
               <View className='ele-form-group-actions'>
-                <EleActionList list={groupActionList} />
+                <EleActionList list={actionList} />
               </View>
             )}
           </View>

@@ -44,6 +44,8 @@ const treeRoot = {
 }
 
 const productList = {
+  id: 1,
+  type: 'listof',
   displayMode: 'product',
   numColumns: 2,
   list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }, { id: 'p4' }],
@@ -115,7 +117,7 @@ const mockForm1Data = {
       actionList: [
         { id: 1, code: 1, title: '上一步' },
         { id: 2, code: 2, title: '删除记录' },
-        { id: 3, code: 3, title: '下一步' },
+        { id: 3, code: 'submit', title: '下一步' },
       ],
       fieldList: [
         {
