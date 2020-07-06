@@ -72,6 +72,7 @@ function EleCarousel(props) {
                   initialTime='0'
                   loop
                   muted={false}
+                  direction={90}
                 />
               ) : (
                 <ServerImage className='ele-carousel-item' src={it.imageUrl} mode={mode} size='large' />

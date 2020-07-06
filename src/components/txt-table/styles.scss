@@ -9,11 +9,14 @@
   .info-row {
     @extend %flex-row;
     padding: 5px 10px;
+    align-items: center;
 
     &-cell {
       @extend %flex-1;
       flex-direction: row;
       word-break: break-all;
+      align-items: center;
+
       &-title {
         font-size: 28px;
         vertical-align: center;
@@ -26,6 +29,10 @@
         vertical-align: center;
         padding-left: 20px;
         color: $text-color-light;
+      }
+
+      &-1lines {
+        @include lamp-clamp(1);
       }
 
       &-2lines {

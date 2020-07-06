@@ -148,17 +148,17 @@ function EleForm(props, ref) {
                 const field = FormUtil.mergeConfig(it)
                 const { name, type } = field
                 const value = fieldValues[name]
+                const key = name + '_' // key重做，因为有taro bug
 
-                if (type === 'display-field' && isNotEmpty(value)) {
-                  const ele = _.isString(value) ? JSON.parse(value) : value
-                  return <EleFlex {...ele} />
+                if (type === 'display-field' && isNotEmpty(field.value)) {
+                  const ele = _.isString(field.value) ? JSON.parse(field.value) : field.value
+                  return <EleFlex key={key} {...ele} />
                 }
-
                 const errors = fieldErrors[name]
 
                 return (
                   <FormItem
-                    key={name}
+                    key={key}
                     bordered={bordered}
                     layout={layout}
                     {...field}

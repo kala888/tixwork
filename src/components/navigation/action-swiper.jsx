@@ -16,7 +16,7 @@ function ActionSwiper(props) {
       <Swiper
         autoplay={false}
         circular={false}
-        indicatorActiveColor='#28aaff'
+        indicatorActiveColor='#d2ab66'
         indicatorDots={showDots}
         className='swiper-action-list-swiper'
       >
