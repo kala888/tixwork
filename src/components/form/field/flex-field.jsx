@@ -8,6 +8,7 @@ import ObjectPicker from './ele-object-picker'
 import ElePopupSelect from './ele-popup-select'
 import EleSwitch from './ele-switch'
 import EleTree from './ele-tree'
+import EleMobileVerifyCode from './ele-mobile-verify-code'
 import './styles.scss'
 
 // TODO 实现附件上传
@@ -32,6 +33,8 @@ export default function FlexField(props) {
 
   //钱，这玩意不一样
   if (type === 'money') return <EleMoney {...props} />
+
+  if (type === 'vcode') return <EleMobileVerifyCode {...props} />
 
   // 日期，暂时支持YYYY-MM-DD
   if (type === 'date') return <EleCalendar {...props} mode='date' />

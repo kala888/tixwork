@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import EleButton from '@/components/elements/ele-button'
 import EleInput from '@/components/form/field/ele-input'
-import EleVcode from '@/components/form/field/ele-vcode'
+import MobileVerifyCode from '@/components/mobile-verify-code'
 import FormUtil from '@/components/form/form-util'
 import NavigationService from '@/nice-router/navigation.service'
 import ServerImage from '@/server-image/server-image'
@@ -49,7 +49,7 @@ export default function LoginPage() {
           <View className='login-form-fields'>
             {Config.loginMethod === 'vcode' && (
               <Block>
-                <EleVcode
+                <MobileVerifyCode
                   className='login-form-fields-txt-input'
                   placeholder='请输入手机号'
                   type='phone'

@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import { AtButton } from 'taro-ui'
 
 import './styles.scss'
+import PopupMessage from '@/nice-router/popup-message'
 
 // form中组件封装后，button 不会触发form的handle方法问题
 // https://github.com/NervJS/taro-ui/issues/96
@@ -39,6 +40,14 @@ function EleButton({
   }
 
   const formType = btnType === 'submit' || btnType === 'reset' ? btnType : null
+
+  const handleMakeCall = () => {
+    const { phoneNumber } = extraData
+    if (phoneNumber) {
+      // noinspection JSIgnoredPromiseFromCall
+      Taro.makePhoneCall({ phoneNumber })
+    }
+  }
 
   const handleScan = async () => {
     const res = await Taro.scanCode()
@@ -96,6 +105,16 @@ function EleButton({
     }
 
     if (btnType === 'submit' || btnType === 'share' || btnType === 'getUserInfo') {
+      return
+    }
+
+    if (btnType === 'makeCall') {
+      handleMakeCall()
+      return
+    }
+
+    if (btnType === 'confirm') {
+      await PopupMessage.show(extraData)
       return
     }
 

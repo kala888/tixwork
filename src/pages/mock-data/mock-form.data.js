@@ -107,7 +107,10 @@ const mockForm1Data = {
     { title: '走人' },
   ],
   actionList: [
-    { code: 'preStep', title: '上一步' },
+    {
+      code: 'preStep',
+      title: '上一步',
+    },
     { code: 'nextStep', title: '下一步', linkToUrl: 'mock-generic-form-2/' },
   ],
   groupList: [
@@ -301,6 +304,20 @@ const mockForm1Data = {
               required: true,
               type: 'number',
               message: '怎么也有点存款吧',
+            },
+          ],
+        },
+        {
+          name: '7-1-code',
+          label: '验证码',
+          type: 'vcode',
+          placeholder: '请输入验证码',
+          value: 873421,
+          linkToUrl: 'sendVerifyCode/13880964614/',
+          rules: [
+            {
+              required: true,
+              message: '验证码不能为空',
             },
           ],
         },

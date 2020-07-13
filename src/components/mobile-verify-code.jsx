@@ -8,9 +8,9 @@ import Taro from '@tarojs/taro'
 import classNames from 'classnames'
 import { AtInput } from 'taro-ui'
 
-import './styles.scss'
+import './form/field/styles.scss'
 
-function EleVcode(props) {
+function MobileVerifyCode(props) {
   const { second, counting, startCount } = useCountdown(props.maxCount)
 
   const { onChange, name, value, placeholder, className } = props
@@ -47,10 +47,10 @@ function EleVcode(props) {
   )
 }
 
-EleVcode.defaultProps = {
+MobileVerifyCode.defaultProps = {
   name: '',
   placeholder: '请输入手机号码',
   onChange: noop,
   maxCount: 60,
 }
-export default EleVcode
+export default MobileVerifyCode

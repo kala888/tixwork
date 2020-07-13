@@ -165,7 +165,29 @@ const obj = {
 const cardList = [
   //竖版
   //横版-没图
-  { id: '131', ...obj, mode: ['vertical', 'default', 'vertical-small'], imageUrl: '', flag: '急' }, // 默认的 horizontal
+  {
+    id: '131',
+    ...obj,
+    mode: ['vertical', 'default', 'vertical-small'],
+    imageUrl: '',
+    flag: '急',
+    actionList: [
+      {
+        btnType: 'confirm',
+        id: 1,
+        title: '删除',
+        extraData: {
+          title: '确认是否删除？',
+          text: '确定是否放弃这个Item，并删除么？',
+          actionList: [
+            {
+              title: '真的删除',
+            },
+          ],
+        },
+      },
+    ],
+  }, // 默认的 horizontal
   { id: '132', ...obj, mode: ['vertical', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
   { id: '133', ...obj, mode: ['vertical', 'primary'], imageUrl: '', flag: '如' }, // 默认的 horizontal
   { id: '134', ...obj, mode: ['vertical', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal

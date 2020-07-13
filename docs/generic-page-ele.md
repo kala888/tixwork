@@ -530,7 +530,7 @@ type=textarea
 
 ```
 
-###### EleVcode
+###### MobileVerifyCode
 
 type=vcode 
 
