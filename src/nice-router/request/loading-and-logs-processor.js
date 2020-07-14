@@ -8,10 +8,10 @@ const systemErrorXClass = 'com.terapico.caf.local.NetworkException'
 
 function showLoading(loading) {
   if (loading === LoadingType.modal) {
-    OverlayLoading.hideLoadingModal()
+    OverlayLoading.showLoadingModal()
   }
   if (loading === LoadingType.barLoading) {
-    Taro.hideNavigationBarLoading()
+    Taro.showNavigationBarLoading()
   }
 }
 
