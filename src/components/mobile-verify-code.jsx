@@ -20,7 +20,7 @@ function MobileVerifyCode(props) {
       return
     }
     if (!/^1\d{10}$/.test(value)) {
-      await Taro.showToast({ title: '请输入正确的手机号' })
+      await Taro.showToast({ title: '请输入正确的手机号', icon: 'none' })
       return
     }
     startCount()
