@@ -1,3 +1,4 @@
+import React from 'react'
 import { Block, View } from '@tarojs/components'
 import { AtActivityIndicator } from 'taro-ui'
 

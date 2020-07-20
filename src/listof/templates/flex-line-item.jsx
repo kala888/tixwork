@@ -13,6 +13,7 @@ import CardTemplate from './card/card-template'
 import Product from './product/product'
 
 import './styles.scss'
+import HotArtist from '@/listof/templates/hot-artist'
 
 export default class FlexLineItem extends React.Component {
   static defaultProps = {
@@ -103,6 +104,7 @@ export default class FlexLineItem extends React.Component {
     return (
       <View onClick={this.handlePress.bind(this, template, item)} className={wrapperClass}>
         {template === 'auto' && <AutoTemplate {...itemProps} />}
+
         {template === 'only-title' && <AutoTemplate showImageCount={0} {...itemProps} />}
         {template === 'single-image' && <AutoTemplate showImageCount={1} {...itemProps} />}
         {template === 'double-image' && <AutoTemplate showImageCount={2} {...itemProps} />}
@@ -120,6 +122,8 @@ export default class FlexLineItem extends React.Component {
         {template === 'user' && <CardTemplate {...itemProps} mode={['horizontal', 'circle', 'avatar']} />}
 
         {template === 'product' && <Product {...itemProps} />}
+
+        {template === 'hot-artist' && <HotArtist {...itemProps} />}
 
         {this.state.loading && (
           <View className='item-loading'>

@@ -10,6 +10,7 @@ import { createAction, isEmpty, LoadingType, log, noop } from './nice-router-uti
 import PopupMessage from './popup-message'
 import BackendService from './request/backend.service'
 import ViewMappingService from './viewmapping.service'
+import ActionUtil from '@/nice-router/action-util'
 
 export default {
   namespace: 'niceRouter',
@@ -41,7 +42,6 @@ export default {
       log('niceRouter/router action', action)
       const {
         statInPage = false,
-        linkToUrl,
         params = {},
         asForm,
         arrayMerge = 'replace',
@@ -49,6 +49,8 @@ export default {
         loading,
         navigationOptions,
       } = action
+
+      const linkToUrl = ActionUtil.getActionUri(action)
 
       if (isEmpty(linkToUrl)) {
         console.warn('store.modules.router.route","can not send empty url to backend')
