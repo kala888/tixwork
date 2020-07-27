@@ -4,7 +4,7 @@ import EleTabs from '@/components/elements/ele-tabs'
 import NavigationService from '@/nice-router/navigation.service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 
-import { usePageTitle, usePullDown } from '@/service/use.service'
+import { useAjaxPullDown, usePageTitle } from '@/service/use.service'
 import Config from '@/utils/config'
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
@@ -14,7 +14,7 @@ import './styles.scss'
 function ListofPageBase(props) {
   const { pageTitle = Config.name } = props
   usePageTitle(pageTitle)
-  usePullDown(props)
+  useAjaxPullDown(props)
 
   const handleFooterButtonClick = (action) => {
     NavigationService.view(action)

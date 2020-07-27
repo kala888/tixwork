@@ -63,19 +63,20 @@ const NavigationService = {
    * eg. 后退传参 NavigationService.back({data},this)
    */
   back({ delta = 1, data } = {}, _page = {}) {
+    console.log('should be a error here', delta, data, _page)
     //TODO
-    const { path: key } = _page.$router || {}
+    // const { path: key } = _page.$router || {}
 
-    return new Promise((resolve, reject) => {
-      Taro.navigateBack({ delta })
-        .then(() => {
-          const pageResolve = this.pagesResolves[key]
-          pageResolve && pageResolve(data)
-          this.pagesResolves[key] = null
-          resolve()
-        })
-        .catch((err) => reject(err))
-    })
+    // return new Promise((resolve, reject) => {
+    //   Taro.navigateBack({ delta })
+    //     .then(() => {
+    //       const pageResolve = this.pagesResolves[key]
+    //       pageResolve && pageResolve(data)
+    //       this.pagesResolves[key] = null
+    //       resolve()
+    //     })
+    //     .catch((err) => reject(err))
+    // })
   },
 
   /**
@@ -106,13 +107,21 @@ const NavigationService = {
         if (routeMethod) {
           routeMethod({ url })
             .then(() => {
-              this.pagesResolves[routeName] = resolve
+              // this.pagesResolves[routeName] = resolve
+              if (resolve) {
+                resolve()
+              }
             })
             .catch((err) => {
               const { errMsg = '' } = err
               if (errMsg.indexOf('a tabbar page')) {
                 // Taro.switchTab({ url }).then(clearPagesResolves)
-                Taro.switchTab({ url }).then(() => this.clearPagesResolves())
+                Taro.switchTab({ url }).then(() => {
+                  // this.clearPagesResolves()
+                  if (resolve) {
+                    resolve()
+                  }
+                })
                 return
               }
               log(`Taro.${method} run failed`, err)

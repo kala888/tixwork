@@ -7,7 +7,6 @@ import classNames from 'classnames'
 import { AtButton } from 'taro-ui'
 
 import './styles.scss'
-import PopupMessage from '@/nice-router/popup-message'
 
 // form中组件封装后，button 不会触发form的handle方法问题
 // https://github.com/NervJS/taro-ui/issues/96
@@ -18,22 +17,24 @@ import PopupMessage from '@/nice-router/popup-message'
 //   btnType: 'share',
 //   uiType:'primary'
 // }
-function EleButton({
-  linkToUrl,
-  openType,
-  onClick,
-  extraData,
-  title,
-  btnType,
-  size,
-  uiType,
-  customStyle,
-  className,
-  full,
-  circle,
-  onGetUserInfo,
-  children,
-}) {
+function EleButton(props) {
+  const {
+    linkToUrl,
+    openType,
+    onClick,
+    extraData,
+    title,
+    btnType,
+    size,
+    uiType,
+    customStyle,
+    className,
+    full,
+    circle,
+    onGetUserInfo,
+    children,
+  } = props
+
   let wxOpenType = openType
   if (!openType && (btnType === 'share' || btnType === 'getPhoneNumber' || btnType === 'getUserInfo')) {
     wxOpenType = btnType
@@ -54,7 +55,7 @@ function EleButton({
     const arg = encodeURIComponent(res.result)
     const actionPath = `${linkToUrl}${arg}/`
     console.log('I want to access ', actionPath)
-    NavigationService.view(actionPath)
+    NavigationService.view(props)
   }
 
   const handlePreview = async () => {
@@ -113,11 +114,6 @@ function EleButton({
       return
     }
 
-    if (btnType === 'confirm') {
-      await PopupMessage.show(extraData)
-      return
-    }
-
     if (btnType === 'open-document') {
       await handlePreview()
       return
@@ -136,7 +132,7 @@ function EleButton({
     }
 
     console.log('btnType is', btnType, 'just do view action')
-    NavigationService.view(linkToUrl)
+    NavigationService.view(props)
   }, 300)
 
   const rootClass = classNames('ele-button', className)

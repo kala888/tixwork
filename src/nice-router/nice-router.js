@@ -2,11 +2,11 @@ import _ from 'lodash'
 import NavigationService from './navigation.service'
 
 const defaultViewConfig = {
-  'com.terapico.moyi.appview.H5Page': {
+  'com.terapico.appview.H5Page': {
     pageName: 'H5Page',
     stateAction: '/nice-router/h5-page',
   },
-  'com.terapico.caf.local.NetworkException': {
+  'NetworkException.RetryPage': {
     pageName: '/nice-router/network-exception-page',
   },
 }

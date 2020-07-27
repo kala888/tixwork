@@ -1,5 +1,7 @@
 import _ from 'lodash'
 
+const systemErrorXClass = 'NetworkException.RetryPage'
+
 const CustomProcessor = async (chain) => {
   const { headers: requestHeaders, ...others } = chain.requestParams
 
@@ -30,6 +32,17 @@ const CustomProcessor = async (chain) => {
         status,
         headers: responseHeaders,
         success,
+      }
+    })
+    .catch((error) => {
+      const { errMsg } = error
+      console.error('Request error', error)
+      return {
+        xclass: systemErrorXClass,
+        message: `error code:${errMsg}`,
+        data: {
+          ...(error.response || {}),
+        },
       }
     })
 }

@@ -28,12 +28,18 @@ export function usePageTitle(title = Config.name) {
 }
 
 // 下拉刷新, 应该传入ActionLike
-export function usePullDown(action) {
+export function useAjaxPullDown(action) {
+  usePullDown(action, true)
+}
+
+export function usePullDown(action, statInPage = false) {
+  console.log('pulldown refresh', action)
   usePullDownRefresh(() => {
-    NavigationService.ajax(
+    NavigationService.view(
       action,
       {},
       {
+        statInPage,
         onSuccess: () => Taro.stopPullDownRefresh(),
         loading: LoadingType.modal,
       }

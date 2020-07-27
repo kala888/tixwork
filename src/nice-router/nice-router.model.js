@@ -2,6 +2,7 @@
 import { isH5 } from '@/utils/index'
 import Taro, { Current } from '@tarojs/taro'
 import _ from 'lodash'
+import ActionUtil from '@/nice-router/action-util'
 
 import GlobalToast from './global-toast'
 import LocalCache from './local-cache.service'
@@ -10,7 +11,6 @@ import { createAction, isEmpty, LoadingType, log, noop } from './nice-router-uti
 import PopupMessage from './popup-message'
 import BackendService from './request/backend.service'
 import ViewMappingService from './viewmapping.service'
-import ActionUtil from '@/nice-router/action-util'
 
 export default {
   namespace: 'niceRouter',

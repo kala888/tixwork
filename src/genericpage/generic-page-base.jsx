@@ -1,6 +1,6 @@
 import React from 'react'
 import NavigationService from '@/nice-router/navigation.service'
-import { useAsyncEffect, usePageTitle, usePullDown } from '@/service/use.service'
+import { useAjaxPullDown, useAsyncEffect, usePageTitle } from '@/service/use.service'
 import Config from '@/utils/config'
 import { View } from '@tarojs/components'
 import { Current, useShareAppMessage } from '@tarojs/taro'
@@ -12,7 +12,7 @@ import './styles.scss'
 function GenericPageBase(props) {
   const { pageTitle = Config.name, pageLinkToUrl = Config.api.FooterHome } = props
   usePageTitle(pageTitle)
-  usePullDown(props)
+  useAjaxPullDown(props)
 
   // q如果变化了，就发送一个后台请求
   const { q } = Current.router.params

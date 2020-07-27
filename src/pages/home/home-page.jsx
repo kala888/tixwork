@@ -3,7 +3,7 @@ import EleCarousel from '@/components/elements/ele-carousel'
 import ActionFloor from '@/components/navigation/action-floor'
 import SectionBar from '@/components/section-bar/section-bar'
 import Listof from '@/listof/listof'
-import { useAsyncEffect, usePageTitle, usePullDown } from '@/service/use.service'
+import { useAjaxPullDown, useAsyncEffect, usePageTitle } from '@/service/use.service'
 import { View } from '@tarojs/components'
 import { useSelector } from 'react-redux'
 import NavigationService from '@/nice-router/navigation.service'
@@ -14,7 +14,7 @@ function HomePage(props) {
   const root = useSelector((state) => state.home)
   const { pageTitle } = root
   usePageTitle(pageTitle)
-  usePullDown(props)
+  useAjaxPullDown(props)
 
   useAsyncEffect(() => {
     NavigationService.ajax('mock-home-page/')
