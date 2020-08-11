@@ -46,7 +46,7 @@ function ListofPageBase(props) {
         height='100vh'
         style={style}
       />
-      <EleFabActionList actionList={actionList} />
+      <EleFabActionList list={actionList} />
     </View>
   )
 }

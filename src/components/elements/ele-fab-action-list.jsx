@@ -2,17 +2,17 @@ import React from 'react'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-import './styles.scss'
 import EleActionList from './ele-action-list'
+import './styles.scss'
 
-function EleFabActionList({ actionList, className }) {
+function EleFabActionList({ list, className }) {
   const rootClass = classNames('ele-fab-action-list', className)
 
   return (
-    isNotEmpty(actionList) && (
+    isNotEmpty(list) && (
       <View className={rootClass}>
-        <View>
-          <EleActionList list={actionList} />
+        <View className='ele-fab-action-list-wrapper'>
+          <EleActionList className={className} list={list} />
         </View>
       </View>
     )

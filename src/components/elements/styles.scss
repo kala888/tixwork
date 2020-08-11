@@ -71,6 +71,26 @@
   }
 }
 
+.ele-action-list.full {
+  flex-direction: column;
+
+  .ele-action-list-btn-wrapper {
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 0;
+  }
+
+  .at-button {
+    @extend %flex-row;
+    font-size: 32px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 400;
+    padding: 40px 20px;
+    color: $white;
+  }
+}
+
 .ele-fab-action-list {
   position: fixed;
   bottom: 0;
@@ -84,11 +104,19 @@
   .at-button {
     @extend %flex-row;
     font-size: 32px;
-    background-color: $orange-color;
     border: none;
     border-radius: 10px;
     font-weight: 400;
     padding: 40px 20px;
     color: $white;
+  }
+}
+
+.ele-fab-action-list.full {
+  @extend %flex-center;
+  flex-direction: column;
+
+  .ele-fab-action-list-wrapper {
+    width: 100%;
   }
 }

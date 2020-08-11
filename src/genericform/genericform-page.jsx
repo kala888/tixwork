@@ -92,7 +92,7 @@ function GenericformPage() {
         handleActionClick={handleActionClick}
       />
 
-      <EleFabActionList actionList={footerActionList} />
+      <EleFabActionList className='full' list={footerActionList} />
     </View>
   )
 }
