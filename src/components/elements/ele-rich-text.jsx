@@ -1,19 +1,18 @@
 import React from 'react'
-import { RichText } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import PropTypes from 'prop-types'
 
 function EleRichText({ content }) {
-  return <RichText nodes={content} />
+  // return <RichText nodes={content} />
+  return <View dangerouslySetInnerHTML={{ __html: content }} />
 }
 
 EleRichText.propTypes = {
   content: PropTypes.string,
-  float: PropTypes.bool,
 }
 
 EleRichText.defaultProps = {
   content: '',
-  float: false,
 }
 
 export default EleRichText

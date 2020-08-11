@@ -18,6 +18,17 @@ export function useVisible(initial = false) {
   }
 }
 
+export function useLoading(initial = false) {
+  const [loading, setLoading] = useState(initial)
+  const showLoading = () => setLoading(true)
+  const hideLoading = () => setLoading(false)
+  return {
+    loading,
+    showLoading,
+    hideLoading,
+  }
+}
+
 // 这只page的title
 export function usePageTitle(title = Config.name) {
   useEffect(() => {

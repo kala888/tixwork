@@ -16,7 +16,14 @@ function EleActionList({ list, customStyle, className }) {
 
         return (
           <View key={id + code} className='ele-action-list-btn-wrapper'>
-            <EleButton {...it} size='small' circle customStyle={{ ...actionStyle }} className='ele-action-list-btn'>
+            <EleButton
+              {...it}
+              size='small'
+              circle
+              title=''
+              customStyle={{ ...actionStyle }}
+              className='ele-action-list-btn'
+            >
               <View className='ele-action-list-btn-container'>
                 {it.imageUrl && <ServerImage className='ele-action-list-btn-image' src={it.imageUrl} />}
                 <Text> {it.title}</Text>

@@ -2,7 +2,7 @@
 
 .listof-page {
   background-color: $color-page-bg;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .listof-footer-tips {
@@ -11,7 +11,7 @@
   @extend %flex;
   justify-content: center;
   align-items: center;
-  padding: 30px 40px;
+  padding: 30px 40px 100px;
 
   &-line {
     @extend %flex-1;

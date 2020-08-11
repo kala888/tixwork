@@ -11,9 +11,9 @@ import ListofUtil from '../listof-util'
 import AutoTemplate from './auto/auto-template'
 import CardTemplate from './card/card-template'
 import Product from './product/product'
-
+import HotArtist from './hot-artist'
+import RichTextTemplate from './rich-text-template'
 import './styles.scss'
-import HotArtist from '@/listof/templates/hot-artist'
 
 export default class FlexLineItem extends React.Component {
   static defaultProps = {
@@ -124,6 +124,7 @@ export default class FlexLineItem extends React.Component {
         {template === 'product' && <Product {...itemProps} />}
 
         {template === 'hot-artist' && <HotArtist {...itemProps} />}
+        {template === 'rich-text' && <RichTextTemplate {...itemProps} />}
 
         {this.state.loading && (
           <View className='item-loading'>
