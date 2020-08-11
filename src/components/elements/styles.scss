@@ -70,3 +70,25 @@
     margin-left: 20px;
   }
 }
+
+.ele-fab-action-list {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 60px;
+  @extend %flex-row;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  .at-button {
+    @extend %flex-row;
+    font-size: 32px;
+    background-color: $orange-color;
+    border: none;
+    border-radius: 10px;
+    font-weight: 400;
+    padding: 40px 20px;
+    color: $white;
+  }
+}

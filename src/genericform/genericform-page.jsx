@@ -8,10 +8,10 @@ import { usePageTitle, usePullDown } from '@/service/use.service'
 import { View } from '@tarojs/components'
 import { useSelector } from 'react-redux'
 import _ from 'lodash'
-import { AtButton } from 'taro-ui'
 
 import FormSteps from './form-steps'
 import './styles.scss'
+import EleFabActionList from '@/components/elements/ele-fab-action-list'
 
 function GenericformPage() {
   const formRef = useRef(null)
@@ -92,16 +92,7 @@ function GenericformPage() {
         handleActionClick={handleActionClick}
       />
 
-      <View className='footer-button-list'>
-        {footerActionList.map((it) => {
-          const { code, title, type } = it
-          return (
-            <AtButton type={type} key={code} onClick={handleActionClick.bind(this, it)}>
-              {title}
-            </AtButton>
-          )
-        })}
-      </View>
+      <EleFabActionList actionList={footerActionList} />
     </View>
   )
 }
