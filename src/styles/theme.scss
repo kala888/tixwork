@@ -10,10 +10,15 @@ $color-brand-dark: #2088cc;
 
 $primary-color: $color-brand;
 
-$border-color: #ccc;
-$border-radius: 4px;
+$border-color: #c5d9e8;
+$border-color-light: lighten($border-color, 20%);
+$color-border-grey: #ccc;
 $border-color-light-blue: $color-brand-light;
+
 $disabled-color: #ddd;
+$border-radius: 4px;
+
+$border-default: 1px solid $border-color;
 
 $shadow-color: rgba(40, 170, 255, 0.1);
 //$shadow-color: $primary-color;

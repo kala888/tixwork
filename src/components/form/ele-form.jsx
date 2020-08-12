@@ -3,12 +3,12 @@ import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import _ from 'lodash'
 import EleFlex from '@/genericpage/ele-flex'
+import EleActionList from '@/components/elements/action-list/ele-action-list'
 import SectionBar from '../section-bar/section-bar'
 import FormItem from './form-item'
 import FormUtil from './form-util'
 import './styles.scss'
 import validator from './validator'
-import EleActionList from '@/components/elements/ele-action-list'
 
 // 参考 https://github.com/react-component/form
 
@@ -173,7 +173,7 @@ function EleForm(props, ref) {
 
             {isNotEmpty(groupActionList) && (
               <View className='ele-form-group-actions'>
-                <EleActionList list={actionList} />
+                <EleActionList mode={['small', 'right']} list={actionList} />
               </View>
             )}
           </View>

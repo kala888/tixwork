@@ -5,11 +5,11 @@ import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 import { useAjaxPullDown, usePageTitle } from '@/service/use.service'
 import Config from '@/utils/config'
+import EleFooterActionList from '@/components/elements/action-list/ele-footer-action-list'
 import { View } from '@tarojs/components'
 import Listof from './listof'
 import SearchBar from './search-bar'
 import './styles.scss'
-import EleFabActionList from '@/components/elements/ele-fab-action-list'
 
 function ListofPageBase(props) {
   const { pageTitle = Config.name } = props
@@ -46,7 +46,7 @@ function ListofPageBase(props) {
         height='100vh'
         style={style}
       />
-      <EleFabActionList list={actionList} />
+      <EleFooterActionList list={actionList} />
     </View>
   )
 }

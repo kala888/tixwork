@@ -11,7 +11,7 @@ import _ from 'lodash'
 
 import FormSteps from './form-steps'
 import './styles.scss'
-import EleFabActionList from '@/components/elements/ele-fab-action-list'
+import EleActionList from '@/components/elements/action-list/ele-action-list'
 
 function GenericformPage() {
   const formRef = useRef(null)
@@ -91,8 +91,7 @@ function GenericformPage() {
         defaultValues={defaultValues}
         handleActionClick={handleActionClick}
       />
-
-      <EleFabActionList className='full' list={footerActionList} />
+      <EleActionList mode='full' list={footerActionList} />
     </View>
   )
 }

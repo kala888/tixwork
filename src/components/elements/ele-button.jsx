@@ -150,8 +150,7 @@ function EleButton(props) {
       onClick={handleClick}
       onGetUserInfo={onGetUserInfo}
     >
-      {title}
-      {children}
+      {props.children || title}
     </AtButton>
   )
 }

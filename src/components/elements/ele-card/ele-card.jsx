@@ -1,5 +1,5 @@
 import React from 'react'
-import EleActionList from '@/components/elements/ele-action-list'
+import EleActionList from '@/components/elements/action-list/ele-action-list'
 import StatusFlag from '@/components/elements/ele-card/status-flag'
 import NavigationService from '@/nice-router/navigation.service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
@@ -53,7 +53,7 @@ function EleCard(props) {
             <Text className='ele-card-info-brief'>{brief}</Text>
             {actionList.length > 0 && (
               <View className='card-action-list'>
-                <EleActionList list={actionList} />
+                <EleActionList mode={['right', 'small']} list={actionList} />
               </View>
             )}
           </View>
