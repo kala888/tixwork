@@ -6,12 +6,11 @@ import NavigationService from '@/nice-router/navigation.service'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import { usePageTitle, usePullDown } from '@/service/use.service'
 import { View } from '@tarojs/components'
+import EleActionList from '@/components/elements/action-list/ele-action-list'
 import { useSelector } from 'react-redux'
 import _ from 'lodash'
-
 import FormSteps from './form-steps'
 import './styles.scss'
-import EleActionList from '@/components/elements/action-list/ele-action-list'
 
 function GenericformPage() {
   const formRef = useRef(null)
@@ -74,6 +73,7 @@ function GenericformPage() {
   const footerActionList = actionList.map((it) => ({
     type: isSubmitAction(it.code) ? 'primary' : null,
     ...it,
+    onClick: handleActionClick.bind(this, it),
   }))
   const defaultValues = getDefaultValues()
   console.log('generic-form initial defaultValues', defaultValues)
