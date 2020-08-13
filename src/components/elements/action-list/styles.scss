@@ -12,8 +12,10 @@
   }
 
   .at-button {
-    font-size: 34px;
+    @extend %flex-center;
+    flex-direction: row;
     border: none;
+    font-size: 34px;
     height: 2.6rem;
     width: 100%;
     border-radius: 20px;
@@ -64,8 +66,6 @@
   }
 
   .at-button {
-    @extend %flex-row;
-    border: none;
     border-radius: 10px;
     color: $white;
   }
