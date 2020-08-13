@@ -71,7 +71,7 @@ function GenericformPage() {
     return defaultValues
   }
   const footerActionList = actionList.map((it) => ({
-    type: isSubmitAction(it.code) ? 'primary' : null,
+    uiType: isSubmitAction(it.code) ? 'primary' : null,
     ...it,
     onClick: handleActionClick.bind(this, it),
   }))
