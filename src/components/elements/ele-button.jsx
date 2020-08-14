@@ -32,7 +32,6 @@ function EleButton(props) {
     full,
     circle,
     onGetUserInfo,
-    children,
   } = props
 
   let wxOpenType = openType

@@ -13,7 +13,7 @@ function EleTabs(props) {
     setCurrent(selectedIdx > -1 ? selectedIdx : 0)
   }, [tabs])
 
-  const handelTabSwitch = (index) => {
+  const handleTabSwitch = (index) => {
     setCurrent(index)
     const tab = tabs[index]
     NavigationService.ajax(
@@ -26,7 +26,10 @@ function EleTabs(props) {
   }
 
   const scroll = tabs.length > 4
-  return <AtTabs height='50px' current={current} scroll={scroll} tabList={tabs} onClick={handelTabSwitch} />
+  // key={Date.now().valueOf()} 坑，这里有个bug，把Key换一下就行了
+  return(
+    <AtTabs key={Date.now().valueOf()} height='50px' current={current} scroll={scroll} tabList={tabs} onClick={handleTabSwitch} />
+  )
 }
 
 EleTabs.defaultProps = {
