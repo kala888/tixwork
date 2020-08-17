@@ -22,12 +22,12 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false
+		"useCompilerModule": true,
+		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
-	"libVersion": "2.11.1",
+	"libVersion": "2.12.1",
 	"simulatorPluginLibVersion": {},
 	"condition": {}
 }
