@@ -62,6 +62,14 @@
   }
 }
 
+.popup-view {
+  .at-radio,
+  .at-checkbox {
+    max-height: 80vh;
+    overflow: scroll;
+  }
+}
+
 .action-field-picker {
   margin-right: -20px;
 
