@@ -4,7 +4,7 @@ import { isNotEmpty } from './nice-router-util'
 
 export default class PopupMessage {
   static async show(options = {}) {
-    const { title, text = '', actionList = [], closeActionText = '关闭' } = options
+    const { title = '提示', text = '？', actionList = [], closeActionText = '关闭' } = options
     const action = actionList.length > 0 ? actionList[0] : null
     if (isNotEmpty(action)) {
       const { title: confirmText = '' } = action

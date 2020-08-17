@@ -60,7 +60,7 @@ function ElePopupSelect(props) {
 
       <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText={cancelText}>
         <AtActionSheetItem className='popup-view'>
-        {multiple ? (
+          {multiple ? (
             <AtCheckbox options={options} selectedList={currentValue} onChange={handleChange} />
           ) : (
             <AtRadio options={options} value={currentValue} onClick={handleChange} />

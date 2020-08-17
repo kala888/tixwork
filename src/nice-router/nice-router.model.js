@@ -2,15 +2,30 @@
 import { isH5 } from '@/utils/index'
 import Taro, { Current } from '@tarojs/taro'
 import _ from 'lodash'
-import ActionUtil from '@/nice-router/action-util'
 
 import GlobalToast from './global-toast'
 import LocalCache from './local-cache.service'
 import NavigationService from './navigation.service'
-import { createAction, isEmpty, LoadingType, log, noop } from './nice-router-util'
+import { createAction, isEmpty, LoadingType, log, noop, isNotEmpty } from './nice-router-util'
+import ActionUtil from './action-util'
 import PopupMessage from './popup-message'
 import BackendService from './request/backend.service'
 import ViewMappingService from './viewmapping.service'
+
+function showToastOrPopup({ toast = {}, popup = {} }) {
+  // 后端说Toast
+  if (isNotEmpty(toast)) {
+    GlobalToast.show({
+      ...toast,
+      icon: 'none',
+    })
+  }
+
+  // 后端说Popup
+  if (isNotEmpty(popup)) {
+    PopupMessage.show(popup)
+  }
+}
 
 export default {
   namespace: 'niceRouter',
@@ -78,19 +93,6 @@ export default {
 
       const { success, xclass, xredirect, data } = resp
 
-      // 后端说Toast
-      if (data.toast) {
-        GlobalToast.show({
-          ...data.toast,
-          icon: 'none',
-        })
-      }
-
-      // 后端说Popup
-      if (data.popup) {
-        PopupMessage.show(data.popup)
-      }
-
       // onSuccess回调
       onSuccess(data, { ...resp })
 
@@ -123,7 +125,11 @@ export default {
 
         //页面跳转逻辑处理
         if (doRedirect) {
-          NavigationService.navigate(pageName, {}, { navigationOptions })
+          NavigationService.navigate(pageName, {}, { navigationOptions }).then(() =>
+            showToastOrPopup({ toast: data.toast, popup: data.popup })
+          )
+        } else {
+          showToastOrPopup({ toast: data.toast, popup: data.popup })
         }
 
         if (!asForm) {

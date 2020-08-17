@@ -27,8 +27,15 @@ function EleTabs(props) {
 
   const scroll = tabs.length > 4
   // key={Date.now().valueOf()} 坑，这里有个bug，把Key换一下就行了
-  return(
-    <AtTabs key={Date.now().valueOf()} height='50px' current={current} scroll={scroll} tabList={tabs} onClick={handleTabSwitch} />
+  return (
+    <AtTabs
+      key={Date.now().valueOf()}
+      height='50px'
+      current={current}
+      scroll={scroll}
+      tabList={tabs}
+      onClick={handleTabSwitch}
+    />
   )
 }
 
