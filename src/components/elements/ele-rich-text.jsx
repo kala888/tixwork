@@ -1,10 +1,11 @@
 import React from 'react'
-import { View } from '@tarojs/components'
 import PropTypes from 'prop-types'
+import '@tarojs/taro/html.css'
+import { RichText } from '@tarojs/components'
 
 function EleRichText({ content }) {
-  // return <RichText nodes={content} />
-  return <View dangerouslySetInnerHTML={{ __html: content }} />
+  return <RichText space='nbsp' nodes={content} />
+  // return <View className='taro_html' dangerouslySetInnerHTML={{ __html: content }} />
 }
 
 EleRichText.propTypes = {
