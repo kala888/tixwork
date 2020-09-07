@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react'
-import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
+import { isNotEmpty, noop, parseJSON } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import _ from 'lodash'
 import EleFlex from '@/genericpage/ele-flex'
@@ -151,7 +151,7 @@ function EleForm(props, ref) {
                 const key = name + '_' // key重做，因为有taro bug
 
                 if (type === 'display-field' && isNotEmpty(field.value)) {
-                  const ele = _.isString(field.value) ? JSON.parse(field.value) : field.value
+                  const ele = _.isString(field.value) ? parseJSON(field.value) : field.value
                   return <EleFlex key={key} {...ele} />
                 }
                 const errors = fieldErrors[name]

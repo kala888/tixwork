@@ -10,7 +10,8 @@ export const LoadingType = {
 }
 
 export const createAction = (type) => (payload) => ({ type, payload })
-export const noop = () => {}
+export const noop = () => {
+}
 
 export const sleep = async (longTime) => new Promise((resolve) => setTimeout(resolve, longTime))
 
@@ -92,4 +93,19 @@ export function parseTaroUri(uri = '') {
 
 export function isLocalPagePath(uri = '') {
   return uri.trim().startsWith(TARO_PROTOCOL_PRIFIX)
+}
+
+export function parseJSON(json) {
+  if (_.isObject()) {
+    return json
+  }
+  if (_.isString(json)) {
+    try {
+      return JSON.parse(json)
+    } catch (e) {
+      return {}
+    }
+  }
+  console.warn('shouldBeObject is not controlled value', json)
+  return json
 }

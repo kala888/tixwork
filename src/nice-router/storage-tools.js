@@ -1,7 +1,7 @@
 /* eslint-disable prefer-promise-reject-errors */
 import Taro from '@tarojs/taro'
 import _ from 'lodash'
-import { log } from './nice-router-util'
+import { log, parseJSON } from './nice-router-util'
 
 const CACHE_PREFIX = 'cachestore-'
 const CACHE_EXPIRATION_PREFIX = 'cacheexpiration-'
@@ -30,7 +30,7 @@ const StorageTools = {
       return
     }
     const value = Taro.getStorageSync(theKey)
-    return value ? JSON.parse(value) : defaultValue
+    return value ? parseJSON(value) : defaultValue
   },
 
   /**
