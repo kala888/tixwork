@@ -14,7 +14,9 @@ const mockForm2Data = {
   actionList: [
     { code: 'preStep', title: '上一步' },
     { code: 'nextStep', title: '下一步' },
+    { code: 'nextStep2', title: '下一步22' },
   ],
+
   groupList: [
     {
       name: 'fist-group222',

@@ -40,6 +40,10 @@
   }
 }
 
+.at-input::after{
+  border:none !important;
+}
+
 .ele-money {
   display: flex;
   flex-direction: row;

@@ -69,6 +69,11 @@
     border-radius: 10px;
     color: $white;
   }
+
+  .at-button--secondary {
+    border: $border-default;
+    color: $primary-color;
+  }
 }
 
 .ele-action-list.footer {

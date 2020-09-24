@@ -38,7 +38,7 @@ function GenericformPage() {
       return
     }
     // 其他请求，就直接执行action，把defaultValues传回去
-    NavigationService.post(action, defaultValues())
+    NavigationService.post(action, defaultValues)
   }
 
   const handleSubmit = async (action) => {
@@ -71,7 +71,7 @@ function GenericformPage() {
     return defaultValues
   }
   const footerActionList = actionList.map((it) => ({
-    uiType: isSubmitAction(it.code) ? 'primary' : null,
+    uiType: isSubmitAction(it.code) ? 'primary' : 'secondary',
     ...it,
     onClick: handleActionClick.bind(this, it),
   }))

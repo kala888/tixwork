@@ -15,15 +15,20 @@ function ItemLabel(props) {
   const tipsTitle = _.isObject(tips) ? tips.title : ''
   const tipsContent = _.isObject(tips) ? tips.content : tips
 
+  const handleShowTips = () => {
+    if (isNotEmpty(tips)) {
+      show()
+    }
+  }
+
   return (
     <View>
       <View className={rootClass}>
-        <View onClick={show}>
+        <View onClick={handleShowTips}>
           <Text className='item-label-title'>
             {required && <Text className='item-label-title-required'>*</Text>}
             {props.children}
           </Text>
-
           {isNotEmpty(tips) && <Text className='iconfont iconfont-question-circle item-label-tips-icon' />}
         </View>
 
