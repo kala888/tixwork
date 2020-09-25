@@ -53,7 +53,7 @@ LocalCache.cacheForm = async (url, params = {}) => {
   if (isNotEmpty(params)) {
     const content = JSON.stringify(params)
     const key = `${url}_${content}`
-    StorageTools.set(key, params, 30)
+    StorageTools.set(key, params, 10)
   }
 }
 
