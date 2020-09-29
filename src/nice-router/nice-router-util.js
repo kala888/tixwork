@@ -61,7 +61,9 @@ function trimProtocal(uri = '') {
 export function toTaroUrl(uri = '', params) {
   const url = trimProtocal(uri)
   if (isNotEmpty(params)) {
-    const postFix = _.map(params, (key, value) => key + '=' + value).join('&')
+    const postFix = _.keys(params)
+      .map((key) => key + '=' + params[key])
+      .join('&')
     if (uri.indexOf('?') > -1) {
       return `${url}&${postFix}`
     }
