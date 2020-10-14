@@ -15,7 +15,8 @@ function EleMobileVerifyCode(props) {
   const sendCode = async () => {
     if (isNotEmpty(linkToUrl)) {
       startCount()
-      NavigationService.ajax(linkToUrl)
+      console.log('props...', props)
+      NavigationService.ajax(linkToUrl, props)
     }
   }
 
@@ -23,7 +24,7 @@ function EleMobileVerifyCode(props) {
   const rootClass = classNames('ele-vcode', className)
   const txtClass = classNames('ele-vcode-txt', { 'ele-vcode-txt-disabled': counting })
   return (
-    <AtInput type='text' maxLength={6} {...others} className={rootClass}>
+    <AtInput type='text' maxlength={6} {...others} className={rootClass}>
       <View className={txtClass} onClick={sendCode}>
         {tips}
       </View>

@@ -1,87 +1,110 @@
 @import 'src/styles/theme';
 
+$card-border: 2px solid #f3f5f7;
+
 .card-container {
   @extend %flex-center;
   flex-direction: column;
-}
-
-.ele-card {
-  //background-color: #5ebfff;
-  @extend %flex-row;
-  background-color: $white;
-  font-size: 32px;
-  color: $text-color;
   box-shadow: 0 10px 19px 1px $shadow-color;
-  //margin-bottom: 20px;
-
-  width: 100%;
-  padding: 20px 10px 20px 30px;
   border-radius: 20px;
-
+  margin-bottom: 20px;
   position: relative;
   overflow: hidden;
+  background-color: $white;
 }
 
-.card-action-list {
-  border-top: 2px solid #f3f5f7;
-  padding-top: 20px;
-  width: 100%;
+.card-header {
   @extend %flex-row;
-  justify-content: flex-end;
-}
-
-.ele-card-cover {
-  @extend %flex-center;
-  height: 100px;
-  width: 100px;
-
-  &-image {
-    height: 100px;
-    width: 100px;
-  }
-
-  &-txt {
-    display: flex !important;
-    text-align: center;
-    @extend %flex-center;
-    height: 100px;
-    width: 100px;
-    color: $white;
-    font-size: 34px;
-    font-weight: 600;
-  }
-}
-
-.ele-card-info {
-  @extend %flex-column;
-  flex: 1;
-  padding: 0 15px;
-  height: 100%;
+  padding: 20px;
+  font-size: 22px;
+  width: 100%;
+  border-bottom: $card-border;
 
   &-title {
-    font-size: 32px;
-    display: -webkit-box !important;
-    font-weight: 600;
+    color: $text-color-light;
     @include lamp-clamp(1);
+    @extend %flex-1;
   }
 
   &-brief {
-    padding: 10px 10px 0;
-    color: $text-color-lighter;
-    font-size: 26px;
-    display: -webkit-box !important;
-    min-height: 0.9rem;
+    color: $text-color-light;
     @include lamp-clamp(1);
+  }
+}
+
+.card-body {
+  //background-color: #5ebfff;
+  @extend %flex-row;
+
+  font-size: 32px;
+  color: $text-color;
+  padding: 20px;
+  width: 100%;
+
+  &-cover {
+    @extend %flex-center;
+    height: 100px;
+    width: 100px;
+
+    &-image {
+      height: 100px;
+      width: 100px;
+    }
+
+    &-txt {
+      display: flex !important;
+      text-align: center;
+      @extend %flex-center;
+      height: 100px;
+      width: 100px;
+      color: $white;
+      font-size: 34px;
+      font-weight: 600;
+    }
+  }
+
+  &-info {
+    @extend %flex-column;
+    flex: 1;
+    padding: 0 15px;
+
+    &-title {
+      font-size: 32px;
+      display: -webkit-box !important;
+      font-weight: 600;
+      @include lamp-clamp(1);
+    }
+
+    &-brief {
+      padding: 10px 10px 0;
+      color: $text-color-lighter;
+      font-size: 26px;
+      display: -webkit-box !important;
+      min-height: 0.9rem;
+      @include lamp-clamp(1);
+    }
+  }
+}
+
+.card-footer {
+  @extend %flex-column;
+  border-top: $card-border;
+  padding: 20px;
+  width: 100%;
+
+  &-action-list {
+    @extend %flex-row;
+    justify-content: flex-end;
   }
 }
 
 // as horizontal
-.ele-card_horizontal {
+.card-body_horizontal {
   .ele-card-cover {
     width: 100px;
     height: 100px;
 
-    .ele-card-cover-image {
+    .card-body-cover-image {
       margin-bottom: -5px;
       height: 100px;
       width: 100px;
@@ -90,134 +113,146 @@
   }
 }
 
-.ele-card_circle {
-  .ele-card-cover-image {
+.card-body_vertical {
+  @extend %flex-column;
+  justify-content: center;
+  padding: 0 0 10px 0;
+  //width: 350px;
+
+  .card-body-cover {
+    align-self: center;
+    height: 350px;
+    width: 100%;
+
+    .card-body-cover-image {
+      height: 350px;
+      width: 100%;
+    }
+
+    .card-body-cover-txt {
+      height: 250px;
+      width: 250px;
+    }
+  }
+
+  .card-body-info {
+    margin-top: 10px;
+  }
+}
+
+.card-body_vertical-small {
+  .card-body-cover-image {
+    height: 250px !important;
+    width: 250px !important;
+  }
+
+  .card-body-cover-txt {
+    height: 150px !important;
+    width: 150px !important;
+  }
+}
+.card-body_vertical-normal {
+  .card-body-cover-image {
+    height: 350px !important;
+    width: 350px !important;
+  }
+
+  .card-body-cover-txt {
+    height: 250px !important;
+    width: 250px !important;
+  }
+}
+
+.card-body_circle {
+  .card-body-cover-image {
     border-radius: 50% !important;
   }
 
-  .ele-card-cover-txt {
+  .card-body-cover-txt {
     border-radius: 50% !important;
   }
 }
 
-.ele-card_large {
-  .ele-card-cover {
+.card-body_large {
+  .card-body-cover {
     width: 180px;
     height: 180px;
 
-    .ele-card-cover-image {
+    .card-body-cover-image {
       height: 180px;
       width: 180px;
     }
 
-    .ele-card-cover-txt {
+    .card-body-cover-txt {
       height: 180px;
       width: 180px;
     }
   }
 
-  .ele-card-info-brief {
+  .card-body-info-brief {
     height: unset;
     white-space: pre-wrap;
     @include lamp-clamp(3);
   }
 }
 
-.ele-card_as-text {
-  .ele-card-cover-txt {
+.card-body_as-text {
+  .card-body-cover-txt {
     background-color: $level-default;
     border-radius: 50%;
   }
 }
 
-.ele-card_small {
-  .ele-card-cover {
+.card-body_small {
+  .card-body-cover {
     width: 60px;
     height: 60px;
 
-    .ele-card-cover-image {
+    .card-body-cover-image {
       width: 60px;
       height: 60px;
     }
 
-    .ele-card-cover-txt {
+    .card-body-cover-txt {
       width: 60px;
       height: 60px;
     }
   }
 }
 
-.ele-card_avatar {
-  .ele-card-cover-image {
+.card-body_avatar {
+  .card-body-cover-image {
     border: 4px solid darken($primary-color, 10%);
     box-shadow: 0 0 20px #fff;
   }
 }
 
-.ele-card_default {
-  .ele-card-cover-txt {
+.card-body_default {
+  .card-body-cover-txt {
     background-color: $level-default;
   }
 }
 
-.ele-card_normal {
-  .ele-card-cover-txt {
+.card-body_normal {
+  .card-body-cover-txt {
     background-color: $level-normal;
   }
 }
 
-.ele-card_primary {
-  .ele-card-cover-txt {
+.card-body_primary {
+  .card-body-cover-txt {
     background-color: $level-primary;
   }
 }
 
-.ele-card_warn {
-  .ele-card-cover-txt {
+.card-body_warn {
+  .card-body-cover-txt {
     background-color: $level-warn;
   }
 }
 
-.ele-card_danger {
-  .ele-card-cover-txt {
+.card-body_danger {
+  .card-body-cover-txt {
     background-color: $level-danger;
-  }
-}
-
-.ele-card_vertical {
-  @extend %flex-column;
-  justify-content: center;
-  padding: 0 0 10px 0;
-  width: 350px;
-
-  .ele-card-cover {
-    height: 350px;
-    width: 350px;
-
-    .ele-card-cover-image {
-      height: 350px;
-      width: 350px;
-    }
-
-    .ele-card-cover-txt {
-      height: 250px;
-      width: 250px;
-    }
-  }
-
-  .ele-card-info {
-    margin-top: 10px;
-  }
-}
-
-.ele-card_vertical-small {
-  .ele-card-cover-image {
-    height: 250px !important;
-    width: 250px !important;
-  }
-
-  .ele-card-cover-txt {
-    height: 150px !important;
-    width: 150px !important;
   }
 }

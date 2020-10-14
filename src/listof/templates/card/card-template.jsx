@@ -7,8 +7,7 @@ import '../styles.scss'
 
 function CardTemplate(props) {
   const { item = {}, mode: globalMode = [] } = props
-  const { title, brief, flag = '', status, actionList = [], documentUrl, linkToUrl } = item
-  const { level = '', mode = '' } = item
+  const { actionList = [], documentUrl, level = '', mode = '' } = item
 
   const imageUrl = ListofUtil.getImageUrl(item)
   const hasImage = isNotEmpty(imageUrl)
@@ -39,18 +38,7 @@ function CardTemplate(props) {
     : []
   const cardActionList = actionList.concat(documentActions).slice(0, 4)
 
-  return (
-    <EleCard
-      title={title}
-      brief={brief}
-      imageUrl={imageUrl}
-      mode={extClass}
-      status={status}
-      flag={flag}
-      actionList={cardActionList}
-      linkToUrl={linkToUrl}
-    />
-  )
+  return <EleCard {...item} mode={extClass} actionList={cardActionList} />
 }
 
 export default CardTemplate

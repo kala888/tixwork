@@ -20,14 +20,13 @@
       &-title {
         font-size: 28px;
         vertical-align: center;
-        width: 5rem;
+        width: 4rem;
       }
 
       &-value {
         @extend %flex-1;
         font-size: 28px;
         vertical-align: center;
-        padding-left: 20px;
         color: $text-color-light;
       }
 
@@ -47,10 +46,25 @@
         @include lamp-clamp(4);
       }
     }
-    &-cell.small {
-      .info-row-cell-title {
-        font-size: 24px;
-      }
+
+    &-cell-title.small {
+      font-size: 24px;
+    }
+
+    &-cell-title.width2 {
+      width: 2rem;
+    }
+
+    &-cell-title.width3 {
+      width: 3rem;
+    }
+
+    &-cell-title.width4 {
+      width: 4rem;
+    }
+
+    &-cell-title.width5 {
+      width: 5rem;
     }
   }
 }

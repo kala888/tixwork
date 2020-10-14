@@ -168,7 +168,6 @@ const cardList = [
   {
     id: '131',
     ...obj,
-    mode: ['vertical', 'default', 'vertical-small'],
     imageUrl: '',
     flag: '急',
     actionList: [
@@ -188,17 +187,15 @@ const cardList = [
       },
     ],
   }, // 默认的 horizontal
-  { id: '132', ...obj, mode: ['vertical', 'normal'], imageUrl: '', flag: '急' }, // 默认的 horizontal
-  { id: '133', ...obj, mode: ['vertical', 'primary'], imageUrl: '', flag: '如' }, // 默认的 horizontal
-  { id: '134', ...obj, mode: ['vertical', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
-  { id: '135', ...obj, mode: ['vertical', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
-
-  //默认，imageOnLeft
-  { id: '1', ...obj, status: '待处理' }, //方图，一行title，一行brief，小的flag+最多3个字
+  { id: '132', ...obj, mode: ['vertical', 'normal'], imageUrl: '', flag: '急' },
+  { id: '133', ...obj, mode: ['vertical', 'primary'], imageUrl: '', flag: '如' },
+  { id: '134', ...obj, mode: ['vertical', 'warn'], imageUrl: '', flag: '律' },
+  { id: '135', ...obj, mode: ['vertical', 'danger'], imageUrl: '', flag: '令' },
 
   //竖版
-  { id: '11', ...obj, mode: ['vertical'] }, // 竖版，1/2屏幕宽，小的flag+最多3个字
+  { id: '11', ...obj, mode: ['vertical'] }, // 竖版，满屏宽图，小的flag+最多3个字
   { id: '12', ...obj, mode: ['vertical', 'vertical-small', 'circle'] }, // 竖版，小圆图，1/2屏幕宽，小的flag+最多3个字
+  { id: '12', ...obj, mode: ['vertical', 'vertical-normal', 'circle'] }, // 竖版，大圆图，1/2屏幕宽，小的flag+最多3个字
 
   //横版-有图
   { id: '231', ...obj, mode: ['horizontal'] }, // 默认的 horizontal
@@ -218,6 +215,38 @@ const cardList = [
   { id: '33', ...obj, mode: ['horizontal', 'primary', 'large'], imageUrl: '', flag: '如' }, // 默认的 horizontal
   { id: '34', ...obj, mode: ['horizontal', 'warn'], imageUrl: '', flag: '律' }, // 默认的 horizontal
   { id: '35', ...obj, mode: ['horizontal', 'danger'], imageUrl: '', flag: '令' }, // 默认的 horizontal
+
+  {
+    id: 36,
+    displayMode: 'image-on-left',
+    headerTitle: '创建时间: 2009-10-10 21：34：56',
+    headerBrief: '查看更多',
+    title: '建设有中国特色社会主义',
+    imageUrl: MockService.randomImage(),
+    brief: '践行社会主义核心价值观',
+    infoList: [{ title: '地址', value: '中华人民共和国北京市国务院所在地' }],
+  },
+
+  {
+    id: 37,
+    displayMode: 'image-on-left',
+    headerTitle: '创建时间: 2009-10-10 21：34：56',
+    headerBrief: '查看更多',
+    title: '建设有中国特色社会主义',
+    imageUrl: MockService.randomImage(),
+    brief: '践行社会主义核心价值观',
+    infoList: [
+      { title: '姓名', value: '张三分' },
+      { title: '性别', value: '男' },
+      { title: '联系方式', value: '张三分' },
+      { title: '性别', value: '男' },
+      { title: '联系方式哦', value: '张三分' },
+      { title: '性别', value: '男' },
+      { title: '我的利息方式', value: '张三分张三分张三分张三分张三分张三分' },
+      { title: '性别', value: '男' },
+      { title: '地址', value: '四川省成都市高新区天府软件园B7 502' },
+    ],
+  },
 ]
 
 const homePageData = {

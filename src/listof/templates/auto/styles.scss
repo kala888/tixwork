@@ -51,10 +51,12 @@
 
 .only-title {
   .auto-info-title {
+    padding-bottom: 0;
     font-weight: 400;
   }
 }
 
 .image-on-bottom {
   flex-direction: column-reverse;
+  padding-bottom: 0;
 }
