@@ -4,9 +4,9 @@ import { AtButton } from 'taro-ui'
 import Taro from '@tarojs/taro'
 import _ from 'lodash'
 import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
+import GlobalToast from '@/nice-router/global-toast'
 
 import './styles.scss'
-import GlobalToast from '@/nice-router/global-toast'
 
 function EleQrScan(props) {
   const { value = '', disabled, onChange = noop } = props
