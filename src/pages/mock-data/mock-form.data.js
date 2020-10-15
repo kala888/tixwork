@@ -140,6 +140,15 @@ const mockForm1Data = {
         },
 
         {
+          name: '-1-team-building3333',
+          label: '扫码ID',
+          type: 'qr-scan',
+          placeholder: '团建项目',
+          value: '猪脑1-2-1-2',
+          title: 'AAA',
+        },
+
+        {
           name: '111-display',
           label: '这个不应该展示',
           type: 'display-field',

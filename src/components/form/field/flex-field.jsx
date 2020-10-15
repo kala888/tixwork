@@ -10,6 +10,7 @@ import EleSwitch from './ele-switch'
 import EleTree from './ele-tree'
 import EleMobileVerifyCode from './ele-mobile-verify-code'
 import './styles.scss'
+import EleQrScan from '@/components/form/field/ele-qr-scan'
 
 // TODO 实现附件上传
 // TODO 实现checkbox（多用于terms）
@@ -56,6 +57,8 @@ export default function FlexField(props) {
   if (type === 'object-picker') return <ObjectPicker {...props} />
 
   if (type === 'tree-picker') return <EleTree {...props} />
+
+  if (type === 'qr-scan') return <EleQrScan {...props} />
 
   // phone
   return <AtInput border={false} {...props} />

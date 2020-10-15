@@ -81,3 +81,16 @@
     color: $text-color-lighter;
   }
 }
+
+.ele-qr-scan {
+  @extend %flex-row;
+
+  &-value {
+    @extend %flex-row;
+    flex: 1;
+    height: 40px;
+  }
+  .at-button {
+    margin: 0 !important;
+  }
+}

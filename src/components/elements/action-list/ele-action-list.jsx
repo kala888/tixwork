@@ -1,12 +1,12 @@
 import React from 'react'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
-
+import { isH5 } from '@/utils/index'
 import EleButton from '../ele-button'
 import './styles.scss'
 
 function EleActionList({ list, mode = ['right'], className }) {
-  const rootClass = classNames('ele-action-list', className, mode)
+  const rootClass = classNames('ele-action-list', className, mode, { h5: isH5() })
 
   return (
     <View className={rootClass}>

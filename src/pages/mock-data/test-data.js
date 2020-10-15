@@ -193,9 +193,9 @@ const cardList = [
   { id: '135', ...obj, mode: ['vertical', 'danger'], imageUrl: '', flag: '令' },
 
   //竖版
-  { id: '11', ...obj, mode: ['vertical'] }, // 竖版，满屏宽图，小的flag+最多3个字
-  { id: '12', ...obj, mode: ['vertical', 'vertical-small', 'circle'] }, // 竖版，小圆图，1/2屏幕宽，小的flag+最多3个字
-  { id: '12', ...obj, mode: ['vertical', 'vertical-normal', 'circle'] }, // 竖版，大圆图，1/2屏幕宽，小的flag+最多3个字
+  { id: '12440', ...obj, mode: ['vertical'] }, // 竖版，满屏宽图，小的flag+最多3个字
+  { id: '12441', ...obj, mode: ['vertical', 'vertical-small', 'circle'] }, // 竖版，小圆图，1/2屏幕宽，小的flag+最多3个字
+  { id: '12442', ...obj, mode: ['vertical', 'vertical-normal', 'circle'] }, // 竖版，大圆图，1/2屏幕宽，小的flag+最多3个字
 
   //横版-有图
   { id: '231', ...obj, mode: ['horizontal'] }, // 默认的 horizontal
