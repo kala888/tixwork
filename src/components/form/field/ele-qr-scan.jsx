@@ -3,16 +3,21 @@ import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import Taro from '@tarojs/taro'
 import _ from 'lodash'
-import { noop } from '@/nice-router/nice-router-util'
+import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 
 import './styles.scss'
+import GlobalToast from '@/nice-router/global-toast'
 
 function EleQrScan(props) {
   const { value = '', disabled, onChange = noop } = props
 
   const handleScan = async () => {
     const { result } = await Taro.scanCode({})
-    onChange(result)
+    if (isNotEmpty(result)) {
+      await GlobalToast.show({ text: '扫码成功' })
+      onChange(result)
+    }
+
   }
 
   let displayValue = value || ''
