@@ -27,15 +27,16 @@ function transToDoubleItemList(list = []) {
 }
 
 export default function TxtTable({ list = [], maxLine = 100 }) {
-  const doubleItemList = transToDoubleItemList(list)
+  const tempList = list.filter((it) => isNotEmpty(it))
+  const doubleItemList = transToDoubleItemList(tempList)
+
   const valueCls = classNames('info-row-cell-value', {
     'info-row-cell-1lines': maxLine === 1,
     'info-row-cell-2lines': maxLine === 2,
     'info-row-cell-3lines': maxLine === 3,
     'info-row-cell-4lines': maxLine === 4,
   })
-  const maxTitleWidth = _.max(list.map((it) => (isNotEmpty(it.title) ? it.title.length : 0)))
-  console.log('111111', maxTitleWidth)
+  const maxTitleWidth = _.max(tempList.map((it) => (isNotEmpty(it.title) ? it.title.length : 0)))
   return (
     <View className='txt-table'>
       {doubleItemList.map((it) => {

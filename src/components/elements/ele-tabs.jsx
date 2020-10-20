@@ -16,7 +16,7 @@ function EleTabs(props) {
   const handleTabSwitch = (index) => {
     setCurrent(index)
     const tab = tabs[index]
-    NavigationService.ajax(
+    NavigationService.refresh(
       tab,
       {},
       {

@@ -6,7 +6,7 @@ import _ from 'lodash'
 import GlobalToast from './global-toast'
 import LocalCache from './local-cache.service'
 import NavigationService from './navigation.service'
-import { createAction, isEmpty, LoadingType, log, noop, isNotEmpty } from './nice-router-util'
+import { createAction, isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util'
 import ActionUtil from './action-util'
 import PopupMessage from './popup-message'
 import BackendService from './request/backend.service'
@@ -63,6 +63,7 @@ export default {
         onSuccess = noop,
         loading,
         navigationOptions,
+        refresh,
       } = action
 
       const linkToUrl = ActionUtil.getActionUri(action)
@@ -114,6 +115,7 @@ export default {
           ...data,
           statInPage,
           arrayMerge,
+          refresh,
         }
         const modelActions = [].concat(stateAction, effectAction)
         for (let i = 0; i < modelActions.length; i++) {

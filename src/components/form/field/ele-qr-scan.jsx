@@ -17,7 +17,6 @@ function EleQrScan(props) {
       await GlobalToast.show({ text: '扫码成功' })
       onChange(result)
     }
-
   }
 
   let displayValue = value || ''

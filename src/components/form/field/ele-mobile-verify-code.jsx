@@ -16,7 +16,7 @@ function EleMobileVerifyCode(props) {
     if (isNotEmpty(linkToUrl)) {
       startCount()
       console.log('props...', props)
-      NavigationService.ajax(linkToUrl, props)
+      NavigationService.ajax(linkToUrl, { mobile: props.value })
     }
   }
 

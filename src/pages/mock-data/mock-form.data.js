@@ -415,7 +415,11 @@ const mockForm1Data = {
 
           type: 'object-picker',
           placeholder: '快点选个工长',
-          linkToUrl: '/find/user/:id/',
+          linkToUrl: '/find/user/12345/',
+          searchAction: {
+            linkToUrl: '/find/user/12345/',
+          },
+          maxSelectCount: 3,
         },
       ],
     },

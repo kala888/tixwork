@@ -16,7 +16,7 @@ import './styles.scss'
 
 //mode=small,large
 function EleCard(props) {
-  const { headerTitle, headerBrief, title, brief, imageUrl, status, flag, level, actionList, infoList } = props
+  const { headerTitle, headerBrief, title, brief, imageUrl, status, flag, level, actionList, infoList, onClick } = props
   const { mode = [] } = props
   const flagSize = mode.includes('large') ? 'large' : 'small'
   const hasImage = isNotEmpty(imageUrl)
@@ -24,7 +24,11 @@ function EleCard(props) {
     mode.push('as-text')
     mode.push(level)
   }
-  const onClick = () => {
+  const handleClick = () => {
+    if (onClick) {
+      onClick()
+      return
+    }
     if (isNotEmpty(actionList)) {
       NavigationService.view(props)
     }
@@ -46,7 +50,7 @@ function EleCard(props) {
       )}
 
       <View className={bodyClass}>
-        <View className='card-body-cover' onClick={onClick}>
+        <View className='card-body-cover' onClick={handleClick}>
           {hasImage ? (
             <ServerImage className='card-body-cover-image' src={imageUrl} />
           ) : (

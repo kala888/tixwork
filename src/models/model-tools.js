@@ -47,8 +47,9 @@ const createDefault = (namespace) => ({
       return {}
     },
     save(state, { payload }) {
-      const { statInPage, arrayMerge, ...resp } = payload
-      const result = mergeState(state, resp, statInPage, arrayMerge)
+      const { statInPage, arrayMerge, refresh, ...resp } = payload
+      const doMerge = refresh ? false : statInPage
+      const result = mergeState(state, resp, doMerge, arrayMerge)
       return result || state
     },
   },

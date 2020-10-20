@@ -7,12 +7,13 @@ import classNames from 'classnames'
 import { AtActivityIndicator } from 'taro-ui'
 
 import ListofUtil from '../listof-util'
-
 import AutoTemplate from './auto/auto-template'
 import CardTemplate from './card/card-template'
 import Product from './product/product'
 import HotArtist from './hot-artist'
 import RichTextTemplate from './rich-text-template'
+import ObjectPickerItem from './card/object-picker-item'
+
 import './styles.scss'
 
 export default class FlexLineItem extends React.Component {
@@ -74,7 +75,7 @@ export default class FlexLineItem extends React.Component {
   handlePress = _.throttle((template) => {
     const { onItemPress, item } = this.props
     if (onItemPress) {
-      onItemPress(item)
+      // onItemPress(item)
       return
     }
 
@@ -90,7 +91,7 @@ export default class FlexLineItem extends React.Component {
   }, 3000)
 
   render() {
-    const { item = {}, displayMode, bordered = true, shadow = true, horizontal, className } = this.props
+    const { item = {}, displayMode, bordered = true, shadow = true, horizontal, className, ...others } = this.props
     const { displayMode: itemDisplayMode } = item
 
     const template = (itemDisplayMode || displayMode).toLowerCase().trim()
@@ -100,7 +101,7 @@ export default class FlexLineItem extends React.Component {
       'no-border': !bordered,
       shadow,
     })
-    const itemProps = { horizontal, item }
+    const itemProps = { ...others, horizontal, item }
     return (
       <View onClick={this.handlePress.bind(this, template, item)} className={wrapperClass}>
         {template === 'auto' && <AutoTemplate {...itemProps} />}
@@ -125,6 +126,7 @@ export default class FlexLineItem extends React.Component {
 
         {template === 'hot-artist' && <HotArtist {...itemProps} />}
         {template === 'rich-text' && <RichTextTemplate {...itemProps} />}
+        {template === 'object-picker' && <ObjectPickerItem {...itemProps} />}
 
         {this.state.loading && (
           <View className='item-loading'>

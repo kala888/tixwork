@@ -1,5 +1,6 @@
 import { isH5 } from '@/utils/index'
-import Taro from '@tarojs/taro'
+import _ from 'lodash'
+import Taro, { Current } from '@tarojs/taro'
 import ActionUtil from './action-util'
 
 import localCacheService from './local-cache.service'
@@ -23,11 +24,23 @@ const isH5Path = (uri = '') => {
   return str.startsWith('https://') || str.startsWith('http://')
 }
 
+const _getNavigationMethod = (method) => {
+  const pages = Taro.getCurrentPages()
+  if (
+    (method === 'navigateTo' && pages.length >= PAGE_LEVEL_LIMIT - 3) ||
+    (method === 'navigateToByForce' && pages.length === PAGE_LEVEL_LIMIT)
+  ) {
+    return Taro.redirectTo
+  }
+
+  return Taro[method]
+}
+
 const NavigationService = {
-  pagesResolves: {}, // 记得清空这个玩意，小心内存泄露
-  clearPagesResolves() {
-    NavigationService.pagesResolves = {}
-    this.pagesResolves = {}
+  pagesGoBackCallback: {}, // 记得清空这个玩意，小心内存泄露
+  clearPagesGoBackCallback() {
+    NavigationService.pagesGoBackCallback = {}
+    this.pagesGoBackCallback = {}
   },
 
   setContainer(container) {
@@ -62,21 +75,20 @@ const NavigationService = {
    *
    * eg. 后退传参 NavigationService.back({data},this)
    */
-  back({ delta = 1, data } = {}, _page = {}) {
-    console.log('should be a error here', delta, data, _page)
-    //TODO
-    // const { path: key } = _page.$router || {}
-
-    // return new Promise((resolve, reject) => {
-    //   Taro.navigateBack({ delta })
-    //     .then(() => {
-    //       const pageResolve = this.pagesResolves[key]
-    //       pageResolve && pageResolve(data)
-    //       this.pagesResolves[key] = null
-    //       resolve()
-    //     })
-    //     .catch((err) => reject(err))
-    // })
+  back(data = {}, delta = 1) {
+    const { path: key } = Current.router
+    return new Promise((resolve, reject) => {
+      Taro.navigateBack({ delta })
+        .then(() => {
+          const goBackCallback = this.pagesGoBackCallback[key]
+          if (goBackCallback) {
+            goBackCallback(data)
+            this.pagesGoBackCallback[key] = null
+          }
+          resolve()
+        })
+        .catch((err) => reject(err))
+    })
   },
 
   /**
@@ -88,43 +100,34 @@ const NavigationService = {
    */
   navigate(routeName, params, options = {}) {
     return new Promise((resolve, reject) => {
-      const pages = Taro.getCurrentPages()
       const url = toTaroUrl(routeName, params)
-
       console.log('taro-redirect', url)
-
       if (routeName) {
-        let { navigationOptions: { method = 'navigateTo' } = {} } = options
-        if (
-          (method === 'navigateTo' && pages.length >= PAGE_LEVEL_LIMIT - 3) ||
-          (method === 'navigateToByForce' && pages.length === PAGE_LEVEL_LIMIT)
-        ) {
-          method = 'redirectTo'
-        }
-        // 把resolve存起来，主动调用 back的时候再调用
-        log('resolve...resolve', this.pagesResolves[routeName])
-        const routeMethod = Taro[method]
+        const method = _.get(options, 'navigationOptions.method', 'navigateTo')
+        const resolveIsGoBackCallback = _.get(options, 'resolveIsGoBackCallback', false)
+        const routeMethod = _getNavigationMethod(method)
         if (routeMethod) {
           routeMethod({ url })
             .then(() => {
-              // this.pagesResolves[routeName] = resolve
-              if (resolve) {
-                resolve()
+              // 把resolve存起来，主动调用 back的时候再调用
+              if (resolveIsGoBackCallback) {
+                this.pagesGoBackCallback[routeName] = resolve
+              } else {
+                resolve && resolve()
               }
             })
             .catch((err) => {
               const { errMsg = '' } = err
               if (errMsg.indexOf('a tabbar page')) {
-                // Taro.switchTab({ url }).then(clearPagesResolves)
                 Taro.switchTab({ url }).then(() => {
-                  // this.clearPagesResolves()
+                  this.clearPagesGoBackCallback()
                   if (resolve) {
                     resolve()
                   }
                 })
                 return
               }
-              log(`Taro.${method} run failed`, err)
+              log(`Taro navigation get failed`, err)
               reject(err)
             })
         }
@@ -144,6 +147,10 @@ const NavigationService = {
       ...options,
       statInPage: true,
     })
+  },
+
+  refresh(action, params, options = {}) {
+    return this.ajax(action, params, { ...options, refresh: true })
   },
 
   post(action, params, options = {}) {

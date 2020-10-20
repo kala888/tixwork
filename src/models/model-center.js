@@ -15,8 +15,9 @@ const modelListOOTB = [
   'navigationList',
   'H5',
 
-  'genericform',
+  'objectPicker',
 
+  'genericform',
   'genericpage',
   'genericpage2',
 

@@ -1,0 +1,21 @@
+@import 'src/listof/templates/styles';
+
+.object-picker-item {
+  @extend %flex-row;
+  background-color: $white;
+  border-bottom: $border-default;
+
+  &-option {
+    @extend %flex-center;
+
+    .iconfont {
+      font-size: 34px;
+      color: green;
+    }
+  }
+
+  .card-container {
+    box-shadow: unset !important;
+    border-radius: 0 !important;
+  }
+}

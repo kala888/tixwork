@@ -9,21 +9,23 @@ import ListofUtil from './listof-util'
 import './styles.scss'
 import FlexLineItem from './templates/flex-line-item'
 
-function Listof({
-  list: listRefs,
-  listMeta,
-  displayMode,
-  emptyMessage,
-  isBigList,
-  height,
-  style = {},
-  dataContainer,
-  horizontal,
-  bordered,
-  containerClass,
-  onItemPress = null,
-  className,
-}) {
+function Listof(props) {
+  const {
+    list: listRefs,
+    listMeta,
+    displayMode,
+    emptyMessage,
+    isBigList,
+    height,
+    style = {},
+    dataContainer,
+    horizontal,
+    bordered,
+    containerClass,
+    onItemPress = null,
+    className,
+  } = props
+
   const [loading, setLoading] = useState(false)
   const loadMore = () => {
     console.log('on-end1')
