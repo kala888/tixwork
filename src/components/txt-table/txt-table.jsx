@@ -26,15 +26,9 @@ function transToDoubleItemList(list = []) {
   return newList
 }
 
-
-const getMaxTitleWidth = _.memoize(
-  (list = []) => {
-    return _.max(
-      list.filter(it => isNotEmpty(it))
-        .map(it => isNotEmpty(it.title) ? it.title.length : 0),
-    )
-  },
-)
+const getMaxTitleWidth = _.memoize((list = []) => {
+  return _.max(list.filter((it) => isNotEmpty(it)).map((it) => (isNotEmpty(it.title) ? it.title.length : 0)))
+})
 
 export default function TxtTable({ list = [], maxLine = 100 }) {
   const doubleItemList = transToDoubleItemList(list)

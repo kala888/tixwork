@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from '@tarojs/components'
+import { Text, View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 import Taro from '@tarojs/taro'
 import _ from 'lodash'
@@ -30,7 +30,7 @@ function EleQrScan(props) {
     <View className='ele-qr-scan'>
       <View className='ele-qr-scan-value'>{_.trim(displayValue)}</View>
       <AtButton size='small' disabled={disabled} onClick={handleScan}>
-        扫码
+        <Text className='iconfont iconfont-scan' />
       </AtButton>
     </View>
   )
