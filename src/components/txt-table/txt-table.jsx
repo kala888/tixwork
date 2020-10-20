@@ -26,9 +26,18 @@ function transToDoubleItemList(list = []) {
   return newList
 }
 
+
+const getMaxTitleWidth = _.memoize(
+  (list = []) => {
+    return _.max(
+      list.filter(it => isNotEmpty(it))
+        .map(it => isNotEmpty(it.title) ? it.title.length : 0),
+    )
+  },
+)
+
 export default function TxtTable({ list = [], maxLine = 100 }) {
-  const tempList = list.filter((it) => isNotEmpty(it))
-  const doubleItemList = transToDoubleItemList(tempList)
+  const doubleItemList = transToDoubleItemList(list)
 
   const valueCls = classNames('info-row-cell-value', {
     'info-row-cell-1lines': maxLine === 1,
@@ -36,7 +45,7 @@ export default function TxtTable({ list = [], maxLine = 100 }) {
     'info-row-cell-3lines': maxLine === 3,
     'info-row-cell-4lines': maxLine === 4,
   })
-  const maxTitleWidth = _.max(tempList.map((it) => (isNotEmpty(it.title) ? it.title.length : 0)))
+  const maxTitleWidth = getMaxTitleWidth(list)
   return (
     <View className='txt-table'>
       {doubleItemList.map((it) => {
