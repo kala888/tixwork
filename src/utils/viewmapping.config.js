@@ -33,6 +33,11 @@ const ViewmappingConfig = {
     },
   ],
 
+  'com.terapico.appview.ObjectPickerPage': {
+    pageName: '/genericform/object-picker-page',
+    stateAction: 'objectPicker/save',
+  },
+
   'com.terapico.appview.MePage': {
     pageName: '/pages/me/me-page',
     stateAction: 'me/save',
