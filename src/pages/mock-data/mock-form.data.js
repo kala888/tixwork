@@ -147,6 +147,14 @@ const mockForm1Data = {
           value: '猪脑1-2-1-2',
           title: 'AAA',
         },
+        {
+          name: '22-1-region',
+          label: '省市区',
+          type: 'region-picker',
+          placeholder: '选择省市区',
+          value: '四川省-成都市-金牛区',
+          title: 'AAA',
+        },
 
         {
           name: '111-display',

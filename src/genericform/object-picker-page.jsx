@@ -17,10 +17,10 @@ function ObjectPickerPage() {
   const [selectedItems, setSelectedItems] = useState([])
 
   const { list, listMeta, emptyMessage = '没有更多数据了', dataContainer, articleList, articleListMeta } = root
-  const {searchAction , maxSelectCount = 10 } = root
+  const { searchAction, maxSelectCount = 10 } = root
 
   // q如果变化了，就发送一个后台请求
-  const {linkToUrl } = Current.router.params
+  const { linkToUrl } = Current.router.params
   useAsyncEffect(() => {
     if (linkToUrl) {
       NavigationService.ajax(linkToUrl)
