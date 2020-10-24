@@ -138,6 +138,66 @@ const mockForm1Data = {
             },
           ],
         },
+        {
+          name: 'a-cook-menu-picker',
+          label: '菜品',
+          type: 'picker',
+          placeholder: '请点餐',
+          title: 'AAA',
+          candidateValues: [
+            {
+              id: 1,
+              title: '鱼',
+              candidateValues: [
+                {
+                  id: 11,
+                  title: '红烧',
+                  candidateValues: [
+                    { id: 111, title: '半条' },
+                    { id: 112, title: '一斤' },
+                    { id: 113, title: '二斤' },
+                    { id: 114, title: '三斤' },
+                  ],
+                },
+                {
+                  id: 12,
+                  title: '清蒸',
+                  candidateValues: [
+                    { id: 123, title: '半条' },
+                    { id: 122, title: '一斤' },
+                    { id: 123, title: '二斤' },
+                    { id: 124, title: '三斤' },
+                  ],
+                },
+              ],
+            },
+            {
+              id: 2,
+              title: '猪肉',
+              candidateValues: [
+                {
+                  id: 21,
+                  name: '红烧',
+                  candidateValues: [
+                    { id: 211, title: '一碗' },
+                    { id: 212, title: '二碗' },
+                    { id: 213, title: '三碗' },
+                    { id: 214, title: '一盆' },
+                  ],
+                },
+                {
+                  id: 22,
+                  title: '油炸',
+                  candidateValues: [
+                    { id: 223, title: '二两' },
+                    { id: 222, title: '半斤' },
+                    { id: 223, title: '一桶' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
 
         {
           name: '-1-team-building3333',

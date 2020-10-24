@@ -96,3 +96,18 @@
     border: none !important;
   }
 }
+
+.ele-picker {
+  &-body {
+    @extend %flex-row;
+
+    .tips {
+      @extend %flex-1;
+    }
+
+    .iconfont {
+      margin-right: -20px;
+      color: $text-color-lighter;
+    }
+  }
+}

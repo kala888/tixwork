@@ -9,13 +9,14 @@ function RegionPicker(props) {
   useEffect(() => {
     const regionData = StorageTools.get('region-data', null)
     let initialed = false
+    console.log('regionData')
     if (regionData) {
       setSource(regionData)
       initialed = true
     }
 
     NavigationService.ajax(
-      'queryLocationData/',
+      'makeRegionList/',
       {},
       {
         onSuccess: (resp) => {
@@ -31,14 +32,4 @@ function RegionPicker(props) {
   return <ElePicker {...props} candidateValues={source} />
 }
 
-RegionPicker.defaultProps = {
-  mode: 'multiSelector',
-  displayMode: 'right-brief',
-  range: null,
-  customStyle: {},
-  className: null,
-  name: '',
-  displayValue: '',
-}
-
-export default ElePicker
+export default RegionPicker

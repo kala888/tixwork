@@ -9,10 +9,11 @@ import ElePopupSelect from './ele-popup-select'
 import EleSwitch from './ele-switch'
 import EleTree from './ele-tree'
 import EleMobileVerifyCode from './ele-mobile-verify-code'
+import EleQrScan from './ele-qr-scan'
+import ElePicker from './ele-picker'
+import RegionPicker from './region-picker'
+
 import './styles.scss'
-import EleQrScan from '@/components/form/field/ele-qr-scan'
-import ElePicker from '@/components/form/field/ele-picker'
-import RegionPicker from '@/components/region-picker/region-picker'
 
 // TODO 实现附件上传
 // TODO 实现checkbox（多用于terms）

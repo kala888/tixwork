@@ -1,20 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import _ from 'lodash'
 import { Picker, View } from '@tarojs/components'
-import { isEmpty } from '@/nice-router/nice-router-util'
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
+import { useVisible } from '@/service/use.service'
+import classNames from 'classnames'
+
+import './styles.scss'
 
 const getOptions = (v) => _.get(v, 'candidateValues', [])
 const getValue = (list, idx = 0) => _.get(list, idx, {})
+const getTips = (value, placeholder) => {
+  if (Array.isArray(value) && isNotEmpty(value)) {
+    return _.trim(value.map((it) => it.title || it).join('-'), '-')
+  }
+  if (isNotEmpty(value)) {
+    return value.title || value
+  }
+  return placeholder
+}
 
 function ElePicker(props) {
-  const [innerDisplayValue, setInnerDisplayValue] = useState()
+  const [tips, setTips] = useState()
+  const { visible, show, close } = useVisible(false)
   const [range, setRange] = useState([])
-  const { value, mode = 'multiSelector', onChange, candidateValues: source, numberOfColumn = 3 } = props
+  const {
+    value,
+    onChange,
+    placeholder,
+    candidateValues: source,
+    numberOfColumn = 3,
+    disabled,
+    mode = 'multiSelector',
+  } = props
 
   useEffect(() => {
-    setInnerDisplayValue(value)
+    const newTips = getTips(value, placeholder)
+    setTips(newTips)
     reBuildRangeList(0)
-  }, [value, source])
+  }, [value, source, placeholder])
 
   const reBuildRangeList = (col, idx = 0) => {
     setRange((pre) => {
@@ -38,16 +61,20 @@ function ElePicker(props) {
 
     if (_.isArray(selected)) {
       selected = selected.map((it, idx) => range[idx][it] || '')
-      const idv = _.trim(selected.map((it) => it.title || it).join('-'), '-')
-      setInnerDisplayValue(idv)
+      const newTips = getTips(selected, placeholder)
+      setTips(newTips)
     } else if (source) {
       selected = source[targetValue]
-      setInnerDisplayValue(selected ? selected.title : '')
+      setTips(selected ? selected.title : '')
       // selectedValue = selected ? selected.id : ''
     }
 
-    onChange && onChange(selected)
+    if (onChange) {
+      const result = selected.map((it) => ({ id: it.id, title: it.title }))
+      onChange(result)
+    }
     // setInnerDisplayValue(innerDisplayValue)
+    close()
   }
 
   const handleColumnChange = (e) => {
@@ -56,10 +83,28 @@ function ElePicker(props) {
     reBuildRangeList(column, selectedValueIdx)
   }
 
+  const tipsClass = classNames('tips', {
+    placeholder: tips === placeholder,
+  })
+
   return (
-    <Picker mode={mode} onChange={handleCommit} range={range} rangeKey='title' onColumnChange={handleColumnChange}>
-      <View className='ele-picker-right-value'>{innerDisplayValue}111</View>
-    </Picker>
+    <View className='ele-picker'>
+      <Picker
+        disabled={disabled}
+        mode={mode}
+        onChange={handleCommit}
+        range={range}
+        rangeKey='title'
+        onColumnChange={handleColumnChange}
+        onCancel={close}
+        onClick={show}
+      >
+        <View className='ele-picker-body'>
+          <View className={tipsClass}>{tips}</View>
+          {visible ? <View className='iconfont iconfont-down' /> : <View className='iconfont iconfont-right' />}
+        </View>
+      </Picker>
+    </View>
   )
 }
 
@@ -71,6 +116,8 @@ ElePicker.defaultProps = {
   className: null,
   name: '',
   displayValue: '',
+  candidateValues: [],
+  placeholder: '请选择',
 }
 
 export default ElePicker

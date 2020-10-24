@@ -1,6 +1,6 @@
 import viewConfig from './viewmapping.config'
 
-const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/' //后端服务地址
+const baseURL = 'https://demo2.doublechaintech.com/repairchain/wxappService/' //后端服务地址
 
 const Config = {
   name: 'NiceRouter App Start',
