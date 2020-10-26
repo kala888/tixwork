@@ -5,9 +5,9 @@ import React, { useState } from 'react'
 import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use.service'
 import './login.scss'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 export default function VCodeLoginForm() {
   const [mobile, setMobile] = useState()
