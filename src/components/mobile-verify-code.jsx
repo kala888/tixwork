@@ -27,7 +27,7 @@ function MobileVerifyCode(props) {
     NavigationService.ajax(Config.api.VerifyCode, { mobile: value })
   }
 
-  const tips = counting ? `${second}秒...` : '获取验证码'
+  const tips = counting ? `${second}秒...` : '验证码'
   const rootClass = classNames('ele-vcode', className)
   const txtClass = classNames('ele-vcode-txt', { 'ele-vcode-txt-disabled': counting })
   return (

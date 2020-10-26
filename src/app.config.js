@@ -1,5 +1,6 @@
 export default {
   pages: [
+    'pages/login/login-page',
     'pages/home/home-page',
     'pages/me/me-page',
     'pages/test-page',
@@ -14,7 +15,6 @@ export default {
     'listof/listof-page3',
     'listof/listof-page4',
     //biz
-    'pages/login/login-page',
   ],
   subPackages: [
     {

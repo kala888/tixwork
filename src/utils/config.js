@@ -18,9 +18,9 @@ const Config = {
     VerifyCode: 'sendVerifyCode/:mobile/',
     OSSToken: 'customGetOssToken/',
   },
-  // loginMethod:'wechat',
-  // loginMethod:'vcode',
-  loginMethod: 'password',
+  // loginMode: 'wechat',
+  loginMode: 'vcode', //包含绑定的微信登录
+  // loginMode: 'password',
 }
 
 console.log('***********   current env  ***********   ')
