@@ -28,6 +28,12 @@ export const isEmpty = (value) => {
   if (_.isNumber(value) || _.isBoolean(value)) {
     return false
   }
+  if (_.isNil(value)) {
+    return true
+  }
+  if (_.isString(value)) {
+    return value.length === 0
+  }
   return _.isEmpty(value)
 }
 export const isNotEmpty = (value) => {
