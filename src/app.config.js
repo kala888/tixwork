@@ -1,6 +1,5 @@
 export default {
   pages: [
-
     'pages/home/home-page',
     'pages/me/me-page',
     'pages/test-page',

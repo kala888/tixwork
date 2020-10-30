@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NavigationBox from '@/components/navigation/navigation-box'
 import NavigationLineItem from '@/components/navigation/navigation-line-item'
 import MockService from '@/nice-router/request/mock-service'
@@ -7,8 +7,11 @@ import { usePageTitle, usePullDown } from '@/service/use.service'
 import Config from '@/utils/config'
 import { View } from '@tarojs/components'
 import { useSelector } from 'react-redux'
+import { useDidShow } from '@tarojs/runtime'
 import { AtButton } from 'taro-ui'
-
+import NavigationService from '@/nice-router/navigation.service'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
+import EleActionList from '@/components/elements/action-list/ele-action-list'
 import './me.scss'
 
 const Box_Navigator_List = [
@@ -43,9 +46,28 @@ const LineItem_Navigator_List = [
 
 function MePage() {
   const root = useSelector((state) => state.me)
+  const [footerActionList, setFooterActionList] = useState([])
+
   const { pageTitle } = root
   usePageTitle(pageTitle)
   usePullDown(Config.api.FooterMe)
+  useEffect(() => {
+    NavigationService.ajax(Config.api.FooterMe)
+  }, [])
+  const handleGoLogin = () => NavigationService.navigate('/pages/login/login-page')
+  const handleLogout = () => {
+    NavigationService.dispatch('app/logout')
+    NavigationService.dispatch('me/save', {})
+    NavigationService.ajax(Config.api.Logout)
+  }
+  useEffect(() => {
+    if (isNotEmpty(root)) {
+      setFooterActionList([{ id: 1, title: '退出登录', onClick: handleLogout }])
+    } else {
+      setFooterActionList([{ id: 1, title: '去登陆', onClick: handleGoLogin }])
+    }
+  }, [root])
+  useDidShow(() => NavigationService.ajax(Config.api.FooterMe))
 
   const handleUpdateProfileInfo = (e) => console.log('111', e)
 
@@ -81,6 +103,8 @@ function MePage() {
           <NavigationLineItem key={`${it.id}_${it.code}`} {...it} />
         ))}
       </View>
+
+      <EleActionList mode='full' list={footerActionList} />
     </View>
   )
 }

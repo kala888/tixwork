@@ -56,7 +56,8 @@
     @extend %flex-row;
     align-items: center;
     width: 100%;
-    margin-top: 20px;
+    //margin-top: 20px;
+    margin-bottom: 16px;
     overflow: hidden;
     &-wrapper {
       width: 100%;

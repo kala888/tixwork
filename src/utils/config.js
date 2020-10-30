@@ -17,6 +17,7 @@ const Config = {
     Login: 'clientLogin/',
     VerifyCode: 'sendVerifyCode/:mobile/',
     OSSToken: 'customGetOssToken/',
+    Logout: 'logout/',
   },
   // loginMode: 'wechat',
   loginMode: 'vcode', //包含绑定的微信登录
