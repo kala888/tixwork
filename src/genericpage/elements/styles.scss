@@ -1,7 +1,7 @@
 @import 'src/styles/theme';
 
 .image-placeholder {
-  background: $image-bg;
+  background: #f4f4f4;
   color: $white;
   @extend %flex-center;
 }

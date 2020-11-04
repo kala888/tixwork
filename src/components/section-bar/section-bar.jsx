@@ -1,15 +1,18 @@
 import React from 'react'
-import ActionIcon from '@/components/navigation/action-icon'
 import ActionUtil from '@/nice-router/action-util'
 import NavigationService from '@/nice-router/navigation.service'
-import { Text, View } from '@tarojs/components'
+import { Block, Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 
 import './styles.scss'
 
 function SectionBar(props) {
-  const { title, brief, className, customStyle = {} } = props
-  const onClick = () => {
+  const { title, brief, className, customStyle = {}, icon = 'more', onClick } = props
+  const handleClick = () => {
+    if (onClick) {
+      onClick()
+      return
+    }
     NavigationService.view(props)
   }
 
@@ -22,9 +25,13 @@ function SectionBar(props) {
     <View className={rootClass} style={customStyle}>
       <View className='section-bar-preicon' />
       <View className='section-bar-title'>{title}</View>
-      <View className='section-bar-action' onClick={onClick}>
-        <Text className='section-bar-action-title'>{actionTitle}</Text>
-        {hasMore && <ActionIcon value='more' className='section-bar-action-icon' />}
+      <View className='section-bar-action' onClick={handleClick}>
+        {hasMore && (
+          <Block>
+            <Text className='section-bar-action-title'>{actionTitle}</Text>
+            <Text className={`iconfont iconfont-${icon}`} />
+          </Block>
+        )}
       </View>
     </View>
   )

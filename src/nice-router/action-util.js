@@ -29,6 +29,9 @@ const getActionUri = (action) => {
   return result || ''
 }
 const isActionLike = (action) => {
+  if (_.isFunction(_.get(action, 'onClick'))) {
+    return true
+  }
   return isNotEmpty(getActionUri(action))
 }
 

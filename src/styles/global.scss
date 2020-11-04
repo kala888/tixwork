@@ -117,3 +117,11 @@ $text-weight: 400, 500, 600, 700, 800;
 .flex-1 {
   @extend %flex-1;
 }
+
+.clickable {
+  transition: opacity 0.3s;
+
+  &:active {
+    opacity: 0.7;
+  }
+}

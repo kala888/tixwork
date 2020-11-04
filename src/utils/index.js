@@ -124,9 +124,26 @@ export function removeOrPush(list = [], item, withClone = false) {
   return result
 }
 
-// export function transCandidateValuesToRange(field = {}) {
-//   const candidateValues=field.candidateValues||field
-//   const values = []
-//   m_.forEach(candidateValues, (key, value) => values.push({ title: key, value }))
-//   return values
-// }
+export function getGroupList(items = []) {
+  const groupList = []
+  _.forEach(items, (it, idx) => {
+    const { group = '' } = it
+    let theGroup = _.find(groupList, { title: group })
+    if (isEmpty(theGroup)) {
+      theGroup = {
+        id: idx,
+        title: group,
+        list: [],
+      }
+      groupList.push(theGroup)
+    }
+    theGroup.list.push({ id: idx, ...it })
+  })
+  return groupList
+}
+
+export function getGroupListByColumn(items = [], columnNum = 3) {
+  const data = items.map((it, idx) => ({ id: idx, ...it }))
+  const groupList = _.chunk(data, columnNum)
+  return groupList.map((list, idx) => ({ id: idx, list }))
+}

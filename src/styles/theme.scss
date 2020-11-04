@@ -2,6 +2,7 @@
 // https://github.com/NervJS/taro/issues/6034
 @import './mixins.scss';
 @import 'node_modules/taro-ui/dist/style/mixins/libs/hairline';
+@import 'node_modules/taro-ui/dist/style/variables/default';
 // Custom Theme 通过https://nervjs.github.io/taro-ui-theme-preview/ 处理
 $color-brand: #28aaff;
 $color-brand-light: #5ebfff;
@@ -9,16 +10,13 @@ $color-brand-dark: #2088cc;
 // end Custom Theme
 
 $primary-color: $color-brand;
-
-$border-color: #c5d9e8;
-$border-color-light: lighten($border-color, 20%);
-$color-border-grey: #ccc;
-$border-color-light-blue: $color-brand-light;
+$primary-color-light: $color-brand-light;
+$primary-color-lighter: lighten($color-brand-light, 20%);
+$primary-color-dark: $color-brand-dark;
+$primary-color-darker: darken($color-brand-light, 20%);
 
 $disabled-color: #ddd;
-$border-radius: 4px;
-
-$border-default: 1px solid $border-color;
+$border-default: 1px solid $color-border-light;
 
 $shadow-color: rgba(40, 170, 255, 0.1);
 //$shadow-color: $primary-color;
@@ -32,7 +30,6 @@ $silver-grey-color: #ccc;
 $light-grey-color: #ededed;
 $ice-blue-color: #53c7ca; //冰蓝
 
-$text-size: 32px;
 $text-color: #333;
 $text-color-light: #56585c;
 $text-color-lighter: #999;
@@ -45,8 +42,6 @@ $level-danger: #fa5151;
 
 $price-color: #f2270c;
 
-$image-bg: #f4f4f4;
-
 $color-page-bg: #f0f2f5;
 
 $under-line-color: #c4d8e7;
@@ -57,6 +52,7 @@ $under-line-color: #c4d8e7;
   background-color: $color-page-bg;
   min-height: 100vh;
   color: $text-color;
+  box-sizing: border-box;
 }
 
 %flex {
