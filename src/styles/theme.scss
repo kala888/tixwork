@@ -1,13 +1,15 @@
 // 注意这里只需要放变量，不要放带有网络请求的东西，不然，请求n次网络，例如字体文件。
 // https://github.com/NervJS/taro/issues/6034
-@import './mixins.scss';
-@import 'node_modules/taro-ui/dist/style/mixins/libs/hairline';
-@import 'node_modules/taro-ui/dist/style/variables/default';
+
 // Custom Theme 通过https://nervjs.github.io/taro-ui-theme-preview/ 处理
 $color-brand: #28aaff;
 $color-brand-light: #5ebfff;
 $color-brand-dark: #2088cc;
 // end Custom Theme
+
+@import './mixins.scss';
+@import 'node_modules/taro-ui/dist/style/mixins/libs/hairline';
+@import 'node_modules/taro-ui/dist/style/mixins/libs/tint';
 
 $primary-color: $color-brand;
 $primary-color-light: $color-brand-light;
@@ -15,8 +17,15 @@ $primary-color-lighter: lighten($color-brand-light, 20%);
 $primary-color-dark: $color-brand-dark;
 $primary-color-darker: darken($color-brand-light, 20%);
 
-$disabled-color: #ddd;
+$color-border-base: #c5d9e8 !default;
+$color-border-split: tint($color-border-base, 20%) !default; // 分割线
+$color-border-light: tint($color-border-base, 30%) !default;
+$color-border-lighter: tint($color-border-base, 50%) !default;
+$color-border-lightest: tint($color-border-base, 80%) !default;
+$color-border-grey: #ccc !default;
+
 $border-default: 1px solid $color-border-light;
+$disabled-color: #ddd;
 
 $shadow-color: rgba(40, 170, 255, 0.1);
 //$shadow-color: $primary-color;
