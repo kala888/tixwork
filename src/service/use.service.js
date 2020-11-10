@@ -92,10 +92,3 @@ export function useCountdown(maxCount = 60) {
     startCount,
   }
 }
-
-// 纯粹因为IDE不能自动导入Taro的useState
-export const useAsyncEffect = (callback, watch = []) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(callback, watch)
-}
-export const useAsyncState = useState

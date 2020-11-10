@@ -1,17 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from '@tarojs/components'
 import { AtSearchBar } from 'taro-ui'
-import { useAsyncEffect, useAsyncState } from '@/service/use.service'
 import NavigationService from '@/nice-router/navigation.service'
 import './search-bar.scss'
 
 export default function SearchBar(props) {
-  const [keyword, setKeyword] = useAsyncState('')
+  const [keyword, setKeyword] = useState('')
   const { title, extraData = {} } = props
 
   const { pKeyword = '', ...others } = extraData
 
-  useAsyncEffect(() => {
+  useEffect(() => {
     setKeyword(pKeyword)
   }, [pKeyword])
   const handleSearch = () => {

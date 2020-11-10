@@ -1,17 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SectionBar from '@/components/section-bar/section-bar'
 import Listof from '@/listof/listof'
 import { View } from '@tarojs/components'
 
-import { useAsyncEffect, useAsyncState } from '@/service/use.service'
 import NavigationService from '@/nice-router/navigation.service'
 
 import './styles.scss'
 
 function HelloDaaSPage() {
-  const [root, setRoot] = useAsyncState({})
+  const [root, setRoot] = useState({})
 
-  useAsyncEffect(() => {
+  useEffect(() => {
     NavigationService.ajax(
       'mock-listof-test/',
       {},
@@ -21,7 +20,7 @@ function HelloDaaSPage() {
         },
       }
     )
-  })
+  }, [])
   const {
     singleItemList = [],
     productList = [],

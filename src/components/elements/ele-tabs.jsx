@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NavigationService from '@/nice-router/navigation.service'
 import { LoadingType } from '@/nice-router/nice-router-util'
-import { useAsyncEffect, useAsyncState } from '@/service/use.service'
 import { AtTabs } from 'taro-ui'
 
 function EleTabs(props) {
   const { tabs } = props
-  const [current, setCurrent] = useAsyncState(0)
+  const [current, setCurrent] = useState(0)
 
-  useAsyncEffect(() => {
+  useEffect(() => {
     const selectedIdx = tabs.findIndex((it) => it.selected)
     setCurrent(selectedIdx > -1 ? selectedIdx : 0)
   }, [tabs])

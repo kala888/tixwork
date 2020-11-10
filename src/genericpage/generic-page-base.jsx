@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NavigationService from '@/nice-router/navigation.service'
-import { useAjaxPullDown, useAsyncEffect, usePageTitle } from '@/service/use.service'
+import { useAjaxPullDown, usePageTitle } from '@/service/use.service'
 import Config from '@/utils/config'
 import { View } from '@tarojs/components'
 import { Current, useShareAppMessage } from '@tarojs/taro'
@@ -16,7 +16,7 @@ function GenericPageBase(props) {
 
   // q如果变化了，就发送一个后台请求
   const { q } = Current.router.params
-  useAsyncEffect(() => {
+  useEffect(() => {
     if (q) {
       const uri = decodeURIComponent(q)
       NavigationService.view(uri)

@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Listof from '@/listof/listof'
 import NavigationService from '@/nice-router/navigation.service'
-import { useAsyncEffect } from '@/service/use.service'
 import { Text, View } from '@tarojs/components'
 import { useSelector } from 'react-redux'
 import { AtSearchBar } from 'taro-ui'
@@ -21,7 +20,7 @@ function ObjectPickerPage() {
 
   // q如果变化了，就发送一个后台请求
   const { linkToUrl } = Current.router.params
-  useAsyncEffect(() => {
+  useEffect(() => {
     if (linkToUrl) {
       NavigationService.ajax(linkToUrl)
     }
