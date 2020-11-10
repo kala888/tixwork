@@ -6,8 +6,10 @@ import { isNotEmpty } from '@/nice-router/nice-router-util'
 import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
-import TxtTable from '@/components/txt-table/txt-table'
+import CardInfoTable from '@/components/elements/ele-card/card-info-table'
+
 import './styles.scss'
+
 /*
  * Copyright(c) 2020 nice-router
  *    Date: 2020/5/9 下午4:48
@@ -69,7 +71,7 @@ function EleCard(props) {
               <EleActionList mode={['right', 'small']} list={actionList} />
             </View>
           )}
-          {isNotEmpty(infoList) && <TxtTable list={infoList} />}
+          {isNotEmpty(infoList) && <CardInfoTable data={infoList} />}
         </View>
       )}
     </View>

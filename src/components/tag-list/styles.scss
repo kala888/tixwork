@@ -1,0 +1,25 @@
+@import 'src/styles/theme';
+
+.tag-list {
+  @extend %flex-row;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  justify-content: space-between;
+
+  &::after {
+    content: '';
+    flex: auto; /* 或者flex: 1 */
+  }
+
+  &-item {
+    padding: 4px 16px;
+    border-radius: 10px;
+    border: $border-default;
+    margin: 8px;
+  }
+
+  &-item--disabled {
+    background-color: $disabled-color;
+    color: $white;
+  }
+}

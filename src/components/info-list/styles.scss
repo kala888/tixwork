@@ -1,0 +1,36 @@
+@import 'src/styles/theme';
+
+.info-item {
+  @extend %flex-row;
+  justify-content: space-between;
+  border-top: $border-default;
+  padding: 0 20px;
+  margin: 0 1px;
+  flex-wrap: wrap;
+  min-height: 2.4rem;
+
+  &-title {
+    @extend %flex;
+    flex: auto;
+    align-items: center;
+    min-width: 6rem;
+  }
+
+  &-value {
+    @extend %flex;
+    flex: auto;
+    text-align: right;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &--multiline {
+    @extend %flex-row;
+    .info-item-value {
+      width: 100%;
+      justify-content: flex-start;
+      line-height: 1.5rem;
+      font-size: 28px;
+    }
+  }
+}

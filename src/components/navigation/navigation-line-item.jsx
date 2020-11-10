@@ -1,7 +1,7 @@
 import React from 'react'
 import NavigationService from '@/nice-router/navigation.service'
 import { View } from '@tarojs/components'
-import ActionIcon from './action-icon'
+import ActionIcon from '../action-icon/action-icon'
 
 import './navigation-line-item.scss'
 

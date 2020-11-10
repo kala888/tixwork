@@ -1,45 +1,53 @@
 @import 'src/styles/theme';
 
 .section-bar {
-  padding: 20px 0;
-  @extend %flex-row;
-  align-items: center;
+  @extend %flex-column;
+  width: 100%;
+  padding: 10px 0;
 
-  &-preicon {
-    width: 8px;
-    min-height: 1.2em;
-    background-color: $primary-color;
-    margin-right: 20px;
-  }
-
-  &-title {
-    color: $text-color;
-    font-size: 34px;
-    font-weight: 700;
-  }
-
-  &-action {
+  &_header {
     @extend %flex-row;
-    justify-content: flex-end;
     align-items: center;
-    flex: 1;
-    color: $text-color-light;
-    height: 100%;
-    text-align: center;
+
+    &-preicon {
+      width: 8px;
+      min-height: 1.2em;
+      background-color: $primary-color;
+      margin-right: 20px;
+    }
 
     &-title {
-      font-size: 24px;
-      font-weight: 500;
-      text-align: right;
+      color: $text-color;
+      font-size: 34px;
+      font-weight: 700;
     }
 
-    &-icon {
-      margin-bottom: -3px;
+    &-action {
+      @extend %flex-row;
+      justify-content: flex-end;
+      align-items: center;
+      flex: 1;
+      color: $text-color-light;
+      height: 100%;
+      text-align: center;
+
+      &-title {
+        font-size: 28px;
+        font-weight: 500;
+        text-align: right;
+        padding-right: 10px;
+      }
 
       .iconfont {
+        color: #ccc;
         font-size: 36px;
+        font-weight: 800;
       }
     }
+  }
+
+  &_body {
+    padding-top: 14px;
   }
 }
 

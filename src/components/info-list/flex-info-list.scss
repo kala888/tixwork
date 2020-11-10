@@ -1,0 +1,6 @@
+@import 'src/styles/theme';
+
+.flex-info-list {
+  @extend %flex-column;
+  width: 100%;
+}

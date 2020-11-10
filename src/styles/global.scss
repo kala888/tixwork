@@ -1,5 +1,6 @@
 @import './theme';
-@import './iconfont';
+@import 'src/styles/iconfont';
+@import 'src/styles/bizfont';
 // 修改switch样式
 .wx-switch-input {
   width: 82px !important;

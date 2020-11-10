@@ -1,5 +1,5 @@
 import React from 'react'
-import ActionIcon from '@/components/navigation/action-icon'
+import ActionIcon from '@/components/action-icon/action-icon'
 import NavigationService from '@/nice-router/navigation.service'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'

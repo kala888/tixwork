@@ -13,6 +13,7 @@ import Product from './product/product'
 import HotArtist from './hot-artist'
 import RichTextTemplate from './rich-text-template'
 import ObjectPickerItem from './card/object-picker-item'
+import InfoListTemplate from './info-list-template'
 
 import './styles.scss'
 
@@ -127,6 +128,7 @@ export default class FlexLineItem extends React.Component {
         {template === 'hot-artist' && <HotArtist {...itemProps} />}
         {template === 'rich-text' && <RichTextTemplate {...itemProps} />}
         {template === 'object-picker' && <ObjectPickerItem {...itemProps} />}
+        {template === 'info-list' && <InfoListTemplate {...itemProps} />}
 
         {this.state.loading && (
           <View className='item-loading'>
