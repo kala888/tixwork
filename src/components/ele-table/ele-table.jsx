@@ -1,8 +1,8 @@
 import { View } from '@tarojs/components'
 import React from 'react'
 import EleTableRow from '@/components/ele-table/ele-table-row'
-import './ele-table.scss'
 import classNames from 'classnames'
+import './ele-table.scss'
 
 /**
  * title:'xxx',
@@ -12,12 +12,8 @@ import classNames from 'classnames'
  * ]
  *
  *
- *
- * @param props
- * @returns {JSX.Element}
- * @constructor
  */
-export default function EleTable(props) {
+function EleTable(props) {
   const { title, data = [], bordered = true } = props
 
   const rootClass = classNames('ele-table', {
@@ -33,3 +29,5 @@ export default function EleTable(props) {
     </View>
   )
 }
+
+export default EleTable

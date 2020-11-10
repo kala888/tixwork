@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import ActionUtil from '@/nice-router/action-util'
 import classNames from 'classnames'
 import _ from 'lodash'
@@ -34,9 +34,9 @@ export default function TagList(props) {
           'tag-list-item--hidden': hide,
         })
         return (
-          <Text key={id} className={itemClass} onClick={handleClick.bind(null, it)}>
+          <View key={id} className={itemClass} onClick={handleClick.bind(null, it)}>
             {title}
-          </Text>
+          </View>
         )
       })}
     </View>

@@ -60,14 +60,14 @@ function SectionBar(props) {
 
   return (
     <View className={rootClass} style={customStyle}>
-      <View className='section-bar_header'>
+      <View className='section-bar_header' onClick={handleClick}>
         {isNotEmpty(title) && (
           <Block>
             <View className='section-bar_header-preicon' />
             <View className='section-bar_header-title'>{title}</View>
           </Block>
         )}
-        <View className='section-bar_header-action' onClick={handleClick}>
+        <View className='section-bar_header-action'>
           {isNotEmpty(actionTitle) && <Text className='section-bar_header-action-title'>{actionTitle}</Text>}
           {isNotEmpty(actionAction) && <Text className={`iconfont iconfont-${actionAction}`} />}
         </View>

@@ -133,11 +133,11 @@ export function getGroupList(items = []) {
       theGroup = {
         id: idx,
         title: group,
-        list: [],
+        items: [],
       }
       groupList.push(theGroup)
     }
-    theGroup.list.push({ id: idx, ...it })
+    theGroup.items.push({ id: idx, ...it })
   })
   return groupList
 }

@@ -6,7 +6,7 @@ import { isNotEmpty } from '@/nice-router/nice-router-util'
 import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
-import CardInfoTable from '@/components/elements/ele-card/card-info-table'
+import CardInfoTable from '@/components/ele-table/card-info-table'
 
 import './styles.scss'
 
