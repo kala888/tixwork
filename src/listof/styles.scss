@@ -51,13 +51,14 @@
   align-items: center;
   flex-wrap: wrap;
   padding: 0 15px;
+  margin-top: 20px;
 
   &-item {
     @extend %flex-row;
     align-items: center;
     width: 100%;
     //margin-top: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     overflow: hidden;
     &-wrapper {
       width: 100%;

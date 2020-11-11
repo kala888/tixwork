@@ -41,6 +41,7 @@ function EleCalendar(props) {
 
   const getDateTime = () => {
     const dateValue = transToDate(value)
+
     if (dateValue) {
       const fmt = mode === 'datetime' ? 'yyyy-MM-dd HH:mm' : 'yyyy-MM-dd'
       const displayValue = formatTime(dateValue, fmt)
@@ -52,7 +53,7 @@ function EleCalendar(props) {
       }
     }
 
-    if (mode === 'datetime' && isEmpty(value)) {
+    if (mode === 'datetime' && isEmpty(dateValue)) {
       return {
         displayTime: formatTime(Date.now(), 'HH:mm'),
       }

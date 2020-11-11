@@ -26,8 +26,10 @@ function ActionIcon({ icon, imageUrl, className, mode }) {
     return <Text className={rootClass} />
   }
 
+  const rootClass = classNames('action-icon', 'action-image', className)
+
   return (
-    <View className='action-icon action-image'>
+    <View className={rootClass}>
       <ServerImage customStyle={{ width: '100%', height: '100%' }} mode={mode} src={imageUrl} />
     </View>
   )

@@ -67,7 +67,7 @@ function SectionBar(props) {
             <View className='section-bar_header-title'>{title}</View>
           </Block>
         )}
-        <View className='section-bar_header-action'>
+        <View className='section-bar_header-action clickable'>
           {isNotEmpty(actionTitle) && <Text className='section-bar_header-action-title'>{actionTitle}</Text>}
           {isNotEmpty(actionAction) && <Text className={`iconfont iconfont-${actionAction}`} />}
         </View>
