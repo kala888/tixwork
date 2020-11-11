@@ -72,8 +72,7 @@ function SectionBar(props) {
           {isNotEmpty(actionAction) && <Text className={`iconfont iconfont-${actionAction}`} />}
         </View>
       </View>
-
-      <View className={contentClass}>{props.children}</View>
+      {props.children && <View className={contentClass}>{props.children}</View>}
     </View>
   )
 }
