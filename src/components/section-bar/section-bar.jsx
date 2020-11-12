@@ -55,7 +55,7 @@ function SectionBar(props) {
   let actionTitle = brief || (hasMore ? 'MORE' : '')
 
   if (foldable) {
-    actionAction = visible ? 'down' : 'right'
+    actionAction = visible ? 'up' : 'down'
   }
 
   return (

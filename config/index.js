@@ -58,10 +58,29 @@ const config = {
         },
       },
     },
-    webpackChain(chain) { // 将 lodash 单独拆分出来 (防止vendors.js过大)
+    webpackChain(chain) {
       // chain.plugin('analyzer')
       //   .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
-      chain.plugin('lodash-webpack-plugin').use(require('lodash-webpack-plugin'),[{shorthands:true,coercions:true}])
+
+      //lodash 瘦身配置
+      // 奇怪行为，需要设置这个https://www.npmjs.com/package/lodash-webpack-plugin
+      // 也可以移除一些，用来瘦身，目前发现shorthands，coercions，paths是必须的，否则会很诡异
+      chain.plugin('lodash-webpack-plugin')
+        .use(require('lodash-webpack-plugin'), [
+          {
+            shorthands: true,
+            cloning: true,
+            caching: true,
+            collections: true,
+            exotics: true,
+            guards: true,
+            memoizing: true,
+            coercions: true,
+            flattening: true,
+            paths: true,
+          }])
+
+      // 将 lodash 单独拆分出来 (防止vendors.js过大)
       chain.merge({
         optimization: {
           splitChunks: {
