@@ -111,3 +111,23 @@
     }
   }
 }
+
+.ele-checkbox {
+  width: 100%;
+
+  .at-checkbox::after {
+    border-bottom: none;
+  }
+
+  .at-radio::after {
+    border-bottom: none;
+  }
+
+  .at-checkbox__option-wrap {
+    padding-right: 0;
+  }
+
+  .item-wrapper-tail {
+    display: none;
+  }
+}

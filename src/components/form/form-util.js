@@ -19,6 +19,8 @@ const fieldConfig = {
   textarea: VerticalField,
   'long-text': VerticalField,
   image: VerticalField,
+  checkbox: VerticalField,
+  radio: VerticalField,
 }
 
 function mergeConfig(field) {

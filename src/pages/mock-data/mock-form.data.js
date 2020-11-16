@@ -124,6 +124,43 @@ const mockForm1Data = {
       ],
       fieldList: [
         {
+          name: 'ooo-checkbox',
+          label: '参与人员',
+          type: 'checkbox',
+          value: ['women', 'backend-developer'],
+          title: '参与人员',
+          candidateValues: [
+            { id: 'man', title: '男人' },
+            { id: 'women', title: '女人' },
+            { id: 'backend-developer', title: '后端开发' },
+          ],
+          rules: [
+            {
+              required: true,
+              message: '参与人员必须要选择的哦',
+            },
+          ],
+        },
+        {
+          name: 'ooo-radio',
+          label: '只喝',
+          type: 'radio',
+          value: 'sprite',
+          title: '只喝啥',
+          candidateValues: [
+            { id: 'coke', title: '可乐' },
+            { id: 'sprite', title: '雪碧' },
+            { id: 'mao-tai', title: '飞天茅台' },
+          ],
+          rules: [
+            {
+              required: true,
+              message: '参与人员必须要选择的哦',
+            },
+          ],
+        },
+
+        {
           name: '-1-team-building',
           label: '团建',
           type: 'tree-picker',

@@ -16,7 +16,10 @@ function ItemWrapper(props) {
   // 没有disabled，没有错误，有值，显示清理btn，就展示
   const showClearAction = !disabled && !hasError && clear && hasValue
 
-  const rootClass = classNames('item-wrapper', { 'item-wrapper-bordered': bordered })
+  const rootClass = classNames('item-wrapper', {
+    'item-wrapper-bordered': bordered,
+    'item-wrapper-vertical': !inline,
+  })
 
   return (
     <View className={rootClass}>

@@ -93,6 +93,10 @@ $error-color: $orange-color;
   @include hairline-bottom($under-line-color);
 }
 
+.item-wrapper-vertical {
+  padding-bottom: 0;
+}
+
 .item-label {
   width: 190px;
   padding-right: 24px;

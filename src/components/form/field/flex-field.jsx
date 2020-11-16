@@ -12,6 +12,7 @@ import EleMobileVerifyCode from './ele-mobile-verify-code'
 import EleQrScan from './ele-qr-scan'
 import ElePicker from './ele-picker'
 import RegionPicker from './region-picker'
+import EleCheckbox from './ele-checkbox'
 
 import './styles.scss'
 
@@ -64,7 +65,12 @@ export default function FlexField(props) {
   if (type === 'qr-scan') return <EleQrScan {...props} />
 
   if (type === 'picker') return <ElePicker {...props} />
+
   if (type === 'region-picker') return <RegionPicker {...props} />
+
+  if (type === 'checkbox') return <EleCheckbox {...props} radio={false} />
+
+  if (type === 'radio') return <EleCheckbox {...props} radio />
 
   // phone
   return <AtInput border={false} {...props} />
