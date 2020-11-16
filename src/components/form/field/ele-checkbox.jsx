@@ -37,9 +37,10 @@ function EleCheckbox(props) {
 }
 
 EleCheckbox.defaultProps = {
-  name: '',
-  displayValue: '',
   candidateValues: [],
+  onChange: noop,
+  radio: false,
+  value: null,
 }
 
 export default EleCheckbox
