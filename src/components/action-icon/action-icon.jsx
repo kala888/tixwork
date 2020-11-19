@@ -13,7 +13,6 @@ function ActionIcon({ icon, imageUrl, className, mode }) {
   if (isNotEmpty(icon)) {
     const isBizFont = icon.startsWith('bizfont-')
     const rootClass = classNames(
-      'action-icon',
       'iconfont',
       {
         bizfont: isBizFont,
@@ -23,7 +22,11 @@ function ActionIcon({ icon, imageUrl, className, mode }) {
       className,
       mode
     )
-    return <Text className={rootClass} />
+    return (
+      <View className='action-icon'>
+        <Text className={rootClass} />
+      </View>
+    )
   }
 
   const rootClass = classNames('action-icon', 'action-image', className)

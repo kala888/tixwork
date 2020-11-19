@@ -16,7 +16,7 @@ function RegionPicker(props) {
     }
 
     NavigationService.ajax(
-      'makeRegionList/',
+      'wxappService/makeRegionList/',
       {},
       {
         onSuccess: (resp) => {

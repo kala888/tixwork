@@ -6,12 +6,17 @@ import { useVisible } from '@/service/use.service'
 import _ from 'lodash'
 import './styles.scss'
 
-function InfoLongText({ value = '', maxLength = 200, className, mode = [], useFold = true }) {
-  const theValue = _.isObject(value) ? JSON.stringify(value) : value
+function InfoLongText(props) {
+  const { value = '', maxLength = 200, className, mode = [], useFold = true } = props
+  let theValue = _.isObject(value) ? JSON.stringify(value) : value
+  if (_.isString(props.children)) {
+    theValue = props.children
+  }
+
   const { visible, toggle } = useVisible(false)
 
   let showFoldAction = false
-  if (useFold && value.length > maxLength) {
+  if (useFold && theValue.length > maxLength) {
     showFoldAction = true
   }
 

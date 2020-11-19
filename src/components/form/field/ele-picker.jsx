@@ -34,9 +34,11 @@ function ElePicker(props) {
   } = props
 
   useEffect(() => {
-    const newTips = getTips(value, placeholder)
-    setTips(newTips)
-    reBuildRangeList(0)
+    if (isNotEmpty(source)) {
+      const newTips = getTips(value, placeholder)
+      setTips(newTips)
+      reBuildRangeList(0)
+    }
   }, [value, source, placeholder])
 
   const reBuildRangeList = (col, idx = 0) => {
