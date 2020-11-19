@@ -142,6 +142,23 @@ const mockForm1Data = {
           ],
         },
         {
+          name: 'step-number',
+          label: '数量',
+          type: 'step-number',
+          value: 25,
+          max: 40,
+          min: 10,
+          step: 5,
+          title: '只喝啥',
+          rules: [
+            {
+              required: true,
+              message: '数量不能为空',
+            },
+          ],
+        },
+
+        {
           name: 'ooo-radio',
           label: '只喝',
           type: 'radio',

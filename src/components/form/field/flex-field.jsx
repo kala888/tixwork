@@ -13,8 +13,10 @@ import EleQrScan from './ele-qr-scan'
 import ElePicker from './ele-picker'
 import RegionPicker from './region-picker'
 import EleCheckbox from './ele-checkbox'
+import EleStepNumberInput from './ele-step-number-input'
 
 import './styles.scss'
+
 
 // TODO 实现附件上传
 // TODO 实现checkbox（多用于terms）
@@ -32,6 +34,8 @@ export default function FlexField(props) {
 
   // double，decimal 应该在校验规则，精度上做手脚
   if (type === 'integer' || type === 'double' || type === 'decimal') return <NumberInput {...props} />
+
+  if (type === 'step-number') return <EleStepNumberInput {...props} />
 
   //语义上只有两个值的，可以转换成true/false的场景
   if (type === 'boolean') return <EleSwitch {...props} />

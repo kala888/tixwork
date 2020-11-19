@@ -5,6 +5,7 @@ import { useCountdown } from '@/service/use.service'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { AtInput } from 'taro-ui'
+import GlobalToast from '@/nice-router/global-toast'
 import './styles.scss'
 
 function EleMobileVerifyCode(props) {
@@ -13,6 +14,12 @@ function EleMobileVerifyCode(props) {
   const { className, linkToUrl, ...others } = props
 
   const sendCode = async () => {
+    if (!/^1\d{10}$/.test(props.value)) {
+      GlobalToast.show({
+        text: '手机号码有误！',
+      })
+      return
+    }
     if (isNotEmpty(linkToUrl)) {
       startCount()
       console.log('props...', props)
