@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import StorageTools from '@/nice-router/storage-tools'
 import NavigationService from '@/nice-router/navigation.service'
 import ElePicker from '@/components/form/field/ele-picker'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 function RegionPicker(props) {
   const [source, setSource] = useState([])
@@ -9,8 +10,7 @@ function RegionPicker(props) {
   useEffect(() => {
     const regionData = StorageTools.get('region-data', null)
     let initialed = false
-    console.log('regionData')
-    if (regionData) {
+    if (isNotEmpty(regionData)) {
       setSource(regionData)
       initialed = true
     }
@@ -21,7 +21,7 @@ function RegionPicker(props) {
       {
         onSuccess: (resp) => {
           if (!initialed) {
-            setSource(regionData)
+            setSource(resp)
           }
           StorageTools.set('region-data', resp, 3600)
         },
