@@ -13,7 +13,9 @@ function NavigationBox(props) {
   const { className, customStyle = {}, roundBottom = true, roundTop = true } = props
 
   const handleClick = (item) => {
-    NavigationService.view(item)
+    if (!item.disabled) {
+      NavigationService.view(item)
+    }
   }
 
   const rootClass = classNames('navigation-box', className, {
@@ -27,10 +29,14 @@ function NavigationBox(props) {
       {isNotEmpty(actionBarTitle) && <View className='navigation-box-title'>{actionBarTitle}</View>}
       <View className='navigation-box-actions'>
         {list.map((it) => {
-          const { icon, imageUrl, title, badge } = it
+          const { icon, imageUrl, title, badge, disabled } = it
+          const itemClass = classNames('navigation-box-item', {
+            'navigation-box-item--disabled': disabled,
+          })
+
           return (
-            <View key={`${it.id}_${it.code}`} className='navigation-box-item' onClick={handleClick.bind(this, it)}>
-              <View className='navigation-box-item-box'>
+            <View key={`${it.id}_${it.code}`} className={itemClass} onClick={handleClick.bind(this, it)}>
+            <View className='navigation-box-item-box'>
                 <AtBadge value={badge}>
                   <ActionIcon className='navigation-box-item-image' icon={icon} imageUrl={imageUrl} />
                 </AtBadge>

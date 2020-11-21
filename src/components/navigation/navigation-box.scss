@@ -59,6 +59,16 @@
       }
     }
   }
+
+  &-item--disabled {
+    .navigation-box-item-title {
+      color: $disabled-color !important;
+    }
+
+    .iconfont {
+      color: $disabled-color;
+    }
+  }
 }
 
 .navigation-box.round-top {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { AtCheckbox, AtRadio } from 'taro-ui'
-import { noop } from '@/nice-router/nice-router-util'
+import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import './styles.scss'
 
@@ -11,7 +11,9 @@ function EleCheckbox(props) {
   const { candidateValues, onChange = noop, value, radio = false } = props
 
   useEffect(() => {
-    setSelected(value)
+    if (isNotEmpty(value)) {
+      setSelected(value)
+    }
   }, [value])
 
   const handleClick = (item) => {

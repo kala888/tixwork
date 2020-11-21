@@ -61,3 +61,13 @@
   flex-direction: column-reverse;
   padding-bottom: 0;
 }
+
+.item-disabled {
+  .auto-info-title {
+    color: $disabled-color;
+  }
+
+  .auto-info-brief {
+    color: $disabled-color;
+  }
+}

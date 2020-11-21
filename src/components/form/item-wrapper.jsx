@@ -46,7 +46,7 @@ function ItemWrapper(props) {
 
 ItemWrapper.defaultProps = {
   errors: [],
-  clear: true,
+  clear: false,
   bordered: true,
   value: null,
   inline: true,
