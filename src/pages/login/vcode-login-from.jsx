@@ -1,18 +1,27 @@
 import MobileVerifyCode from '@/components/mobile-verify-code'
 import EleInput from '@/components/form/field/ele-input'
 import { Block, View } from '@tarojs/components'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation.service'
 
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use.service'
+import Taro from '@tarojs/taro'
 import './login.scss'
 
 export default function VCodeLoginForm() {
   const [mobile, setMobile] = useState()
+  const [loginCode, setLoginCode] = useState('')
   const [code, setCode] = useState()
+
   const { visible, toggle } = useVisible(true)
+
+  useEffect(() => {
+    Taro.login({
+      success: (res) => setLoginCode(res.code),
+    })
+  }, [])
 
   const handleSubmit = () => {
     NavigationService.dispatch('app/login', {
@@ -28,6 +37,7 @@ export default function VCodeLoginForm() {
       NavigationService.dispatch('app/login', {
         ...e.detail,
         loginMethod: 'wechat_mobile',
+        code: loginCode,
       })
     }
   }
