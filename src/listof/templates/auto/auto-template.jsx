@@ -7,7 +7,6 @@ import ListofUtil from '../../listof-util'
 import './styles.scss'
 
 function AutoTemplate(props) {
-
   const { item, showImageCount, mode: globalMode = [] } = props
   const { title, brief, mode: itemMode = [] } = item
 
@@ -25,7 +24,7 @@ function AutoTemplate(props) {
     {
       'only-title': !brief,
     },
-    mode,
+    mode
   )
 
   return (

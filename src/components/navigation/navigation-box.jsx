@@ -36,7 +36,7 @@ function NavigationBox(props) {
 
           return (
             <View key={`${it.id}_${it.code}`} className={itemClass} onClick={handleClick.bind(this, it)}>
-            <View className='navigation-box-item-box'>
+              <View className='navigation-box-item-box'>
                 <AtBadge value={badge}>
                   <ActionIcon className='navigation-box-item-image' icon={icon} imageUrl={imageUrl} />
                 </AtBadge>

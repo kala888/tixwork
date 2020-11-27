@@ -54,8 +54,24 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
   return tempObj
 }
 
+//坑！！ ios只能识别yyyy/MM/dd hh:mm:ss
 export function transToDate(value) {
-  const dateValue = new Date(value)
+  let temp = value
+  if (_.isString(value)) {
+    temp = value.replace(/-/g, '/')
+  }
+  const dateValue = new Date(temp)
+
+  console.log(
+    'transToDate',
+    value,
+    '=>',
+    dateValue,
+    'dateValue instanceof Date?',
+    dateValue instanceof Date
+    // 'NaN?', !_.isNaN(dateValue.getTime()),
+  )
+
   const ifDateType = dateValue instanceof Date && !_.isNaN(dateValue)
   return ifDateType ? dateValue : null
 }

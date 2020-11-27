@@ -3,7 +3,7 @@ import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use.service'
 import { formatTime, transToDate } from '@/utils/index'
 import { Picker } from '@tarojs/components'
-import { AtActionSheet, AtActionSheetItem, AtCalendar } from 'taro-ui'
+import { AtActionSheet, AtCalendar } from 'taro-ui'
 import ActionField from './action-field'
 
 function EleCalendar(props) {
@@ -66,15 +66,12 @@ function EleCalendar(props) {
   return (
     <ActionField onClick={show} disabled={disabled} value={displayValue} placeholder={placeholder}>
       <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText='取消'>
-        <AtActionSheetItem>
-          {mode === 'date' && <AtCalendar isVertical currentDate={displayDate} onSelectDate={handleDateSelected} />}
-
-          {mode === 'datetime' && (
-            <Picker mode='time' value={displayTime} onChange={handleTimeChange} onCancel={close}>
-              {showCalendar && <AtCalendar isVertical currentDate={date} onSelectDate={handleDateSelected} />}
-            </Picker>
-          )}
-        </AtActionSheetItem>
+        {mode === 'date' && <AtCalendar isVertical currentDate={displayDate} onSelectDate={handleDateSelected} />}
+        {mode === 'datetime' && (
+          <Picker mode='time' value={displayTime} onChange={handleTimeChange} onCancel={close}>
+            {showCalendar && <AtCalendar isVertical currentDate={date} onSelectDate={handleDateSelected} />}
+          </Picker>
+        )}
       </AtActionSheet>
     </ActionField>
   )

@@ -101,7 +101,7 @@ const NavigationService = {
   navigate(routeName, params, options = {}) {
     return new Promise((resolve, reject) => {
       const url = toTaroUrl(routeName, params)
-      console.log('taro-redirect', url)
+      // console.log('taro-redirect', url)
       if (routeName) {
         const method = _.get(options, 'navigationOptions.method', 'navigateTo')
         const resolveIsGoBackCallback = _.get(options, 'resolveIsGoBackCallback', false)
