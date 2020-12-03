@@ -75,7 +75,7 @@ export function transToDate(value) {
     // 'NaN?', !_.isNaN(dateValue.getTime()),
   )
 
-  const ifDateType = dateValue instanceof Date && !_.isNaN(dateValue)
+  const ifDateType = dateValue instanceof Date && !_.isNaN(dateValue.getTime())
   return ifDateType ? dateValue : null
 }
 
