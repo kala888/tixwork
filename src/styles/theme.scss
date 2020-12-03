@@ -17,6 +17,10 @@ $primary-color-lighter: lighten($color-brand-light, 20%);
 $primary-color-dark: $color-brand-dark;
 $primary-color-darker: darken($color-brand-light, 20%);
 
+$price-color: #f2270c;
+$color-page-bg: #f0f2f5;
+$under-line-color: #c4d8e7;
+
 $color-border-grey: #ccc !default;
 $border-default: 1px solid $color-border-grey;
 $disabled-color: #ddd;
@@ -44,12 +48,6 @@ $level-warn: #ffc300;
 $level-danger: #fa5151;
 $level-info: $ice-blue-color;
 
-$price-color: #f2270c;
-
-$color-page-bg: #f0f2f5;
-
-$under-line-color: #c4d8e7;
-
 %page {
   display: flex;
   flex-direction: column;
@@ -57,6 +55,7 @@ $under-line-color: #c4d8e7;
   min-height: 100vh;
   color: $text-color;
   box-sizing: border-box;
+  width: 100%;
 }
 
 %flex {
