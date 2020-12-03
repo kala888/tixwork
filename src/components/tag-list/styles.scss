@@ -16,10 +16,13 @@
     border-radius: 10px;
     border: $border-default;
     margin: 8px;
-  }
-
-  &-item--disabled {
-    background-color: $disabled-color;
-    color: $white;
+    &--disabled {
+      background-color: $disabled-color;
+      color: $white;
+    }
+    &--selected {
+      background-color: $primary-color;
+      color: $white;
+    }
   }
 }

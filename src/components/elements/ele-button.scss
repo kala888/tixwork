@@ -1,0 +1,71 @@
+@import 'src/styles/theme';
+
+.ele-button {
+  .ele-button-content {
+    @extend %flex-center;
+    flex-direction: row;
+
+    .iconfont {
+      @extend %flex;
+    }
+  }
+
+  .at-button {
+    background-color: $level-primary;
+  }
+
+  .at-button__text {
+    align-self: center;
+    color: $white;
+  }
+
+  &--normal {
+    .at-button {
+      background-color: $level-normal;
+    }
+
+    .at-button__text {
+      color: $white;
+    }
+  }
+
+  &--warn {
+    .at-button {
+      background-color: $level-warn;
+    }
+
+    .at-button__text {
+      color: $white;
+    }
+  }
+
+  &--danger {
+    .at-button {
+      background-color: $level-danger;
+    }
+
+    .at-button__text {
+      color: $white;
+    }
+  }
+
+  &--info {
+    .at-button {
+      background-color: $level-info;
+    }
+
+    .at-button__text {
+      color: $white;
+    }
+  }
+
+  &--secondary {
+    .at-button {
+      background-color: $white;
+    }
+
+    .at-button__text {
+      color: $primary-color;
+    }
+  }
+}

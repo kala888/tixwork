@@ -6,13 +6,13 @@ import ListofUtil from '../../listof-util'
 import '../styles.scss'
 
 function CardTemplate(props) {
-  const { item = {}, mode: globalMode = [] } = props
-  const { actionList = [], documentUrl, level = '', mode = '' } = item
+  const { item = {} } = props
+  const { actionList = [], documentUrl, level = '' } = item
 
   const imageUrl = ListofUtil.getImageUrl(item)
   const hasImage = isNotEmpty(imageUrl)
   const isDocument = isNotEmpty(documentUrl)
-  let extClass = globalMode.concat(mode, hasImage ? 'no-bg' : level, isDocument ? 'large' : '')
+  let extClass = [].concat(props.mode, item.mode, hasImage ? 'no-bg' : level, isDocument ? 'large' : '')
 
   const documentActions = isDocument
     ? [

@@ -23,17 +23,21 @@
   }
 }
 
-.ele-action-list.h5 {
+.ele-action-list--h5 {
   .at-button {
     height: 1.3rem !important;
   }
 }
 
-.ele-action-list.small {
+.ele-action-list--small {
   .at-button {
     height: 1.8rem;
     font-size: 26px;
     border-radius: 1rem;
+  }
+
+  .iconfont {
+    font-size: 40px;
   }
 
   .ele-action-list-item {
@@ -41,7 +45,7 @@
   }
 }
 
-.ele-action-list.right {
+.ele-action-list--right {
   justify-content: flex-end;
 
   .ele-action-list-item {
@@ -49,7 +53,7 @@
   }
 }
 
-.ele-action-list.left {
+.ele-action-list--left {
   justify-content: flex-start;
 
   .ele-action-list-item {
@@ -57,7 +61,7 @@
   }
 }
 
-.ele-action-list.full {
+.ele-action-list--full {
   @extend %flex-center;
   flex-direction: column;
 
@@ -82,7 +86,7 @@
   }
 }
 
-.ele-action-list.footer {
+.ele-action-list--footer {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -92,5 +96,27 @@
 
   .ele-action-list-btn {
     margin: 0 40px;
+  }
+}
+
+.ele-action-list--footer-bar {
+  @extend %flex-row;
+  align-items: center;
+  background-color: $white;
+
+  @include hairline-top($under-line-color);
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .at-button {
+    height: 100px;
+    border-radius: 0;
+  }
+
+  .ele-action-list-item {
+    @include hairline-right($under-line-color);
   }
 }

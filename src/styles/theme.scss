@@ -17,14 +17,8 @@ $primary-color-lighter: lighten($color-brand-light, 20%);
 $primary-color-dark: $color-brand-dark;
 $primary-color-darker: darken($color-brand-light, 20%);
 
-$color-border-base: #c5d9e8 !default;
-$color-border-split: tint($color-border-base, 20%) !default; // 分割线
-$color-border-light: tint($color-border-base, 30%) !default;
-$color-border-lighter: tint($color-border-base, 50%) !default;
-$color-border-lightest: tint($color-border-base, 80%) !default;
 $color-border-grey: #ccc !default;
-
-$border-default: 1px solid $color-border-light;
+$border-default: 1px solid $color-border-grey;
 $disabled-color: #ddd;
 
 $shadow-color: rgba(40, 170, 255, 0.1);
@@ -48,6 +42,7 @@ $level-normal: #07c160;
 $level-primary: $primary-color;
 $level-warn: #ffc300;
 $level-danger: #fa5151;
+$level-info: $ice-blue-color;
 
 $price-color: #f2270c;
 

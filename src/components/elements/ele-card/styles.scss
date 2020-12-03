@@ -99,7 +99,7 @@ $card-border: 2px solid #f3f5f7;
 }
 
 // as horizontal
-.card-body_horizontal {
+.card-body--horizontal {
   .ele-card-cover {
     width: 100px;
     height: 100px;
@@ -113,7 +113,7 @@ $card-border: 2px solid #f3f5f7;
   }
 }
 
-.card-body_vertical {
+.card-body--vertical {
   @extend %flex-column;
   justify-content: center;
   padding: 0 0 10px 0;
@@ -140,7 +140,7 @@ $card-border: 2px solid #f3f5f7;
   }
 }
 
-.card-body_vertical-small {
+.card-body--vertical-small {
   .card-body-cover-image {
     height: 250px !important;
     width: 250px !important;
@@ -151,7 +151,8 @@ $card-border: 2px solid #f3f5f7;
     width: 150px !important;
   }
 }
-.card-body_vertical-normal {
+
+.card-body--vertical-normal {
   .card-body-cover-image {
     height: 350px !important;
     width: 350px !important;
@@ -163,7 +164,7 @@ $card-border: 2px solid #f3f5f7;
   }
 }
 
-.card-body_circle {
+.card-body--circle {
   .card-body-cover-image {
     border-radius: 50% !important;
   }
@@ -173,7 +174,7 @@ $card-border: 2px solid #f3f5f7;
   }
 }
 
-.card-body_large {
+.card-body--large {
   .card-body-cover {
     width: 180px;
     height: 180px;
@@ -196,14 +197,14 @@ $card-border: 2px solid #f3f5f7;
   }
 }
 
-.card-body_as-text {
+.card-body--as-text {
   .card-body-cover-txt {
     background-color: $level-default;
     border-radius: 50%;
   }
 }
 
-.card-body_small {
+.card-body--small {
   .card-body-cover {
     width: 60px;
     height: 60px;
@@ -220,38 +221,38 @@ $card-border: 2px solid #f3f5f7;
   }
 }
 
-.card-body_avatar {
+.card-body--avatar {
   .card-body-cover-image {
     border: 4px solid darken($primary-color, 10%);
     box-shadow: 0 0 20px #fff;
   }
 }
 
-.card-body_default {
+.card-body--default {
   .card-body-cover-txt {
     background-color: $level-default;
   }
 }
 
-.card-body_normal {
+.card-body--normal {
   .card-body-cover-txt {
     background-color: $level-normal;
   }
 }
 
-.card-body_primary {
+.card-body--primary {
   .card-body-cover-txt {
     background-color: $level-primary;
   }
 }
 
-.card-body_warn {
+.card-body--warn {
   .card-body-cover-txt {
     background-color: $level-warn;
   }
 }
 
-.card-body_danger {
+.card-body--danger {
   .card-body-cover-txt {
     background-color: $level-danger;
   }

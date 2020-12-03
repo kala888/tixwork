@@ -1,9 +1,12 @@
-import { View } from '@tarojs/components'
 import React from 'react'
 
 import FlexInfoItem from '@/components/info-list/flex-info-item'
 import SectionBar from '@/components/section-bar/section-bar'
+
 import './flex-info-list.scss'
+import EleActionList from '@/components/elements/action-list/ele-action-list'
+import { View } from '@tarojs/components'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 /**
  * title  section 名字(optional)
@@ -17,24 +20,26 @@ import './flex-info-list.scss'
  * @constructor
  */
 function FlexInfoList(props) {
-  const { items = [], ...others } = props
+  const { items = [], actionList, ...others } = props
+
   return (
-    <View className='flex-info-list'>
-      <SectionBar {...others}>
-        <View className='flex-info-list-body'>
-          {items.map((it, idx) => (
-            <FlexInfoItem key={`the-group-item-${idx}`} {...it} />
-          ))}
+    <SectionBar mode={['bordered', 'highlight']} {...others} className='flex-info-list'>
+      {items.map((it, idx) => (
+        <FlexInfoItem key={`the-group-item-${idx}`} {...it} />
+      ))}
+      {isNotEmpty(actionList) && (
+        <View className='flex-info-list-actions'>
+          <EleActionList mode={['small', 'right']} list={actionList} />
         </View>
-      </SectionBar>
-    </View>
+      )}
+    </SectionBar>
   )
 }
 
 FlexInfoList.defaultProps = {
   title: '',
   items: [],
-  foldable: null,
+  foldable: true,
   expand: true,
 }
 export default FlexInfoList

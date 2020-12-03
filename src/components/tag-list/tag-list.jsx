@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View } from '@tarojs/components'
 import ActionUtil from '@/nice-router/action-util'
 import classNames from 'classnames'
@@ -7,6 +7,8 @@ import { isEmpty } from '@/nice-router/nice-router-util'
 import './styles.scss'
 
 export default function TagList(props) {
+  const [selected, setSelected] = useState({})
+
   const { value, items, onClick, mode = 'rect' } = props
   const list = value || items || []
   if (isEmpty(list)) {
@@ -15,6 +17,7 @@ export default function TagList(props) {
 
   const clickable = ActionUtil.isActionLike(props)
   const handleClick = (item) => {
+    setSelected(item)
     if (_.isFunction(onClick)) {
       onClick(item)
     }
@@ -32,6 +35,7 @@ export default function TagList(props) {
           clickable,
           [`tag-list-item--${mode}`]: true,
           'tag-list-item--hidden': hide,
+          'tag-list-item--selected': selected?.code === it.code,
         })
         return (
           <View key={id} className={itemClass} onClick={handleClick.bind(null, it)}>

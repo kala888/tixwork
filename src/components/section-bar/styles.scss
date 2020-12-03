@@ -2,55 +2,66 @@
 
 .section-bar {
   @extend %flex-column;
-  width: 100%;
-  padding: 10px 0;
 
-  &_header {
+  &-header {
     @extend %flex-row;
     align-items: center;
-
-    &-preicon {
-      width: 8px;
-      min-height: 1.2em;
-      background-color: $primary-color;
-      margin-right: 20px;
-    }
-
-    &-title {
-      color: $text-color;
-      font-size: 34px;
-      font-weight: 700;
-    }
-
-    &-action {
-      @extend %flex-row;
-      justify-content: flex-end;
-      align-items: center;
-      flex: 1;
-      color: $text-color-light;
-      height: 100%;
-      text-align: center;
-
-      &-title {
-        font-size: 28px;
-        font-weight: 500;
-        text-align: right;
-        padding-right: 10px;
-      }
-
-      .iconfont {
-        color: #ccc;
-        font-size: 36px;
-        font-weight: 800;
-      }
-    }
+    padding: 0 20px;
+    height: 80px;
   }
 
-  &_body {
-    padding-top: 14px;
+  .iconfont {
+    color: #ccc;
+    font-size: 36px;
+    font-weight: 800;
+  }
+
+  &-prefix {
+    width: 8px;
+    min-height: 1.2em;
+    background-color: $primary-color;
+    margin-right: 20px;
+  }
+
+  &-title {
+    color: $text-color;
+    font-size: 34px;
+    font-weight: 700;
+  }
+
+  &-action {
+    @extend %flex-row;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    color: $text-color-light;
+    height: 100%;
+    text-align: center;
+
+    &-title {
+      font-size: 28px;
+      font-weight: 500;
+      text-align: right;
+      padding-right: 10px;
+    }
   }
 }
 
-.section-bar.padding {
-  padding: 0 20px;
+.section-bar--foldable {
+  .section-bar-header {
+    border-bottom: $border-default;
+  }
+}
+
+.section-bar--bordered {
+  border: $border-default;
+}
+
+.section-bar--highlight {
+  .section-bar-header {
+    background-color: #ddd;
+    .iconfont {
+      color: $black;
+    }
+  }
 }

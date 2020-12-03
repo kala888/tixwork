@@ -1,5 +1,5 @@
 import React from 'react'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
@@ -10,6 +10,10 @@ import './action-icon.scss'
  *  有icon，优先展示ICON
  */
 function ActionIcon({ icon, imageUrl, className, mode }) {
+  if (isEmpty(icon) && isEmpty(imageUrl)) {
+    return null
+  }
+
   if (isNotEmpty(icon)) {
     const isBizFont = icon.startsWith('bizfont-')
     const rootClass = classNames(

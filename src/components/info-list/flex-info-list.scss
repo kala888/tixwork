@@ -1,6 +1,24 @@
 @import 'src/styles/theme';
 
 .flex-info-list {
-  @extend %flex-column;
-  width: 100%;
+  .info-item {
+    padding: 0 10px;
+  }
+
+  &-actions {
+    @extend %flex-row;
+    justify-content: flex-end;
+    border-top: $border-default;
+    padding: 20px;
+  }
+}
+
+.flex-info-list.section-bar--bordered {
+  .section-bar-header {
+    border-bottom: none;
+  }
+
+  .info-item:last-child {
+    border-bottom: none;
+  }
 }

@@ -1,13 +1,12 @@
 import { Text, View } from '@tarojs/components'
 import React from 'react'
-import _ from 'lodash'
-import classNames from 'classnames'
+import { getExtMode } from '@/nice-router/nice-router-util'
 import './ele-table.scss'
 
 export default function EleTableCell(props) {
   const { className, title, colspan = 1, mode = [] } = props
-  const modeClass = (_.isString(mode) ? [mode] : mode).map((it) => `ele-table-cell--${it}`)
-  const rootClass = classNames('ele-table-cell', className, modeClass)
+
+  const rootClass = getExtMode(mode).classNames('ele-table-cell', className)
 
   return (
     <View className={rootClass} style={{ flex: colspan }}>

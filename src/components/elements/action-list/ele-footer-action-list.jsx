@@ -9,4 +9,8 @@ function EleFooterActionList(props) {
   return <EleActionList {...props} mode={theMode} />
 }
 
+EleFooterActionList.defaultProps = {
+  list: [],
+}
+
 export default EleFooterActionList

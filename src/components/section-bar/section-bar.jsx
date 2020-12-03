@@ -5,7 +5,7 @@ import { Block, Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 
 import { useVisible } from '@/service/use.service'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import './styles.scss'
 
 /**
@@ -16,7 +16,7 @@ import './styles.scss'
  * @constructor
  */
 function SectionBar(props) {
-  const { title, brief, className, customStyle = {}, icon = 'right' } = props
+  const { title, brief, className, customStyle = {}, icon = 'right', mode = [] } = props
 
   const { foldable, expand = 'true', onClick } = props
   const { visible, toggle, show, close } = useVisible(true)
@@ -45,9 +45,9 @@ function SectionBar(props) {
     NavigationService.view(props)
   }
 
-  const rootClass = classNames('section-bar', className)
+  const rootClass = getExtMode(mode, foldable ? 'foldable' : '').classNames('section-bar', className)
 
-  const contentClass = classNames('section-bar_body', {
+  const contentClass = classNames('section-bar-body', {
     hidden: !hasMore && !visible,
   })
 
@@ -60,15 +60,15 @@ function SectionBar(props) {
 
   return (
     <View className={rootClass} style={customStyle}>
-      <View className='section-bar_header' onClick={handleClick}>
+      <View className='section-bar-header' onClick={handleClick}>
         {isNotEmpty(title) && (
           <Block>
-            <View className='section-bar_header-preicon' />
-            <View className='section-bar_header-title'>{title}</View>
+            <View className='section-bar-prefix' />
+            <View className='section-bar-title'>{title}</View>
           </Block>
         )}
-        <View className='section-bar_header-action clickable'>
-          {isNotEmpty(actionTitle) && <Text className='section-bar_header-action-title'>{actionTitle}</Text>}
+        <View className='section-bar-action clickable'>
+          {isNotEmpty(actionTitle) && <Text className='section-bar-action-title'>{actionTitle}</Text>}
           {isNotEmpty(actionAction) && <Text className={`iconfont iconfont-${actionAction}`} />}
         </View>
       </View>

@@ -1,16 +1,17 @@
 import React from 'react'
 import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
-import classNames from 'classnames'
 
+import StatusFlag from '@/components/elements/ele-card/status-flag'
+import EleActionList from '@/components/elements/action-list/ele-action-list'
+import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
+import CardInfoTable from '@/components/ele-table/card-info-table'
 import ListofUtil from '../../listof-util'
 import './styles.scss'
 
 function AutoTemplate(props) {
-  const { item, showImageCount, mode: globalMode = [] } = props
-  const { title, brief, mode: itemMode = [] } = item
-
-  const mode = [].concat(globalMode, itemMode)
+  const { item, showImageCount } = props
+  const { title, brief, infoList = [], status, actionList } = item
 
   let list = []
   if (showImageCount > 0) {
@@ -19,16 +20,11 @@ function AutoTemplate(props) {
     list = tempList.slice(0, size)
   }
 
-  const rootCls = classNames(
-    'auto',
-    {
-      'only-title': !brief,
-    },
-    mode
-  )
+  const rootClass = getExtMode(props.mode, item.mode, { 'only-title': !brief }).classNames('auto')
 
   return (
-    <View className={rootCls}>
+    <View className={rootClass}>
+      <StatusFlag title={status} mode='large' />
       {list.length > 0 && (
         <View className='auto-image-list'>
           {list.map((it, index) => {
@@ -45,7 +41,14 @@ function AutoTemplate(props) {
       <View className='auto-info'>
         <Text className='auto-info-title'>{title}</Text>
         {brief && <Text className='auto-info-brief'>{brief}</Text>}
+        {infoList.length > 0 && <CardInfoTable data={infoList} />}
       </View>
+
+      {isNotEmpty(actionList) && (
+        <View className='auto-action-bar'>
+          <EleActionList mode={['right', 'small']} list={actionList} />
+        </View>
+      )}
     </View>
   )
 }

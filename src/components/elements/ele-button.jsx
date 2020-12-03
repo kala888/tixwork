@@ -1,12 +1,14 @@
 import React from 'react'
 import _ from 'lodash'
 import NavigationService from '@/nice-router/navigation.service'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import Taro from '@tarojs/taro'
-import classNames from 'classnames'
 import { AtButton } from 'taro-ui'
 
-import './styles.scss'
+import ActionIcon from '@/components/action-icon/action-icon'
+import { Text, View } from '@tarojs/components'
+
+import './ele-button.scss'
 
 // form中组件封装后，button 不会触发form的handle方法问题
 // https://github.com/NervJS/taro-ui/issues/96
@@ -26,12 +28,14 @@ function EleButton(props) {
     title,
     btnType,
     size,
-    uiType,
     customStyle,
     className,
     full,
     circle,
     onGetUserInfo,
+    icon,
+    imageUrl,
+    mode,
   } = props
 
   let wxOpenType = openType
@@ -134,23 +138,29 @@ function EleButton(props) {
     NavigationService.view(props)
   }, 300)
 
-  const rootClass = classNames('ele-button', className)
+  const rootClass = getExtMode(mode).classNames('ele-button', className)
 
   return (
-    <AtButton
-      circle={circle}
-      type={uiType}
-      className={rootClass}
-      openType={wxOpenType}
-      formType={formType}
-      size={size}
-      full={full}
-      customStyle={customStyle}
-      onClick={handleClick}
-      onGetUserInfo={onGetUserInfo}
-    >
-      {props.children || title}
-    </AtButton>
+    <View className={rootClass}>
+      <AtButton
+        circle={circle}
+        className={rootClass}
+        openType={wxOpenType}
+        formType={formType}
+        size={size}
+        full={full}
+        customStyle={customStyle}
+        onClick={handleClick}
+        onGetUserInfo={onGetUserInfo}
+      >
+        {props.children || (
+          <View className='ele-button-content'>
+            <ActionIcon icon={icon} imageUrl={imageUrl} />
+            <Text>{title}</Text>
+          </View>
+        )}
+      </AtButton>
+    </View>
   )
 }
 
@@ -158,13 +168,14 @@ EleButton.defaultProps = {
   title: '',
   btnType: '',
   size: null,
-  uiType: 'primary',
   customStyle: {},
   full: false,
   className: null,
   circle: null,
   onGetUserInfo: null,
   extraData: {},
+  icon: null,
+  imageUrl: null,
 }
 
 export default EleButton

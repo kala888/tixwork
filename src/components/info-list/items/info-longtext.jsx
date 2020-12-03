@@ -1,9 +1,9 @@
 import React from 'react'
 import { Text, View } from '@tarojs/components'
-import classNames from 'classnames'
 import { useVisible } from '@/service/use.service'
 
 import _ from 'lodash'
+import { getExtMode } from '@/nice-router/nice-router-util'
 import './styles.scss'
 
 function InfoLongText(props) {
@@ -20,9 +20,7 @@ function InfoLongText(props) {
     showFoldAction = true
   }
 
-  const rootClass = classNames('info-longtext', className, mode, {
-    'info-longtext--fold': showFoldAction && !visible,
-  })
+  const rootClass = getExtMode(mode, { fold: showFoldAction && !visible }).classNames('info-longtext', className)
 
   return (
     <View className={rootClass}>

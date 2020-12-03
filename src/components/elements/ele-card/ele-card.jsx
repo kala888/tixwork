@@ -2,10 +2,9 @@ import React from 'react'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import StatusFlag from '@/components/elements/ele-card/status-flag'
 import NavigationService from '@/nice-router/navigation.service'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
-import classNames from 'classnames'
 import CardInfoTable from '@/components/ele-table/card-info-table'
 
 import './styles.scss'
@@ -36,8 +35,7 @@ function EleCard(props) {
     }
   }
 
-  const extClass = mode.filter((it) => isNotEmpty(it)).map((it) => 'card-body_' + it)
-  const bodyClass = classNames('card-body', extClass)
+  const bodyClass = getExtMode(mode).classNames('card-body')
 
   const hasHeader = isNotEmpty(headerTitle) || isNotEmpty(headerBrief)
   const hasFooter = isNotEmpty(actionList) || isNotEmpty(infoList)
@@ -66,12 +64,12 @@ function EleCard(props) {
       </View>
       {hasFooter && (
         <View className='card-footer'>
+          {isNotEmpty(infoList) && <CardInfoTable data={infoList} />}
           {isNotEmpty(actionList) && (
             <View className='card-footer-action-list'>
               <EleActionList mode={['right', 'small']} list={actionList} />
             </View>
           )}
-          {isNotEmpty(infoList) && <CardInfoTable data={infoList} />}
         </View>
       )}
     </View>

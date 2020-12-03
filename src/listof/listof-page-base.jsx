@@ -1,6 +1,4 @@
 import React from 'react'
-import EleRichText from '@/components/elements/ele-rich-text'
-import EleTabs from '@/components/elements/ele-tabs'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 import { useAjaxPullDown, usePageTitle } from '@/service/use.service'
@@ -8,8 +6,9 @@ import Config from '@/utils/config'
 import EleFooterActionList from '@/components/elements/action-list/ele-footer-action-list'
 import { View } from '@tarojs/components'
 import Listof from './listof'
-import SearchBar from './search-bar'
 import './styles.scss'
+import FlexLineItem from './templates/flex-line-item'
+import FlexHeader from './flex-header'
 
 function ListofPageBase(props) {
   const { pageTitle = Config.name } = props
@@ -29,13 +28,16 @@ function ListofPageBase(props) {
     actionList = [],
     content, // rich-text
     searchAction = {},
+    header,
   } = props
 
   return (
     <View className='listof-page'>
-      {isNotEmpty(searchAction) && <SearchBar {...searchAction} />}
-      {isNotEmpty(content) && <EleRichText content={content} />}
-      {isNotEmpty(tabs) && <EleTabs tabs={tabs} />}
+      {isNotEmpty(header) && <FlexLineItem item={header} {...header} />}
+      {isNotEmpty(searchAction) && <FlexHeader type='search' {...searchAction} />}
+      {isNotEmpty(content) && <FlexHeader displayMode='rich-text' item={{ content }} />}
+      {isNotEmpty(tabs) && <FlexHeader type='tabs' tabs={tabs} tabsType={tabsType} />}
+
       <Listof
         dataContainer={dataContainer}
         list={list || articleList}

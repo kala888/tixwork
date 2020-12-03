@@ -43,7 +43,7 @@ class App extends React.Component {
     if (Taro.canIUse('getUpdateManager')) {
       const updateManager = Taro.getUpdateManager()
       updateManager.onCheckForUpdate(() => {
-        console.log('checking.......')
+        console.log('checking app update .......')
       })
       updateManager.onUpdateReady(() => {
         // noinspection JSIgnoredPromiseFromCall

@@ -56,6 +56,9 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
 
 //坑！！ ios只能识别yyyy/MM/dd hh:mm:ss
 export function transToDate(value) {
+  if (isEmpty(value)) {
+    return null
+  }
   let temp = value
   if (_.isString(value)) {
     temp = value.replace(/-/g, '/')

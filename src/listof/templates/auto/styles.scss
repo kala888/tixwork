@@ -9,6 +9,10 @@
   box-shadow: 0 10px 19px 1px $shadow-color;
   color: $text-color;
   margin-bottom: 20px;
+  padding-bottom: 20px;
+
+  position: relative;
+  overflow: hidden;
 
   .auto-image-list {
     @extend %flex-row;
@@ -21,6 +25,11 @@
       width: 100%;
       border: 0.5px solid $silver-grey-color;
     }
+  }
+
+  &-action-bar {
+    @extend %flex-row;
+    padding: 5px 30px 0 30px;
   }
 
   &-info {
@@ -49,7 +58,7 @@
   }
 }
 
-.only-title {
+.auto--only-title {
   padding-bottom: 0;
 
   .auto-info-title {
@@ -57,7 +66,7 @@
   }
 }
 
-.image-on-bottom {
+.auto--image-on-bottom {
   flex-direction: column-reverse;
   padding-bottom: 0;
 }

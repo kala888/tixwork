@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import classNames from 'classnames'
 
 const TARO_PROTOCOL_PRIFIX = 'page://'
 export const LoadingType = {
@@ -115,4 +116,36 @@ export function parseJSON(json) {
   }
   console.warn('shouldBeObject is not controlled value', json)
   return json
+}
+
+/**
+ *
+ * mode
+ *
+ * @returns {{mode: (function(*=): (*)), classNames: (function(*=, ...[*]=): string)}}
+ */
+export function getExtMode() {
+  const modeList = _.flatten(arguments).filter(isNotEmpty)
+
+  const buildWithPrefix = (prefix) => {
+    if (isEmpty(prefix)) {
+      return prefix
+    }
+    const list = modeList.map((it) => {
+      if (_.isObject(it)) {
+        return _.keys(it).map((key) => (it[key] ? key : ''))
+      }
+      return it
+    })
+    return _.flatten(list)
+      .filter((it) => isNotEmpty(it))
+      .map((it) => `${prefix}--${_.trim(it)}`)
+  }
+
+  return {
+    mode: buildWithPrefix,
+    classNames: function(prefix, ...others) {
+      return classNames(prefix, others, buildWithPrefix(prefix))
+    },
+  }
 }

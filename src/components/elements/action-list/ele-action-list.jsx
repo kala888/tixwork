@@ -1,21 +1,32 @@
 import React from 'react'
+import _ from 'lodash'
 import { View } from '@tarojs/components'
-import classNames from 'classnames'
 import { isH5 } from '@/utils/index'
-import EleButton from '../ele-button'
+import { getExtMode } from '@/nice-router/nice-router-util'
 import './styles.scss'
+import EleButton from '../ele-button'
 
-function EleActionList({ list, mode = ['right'], className }) {
-  const rootClass = classNames('ele-action-list', className, mode, { h5: isH5() })
+const LEVEL_LIST = ['primary', 'warn', 'danger', 'normal', 'info', 'secondary']
+
+function EleActionList({ list = [], mode = ['right'], className }) {
+  const rootClass = getExtMode(mode, {
+    h5: isH5(),
+  }).classNames('ele-action-list', className)
 
   return (
     <View className={rootClass}>
-      {list.map((it) => {
+      {list.map((it, idx) => {
         const { customStyle: actionStyle = {} } = it
         const key = `btn_${it.id}_${it.code}_${it.title}`
+        let level = null
+
+        if (_.includes(mode, 'colorful')) {
+          level = LEVEL_LIST[idx % LEVEL_LIST.length]
+        }
+
         return (
           <View key={key} className='ele-action-list-item'>
-            <EleButton {...it} customStyle={{ ...actionStyle }} className='ele-action-list-btn' />
+            <EleButton {...it} mode={level} customStyle={{ ...actionStyle }} className='ele-action-list-btn' />
           </View>
         )
       })}
