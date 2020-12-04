@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'

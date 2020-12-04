@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import NavigationService from './navigation.service'
+import NavigationService from './navigation-service'
 
 const defaultViewConfig = {
   'com.terapico.appview.H5Page': {

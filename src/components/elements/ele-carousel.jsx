@@ -1,7 +1,7 @@
 import React from 'react'
 import ActionUtil from '@/nice-router/action-util'
 
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import ServerImage from '@/server-image/server-image'
 import { Swiper, SwiperItem, Video, View } from '@tarojs/components'

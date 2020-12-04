@@ -3,7 +3,7 @@ import _ from 'lodash'
 import Taro, { Current } from '@tarojs/taro'
 import ActionUtil from './action-util'
 
-import localCacheService from './local-cache.service'
+import localCacheService from './local-cache-service'
 import {
   isEmpty,
   isLocalPagePath,

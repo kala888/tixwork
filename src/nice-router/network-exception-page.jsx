@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
 
-import NavigationService from './navigation.service'
+import NavigationService from './navigation-service'
 import networkImage from './network.png'
 import './styles.scss'
 

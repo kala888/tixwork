@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/service/use.service'
+import { useVisible } from '@/service/use-service'
 import { formatTime, transToDate } from '@/utils/index'
 import { Picker } from '@tarojs/components'
 import { AtActionSheet, AtCalendar } from 'taro-ui'

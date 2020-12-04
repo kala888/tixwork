@@ -1,7 +1,7 @@
 import React from 'react'
 import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 
-import { useVisible } from '@/service/use.service'
+import { useVisible } from '@/service/use-service'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import './style.scss'

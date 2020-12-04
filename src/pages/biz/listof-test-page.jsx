@@ -3,7 +3,7 @@ import SectionBar from '@/components/section-bar/section-bar'
 import Listof from '@/listof/listof'
 import { View } from '@tarojs/components'
 
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 
 import './styles.scss'
 

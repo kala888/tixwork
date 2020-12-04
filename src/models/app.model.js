@@ -1,6 +1,6 @@
 /* eslint-disable */
 import AuthTools from '@/nice-router/auth-tools'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import Config from '@/utils/config'
 import Taro from '@tarojs/taro'
 

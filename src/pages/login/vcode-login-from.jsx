@@ -3,10 +3,10 @@ import EleInput from '@/components/form/field/ele-input'
 import { Block, View } from '@tarojs/components'
 import React, { useEffect, useState } from 'react'
 import { AtButton } from 'taro-ui'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/service/use.service'
+import { useVisible } from '@/service/use-service'
 import Taro from '@tarojs/taro'
 import './login.scss'
 

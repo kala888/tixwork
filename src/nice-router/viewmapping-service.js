@@ -3,7 +3,7 @@ import NiceRouter from './nice-router'
 import { isEmpty, log } from './nice-router-util'
 
 const POINTER = {}
-const ViewMappingService = {
+const ViewmappingService = {
   getView(backendKey = '', stageInPage = false) {
     const key = _.trim(backendKey)
     let view = _.get(NiceRouter.config.viewConfig, key, {})
@@ -23,4 +23,4 @@ const ViewMappingService = {
   },
 }
 
-export default ViewMappingService
+export default ViewmappingService

@@ -1,7 +1,7 @@
 import GlobalToast from '@/nice-router/global-toast'
 import { isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
 import OverlayLoading from '@/nice-router/overlay-loading'
-import ViewMappingService from '@/nice-router/viewmapping.service'
+import ViewmappingService from '@/nice-router/viewmapping-service'
 import Taro from '@tarojs/taro'
 
 const systemErrorXClass = 'com.terapico.caf.local.NetworkException'
@@ -27,7 +27,7 @@ async function hideLoading(loading) {
 function showError({ xclass, data = {} }) {
   console.error('request got error', xclass, data)
 
-  const view = ViewMappingService.getView(xclass)
+  const view = ViewmappingService.getView(xclass)
   // 系统错误，根据xclass跳转页面
   if (xclass === systemErrorXClass || isNotEmpty(view)) {
     return

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import ActionUtil from '@/nice-router/action-util'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import { Block, Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 
-import { useVisible } from '@/service/use.service'
+import { useVisible } from '@/service/use-service'
 import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import './styles.scss'
 

@@ -4,13 +4,13 @@ import Taro, { Current } from '@tarojs/taro'
 import _ from 'lodash'
 
 import GlobalToast from './global-toast'
-import LocalCache from './local-cache.service'
-import NavigationService from './navigation.service'
+import LocalCache from './local-cache-service'
+import NavigationService from './navigation-service'
 import { createAction, isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util'
 import ActionUtil from './action-util'
 import PopupMessage from './popup-message'
-import BackendService from './request/backend.service'
-import ViewMappingService from './viewmapping.service'
+import BackendService from './request/backend-service'
+import ViewmappingService from './viewmapping-service'
 
 function showToastOrPopup({ toast = {}, popup = {} }) {
   // 后端说Toast
@@ -155,7 +155,7 @@ function getCurrentPage() {
 }
 
 function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPage }) {
-  const nextView = ViewMappingService.getView(xclass, statInPage)
+  const nextView = ViewmappingService.getView(xclass, statInPage)
 
   const nextPage = nextView.pageName
   const newStateAction = stateAction || nextView.stateAction

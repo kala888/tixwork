@@ -1,7 +1,7 @@
 import React from 'react'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import StatusFlag from '@/components/elements/ele-card/status-flag'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'

@@ -1,7 +1,7 @@
 import React from 'react'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 
-import { useAjaxPullDown, usePageTitle } from '@/service/use.service'
+import { useAjaxPullDown, usePageTitle } from '@/service/use-service'
 import Config from '@/utils/config'
 import EleFooterActionList from '@/components/elements/action-list/ele-footer-action-list'
 import { View } from '@tarojs/components'

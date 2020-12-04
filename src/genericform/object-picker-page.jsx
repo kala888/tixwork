@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Listof from '@/listof/listof'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import { Text, View } from '@tarojs/components'
 import { useSelector } from 'react-redux'
 import { AtSearchBar } from 'taro-ui'

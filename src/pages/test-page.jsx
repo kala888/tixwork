@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import { View } from '@tarojs/components'
 
 function TestPage() {

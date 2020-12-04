@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View } from '@tarojs/components'
-import { useVisible } from '@/service/use.service'
+import { useVisible } from '@/service/use-service'
 
 import _ from 'lodash'
 import { getExtMode } from '@/nice-router/nice-router-util'

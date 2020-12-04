@@ -1,5 +1,5 @@
 import React from 'react'
-import { useVisible } from '@/service/use.service'
+import { useVisible } from '@/service/use-service'
 import { View } from '@tarojs/components'
 import { AtActionSheet } from 'taro-ui'
 import ActionField from './action-field'

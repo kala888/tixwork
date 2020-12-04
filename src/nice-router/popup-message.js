@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import NavigationService from './navigation.service'
+import NavigationService from './navigation-service'
 import { isNotEmpty } from './nice-router-util'
 
 export default class PopupMessage {

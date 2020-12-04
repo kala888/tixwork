@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import NavigationService from '@/nice-router/navigation.service'
-import { useAjaxPullDown, usePageTitle } from '@/service/use.service'
+import NavigationService from '@/nice-router/navigation-service'
+import { useAjaxPullDown, usePageTitle } from '@/service/use-service'
 import Config from '@/utils/config'
 import { View } from '@tarojs/components'
 import { Current, useShareAppMessage } from '@tarojs/taro'

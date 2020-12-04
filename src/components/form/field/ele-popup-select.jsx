@@ -1,6 +1,6 @@
 import React from 'react'
 import { isEmpty } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/service/use.service'
+import { useVisible } from '@/service/use-service'
 import { View } from '@tarojs/components'
 import _ from 'lodash'
 import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtRadio } from 'taro-ui'

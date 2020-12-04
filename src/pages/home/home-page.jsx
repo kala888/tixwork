@@ -3,10 +3,10 @@ import EleCarousel from '@/components/elements/ele-carousel'
 import ActionFloor from '@/components/navigation/action-floor'
 import SectionBar from '@/components/section-bar/section-bar'
 import Listof from '@/listof/listof'
-import { useAjaxPullDown, usePageTitle } from '@/service/use.service'
+import { useAjaxPullDown, usePageTitle } from '@/service/use-service'
 import { View } from '@tarojs/components'
 import { useSelector } from 'react-redux'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 
 import './home.scss'
 

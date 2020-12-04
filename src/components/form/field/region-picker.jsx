@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import StorageTools from '@/nice-router/storage-tools'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import ElePicker from '@/components/form/field/ele-picker'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 

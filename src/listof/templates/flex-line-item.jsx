@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import ActionUtil from '@/nice-router/action-util'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { AtActivityIndicator } from 'taro-ui'

@@ -1,5 +1,5 @@
 import React from 'react'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import ActionUtil from '@/nice-router/action-util'
 import { Text, View } from '@tarojs/components'

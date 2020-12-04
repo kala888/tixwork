@@ -1,6 +1,6 @@
 import React from 'react'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/service/use.service'
+import { useVisible } from '@/service/use-service'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'

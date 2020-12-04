@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import _ from 'lodash'
 import { Picker, View } from '@tarojs/components'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/service/use.service'
+import { useVisible } from '@/service/use-service'
 import classNames from 'classnames'
 
 import './styles.scss'

@@ -1,5 +1,5 @@
 import React from 'react'
-import NavigationService from '@/nice-router/navigation.service'
+import NavigationService from '@/nice-router/navigation-service'
 import { LoadingType } from '@/nice-router/nice-router-util'
 import PropTypes from 'prop-types'
 
