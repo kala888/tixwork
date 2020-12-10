@@ -25,6 +25,10 @@ function EleCarousel(props) {
     mode,
   } = props
 
+  if (isEmpty(items)) {
+    return null
+  }
+
   const handleClick = async (item = {}) => {
     const { videoUrl = '', imageUrl } = item
     console.log('carousel viewed', item)

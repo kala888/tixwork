@@ -15,14 +15,27 @@ function ObjectPickerPage() {
   const [keyword, setKeyword] = useState('')
   const [selectedItems, setSelectedItems] = useState([])
 
+  const [maxSelectCount, setMaxSelectCount] = useState(1)
+
   const { list, listMeta, emptyMessage = '没有更多数据了', dataContainer, articleList, articleListMeta } = root
-  const { searchAction, maxSelectCount = 10 } = root
+  const { searchAction } = root
+
+  useEffect(() => {
+    const msc = _.get(root, 'maxSelectCount', 1)
+    setMaxSelectCount(msc)
+  }, [root])
 
   // q如果变化了，就发送一个后台请求
   const { linkToUrl } = Current.router.params
   useEffect(() => {
     if (linkToUrl) {
-      NavigationService.ajax(linkToUrl)
+      NavigationService.ajax(
+        linkToUrl,
+        {},
+        {
+          loading: LoadingType.modal,
+        }
+      )
     }
   }, [linkToUrl])
 

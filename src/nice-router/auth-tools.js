@@ -5,7 +5,7 @@ import StorageTools from './storage-tools'
 const TOKEN = 'TOKEN'
 const AUTH_INFO = 'AUTH_INFO'
 
-const SAFTY_TIME = 1800 //预留半个小时过期（单位秒）
+const SAFETY_TIME = 1800 //预留半个小时过期（单位秒）
 
 async function saveTokenAsync(token) {
   StorageTools.set(TOKEN, token)
@@ -21,7 +21,7 @@ async function isValidateToken() {
   const authInfo = await getAuthInfoAsync()
   if (isNotEmpty(authInfo) && authInfo.exp > 0) {
     log('the token expTime is', authInfo.exp, 'will exp ', authInfo.exp - Date.now() / 1000, 'latter')
-    return authInfo.exp - Date.now() / 1000 > SAFTY_TIME
+    return authInfo.exp - Date.now() / 1000 > SAFETY_TIME
   }
   return false
 }

@@ -2,13 +2,16 @@ import React from 'react'
 import _ from 'lodash'
 import { View } from '@tarojs/components'
 import { isH5 } from '@/utils/index'
-import { getExtMode } from '@/nice-router/nice-router-util'
-import './styles.scss'
+import { getExtMode, isEmpty } from '@/nice-router/nice-router-util'
 import EleButton from '../ele-button'
+import './styles.scss'
 
 const LEVEL_LIST = ['primary', 'warn', 'danger', 'normal', 'info', 'secondary']
 
 function EleActionList({ list = [], mode = ['right'], className }) {
+  if (isEmpty(list)) {
+    return null
+  }
   const rootClass = getExtMode(mode, {
     h5: isH5(),
   }).classNames('ele-action-list', className)

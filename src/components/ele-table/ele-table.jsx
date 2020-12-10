@@ -1,8 +1,8 @@
 import { View } from '@tarojs/components'
 import React from 'react'
 import EleTableRow from '@/components/ele-table/ele-table-row'
-import classNames from 'classnames'
 import './ele-table.scss'
+import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 
 /**
  * title:'xxx',
@@ -14,14 +14,11 @@ import './ele-table.scss'
  *
  */
 function EleTable(props) {
-  const { title, data = [], bordered = true } = props
-
-  const rootClass = classNames('ele-table', {
-    'ele-table--no-border': !bordered,
-  })
+  const { title, data = [], bordered = true, className } = props
+  const rootClass = getExtMode(bordered).classNames('ele-table', className)
   return (
     <View className={rootClass}>
-      <View className='ele-table-title'>{title}</View>
+      {isNotEmpty(title) && <View className='ele-table-title'>{title}</View>}
       {data.map((row, idx) => (
         <EleTableRow key={`ele-table-row-${idx}`} items={row.items} header={row.header} />
       ))}

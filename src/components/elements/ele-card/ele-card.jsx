@@ -21,6 +21,7 @@ function EleCard(props) {
   const { mode = [] } = props
   const flagSize = mode.includes('large') ? 'large' : 'small'
   const hasImage = isNotEmpty(imageUrl)
+  const hasFlag = !hasImage && isNotEmpty(flag)
   if (!hasImage) {
     mode.push('as-text')
     mode.push(level)
@@ -50,13 +51,16 @@ function EleCard(props) {
       )}
 
       <View className={bodyClass}>
-        <View className='card-body-cover' onClick={handleClick}>
-          {hasImage ? (
-            <ServerImage className='card-body-cover-image' src={imageUrl} />
-          ) : (
-            <Text className='card-body-cover-txt'>{flag}</Text>
-          )}
-        </View>
+        {(hasImage || hasFlag) && (
+          <View className='card-body-cover' onClick={handleClick}>
+            {hasImage ? (
+              <ServerImage className='card-body-cover-image' src={imageUrl} />
+            ) : (
+              <Text className='card-body-cover-txt'>{flag}</Text>
+            )}
+          </View>
+        )}
+
         <View className='card-body-info'>
           <Text className='card-body-info-title'>{title}</Text>
           <Text className='card-body-info-brief'>{brief}</Text>

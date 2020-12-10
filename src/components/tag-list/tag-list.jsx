@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { View } from '@tarojs/components'
 import ActionUtil from '@/nice-router/action-util'
-import classNames from 'classnames'
 import _ from 'lodash'
-import { isEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import './styles.scss'
 
 export default function TagList(props) {
@@ -30,13 +29,17 @@ export default function TagList(props) {
       {list.map((it, idx) => {
         const tag = _.isString(it) ? { title: it, id: idx } : it
         const { id, title, disabled, hide } = tag
-        const itemClass = classNames('tag-list-item', {
-          'tag-list-item--disabled': disabled,
-          clickable,
-          [`tag-list-item--${mode}`]: true,
-          'tag-list-item--hidden': hide,
-          'tag-list-item--selected': selected?.code === it.code,
-        })
+
+        const isSelected = isNotEmpty(selected) ? selected.code === it.code : it.selected
+
+        const itemClass = getExtMode(
+          {
+            hidden: hide,
+            disabled,
+            selected: isSelected,
+          },
+          mode
+        ).classNames('tag-list-item', { clickable })
         return (
           <View key={id} className={itemClass} onClick={handleClick.bind(null, it)}>
             {title}

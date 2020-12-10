@@ -10,6 +10,7 @@ import EleActionList from '@/components/elements/action-list/ele-action-list'
 import { useSelector } from 'react-redux'
 import _ from 'lodash'
 import FormSteps from './form-steps'
+import ActionUtil from '@/nice-router/action-util'
 import './styles.scss'
 
 function GenericformPage() {
@@ -21,24 +22,18 @@ function GenericformPage() {
   usePageTitle(pageTitle)
   usePullDown(root)
 
-  const isSubmitAction = (code = '') => {
-    const submitCodeList = ['nextStep', 'submit', 'commit', 'next', 'nextRecord']
-    const result = _.find(submitCodeList, (it) => it.toLowerCase() === code.toLowerCase())
-    return !!result
-  }
-
   const handleActionClick = async (action = {}) => {
     const { code } = action
     if (code === 'reset') {
       formRef.current.resetFields()
       return
     }
-    if (isSubmitAction(code)) {
+    if (ActionUtil.isSubmitAction(code)) {
       await handleSubmit(action)
       return
     }
     // 其他请求，就直接执行action，把defaultValues传回去
-    NavigationService.post(action, defaultValues)
+    await NavigationService.post(action, defaultValues)
   }
 
   const handleSubmit = async (action) => {
@@ -71,7 +66,7 @@ function GenericformPage() {
     return defaultValues
   }
   const footerActionList = actionList.map((it) => ({
-    uiType: isSubmitAction(it.code) ? 'primary' : 'secondary',
+    uiType: ActionUtil.isSubmitAction(it.code) ? 'primary' : 'secondary',
     ...it,
     onClick: handleActionClick.bind(this, it),
   }))

@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Text, View } from '@tarojs/components'
 import _ from 'lodash'
 import classNames from 'classnames'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import { getGroupListByColumn } from '@/utils/index'
 import NavigationService from '@/nice-router/navigation-service'
 import './grid-list.scss'
@@ -14,7 +14,11 @@ import './grid-list.scss'
  * @constructor
  */
 export default function GridList(props) {
-  const { items = [], columnNum = 3, onClick } = props
+  const { items = [], columnNum = 3, onClick, className } = props
+  if (isEmpty(items)) {
+    return null
+  }
+
   const groupList = getGroupListByColumn(items, columnNum)
   const handleClick = (item, index, row) => {
     if (_.isFunction(onClick)) {
@@ -24,8 +28,10 @@ export default function GridList(props) {
     NavigationService.view(item)
   }
 
+  const rootClass = classNames('grid-list', className)
+
   return (
-    <View className='grid-list'>
+    <View className={rootClass}>
       {groupList.map((row) => {
         const { list } = row
         return (

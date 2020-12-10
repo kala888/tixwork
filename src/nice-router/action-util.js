@@ -17,8 +17,10 @@
  *  effectAction // action还能指定获得结果后，触发哪个effect
  *  stateAction  // action还能指定获得结果后，触发哪个state
  */
-import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import _ from 'lodash'
+
+const SUBMIT_CODE_LIST = ['nextStep', 'commit', 'next', 'nextRecord']
 
 const getActionUri = (action) => {
   let result = action
@@ -50,11 +52,26 @@ const getConfirmContent = (action = {}) => {
   return action.confirm
 }
 
+const isSubmitAction = (action = '') => {
+  const theCode = (action?.code || action || '').toLowerCase()
+  if (isEmpty(theCode)) {
+    return false
+  }
+  if (theCode.startsWith('submit')) {
+    return true
+  }
+
+  const result = _.find(SUBMIT_CODE_LIST, (it) => it.toLowerCase() === theCode)
+
+  return isNotEmpty(result)
+}
+
 const ActionUtil = {
   getActionUri,
   isActionLike,
   trans2Action,
   getConfirmContent,
+  isSubmitAction,
 }
 
 export default ActionUtil

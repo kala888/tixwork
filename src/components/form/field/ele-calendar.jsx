@@ -6,6 +6,13 @@ import { Picker } from '@tarojs/components'
 import { AtActionSheet, AtCalendar } from 'taro-ui'
 import ActionField from './action-field'
 
+/**
+ * 有时候弹不出来，记得在外层包一个View
+ *
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function EleCalendar(props) {
   const [date, setDate] = useState('')
   const [showCalendar, setShowCalendar] = useState(true)
@@ -24,7 +31,6 @@ function EleCalendar(props) {
   const handleDateSelected = (e) => {
     const { start: startDate } = e.value
     close()
-
     if (mode === 'date') {
       onChange(startDate)
       return
@@ -40,6 +46,7 @@ function EleCalendar(props) {
   }
 
   const getDateTime = () => {
+    console.log('getDate-time', value)
     const dateValue = transToDate(value)
 
     if (dateValue) {
@@ -58,6 +65,7 @@ function EleCalendar(props) {
         displayTime: formatTime(Date.now(), 'HH:mm'),
       }
     }
+
     return {}
   }
 

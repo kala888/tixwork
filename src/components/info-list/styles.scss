@@ -6,7 +6,6 @@
   border-top: $border-default;
   padding: 10px 0;
   margin: 0 1px;
-  flex-wrap: wrap;
   min-height: 2.4rem;
 
   &:last-child {
@@ -30,6 +29,7 @@
 
   &--multiline {
     @extend %flex-row;
+    flex-wrap: wrap;
 
     .info-item-value {
       width: 100%;
