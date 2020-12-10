@@ -173,7 +173,7 @@ const NavigationService = {
 
   async routeTo(routerParams) {
     const action = ActionUtil.trans2Action(routerParams)
-    const { linkToUrl, cache = false, params } = action
+    const { linkToUrl, cache = false, params, statInPage } = action
     if (isEmpty(linkToUrl)) {
       return
     }
@@ -191,13 +191,13 @@ const NavigationService = {
     }
 
     // 1, 前端页面跳转, page:///pages/home/home-page?type=qa 或跳转到HomePage的screen
-    if (isLocalPagePath(linkToUrl)) {
+    if (!statInPage && isLocalPagePath(linkToUrl)) {
       const { queryParams, pathname } = parseTaroUri(linkToUrl)
       return this.navigate(pathname, { ...params, ...queryParams })
     }
 
     // 2, H5跳转：目标页面是Http页面，小程序中需要跳转到webview
-    if (isH5Path(linkToUrl)) {
+    if (!statInPage && isH5Path(linkToUrl)) {
       let h5PageTarget = linkToUrl
       const h5Param = {}
       if (!isH5()) {

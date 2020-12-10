@@ -56,8 +56,8 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
 
 //坑！！ ios只能识别yyyy/MM/dd hh:mm:ss
 export function transToDate(value) {
-  if (isEmpty(value)) {
-    return null
+  if (_.isDate(value) || isEmpty(value)) {
+    return value
   }
   let temp = value
   if (_.isString(value)) {
@@ -79,7 +79,11 @@ export function transToDate(value) {
   return ifDateType ? dateValue : null
 }
 
-function dateFormat(time, fmt) {
+function dateFormat(dateTime, fmt) {
+  let time = transToDate(dateTime)
+  if (!_.isDate(time)) {
+    return dateTime
+  }
   const values = {
     'M+': time.getMonth() + 1, //月份
     'd+': time.getDate(), //日
