@@ -4,7 +4,7 @@ import { Text, View } from '@tarojs/components'
 
 import StatusFlag from '@/components/elements/ele-card/status-flag'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
-import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode } from '@/nice-router/nice-router-util'
 import CardInfoTable from '@/components/ele-table/card-info-table'
 import ListofUtil from '../../listof-util'
 import './styles.scss'
@@ -44,11 +44,7 @@ function AutoTemplate(props) {
         {infoList.length > 0 && <CardInfoTable data={infoList} />}
       </View>
 
-      {isNotEmpty(actionList) && (
-        <View className='auto-action-bar'>
-          <EleActionList mode={['right', 'small']} list={actionList} />
-        </View>
-      )}
+      <EleActionList mode={['right', 'small']} className='auto-action-bar' list={actionList} />
     </View>
   )
 }
