@@ -5,6 +5,7 @@ import Config from '@/utils/config'
 import { View } from '@tarojs/components'
 import { Current, useShareAppMessage } from '@tarojs/taro'
 import classNames from 'classnames'
+import _ from 'lodash'
 
 import EleFlex from './ele-flex'
 import './styles.scss'
