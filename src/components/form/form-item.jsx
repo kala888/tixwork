@@ -26,6 +26,7 @@ function FormItem(props) {
     tips,
     layout,
     onChange,
+    hiddenTail,
   } = props
 
   const handleChange = (v, e) => {
@@ -63,6 +64,7 @@ function FormItem(props) {
       inline={inline}
       disabled={disabled}
       onClear={onClear}
+      hiddenTail={hiddenTail}
     >
       <View className={rootClass}>
         <ItemLabel tips={tips} layout={layout} required={isRequired}>

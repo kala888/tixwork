@@ -1,8 +1,7 @@
 import React from 'react'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
 import { Text, View } from '@tarojs/components'
-import classNames from 'classnames'
 import _ from 'lodash'
 import { AtActionSheet } from 'taro-ui'
 import './styles.scss'
@@ -10,7 +9,7 @@ import './styles.scss'
 function ItemLabel(props) {
   const { visible, show, close } = useVisible(false)
   const { required, tips, layout } = props
-  const rootClass = classNames('item-label', { [`item-label-${layout}`]: true })
+  const rootClass = getExtMode({ [layout]: true }).classNames(layout)
 
   const tipsTitle = _.isObject(tips) ? tips.title : ''
   const tipsContent = _.isObject(tips) ? tips.content : tips

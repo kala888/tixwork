@@ -48,7 +48,7 @@ $error-color: $orange-color;
   }
 }
 
-.form-item-horizontal {
+.form-item--horizontal {
   display: flex;
   align-items: center;
 }
@@ -89,11 +89,11 @@ $error-color: $orange-color;
   }
 }
 
-.item-wrapper-bordered {
+.item-wrapper--bordered {
   @include hairline-bottom($under-line-color);
 }
 
-.item-wrapper-vertical {
+.item-wrapper--vertical {
   padding-bottom: 0;
 }
 
@@ -132,7 +132,7 @@ $error-color: $orange-color;
   }
 }
 
-.item-label-vertical {
+.item-label--vertical {
   width: 100%;
   padding-bottom: 12px;
 }
