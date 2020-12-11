@@ -25,12 +25,11 @@ function GenericPageBase(props) {
 
   useShareAppMessage((res) => {
     if (res.from === 'button') {
-      const { target: { dataset = {} } = {} } = res
-      const { share = {} } = dataset
-      const { shareTitle, linkToUrl, imageUrl } = share
+      const shareAction = _.get(res, 'target.dataset.extraData', {})
+      const { title, linkToUrl, imageUrl } = shareAction
       const encodePath = encodeURIComponent(linkToUrl || pageLinkToUrl)
       return {
-        title: shareTitle || pageTitle,
+        title: title || pageTitle,
         path: `/pages/generic-page?q=${encodePath}`,
         imageUrl,
       }
