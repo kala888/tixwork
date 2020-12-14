@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import NavigationService from '@/nice-router/navigation-service'
 import { LoadingType } from '@/nice-router/nice-router-util'
 import Config from '@/utils/config'
+import _ from 'lodash'
 import Taro, { usePullDownRefresh } from '@tarojs/taro'
 
 // boolean类型的控制属性，show，close，toggle
@@ -59,7 +60,7 @@ export function usePullDown(action, statInPage = false) {
 }
 
 // 倒计时
-export function useCountdown(maxCount = 60) {
+export function useCountdown(maxCount = 60, onEndOfCounting) {
   const [second, setSecond] = useState(maxCount)
   const [counting, setCounting] = useState(false)
   const interval = useRef()
@@ -79,13 +80,16 @@ export function useCountdown(maxCount = 60) {
         if (result === 0) {
           clearInterval(interval.current)
           setCounting(false)
+          if (_.isFunction(onEndOfCounting)) {
+            onEndOfCounting()
+          }
           return maxCount
         }
         return result
       })
     }, 1000)
     return () => clearInterval(interval.current)
-  }, [counting, maxCount])
+  }, [counting, maxCount, onEndOfCounting])
   return {
     second,
     counting,

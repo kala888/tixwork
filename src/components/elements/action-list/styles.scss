@@ -99,6 +99,13 @@
   width: 100%;
 }
 
+.ele-action-list--radius0 {
+  .at-button {
+    border-radius: 0;
+    padding: 0;
+  }
+}
+
 .ele-action-list--footer-bar {
   @extend %flex-row;
   align-items: center;
