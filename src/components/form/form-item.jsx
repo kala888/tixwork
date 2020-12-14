@@ -1,7 +1,6 @@
 import React from 'react'
-import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
+import { getExtMode, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
-import classNames from 'classnames'
 import _ from 'lodash'
 
 import FormUtil from '../form/form-util'
@@ -48,10 +47,10 @@ function FormItem(props) {
   // const layout = field.layout || this.props.layout || ''
   const hasError = isNotEmpty(errors)
 
-  const rootClass = classNames('form-item', {
-    'form-item-error': hasError,
-    [`form-item-${layout}`]: true,
-  })
+  const rootClass = getExtMode({
+    error: hasError,
+    [layout]: true,
+  }).classNames('form-item')
 
   const isRequired = showRequiredIcon()
 

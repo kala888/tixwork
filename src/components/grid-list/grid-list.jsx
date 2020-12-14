@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Text, View } from '@tarojs/components'
 import _ from 'lodash'
 import classNames from 'classnames'
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import { getGroupListByColumn } from '@/utils/index'
 import NavigationService from '@/nice-router/navigation-service'
 import './grid-list.scss'
@@ -39,11 +39,11 @@ export default function GridList(props) {
             {list.map((item, idx) => {
               const { disabled, imageUrl, title = '', brief = '', icon = '' } = item
 
-              const bodyClass = classNames('grid-list-item', {
-                'grid-list-item--last': idx === columnNum - 1,
-                'grid-list-item--active': !disabled,
-                'grid-list-item--disabled': disabled,
-              })
+              const bodyClass = getExtMode({
+                last: idx === columnNum - 1,
+                active: !disabled,
+                disabled: disabled,
+              }).classNames('grid-list-item')
 
               const itemStyle = { flex: `0 0 ${100 / columnNum}%` }
               const actionTitle = `${title}${isNotEmpty(brief) ? '\n' + brief : ''}`

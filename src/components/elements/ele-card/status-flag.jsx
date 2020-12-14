@@ -1,19 +1,19 @@
 import React from 'react'
 import { Text, View } from '@tarojs/components'
-import classNames from 'classnames'
+import { getExtMode } from '@/nice-router/nice-router-util'
 import './status-flag.scss'
 
 function StatusFlag({ title = '', mode = 'normal' }) {
   const length = title.length
 
-  const txtClass = classNames('status-flag-txt', {
-    'status-flag-txt_large': length < 3,
-    'status-flag-txt_normal': length === 3,
-    'status-flag-txt_small': title.length === 4,
-    'status-flag-txt_tiny': title.length > 4,
-  })
+  const txtClass = getExtMode({
+    txt_large: length < 3,
+    txt_normal: length === 3,
+    txt_small: title.length === 4,
+    txt_tiny: title.length > 4,
+  }).classNames('status-flag-txt')
 
-  const rootClass = classNames('status-flag', `status-flag_${mode}`)
+  const rootClass = getExtMode(mode).classNames('status-flag')
 
   return (
     length > 0 && (

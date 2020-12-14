@@ -9,7 +9,7 @@ import './styles.scss'
 function ItemLabel(props) {
   const { visible, show, close } = useVisible(false)
   const { required, tips, layout } = props
-  const rootClass = getExtMode({ [layout]: true }).classNames(layout)
+  const rootClass = getExtMode({ [layout]: true }).classNames('item-label')
 
   const tipsTitle = _.isObject(tips) ? tips.title : ''
   const tipsContent = _.isObject(tips) ? tips.content : tips

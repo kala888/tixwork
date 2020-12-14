@@ -1,5 +1,5 @@
 import React from 'react'
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import { Block, View } from '@tarojs/components'
 import classNames from 'classnames'
 import _ from 'lodash'
@@ -24,8 +24,14 @@ export default function CardInfoTable(props) {
   const rootClass = classNames('card-info-table', className)
   const maxLabelLengthLeft = getMaxLabelLength(rowList, 0)
   const maxLabelLengthRight = getMaxLabelLength(rowList, 1)
-  const leftItemLabelClass = classNames('card-info-table-label', `card-info-table-label--width${maxLabelLengthLeft}`)
-  const rightItemLabelClass = classNames('card-info-table-label', `card-info-table-label--width${maxLabelLengthRight}`)
+  const leftItemLabelClass = getExtMode({
+    [`width${maxLabelLengthLeft}`]: true,
+  }).classNames('card-info-table-label')
+
+  const rightItemLabelClass = getExtMode({
+    [`width${maxLabelLengthRight}`]: true,
+  }).classNames('card-info-table-label')
+
   return (
     <View className={rootClass}>
       <EleTable bordered={false}>

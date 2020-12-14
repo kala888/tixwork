@@ -10,7 +10,7 @@ import './styles.scss'
 function ServerImage(props) {
   const { mode = 'aspectFill', className, src, uri, size, customStyle = {} } = props
   const rootCls = classNames('server-image', className, {
-    'server-image-h5': isH5() && (mode === 'widthFix' || mode === 'heightFix'),
+    'server-image--h5': isH5() && (mode === 'widthFix' || mode === 'heightFix'),
   })
   const remotePath = ImageTools.getServerImagUrl(src || uri, size)
 

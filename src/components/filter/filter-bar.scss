@@ -22,7 +22,7 @@
     }
   }
 
-  &-item.selected {
+  &-item--selected {
     position: relative;
     font-weight: 800;
     color: #333;
@@ -47,7 +47,7 @@
   }
 }
 
-.filter-tabs.bordered {
+.filter-tabs--bordered {
   padding-bottom: 20px;
   @include hairline-bottom($under-line-color);
 }
@@ -97,7 +97,7 @@
         }
       }
 
-      &-item.selected &-item-txt {
+      &-item--selected &-item-txt {
         color: $red-color;
         border: 1px solid $red-color;
       }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { isEmpty, noop } from '@/nice-router/nice-router-util'
+import { getExtMode, isEmpty, noop } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
@@ -55,16 +55,15 @@ function FilterBar(props) {
 
   const handleConfirm = () => {}
 
-  const tabsClass = classNames('filter-tabs', { bordered })
+  const tabsClass = getExtMode({ bordered }).classNames('filter-tabs')
 
   return isEmpty(items) ? null : (
     <View>
       <View className={tabsClass}>
         {activeTabs.map((tab) => {
-          const itemClass = classNames('filter-tabs-item', {
-            'pin-first': pinFirst,
+          const itemClass = getExtMode({
             selected: selected.id === tab.id,
-          })
+          }).classNames('filter-tabs-item', { 'pin-first': pinFirst })
           return (
             <View key={tab.key} className={itemClass} onClick={onTabClick.bind(this, tab)}>
               {tab.name}

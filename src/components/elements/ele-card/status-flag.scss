@@ -28,24 +28,24 @@
     font-weight: 600;
   }
 
-  &-txt_large {
+  &--txt_large {
     font-size: 32px;
   }
 
-  &-txt_normal {
+  &--txt_normal {
     font-size: 30px;
   }
 
-  &-txt_small {
+  &--txt_small {
     font-size: 26px;
   }
 
-  &-txt_tiny {
+  &--txt_tiny {
     font-size: 22px;
   }
 }
 
-.status-flag_small {
+.status-flag--small {
   .status-flag-bg {
     border-width: 90px !important;
   }
