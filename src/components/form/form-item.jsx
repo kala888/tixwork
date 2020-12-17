@@ -71,9 +71,7 @@ function FormItem(props) {
         {label || title}
       </FormItemLabel>
 
-      <View className='form-item-field'>
-        <FlexField {...props} onChange={handleChange} />
-      </View>
+      <View className='form-item-field'>{props.children || <FlexField {...props} onChange={handleChange} />}</View>
 
       {layout === 'horizontal' && theTail}
 
@@ -83,6 +81,9 @@ function FormItem(props) {
 }
 
 FormItem.defaultProps = {
+  name: '',
+  clear: false,
+  value: null,
   errors: [],
   onChange: noop,
   layout: 'horizontal', //'vertical','float'
@@ -90,6 +91,8 @@ FormItem.defaultProps = {
   rules: [],
   showRequired: true,
   inline: true,
+  bordered: true,
+  disabled: false,
 }
 
 export default FormItem
