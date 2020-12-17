@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
 import { formatTime, transToDate } from '@/utils/index'
-import { Picker, View } from '@tarojs/components'
+import { Picker } from '@tarojs/components'
 import { AtActionSheet, AtCalendar } from 'taro-ui'
 import ActionField from './action-field'
+
+import './ele-calendar.scss'
 
 /**
  * 有时候弹不出来，记得在外层包一个View
@@ -71,18 +73,22 @@ function EleCalendar(props) {
 
   const { displayValue, displayDate, displayTime } = getDateTime()
 
-  // action-sheet 里面的那个view不要干掉，不然日历有问题
+  // action-sheet 里面的那个view不要干掉，不然日历有问题????? TODO
   return (
-    <ActionField onClick={show} disabled={disabled} value={displayValue} placeholder={placeholder}>
+    <ActionField
+      onClick={show}
+      disabled={disabled}
+      value={displayValue}
+      placeholder={placeholder}
+      className='ele-calendar'
+    >
       <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText='取消'>
-        <View>
-          {mode === 'date' && <AtCalendar isVertical currentDate={displayDate} onSelectDate={handleDateSelected} />}
-          {mode === 'datetime' && (
-            <Picker mode='time' value={displayTime} onChange={handleTimeChange} onCancel={close}>
-              {showCalendar && <AtCalendar isVertical currentDate={date} onSelectDate={handleDateSelected} />}
-            </Picker>
-          )}
-        </View>
+        {mode === 'date' && <AtCalendar isVertical currentDate={displayDate} onSelectDate={handleDateSelected} />}
+        {mode === 'datetime' && (
+          <Picker mode='time' value={displayTime} onChange={handleTimeChange} onCancel={close}>
+            {showCalendar && <AtCalendar isVertical currentDate={date} onSelectDate={handleDateSelected} />}
+          </Picker>
+        )}
       </AtActionSheet>
     </ActionField>
   )

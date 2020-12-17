@@ -44,7 +44,6 @@ import Listof from '@/listof/listof'
 import MockService from '@/nice-router/request/mock-service'
 import { View } from '@tarojs/components'
 
-import './styles.scss'
 
 const newsList = [
   {

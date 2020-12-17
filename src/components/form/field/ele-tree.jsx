@@ -43,11 +43,7 @@ function EleTree(props) {
   return (
     <ActionField onClick={show} disabled={disabled} value={displayValue} placeholder={placeholder}>
       <View className='action-field-picker' onClick={toggle}>
-        {visible ? (
-          <View className='iconfont iconfont-down action-field-picker-icon' />
-        ) : (
-          <View className='iconfont iconfont-right action-field-picker-icon' />
-        )}
+        <View className={`iconfont iconfont-${visible ? 'down' : 'right'}`} />
       </View>
 
       <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText='确认'>

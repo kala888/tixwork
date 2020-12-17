@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import { View } from '@tarojs/components'
 import { isH5 } from '@/utils/index'
-import { getExtMode, isEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode, isEmpty, mergeMode } from '@/nice-router/nice-router-util'
 import EleButton from '../ele-button'
 import './styles.scss'
 
@@ -27,9 +27,11 @@ function EleActionList({ list = [], mode = ['right'], className }) {
           level = LEVEL_LIST[idx % LEVEL_LIST.length]
         }
 
+        const theMode = mergeMode(it.mode, level)
+
         return (
           <View key={key} className='ele-action-list-item'>
-            <EleButton {...it} mode={level} customStyle={{ ...actionStyle }} className='ele-action-list-btn' />
+            <EleButton {...it} mode={theMode} customStyle={{ ...actionStyle }} className='ele-action-list-btn' />
           </View>
         )
       })}

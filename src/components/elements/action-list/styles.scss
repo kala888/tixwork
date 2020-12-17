@@ -5,7 +5,6 @@
   width: 100%;
   justify-content: space-around;
   align-items: center;
-  z-index: 99999;
 
   &-item {
     @extend %flex-center;
@@ -97,6 +96,7 @@
   right: 0;
   padding-bottom: 40px;
   width: 100%;
+  z-index: 99999;
 }
 
 .ele-action-list--radius0 {
@@ -107,6 +107,7 @@
 }
 
 .ele-action-list--footer-bar {
+  z-index: 99999;
   @extend %flex-row;
   align-items: center;
   background-color: $white;

@@ -10,13 +10,14 @@
 
 .action-field {
   @extend %flex-row;
+  width: 100%;
+  align-items: center;
 
   &-content {
     @extend %flex-1;
-  }
-
-  &-content.disabled {
-    opacity: 0.3;
+    &--disabled {
+      opacity: 0.3;
+    }
   }
 
   .at-action-sheet__item {
@@ -26,6 +27,13 @@
   .at-radio::before {
     border-top: none;
     margin-top: 0;
+  }
+}
+.action-field-picker {
+  margin-right: -20px;
+
+  .iconfont {
+    color: $text-color-lighter;
   }
 }
 
@@ -71,14 +79,6 @@
   .at-checkbox {
     max-height: 80vh;
     overflow: scroll;
-  }
-}
-
-.action-field-picker {
-  margin-right: -20px;
-
-  &-icon {
-    color: $text-color-lighter;
   }
 }
 

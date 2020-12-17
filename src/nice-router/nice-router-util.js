@@ -118,6 +118,10 @@ export function parseJSON(json) {
   return json
 }
 
+export function mergeMode() {
+  return _.flatten(arguments).filter(isNotEmpty)
+}
+
 /**
  *
  * mode

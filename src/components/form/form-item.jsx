@@ -2,14 +2,18 @@ import React from 'react'
 import { getExtMode, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import _ from 'lodash'
+import { useVisible } from '@/service/use-service'
+import { AtToast } from 'taro-ui'
 
+import FormItemTail from './form-item-tail'
 import FormUtil from '../form/form-util'
 import FlexField from './field/flex-field'
-import ItemLabel from './item-label'
-import ItemWrapper from './item-wrapper'
-import './styles.scss'
+import FormItemLabel from './form-item-label'
+import './form-item.scss'
 
 function FormItem(props) {
+  const { visible, show: showError, close: closeError } = useVisible(false)
+
   const {
     name,
     required,
@@ -22,10 +26,9 @@ function FormItem(props) {
     inline,
     disabled,
     label,
+    title,
     tips,
-    layout,
     onChange,
-    hiddenTail,
   } = props
 
   const handleChange = (v, e) => {
@@ -44,36 +47,38 @@ function FormItem(props) {
     }
     return false
   }
-  // const layout = field.layout || this.props.layout || ''
+
   const hasError = isNotEmpty(errors)
+
+  const layout = inline ? 'horizontal' : 'vertical'
 
   const rootClass = getExtMode({
     error: hasError,
     [layout]: true,
+    bordered,
   }).classNames('form-item')
 
   const isRequired = showRequiredIcon()
 
+  // 没有disabled，没有错误，有值，显示清理btn，就展示
+  const showClear = !disabled && !hasError && clear && isNotEmpty(value)
+
+  const theTail = <FormItemTail showClear={showClear} hasError={hasError} onClear={onClear} onShowError={showError} />
+
   return (
-    <ItemWrapper
-      clear={clear}
-      value={value}
-      errors={errors}
-      bordered={bordered}
-      inline={inline}
-      disabled={disabled}
-      onClear={onClear}
-      hiddenTail={hiddenTail}
-    >
-      <View className={rootClass}>
-        <ItemLabel tips={tips} layout={layout} required={isRequired}>
-          {label}
-        </ItemLabel>
-        <View className='form-item-flex-field'>
-          {props.children ? props.children : <FlexField {...props} onChange={handleChange} />}
-        </View>
+    <View className={rootClass}>
+      <FormItemLabel tips={tips} layout={layout} required={isRequired} tail={layout === 'vertical' ? theTail : null}>
+        {label || title}
+      </FormItemLabel>
+
+      <View className='form-item-field'>
+        <FlexField {...props} onChange={handleChange} />
       </View>
-    </ItemWrapper>
+
+      {layout === 'horizontal' && theTail}
+
+      {hasError && <AtToast text={errors[0]} onClose={closeError} duration={3000} isOpened={visible} />}
+    </View>
   )
 }
 
@@ -84,6 +89,7 @@ FormItem.defaultProps = {
   required: null,
   rules: [],
   showRequired: true,
+  inline: true,
 }
 
 export default FormItem

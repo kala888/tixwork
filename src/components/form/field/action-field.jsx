@@ -1,11 +1,11 @@
 import React from 'react'
-import { isEmpty, noop } from '@/nice-router/nice-router-util'
+import { getExtMode, isEmpty, noop } from '@/nice-router/nice-router-util'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import './styles.scss'
 
 function ActionField(props) {
-  const { value, placeholder, disabled, onClick } = props
+  const { value, placeholder, disabled, onClick, className } = props
   const handleClick = () => {
     if (!disabled) {
       onClick()
@@ -13,10 +13,14 @@ function ActionField(props) {
   }
 
   const showAsPlaceholder = isEmpty(value)
-  const contentClass = classNames('action-field-content', { placeholder: showAsPlaceholder, disabled })
+  const contentClass = getExtMode({
+    placeholder: showAsPlaceholder,
+    disabled,
+  }).classNames('action-field-content')
   const content = showAsPlaceholder ? placeholder : value
+  const rootClass = classNames('action-field', className)
   return (
-    <View className='action-field'>
+    <View className={rootClass}>
       <Text className={contentClass} onClick={handleClick}>
         {content}
       </Text>

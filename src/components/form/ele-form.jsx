@@ -7,7 +7,7 @@ import EleActionList from '@/components/elements/action-list/ele-action-list'
 import SectionBar from '../section-bar/section-bar'
 import FormItem from './form-item'
 import FormUtil from './form-util'
-import './styles.scss'
+import './ele-form.scss'
 import validator from './validator'
 
 // 参考 https://github.com/react-component/form
@@ -42,7 +42,7 @@ const getGroups = (groupList, fieldList) => {
 function EleForm(props, ref) {
   const {
     defaultValues = {},
-    onFieldChange = null,
+    onFieldChange,
     fieldList = [],
     groupList = [],
     layout,

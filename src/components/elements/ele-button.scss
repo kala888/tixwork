@@ -1,7 +1,7 @@
 @import 'src/styles/theme';
 
 .ele-button {
-  .ele-button-content {
+  &-content {
     @extend %flex-center;
     flex-direction: row;
 
@@ -61,11 +61,12 @@
 
   &--secondary {
     .at-button {
-      background-color: $white;
-    }
+      background-color: $white !important;
+      border: 1px solid $primary-color !important;
 
-    .at-button__text {
-      color: $primary-color;
+      .at-button__text {
+        color: $primary-color !important;
+      }
     }
   }
 }
