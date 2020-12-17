@@ -2,7 +2,7 @@ import React from 'react'
 import { getExtMode, isEmpty, noop } from '@/nice-router/nice-router-util'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
-import './styles.scss'
+import './action-field.scss'
 
 function ActionField(props) {
   const { value, placeholder, disabled, onClick, className } = props
@@ -17,6 +17,7 @@ function ActionField(props) {
     placeholder: showAsPlaceholder,
     disabled,
   }).classNames('action-field-content')
+
   const content = showAsPlaceholder ? placeholder : value
   const rootClass = classNames('action-field', className)
   return (

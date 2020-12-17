@@ -1,0 +1,28 @@
+@import 'src/styles/theme';
+
+.action-field {
+  @extend %flex-row;
+  width: 100%;
+  align-items: center;
+
+  &-content {
+    @extend %flex-1;
+
+    &--disabled {
+      opacity: 0.3;
+    }
+
+    &--placeholder {
+      color: $placeholder;
+    }
+  }
+
+  .at-action-sheet__item {
+    padding-top: 0;
+  }
+
+  .at-radio::before {
+    border-top: none;
+    margin-top: 0;
+  }
+}
