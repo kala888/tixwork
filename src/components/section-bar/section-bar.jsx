@@ -16,7 +16,7 @@ import './styles.scss'
  * @constructor
  */
 function SectionBar(props) {
-  const { title, brief, className, customStyle = {}, icon = 'right', mode = [] } = props
+  const { title, brief, className, customStyle = {}, icon = 'right', mode = [], disabled = false } = props
 
   const { foldable, expand = 'true', onClick } = props
   const { visible, toggle, show, close } = useVisible(true)
@@ -34,6 +34,9 @@ function SectionBar(props) {
   const hasMore = ActionUtil.isActionLike(props)
 
   const handleClick = () => {
+    if (disabled) {
+      return
+    }
     if (onClick) {
       onClick()
       return
@@ -45,7 +48,12 @@ function SectionBar(props) {
     NavigationService.view(props)
   }
 
-  const rootClass = getExtMode(mode, foldable ? 'foldable' : '').classNames('section-bar', className)
+  const rootClass = getExtMode(mode,
+    {
+      foldable,
+      disabled,
+    },
+  ).classNames('section-bar', className)
 
   const contentClass = classNames('section-bar-body', {
     hidden: !hasMore && !visible,

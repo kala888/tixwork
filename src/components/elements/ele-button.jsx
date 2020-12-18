@@ -156,7 +156,7 @@ function EleButton(props) {
         {props.children || (
           <View className='ele-button-content'>
             <ActionIcon icon={icon} imageUrl={imageUrl} />
-            <Text className='ele-button-text'>{title}</Text>
+            <View className='ele-button-text'>{title}</View>
           </View>
         )}
       </AtButton>
