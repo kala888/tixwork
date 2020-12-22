@@ -41,11 +41,13 @@ function EleTree(props) {
 
   const { currentValue, displayValue } = getValue()
   return (
-    <ActionField onClick={show} disabled={disabled} value={displayValue} placeholder={placeholder}>
-      <View className='action-field-picker' onClick={toggle}>
-        <View className={`iconfont iconfont-${visible ? 'down' : 'right'}`} />
-      </View>
-
+    <ActionField
+      onClick={show}
+      disabled={disabled}
+      value={displayValue}
+      placeholder={placeholder}
+      toggleStatus={visible}
+    >
       <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText='确认'>
         <View style='height:80vh'>
           <Tree {...root} onChange={onChange} selected={currentValue} />

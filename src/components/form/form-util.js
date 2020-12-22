@@ -9,7 +9,6 @@ function getValue(fileValue) {
 }
 
 const VerticalField = {
-  layout: 'vertical',
   inline: false,
 }
 const BaseField = {

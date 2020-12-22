@@ -46,6 +46,12 @@ const createDefault = (namespace) => ({
     clear() {
       return {}
     },
+    saveSomeThing(state, { payload }) {
+      return {
+        ...state,
+        ...payload,
+      }
+    },
     save(state, { payload }) {
       const { statInPage, arrayMerge, refresh, ...resp } = payload
       const doMerge = refresh ? false : statInPage

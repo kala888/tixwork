@@ -5,6 +5,10 @@
   width: 100%;
   align-items: center;
 
+  &-picker-icon {
+    color: #ccc;
+  }
+
   &-content {
     @extend %flex-1;
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { isEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
-import { View } from '@tarojs/components'
 import _ from 'lodash'
 import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtRadio } from 'taro-ui'
 
@@ -49,15 +48,13 @@ function ElePopupSelect(props) {
   const cancelText = multiple ? '确定' : '取消'
 
   return (
-    <ActionField onClick={show} disabled={disabled} value={displayValue} placeholder={placeholder}>
-      <View className='action-field-picker' onClick={toggle}>
-        {visible ? (
-          <View className='iconfont iconfont-down action-field-picker-icon' />
-        ) : (
-          <View className='iconfont iconfont-right action-field-picker-icon' />
-        )}
-      </View>
-
+    <ActionField
+      onClick={show}
+      disabled={disabled}
+      value={displayValue}
+      placeholder={placeholder}
+      toggleStatus={visible}
+    >
       <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText={cancelText}>
         <AtActionSheetItem className='popup-view'>
           {multiple ? (

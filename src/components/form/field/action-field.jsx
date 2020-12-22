@@ -1,30 +1,40 @@
 import React from 'react'
 import { getExtMode, isEmpty, noop } from '@/nice-router/nice-router-util'
-import { Text, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
+import _ from 'lodash'
 import classNames from 'classnames'
 import './action-field.scss'
 
 function ActionField(props) {
-  const { value, placeholder, disabled, onClick, className } = props
+  const { value, placeholder, disabled, onClick, className, toggleStatus } = props
+
   const handleClick = () => {
     if (!disabled) {
       onClick()
     }
   }
 
-  const showAsPlaceholder = isEmpty(value)
+  const theValue = value?.title || value
+
   const contentClass = getExtMode({
-    placeholder: showAsPlaceholder,
+    placeholder: isEmpty(theValue),
     disabled,
   }).classNames('action-field-content')
 
-  const content = showAsPlaceholder ? placeholder : value
   const rootClass = classNames('action-field', className)
   return (
     <View className={rootClass}>
-      <Text className={contentClass} onClick={handleClick}>
-        {content}
-      </Text>
+      <View className={contentClass} onClick={handleClick}>
+        {theValue || placeholder}
+      </View>
+
+      {!_.isNil(toggleStatus) && (
+        <View
+          className={`iconfont iconfont-${toggleStatus ? 'down' : 'right'} action-field-picker-icon`}
+          onClick={handleClick}
+        />
+      )}
+
       {!disabled && props.children}
     </View>
   )

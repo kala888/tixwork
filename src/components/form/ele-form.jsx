@@ -45,7 +45,6 @@ function EleForm(props, ref) {
     onFieldChange,
     fieldList = [],
     groupList = [],
-    layout,
     showRequired = true,
     bordered = true,
   } = props
@@ -160,7 +159,6 @@ function EleForm(props, ref) {
                   <FormItem
                     key={key}
                     bordered={bordered}
-                    layout={layout}
                     {...field}
                     showRequired={showRequired}
                     value={value}

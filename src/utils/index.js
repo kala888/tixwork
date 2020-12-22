@@ -139,6 +139,10 @@ export function isDevEnv() {
 }
 
 export function removeOrPush(list = [], item, withClone = false) {
+  if (!_.isArray(list)) {
+    console.warn('the list shou be array')
+    return []
+  }
   const result = withClone ? _.clone(list) : list
   const target = _.remove(result, item)
   if (target.length === 0) {

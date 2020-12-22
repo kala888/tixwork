@@ -48,12 +48,10 @@ function SectionBar(props) {
     NavigationService.view(props)
   }
 
-  const rootClass = getExtMode(mode,
-    {
-      foldable,
-      disabled,
-    },
-  ).classNames('section-bar', className)
+  const rootClass = getExtMode(mode, {
+    foldable,
+    disabled,
+  }).classNames('section-bar', className)
 
   const contentClass = classNames('section-bar-body', {
     hidden: !hasMore && !visible,
@@ -83,6 +81,10 @@ function SectionBar(props) {
       {props.children && <View className={contentClass}>{props.children}</View>}
     </View>
   )
+}
+
+export function BorderedSectionBar(props) {
+  return <SectionBar foldable mode={['bordered', 'highlight']} {...props} />
 }
 
 export default SectionBar

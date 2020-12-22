@@ -13,7 +13,7 @@ import './form/field/styles.scss'
 function MobileVerifyCode(props) {
   const { second, counting, startCount } = useCountdown(props.maxCount)
 
-  const { onChange, name, value, placeholder, className } = props
+  const { onChange, name, value, placeholder, className, onSendCodeSuccess = noop } = props
 
   const sendCode = async () => {
     if (counting) {
@@ -24,7 +24,7 @@ function MobileVerifyCode(props) {
       return
     }
     startCount()
-    NavigationService.ajax(Config.api.VerifyCode, { mobile: value })
+    NavigationService.ajax(Config.api.VerifyCode, { mobile: value }, { onSuccess: (resp) => onSendCodeSuccess(resp) })
   }
 
   const tips = counting ? `${second}秒...` : '验证码'

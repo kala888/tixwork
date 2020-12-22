@@ -4,7 +4,7 @@ import { Block, View } from '@tarojs/components'
 import React, { useEffect, useState } from 'react'
 import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation-service'
-
+import _ from 'lodash'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
 import Taro from '@tarojs/taro'
@@ -29,6 +29,15 @@ export default function VCodeLoginForm() {
       mobile,
       verifyCode: code,
     })
+  }
+
+  const handleSendCodeSuccess = (resp) => {
+    const txt = _.get(resp, 'toast.text', '')
+    const theCode = _.get(txt.match(/验证码(\d{6})/), 1)
+    console.log('text', txt, theCode)
+    if (isNotEmpty(theCode)) {
+      setCode(theCode)
+    }
   }
 
   const handleBindingWechatMobile = (e) => {
@@ -66,6 +75,7 @@ export default function VCodeLoginForm() {
           placeholder='请输入手机号'
           value={mobile}
           onChange={setMobile}
+          onSendCodeSuccess={handleSendCodeSuccess}
         />
         <EleInput
           name='vcode'

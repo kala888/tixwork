@@ -47,8 +47,18 @@
   }
 
   // section-bar  里面的form-item
-  .item-wrapper {
+  .form-item {
     padding-left: 20px;
+  }
+}
+
+.section-bar--disabled {
+  .section-bar-header {
+    opacity: 0.7;
+  }
+
+  .section-bar-title {
+    color: $text-color-lighter;
   }
 }
 
@@ -65,6 +75,7 @@
 .section-bar--highlight {
   .section-bar-header {
     background-color: #ddd;
+
     .iconfont {
       color: $black;
     }

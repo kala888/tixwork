@@ -34,6 +34,11 @@ const isActionLike = (action) => {
   if (_.isFunction(_.get(action, 'onClick'))) {
     return true
   }
+
+  if (_.isFunction(_.get(action, 'onChange'))) {
+    return true
+  }
+
   return isNotEmpty(getActionUri(action))
 }
 

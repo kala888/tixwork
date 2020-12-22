@@ -7,9 +7,11 @@ $error-color: $orange-color;
   min-width: 200px;
   max-width: 240px;
   padding-right: 24px;
+  overflow: hidden;
 
   &-title {
     position: relative;
+    text-overflow: ellipsis;
   }
 
   &-required {

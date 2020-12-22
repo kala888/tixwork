@@ -10,20 +10,16 @@ TestData.initial()
 const EMPTY_PARAMETER_TOKEN = '+'
 const BackendService = {}
 
-const replaceUrlPlaceholder = (pUri, params) => {
-  let lastParams = params
-  let uri = pUri
-  if (isNotEmpty(params) || _.trim(pUri)) {
-    lastParams = _.cloneDeep(params)
-    _.keys(params).forEach((key) => {
-      const tmp = `:${key}`
-      if (tmp && uri.indexOf(tmp) > -1) {
-        uri = uri.replace(tmp, params[key] || EMPTY_PARAMETER_TOKEN)
-        _.unset(lastParams, key)
-      }
-    })
-  }
-  return { uri, lastParams }
+const replaceUrlPlaceholder = (uri = '', params) => {
+  let theParams = _.cloneDeep(params)
+  let theUri = _.trim(uri)
+  theUri = theUri.replace(/:[^:/ ]+/g, (token) => {
+    const key = _.trim(token, ':')
+    const value = _.get(params, key, EMPTY_PARAMETER_TOKEN)
+    _.unset(theParams, key)
+    return value
+  })
+  return { uri: theUri, params: theParams }
 }
 
 function removeEmptyValues(params = {}) {
@@ -48,7 +44,7 @@ BackendService.send = async (action = {}) => {
   } = action
 
   // 将url中的替代变量替换掉
-  const { uri: actionUri, lastParams } = replaceUrlPlaceholder(uri, params)
+  const { uri: actionUri, params: lastParams } = replaceUrlPlaceholder(uri, params)
   // 移除undefined，null的数据，不然daas接受处理有点小问题
   let data = removeEmptyValues(lastParams)
   if (asForm) {

@@ -3,11 +3,11 @@ import React from 'react'
 import FlexInfoItem from '@/components/info-list/flex-info-item'
 import SectionBar from '@/components/section-bar/section-bar'
 
-import './flex-info-list.scss'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import { View } from '@tarojs/components'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 
+import './flex-info-list.scss'
 /**
  * title  section 名字(optional)
  * onClick section 点击事件(optional)

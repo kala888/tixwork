@@ -9,19 +9,23 @@ import './styles.scss'
 
 function EleImagePicker(props) {
   const { value = [], onChange, maxLength, disabled, brief } = props
-  let defaultImages = []
-  if (!isEmpty(value)) {
-    const sourceFile = Array.isArray(value) ? value : [{ imageUrl: value }]
-    defaultImages = sourceFile.filter((it) => it.imageUrl).map((it) => ({ url: it.imageUrl }))
-  }
 
-  const [files, setFiles] = useState(defaultImages)
+  const [files, setFiles] = useState([])
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    const images = files.map((it) => ({ imageUrl: it.url }))
+    let sourceFile = []
+    if (!isEmpty(value)) {
+      sourceFile = Array.isArray(value) ? value : [{ imageUrl: value }]
+    }
+    const defaultImages = sourceFile.filter((it) => it.imageUrl).map((it) => ({ url: it.imageUrl }))
+    setFiles(defaultImages)
+  }, [value])
+
+  const handleChange = (theFiles = []) => {
+    const images = theFiles.map((it) => ({ imageUrl: it.url }))
     onChange(images)
-  }, [files]) //deps千万不要加onChange
+  }
 
   const uploadNewFiles = (currentFiles) => {
     const todoList = currentFiles.filter((it) => {
@@ -36,7 +40,7 @@ function EleImagePicker(props) {
       const { remoteFile, sourceFile } = result
 
       setFiles((preState) => {
-        return preState.map((it) => {
+        const result = preState.map((it) => {
           if (it.url === sourceFile) {
             return {
               url: remoteFile,
@@ -44,6 +48,8 @@ function EleImagePicker(props) {
           }
           return it
         })
+        handleChange(result)
+        return result
       })
     }
 
@@ -71,6 +77,7 @@ function EleImagePicker(props) {
 
     if (operationType === 'remove') {
       setFiles(changedFiles)
+      handleChange(changedFiles)
       return
     }
 

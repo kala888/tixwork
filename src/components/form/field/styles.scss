@@ -13,8 +13,15 @@
   width: 100%;
   align-items: center;
 
+  &-toggle-icon {
+    .iconfont {
+      color: $text-color-lighter;
+    }
+  }
+
   &-content {
     @extend %flex-1;
+
     &--disabled {
       opacity: 0.3;
     }
@@ -27,13 +34,6 @@
   .at-radio::before {
     border-top: none;
     margin-top: 0;
-  }
-}
-.action-field-picker {
-  margin-right: -20px;
-
-  .iconfont {
-    color: $text-color-lighter;
   }
 }
 
@@ -126,8 +126,21 @@
   .at-checkbox__option-wrap {
     padding-right: 0;
   }
+}
 
-  .item-wrapper-tail {
-    display: none;
+.ele-radio {
+  &-body {
+    @extend %flex-row;
+    justify-content: space-between;
+  }
+
+  &--vertical {
+    .ele-radio-body {
+      @extend %flex-column;
+
+      .radio-list__label {
+        margin: 8px 0;
+      }
+    }
   }
 }

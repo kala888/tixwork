@@ -23,6 +23,9 @@ import './styles.scss'
 
 export default function FlexField(props) {
   const { type } = props
+  if (props.children) {
+    return props.children
+  }
 
   // if (type === 'image') {
   //   console.log('.....picker-flexfield', this.props.label, this.props.value)
@@ -53,11 +56,11 @@ export default function FlexField(props) {
   //通过candidateValues来控制 单选，页面上有的单选Radio
   if (type === 'single-select') return <ElePopupSelect {...props} multiple={false} />
 
+  //max=1来处理单图，max=n处理多图
+  if (type === 'image') return <EleImagePicker {...props} maxLength={props.max} />
+
   //通过candidateValues来控制 多选，页面上有的多选Checkbox
   if (type === 'multi-select') return <ElePopupSelect {...props} multiple />
-
-  //max=1来处理单图，max=n处理多图
-  if (type === 'image') return <EleImagePicker {...props} />
 
   if (type === 'textarea' || type === 'long-text') return <AtTextarea {...props} />
 
