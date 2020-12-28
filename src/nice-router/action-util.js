@@ -38,7 +38,6 @@ const isActionLike = (action) => {
   if (_.isFunction(_.get(action, 'onChange'))) {
     return true
   }
-
   return isNotEmpty(getActionUri(action))
 }
 
@@ -58,11 +57,13 @@ const getConfirmContent = (action = {}) => {
 }
 
 const isSubmitAction = (action = '') => {
-  const theCode = (action?.code || action || '').toLowerCase()
+  const tmp = _.isString(action) ? action : _.get(action, 'code', '')
+  const theCode = _.toLower(tmp)
+
   if (isEmpty(theCode)) {
     return false
   }
-  if (theCode.startsWith('submit')) {
+  if (theCode.startsWith('submit') || theCode.startsWith('update') || theCode.startsWith('save')) {
     return true
   }
 
@@ -71,12 +72,18 @@ const isSubmitAction = (action = '') => {
   return isNotEmpty(result)
 }
 
+const toSubmitActionList = (actionList = [], onSubmit) => {
+  const theActionList = _.isArray(actionList) ? actionList : [actionList]
+  return theActionList.map((it) => ({ ...it, onClick: isSubmitAction(it) ? onSubmit.bind(null, it) : null }))
+}
+
 const ActionUtil = {
   getActionUri,
   isActionLike,
   trans2Action,
   getConfirmContent,
   isSubmitAction,
+  toSubmitActionList,
 }
 
 export default ActionUtil

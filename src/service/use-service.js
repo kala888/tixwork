@@ -31,12 +31,13 @@ export function useLoading(initial = false) {
 }
 
 // 这只page的title
-export function usePageTitle(title = Config.name) {
+export function usePageTitle(value) {
   useEffect(() => {
+    let theTitle = _.isString(value) ? value : value?.pageTitle || value?.title
     Taro.setNavigationBarTitle({
-      title: title,
+      title: theTitle || Config.name,
     })
-  }, [title])
+  }, [value])
 }
 
 // 下拉刷新, 应该传入ActionLike

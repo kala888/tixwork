@@ -175,6 +175,7 @@ const NavigationService = {
     const action = ActionUtil.trans2Action(routerParams)
     const { linkToUrl, cache = false, params, statInPage } = action
     if (isEmpty(linkToUrl)) {
+      console.log('THE ACTION linkToUrl IS EMPTY')
       return
     }
 

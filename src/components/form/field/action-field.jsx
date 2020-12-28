@@ -14,7 +14,7 @@ function ActionField(props) {
     }
   }
 
-  const theValue = value?.title || value
+  const theValue = _.isObject(value) ? value?.title : value
 
   const contentClass = getExtMode({
     placeholder: isEmpty(theValue),

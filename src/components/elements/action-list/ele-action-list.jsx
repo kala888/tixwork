@@ -1,12 +1,18 @@
 import React from 'react'
-import _ from 'lodash'
 import { View } from '@tarojs/components'
 import { isH5 } from '@/utils/index'
-import { getExtMode, isEmpty, mergeMode } from '@/nice-router/nice-router-util'
+import _ from 'lodash'
+import { getExtMode, isEmpty } from '@/nice-router/nice-router-util'
 import EleButton from '../ele-button'
 import './styles.scss'
 
-const LEVEL_LIST = ['primary', 'warn', 'danger', 'normal', 'info', 'secondary']
+const MixClass = [
+  ['mix0'],
+  ['mix0', 'mix1'],
+  ['mix0', 'mix05', 'mix1'],
+  ['mix0', 'mix033', 'mix066', 'mix1'],
+  ['mix0', 'mix025', 'mix05', 'mix075', 'mix1'],
+]
 
 function EleActionList({ list = [], mode = ['right'], className }) {
   if (isEmpty(list)) {
@@ -21,17 +27,11 @@ function EleActionList({ list = [], mode = ['right'], className }) {
       {list.map((it, idx) => {
         const { customStyle: actionStyle = {} } = it
         const key = `btn_${it.id}_${it.code}_${it.title}`
-        let level = null
-
-        if (_.includes(mode, 'colorful')) {
-          level = LEVEL_LIST[idx % LEVEL_LIST.length]
-        }
-
-        const theMode = mergeMode(it.mode, level)
-
+        const mixColorClass = _.get(MixClass, `${list.length - 1}.${idx}`)
+        const itemClass = getExtMode(mixColorClass).classNames('ele-action-list-item')
         return (
-          <View key={key} className='ele-action-list-item'>
-            <EleButton {...it} mode={theMode} customStyle={{ ...actionStyle }} className='ele-action-list-btn' />
+          <View key={key} className={itemClass}>
+            <EleButton {...it} customStyle={{ ...actionStyle }} className='ele-action-list-btn' />
           </View>
         )
       })}

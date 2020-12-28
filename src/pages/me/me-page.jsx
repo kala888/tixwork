@@ -48,8 +48,7 @@ function MePage() {
   const root = useSelector((state) => state.me)
   const [footerActionList, setFooterActionList] = useState([])
 
-  const { pageTitle } = root
-  usePageTitle(pageTitle)
+  usePageTitle(root)
   usePullDown(Config.api.FooterMe)
   useEffect(() => {
     NavigationService.ajax(Config.api.FooterMe)

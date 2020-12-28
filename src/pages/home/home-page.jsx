@@ -12,8 +12,7 @@ import './home.scss'
 
 function HomePage(props) {
   const root = useSelector((state) => state.home)
-  const { pageTitle } = root
-  usePageTitle(pageTitle)
+  usePageTitle(root)
   useAjaxPullDown(props)
 
   useEffect(() => {

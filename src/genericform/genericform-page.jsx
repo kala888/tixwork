@@ -9,17 +9,15 @@ import { View } from '@tarojs/components'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import { useSelector } from 'react-redux'
 import _ from 'lodash'
-import FormSteps from './form-steps'
 import ActionUtil from '@/nice-router/action-util'
+import FormSteps from './form-steps'
 import './styles.scss'
 
 function GenericformPage() {
   const formRef = useRef(null)
   const root = useSelector((state) => state.genericform)
-  const { pageTitle } = root
   const { id, groupList = [], fieldList = [], stepList = [], actionList = [], content } = root
-
-  usePageTitle(pageTitle)
+  usePageTitle(root)
   usePullDown(root)
 
   const handleActionClick = async (action = {}) => {

@@ -9,12 +9,20 @@ const SAFETY_TIME = 1800 //预留半个小时过期（单位秒）
 
 async function saveTokenAsync(token) {
   StorageTools.set(TOKEN, token)
-  const authInfo = jwtDecode(token)
-  StorageTools.set(AUTH_INFO, authInfo)
-
   log('saveToken', token)
-  log('saveAuthInfo', authInfo)
-  return authInfo
+
+  if (token) {
+    window.Date = Date
+    window.setTimeout = setTimeout
+    console.log('xxxx date:', window.Date)
+    console.log('xxxx setTimeout', window.setTimeout)
+    console.log('xxxx token', token)
+    const authInfo = jwtDecode(token)
+    StorageTools.set(AUTH_INFO, authInfo)
+    log('saveAuthInfo', authInfo)
+    return authInfo
+  }
+  return {}
 }
 
 async function isValidateToken() {
