@@ -3,10 +3,9 @@ import _ from 'lodash'
 import NavigationService from '@/nice-router/navigation-service'
 import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import Taro from '@tarojs/taro'
-import { AtButton } from 'taro-ui'
 
 import ActionIcon from '@/components/action-icon/action-icon'
-import { Text, View } from '@tarojs/components'
+import { Button, View } from '@tarojs/components'
 
 import './ele-button.scss'
 
@@ -16,34 +15,19 @@ import './ele-button.scss'
 // {
 //   type: 'button',
 //   linkToUrl: '',
-//   btnType: 'share',
+//   type: 'share',
 //   uiType:'primary'
 // }
 function EleButton(props) {
-  const {
-    linkToUrl,
-    openType,
-    onClick,
-    extraData,
-    title,
-    btnType,
-    size,
-    customStyle,
-    className,
-    full,
-    circle,
-    onGetUserInfo,
-    icon,
-    imageUrl,
-    mode,
-  } = props
+  const { linkToUrl, extraData, title, size, type, icon, imageUrl, mode } = props
+  const { openType, onClick, className, onGetUserInfo } = props
 
   let wxOpenType = openType
-  if (!openType && (btnType === 'share' || btnType === 'getPhoneNumber' || btnType === 'getUserInfo')) {
-    wxOpenType = btnType
+  if (!openType && (type === 'share' || type === 'getPhoneNumber' || type === 'getUserInfo')) {
+    wxOpenType = type
   }
 
-  const formType = btnType === 'submit' || btnType === 'reset' ? btnType : null
+  const formType = type === 'submit' || type === 'reset' ? type : null
 
   const handleMakeCall = () => {
     const { phoneNumber } = extraData
@@ -108,70 +92,63 @@ function EleButton(props) {
       return
     }
 
-    if (btnType === 'submit' || btnType === 'share' || btnType === 'getUserInfo') {
+    if (type === 'submit' || type === 'share' || type === 'getUserInfo') {
       return
     }
 
-    if (btnType === 'makeCall') {
+    if (type === 'makeCall') {
       handleMakeCall()
       return
     }
 
-    if (btnType === 'open-document') {
+    if (type === 'open-document') {
       await handlePreview()
       return
     }
-    if (btnType === 'download') {
+    if (type === 'download') {
       await handleDownload()
       return
     }
-    if (btnType === 'copy') {
+    if (type === 'copy') {
       handleCopy()
       return
     }
-    if (btnType === 'scanner') {
+    if (type === 'scanner') {
       await handleScan()
       return
     }
 
-    console.log('btnType is', btnType, 'just do view action')
+    console.log('type is', type, 'just do view action')
     NavigationService.view(props)
   }, 300)
 
   const rootClass = getExtMode(mode).classNames('ele-button', className)
 
   return (
-    <View className={rootClass}>
-      <AtButton
-        circle={circle}
-        className={rootClass}
-        openType={wxOpenType}
-        formType={formType}
-        size={size}
-        full={full}
-        customStyle={customStyle}
-        onClick={handleClick}
-        onGetUserInfo={onGetUserInfo}
-      >
-        {props.children || (
-          <View className='ele-button-content'>
-            <ActionIcon icon={icon} imageUrl={imageUrl} />
-            <View className='ele-button-text'>{title}</View>
-          </View>
-        )}
-      </AtButton>
-    </View>
+    <Button
+      className={rootClass}
+      openType={wxOpenType}
+      formType={formType}
+      size={size}
+      onClick={handleClick}
+      onGetUserInfo={onGetUserInfo}
+      data-extraData={extraData}
+    >
+      {props.children || (
+        <View className='ele-button-body'>
+          <ActionIcon icon={icon} imageUrl={imageUrl} />
+          <View className='ele-button-text'>{title}</View>
+        </View>
+      )}
+    </Button>
   )
 }
 
 EleButton.defaultProps = {
   title: '',
-  btnType: '',
+  type: '',
   size: null,
-  customStyle: {},
-  full: false,
   className: null,
-  circle: null,
   onGetUserInfo: null,
   extraData: {},
   icon: null,

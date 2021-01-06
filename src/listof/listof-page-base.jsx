@@ -17,6 +17,7 @@ function ListofPageBase(props) {
 
   const {
     tabs,
+    tabsType,
     list,
     listMeta,
     displayMode,
@@ -34,8 +35,9 @@ function ListofPageBase(props) {
   return (
     <View className='listof-page'>
       {isNotEmpty(header) && <FlexLineItem item={header} {...header} />}
-      {isNotEmpty(searchAction) && <FlexHeader type='search' {...searchAction} />}
-      {isNotEmpty(content) && <FlexHeader displayMode='rich-text' item={{ content }} />}
+      {isNotEmpty(searchAction) && <FlexHeader {...searchAction} type='search' />}
+      {isNotEmpty(content) && <FlexHeader item={{ content }} displayMode='rich-text' />}
+
       {isNotEmpty(tabs) && <FlexHeader type='tabs' tabs={tabs} tabsType={tabsType} />}
 
       <Listof

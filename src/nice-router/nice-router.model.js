@@ -80,7 +80,7 @@ export default {
         if (cached) {
           GlobalToast.show({
             text: '操作太快了，换句话试试',
-            duration: 3000,
+            duration: 2000,
           })
           return
         }

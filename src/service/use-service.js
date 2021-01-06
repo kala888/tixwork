@@ -4,6 +4,7 @@ import { LoadingType } from '@/nice-router/nice-router-util'
 import Config from '@/utils/config'
 import _ from 'lodash'
 import Taro, { usePullDownRefresh } from '@tarojs/taro'
+import ActionUtil from '@/nice-router/action-util'
 
 // boolean类型的控制属性，show，close，toggle
 export function useVisible(initial = false) {
@@ -48,6 +49,11 @@ export function useAjaxPullDown(action) {
 export function usePullDown(action, statInPage = false) {
   console.log('pulldown refresh', action)
   usePullDownRefresh(() => {
+    if (!ActionUtil.isActionLike(action)) {
+      Taro.stopPullDownRefresh()
+      return
+    }
+
     NavigationService.view(
       action,
       {},

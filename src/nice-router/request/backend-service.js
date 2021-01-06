@@ -1,11 +1,12 @@
 import _ from 'lodash'
-import { isNotEmpty, LoadingType, log } from '../nice-router-util'
+import { isEmpty, isNotEmpty, LoadingType, log } from '../nice-router-util'
 import StorageTools from '../storage-tools'
 import HttpRequest from './http-request'
 import MockService from './mock-service'
 import TestData from '../../pages/mock-data/test-data'
 
 TestData.initial()
+
 
 const EMPTY_PARAMETER_TOKEN = '+'
 const BackendService = {}
@@ -15,7 +16,10 @@ const replaceUrlPlaceholder = (uri = '', params) => {
   let theUri = _.trim(uri)
   theUri = theUri.replace(/:[^:/ ]+/g, (token) => {
     const key = _.trim(token, ':')
-    const value = _.get(params, key, EMPTY_PARAMETER_TOKEN)
+    let value = _.get(params, key)
+    if (isEmpty(value)) {
+      value = EMPTY_PARAMETER_TOKEN
+    }
     _.unset(theParams, key)
     return value
   })
@@ -56,7 +60,7 @@ BackendService.send = async (action = {}) => {
     params: data,
     headers,
   }
-  // mock 数据处理
+  // // mock 数据处理
   const mockData = MockService.getMockResp(actionUri)
   if (mockData) {
     return mockData

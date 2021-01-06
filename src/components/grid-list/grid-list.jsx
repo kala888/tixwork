@@ -57,7 +57,7 @@ export default function GridList(props) {
                 >
                   <View className='grid-list-item_icon'>
                     {isNotEmpty(imageUrl) ? (
-                      <Image className='grid-list-item_icon-image' src={imageUrl} mode='scaleToFill' />
+                      <Image className='grid-list-item_icon-image' src={imageUrl} mode='heightFix' />
                     ) : (
                       <Text className={`iconfont iconfont-${icon}`} />
                     )}

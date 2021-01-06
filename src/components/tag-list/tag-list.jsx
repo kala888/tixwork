@@ -6,7 +6,7 @@ import './tag-list.scss'
 
 export default function TagList(props) {
   const [tagList, setTagList] = useState([])
-  const { onItemClick = noop, onChange = noop, multiple = false, mode = 'rect', disabled } = props
+  const { onItemClick = noop, onChange = noop, multiple = false, mode = 'rect' } = props
 
   useEffect(() => {
     // console.log('set---tag-list-items', items, tagList, tagList !== items)
@@ -35,20 +35,18 @@ export default function TagList(props) {
   }
 
   return (
-    <View>
-      <View className='tag-list'>
-        {tagList.map((it, idx) => {
-          const tag = _.isString(it) ? { title: it, id: idx } : it
-          const { title, disabled, hidden, selected } = tag
-          const itemClass = getExtMode({ hidden, disabled, selected }, mode).classNames('tag-list-item')
-          const key = `tag-item-${tag.id}-${title}-${it.value}`
-          return (
-            <View key={key} className={itemClass} onClick={handleClick.bind(null, it)}>
-              <Text>{title}</Text>
-            </View>
-          )
-        })}
-      </View>
+    <View className='tag-list'>
+      {tagList.map((it, idx) => {
+        const tag = _.isString(it) ? { title: it, id: idx } : it
+        const { title, disabled, hidden, selected } = tag
+        const itemClass = getExtMode({ hidden, disabled, selected }, mode).classNames('tag-list-item')
+        const key = `tag-item-${tag.id}-${title}-${it.value}`
+        return (
+          <View key={key} className={itemClass} onClick={handleClick.bind(null, it)}>
+            {title}
+          </View>
+        )
+      })}
     </View>
   )
 }

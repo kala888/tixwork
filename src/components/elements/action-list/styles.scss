@@ -12,11 +12,7 @@
     width: 100%;
   }
 
-  .ele-action-list-btn {
-    width: 100%;
-  }
-
-  .at-button {
+  .ele-button {
     @extend %flex-center;
     flex-direction: row;
     border: none;
@@ -28,17 +24,11 @@
   }
 }
 
-.ele-action-list--h5 {
-  .at-button {
-    height: 1.3rem !important;
-  }
-}
-
 .ele-action-list--small {
-  .at-button {
+  .ele-button {
     height: 1.8rem;
     font-size: 26px;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
   }
 
   .iconfont {
@@ -75,21 +65,18 @@
   }
 
   .ele-button {
-    width: 100%;
-  }
-
-  .at-button {
     border-radius: 10px;
     color: $white;
   }
 
-  .at-button--secondary {
+  .ele-button--secondary {
     border: $border-default;
     color: $primary-color;
   }
 }
 
 .ele-action-list--footer {
+  @extend .ele-action-list--full;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -100,7 +87,7 @@
 }
 
 .ele-action-list--radius0 {
-  .at-button {
+  .ele-button {
     border-radius: 0;
     padding: 0;
   }
@@ -128,7 +115,7 @@
     }
   }
 
-  .at-button {
+  .ele-button {
     height: 100px;
     border-radius: 0;
     padding: 0;
@@ -137,37 +124,41 @@
 
 .ele-action-list--colorful {
   $colorful-start-color: $primary-color;
-  $colorful-end-color: lighten($primary-color, 20%);
+  $colorful-end-color: $orange-color;
 
-  .at-button__text {
-    color: $white;
-  }
-
-  .ele-action-list-item--mix0 .at-button {
+  .ele-action-list-item--mix0 .ele-button {
     background-color: $colorful-start-color;
   }
 
-  .ele-action-list-item--mix025 .at-button {
+  .ele-action-list-item--mix025 .ele-button {
     background-color: mix($colorful-end-color, $colorful-start-color, 25%);
   }
 
-  .ele-action-list-item--mix033 .at-button {
+  .ele-action-list-item--mix033 .ele-button {
     background-color: mix($colorful-end-color, $colorful-start-color, 33%);
   }
 
-  .ele-action-list-item--mix05 .at-button {
+  .ele-action-list-item--mix05 .ele-button {
     background-color: mix($colorful-end-color, $colorful-start-color, 50%);
   }
 
-  .ele-action-list-item--mix066 .at-button {
+  .ele-action-list-item--mix066 .ele-button {
     background-color: mix($colorful-end-color, $colorful-start-color, 66%);
   }
 
-  .ele-action-list-item--mix075 .at-button {
+  .ele-action-list-item--mix075 .ele-button {
     background-color: mix($colorful-end-color, $colorful-start-color, 75%);
   }
 
-  .ele-action-list-item--mix1 .at-button {
+  .ele-action-list-item--mix1 .ele-button {
     background-color: $colorful-end-color;
+  }
+}
+
+.collect-share-popup {
+  .at-input__input {
+    border: $border-default;
+    margin-top: 10px;
+    padding: 20px;
   }
 }

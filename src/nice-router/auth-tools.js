@@ -1,4 +1,4 @@
-import jwtDecode from 'jwt-decode'
+import jwtDecode from './jwt-decode'
 import { isNotEmpty, log } from './nice-router-util'
 import StorageTools from './storage-tools'
 

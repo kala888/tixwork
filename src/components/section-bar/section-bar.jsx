@@ -58,7 +58,6 @@ function SectionBar(props) {
   })
 
   let actionAction = hasMore ? icon : ''
-  let actionTitle = brief || (hasMore ? 'MORE' : '')
 
   if (foldable) {
     actionAction = visible ? 'up' : 'down'
@@ -74,7 +73,7 @@ function SectionBar(props) {
           </Block>
         )}
         <View className='section-bar-action clickable'>
-          {isNotEmpty(actionTitle) && <Text className='section-bar-action-title'>{actionTitle}</Text>}
+          {isNotEmpty(brief) && <Text className='section-bar-action-title'>{brief}</Text>}
           {isNotEmpty(actionAction) && <Text className={`iconfont iconfont-${actionAction}`} />}
         </View>
       </View>

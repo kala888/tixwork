@@ -1,6 +1,6 @@
 @import 'src/styles/theme';
 
-$card-border: 2px solid #f3f5f7;
+$card-border: 1px solid #ddd;
 
 .card-container {
   @extend %flex-center;
@@ -77,8 +77,8 @@ $card-border: 2px solid #f3f5f7;
 
     &-brief {
       padding: 10px 10px 0;
-      color: $text-color-lighter;
-      font-size: 26px;
+      color: $text-color-light;
+      font-size: 28px;
       display: -webkit-box !important;
       //min-height: 0.9rem;
       @include lamp-clamp(1);
@@ -166,10 +166,12 @@ $card-border: 2px solid #f3f5f7;
 
 .card-body--circle {
   .card-body-cover-image {
+    box-sizing: border-box;
     border-radius: 50% !important;
   }
 
   .card-body-cover-txt {
+    box-sizing: border-box;
     border-radius: 50% !important;
   }
 }
