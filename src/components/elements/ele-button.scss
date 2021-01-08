@@ -50,4 +50,10 @@
   &--radius0 {
     border-radius: 0;
   }
+
+  &--disabled {
+    border-color: $disabled-color;
+    background-color: $disabled-color;
+    color: darken($disabled-color, 40%);
+  }
 }

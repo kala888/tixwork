@@ -12,14 +12,8 @@ import './ele-button.scss'
 // form中组件封装后，button 不会触发form的handle方法问题
 // https://github.com/NervJS/taro-ui/issues/96
 
-// {
-//   type: 'button',
-//   linkToUrl: '',
-//   type: 'share',
-//   uiType:'primary'
-// }
 function EleButton(props) {
-  const { linkToUrl, extraData, title, size, type, icon, imageUrl, mode, ajax = false } = props
+  const { linkToUrl, extraData, title, size, type, icon, imageUrl, mode, ajax = false, disabled } = props
   const { openType, onClick, className, onGetUserInfo } = props
 
   let wxOpenType = openType
@@ -42,7 +36,7 @@ function EleButton(props) {
     const arg = encodeURIComponent(res.result)
     const actionPath = `${linkToUrl}${arg}/`
     console.log('I want to access ', actionPath)
-    NavigationService.view(props)
+    await NavigationService.view(props)
   }
 
   const handlePreview = async () => {
@@ -122,7 +116,7 @@ function EleButton(props) {
     NavigationService.view(props, {}, { statInPage: ajax })
   }, 300)
 
-  const rootClass = getExtMode(mode).classNames('ele-button', className)
+  const rootClass = getExtMode(mode, { disabled }).classNames('ele-button', className)
 
   const buttonSize = size === 'small' ? 'mini' : size
   return (
@@ -134,6 +128,7 @@ function EleButton(props) {
       onClick={handleClick}
       onGetUserInfo={onGetUserInfo}
       data-extraData={extraData}
+      disabled={disabled}
     >
       {props.children || (
         <View className='ele-button-body'>
