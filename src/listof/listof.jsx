@@ -1,124 +1,90 @@
 import NavigationService from '@/nice-router/navigation-service'
-import { isEmpty } from '@/nice-router/nice-router-util'
-import { Block, ScrollView, Text, View } from '@tarojs/components'
-import React, { useState } from 'react'
-import classNames from 'classnames'
-import { enrichListOfEntity, toRpx } from '../utils'
-import FooterTips from './footer-tips'
+import { getExtMode, isEmpty, LoadingType } from '@/nice-router/nice-router-util'
+import { ScrollView, Text, View } from '@tarojs/components'
+import React from 'react'
+
+import FooterTips from '@/listof/footer-tips'
+import { useLoading } from '@/service/use-service'
+import ActionUtil from '@/nice-router/action-util'
+
+import { enrichListOfEntity } from '../utils'
 import ListofUtil from './listof-util'
-import './styles.scss'
+import './listof.scss'
 import FlexLineItem from './templates/flex-line-item'
 
 function Listof(props) {
-  const {
-    list: listRefs,
-    listMeta,
-    displayMode,
-    emptyMessage,
-    isBigList,
-    height,
-    style = {},
-    dataContainer,
-    horizontal,
-    bordered,
-    containerClass,
-    onItemPress = null,
-    className,
-  } = props
+  const { loading, showLoading, hideLoading } = useLoading(false)
+  const { list, items, emptyMessage } = props
+  const theList = list || items || []
 
-  const [loading, setLoading] = useState(false)
-  const loadMore = () => {
-    console.log('on-end1')
-    if (!loading) {
-      if (listMeta.hasNextPage) {
-        setLoading(true)
-        NavigationService.dispatch('listof/fetchNext', {
-          listMeta,
-          onSuccess: () => {
-            console.log('xxxx set loading to false')
-            setLoading(false)
-          },
-        })
-      }
+  if (isEmpty(theList)) {
+    if (isEmpty(emptyMessage)) {
+      return null
     }
+    return <Text className='listof-empty-message'>{emptyMessage}</Text>
   }
 
-  const list = enrichListOfEntity({ dataContainer, targetList: listRefs })
+  const { dataContainer, listMeta = {}, displayMode, onItemPress, horizontal = false } = props
+  const { longList = false, mode, className, height } = props
+
+  const hasNextPage = ActionUtil.isActionLike(listMeta)
+  //longList=无限循环list 展示footer
+  let showFooter = longList
+  //但是，如果没有下一页，且list比较小, 就不展示footer了
+  if (!hasNextPage && theList.length < 15) {
+    showFooter = false
+  }
+
+  const loadMore = () => {
+    if (!hasNextPage) {
+      return
+    }
+
+    showLoading()
+    NavigationService.ajax(
+      listMeta,
+      {},
+      {
+        loading: LoadingType.barLoading,
+        arrayMerge: 'append',
+        onSuccess: () => {
+          hideLoading()
+        },
+      }
+    )
+  }
+
+  const flexLineItems = enrichListOfEntity({ dataContainer, targetList: theList })
 
   const itemWidth = ListofUtil.getItemWidth(displayMode)
+  const rootClass = getExtMode({ horizontal }, mode).classNames('listof-view', className)
+  const containerClass = getExtMode({ multiple: itemWidth }).classNames('listof-view-container')
 
-  const scrollViewStyle = height ? { height: toRpx(height) } : {}
-  const scrollViewClass = classNames(className, {
-    'scroll-view-horizontal': horizontal,
-  })
-
-  const listofContainerClass = classNames(
-    {
-      'listof-container': !horizontal,
-      'multiple-items': itemWidth,
-    },
-    containerClass
-  )
-
-  const itemContainerClass = classNames('listof-container-item', { horizontal })
-
-  const listofContainerItemContainerStyle = itemWidth ? { width: `${itemWidth}%` } : {}
-  const emptyMessageClass = classNames('listof-empty-message', {
-    hidden: list.length > 0 || isEmpty(emptyMessage),
-  })
   return (
-    <Block>
-      <Text className={emptyMessageClass}>{emptyMessage}</Text>
-      <ScrollView
-        scrollY={!horizontal}
-        scrollX={horizontal}
-        onScrollToLower={loadMore}
-        className={scrollViewClass}
-        style={{ ...scrollViewStyle }}
-      >
-        <View className={listofContainerClass} style={style}>
-          {list.map((item, index) => {
-            const key = `${item.id}_${item.code}_${item.title}`
-            return (
-              <View key={key} className={itemContainerClass} style={listofContainerItemContainerStyle}>
-                <FlexLineItem
-                  className='listof-container-item-wrapper'
-                  index={index}
-                  item={item}
-                  onItemPress={onItemPress}
-                  displayMode={displayMode}
-                  bordered={bordered}
-                  horizontal={horizontal}
-                />
-              </View>
-            )
-          })}
-        </View>
-        <FooterTips
-          isBigList={isBigList}
-          listMeta={listMeta}
-          loading={loading}
-          listLength={list.length}
-          loadMore={loadMore}
-        />
-      </ScrollView>
-    </Block>
-  )
-}
+    <ScrollView
+      className={rootClass}
+      scrollY={!horizontal}
+      scrollX={horizontal}
+      lowerThreshold={100}
+      onScrollToLower={loadMore}
+      style={{ height }}
+    >
+      <View className={containerClass}>
+        {flexLineItems.map((item, index) => (
+          <FlexLineItem
+            key={`${item.id}_${item.code}_${item.title}`}
+            index={index}
+            item={item}
+            onItemPress={onItemPress}
+            displayMode={displayMode}
+            horizontal={horizontal}
+          />
+        ))}
+      </View>
 
-Listof.defaultProps = {
-  dataContainer: {},
-  list: [],
-  listMeta: {},
-  displayMode: 'auto',
-  emptyMessage: '',
-  isBigList: false,
-  height: null,
-  numColumns: null,
-  horizontal: false,
-  bordered: true,
-  className: null,
-  onItemPress: null,
+      {showFooter && <FooterTips hasNextPage={hasNextPage} loading={loading} onLoadMore={loadMore} />}
+    </ScrollView>
+  )
 }
 
 export default Listof

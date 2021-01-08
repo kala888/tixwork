@@ -17,7 +17,7 @@
     flex-direction: row;
     border: none;
     font-size: 34px;
-    height: 2.6rem;
+    height: 100px;
     width: 100%;
     border-radius: 10px;
     min-width: 4rem;
@@ -28,7 +28,8 @@
   .ele-button {
     height: 1.8rem;
     font-size: 26px;
-    border-radius: 0.5rem;
+    padding: 0 16px;
+    border-radius: 0.8rem;
   }
 
   .iconfont {
@@ -153,4 +154,3 @@
     background-color: $colorful-end-color;
   }
 }
-

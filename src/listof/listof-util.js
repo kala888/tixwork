@@ -32,9 +32,8 @@ function getImageList(item = {}) {
 
 function getItemWidth(displayMode) {
   if (['product', 'v-card'].indexOf(displayMode) > -1) {
-    return 49
+    return '49%'
   }
-  return 100
 }
 
 function isSelfHoldClickTemplate(displayMode, item = {}) {

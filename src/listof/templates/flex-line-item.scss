@@ -1,10 +1,10 @@
 @import 'src/styles/theme';
 
-.line-item-wrapper {
+.flex-line-item {
   position: relative;
   width: 100%;
 
-  .item-loading {
+  .inline-loading {
     position: absolute;
     top: 0;
     right: 0;
@@ -13,14 +13,21 @@
     z-index: 9999999;
     background-color: rgba(244, 246, 248, 0.3);
   }
+
+  .flex-info-list,
+  .auto,
+  .ele-card,
+  .rich-text {
+    margin: 0 20px 20px;
+  }
 }
 
-.no-border {
+.flex-line-item---no-border {
   border: unset;
   box-shadow: unset;
 }
 
-%template {
+%flex-line-template {
   font-size: 32px;
   background-color: $white;
   @extend %flex-column;
@@ -29,17 +36,11 @@
   border-radius: 10px;
   box-shadow: 0 10px 19px 1px $shadow-color;
   color: $text-color;
-  margin-bottom: 20px;
 }
 
 .space-between-container {
   justify-content: space-between;
   flex-direction: row;
-}
-
-.card {
-  @extend %template;
-  padding: 0;
 }
 
 .rich-text {

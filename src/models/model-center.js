@@ -1,7 +1,6 @@
 // https://github.com/Meituan-Dianping/mpvue/issues/736
 import niceRouter from '@/nice-router/nice-router.model'
 import _ from 'lodash'
-import listof from '../listof/listof.model'
 import app from './app.model'
 
 import ModelTools from './model-tools'
@@ -9,7 +8,6 @@ import ModelTools from './model-tools'
 const modelListOOTB = [
   niceRouter,
   app,
-  listof,
   'home',
   'me',
   'navigationList',

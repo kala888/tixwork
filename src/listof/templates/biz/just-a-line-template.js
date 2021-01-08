@@ -1,3 +1,4 @@
+import React from 'react'
 import { formatMoney } from '@/utils/index'
 import { View } from '@tarojs/components'
 import './styles.scss'

@@ -2,19 +2,13 @@ import React, { useState } from 'react'
 import { Text, View } from '@tarojs/components'
 import { noop } from '@/nice-router/nice-router-util'
 import CardTemplate from './card-template'
-import './styles.scss'
+import './object-picker-item.scss'
 
 function ObjectPickerItem(props) {
   const [checked, setChecked] = useState(false)
   const { onItemPress = noop, item } = props
   const handleChecked = () => {
     onItemPress(item, setChecked)
-
-    // setChecked((pre) => {
-    //   const value = !pre
-    //
-    //   return value
-    // })
   }
 
   return (

@@ -22,7 +22,6 @@ function EleActionList(props) {
     return null
   }
 
-
   const rootClass = getExtMode(mode, { h5: isH5() }).classNames('ele-action-list', className)
 
   return (

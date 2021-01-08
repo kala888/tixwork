@@ -44,5 +44,10 @@
   &--secondary {
     background-color: $white;
     color: $primary-color;
+    border-color: $primary-color;
+  }
+
+  &--radius0 {
+    border-radius: 0;
   }
 }

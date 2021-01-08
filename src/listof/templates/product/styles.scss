@@ -1,19 +1,19 @@
-@import '../styles';
+@import '../flex-line-item.scss';
 
 .product {
-  @extend %template;
+  @extend %flex-line-template;
   padding: 0 0 10px 0;
   border-radius: 30px;
+  margin-bottom: 20px;
 
   &-cover {
     @extend %flex-center;
     height: 350px;
-    width: 350px;
-    max-width: 700px;
     &-image {
+      @extend %flex-center;
       height: 350px;
-      border-top-right-radius: 40px;
-      border-top-left-radius: 40px;
+      border-top-right-radius: 30px;
+      border-top-left-radius: 30px;
     }
   }
 

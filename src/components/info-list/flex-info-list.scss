@@ -1,6 +1,8 @@
 @import 'src/styles/theme';
 
 .flex-info-list {
+  background-color: $white;
+
   .info-item {
     padding: 0 10px;
   }

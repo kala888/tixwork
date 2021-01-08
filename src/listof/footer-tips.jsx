@@ -1,63 +1,38 @@
 import React from 'react'
-import { Block, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { AtActivityIndicator } from 'taro-ui'
+import _ from 'lodash'
+import { getExtMode } from '@/nice-router/nice-router-util'
 
-import './styles.scss'
+import './footer-tips.scss'
 
 function FooterTips(props) {
-  const { listMeta, loading, listLength, isBigList } = props
+  const { hasNextPage = false, loading, onLoadMore } = props
 
-  let tips = ''
-  let disabled = true
+  let tips = loading ? '正在加载中...' : '我们是有底线的'
 
-  if (loading) {
-    tips = '正在加载中...'
+  if (!loading && hasNextPage) {
+    tips = '加载更多'
   }
 
-  if (!loading && listMeta) {
-    if (listMeta.hasNextPage) {
-      tips = '加载更多'
-      disabled = false
-    }
-    if (!listMeta.hasNextPage && listLength > 10) {
-      tips = '我们是有底线的'
+  const handleLoadMore = () => {
+    if (!loading && hasNextPage && _.isFunction(onLoadMore)) {
+      onLoadMore()
     }
   }
 
-  function handleLoadMore() {
-    const { loadMore } = props
-    if (!disabled && loadMore) {
-      loadMore()
-    }
-  }
+  const rootClass = getExtMode({ loading }).classNames('listof-footer-tips')
 
   return (
-    isBigList &&
-    tips.length > 0 && (
-      <View className='listof-footer-tips' onClick={handleLoadMore}>
-        {loading ? (
-          <View className='listof-footer-tips-content'>
-            <View className='listof-footer-tips-content-loading'>
-              <AtActivityIndicator size={28} />
-            </View>
-            <View>{tips}</View>
-          </View>
-        ) : (
-          <Block>
-            <View className='listof-footer-tips-line' />
-            <View className='listof-footer-tips-content'>{tips}</View>
-            <View className='listof-footer-tips-line' />
-          </Block>
-        )}
+    <View className={rootClass} onClick={handleLoadMore}>
+      <View className='listof-footer-tips-line' />
+      <View className='listof-footer-tips-loading'>
+        <AtActivityIndicator size={28} />
       </View>
-    )
+      <View className='listof-footer-tips-txt'>{tips}</View>
+      <View className='listof-footer-tips-line' />
+    </View>
   )
 }
 
-FooterTips.defaultProps = {
-  listMeta: null,
-  loading: false,
-  listLength: 0,
-  isBigList: true,
-}
 export default FooterTips

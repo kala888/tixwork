@@ -7,7 +7,7 @@ import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import CardInfoTable from '@/components/ele-table/card-info-table'
 
-import './styles.scss'
+import './ele-card.scss'
 
 /*
  * Copyright(c) 2020 nice-router
@@ -36,44 +36,40 @@ function EleCard(props) {
     }
   }
 
-  const bodyClass = getExtMode(mode).classNames('card-body')
+  const bodyClass = getExtMode(mode).classNames('ele-card-body')
 
   const hasHeader = isNotEmpty(headerTitle) || isNotEmpty(headerBrief)
   const hasFooter = isNotEmpty(actionList) || isNotEmpty(infoList)
   return (
-    <View className='card-container'>
+    <View className='ele-card'>
       <StatusFlag title={status} mode={flagSize} />
       {hasHeader && (
-        <View className='card-header'>
-          <View className='card-header-title'>{headerTitle}</View>
-          <View className='card-header-brief'>{headerBrief}</View>
+        <View className='ele-card-header'>
+          <View className='ele-card-header-title'>{headerTitle}</View>
+          <View className='ele-card-header-brief'>{headerBrief}</View>
         </View>
       )}
 
       <View className={bodyClass}>
         {(hasImage || hasFlag) && (
-          <View className='card-body-cover' onClick={handleClick}>
+          <View className='ele-card-body-cover' onClick={handleClick}>
             {hasImage ? (
-              <ServerImage className='card-body-cover-image' src={imageUrl} />
+              <ServerImage className='ele-card-body-cover-image' src={imageUrl} />
             ) : (
-              <Text className='card-body-cover-txt'>{flag}</Text>
+              <Text className='ele-card-body-cover-txt'>{flag}</Text>
             )}
           </View>
         )}
 
-        <View className='card-body-info'>
-          <Text className='card-body-info-title'>{title}</Text>
-          <Text className='card-body-info-brief'>{brief}</Text>
+        <View className='ele-card-body-info'>
+          <Text className='ele-card-body-info-title'>{title}</Text>
+          <Text className='ele-card-body-info-brief'>{brief}</Text>
         </View>
       </View>
       {hasFooter && (
-        <View className='card-footer'>
+        <View className='ele-card-footer'>
           {isNotEmpty(infoList) && <CardInfoTable data={infoList} />}
-          {isNotEmpty(actionList) && (
-            <View className='card-footer-action-list'>
-              <EleActionList mode={['right', 'small']} list={actionList} />
-            </View>
-          )}
+          {isNotEmpty(actionList) && <EleActionList mode={['right', 'small']} list={actionList} />}
         </View>
       )}
     </View>

@@ -19,7 +19,7 @@ import './ele-button.scss'
 //   uiType:'primary'
 // }
 function EleButton(props) {
-  const { linkToUrl, extraData, title, size, type, icon, imageUrl, mode } = props
+  const { linkToUrl, extraData, title, size, type, icon, imageUrl, mode, ajax = false } = props
   const { openType, onClick, className, onGetUserInfo } = props
 
   let wxOpenType = openType
@@ -119,17 +119,18 @@ function EleButton(props) {
     }
 
     console.log('type is', type, 'just do view action')
-    NavigationService.view(props)
+    NavigationService.view(props, {}, { statInPage: ajax })
   }, 300)
 
   const rootClass = getExtMode(mode).classNames('ele-button', className)
 
+  const buttonSize = size === 'small' ? 'mini' : size
   return (
     <Button
       className={rootClass}
       openType={wxOpenType}
       formType={formType}
-      size={size}
+      size={buttonSize}
       onClick={handleClick}
       onGetUserInfo={onGetUserInfo}
       data-extraData={extraData}

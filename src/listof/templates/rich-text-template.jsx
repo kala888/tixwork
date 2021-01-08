@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from '@tarojs/components'
 import EleRichText from '@/components/elements/ele-rich-text'
-import './styles.scss'
+import './flex-line-item.scss'
 
 export default function RichTextTemplate({ item = {} }) {
   console.log('item....', item)

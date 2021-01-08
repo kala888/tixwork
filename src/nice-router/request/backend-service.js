@@ -7,7 +7,6 @@ import TestData from '../../pages/mock-data/test-data'
 
 TestData.initial()
 
-
 const EMPTY_PARAMETER_TOKEN = '+'
 const BackendService = {}
 

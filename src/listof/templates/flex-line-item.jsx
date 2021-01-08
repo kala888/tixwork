@@ -1,141 +1,111 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import _ from 'lodash'
 import ActionUtil from '@/nice-router/action-util'
 import NavigationService from '@/nice-router/navigation-service'
 import { View } from '@tarojs/components'
-import classNames from 'classnames'
 import { AtActivityIndicator } from 'taro-ui'
+
+import { getExtMode } from '@/nice-router/nice-router-util'
+import FlexInfoList from '@/components/info-list/flex-info-list'
 
 import ListofUtil from '../listof-util'
 import AutoTemplate from './auto/auto-template'
 import CardTemplate from './card/card-template'
-import Product from './product/product'
-import HotArtist from './hot-artist'
 import RichTextTemplate from './rich-text-template'
 import ObjectPickerItem from './card/object-picker-item'
-import InfoListTemplate from './info-list-template'
+import Product from './product/product'
 
-import './styles.scss'
+import './flex-line-item.scss'
 
-export default class FlexLineItem extends React.Component {
-  static defaultProps = {
-    displayMode: 'auto',
-    onItemPress: null,
-  }
+function FlexLineItem(props) {
+  const [loading, setLoading] = useState(false)
+  const timer = useRef()
 
-  state = {
-    loading: false,
-  }
+  const { id, hashCode } = props
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const { item: current } = this.props
-    const { item: next } = nextProps
+  useEffect(() => {
+    return () => clearTimeout(timer.current)
+  }, [id, hashCode])
 
-    // console.log('should item update?', current, next)
-
-    if (this.state.loading !== nextState.loading) {
-      return true
+  const startLoading = () => {
+    if (timer.current) {
+      clearTimeout(timer.current)
     }
-    if (current === next) {
-      console.log('item reRender false: current === next')
-      return false
-    }
-    if (current.id !== next.id) {
-      console.log('item reRender true: current.id !== next.id')
-      return true
-    }
-    if (current && next && (current.hashCode || next.hashCode)) {
-      console.log('item reRender  ?: next.hashCode !== current.hashCode', next.hashCode !== current.hashCode)
-      return next.hashCode !== current.hashCode
-    }
-    return true
+    setLoading(true)
+    timer.current = setTimeout(() => stopLoading(), 3000)
   }
+  const stopLoading = () => setLoading(false)
 
-  componentWillUnmount() {
-    this.timer && clearTimeout(this.timer)
-  }
-
-  startLoading = () => {
-    this.timer && clearTimeout(this.timer)
-    this.setState(
-      {
-        loading: true,
-      },
-      () => {
-        this.timer = setTimeout(() => this.stopLoading(), 3000)
-      }
-    )
-  }
-  stopLoading = () => {
-    if (this.state.loading) {
-      this.setState({ loading: false })
-    }
-  }
+  const { item = {}, bordered = true, horizontal, className, ...others } = props
+  const displayMode = _.get(item, 'displayMode', props.displayMode)
+    .toLowerCase()
+    .trim()
 
   // 使用节流，3面内的点击只算一次
-  handlePress = _.throttle((template) => {
-    const { onItemPress, item } = this.props
+  const handleClick = _.throttle(() => {
+    console.log('item....click')
+    const { onItemPress, item } = props
     if (onItemPress) {
-      // onItemPress(item)
       return
     }
 
-    if (ListofUtil.isSelfHoldClickTemplate(template, item)) {
+    if (ListofUtil.isSelfHoldClickTemplate(displayMode, item)) {
       return
     }
 
     if (ActionUtil.isActionLike(item)) {
-      this.startLoading()
-      // NavigationService.view('page://pages/test-page', item, { onSuccess: this.stopLoading })
-      NavigationService.view(item, {}, { onSuccess: this.stopLoading })
+      startLoading()
+      NavigationService.view(
+        item,
+        {},
+        {
+          ajax: item.ajax,
+          onSuccess: () => stopLoading(),
+        }
+      )
     }
   }, 3000)
 
-  render() {
-    const { item = {}, displayMode, bordered = true, shadow = true, horizontal, className, ...others } = this.props
-    const { displayMode: itemDisplayMode } = item
+  const wrapperClass = getExtMode({ 'no-border': !bordered }).classNames('flex-line-item', className, {
+    click: ActionUtil.isActionLike(item),
+  })
 
-    const template = (itemDisplayMode || displayMode).toLowerCase().trim()
-    // console.log(`line-item show with "${template}, item is`, item)
+  const itemProps = { ...others, horizontal, item }
+  const itemWidth = ListofUtil.getItemWidth(displayMode)
 
-    const wrapperClass = classNames('line-item-wrapper', className, {
-      'no-border': !bordered,
-      shadow,
-    })
-    const itemProps = { ...others, horizontal, item }
-    return (
-      <View onClick={this.handlePress.bind(this, template, item)} className={wrapperClass}>
-        {template === 'auto' && <AutoTemplate {...itemProps} />}
+  return (
+    <View onClick={handleClick} className={wrapperClass} style={{ width: itemWidth }}>
+      {displayMode === 'auto' && <AutoTemplate {...itemProps} />}
 
-        {template === 'only-title' && <AutoTemplate showImageCount={0} {...itemProps} />}
-        {template === 'single-image' && <AutoTemplate showImageCount={1} {...itemProps} />}
-        {template === 'double-image' && <AutoTemplate showImageCount={2} {...itemProps} />}
-        {template === 'three-image' && <AutoTemplate showImageCount={3} {...itemProps} />}
-        {template === 'image-on-bottom' && <AutoTemplate {...itemProps} mode='image-on-bottom' />}
-        {template === 'image-on-top' && <AutoTemplate {...itemProps} />}
+      {displayMode === 'only-title' && <AutoTemplate showImageCount={0} {...itemProps} />}
+      {displayMode === 'single-image' && <AutoTemplate showImageCount={1} {...itemProps} />}
+      {displayMode === 'double-image' && <AutoTemplate showImageCount={2} {...itemProps} />}
+      {displayMode === 'three-image' && <AutoTemplate showImageCount={3} {...itemProps} />}
+      {displayMode === 'image-on-bottom' && <AutoTemplate {...itemProps} mode='image-on-bottom' />}
+      {displayMode === 'image-on-top' && <AutoTemplate {...itemProps} />}
 
-        {template === 'card' && <CardTemplate {...itemProps} />}
-        {template === 'image-on-left' && <CardTemplate {...itemProps} />}
-        {template === 'document' && <CardTemplate {...itemProps} />}
+      {displayMode === 'card' && <CardTemplate {...itemProps} />}
+      {displayMode === 'image-on-left' && <CardTemplate {...itemProps} />}
+      {displayMode === 'document' && <CardTemplate {...itemProps} />}
 
-        {template === 'big-card' && <CardTemplate {...itemProps} mode={['horizontal', 'large']} />}
-        {template === 'h-card' && <CardTemplate {...itemProps} mode={['horizontal']} />}
-        {template === 'v-card' && <CardTemplate {...itemProps} mode={['vertical']} />}
-        {template === 'user' && <CardTemplate {...itemProps} mode={['horizontal', 'circle', 'avatar']} />}
+      {displayMode === 'big-card' && <CardTemplate {...itemProps} mode={['horizontal', 'large']} />}
+      {displayMode === 'h-card' && <CardTemplate {...itemProps} mode={['horizontal']} />}
+      {displayMode === 'v-card' && <CardTemplate {...itemProps} mode={['vertical']} />}
+      {displayMode === 'user' && <CardTemplate {...itemProps} mode={['horizontal', 'circle', 'avatar']} />}
 
-        {template === 'product' && <Product {...itemProps} />}
+      {displayMode === 'rich-text' && <RichTextTemplate {...itemProps} />}
+      {displayMode === 'object-picker' && <ObjectPickerItem {...itemProps} />}
+      {displayMode === 'info-list' && <FlexInfoList {...item} foldable />}
 
-        {template === 'hot-artist' && <HotArtist {...itemProps} />}
-        {template === 'rich-text' && <RichTextTemplate {...itemProps} />}
-        {template === 'object-picker' && <ObjectPickerItem {...itemProps} />}
-        {template === 'info-list' && <InfoListTemplate {...itemProps} />}
+      {displayMode === 'product' && <Product {...itemProps} />}
 
-        {this.state.loading && (
-          <View className='item-loading'>
-            <AtActivityIndicator size={50} mode='center' />
-          </View>
-        )}
-      </View>
-    )
-  }
+      {loading && (
+        <View className='inline-loading'>
+          <AtActivityIndicator size={50} mode='center' />
+        </View>
+      )}
+    </View>
+  )
 }
+
+export default React.memo(FlexLineItem)

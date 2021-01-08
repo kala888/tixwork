@@ -17,13 +17,14 @@
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
-    "useMultiFrameRuntime": false,
+    "useMultiFrameRuntime": true,
     "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": true,
@@ -31,7 +32,7 @@
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
-    "bundle": false
+    "useApiHostProcess": true
   },
   "compileType": "miniprogram",
   "simulatorType": "wechat",

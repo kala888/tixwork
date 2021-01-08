@@ -1,4 +1,4 @@
-@import 'src/listof/templates/styles';
+@import 'src/styles/theme';
 
 .object-picker-item {
   @extend %flex-row;
@@ -14,7 +14,7 @@
     }
   }
 
-  .card-container {
+  .ele-card {
     box-shadow: unset !important;
     border-radius: 0 !important;
   }
