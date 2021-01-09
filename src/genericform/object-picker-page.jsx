@@ -1,29 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import Listof from '@/listof/listof'
+import React, { useEffect } from 'react'
 import NavigationService from '@/nice-router/navigation-service'
-import { Text, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { useSelector } from 'react-redux'
-import { AtSearchBar } from 'taro-ui'
 import { Current } from '@tarojs/taro'
 import _ from 'lodash'
-import GlobalToast from '@/nice-router/global-toast'
-import { LoadingType, noop } from '@/nice-router/nice-router-util'
+import { LoadingType } from '@/nice-router/nice-router-util'
+import ListofPageBase from '@/listof/listof-page-base'
 import './object-picker-page.scss'
+import { AtFloatLayout } from 'taro-ui'
+import Listof from '@/listof/listof'
+import { useVisible } from '@/service/use-service'
 
 function ObjectPickerPage() {
-  const root = useSelector((state) => state.objectPicker)
-  const [keyword, setKeyword] = useState('')
-  const [selectedItems, setSelectedItems] = useState([])
-
-  const [maxSelectCount, setMaxSelectCount] = useState(1)
-
-  const { list, listMeta, emptyMessage = '没有更多数据了', dataContainer, articleList, articleListMeta } = root
-  const { searchAction } = root
-
-  useEffect(() => {
-    const msc = _.get(root, 'maxSelectCount', 1)
-    setMaxSelectCount(msc)
-  }, [root])
+  const { visible, close, show } = useVisible(false)
 
   // q如果变化了，就发送一个后台请求
   const { linkToUrl } = Current.router.params
@@ -39,75 +28,34 @@ function ObjectPickerPage() {
     }
   }, [linkToUrl])
 
-  const handleCommit = async () => {
-    await NavigationService.back(selectedItems)
-  }
+  const root = useSelector((state) => state.objectPicker)
+  const { selectedItems = [], inbound = {} } = root
+  const { list = [], maxSelectCount } = inbound
 
-  const handleItemPress = (item, setChecked = noop) => {
-    setSelectedItems((pre) => {
-      const result = _.clone(pre)
-      const target = _.remove(result, item)
-      console.log('th...target', target)
-      // 删除
-      if (target.length > 0) {
-        setChecked(false)
-        return result
-      }
+  const handleCommit = async () => await NavigationService.back(selectedItems)
 
-      // 添加 动作 超过最大数
-      if (result.length + 1 > maxSelectCount) {
-        GlobalToast.show({ text: `最多只能选择${maxSelectCount}` })
-        // setChecked(false)
-        return result
-      }
+  const actionList = [
+    { id: 'object-action-1', title: `已选 ${selectedItems.length}`, onClick: show },
+    { id: 'object-action-2', title: `确定`, onClick: handleCommit },
+  ]
 
-      // 添加
-      result.push(item)
-      setChecked(true)
-      return result
-    })
-  }
-
-  const onSearchActionClick = () => {
-    NavigationService.ajax(
-      searchAction,
-      { keyword },
-      {
-        loading: LoadingType.modal,
-      }
-    )
-  }
+  const theList = list.map((it) => ({
+    ...it,
+    checked: _.findIndex(selectedItems, { id: it.id }) > -1,
+  }))
 
   return (
     <View className='object-picker'>
-      <View className='object-picker-header'>
-        <AtSearchBar actionName='搜一下' value={keyword} onChange={setKeyword} onActionClick={onSearchActionClick} />
-      </View>
-
-      <View className='object-picker-body'>
-        <Listof
-          dataContainer={dataContainer}
-          list={list || articleList}
-          listMeta={listMeta || articleListMeta}
-          displayMode='object-picker'
-          emptyMessage={emptyMessage}
-          isBigList
-          height='90vh'
-          onItemPress={handleItemPress} //透传给item，自己处理
-        />
-      </View>
-
-      <View className='object-picker-footer'>
-        <View className='object-picker-footer-tips'>
-          <Text>
-            已选 <Text className='object-picker-footer-tips-txt'>{selectedItems.length}</Text> 人
-          </Text>
-          <Text className='object-picker-footer-tips-brief'>最多可以选择：{maxSelectCount}</Text>
-        </View>
-        <View className='object-picker-footer-btn' onClick={handleCommit}>
-          确定
-        </View>
-      </View>
+      <ListofPageBase {...inbound} list={theList} displayMode='object-picker' actionList={actionList} />
+      <AtFloatLayout
+        className='large-float-layout'
+        isOpened={visible}
+        onClose={close}
+        title={`已选择，最多可选${maxSelectCount}`}
+      >
+        <Listof list={selectedItems} displayMode='object-picker-popup' emptyMessage='还没有选择！' />
+        <View className='object-picker-popup-bottom' />
+      </AtFloatLayout>
     </View>
   )
 }

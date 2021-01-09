@@ -24,7 +24,7 @@ function Listof(props) {
     return <Text className='listof-empty-message'>{emptyMessage}</Text>
   }
 
-  const { dataContainer, listMeta = {}, displayMode, onItemPress, horizontal = false } = props
+  const { dataContainer, listMeta = {}, displayMode, onItemClick, horizontal = false } = props
   const { longList = false, mode, className, height } = props
 
   const hasNextPage = ActionUtil.isActionLike(listMeta)
@@ -75,7 +75,7 @@ function Listof(props) {
             key={`${item.id}_${item.code}_${item.title}`}
             index={index}
             item={item}
-            onItemPress={onItemPress}
+            onItemClick={onItemClick}
             displayMode={displayMode}
             horizontal={horizontal}
           />

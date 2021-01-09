@@ -13,6 +13,7 @@ import AutoTemplate from './auto/auto-template'
 import CardTemplate from './card/card-template'
 import RichTextTemplate from './rich-text-template'
 import ObjectPickerItem from './card/object-picker-item'
+import ObjectPickerPopupItem from './card/object-picker-popup-item'
 import Product from './product/product'
 
 import './flex-line-item.scss'
@@ -36,7 +37,7 @@ function FlexLineItem(props) {
   }
   const stopLoading = () => setLoading(false)
 
-  const { item = {}, bordered = true, horizontal, className, ...others } = props
+  const { item = {}, bordered = true, horizontal, className, onItemClick, ...others } = props
   const displayMode = _.get(item, 'displayMode', props.displayMode)
     .toLowerCase()
     .trim()
@@ -44,8 +45,7 @@ function FlexLineItem(props) {
   // 使用节流，3面内的点击只算一次
   const handleClick = _.throttle(() => {
     console.log('item....click')
-    const { onItemPress, item } = props
-    if (onItemPress) {
+    if (onItemClick) {
       return
     }
 
@@ -95,6 +95,7 @@ function FlexLineItem(props) {
 
       {displayMode === 'rich-text' && <RichTextTemplate {...itemProps} />}
       {displayMode === 'object-picker' && <ObjectPickerItem {...itemProps} />}
+      {displayMode === 'object-picker-popup' && <ObjectPickerPopupItem {...itemProps} />}
       {displayMode === 'info-list' && <FlexInfoList {...item} foldable />}
 
       {displayMode === 'product' && <Product {...itemProps} />}

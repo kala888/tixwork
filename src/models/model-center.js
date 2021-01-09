@@ -2,6 +2,7 @@
 import niceRouter from '@/nice-router/nice-router.model'
 import _ from 'lodash'
 import app from './app.model'
+import objectPicker from './object-picker.model'
 
 import ModelTools from './model-tools'
 
@@ -13,7 +14,7 @@ const modelListOOTB = [
   'navigationList',
   'H5',
 
-  'objectPicker',
+  objectPicker,
 
   'genericform',
   'genericpage',

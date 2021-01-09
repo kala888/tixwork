@@ -3,14 +3,18 @@ import AuthTools from '@/nice-router/auth-tools'
 import NavigationService from '@/nice-router/navigation-service'
 import Config from '@/utils/config'
 import Taro from '@tarojs/taro'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
+import ActionUtil from '@/nice-router/action-util'
 
-function wechatLogin(loginMethod, options) {
+function wechatLogin(payload = ({} = {})) {
+  const { loginMethod } = payload
   const wxObj = loginMethod === 'wechat_work_app' ? wx.qy : Taro
+
   const doLogin = () => {
     wxObj.login({
       success: async (response) => {
-        console.log('进行wx login, code is', response.code)
-        await remoteLogin({ loginMethod, code: response.code }, options)
+        console.log('进行wx login, code is', response.code, payload)
+        doRemoteLogin({ ...payload, code: response.code })
       },
     })
   }
@@ -31,24 +35,41 @@ function wechatLogin(loginMethod, options) {
   })
 }
 
-function remoteLogin(params = {}, options = {}) {
-  const navigationOptions = {}
-  if (!options.statInPage) {
-    navigationOptions.method = 'reLaunch'
-  }
-
+function doRemoteLogin(payload) {
+  const { options = {}, ...params } = payload
   NavigationService.put(Config.api.Login, params, {
-    navigationOptions,
-    ...options,
-    onSuccess: (resp, { headers }) => {
+    statInPage: true,
+    onSuccess: async (resp, { headers }) => {
       if (options.onSuccess) {
         options.onSuccess(resp)
       }
+
       const { authorization } = headers
       console.log('wx login response, headers', headers)
       if (authorization) {
         // noinspection JSIgnoredPromiseFromCall
-        AuthTools.saveTokenAsync(authorization)
+        await AuthTools.saveTokenAsync(authorization)
+      }
+
+      const { callbackUrl, loginSuccess = false } = resp
+      if (loginSuccess) {
+        let callbackAction = resp
+        if (isNotEmpty(callbackUrl)) {
+          callbackAction = { linkToUrl: callbackUrl }
+        }
+        if (!ActionUtil.isActionLike(callbackAction)) {
+          await NavigationService.back()
+          return
+        }
+
+        await NavigationService.view(
+          callbackAction,
+          {},
+          {
+            navigationOptions: { method: 'redirectTo' },
+            ...options,
+          }
+        )
       }
     },
   })
@@ -56,22 +77,20 @@ function remoteLogin(params = {}, options = {}) {
 
 export default {
   namespace: 'app',
-  state: {},
+  state: {
+    callbackUrl: '',
+    loginSuccess: false,
+  },
   reducers: {},
   effects: {
-    *login({ payload = {} }, { put }) {
-      const { statInPage, ...params } = payload
-      const options = { statInPage }
-      yield put({ type: 'logout' })
-      const { loginMethod } = params
-
+    *login({ payload = {} }) {
+      const { loginMethod } = payload
       if (loginMethod === 'wechat_work_app' || loginMethod === 'wechat_app') {
-        wechatLogin(loginMethod, options)
+        wechatLogin(payload)
         return
       }
-
       console.log('登录。。。非微信登录')
-      remoteLogin(params, options)
+      doRemoteLogin(payload)
     },
 
     *logout() {

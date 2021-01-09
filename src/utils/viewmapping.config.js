@@ -35,7 +35,7 @@ const ViewmappingConfig = {
 
   'com.terapico.appview.ObjectPickerPage': {
     pageName: '/genericform/object-picker-page',
-    stateAction: 'objectPicker/save',
+    stateAction: 'objectPicker/saveInbound',
   },
 
   'com.terapico.appview.MePage': {
@@ -44,7 +44,6 @@ const ViewmappingConfig = {
   },
   LoginForm: {
     pageName: '/pages/login/login-page',
-    stateAction: 'app/logout',
   },
   'com.terapico.appview.HomePage': {
     pageName: '/pages/home/home-page',

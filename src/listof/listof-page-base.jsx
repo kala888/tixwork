@@ -16,7 +16,7 @@ import FlexLineItem from './templates/flex-line-item'
 import FlexHeader from './flex-header'
 
 function ListofPageBase(props) {
-  const [height, setHeight] = useState('0vh')
+  const [height, setHeight] = useState()
 
   const { pageTitle = Config.name } = props
   usePageTitle(pageTitle)
@@ -28,7 +28,7 @@ function ListofPageBase(props) {
       .fields({ size: true }, (res) => {
         const deviceHeight = getDeviceHeight()
         const headerHeight = _.isNumber(res.height) ? res.height : 0
-        const footerHeight = isNotEmpty(props.actionList) ? 50 : 0
+        const footerHeight = isNotEmpty(props.actionList) || _.isFunction(renderFooter) ? 50 : 0
         const theHeight = deviceHeight - headerHeight - footerHeight
         console.log(
           'calc the height for listof without header and footer device',
@@ -45,7 +45,7 @@ function ListofPageBase(props) {
       })
       .exec()
   }
-  useReady(() => Taro.nextTick(initialHeight))
+  useReady(() => Taro.nextTick(() => setTimeout(initialHeight, 100)))
 
   const {
     tabs,
@@ -60,6 +60,8 @@ function ListofPageBase(props) {
     searchAction = {},
     header,
     renderHeader,
+    renderFooter,
+    onItemClick,
   } = props
 
   const theHeader = (
@@ -70,6 +72,7 @@ function ListofPageBase(props) {
       {isNotEmpty(tabs) && <FlexHeader type='tabs' tabs={tabs} tabsType={tabsType} />}
     </Block>
   )
+  const theFooter = <EleActionList mode={['footer-bar', 'colorful']} list={actionList} />
 
   const rootClass = classNames('listof-page', classNames)
 
@@ -84,8 +87,9 @@ function ListofPageBase(props) {
         emptyMessage={emptyMessage}
         height={height}
         longList
+        onItemClick={onItemClick}
       />
-      <EleActionList id='listof-footer' mode={['footer-bar', 'colorful']} list={actionList} />
+      <View id='listof-footer'> {renderFooter ? renderFooter() : theFooter}</View>
     </View>
   )
 }

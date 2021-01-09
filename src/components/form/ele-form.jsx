@@ -118,7 +118,7 @@ function EleForm(props, ref) {
   const _validateField = (name, value) => {
     const fields = getFields(groupList, fieldList)
     const field = fields.find((it) => it.name === name)
-    if (!field) {
+    if (!field || field.type === 'display-field') {
       return Promise.resolve()
     }
     return validator(field, value).then((errors) => {

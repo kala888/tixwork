@@ -15,7 +15,7 @@ function Product(props) {
   return (
     <View className='product'>
       <View className='product-cover'>
-        <ServerImage className='product-cover-image' src={src} mode='heightFix' />
+        <ServerImage className='product-cover-image' src={src} mode='aspectFill' />
       </View>
 
       <View className='product-info'>

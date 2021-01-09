@@ -1,20 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Text, View } from '@tarojs/components'
-import { noop } from '@/nice-router/nice-router-util'
 import CardTemplate from './card-template'
 import './object-picker-item.scss'
+import NavigationService from '@/nice-router/navigation-service'
 
 function ObjectPickerItem(props) {
-  const [checked, setChecked] = useState(false)
-  const { onItemPress = noop, item } = props
-  const handleChecked = () => {
-    onItemPress(item, setChecked)
-  }
-
+  const { item } = props
+  const handleClick = () => NavigationService.dispatch('objectPicker/selectItem', item)
   return (
-    <View className='object-picker-item' onClick={handleChecked}>
+    <View className='object-picker-item' onClick={handleClick}>
       <View className='object-picker-item-option'>
-        <Text className={`iconfont iconfont-radio${checked ? '-checked' : ''}`} />
+        <Text className={`iconfont iconfont-radio${item.checked ? '-checked' : ''}`} />
       </View>
       <CardTemplate {...props} />
     </View>

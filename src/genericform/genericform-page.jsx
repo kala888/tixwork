@@ -38,10 +38,9 @@ function GenericformPage() {
     console.log('11111', formRef)
     const result = await formRef.current.validateFields()
     const { errors, values } = result
-    console.log('resultresultresult', errors, isEmpty(errors))
     if (isEmpty(errors)) {
       console.log('form-values', values)
-      NavigationService.post(action, values, {
+      await NavigationService.post(action, values, {
         asForm: true,
         navigationOptions: { method: 'redirectTo' },
       })
