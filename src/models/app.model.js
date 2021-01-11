@@ -68,6 +68,12 @@ function doRemoteLogin(payload) {
           {
             navigationOptions: { method: 'redirectTo' },
             ...options,
+            onSuccess: (data, resp) => {
+              console.log('after login redirect resp', data)
+              if (resp.success) {
+                NavigationService.back()
+              }
+            },
           }
         )
       }

@@ -85,7 +85,7 @@ $text-weight: 400, 500, 600, 700, 800;
 }
 
 .transparent-btn {
-  background-color: transparent;
+  background-color: transparent !important;
   border: none;
   padding: 0;
   display: block;

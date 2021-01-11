@@ -56,4 +56,15 @@
     background-color: $disabled-color;
     color: darken($disabled-color, 40%);
   }
+
+  &--ghost {
+    border-color: transparent;
+    background-color: transparent;
+    color: $text-color;
+    border-radius: 0;
+
+    &::after {
+      border: none;
+    }
+  }
 }

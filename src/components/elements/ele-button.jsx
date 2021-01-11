@@ -13,7 +13,7 @@ import './ele-button.scss'
 // https://github.com/NervJS/taro-ui/issues/96
 
 function EleButton(props) {
-  const { linkToUrl, extraData, title, size, type, icon, imageUrl, mode, ajax = false, disabled } = props
+  const { linkToUrl, extraData, title, size, type, icon, imageUrl, mode, ajax = false, disabled, reLaunch } = props
   const { openType, onClick, className, onGetUserInfo } = props
 
   let wxOpenType = openType
@@ -112,9 +112,17 @@ function EleButton(props) {
       return
     }
 
-    console.log('type is', type, 'just do view action')
-    NavigationService.view(props, {}, { statInPage: ajax })
-  }, 300)
+    console.log('type is', type, 'just do view action', props)
+
+    await NavigationService.view(
+      props,
+      {},
+      {
+        navigationOptions: reLaunch ? { method: 'reLaunch' } : null,
+        statInPage: ajax,
+      }
+    )
+  }, 200)
 
   const rootClass = getExtMode(mode, { disabled }).classNames('ele-button', className)
 

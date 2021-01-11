@@ -13,6 +13,7 @@ import NavigationService from '@/nice-router/navigation-service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import './me.scss'
+import Listof from '@/listof/listof'
 
 const Box_Navigator_List = [
   {
@@ -72,7 +73,7 @@ function MePage() {
 
   const {
     boxNavigatorList = Box_Navigator_List,
-    lineItemNavigatorList = LineItem_Navigator_List,
+    navigationLineItems = LineItem_Navigator_List,
     name = '用户A',
     brief = '超级管理员',
     avatar,
@@ -98,9 +99,7 @@ function MePage() {
       </View>
 
       <View className='me-page-body'>
-        {lineItemNavigatorList.map((it) => (
-          <NavigationLineItem key={`${it.id}_${it.code}`} {...it} />
-        ))}
+        <Listof items={navigationLineItems} displayMode='navigation-line' />
       </View>
 
       <EleActionList mode='full' list={footerActionList} />

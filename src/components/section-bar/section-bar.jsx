@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react'
 import ActionUtil from '@/nice-router/action-util'
 import NavigationService from '@/nice-router/navigation-service'
-import { Block, Text, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import classNames from 'classnames'
 
 import { useVisible } from '@/service/use-service'
-import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode, isEmpty } from '@/nice-router/nice-router-util'
+import EleButton from '@/components/elements/ele-button'
+import ActionIcon from '@/components/action-icon/action-icon'
+
 import './styles.scss'
 
 /**
@@ -16,10 +19,22 @@ import './styles.scss'
  * @constructor
  */
 function SectionBar(props) {
-  const { title, brief, className, customStyle = {}, icon = 'right', mode = [], disabled = false } = props
-
-  const { foldable, expand = 'true', onClick } = props
   const { visible, toggle, show, close } = useVisible(true)
+
+  const {
+    title,
+    brief,
+    className,
+    imageUrl,
+    icon,
+    mode = [],
+    disabled = false,
+    foldable,
+    expand = 'true',
+    onClick,
+    children,
+    ...others
+  } = props
 
   useEffect(() => {
     if (foldable) {
@@ -31,7 +46,7 @@ function SectionBar(props) {
     }
   }, [foldable, expand])
 
-  const hasMore = ActionUtil.isActionLike(props)
+  const isAction = ActionUtil.isActionLike(props)
 
   const handleClick = () => {
     if (disabled) {
@@ -48,42 +63,31 @@ function SectionBar(props) {
     NavigationService.view(props)
   }
 
-  const rootClass = getExtMode(mode, {
-    foldable,
-    disabled,
-  }).classNames('section-bar', className)
+  const rootClass = getExtMode(mode, { foldable, disabled }).classNames('section-bar', className)
 
-  const contentClass = classNames('section-bar-body', {
-    hidden: !hasMore && !visible,
-  })
+  const contentClass = classNames('section-bar-body', { hidden: !isAction && !visible })
 
-  let actionAction = hasMore ? icon : ''
+  let theIcon = isEmpty(icon) && isAction ? 'right' : icon
 
   if (foldable) {
-    actionAction = visible ? 'up' : 'down'
+    theIcon = visible ? 'up' : 'down'
   }
 
   return (
-    <View className={rootClass} style={customStyle}>
-      <View className='section-bar-header' onClick={handleClick}>
-        {isNotEmpty(title) && (
-          <Block>
-            <View className='section-bar-prefix' />
-            <View className='section-bar-title'>{title}</View>
-          </Block>
-        )}
-        <View className='section-bar-action clickable'>
-          {isNotEmpty(brief) && <Text className='section-bar-action-title'>{brief}</Text>}
-          {isNotEmpty(actionAction) && <Text className={`iconfont iconfont-${actionAction}`} />}
+    <View className={rootClass}>
+      <EleButton mode='ghost' className='section-bar-header' onClick={handleClick} {...others}>
+        <View className='section-bar-prefix' />
+        <View className='flex-1 flex-row'>
+          <View className='section-bar-title'>{title}</View>
+          <View className='section-bar-brief'>{brief}</View>
         </View>
-      </View>
-      {props.children && <View className={contentClass}>{props.children}</View>}
+        <View className='section-bar-postfix'>
+          <ActionIcon imageUrl={imageUrl} icon={theIcon} mode='widthFix' />
+        </View>
+      </EleButton>
+      {children && <View className={contentClass}>{children}</View>}
     </View>
   )
-}
-
-export function BorderedSectionBar(props) {
-  return <SectionBar foldable mode={['bordered', 'highlight']} {...props} />
 }
 
 export default SectionBar

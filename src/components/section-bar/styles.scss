@@ -2,58 +2,74 @@
 
 .section-bar {
   @extend %flex-column;
+  justify-content: center;
 
   &-header {
     @extend %flex-row;
     align-items: center;
-    padding: 0 20px;
     height: 80px;
-  }
-
-  .iconfont {
-    color: #ccc;
-    font-size: 36px;
-    font-weight: 800;
+    width: 100%;
   }
 
   &-prefix {
     width: 8px;
+    border-radius: 4px;
     min-height: 1.2em;
     background-color: $primary-color;
     margin-right: 20px;
   }
 
   &-title {
+    @extend %flex-1;
     color: $text-color;
-    font-size: 34px;
+    font-size: 32px;
     font-weight: 700;
   }
 
-  &-action {
-    @extend %flex-row;
-    justify-content: flex-end;
-    align-items: center;
-    flex: 1;
-    height: 100%;
-    text-align: center;
+  &-brief {
+    color: $text-color-light;
+    font-size: 30px;
+  }
 
-    &-title {
-      font-size: 28px;
-      font-weight: 500;
-      text-align: right;
-      padding-right: 10px;
-      color: #999;
-    }
+  &-postfix {
+    padding-left: 20px;
 
     .iconfont {
       color: #999;
-      font-weight: 800;
+      font-size: 38px;
+      font-weight: 500;
     }
+
+    width: 44px;
+    height: 44px;
+    @extend %flex-center;
   }
 
-  // section-bar  里面的form-item
-  .form-item {
-    padding-left: 20px;
+  &-body {
+    // section-bar  里面的form-item
+    .form-item {
+      padding-left: 20px;
+    }
+  }
+}
+
+.navigation-line {
+  margin-top: 20px;
+  background-color: $white;
+  border-radius: 10px;
+  padding: 10px 20px;
+
+  height: 110px;
+
+  .section-bar-title {
+    font-weight: 400;
+  }
+
+  .section-bar-prefix {
+    height: 60px;
+    width: 10px;
+    background-color: $primary-color;
+    border-radius: 5px;
   }
 }
 
@@ -75,6 +91,10 @@
 
 .section-bar--bordered {
   border: $border-default;
+
+  .section-bar-header {
+    padding: 0 20px;
+  }
 }
 
 .section-bar--highlight {

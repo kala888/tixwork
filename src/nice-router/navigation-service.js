@@ -26,10 +26,12 @@ const isH5Path = (uri = '') => {
 
 const _getNavigationMethod = (method) => {
   const pages = Taro.getCurrentPages()
+  console.log('current method', method, 'currentPages length', pages.length, ' all pages', pages)
   if (
-    (method === 'navigateTo' && pages.length >= PAGE_LEVEL_LIMIT - 3) ||
+    (method === 'navigateTo' && pages.length === PAGE_LEVEL_LIMIT) ||
     (method === 'navigateToByForce' && pages.length === PAGE_LEVEL_LIMIT)
   ) {
+    console.log('currentPages method', method, ' actually is redirect')
     return Taro.redirectTo
   }
 

@@ -22,11 +22,11 @@ $error-color: $orange-color;
     margin: 20px 0;
     @include hairline-bottom($under-line-color);
 
-    &-preicon {
+    .section-bar-prefix {
       width: 4px;
     }
 
-    &-title-txt {
+    .section-bar-title {
       color: #6a6a77;
       font-weight: 700;
       line-height: 1.5;

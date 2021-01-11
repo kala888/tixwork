@@ -7,6 +7,7 @@ import { AtActivityIndicator } from 'taro-ui'
 
 import { getExtMode } from '@/nice-router/nice-router-util'
 import FlexInfoList from '@/components/info-list/flex-info-list'
+import SectionBar from '@/components/section-bar/section-bar'
 
 import ListofUtil from '../listof-util'
 import AutoTemplate from './auto/auto-template'
@@ -87,6 +88,8 @@ function FlexLineItem(props) {
       {displayMode === 'card' && <CardTemplate {...itemProps} />}
       {displayMode === 'image-on-left' && <CardTemplate {...itemProps} />}
       {displayMode === 'document' && <CardTemplate {...itemProps} />}
+
+      {displayMode === 'navigation-line' && <SectionBar {...itemProps} {...item} className='navigation-line' />}
 
       {displayMode === 'big-card' && <CardTemplate {...itemProps} mode={['horizontal', 'large']} />}
       {displayMode === 'h-card' && <CardTemplate {...itemProps} mode={['horizontal']} />}
