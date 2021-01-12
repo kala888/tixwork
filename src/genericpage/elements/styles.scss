@@ -110,26 +110,6 @@
   }
 }
 
-.ele-fab {
-  position: fixed;
-  right: 50px;
-  bottom: 160px;
-  z-index: 99999;
-  opacity: 0.8;
-
-  .action-icon {
-    width: 80px;
-
-    .iconfont {
-      font-size: 60px !important;
-    }
-  }
-
-  &-txt {
-    color: $white;
-  }
-}
-
 .ele-more-actions {
   @extend %flex-center;
 
