@@ -1,15 +1,15 @@
 export default {
   pages: [
-    'nice-router/network-exception-page',
     'pages/home/home-page',
     'pages/me/me-page',
+    'pages/test-page',
     // 'pages/biz/listof-test-page', // 有问题
 
-    'pages/test-page',
+    'pages/login/login-page',
 
     // base
-    'pages/login/login-page',
     'nice-router/h5-page',
+    'nice-router/network-exception-page',
 
     'listof/listof-page',
     'listof/listof-page2',
