@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, View } from '@tarojs/components'
+import NavigationService from '@/nice-router/navigation-service'
 import CardTemplate from './card-template'
 import './object-picker-item.scss'
-import NavigationService from '@/nice-router/navigation-service'
 
 function ObjectPickerItem(props) {
   const { item } = props

@@ -13,6 +13,7 @@ import { useVisible } from '@/service/use-service'
 
 function ObjectPickerPage() {
   const { visible, close, show } = useVisible(false)
+  const root = useSelector((state) => state.objectPicker)
 
   // q如果变化了，就发送一个后台请求
   const { linkToUrl } = Current.router.params
@@ -26,9 +27,9 @@ function ObjectPickerPage() {
         }
       )
     }
+    return () => NavigationService.dispatch('objectPicker/clear')
   }, [linkToUrl])
 
-  const root = useSelector((state) => state.objectPicker)
   const { selectedItems = [], inbound = {} } = root
   const { list = [], maxSelectCount } = inbound
 

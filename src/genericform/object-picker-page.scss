@@ -5,16 +5,6 @@
     height: 10vh;
   }
 
-  .large-float-layout {
-    z-index: 999999999;
-
-    .layout-body,
-    .layout-body__content,
-    .at-float-layout__container {
-      padding-bottom: 80px;
-    }
-  }
-
   .ele-action-list-item {
     &:first-child {
       border: none;

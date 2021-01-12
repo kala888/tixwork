@@ -126,3 +126,17 @@ $text-weight: 400, 500, 600, 700, 800;
     opacity: 0.7;
   }
 }
+
+.large-float-layout {
+  z-index: 99999;
+
+  .layout-body,
+  .layout-body__content,
+  .at-float-layout__container {
+    max-height: 90vh !important;
+  }
+}
+
+.at-action-sheet--active {
+  z-index: 99999;
+}

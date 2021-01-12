@@ -11,8 +11,8 @@ import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation-service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
-import './me.scss'
 import Listof from '@/listof/listof'
+import './me.scss'
 
 const Box_Navigator_List = [
   {
