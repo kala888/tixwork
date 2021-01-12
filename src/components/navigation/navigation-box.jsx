@@ -2,9 +2,9 @@ import React from 'react'
 import ActionIcon from '@/components/action-icon/action-icon'
 import NavigationService from '@/nice-router/navigation-service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
+import EleBadge from '@/components/elements/ele-badge/ele-badge'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
-import { AtBadge } from 'taro-ui'
 
 import './navigation-box.scss'
 
@@ -37,9 +37,9 @@ function NavigationBox(props) {
           return (
             <View key={`${it.id}_${it.code}`} className={itemClass} onClick={handleClick.bind(this, it)}>
               <View className='navigation-box-item-box'>
-                <AtBadge value={badge}>
+                <EleBadge value={badge}>
                   <ActionIcon className='navigation-box-item-image' icon={icon} imageUrl={imageUrl} />
-                </AtBadge>
+                </EleBadge>
                 <View className='navigation-box-item-title'>{title}</View>
               </View>
             </View>
