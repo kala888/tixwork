@@ -2,11 +2,11 @@ import MobileVerifyCode from '@/components/mobile-verify-code'
 import EleInput from '@/components/form/field/ele-input'
 import { Block, View } from '@tarojs/components'
 import React, { useEffect, useState } from 'react'
-import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation-service'
 import _ from 'lodash'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
+import EleButton from '@/components/elements/ele-button'
 import Taro from '@tarojs/taro'
 import './login.scss'
 
@@ -54,13 +54,13 @@ export default function VCodeLoginForm() {
   if (visible) {
     return (
       <Block>
-        <AtButton openType='getPhoneNumber' className='login-button' onGetPhoneNumber={handleBindingWechatMobile}>
+        <EleButton openType='getPhoneNumber' className='login-button' onGetPhoneNumber={handleBindingWechatMobile}>
           使用微信绑定的手机号
-        </AtButton>
+        </EleButton>
         <View className='login-form-fields-switch'>
-          <AtButton full={false} onClick={toggle}>
+          <EleButton mode='ghost' onClick={toggle}>
             其他手机号码
-          </AtButton>
+          </EleButton>
         </View>
       </Block>
     )
@@ -87,14 +87,14 @@ export default function VCodeLoginForm() {
         />
       </View>
       <View className='login-form-fields-switch'>
-        <AtButton full={false} onClick={toggle}>
+        <EleButton mode='ghost' onClick={toggle}>
           使用微信绑定手机号
-        </AtButton>
+        </EleButton>
       </View>
 
-      <AtButton className='login-button' onClick={handleSubmit}>
+      <EleButton className='login-button' onClick={handleSubmit}>
         登录
-      </AtButton>
+      </EleButton>
     </Block>
   )
 }

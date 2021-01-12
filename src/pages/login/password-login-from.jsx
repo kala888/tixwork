@@ -2,10 +2,10 @@ import EleInput from '@/components/form/field/ele-input'
 import { Block, View } from '@tarojs/components'
 import React, { useState } from 'react'
 
-import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation-service'
 
 import './login.scss'
+import EleButton from '@/components/elements/ele-button'
 
 export default function PasswordForm() {
   const [login, setLogin] = useState()
@@ -38,9 +38,9 @@ export default function PasswordForm() {
           onChange={setPassword}
         />
       </View>
-      <AtButton className='login-button' onClick={handleSubmit}>
+      <EleButton className='login-button' onClick={handleSubmit}>
         登录
-      </AtButton>
+      </EleButton>
     </Block>
   )
 }

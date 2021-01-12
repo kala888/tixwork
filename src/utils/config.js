@@ -20,8 +20,8 @@ const Config = {
     Logout: 'logout/',
   },
   // loginMode: 'wechat',
-  loginMode: 'vcode', //包含绑定的微信登录
-  // loginMode: 'password',
+  // loginMode: 'vcode', //包含绑定的微信登录
+  loginMode: 'password',
 }
 
 console.log('***********   current env  ***********   ')

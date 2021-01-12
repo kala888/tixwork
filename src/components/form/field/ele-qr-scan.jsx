@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text, View } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
 import Taro from '@tarojs/taro'
 import _ from 'lodash'
 import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import GlobalToast from '@/nice-router/global-toast'
+import EleButton from '@/components/elements/ele-button'
 
 import './styles.scss'
 
@@ -29,9 +29,9 @@ function EleQrScan(props) {
   return (
     <View className='ele-qr-scan'>
       <View className='ele-qr-scan-value'>{_.trim(displayValue)}</View>
-      <AtButton size='small' disabled={disabled} onClick={handleScan}>
+      <EleButton size='small' mode='ghost' disabled={disabled} onClick={handleScan}>
         <Text className='iconfont iconfont-scan' />
-      </AtButton>
+      </EleButton>
     </View>
   )
 }

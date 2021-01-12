@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation-service'
+import EleButton from '@/components/elements/ele-button'
 
 import './login.scss'
 
@@ -14,8 +14,8 @@ export default function WechatLoginForm() {
     })
   }
   return (
-    <AtButton className='login-button' onClick={handleSubmit}>
+    <EleButton className='login-button' onClick={handleSubmit}>
       微信登录
-    </AtButton>
+    </EleButton>
   )
 }

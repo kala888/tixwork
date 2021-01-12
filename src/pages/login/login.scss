@@ -68,16 +68,10 @@
         @extend %flex-row;
         align-self: flex-end;
 
-        .at-button {
-          width: unset;
+        .ele-button {
           color: $white;
+          font-size: 30px;
           background-color: transparent;
-          border: none;
-          padding: 0;
-          display: block;
-          height: unset;
-          line-height: unset;
-          text-align: unset;
         }
       }
     }

@@ -7,11 +7,11 @@ import Config from '@/utils/config'
 import { View } from '@tarojs/components'
 import { useSelector } from 'react-redux'
 import { useDidShow } from '@tarojs/runtime'
-import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation-service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import Listof from '@/listof/listof'
+import EleButton from '@/components/elements/ele-button'
 import './me.scss'
 
 const Box_Navigator_List = [
@@ -82,9 +82,14 @@ function MePage() {
     <View className='me-page'>
       <View className='me-page-header'>
         <View className='me-page-header-info'>
-          <AtButton openType='getUserInfo' className='transparent-btn' onGetUserInfo={handleUpdateProfileInfo}>
+          <EleButton
+            mode='ghost'
+            openType='getUserInfo'
+            className='transparent-btn'
+            onGetUserInfo={handleUpdateProfileInfo}
+          >
             <ServerImage className='me-avatar' src={avatar || MockService.randomImage()} />
-          </AtButton>
+          </EleButton>
 
           <View className='me-title'>
             <View className='me-title-name'>{name}</View>

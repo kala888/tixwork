@@ -2,7 +2,8 @@ import React from 'react'
 import FormItem from '@/components/form/form-item'
 import FormUtil from '@/components/form/form-util'
 import { View } from '@tarojs/components'
-import { AtButton, AtInput } from 'taro-ui'
+import { AtInput } from 'taro-ui'
+import EleButton from '@/components/elements/ele-button'
 
 export default class BaseFormPage extends React.PureComponent {
   //以name为key
@@ -45,7 +46,7 @@ export default class BaseFormPage extends React.PureComponent {
           />
         </FormItem>
 
-        <AtButton onClick={this.handleSubmit}>提交</AtButton>
+        <EleButton onClick={this.handleSubmit}>提交</EleButton>
       </View>
     )
   }
