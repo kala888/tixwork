@@ -4,9 +4,9 @@ import { toRpx } from '@/utils/index'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
-import { AtTag } from 'taro-ui'
 
 import './styles.scss'
+import TagList from '@/components/elements/ele-tag/tag-list'
 
 function EleStoreLocation(props) {
   const {
@@ -58,21 +58,8 @@ function EleStoreLocation(props) {
 
           <View className='header-right'>
             <View className='header-right-name'>{name}</View>
-
             {summary.length > 0 && <View className='header-right-summary'>{summary}</View>}
-
-            {tags.length > 0 && (
-              <View className='header-right-tags'>
-                {tags.map((it) => (
-                  <View key={it} className='header-right-tags-item'>
-                    <AtTag size='small' key={it}>
-                      {' '}
-                      {it}{' '}
-                    </AtTag>
-                  </View>
-                ))}
-              </View>
-            )}
+            <TagList items={tags} />
           </View>
         </View>
       )}

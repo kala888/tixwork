@@ -42,14 +42,6 @@
         line-height: 36px;
         @include text-ellipsis;
       }
-
-      &-tags {
-        @extend %flex;
-
-        &-item {
-          margin-left: 10px;
-        }
-      }
     }
   }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useVisible } from '@/service/use-service'
 import { noop } from '@/nice-router/nice-router-util'
-import TagList from '@/components/tag-list/tag-list'
+import TagList from '@/components/elements/ele-tag/tag-list'
 import ActionField from '@/components/form/field/action-field'
 import { AtFloatLayout } from 'taro-ui'
 import { View } from '@tarojs/components'

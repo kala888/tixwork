@@ -1,5 +1,5 @@
 import React from 'react'
-import TagList from '@/components/tag-list/tag-list'
+import TagList from '@/components/elements/ele-tag/tag-list'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import classNames from 'classnames'
 import { View } from '@tarojs/components'

@@ -9,6 +9,7 @@
   &-cover {
     @extend %flex-center;
     height: 350px;
+
     &-image {
       @extend %flex-center;
       height: 350px;
@@ -24,6 +25,14 @@
       @extend %flex-row;
       color: $text-color;
       @include lamp-clamp(2);
+
+      &-tag {
+        padding: 3px 10px;
+        border: 1px solid $red-color;
+        color: $red-color;
+        font-size: 22px;
+        border-radius: 10px;
+      }
 
       &-txt {
         font-size: 26px;
