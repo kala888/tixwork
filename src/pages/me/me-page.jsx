@@ -56,7 +56,7 @@ function MePage() {
   const handleGoLogin = () => NavigationService.navigate('/pages/login/login-page')
   const handleLogout = () => {
     NavigationService.dispatch('app/logout')
-    NavigationService.dispatch('me/save', {})
+    NavigationService.dispatch('me/clear')
     NavigationService.ajax(Config.api.Logout)
   }
   useEffect(() => {

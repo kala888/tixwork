@@ -13,8 +13,25 @@ import './ele-button.scss'
 // https://github.com/NervJS/taro-ui/issues/96
 
 function EleButton(props) {
-  const { linkToUrl, extraData, title, size, type, icon, imageUrl, mode, ajax = false, disabled, reLaunch } = props
-  const { openType, onClick, className, onGetUserInfo } = props
+  const {
+    id,
+    linkToUrl,
+    extraData,
+    title,
+    size,
+    type,
+    icon,
+    imageUrl,
+    mode,
+    ajax = false,
+    disabled,
+    reLaunch,
+    openType,
+    onClick,
+    className,
+    children,
+    ...others
+  } = props
 
   let wxOpenType = openType
   if (!openType && (type === 'share' || type === 'getPhoneNumber' || type === 'getUserInfo')) {
@@ -127,6 +144,8 @@ function EleButton(props) {
   const rootClass = getExtMode(mode, { disabled }).classNames('ele-button', className)
 
   const buttonSize = size === 'small' ? 'mini' : size
+
+  console.log('othersothersothersothers', others)
   return (
     <Button
       className={rootClass}
@@ -134,11 +153,11 @@ function EleButton(props) {
       formType={formType}
       size={buttonSize}
       onClick={handleClick}
-      onGetUserInfo={onGetUserInfo}
       data-extraData={extraData}
       disabled={disabled}
+      {...others}
     >
-      {props.children || (
+      {children || (
         <View className='ele-button-body'>
           <ActionIcon icon={icon} imageUrl={imageUrl} />
           <View className='ele-button-text'>{title}</View>
@@ -153,7 +172,6 @@ EleButton.defaultProps = {
   type: '',
   size: null,
   className: null,
-  onGetUserInfo: null,
   extraData: {},
   icon: null,
   imageUrl: null,

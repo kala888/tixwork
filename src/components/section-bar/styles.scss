@@ -53,26 +53,6 @@
   }
 }
 
-.navigation-line {
-  margin-top: 20px;
-  background-color: $white;
-  border-radius: 10px;
-  padding: 10px 20px;
-
-  height: 110px;
-
-  .section-bar-title {
-    font-weight: 400;
-  }
-
-  .section-bar-prefix {
-    height: 60px;
-    width: 10px;
-    background-color: $primary-color;
-    border-radius: 5px;
-  }
-}
-
 .section-bar--disabled {
   .section-bar-header {
     opacity: 0.7;

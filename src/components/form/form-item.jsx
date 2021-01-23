@@ -2,13 +2,13 @@ import React from 'react'
 import { getExtMode, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
 import _ from 'lodash'
+import GlobalToast from '@/nice-router/global-toast'
 
 import FormItemTail from './form-item-tail'
 import FormUtil from '../form/form-util'
 import FlexField from './field/flex-field'
 import FormItemLabel from './form-item-label'
 import './form-item.scss'
-import GlobalToast from '@/nice-router/global-toast'
 
 function FormItem(props) {
   const {

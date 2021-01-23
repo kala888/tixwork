@@ -21,6 +21,10 @@ export default function GridList(props) {
 
   const groupList = getGroupListByColumn(items, columnNum)
   const handleClick = (item, index, row) => {
+    if (item.onClick) {
+      item.onClick()
+      return
+    }
     if (_.isFunction(onClick)) {
       onClick(item, row * columnNum + index)
       return

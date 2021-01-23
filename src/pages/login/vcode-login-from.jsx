@@ -2,8 +2,8 @@ import MobileVerifyCode from '@/components/mobile-verify-code'
 import EleInput from '@/components/form/field/ele-input'
 import { Block, View } from '@tarojs/components'
 import React, { useEffect, useState } from 'react'
-import NavigationService from '@/nice-router/navigation-service'
 import _ from 'lodash'
+import NavigationService from '@/nice-router/navigation-service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
 import EleButton from '@/components/elements/ele-button'
@@ -12,14 +12,14 @@ import './login.scss'
 
 export default function VCodeLoginForm() {
   const [mobile, setMobile] = useState()
-  const [loginCode, setLoginCode] = useState('')
-  const [code, setCode] = useState()
+  const [verifyCode, setVerifyCode] = useState()
+  const [code, setCode] = useState() // wx login code
 
   const { visible, toggle } = useVisible(true)
 
   useEffect(() => {
     Taro.login({
-      success: (res) => setLoginCode(res.code),
+      success: (res) => setCode(res.code),
     })
   }, [])
 
@@ -27,26 +27,35 @@ export default function VCodeLoginForm() {
     NavigationService.dispatch('app/login', {
       loginMethod: 'mobile_vcode',
       mobile,
-      verifyCode: code,
+      verifyCode,
     })
   }
-
   const handleSendCodeSuccess = (resp) => {
     const txt = _.get(resp, 'toast.text', '')
     const theCode = _.get(txt.match(/验证码(\d{6})/), 1)
     console.log('text', txt, theCode)
     if (isNotEmpty(theCode)) {
-      setCode(theCode)
+      setVerifyCode(theCode)
     }
   }
 
   const handleBindingWechatMobile = (e) => {
     const { encryptedData } = e.detail
+
     if (isNotEmpty(encryptedData)) {
-      NavigationService.dispatch('app/login', {
-        ...e.detail,
-        loginMethod: 'wechat_mobile',
-        code: loginCode,
+      Taro.checkSession({
+        success: async () => {
+          NavigationService.dispatch('app/login', {
+            ...e.detail,
+            loginMethod: 'wechat_mobile',
+            code,
+          })
+        },
+        fail: () => {
+          Taro.login({
+            success: (res) => setCode(res.code),
+          })
+        },
       })
     }
   }
@@ -78,12 +87,12 @@ export default function VCodeLoginForm() {
           onSendCodeSuccess={handleSendCodeSuccess}
         />
         <EleInput
-          name='vcode'
+          name='verifyCode'
           className='login-form-fields-input,login-form-fields-vcode'
           placeholder='请输入验证码'
           type='number'
-          value={code}
-          onChange={setCode}
+          value={verifyCode}
+          onChange={setVerifyCode}
         />
       </View>
       <View className='login-form-fields-switch'>

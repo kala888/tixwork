@@ -40,7 +40,7 @@ function isSelfHoldClickTemplate(displayMode, item = {}) {
   if ('card' === displayMode) {
     return isNotEmpty(item.documentUrl) || isNotEmpty(item.actionList)
   }
-  return false
+  return 'navigation-line' === displayMode
 }
 
 const ListofUtil = {

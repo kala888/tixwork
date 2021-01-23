@@ -4,11 +4,12 @@ import Taro from '@tarojs/taro'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import { getDeviceHeight } from '@/utils/index'
-import { useReady } from '@tarojs/runtime'
+import { useDidShow, useReady } from '@tarojs/runtime'
 import classNames from 'classnames'
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service'
 import Config from '@/utils/config'
 import { Block, View } from '@tarojs/components'
+import NavigationService from '@/nice-router/navigation-service'
 
 import Listof from './listof'
 import './styles.scss'
@@ -21,6 +22,7 @@ function ListofPageBase(props) {
   const { pageTitle = Config.name } = props
   usePageTitle(pageTitle)
   useAjaxPullDown(props)
+  useDidShow(() => NavigationService.ajax(props))
 
   const initialHeight = () => {
     Taro.createSelectorQuery()

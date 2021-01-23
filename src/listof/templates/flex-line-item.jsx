@@ -7,7 +7,6 @@ import { AtActivityIndicator } from 'taro-ui'
 
 import { getExtMode } from '@/nice-router/nice-router-util'
 import FlexInfoList from '@/components/info-list/flex-info-list'
-import SectionBar from '@/components/section-bar/section-bar'
 
 import ListofUtil from '../listof-util'
 import AutoTemplate from './auto/auto-template'
@@ -16,6 +15,7 @@ import RichTextTemplate from './rich-text-template'
 import ObjectPickerItem from './card/object-picker-item'
 import ObjectPickerPopupItem from './card/object-picker-popup-item'
 import Product from './product/product'
+import NavigationLine from './navigation-line/navigation-line'
 
 import './flex-line-item.scss'
 
@@ -47,6 +47,7 @@ function FlexLineItem(props) {
   const handleClick = _.throttle(() => {
     console.log('item....click')
     if (onItemClick) {
+      onItemClick(item)
       return
     }
 
@@ -89,7 +90,7 @@ function FlexLineItem(props) {
       {displayMode === 'image-on-left' && <CardTemplate {...itemProps} />}
       {displayMode === 'document' && <CardTemplate {...itemProps} />}
 
-      {displayMode === 'navigation-line' && <SectionBar {...itemProps} {...item} className='navigation-line' />}
+      {displayMode === 'navigation-line' && <NavigationLine {...itemProps} {...item} />}
 
       {displayMode === 'big-card' && <CardTemplate {...itemProps} mode={['horizontal', 'large']} />}
       {displayMode === 'h-card' && <CardTemplate {...itemProps} mode={['horizontal']} />}

@@ -206,3 +206,17 @@ export function diffTime(end, start = Date.now()) {
   }
   return result.join('')
 }
+
+export function getParametersFromUrl(url = '') {
+  let query = {}
+  const startIndex = url.indexOf('?')
+  if (startIndex > -1) {
+    const str = url.substr(startIndex + 1)
+    const pairs = str.split('&')
+    for (let i = 0; i < pairs.length; i++) {
+      const pair = pairs[i].split('=')
+      query[pair[0]] = pair[1]
+    }
+  }
+  return query // 返回对象
+}

@@ -36,13 +36,14 @@ $golden-color: #ab956d;
 $silver-grey-color: #ccc;
 $light-grey-color: #ededed;
 $ice-blue-color: #53c7ca; //冰蓝
+$green-color: #07c160;
 
 $text-color: #333;
 $text-color-light: #56585c;
 $text-color-lighter: #999;
 
 $level-default: $text-color-light;
-$level-normal: #07c160;
+$level-normal: $green-color;
 $level-primary: $primary-color;
 $level-warn: #ffc300;
 $level-danger: #fa5151;
