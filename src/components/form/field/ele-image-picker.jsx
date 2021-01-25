@@ -7,6 +7,8 @@ import { AtImagePicker, AtProgress } from 'taro-ui'
 
 import './styles.scss'
 
+// TODO image picker 有个bug，可以暂时等待Taro ui 升级，要修改源码，https://github.com/NervJS/taro-ui/pull/1290
+
 function EleImagePicker(props) {
   const { value = [], onChange, maxLength, disabled, brief } = props
 
