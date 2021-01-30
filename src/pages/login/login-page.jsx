@@ -11,7 +11,6 @@ import PasswordLoginForm from './password-login-from'
 import WechatLoginForm from './wechat-login-form'
 import './login.scss'
 
-
 export default function LoginPage() {
   const [wxLoginSuccess, setWxLoginSuccess] = useState(false)
 
@@ -29,8 +28,6 @@ export default function LoginPage() {
       },
     })
   }, [])
-
-
 
   return (
     <View className='login-page'>
