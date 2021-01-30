@@ -1,15 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ServerImage from '@/server-image/server-image'
 import Config from '@/utils/config'
 import { Text, View } from '@tarojs/components'
-import loginLogo from '../../assets/login-logo.png'
+import Taro from '@tarojs/taro'
+import NavigationService from '@/nice-router/navigation-service'
 
-import './login.scss'
+import loginLogo from '../../assets/login-logo.png'
 import VCodeLoginForm from './vcode-login-from'
 import PasswordLoginForm from './password-login-from'
 import WechatLoginForm from './wechat-login-form'
+import './login.scss'
+
 
 export default function LoginPage() {
+  const [wxLoginSuccess, setWxLoginSuccess] = useState(false)
+
+  useEffect(() => {
+    Taro.login({
+      success: (res) => {
+        console.log('doooooologin')
+        NavigationService.ajax(
+          Config.api.WxLogin,
+          { code: res.code },
+          {
+            onSuccess: () => setWxLoginSuccess(true),
+          }
+        )
+      },
+    })
+  }, [])
+
+
+
   return (
     <View className='login-page'>
       <View className='login-page-header'>
@@ -24,7 +46,7 @@ export default function LoginPage() {
         <View className='form-form-title'>欢迎登录</View>
 
         {Config.loginMode === 'wechat' && <WechatLoginForm />}
-        {Config.loginMode === 'vcode' && <VCodeLoginForm />}
+        {Config.loginMode === 'vcode' && <VCodeLoginForm disabled={!wxLoginSuccess} />}
         {Config.loginMode === 'password' && <PasswordLoginForm />}
       </View>
     </View>

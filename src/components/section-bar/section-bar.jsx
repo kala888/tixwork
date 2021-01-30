@@ -77,10 +77,8 @@ function SectionBar(props) {
     <View className={rootClass}>
       <EleButton mode='ghost' className='section-bar-header' onClick={handleClick} {...others}>
         <View className='section-bar-prefix' />
-        <View className='flex-1 flex-row'>
-          <View className='section-bar-title'>{title}</View>
-          <View className='section-bar-brief'>{brief}</View>
-        </View>
+        <View className='section-bar-title'>{title}</View>
+        <View className='section-bar-brief'>{brief}</View>
         <View className='section-bar-postfix'>
           <ActionIcon imageUrl={imageUrl} icon={theIcon} mode='widthFix' />
         </View>

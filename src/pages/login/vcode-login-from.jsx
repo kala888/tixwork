@@ -1,27 +1,20 @@
 import MobileVerifyCode from '@/components/mobile-verify-code'
 import EleInput from '@/components/form/field/ele-input'
 import { Block, View } from '@tarojs/components'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import _ from 'lodash'
 import NavigationService from '@/nice-router/navigation-service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
 import EleButton from '@/components/elements/ele-button'
-import Taro from '@tarojs/taro'
 import './login.scss'
 
-export default function VCodeLoginForm() {
+export default function VCodeLoginForm(props) {
   const [mobile, setMobile] = useState()
   const [verifyCode, setVerifyCode] = useState()
-  const [code, setCode] = useState() // wx login code
-
   const { visible, toggle } = useVisible(true)
 
-  useEffect(() => {
-    Taro.login({
-      success: (res) => setCode(res.code),
-    })
-  }, [])
+  const { disabled } = props
 
   const handleSubmit = () => {
     NavigationService.dispatch('app/login', {
@@ -30,6 +23,7 @@ export default function VCodeLoginForm() {
       verifyCode,
     })
   }
+
   const handleSendCodeSuccess = (resp) => {
     const txt = _.get(resp, 'toast.text', '')
     const theCode = _.get(txt.match(/验证码(\d{6})/), 1)
@@ -40,22 +34,15 @@ export default function VCodeLoginForm() {
   }
 
   const handleBindingWechatMobile = (e) => {
+    if (disabled) {
+      return
+    }
     const { encryptedData } = e.detail
-
+    console.log('e.detail', e.detail)
     if (isNotEmpty(encryptedData)) {
-      Taro.checkSession({
-        success: async () => {
-          NavigationService.dispatch('app/login', {
-            ...e.detail,
-            loginMethod: 'wechat_mobile',
-            code,
-          })
-        },
-        fail: () => {
-          Taro.login({
-            success: (res) => setCode(res.code),
-          })
-        },
+      NavigationService.dispatch('app/login', {
+        ...e.detail,
+        loginMethod: 'wechat_mobile',
       })
     }
   }

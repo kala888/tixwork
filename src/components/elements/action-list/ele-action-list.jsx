@@ -24,8 +24,13 @@ function EleActionList(props) {
 
   const rootClass = getExtMode(mode, { h5: isH5() }).classNames('ele-action-list', className)
 
+  const stopTheEvent = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
   return (
-    <View className={rootClass}>
+    <View className={rootClass} onClick={stopTheEvent}>
       {theActionList.map((action, idx) => {
         const key = `btn_${action.id}_${action.code}_${action.title}`
         const mixColorClass = _.get(MixClass, `${list.length - 1}.${idx}`)

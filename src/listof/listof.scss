@@ -26,7 +26,8 @@
   white-space: nowrap;
 
   .listof-view-container {
-    @extend %flex-row;
+    flex-direction: row;
+    flex-wrap: unset;
   }
 
   .flex-line-item {

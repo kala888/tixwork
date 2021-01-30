@@ -1,6 +1,8 @@
 @import 'src/styles/theme';
 
 .ele-switch {
+  padding: 10px 0;
+
   &-disabled {
     .at-switch__title {
       opacity: 0.3;

@@ -15,6 +15,7 @@ const Config = {
     FooterMe: 'customerViewDashboard/',
 
     Login: 'clientLogin/',
+    WxLogin: 'wxappService/wxlogin/:code/',
     VerifyCode: 'sendVerifyCode/:mobile/',
     OSSToken: 'customGetOssToken/',
     Logout: 'logout/',

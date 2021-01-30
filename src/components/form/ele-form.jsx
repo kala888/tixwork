@@ -68,7 +68,9 @@ function EleForm(props, ref) {
       }))
     } else {
       setFieldErrors((preState) => {
-        return _.omit(preState, name)
+        const result = _.clone(preState)
+        _.omit(result, name)
+        return result
       })
     }
     // 记录值
