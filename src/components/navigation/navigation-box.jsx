@@ -1,10 +1,10 @@
 import React from 'react'
 import ActionIcon from '@/components/action-icon/action-icon'
-import NavigationService from '@/nice-router/navigation-service'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
+import { Text, View } from '@tarojs/components'
+
 import EleBadge from '@/components/elements/ele-badge/ele-badge'
-import { View } from '@tarojs/components'
-import classNames from 'classnames'
+import EleButton from '@/components/elements/ele-button'
 
 import './navigation-box.scss'
 
@@ -12,17 +12,11 @@ function NavigationBox(props) {
   const { title: actionBarTitle = '', list = [] } = props
   const { className, customStyle = {}, roundBottom = true, roundTop = true } = props
 
-  const handleClick = (item) => {
-    if (!item.disabled) {
-      NavigationService.view(item)
-    }
-  }
-
-  const rootClass = classNames('navigation-box', className, {
-    'navigation-box-center': list.length <= 5,
+  const rootClass = getExtMode({
+    center: list.length <= 5,
     'round-bottom': roundBottom,
     'round-top': roundTop,
-  })
+  }).classNames('navigation-box', className)
 
   return (
     <View className={rootClass} customStyle={customStyle}>
@@ -30,19 +24,15 @@ function NavigationBox(props) {
       <View className='navigation-box-actions'>
         {list.map((it) => {
           const { icon, imageUrl, title, badge, disabled } = it
-          const itemClass = classNames('navigation-box-item', {
-            'navigation-box-item--disabled': disabled,
-          })
+          const itemClass = getExtMode({ disabled }).classNames('navigation-box-item')
 
           return (
-            <View key={`${it.id}_${it.code}`} className={itemClass} onClick={handleClick.bind(this, it)}>
-              <View className='navigation-box-item-box'>
-                <EleBadge value={badge}>
-                  <ActionIcon className='navigation-box-item-image' icon={icon} imageUrl={imageUrl} />
-                </EleBadge>
-                <View className='navigation-box-item-title'>{title}</View>
-              </View>
-            </View>
+            <EleButton mode='ghost' key={`${it.id}_${it.code}`} className={itemClass} {...it}>
+              <EleBadge value={badge}>
+                <ActionIcon icon={icon} imageUrl={imageUrl} />
+                <Text className='navigation-box-item-title'>{title}</Text>
+              </EleBadge>
+            </EleButton>
           )
         })}
       </View>

@@ -24,15 +24,16 @@
     height: 120px;
     @extend %flex-center;
 
-    &-box {
+    .ele-badge {
       @extend %flex-center;
       flex: 1;
       flex-direction: column;
     }
 
-    &-image {
+    .action-icon {
       width: 50px;
       height: 50px;
+      @extend %flex-center;
     }
 
     &-title {
@@ -71,17 +72,17 @@
   }
 }
 
-.navigation-box.round-top {
+.navigation-box--round-top {
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
 }
 
-.navigation-box.round-bottom {
+.navigation-box--round-bottom {
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
 }
 
-.navigation-box-center {
+.navigation-box--center {
   .navigation-box-actions {
     justify-content: space-around;
   }
