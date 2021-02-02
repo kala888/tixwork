@@ -48,5 +48,15 @@
 
   &-body {
     padding: 30px;
+
+    .navigation-line {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .navigation-line-title {
+      font-weight: 400;
+      font-size: 30px;
+    }
   }
 }
