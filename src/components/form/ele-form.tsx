@@ -123,6 +123,7 @@ function EleForm(props, ref) {
     if (!field || field.type === 'display-field') {
       return Promise.resolve()
     }
+    // @ts-ignore
     return validator(field, value).then((errors) => {
       return errors
     })

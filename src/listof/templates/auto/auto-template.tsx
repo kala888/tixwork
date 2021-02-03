@@ -27,7 +27,7 @@ function AutoTemplate(props) {
       <StatusFlag title={status} mode='large' />
       {list.length > 0 && (
         <View className='auto-image-list'>
-          {list.map((it, index) => {
+          {list.map((it: any, index) => {
             const { id } = it
             return (
               <View key={id} className='auto-image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>

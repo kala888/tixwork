@@ -128,8 +128,8 @@ export function mergeMode() {
  *
  * @returns {{mode: (function(*=): (*)), classNames: (function(*=, ...[*]=): string)}}
  */
-export function getExtMode() {
-  const modeList = _.flatten(arguments).filter(isNotEmpty)
+export function getExtMode(...props: any[]) {
+  const modeList = _.flatten(props).filter(isNotEmpty)
 
   const buildWithPrefix = (prefix) => {
     if (isEmpty(prefix)) {
@@ -148,7 +148,7 @@ export function getExtMode() {
 
   return {
     mode: buildWithPrefix,
-    classNames: function(prefix, ...others) {
+    classNames: function(prefix: any, ...others: any[]) {
       return classNames(prefix, others, buildWithPrefix(prefix))
     },
   }

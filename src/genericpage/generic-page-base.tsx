@@ -16,6 +16,7 @@ function GenericPageBase(props) {
   useAjaxPullDown(props)
 
   // q如果变化了，就发送一个后台请求
+  // @ts-ignore
   const { q } = Current.router.params
   useEffect(() => {
     if (q) {

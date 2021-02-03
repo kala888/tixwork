@@ -34,6 +34,7 @@ function FlexLineItem(props) {
       clearTimeout(timer.current)
     }
     setLoading(true)
+    // @ts-ignore
     timer.current = setTimeout(() => stopLoading(), 3000)
   }
   const stopLoading = () => setLoading(false)

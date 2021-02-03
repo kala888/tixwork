@@ -1,11 +1,19 @@
 import React from 'react'
 import { Text, View } from '@tarojs/components'
-import { getExtMode } from '@/nice-router/nice-router-util'
+import { getExtMode, isEmpty } from '@/nice-router/nice-router-util'
 import './status-flag.scss'
 
-function StatusFlag({ title = '', mode = 'normal' }) {
-  const length = title.length
+interface StatusFlagProps {
+  title: string,
+  mode?: any
+}
 
+const StatusFlag: React.FC<StatusFlagProps> = props => {
+  const { title, mode } = props
+  if (isEmpty(title)) {
+    return null
+  }
+  const length = title.length
   const txtClass = getExtMode({
     txt_large: length < 3,
     txt_normal: length === 3,
@@ -16,13 +24,16 @@ function StatusFlag({ title = '', mode = 'normal' }) {
   const rootClass = getExtMode(mode).classNames('status-flag')
 
   return (
-    length > 0 && (
-      <View className={rootClass}>
-        <View className='status-flag-bg' />
-        <Text className={txtClass}>{title}</Text>
-      </View>
-    )
+    <View className={rootClass}>
+      <View className='status-flag-bg' />
+      <Text className={txtClass}>{title}</Text>
+    </View>
   )
+}
+
+StatusFlag.defaultProps = {
+  title: '',
+  mode: 'normal',
 }
 
 export default StatusFlag
