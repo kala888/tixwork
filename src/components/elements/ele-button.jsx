@@ -170,11 +170,7 @@ function EleButton(props) {
 EleButton.defaultProps = {
   title: '',
   type: '',
-  size: null,
-  className: null,
   extraData: {},
-  icon: null,
-  imageUrl: null,
 }
 
 export default EleButton

@@ -83,8 +83,6 @@ function EleStoreLocation(props) {
 
 EleStoreLocation.defaultProps = {
   address: '店铺在这里',
-  longitude: null,
-  latitude: null,
   iconColor: '#3399ff',
   imageUrl: '',
   name: '店铺名称',
@@ -95,7 +93,6 @@ EleStoreLocation.defaultProps = {
   showAddress: true,
   showPhoneNumber: true,
   tags: [],
-  className: null,
 }
 
 export default EleStoreLocation

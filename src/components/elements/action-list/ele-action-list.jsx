@@ -46,7 +46,6 @@ function EleActionList(props) {
 }
 
 EleActionList.defaultProps = {
-  className: null,
   customStyle: {},
 }
 

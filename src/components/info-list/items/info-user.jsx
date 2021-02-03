@@ -44,7 +44,7 @@ InfoUser.defaultProps = {
   title: '',
   brief: '',
   imageUrl: '',
-  linkToUrl: null,
+  linkToUrl: '',
 }
 
 export default InfoUser

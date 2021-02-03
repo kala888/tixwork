@@ -18,7 +18,6 @@ function EleNavigationBox(props) {
 }
 
 EleNavigationBox.defaultProps = {
-  className: null,
   kids: [],
 }
 

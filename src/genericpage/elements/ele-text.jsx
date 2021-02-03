@@ -17,7 +17,6 @@ function EleText(props) {
 
 EleText.defaultProps = {
   text: '',
-  action: null,
   customStyle: {},
 }
 

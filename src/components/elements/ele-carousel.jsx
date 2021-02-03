@@ -97,9 +97,7 @@ EleCarousel.defaultProps = {
   circular: true,
   indicatorColor: 'rgba(255, 255, 255, 0.6)',
   indicatorActiveColor: '#fff',
-  indicatorDots: null,
   customStyle: {},
-  className: null,
   mode: 'aspectFill',
 }
 

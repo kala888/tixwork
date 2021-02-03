@@ -105,6 +105,9 @@ const config = {
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
+    router: {
+      mode: 'browser' // 或者是 'hash'
+    },
     postcss: {
       autoprefixer: {
         enable: true,

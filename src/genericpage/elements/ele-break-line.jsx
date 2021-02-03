@@ -31,6 +31,5 @@ EleBreakLine.defaultProps = {
   text: '',
   fontColor: '#ddd',
   customStyle: {},
-  className: null,
 }
 export default EleBreakLine

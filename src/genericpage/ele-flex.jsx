@@ -77,7 +77,6 @@ EleFlex.defaultProps = {
   flex: 1,
   kids: [], //children的同义词，不用children，微信有问题
   customStyle: {},
-  className: null,
 }
 
 EleFlex.config = {

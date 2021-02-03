@@ -23,10 +23,7 @@ function EleImage(props) {
 }
 
 EleImage.defaultProps = {
-  imageUrl: null,
-  src: null,
   customStyle: {},
-  className: null,
 }
 
 export default EleImage

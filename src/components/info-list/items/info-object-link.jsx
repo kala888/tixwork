@@ -31,7 +31,7 @@ InfoObjectLink.defaultProps = {
   id: '',
   title: '',
   brief: '',
-  linkToUrl: null,
+  linkToUrl: '',
 }
 
 export default InfoObjectLink

@@ -82,11 +82,9 @@ function FormItem(props) {
 FormItem.defaultProps = {
   name: '',
   clear: false,
-  value: null,
   errors: [],
   onChange: noop,
   layout: 'horizontal', //'vertical','float'
-  required: null,
   rules: [],
   showRequired: true,
   inline: true,

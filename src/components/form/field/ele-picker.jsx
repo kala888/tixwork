@@ -113,9 +113,7 @@ function ElePicker(props) {
 ElePicker.defaultProps = {
   mode: 'multiSelector',
   displayMode: 'right-brief',
-  range: null,
   customStyle: {},
-  className: null,
   name: '',
   displayValue: '',
   candidateValues: [],

@@ -44,7 +44,6 @@ function EleRadio(props) {
 EleRadio.defaultProps = {
   candidateValues: [],
   onChange: noop,
-  value: null,
 }
 
 export default EleRadio

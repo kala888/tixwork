@@ -38,7 +38,6 @@ EleNotice.defaultProps = {
   customStyle: {},
   imageHeight: 20,
   imageWidth: 20,
-  className: null,
 }
 
 export default EleNotice
