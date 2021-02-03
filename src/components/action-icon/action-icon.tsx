@@ -6,10 +6,18 @@ import classNames from 'classnames'
 
 import './action-icon.scss'
 
+interface ActionIconProps {
+  icon?: string,
+  imageUrl?: string,
+  className?: string,
+  mode?: string | Array<string>
+}
+
 /**
  *  有icon，优先展示ICON
  */
-function ActionIcon({ icon, imageUrl, className, mode }) {
+const ActionIcon: React.FC<ActionIconProps> = props => {
+  const { icon = '', imageUrl, className, mode } = props
   if (isEmpty(icon) && isEmpty(imageUrl)) {
     return null
   }
@@ -24,7 +32,7 @@ function ActionIcon({ icon, imageUrl, className, mode }) {
         [`iconfont-${icon}`]: !isBizFont,
       },
       className,
-      mode
+      mode,
     )
     return (
       <View className='action-icon'>

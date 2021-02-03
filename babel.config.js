@@ -6,7 +6,7 @@ const plugins = ['lodash']
 const presets = [
   ['taro', {
     framework: 'react',
-    ts: false,
+    ts: true,
   }],
 ]
 
