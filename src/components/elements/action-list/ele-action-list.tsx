@@ -4,8 +4,9 @@ import { isH5 } from '@/utils/index'
 import _ from 'lodash'
 import { getExtMode, isEmpty } from '@/nice-router/nice-router-util'
 
-import EleButton from '../ele-button'
+import EleButton, { EleButtonProps } from '../ele-button'
 import './styles.scss'
+
 
 const MixClass = [
   ['mix0'],
@@ -15,10 +16,15 @@ const MixClass = [
   ['mix0', 'mix025', 'mix05', 'mix075', 'mix1'],
 ]
 
-function EleActionList(props) {
-  const { list, items, actionList, mode = ['full'], className } = props
-  const theActionList = list || items || actionList
-  if (isEmpty(theActionList)) {
+export type EleActionListProps = {
+  items?: EleButtonProps[],
+  mode?: 'small' | 'right' | 'left' | 'full' | 'footer' | 'radius0' | 'footer-bar' | 'colorful' | string[],
+  className?: string
+}
+
+const EleActionList: React.FC<EleActionListProps> = (props) => {
+  const { items = [], mode = ['full'], className } = props
+  if (isEmpty(items)) {
     return null
   }
 
@@ -31,9 +37,9 @@ function EleActionList(props) {
 
   return (
     <View className={rootClass} onClick={stopTheEvent}>
-      {theActionList.map((action, idx) => {
+      {items.map((action, idx) => {
         const key = `btn_${action.id}_${action.code}_${action.title}`
-        const mixColorClass = _.get(MixClass, `${list.length - 1}.${idx}`)
+        const mixColorClass = _.get(MixClass, `${items.length - 1}.${idx}`)
         const itemClass = getExtMode(mixColorClass).classNames('ele-action-list-item')
         return (
           <View key={key} className={itemClass}>
@@ -44,9 +50,4 @@ function EleActionList(props) {
     </View>
   )
 }
-
-EleActionList.defaultProps = {
-  customStyle: {},
-}
-
 export default EleActionList

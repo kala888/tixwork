@@ -2,11 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { View } from '@tarojs/components'
 import _ from 'lodash'
 import { noop } from '@/nice-router/nice-router-util'
-import EleTag from '@/components/elements/ele-tag/ele-tag'
+import EleTag, { EleTagProps } from '@/components/elements/ele-tag/ele-tag'
 import './tag-list.scss'
 
-export default function TagList(props) {
-  const [tagList, setTagList] = useState([])
+type TagListProps = {
+  onItemClick?: Function,
+  onChange?: Function,
+  multiple?: boolean,
+  disabled?: boolean,
+  items?: EleTagProps[]
+}
+
+export default function TagList(props: TagListProps) {
+  const [tagList, setTagList] = useState<EleTagProps[]>([])
   const { onItemClick = noop, onChange = noop, multiple = false, disabled } = props
 
   useEffect(() => {
@@ -37,9 +45,10 @@ export default function TagList(props) {
   return (
     <View className='tag-list'>
       {tagList.map((it, idx) => {
-        const tag = _.isString(it) ? { title: it, id: idx } : it
+        const tag = _.isString(it) ? { title: it, id: `tag-${idx}` } : it
+        const key = `tag-item-${idx}-${tag.id}-${it.title}`
         return (
-          <EleTag key={`tag-item-${tag.id}-${it.title}-${it.value}`} {...tag} onClick={handleClick.bind(null, it)} />
+          <EleTag key={key} {...tag} onClick={handleClick.bind(null, it)} />
         )
       })}
     </View>

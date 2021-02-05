@@ -4,7 +4,13 @@ import Taro from '@tarojs/taro'
 import { getExtMode } from '@/nice-router/nice-router-util'
 import './styles.scss'
 
-function InfoMobile({ value = '', className }) {
+
+type InfoMobileProps = {
+  value: string,
+  className?: string,
+}
+
+function InfoMobile({ value = '', className }: InfoMobileProps) {
   const onClick = () => {
     Taro.makePhoneCall({ phoneNumber: value })
   }

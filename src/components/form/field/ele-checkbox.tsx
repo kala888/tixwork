@@ -3,12 +3,20 @@ import React, { useEffect, useState } from 'react'
 import { AtCheckbox, AtRadio } from 'taro-ui'
 import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
+import { CandidateValue } from '@/nice-router/nice-router'
 import './styles.scss'
 
-function EleCheckbox(props) {
-  const [selected, setSelected] = useState()
+type EleCheckboxProps = {
+  candidateValues?: CandidateValue[],
+  onChange?: Function,
+  value?: any,
+  radio?: boolean,
+}
 
-  const { candidateValues, onChange = noop, value, radio = false } = props
+function EleCheckbox(props: EleCheckboxProps) {
+  const [selected, setSelected] = useState<CandidateValue[]>()
+
+  const { candidateValues = [], onChange = noop, value, radio = false } = props
 
   useEffect(() => {
     if (isNotEmpty(value)) {
@@ -16,9 +24,9 @@ function EleCheckbox(props) {
     }
   }, [value])
 
-  const handleClick = (item) => {
-    setSelected(item)
-    onChange(item)
+  const handleClick = (items) => {
+    setSelected(items)
+    onChange(items)
   }
 
   const options = candidateValues.map((it) => ({
@@ -27,11 +35,13 @@ function EleCheckbox(props) {
     ...it,
   }))
 
+
   return (
     <View className='ele-checkbox'>
       {radio ? (
         <AtRadio options={options} value={selected} onClick={handleClick} />
       ) : (
+        // @ts-ignore
         <AtCheckbox options={options} selectedList={selected} onChange={handleClick} />
       )}
     </View>

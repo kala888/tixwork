@@ -100,7 +100,7 @@ const NavigationService = {
    * @param options
    * @returns {Promise<any>}
    */
-  navigate(routeName, params, options = {}) {
+  navigate(routeName, params = {}, options = {}) {
     return new Promise((resolve, reject) => {
       const url = toTaroUrl(routeName, params)
       // console.log('taro-redirect', url)

@@ -29,15 +29,15 @@
   text-align: left;
 }
 
-.info-text.left {
+.info-text--left {
   justify-content: flex-start;
 }
 
-.info-text.center {
+.info-text--center {
   justify-content: flex-start;
 }
 
-.info-text.bold {
+.info-text--bold {
   font-weight: 500;
 }
 
@@ -138,19 +138,19 @@
     margin-right: 8px;
   }
 
-  &-icon.normal {
+  &-icon--normal {
     border-color: $level-warn;
   }
 
-  &-icon.primary {
+  &-icon--primary {
     border-color: $level-primary;
   }
 
-  &-icon.warn {
+  &-icon--warn {
     border-color: $level-warn;
   }
 
-  &-icon.danger {
+  &-icon--danger {
     border-color: $level-danger;
   }
 }

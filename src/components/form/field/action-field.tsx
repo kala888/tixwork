@@ -5,8 +5,18 @@ import _ from 'lodash'
 import classNames from 'classnames'
 import './action-field.scss'
 
-function ActionField(props) {
-  const { value, placeholder, disabled, onClick, className, toggleStatus } = props
+type ActionFieldProps = {
+  value: string | { title: string },
+  placeholder?: string,
+  disabled?: boolean,
+  onClick?: Function,
+  className?: string,
+  toggleStatus?: boolean,
+  children?: any,
+}
+
+function ActionField(props: ActionFieldProps) {
+  const { value, placeholder, disabled, onClick = noop, className, toggleStatus } = props
 
   const handleClick = () => {
     if (!disabled) {

@@ -10,22 +10,22 @@ function InfoFile(props) {
     <View className='info-file'>
       <EleActionList
         mode='small'
-        list={[
+        items={[
           {
             id: 'open-document',
-            btnType: 'open-document',
+            type: 'open-document',
             linkToUrl,
             title: '查看',
           },
           {
             id: 'download-document',
-            btnType: 'download',
+            type: 'download',
             linkToUrl,
             title: '下载',
           },
           {
             id: 'download-copy',
-            btnType: 'copy',
+            type: 'copy',
             title: '分享',
             extraData: linkToUrl,
           },

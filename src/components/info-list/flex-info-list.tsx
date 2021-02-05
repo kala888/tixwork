@@ -1,13 +1,17 @@
 import React from 'react'
 
-import FlexInfoItem from '@/components/info-list/flex-info-item'
+import FlexInfoItem, { FlexInfoItemProps } from '@/components/info-list/flex-info-item'
 import SectionBar from '@/components/section-bar/section-bar'
 
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import { View } from '@tarojs/components'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-
 import './flex-info-list.scss'
+import { ActionListLike } from '@/nice-router/nice-router'
+
+
+type FlexInfoListProps = { items: FlexInfoItemProps[] } & ActionListLike
+
 /**
  * title  section 名字(optional)
  * onClick section 点击事件(optional)
@@ -19,7 +23,7 @@ import './flex-info-list.scss'
  * @returns {JSX.Element}
  * @constructor
  */
-function FlexInfoList(props) {
+function FlexInfoList(props: FlexInfoListProps) {
   const { items = [], actionList, ...others } = props
 
   return (
@@ -29,7 +33,7 @@ function FlexInfoList(props) {
       ))}
       {isNotEmpty(actionList) && (
         <View className='flex-info-list-actions'>
-          <EleActionList mode={['small', 'right']} list={actionList} />
+          <EleActionList mode={['small', 'right']} items={actionList} />
         </View>
       )}
     </SectionBar>

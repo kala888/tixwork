@@ -3,15 +3,11 @@ import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
+import { IconLike, ImageLike, ModeClass } from '@/nice-router/nice-router'
 
 import './action-icon.scss'
 
-interface ActionIconProps {
-  icon?: string,
-  imageUrl?: string,
-  className?: string,
-  mode?: string | Array<string>
-}
+type ActionIconProps = IconLike & ImageLike & ModeClass
 
 /**
  *  有icon，优先展示ICON

@@ -1,16 +1,23 @@
 import React from 'react'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-
+import EleTag from '@/components/elements/ele-tag/ele-tag'
 import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import ListofUtil from '../../listof-util'
 import './styles.scss'
-import EleTag from '@/components/elements/ele-tag/ele-tag'
 
-function Product(props) {
-  const { item = {} } = props
-  const { preTag = '', tags = [], brand = '', name, price } = item
-  const src = ListofUtil.getImageUrl(item)
+
+type ProductProps = {
+  preTag: string,
+  tags: string[],
+  brand: string,
+  name: string,
+  price: number
+}
+
+function Product(props: ProductProps) {
+  const { preTag = '', tags = [], brand = '', name, price } = props
+  const src = ListofUtil.getImageUrl(props)
 
   return (
     <View className='product'>
@@ -25,7 +32,7 @@ function Product(props) {
         </Text>
 
         <View className='product-info-brief'>
-          <Text numberOfLines={1}>{`￥${price}`}</Text>
+          <Text>{`￥${price}`}</Text>
           {tags.map((it) => isNotEmpty(it) && <EleTag title={it} mode='primary' size='small' />)}
         </View>
       </View>

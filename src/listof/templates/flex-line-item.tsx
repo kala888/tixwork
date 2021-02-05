@@ -19,7 +19,19 @@ import NavigationLine from './navigation-line/navigation-line'
 
 import './flex-line-item.scss'
 
-function FlexLineItem(props) {
+export type FlexLineItemProps = {
+  id?: string,
+  hashCode?: string,
+  item?: any,
+  bordered?: boolean,
+  horizontal?: boolean,
+  className?: string,
+  onItemClick?: Function,
+  displayMode?: string,
+  index?:number
+}
+
+function FlexLineItem(props: FlexLineItemProps) {
   const [loading, setLoading] = useState(false)
   const timer = useRef()
 
@@ -64,7 +76,7 @@ function FlexLineItem(props) {
         {
           ajax: item.ajax,
           onSuccess: () => stopLoading(),
-        }
+        },
       )
     }
   }, 3000)
@@ -98,12 +110,12 @@ function FlexLineItem(props) {
       {displayMode === 'v-card' && <CardTemplate {...itemProps} mode={['vertical']} />}
       {displayMode === 'user' && <CardTemplate {...itemProps} mode={['horizontal', 'circle', 'avatar']} />}
 
-      {displayMode === 'rich-text' && <RichTextTemplate {...itemProps} />}
+      {displayMode === 'rich-text' && <RichTextTemplate {...itemProps} {...item} />}
       {displayMode === 'object-picker' && <ObjectPickerItem {...itemProps} />}
       {displayMode === 'object-picker-popup' && <ObjectPickerPopupItem {...itemProps} />}
       {displayMode === 'info-list' && <FlexInfoList {...item} foldable />}
 
-      {displayMode === 'product' && <Product {...itemProps} />}
+      {displayMode === 'product' && <Product {...itemProps} {...item} />}
 
       {loading && (
         <View className='inline-loading'>

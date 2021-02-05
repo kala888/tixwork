@@ -1,6 +1,7 @@
 import React from 'react'
 import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
+import { ActionListLike, EleObject, TitleValue } from '@/nice-router/nice-router'
 
 import StatusFlag from '@/components/elements/ele-card/status-flag'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
@@ -9,8 +10,20 @@ import CardInfoTable from '@/components/ele-table/card-info-table'
 import ListofUtil from '../../listof-util'
 import './styles.scss'
 
-function AutoTemplate(props) {
-  const { item, showImageCount } = props
+type AutoItemProps = {
+  status: string,
+  infoList?: TitleValue[],
+  mode?: 'only-title' | 'image-on-bottom',
+} & ActionListLike & EleObject
+
+type AutoTemplateProps = {
+  item: AutoItemProps,
+  showImageCount?: number,
+  mode?: 'only-title' | 'image-on-bottom',
+}
+
+function AutoTemplate(props: AutoTemplateProps) {
+  const { item, showImageCount = 3 } = props
   const { title, brief, infoList = [], status, actionList } = item
 
   let list = []
@@ -24,7 +37,7 @@ function AutoTemplate(props) {
 
   return (
     <View className={rootClass}>
-      <StatusFlag title={status} mode='large' />
+      <StatusFlag title={status} size='normal' />
       {list.length > 0 && (
         <View className='auto-image-list'>
           {list.map((it: any, index) => {
@@ -44,7 +57,7 @@ function AutoTemplate(props) {
         {infoList.length > 0 && <CardInfoTable data={infoList} />}
       </View>
 
-      <EleActionList mode={['right', 'small']} className='auto-action-bar' list={actionList} />
+      <EleActionList mode={['right', 'small']} className='auto-action-bar' items={actionList} />
     </View>
   )
 }

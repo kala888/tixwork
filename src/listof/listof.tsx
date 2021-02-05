@@ -10,9 +10,24 @@ import ActionUtil from '@/nice-router/action-util'
 import { enrichListOfEntity } from '../utils'
 import ListofUtil from './listof-util'
 import './listof.scss'
-import FlexLineItem from './templates/flex-line-item'
+import FlexLineItem, { FlexLineItemProps } from './templates/flex-line-item'
 
-function Listof(props) {
+export type ListofProps = {
+  list?: FlexLineItemProps[]
+  items?: FlexLineItemProps[]
+  emptyMessage?: string
+  dataContainer?: object
+  listMeta?: object
+  displayMode?: string
+  onItemClick?: Function
+  horizontal?: boolean
+  longList?: boolean
+  height?: number
+  mode?: 'horizontal' | 'vertical'
+  className?: string
+}
+
+function Listof(props: ListofProps) {
   const { loading, showLoading, hideLoading } = useLoading(false)
   const { list, items, emptyMessage } = props
   const theList = list || items || []

@@ -6,7 +6,13 @@ import { getExtMode } from '@/nice-router/nice-router-util'
 
 import './footer-tips.scss'
 
-function FooterTips(props) {
+type FooterTipsProps = {
+  hasNextPage?: boolean
+  loading?: boolean
+  onLoadMore?: Function
+}
+
+function FooterTips(props: FooterTipsProps) {
   const { hasNextPage = false, loading, onLoadMore } = props
 
   let tips = loading ? '正在加载中...' : '我们是有底线的'

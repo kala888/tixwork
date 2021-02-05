@@ -6,15 +6,29 @@ import Taro from '@tarojs/taro'
 
 import ActionIcon from '@/components/action-icon/action-icon'
 import { Button, View } from '@tarojs/components'
+import { ActionLike2, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router'
 
 import './ele-button.scss'
 
 // form中组件封装后，button 不会触发form的handle方法问题
 // https://github.com/NervJS/taro-ui/issues/96
 
-function EleButton(props) {
+
+export type EleButtonProps = {
+  size?: 'small' | 'default',
+  type?: string,
+  ajax?: boolean,
+  disabled?: boolean,
+  reLaunch?: boolean,
+  openType?: string,
+  children?: any,
+  className?: string,
+  mode?: 'normal' | 'warn' | 'danger' | 'info' | 'secondary' | 'radius0' | 'ghost'
+} & IconLike & EleObject & ImageLike & ActionLike2
+
+
+function EleButton(props: EleButtonProps) {
   const {
-    id,
     linkToUrl,
     extraData,
     title,
@@ -30,15 +44,19 @@ function EleButton(props) {
     onClick,
     className,
     children,
+    code,
+    id,
     ...others
   } = props
+
+  console.log('the action code & id', code, id)
 
   let wxOpenType = openType
   if (!openType && (type === 'share' || type === 'getPhoneNumber' || type === 'getUserInfo')) {
     wxOpenType = type
   }
 
-  const formType = type === 'submit' || type === 'reset' ? type : null
+  const formType: any = type === 'submit' || type === 'reset' ? type : null
 
   const handleMakeCall = () => {
     const { phoneNumber } = extraData
@@ -49,6 +67,7 @@ function EleButton(props) {
   }
 
   const handleScan = async () => {
+    // @ts-ignore
     const res = await Taro.scanCode()
     const arg = encodeURIComponent(res.result)
     const actionPath = `${linkToUrl}${arg}/`
@@ -63,7 +82,7 @@ function EleButton(props) {
     }
     try {
       await Taro.showLoading({ title: '正在打开文件...', mask: true })
-      const res = await Taro.downloadFile({ url: linkToUrl })
+      const res: any = await Taro.downloadFile({ url: linkToUrl })
       await Taro.openDocument({ filePath: res.tempFilePath })
     } catch (e) {
       await Taro.showToast({ title: '文件打开失败，稍后重试', icon: 'none' })
@@ -137,15 +156,14 @@ function EleButton(props) {
       {
         navigationOptions: reLaunch ? { method: 'reLaunch' } : null,
         statInPage: ajax,
-      }
+      },
     )
   }, 200)
 
   const rootClass = getExtMode(mode, { disabled }).classNames('ele-button', className)
 
-  const buttonSize = size === 'small' ? 'mini' : size
+  const buttonSize: any = size === 'small' ? 'mini' : size
 
-  console.log('othersothersothersothers', others)
   return (
     <Button
       className={rootClass}
@@ -165,12 +183,6 @@ function EleButton(props) {
       )}
     </Button>
   )
-}
-
-EleButton.defaultProps = {
-  title: '',
-  type: '',
-  extraData: {},
 }
 
 export default EleButton

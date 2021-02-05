@@ -1,10 +1,17 @@
 import { View } from '@tarojs/components'
 import React from 'react'
-import EleTableCell from '@/components/ele-table/ele-table-cell'
+import EleTableCell, { EleTableCellProps } from '@/components/ele-table/ele-table-cell'
 import classNames from 'classnames'
 import './ele-table.scss'
 
-export default function EleTableRow(props) {
+export type EleTableRowProps = {
+  items?: EleTableCellProps [],
+  header?: any,
+  className?: string,
+  children?: any
+}
+
+const EleTableRow: React.FC<EleTableRowProps> = (props) => {
   const { items = [], header, className } = props
   const rootClass = classNames('ele-table-row', className, {
     'ele-table-row--header': header,
@@ -18,3 +25,5 @@ export default function EleTableRow(props) {
     </View>
   )
 }
+
+export default EleTableRow

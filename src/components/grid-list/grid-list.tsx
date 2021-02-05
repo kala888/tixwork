@@ -5,7 +5,17 @@ import classNames from 'classnames'
 import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import { getGroupListByColumn } from '@/utils/index'
 import NavigationService from '@/nice-router/navigation-service'
+import { ActionLike2, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router'
 import './grid-list.scss'
+
+type GridListItemProps = ImageLike & IconLike & ActionLike2 & EleObject
+
+type GridListProps = {
+  items: GridListItemProps [],
+  columnNum?: number,
+  onClick?: Function,
+  className?: string
+}
 
 /**
  * 参考 taro-ui的grid写了写了一个
@@ -13,7 +23,7 @@ import './grid-list.scss'
  * @returns {JSX.Element}
  * @constructor
  */
-export default function GridList(props) {
+export default function GridList(props: GridListProps) {
   const { items = [], columnNum = 3, onClick, className } = props
   if (isEmpty(items)) {
     return null
@@ -40,7 +50,7 @@ export default function GridList(props) {
         const { list } = row
         return (
           <View key={`row-${row.id}`} className='grid-list-row'>
-            {list.map((item, idx) => {
+            {list.map((item: GridListItemProps, idx) => {
               const { disabled, imageUrl, title = '', brief = '', icon = '' } = item
 
               const bodyClass = getExtMode({
@@ -52,16 +62,12 @@ export default function GridList(props) {
               const itemStyle = { flex: `0 0 ${100 / columnNum}%` }
               const actionTitle = `${title}${isNotEmpty(brief) ? '\n' + brief : ''}`
 
+              const key = `item-${idx}-${item.id}`
               return (
-                <View
-                  key={`item-${item.id}`}
-                  className={bodyClass}
-                  style={itemStyle}
-                  onClick={handleClick.bind(this, item)}
-                >
+                <View key={key} className={bodyClass} style={itemStyle} onClick={handleClick.bind(this, item)}>
                   <View className='grid-list-item_icon'>
                     {isNotEmpty(imageUrl) ? (
-                      <Image className='grid-list-item_icon-image' src={imageUrl} mode='heightFix' />
+                      <Image className='grid-list-item_icon-image' src={imageUrl || ''} mode='heightFix' />
                     ) : (
                       <Text className={`iconfont iconfont-${icon}`} />
                     )}

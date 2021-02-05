@@ -4,25 +4,29 @@ import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import { Text, View } from '@tarojs/components'
 
 import EleBadge from '@/components/elements/ele-badge/ele-badge'
-import EleButton from '@/components/elements/ele-button'
+import EleButton, { EleButtonProps } from '@/components/elements/ele-button'
 
 import './navigation-box.scss'
 
-function NavigationBox(props) {
-  const { title: actionBarTitle = '', list = [] } = props
-  const { className, customStyle = {}, roundBottom = true, roundTop = true } = props
+type NavigationBoxItem = { badge?: number } & EleButtonProps
 
-  const rootClass = getExtMode({
-    center: list.length <= 5,
-    'round-bottom': roundBottom,
-    'round-top': roundTop,
-  }).classNames('navigation-box', className)
+type NavigationBoxProps = {
+  title?: string,
+  items: NavigationBoxItem[],
+  mode?: 'round-bottom' | 'round-top',
+  className?: string
+}
+
+function NavigationBox(props: NavigationBoxProps) {
+  const { title: actionBarTitle = '', items = [], className, mode } = props
+
+  const rootClass = getExtMode(mode, { center: items.length <= 5 }).classNames('navigation-box', className)
 
   return (
-    <View className={rootClass} customStyle={customStyle}>
+    <View className={rootClass}>
       {isNotEmpty(actionBarTitle) && <View className='navigation-box-title'>{actionBarTitle}</View>}
       <View className='navigation-box-actions'>
-        {list.map((it) => {
+        {items.map((it) => {
           const { icon, imageUrl, title, badge, disabled } = it
           const itemClass = getExtMode({ disabled }).classNames('navigation-box-item')
 

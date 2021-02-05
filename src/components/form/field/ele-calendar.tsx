@@ -4,9 +4,19 @@ import { useVisible } from '@/service/use-service'
 import { formatTime, transToDate } from '@/utils/index'
 import { Picker } from '@tarojs/components'
 import { AtActionSheet, AtCalendar } from 'taro-ui'
-import ActionField from './action-field'
+import { ModeClass } from '@/nice-router/nice-router'
 
+import ActionField from './action-field'
 import './ele-calendar.scss'
+
+
+type EleCalendarProps = {
+  onChange?: Function,
+  placeholder?: string,
+  label?: string,
+  value?: any,
+  disabled?: boolean
+} & ModeClass
 
 /**
  * 有时候弹不出来，记得在外层包一个View
@@ -15,11 +25,11 @@ import './ele-calendar.scss'
  * @returns {JSX.Element}
  * @constructor
  */
-function EleCalendar(props) {
+function EleCalendar(props: EleCalendarProps) {
   const [date, setDate] = useState('')
   const [showCalendar, setShowCalendar] = useState(true)
   const { visible, show: showPopup, close: closePopup } = useVisible(false)
-  const { mode, onChange, placeholder, label, value, disabled } = props
+  const { mode, onChange = noop, placeholder, label, value, disabled } = props
 
   const show = () => {
     showPopup()

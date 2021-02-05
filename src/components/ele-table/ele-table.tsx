@@ -1,19 +1,18 @@
 import { View } from '@tarojs/components'
 import React from 'react'
-import EleTableRow from '@/components/ele-table/ele-table-row'
+import EleTableRow, { EleTableRowProps } from '@/components/ele-table/ele-table-row'
 import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import './ele-table.scss'
 
-/**
- * title:'xxx',
- * items:[
- *  {id:1, header:true, cellList:[{title:'xx',}]}
- *
- * ]
- *
- *
- */
-function EleTable(props) {
+type EleTableProps = {
+  title?: string,
+  data?: EleTableRowProps[],
+  children?: any,
+  className?: string,
+  bordered?: boolean
+}
+
+function EleTable(props: EleTableProps) {
   const { title, data = [], bordered = true, className } = props
   const rootClass = getExtMode({ bordered }).classNames('ele-table', className)
   return (

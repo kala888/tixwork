@@ -13,6 +13,7 @@ import EleActionList from '@/components/elements/action-list/ele-action-list'
 import Listof from '@/listof/listof'
 import EleButton from '@/components/elements/ele-button'
 import './me.scss'
+import { Action } from '@/nice-router/types'
 
 const Box_Navigator_List = [
   {
@@ -46,7 +47,7 @@ const LineItem_Navigator_List = [
 
 function MePage() {
   const root = useSelector((state) => state.me)
-  const [footerActionList, setFooterActionList] = useState([])
+  const [footerActionList, setFooterActionList] = useState<Action[]>([])
 
   usePageTitle(root)
   usePullDown(Config.api.FooterMe)
@@ -106,7 +107,7 @@ function MePage() {
         <Listof items={navigationLineItems} displayMode='navigation-line' />
       </View>
 
-      <EleActionList mode='full' list={footerActionList} />
+      <EleActionList mode='full' items={footerActionList} />
     </View>
   )
 }

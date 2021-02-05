@@ -9,7 +9,18 @@ import QRCodeImpl from 'qr.js/lib/QRCode'
 // 修改自 https://github.com/xueyida/QRcode.taro/blob/master/QRCodeCanvas.js
 const defaultCanvasId = 'qrcode-canvase'
 
-export default class EleQrcode extends React.PureComponent {
+type EleQrcodeProps = {
+  size: number,
+  level?: string,
+  bgColor: string,
+  fgColor: string,
+  logoSize?: number,
+  logo?: number,
+  text: 'string',
+  customStyle?: object
+}
+
+export default class EleQrcode extends React.PureComponent<EleQrcodeProps> {
   static defaultProps = {
     size: 200,
     level: 'L',
@@ -56,10 +67,11 @@ export default class EleQrcode extends React.PureComponent {
   }
 
   update() {
-    const { text, size, level, bgColor, fgColor, logoSize, logo } = this.props
+    const { text, size, level, bgColor, fgColor, logoSize = '100', logo = '' } = this.props
     const qrcode = new QRCodeImpl(-1, ErrorCorrectLevel[level])
     qrcode.addData(this.convertStr(text))
     qrcode.make()
+    // @ts-ignore
     const canvas = Taro.createCanvasContext(defaultCanvasId, this.$scope)
     if (!canvas) {
       return
@@ -76,7 +88,9 @@ export default class EleQrcode extends React.PureComponent {
 
     cells.forEach(function(row, rdx) {
       row.forEach(function(cell, cdx) {
-        canvas && (canvas.fillStyle = cell ? fgColor : bgColor)
+        if (canvas) {
+          canvas.fillStyle = cell ? fgColor : bgColor
+        }
         const w = Math.ceil((cdx + 1) * tileW) - Math.floor(cdx * tileW)
         const h = Math.ceil((rdx + 1) * tileH) - Math.floor(rdx * tileH)
         canvas && canvas.fillRect(Math.round(cdx * tileW), Math.round(rdx * tileH), w, h)
@@ -84,6 +98,7 @@ export default class EleQrcode extends React.PureComponent {
     })
     canvas.save()
     if (!_.isNil(logo)) {
+      // @ts-ignore
       canvas.drawImage(logo, (size - logoSize) / 2, (size - logoSize) / 2, logoSize, logoSize)
     }
     canvas.draw()
@@ -91,9 +106,9 @@ export default class EleQrcode extends React.PureComponent {
 
   render() {
     // style:{marginTop: '400px'}
-    const { size, style } = this.props
+    const { size, customStyle = {} } = this.props
     const itemWith = toRpx(size)
-    const canvasStyle = { height: itemWith, width: itemWith, ...style }
+    const canvasStyle = { height: itemWith, width: itemWith, ...customStyle }
     return <Canvas canvasId={defaultCanvasId} style={canvasStyle} />
   }
 }

@@ -5,9 +5,19 @@ import TagList from '@/components/elements/ele-tag/tag-list'
 import ActionField from '@/components/form/field/action-field'
 import { AtFloatLayout } from 'taro-ui'
 import { View } from '@tarojs/components'
+import { CandidateValue } from '@/nice-router/nice-router'
 import './ele-tag-picker.scss'
 
-export default function EleTagPicker(props) {
+type EleTagPickerProps = {
+  title?: string,
+  value?: any,
+  candidateValues?: CandidateValue[],
+  onChange?: Function,
+  disabled?: boolean,
+  placeholder?: string,
+}
+
+export default function EleTagPicker(props: EleTagPickerProps) {
   const { visible, toggle, close } = useVisible(false)
 
   const { title, value, candidateValues, onChange = noop, disabled, placeholder = '请选择...', ...others } = props

@@ -1,17 +1,24 @@
 import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { EleObject, ImageLike, ImageListLike } from '@/nice-router/nice-router'
 
 const defaultImage = null
 
-function getImageUrl(item = {}) {
-  const { imageList = [], editorSuggestionImageList = [], imageUrl, coverImage } = item
+function getImageUrl(
+  item: {
+    coverImage?: string
+    heroImage?: string
+  } & ImageLike &
+    ImageListLike
+) {
+  const { imageList = [], imageUrl, coverImage, heroImage } = item || {}
   if (coverImage) {
     return coverImage
   }
+  if (heroImage) {
+    return heroImage
+  }
   if (imageUrl) {
     return imageUrl
-  }
-  if (editorSuggestionImageList.length > 0) {
-    return editorSuggestionImageList[0].imageUrl
   }
   if (imageList.length > 0) {
     return imageList[0].imageUrl
@@ -19,15 +26,16 @@ function getImageUrl(item = {}) {
   return defaultImage
 }
 
-function getImageList(item = {}) {
-  const { imageList = [], editorSuggestionImageList = [], imageUrl } = item
-  let list = []
-  if (imageUrl) {
-    list.push({ id: `${item.id}_imageUrl`, imageUrl })
-  } else {
-    list = editorSuggestionImageList.concat(imageList)
+function getImageList(item: ImageLike & ImageListLike & EleObject = {}) {
+  const { imageList = [], imageUrl } = item
+  if (isNotEmpty(imageList)) {
+    return imageList
   }
-  return list
+  if (isNotEmpty(imageUrl)) {
+    return [{ id: `${item.id}_imageUrl`, imageUrl }]
+  }
+
+  return []
 }
 
 function getItemWidth(displayMode) {
@@ -38,6 +46,7 @@ function getItemWidth(displayMode) {
 
 function isSelfHoldClickTemplate(displayMode, item = {}) {
   if ('card' === displayMode) {
+    // @ts-ignore
     return isNotEmpty(item.documentUrl) || isNotEmpty(item.actionList)
   }
   return 'navigation-line' === displayMode

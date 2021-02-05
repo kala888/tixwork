@@ -1,9 +1,13 @@
 import React from 'react'
-import EleCarousel from '@/components/elements/ele-carousel'
+import EleCarousel, { EleCarouselItem } from '@/components/elements/ele-carousel'
 import { View } from '@tarojs/components'
 import './styles.scss'
 
-function InfoImageList(props) {
+type InfoImageListProps = {
+  value: EleCarouselItem[]
+}
+
+function InfoImageList(props: InfoImageListProps) {
   const { value } = props
   return (
     <View className='info-image-list'>

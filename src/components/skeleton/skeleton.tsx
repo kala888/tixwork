@@ -3,7 +3,13 @@ import { View } from '@tarojs/components'
 import _ from 'lodash'
 import './skeleton.scss'
 
-export default function Skeleton(props) {
+type SkeletonProps = {
+  loading: boolean,
+  size: number,
+  children?: any
+}
+
+export default function Skeleton(props: SkeletonProps) {
   const { loading = false, size = 8 } = props
   return (
     <View>

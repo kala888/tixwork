@@ -9,14 +9,31 @@ import './styles.scss'
 
 // TODO image picker 有个bug，可以暂时等待Taro ui 升级，要修改源码，https://github.com/NervJS/taro-ui/pull/1290
 
-function EleImagePicker(props) {
-  const { value = [], onChange, maxLength, disabled, brief } = props
 
-  const [files, setFiles] = useState([])
+type EleImage = {
+  imageUrl?: string,
+}
+
+type EleAtImage = {
+  url?: string,
+}
+
+type EleImagePickerProps = {
+  value: EleImage [] | string,
+  onChange?: Function,
+  maxLength?: number,
+  disabled?: boolean,
+  brief?: string
+}
+
+function EleImagePicker(props: EleImagePickerProps) {
+  const { value = [], onChange = noop, maxLength = 4, disabled, brief } = props
+
+  const [files, setFiles] = useState<EleAtImage[]>([])
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    let sourceFile = []
+    let sourceFile: EleImage[] = []
     if (!isEmpty(value)) {
       sourceFile = Array.isArray(value) ? value : [{ imageUrl: value }]
     }
@@ -24,7 +41,7 @@ function EleImagePicker(props) {
     setFiles(defaultImages)
   }, [value])
 
-  const handleChange = (theFiles = []) => {
+  const handleChange = (theFiles: EleAtImage[] = []) => {
     const images = theFiles.map((it) => ({ imageUrl: it.url }))
     onChange(images)
   }
@@ -42,7 +59,7 @@ function EleImagePicker(props) {
       const { remoteFile, sourceFile } = result
 
       setFiles((preState) => {
-        const result = preState.map((it) => {
+        const tempList = preState.map((it) => {
           if (it.url === sourceFile) {
             return {
               url: remoteFile,
@@ -50,8 +67,8 @@ function EleImagePicker(props) {
           }
           return it
         })
-        handleChange(result)
-        return result
+        handleChange(tempList)
+        return tempList
       })
     }
 
@@ -100,6 +117,7 @@ function EleImagePicker(props) {
     console.error('未知操作')
   }
 
+  // @ts-ignore
   const onImageClick = (index, file) => {
     // noinspection JSIgnoredPromiseFromCall
     Taro.previewImage({ urls: [file.url] })
@@ -111,6 +129,7 @@ function EleImagePicker(props) {
   const count = maxLength - files.length
   console.log('render image picker')
 
+
   return (
     <View>
       <AtImagePicker
@@ -119,6 +138,7 @@ function EleImagePicker(props) {
         length={4} //单行显示最大个数
         showAddBtn={showAddBtn}
         multiple={multiple}
+        // @ts-ignore
         files={files}
         onChange={handleFileChange}
         onImageClick={onImageClick}

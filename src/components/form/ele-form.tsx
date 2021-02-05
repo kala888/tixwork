@@ -174,7 +174,7 @@ function EleForm(props, ref) {
 
             {isNotEmpty(groupActionList) && (
               <View className='ele-form-group-actions'>
-                <EleActionList mode={['small', 'right']} list={actionList} />
+                <EleActionList mode={['small', 'right']} items={actionList} />
               </View>
             )}
           </View>

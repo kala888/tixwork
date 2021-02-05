@@ -2,8 +2,7 @@ import { isNotEmpty } from '@/nice-router/nice-router-util'
 
 const SHOW_AS_MULTIPLE_LINE = ['image', 'image-list']
 
-export function isMultiline(item = {}) {
-  const { value = '', multiline, type } = item
+export function isMultiline({ value = '', multiline, type }) {
   if (isNotEmpty(multiline)) {
     return multiline
   }

@@ -4,12 +4,12 @@ import { getExtMode, isEmpty } from '@/nice-router/nice-router-util'
 import './status-flag.scss'
 
 interface StatusFlagProps {
-  title: string,
-  mode?: any
+  title?: string,
+  size?: 'normal' | 'small'
 }
 
 const StatusFlag: React.FC<StatusFlagProps> = props => {
-  const { title, mode } = props
+  const { title = '', size = 'normal' } = props
   if (isEmpty(title)) {
     return null
   }
@@ -21,7 +21,7 @@ const StatusFlag: React.FC<StatusFlagProps> = props => {
     txt_tiny: title.length > 4,
   }).classNames('status-flag-txt')
 
-  const rootClass = getExtMode(mode).classNames('status-flag')
+  const rootClass = getExtMode({ [size]: size }).classNames('status-flag')
 
   return (
     <View className={rootClass}>
@@ -29,11 +29,6 @@ const StatusFlag: React.FC<StatusFlagProps> = props => {
       <Text className={txtClass}>{title}</Text>
     </View>
   )
-}
-
-StatusFlag.defaultProps = {
-  title: '',
-  mode: 'normal',
 }
 
 export default StatusFlag

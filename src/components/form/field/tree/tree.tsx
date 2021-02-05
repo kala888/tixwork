@@ -6,9 +6,22 @@ import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
 import './style.scss'
 
-function Tree(props) {
+
+type TreeProps = {
+  id?: string,
+  selected?: boolean,
+  onChange?: Function,
+  value: any,
+  disabled?: boolean,
+  nodes: TreeProps[],
+  expandAll?: boolean,
+  title: string,
+  brief: string
+}
+
+function Tree(props: TreeProps) {
   const { visible, toggle } = useVisible()
-  const { selected, onChange, value, disabled, nodes, expandAll, title, brief } = props
+  const { selected, onChange = noop, value, disabled, nodes, expandAll, title, brief } = props
   const handleItemSelect = () => {
     if (disabled) {
       return
@@ -46,8 +59,8 @@ function Tree(props) {
       </View>
 
       <View className={subTreeClass}>
-        {nodes.map((it) => (
-          <Tree key={`${it.id}_${it.title}`} selected={selected} onChange={onChange} expandAll={expandAll} {...it} />
+        {nodes.map((it, idx) => (
+          <Tree key={`${it.id}_${idx}`} selected={selected} onChange={onChange} expandAll={expandAll} {...it} />
         ))}
       </View>
     </View>

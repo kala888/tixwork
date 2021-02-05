@@ -3,8 +3,16 @@ import React from 'react'
 import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import './ele-table.scss'
 
-export default function EleTableCell(props) {
-  const { className, title, colspan = 1, mode = [] } = props
+export type EleTableCellProps = {
+  title?: string,
+  colspan?: number,
+  children?: any,
+  mode: 'left' | 'right',
+  className?: string
+}
+
+const EleTableCell: React.FC<EleTableCellProps> = (props) => {
+  const { title, colspan = 1, mode = '', className } = props
 
   const rootClass = getExtMode(mode).classNames('ele-table-cell', className)
 
@@ -15,3 +23,5 @@ export default function EleTableCell(props) {
     </View>
   )
 }
+
+export default EleTableCell

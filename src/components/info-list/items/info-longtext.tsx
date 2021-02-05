@@ -6,8 +6,16 @@ import _ from 'lodash'
 import { getExtMode } from '@/nice-router/nice-router-util'
 import './styles.scss'
 
-function InfoLongText(props) {
-  const { value = '', maxLength = 200, className, mode = [], useFold = true } = props
+type InfoLongTextProps = {
+  value?: string | object,
+  maxLength?: number,
+  useFold?: boolean,
+  className?: string,
+  children?: any
+}
+
+function InfoLongText(props: InfoLongTextProps) {
+  const { value = '', maxLength = 200, className, useFold = true } = props
   let theValue = _.isObject(value) ? JSON.stringify(value) : value
   if (_.isString(props.children)) {
     theValue = props.children
@@ -20,7 +28,7 @@ function InfoLongText(props) {
     showFoldAction = true
   }
 
-  const rootClass = getExtMode(mode, { fold: showFoldAction && !visible }).classNames('info-longtext', className)
+  const rootClass = getExtMode({ fold: showFoldAction && !visible }).classNames('info-longtext', className)
 
   return (
     <View className={rootClass}>

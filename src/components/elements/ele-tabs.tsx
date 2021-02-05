@@ -2,9 +2,19 @@ import React, { useEffect, useState } from 'react'
 import NavigationService from '@/nice-router/navigation-service'
 import { LoadingType } from '@/nice-router/nice-router-util'
 import { AtTabs } from 'taro-ui'
+import { ActionLike2 } from '@/nice-router/nice-router'
+import { TabItem } from 'taro-ui/types/tabs'
 
-function EleTabs(props) {
-  const { tabs } = props
+type EleTabItemProps = {
+  selected?: boolean
+} & ActionLike2
+
+export type EleTabsProps = {
+  tabs?: EleTabItemProps[] & TabItem[]
+}
+
+function EleTabs(props: EleTabsProps) {
+  const { tabs = [] } = props
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
@@ -20,7 +30,7 @@ function EleTabs(props) {
       {},
       {
         loading: LoadingType.barLoading,
-      }
+      },
     )
   }
 

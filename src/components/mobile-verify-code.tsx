@@ -10,10 +10,20 @@ import { AtInput } from 'taro-ui'
 
 import './form/field/styles.scss'
 
-function MobileVerifyCode(props) {
+type MobileVerifyCodeProps = {
+  onChange?: any
+  name: string
+  value?: string
+  placeholder?: string
+  className?: string
+  onSendCodeSuccess?: Function
+  maxCount?: number
+}
+
+function MobileVerifyCode(props: MobileVerifyCodeProps) {
   const { second, counting, startCount } = useCountdown(props.maxCount)
 
-  const { onChange, name, value, placeholder, className, onSendCodeSuccess = noop } = props
+  const { onChange, name, value = '', placeholder, className, onSendCodeSuccess = noop } = props
 
   const sendCode = async () => {
     if (counting) {

@@ -17,6 +17,12 @@ import InfoUser from './items/info-user'
 
 import './styles.scss'
 
+export type FlexInfoItemProps = {
+  title: string,
+  value?: any,
+  type: 'money' | 'longtext' | 'mobile' | 'auto' | 'user' | 'status' | 'date' | 'datetime' | 'document' | 'image' | 'image-list' | 'tag-list'
+}
+
 function RenderInfoItem(props) {
   const { type } = props
 
@@ -38,7 +44,7 @@ function RenderInfoItem(props) {
   return <InfoText {...props} />
 }
 
-function FlexInfoItem(props) {
+function FlexInfoItem(props: FlexInfoItemProps) {
   const { title, value } = props
 
   if (isEmpty(value)) {

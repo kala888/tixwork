@@ -6,19 +6,28 @@ import _ from 'lodash'
 import EleTable from '@/components/ele-table/ele-table'
 import EleTableRow from '@/components/ele-table/ele-table-row'
 import EleTableCell from '@/components/ele-table/ele-table-cell'
+import { TitleValue } from '@/nice-router/nice-router'
+
 import './card-info-table.scss'
+
 
 const getMaxLabelLength = (list, idx = 0) => {
   const result = _.max(
     list.map((it) => {
       const titleLength = _.get(it, idx + '.title', '').length
       return titleLength > 2 ? titleLength : 2
-    })
+    }),
   )
+  // @ts-ignore
   return result > 5 ? 5 : result
 }
 
-export default function CardInfoTable(props) {
+type CardInfoTableProps = {
+  data: TitleValue[],
+  className?: string,
+}
+
+export default function CardInfoTable(props: CardInfoTableProps) {
   const { data = [], className } = props
   const rowList = _.chunk(data, 2)
   const rootClass = classNames('card-info-table', className)
@@ -35,7 +44,7 @@ export default function CardInfoTable(props) {
   return (
     <View className={rootClass}>
       <EleTable bordered={false}>
-        {rowList.map((row, idx) => {
+        {rowList.map((row: [TitleValue, TitleValue], idx) => {
           const leftItem = row[0] || {}
           const rightItem = row[1] || {}
           const showRight = isNotEmpty(rightItem)

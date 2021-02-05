@@ -1,11 +1,17 @@
 import SearchBar from '@/listof/search-bar'
 import EleTabs from '@/components/elements/ele-tabs'
-import FlexLineItem from '@/listof/templates/flex-line-item'
+import FlexLineItem, { FlexLineItemProps } from '@/listof/templates/flex-line-item'
 import React from 'react'
 
-export default function FlexHeader(props) {
+type FlexHeaderProps = {
+  type?: 'search' | 'tabs' | string
+  tabsType?: string
+  tabs?: any
+} & Partial<FlexLineItemProps>
+
+export default function FlexHeader(props: FlexHeaderProps) {
   const { type } = props
   if (type === 'search') return <SearchBar {...props} />
-  if (type === 'tabs') return <EleTabs {...props} type={props.tabsType} />
+  if (type === 'tabs') return <EleTabs {...props} />
   return <FlexLineItem {...props} />
 }

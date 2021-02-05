@@ -8,9 +8,13 @@ import Taro from '@tarojs/taro'
 import ActionUtil from '@/nice-router/action-util'
 import _ from 'lodash'
 import classNames from 'classnames'
+import { EleObject, ImageLike } from '@/nice-router/nice-router'
 import './styles.scss'
 
-function InfoUser(props) {
+
+type InfoUserProps = ImageLike & EleObject
+
+function InfoUser(props: InfoUserProps) {
   const { id, title, brief, imageUrl } = props
 
   const onClick = _.debounce(() => {

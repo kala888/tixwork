@@ -6,10 +6,17 @@ import classNames from 'classnames'
 
 import { useVisible } from '@/service/use-service'
 import { getExtMode, isEmpty } from '@/nice-router/nice-router-util'
-import EleButton from '@/components/elements/ele-button'
+import EleButton, { EleButtonProps } from '@/components/elements/ele-button'
 import ActionIcon from '@/components/action-icon/action-icon'
-
 import './styles.scss'
+
+type SectionBarProps = {
+  children?: any,
+  className?: string,
+  foldable?: boolean,
+  expand?: boolean,
+  mode?: 'bordered' | 'highlight'
+} & EleButtonProps
 
 /**
  * 可折叠，支持onClick和linkToUrl
@@ -18,7 +25,7 @@ import './styles.scss'
  * @returns {JSX.Element}
  * @constructor
  */
-function SectionBar(props) {
+function SectionBar(props: SectionBarProps) {
   const { visible, toggle, show, close } = useVisible(true)
 
   const {

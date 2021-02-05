@@ -8,11 +8,23 @@ import { Swiper, SwiperItem, Video, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
 
+import { SwiperProps } from '@tarojs/components/types/Swiper'
+
+import { ActionLike2, ImageLike, VideoLike } from '@/nice-router/nice-router'
+import { ImageProps } from '@tarojs/components/types/Image'
 import './styles.scss'
 
-function EleCarousel(props) {
+export type EleCarouselItem = ActionLike2 & ImageLike & VideoLike
+
+export type EleCarouselProps = {
+  items?: EleCarouselItem[],
+  customStyle?: object,
+  imageMode?: ImageProps.mode
+} & SwiperProps
+
+function EleCarousel(props: EleCarouselProps) {
   const {
-    items,
+    items = [],
     autoplay,
     interval,
     duration,
@@ -22,14 +34,14 @@ function EleCarousel(props) {
     indicatorDots,
     customStyle,
     className,
-    mode,
+    imageMode,
   } = props
 
   if (isEmpty(items)) {
     return null
   }
 
-  const handleClick = async (item = {}) => {
+  const handleClick = async (item: EleCarouselItem = {}) => {
     const { videoUrl = '', imageUrl } = item
     console.log('carousel viewed', item)
 
@@ -43,7 +55,7 @@ function EleCarousel(props) {
     }
 
     if (isEmpty(videoUrl) && isNotEmpty(imageUrl)) {
-      await Taro.previewImage({ urls: [imageUrl] })
+      await Taro.previewImage({ urls: [imageUrl || ''] })
     }
   }
 
@@ -62,24 +74,26 @@ function EleCarousel(props) {
         indicatorDots={showDots}
         className='ele-carousel-item'
       >
-        {items.map((it) => {
+        {items.map((it, idx) => {
           const { videoUrl = '', imageUrl } = it
+          // @ts-ignore
+          const key = `carousel-${idx}-${it.id}`
+
           return (
-            <SwiperItem key={it.id} onClick={() => handleClick(it)} className='ele-carousel-item'>
+            <SwiperItem key={key} onClick={() => handleClick(it)} className='ele-carousel-item'>
               {videoUrl.length > 0 ? (
                 <Video
                   className='ele-carousel-item'
                   src={videoUrl}
                   controls
-                  autoplay={it.autoplay}
                   poster={imageUrl}
-                  initialTime='0'
                   loop
                   muted={false}
                   direction={90}
                 />
               ) : (
-                <ServerImage className='ele-carousel-item' src={it.imageUrl} mode={mode} size='large' />
+                // @ts-ignore
+                <ServerImage className='ele-carousel-item' src={it.imageUrl} mode={imageMode} size='large' />
               )}
             </SwiperItem>
           )

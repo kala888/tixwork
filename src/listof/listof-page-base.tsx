@@ -11,12 +11,25 @@ import Config from '@/utils/config'
 import { Block, View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation-service'
 
-import Listof from './listof'
+import { ActionListLike } from '@/nice-router/nice-router'
+import { EleTabsProps } from '@/components/elements/ele-tabs'
+import Listof, { ListofProps } from './listof'
 import './styles.scss'
 import FlexLineItem from './templates/flex-line-item'
 import FlexHeader from './flex-header'
 
-function ListofPageBase(props) {
+type listofPageBaseProps = {
+  pageTitle?: string
+  content?: string
+  searchAction?: object
+  header?: object
+  renderHeader?: Function
+  renderFooter?: Function
+} & ActionListLike &
+  EleTabsProps &
+  ListofProps
+
+function ListofPageBase(props: listofPageBaseProps) {
   const [height, setHeight] = useState()
 
   const { pageTitle = Config.name } = props
@@ -43,6 +56,7 @@ function ListofPageBase(props) {
           theHeight
         )
         console.log('calc the height for listof without header and footer ', theHeight)
+        // @ts-ignore
         setHeight(`${theHeight}px`)
       })
       .exec()
@@ -51,7 +65,6 @@ function ListofPageBase(props) {
 
   const {
     tabs,
-    tabsType,
     list,
     listMeta,
     displayMode,
@@ -71,10 +84,10 @@ function ListofPageBase(props) {
       {isNotEmpty(header) && <FlexLineItem item={header} {...header} />}
       {isNotEmpty(searchAction) && <FlexHeader {...searchAction} type='search' />}
       {isNotEmpty(content) && <FlexHeader item={{ content }} displayMode='rich-text' />}
-      {isNotEmpty(tabs) && <FlexHeader type='tabs' tabs={tabs} tabsType={tabsType} />}
+      {isNotEmpty(tabs) && <FlexHeader type='tabs' tabs={tabs} />}
     </Block>
   )
-  const theFooter = <EleActionList mode={['footer-bar', 'colorful']} list={actionList} />
+  const theFooter = <EleActionList mode={['footer-bar', 'colorful']} items={actionList} />
 
   const rootClass = classNames('listof-page', classNames)
 

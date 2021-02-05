@@ -3,7 +3,15 @@ import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import './ele-badge.scss'
 
-export default function EleBadge(props) {
+type EleBadgeProps = {
+  dot?: boolean,
+  value?: number,
+  maxValue?: number,
+  className?: string,
+  children?: any,
+}
+
+export default function EleBadge(props: EleBadgeProps) {
   const { dot, value = '', maxValue = 99, className } = props
   const theValue = value > maxValue ? `${maxValue}+` : `${value}`
 

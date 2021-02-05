@@ -7,7 +7,27 @@ import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import CardInfoTable from '@/components/ele-table/card-info-table'
 
+import { ActionListLike, EleObject, ImageLike } from '@/nice-router/nice-router'
+
 import './ele-card.scss'
+
+type EleCardLevel = 'default' | 'normal' | 'primary' | 'warn' | 'danger'
+
+export type EleCardMode = 'horizontal' | 'vertical' | 'vertical-small'
+  | 'vertical-normal' | 'circle' | 'large' | 'small' | 'as-text'
+  | 'avatar'
+
+
+export type EleCardProps = {
+  headerTitle?: string,
+  headerBrief?: string,
+  status?: string,
+  flag?: string,
+  level?: EleCardLevel,
+  infoList?: any[],
+  mode?: EleCardMode | EleCardMode[],
+  onClick?: Function,
+} & ImageLike & EleObject & ActionListLike
 
 /*
  * Copyright(c) 2020 nice-router
@@ -16,14 +36,15 @@ import './ele-card.scss'
  */
 
 //mode=small,large
-function EleCard(props) {
-  const { headerTitle, headerBrief, title, brief, imageUrl, status, flag, level, actionList, infoList, onClick } = props
+function EleCard(props: EleCardProps) {
+  const { headerTitle, headerBrief, title, brief, imageUrl, status, flag, level = '', actionList, infoList = [], onClick } = props
   const { mode = [] } = props
-  const flagSize = mode.includes('large') ? 'large' : 'small'
+  const flagSize = mode.includes('large') ? 'normal' : 'small'
   const hasImage = isNotEmpty(imageUrl)
   const hasFlag = !hasImage && isNotEmpty(flag)
-  if (!hasImage) {
+  if (!hasImage && Array.isArray(mode)) {
     mode.push('as-text')
+    // @ts-ignore
     mode.push(level)
   }
   const handleClick = () => {
@@ -42,7 +63,7 @@ function EleCard(props) {
   const hasFooter = isNotEmpty(actionList) || isNotEmpty(infoList)
   return (
     <View className='ele-card'>
-      <StatusFlag title={status} mode={flagSize} />
+      <StatusFlag title={status} size={flagSize} />
       {hasHeader && (
         <View className='ele-card-header'>
           <View className='ele-card-header-title'>{headerTitle}</View>
@@ -69,7 +90,7 @@ function EleCard(props) {
       {hasFooter && (
         <View className='ele-card-footer'>
           {isNotEmpty(infoList) && <CardInfoTable data={infoList} />}
-          {isNotEmpty(actionList) && <EleActionList mode={['right', 'small']} list={actionList} />}
+          {isNotEmpty(actionList) && <EleActionList mode={['right', 'small']} items={actionList} />}
         </View>
       )}
     </View>
