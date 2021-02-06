@@ -1,7 +1,7 @@
 import { isNotEmpty } from '@/nice-router/nice-router-util'
-import { EleObject, ImageLike, ImageListLike } from '@/nice-router/nice-router'
+import { EleObject, ImageLike, ImageListLike } from '@/nice-router/nice-router-types'
 
-const defaultImage = null
+const defaultImage = ''
 
 function getImageUrl(
   item: {
@@ -9,7 +9,7 @@ function getImageUrl(
     heroImage?: string
   } & ImageLike &
     ImageListLike
-) {
+): string {
   const { imageList = [], imageUrl, coverImage, heroImage } = item || {}
   if (coverImage) {
     return coverImage
@@ -21,18 +21,18 @@ function getImageUrl(
     return imageUrl
   }
   if (imageList.length > 0) {
-    return imageList[0].imageUrl
+    return imageList[0].imageUrl || ''
   }
   return defaultImage
 }
 
-function getImageList(item: ImageLike & ImageListLike & EleObject = {}) {
+function getImageList(item: ImageLike & ImageListLike & EleObject = {}): ImageLike[] {
   const { imageList = [], imageUrl } = item
   if (isNotEmpty(imageList)) {
     return imageList
   }
   if (isNotEmpty(imageUrl)) {
-    return [{ id: `${item.id}_imageUrl`, imageUrl }]
+    return [{ imageUrl }]
   }
 
   return []
@@ -44,7 +44,7 @@ function getItemWidth(displayMode) {
   }
 }
 
-function isSelfHoldClickTemplate(displayMode, item = {}) {
+function isSelfHoldClickTemplate(displayMode: string, item: object = {}): boolean {
   if ('card' === displayMode) {
     // @ts-ignore
     return isNotEmpty(item.documentUrl) || isNotEmpty(item.actionList)

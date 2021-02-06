@@ -1,5 +1,5 @@
 import React from 'react'
-import NiceRouter from '@/nice-router/nice-router'
+import NiceRouterConfig from '@/nice-router/nice-router.config'
 import { noop } from '@/nice-router/nice-router-util'
 import Config from '@/utils/config'
 import { isH5, isWeapp } from '@/utils/index'
@@ -30,7 +30,7 @@ const dvaApp = dva.createApp({
   models: models,
 })
 const store = dvaApp.getStore()
-NiceRouter.start({ config: Config, container: dvaApp })
+NiceRouterConfig.start({ config: Config, container: dvaApp })
 
 class App extends React.Component {
   componentDidMount() {
@@ -78,7 +78,7 @@ class App extends React.Component {
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render() {
-    return <Provider store={store}>{this.props.children}</Provider>
+    return (<Provider store={store}> {this.props.children} </Provider>)
   }
 }
 

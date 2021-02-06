@@ -6,7 +6,7 @@ import Taro from '@tarojs/taro'
 
 import ActionIcon from '@/components/action-icon/action-icon'
 import { Button, View } from '@tarojs/components'
-import { ActionLike2, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router'
+import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types'
 
 import './ele-button.scss'
 
@@ -23,8 +23,9 @@ export type EleButtonProps = {
   openType?: string,
   children?: any,
   className?: string,
-  mode?: 'normal' | 'warn' | 'danger' | 'info' | 'secondary' | 'radius0' | 'ghost'
-} & IconLike & EleObject & ImageLike & ActionLike2
+  mode?: 'normal' | 'warn' | 'danger' | 'info' | 'secondary' | 'radius0' | 'ghost',
+  onGetPhoneNumber?: any
+} & IconLike & EleObject & ImageLike & ActionLike
 
 
 function EleButton(props: EleButtonProps) {

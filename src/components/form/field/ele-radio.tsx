@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import _ from 'lodash'
 import { getExtMode, isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { Label, Radio, RadioGroup, View } from '@tarojs/components'
+import { CandidateValue } from '@/nice-router/nice-router-types'
 import './styles.scss'
 
 function EleRadio(props) {
-  const [selected, setSelected] = useState('')
+  const [selected, setSelected] = useState<CandidateValue>()
 
   const { candidateValues = [], onChange = noop, value, mode = [] } = props
 

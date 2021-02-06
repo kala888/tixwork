@@ -6,17 +6,18 @@ import classNames from 'classnames'
 
 import { useVisible } from '@/service/use-service'
 import { getExtMode, isEmpty } from '@/nice-router/nice-router-util'
-import EleButton, { EleButtonProps } from '@/components/elements/ele-button'
+import EleButton from '@/components/elements/ele-button'
 import ActionIcon from '@/components/action-icon/action-icon'
 import './styles.scss'
+import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types'
 
 type SectionBarProps = {
   children?: any,
   className?: string,
   foldable?: boolean,
   expand?: boolean,
-  mode?: 'bordered' | 'highlight'
-} & EleButtonProps
+  mode?: 'bordered' | 'highlight' | string[]
+} & ActionLike & ImageLike & EleObject & IconLike
 
 /**
  * 可折叠，支持onClick和linkToUrl

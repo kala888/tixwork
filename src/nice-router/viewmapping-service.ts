@@ -1,16 +1,23 @@
 import _ from 'lodash'
-import NiceRouter from './nice-router'
+import NiceRouterConfig from './nice-router.config'
 import { isEmpty, log } from './nice-router-util'
 
 const POINTER = {}
 const ViewmappingService = {
-  getView(backendKey = '', stageInPage = false) {
+  getView(
+    backendKey: string = '',
+    stageInPage: boolean = false
+  ): {
+    pageName?: string
+    stateAction?: string | string[]
+    effectAction?: string | string[]
+  } {
     const key = _.trim(backendKey)
-    let view = _.get(NiceRouter.config.viewConfig, key, {})
+    let view = _.get(NiceRouterConfig.config.viewConfig, key, {})
     if (isEmpty(view)) {
       const shortKey = key.substr(key.lastIndexOf('.') + 1, key.length)
       log('the key for class', key, 'not found, try to map with shortKey', shortKey)
-      view = NiceRouter.config.viewConfig[shortKey] || {}
+      view = NiceRouterConfig.config.viewConfig[shortKey] || {}
     }
     if (Array.isArray(view)) {
       const pointer = _.get(POINTER, backendKey, -1)

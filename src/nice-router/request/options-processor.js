@@ -1,4 +1,4 @@
-import NiceRouter from '@/nice-router/nice-router'
+import NiceRouterConfig from '@/nice-router/nice-router.config'
 import _ from 'lodash'
 import pathToRegexp from 'path-to-regexp'
 
@@ -28,7 +28,7 @@ function getUrlAndParam({ uri, params }) {
   })
 
   return {
-    url: NiceRouter.config.baseURL + domain + url,
+    url: NiceRouterConfig.config.baseURL + domain + url,
     params: processedParams,
   }
 }

@@ -3,8 +3,21 @@ import Crypto from './crypto'
 import './hmac'
 import './sha1'
 
-function getAliyunConfig(ossToken = {}) {
-  const { accessKeyId, accessKeySecret, securityToken } = ossToken
+
+export type OssTokenDTO = {
+  type: 'qiniu' | 'aliyun',
+  expiration: string,
+  userHome: string,
+  prefix: string,
+  uploadPrefix: string,
+  accessKeyId: string,
+  accessKeySecret: string,
+  securityToken: string,
+  bucket: string,
+}
+
+function getAliyunConfig(ossToken: OssTokenDTO) {
+  const { accessKeyId, accessKeySecret, securityToken } = ossToken||{}
 
   const policyText = {
     // "expiration": ossConfig.expiration,

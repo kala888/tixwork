@@ -7,16 +7,11 @@ const AUTH_INFO = 'AUTH_INFO'
 
 const SAFETY_TIME = 1800 //预留半个小时过期（单位秒）
 
-async function saveTokenAsync(token) {
+async function saveTokenAsync(token: string) {
   StorageTools.set(TOKEN, token)
   log('saveToken', token)
 
   if (token) {
-    window.Date = Date
-    window.setTimeout = setTimeout
-    console.log('xxxx date:', window.Date)
-    console.log('xxxx setTimeout', window.setTimeout)
-    console.log('xxxx token', token)
     const authInfo = jwtDecode(token)
     StorageTools.set(AUTH_INFO, authInfo)
     log('saveAuthInfo', authInfo)
@@ -47,25 +42,6 @@ async function logout() {
   StorageTools.remove(AUTH_INFO)
   // StorageTools.remove(COOKIES)
 }
-
-// async function syncToken() {
-//   const authInfo = await getAuthInfoAsync()
-//   const uri = Config.api.JsCode2Session
-//   if (!authInfo.expireIn && uri) {
-//     const wxloginResp = await Taro.login()
-//     if (wxloginResp.code) {
-//       const url = uri.replace(':code', wxloginResp.code)
-//       NavigationService.ajax(
-//         url,
-//         {},
-//         {
-//           onSuccess: (resp) => {
-//             saveTokenAsync(resp.token)
-//           },
-//         })
-//     }
-//   }
-// }
 
 const AuthTools = {
   getTokenAsync,

@@ -6,11 +6,11 @@ import SectionBar from '@/components/section-bar/section-bar'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import { View } from '@tarojs/components'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
+import { ActionListLike } from '@/nice-router/nice-router-types'
 import './flex-info-list.scss'
-import { ActionListLike } from '@/nice-router/nice-router'
 
 
-type FlexInfoListProps = { items: FlexInfoItemProps[] } & ActionListLike
+type FlexInfoListProps = { items: FlexInfoItemProps[] } & Partial<ActionListLike>
 
 /**
  * title  section 名字(optional)

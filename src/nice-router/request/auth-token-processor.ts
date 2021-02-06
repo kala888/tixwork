@@ -8,14 +8,14 @@ const AuthTokenProcessor = async (chain) => {
   const { headers = {} } = requestParams
 
   log('set Authorization token to Request Header:', token)
-  return chain
-    .proceed({
-      ...requestParams,
-      headers: {
-        ...headers,
-        Authorization: token,
-      },
-    })
+  const theParam: any = {
+    ...requestParams,
+    headers: {
+      ...headers,
+      Authorization: token,
+    },
+  }
+  return chain.proceed(theParam)
     .then(async (theData) => {
       const authorization = _.get(theData, 'headers.authorization', '')
       console.log('aaaaaaa', authorization, theData)

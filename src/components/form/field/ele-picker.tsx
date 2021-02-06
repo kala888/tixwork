@@ -42,7 +42,7 @@ function ElePicker(props) {
   }, [value, source, placeholder])
 
   const reBuildRangeList = (col, idx = 0) => {
-    setRange((pre) => {
+    setRange((pre:any) => {
       const tempRange = col === 0 ? [source] : _.clone(pre)
       for (let i = col; i < numberOfColumn; i++) {
         const v = getValue(tempRange[i], i === col ? idx : 0)

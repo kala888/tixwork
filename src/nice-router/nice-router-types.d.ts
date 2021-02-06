@@ -16,12 +16,14 @@ export interface VideoLike {
   videoUrl?: string
 }
 
-export interface ActionLike2 {
+export interface ActionLike {
   code?: string
   linkToUrl?: string
   onClick?: Function
+  onChange?: Function
   extraData?: any
   disabled?: boolean
+  statInPage?: boolean
 }
 
 export interface ModeClass {

@@ -8,7 +8,7 @@ import ActionField from './action-field'
 import './styles.scss'
 
 function ElePopupSelect(props) {
-  const { visible, show, close, toggle } = useVisible(false)
+  const { visible, show, close } = useVisible(false)
 
   const { onChange, multiple, value, placeholder, label, candidateValues, disabled } = props
 

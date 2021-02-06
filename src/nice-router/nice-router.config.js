@@ -26,26 +26,26 @@ const NiceRouterStatus = {
   done: 1,
 }
 
-const NiceRouter = {
+const NiceRouterConfig = {
   config: {},
   status: NiceRouterStatus.initial,
 }
 
-NiceRouter.start = ({ config = {}, container }) => {
+NiceRouterConfig.start = ({ config = {}, container }) => {
   NavigationService.setContainer(container)
 
-  NiceRouter.config = _.merge(defaultConfig, config)
+  NiceRouterConfig.config = _.merge(defaultConfig, config)
 
   const tempViewConfig = {}
-  const vcfg = NiceRouter.config.viewConfig
+  const vcfg = NiceRouterConfig.config.viewConfig
   Object.keys(vcfg).map((key) => {
     tempViewConfig[key.trim()] = vcfg[key]
   })
-  NiceRouter.config.viewConfig = tempViewConfig
+  NiceRouterConfig.config.viewConfig = tempViewConfig
 
-  NiceRouter.status = NiceRouterStatus.done
+  NiceRouterConfig.status = NiceRouterStatus.done
 
-  return NiceRouter
+  return NiceRouterConfig
 }
 
-export default NiceRouter
+export default NiceRouterConfig

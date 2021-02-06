@@ -6,11 +6,11 @@ import { Text, View } from '@tarojs/components'
 import _ from 'lodash'
 import classNames from 'classnames'
 
-import { ActionLike2, EleObject } from '@/nice-router/nice-router'
+import { ActionLike, EleObject } from '@/nice-router/nice-router-types'
 import './styles.scss'
 
 
-function InfoObjectLink(props: EleObject & ActionLike2) {
+function InfoObjectLink(props: EleObject & ActionLike) {
   const { id, title, brief } = props
 
   const onClick = _.debounce(() => {

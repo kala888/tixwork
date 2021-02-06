@@ -5,7 +5,7 @@ import TagList from '@/components/elements/ele-tag/tag-list'
 import ActionField from '@/components/form/field/action-field'
 import { AtFloatLayout } from 'taro-ui'
 import { View } from '@tarojs/components'
-import { CandidateValue } from '@/nice-router/nice-router'
+import { CandidateValue } from '@/nice-router/nice-router-types'
 import './ele-tag-picker.scss'
 
 type EleTagPickerProps = {

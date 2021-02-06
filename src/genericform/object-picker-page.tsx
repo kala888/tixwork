@@ -23,7 +23,7 @@ function ObjectPickerPage() {
         linkToUrl,
         {},
         {
-          loading: LoadingType.modal,
+          loading: LoadingType.Modal,
         }
       )
     }

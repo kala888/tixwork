@@ -6,7 +6,7 @@ import Taro from '@tarojs/taro'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import ActionUtil from '@/nice-router/action-util'
 
-function wechatLogin(payload = ({} = {})) {
+function wechatLogin(payload = {}) {
   const { loginMethod } = payload
   const wxObj = loginMethod === 'wechat_work_app' ? wx.qy : Taro
 

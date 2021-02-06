@@ -6,7 +6,7 @@ import { Current } from '@tarojs/taro'
 
 export default function H5Page() {
   const { visible, close } = useVisible(true)
-  const { uri = '' } = Current.router.params || {}
+  const { uri = '' } = Current.router?.params || {}
   const src = decodeURIComponent(uri)
   console.log('action path in H5', src)
   return (

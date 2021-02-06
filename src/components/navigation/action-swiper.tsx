@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import { Swiper, SwiperItem, View } from '@tarojs/components'
 import NavigationBox from '@/components/navigation/navigation-box'
-import { ActionListLike } from '@/nice-router/nice-router'
+import { ActionListLike } from '@/nice-router/nice-router-types'
 
 import './action-swiper.scss'
 

@@ -7,7 +7,7 @@ import './login.scss'
 
 export default function WechatLoginForm() {
   const handleSubmit = () => {
-    // eslint-disable-next-line no-undef
+    // @ts-ignore
     let loginMethod = wx.qy ? 'wechat_work_app' : 'wechat_app'
     NavigationService.dispatch('app/login', {
       loginMethod: loginMethod,

@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { HttpResponse } from '@/nice-router/request/reqeust'
 
 const systemErrorXClass = 'NetworkException.RetryPage'
 
@@ -11,7 +12,7 @@ const CustomProcessor = async (chain) => {
       ...others,
       header: requestHeaders,
     })
-    .then(async (resp) => {
+    .then(async (resp):Promise<HttpResponse> => {
       // 注意这里的taro 原生的http中使用的header是就叫header，其实是headers
       const { header, statusText, status, data } = resp
 

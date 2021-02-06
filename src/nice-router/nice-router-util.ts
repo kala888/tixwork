@@ -2,12 +2,13 @@ import _ from 'lodash'
 import classNames from 'classnames'
 
 const TARO_PROTOCOL_PRIFIX = 'page://'
-export const LoadingType = {
-  none: 100,
-  top: 1,
-  modal: 2,
-  fetchingNext: 3,
-  barLoading: 4,
+
+export enum LoadingType {
+  None,
+  Top,
+  Modal,
+  FetchingNext,
+  BarLoading,
 }
 
 export const createAction = (type) => (payload) => ({ type, payload })
@@ -84,7 +85,12 @@ export function toTaroUrl(uri = '', params) {
  * @param uri 以/开头
  * @returns {{params: {}, pathname: (string|string)}}
  */
-export function parseTaroUri(uri = '') {
+export function parseTaroUri(
+  uri = ''
+): {
+  pathname: string
+  params: object
+} {
   const url = trimProtocal(uri)
   const urlData = url.split('?')
   let params = {}

@@ -3,24 +3,20 @@ import { isH5 } from '@/utils/index'
 import Taro, { Current } from '@tarojs/taro'
 import _ from 'lodash'
 
-import GlobalToast from './global-toast'
+import GlobalToast, { GlobalToastProps } from './global-toast'
 import LocalCache from './local-cache-service'
 import NavigationService from './navigation-service'
 import { createAction, isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util'
 import ActionUtil from './action-util'
-import PopupMessage from './popup-message'
+import PopupMessage, { PopupMessageProps } from './popup-message'
 import BackendService from './request/backend-service'
 import ViewmappingService from './viewmapping-service'
 
-function showToastOrPopup({ toast = {}, popup = {} }) {
+function showToastOrPopup({ toast, popup }: { toast: GlobalToastProps; popup: PopupMessageProps }): void {
   // 后端说Toast
   if (isNotEmpty(toast)) {
-    GlobalToast.show({
-      ...toast,
-      icon: 'none',
-    })
+    GlobalToast.show({ ...toast, icon: 'none' })
   }
-
   // 后端说Popup
   if (isNotEmpty(popup)) {
     PopupMessage.show(popup)
@@ -43,9 +39,8 @@ export default {
 
   effects: {
     // 重发重试
-    *retry(action, { put, select }) {
+    *retry({}, { put, select }) {
       const { latestRoute } = yield select((state) => state.niceRouter)
-
       log('retry to next', latestRoute)
       if (latestRoute) {
         yield put(createAction('route')(latestRoute))
@@ -73,7 +68,7 @@ export default {
         return
       }
 
-      const withLoading = loading || (asForm ? LoadingType.modal : LoadingType.none)
+      const withLoading = loading || (asForm ? LoadingType.Modal : LoadingType.None)
 
       if (asForm) {
         const cached = yield LocalCache.isCachedForm(linkToUrl, params)
@@ -117,10 +112,10 @@ export default {
           arrayMerge,
           refresh,
         }
-        const modelActions = [].concat(stateAction, effectAction)
+        const modelActions = _.concat(stateAction, effectAction)
         for (let i = 0; i < modelActions.length; i++) {
           const modelAction = modelActions[i]
-          if (modelAction) {
+          if (isNotEmpty(modelAction)) {
             yield put(createAction(modelAction)(storeData))
           }
         }
@@ -151,15 +146,26 @@ function getCurrentPage() {
   const pages = Taro.getCurrentPages()
   const currentPage = _.last(pages) || { route: '' }
   //TODO
-  return isH5() ? Current.router.path : '/' + currentPage.route
+  return isH5() ? Current.router?.path : '/' + currentPage.route
 }
 
-function getViewMapping({ xclass, stateAction, effectAction, xredirect, statInPage }) {
+function getViewMapping({
+  xclass,
+  stateAction,
+  effectAction,
+  xredirect,
+  statInPage,
+}): {
+  pageName: string
+  stateAction: string | string[]
+  effectAction: string | string[]
+  doRedirect: boolean
+} {
   const nextView = ViewmappingService.getView(xclass, statInPage)
 
-  const nextPage = nextView.pageName
-  const newStateAction = stateAction || nextView.stateAction
-  const newEffectAction = effectAction || nextView.effectAction
+  const nextPage = nextView.pageName || ''
+  const newStateAction = stateAction || nextView.stateAction || []
+  const newEffectAction = effectAction || nextView.effectAction || []
 
   let doRedirect = false
   // if ((xredirect || (!xredirect && !statInPage))

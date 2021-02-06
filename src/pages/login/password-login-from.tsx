@@ -3,9 +3,9 @@ import { Block, View } from '@tarojs/components'
 import React, { useState } from 'react'
 
 import NavigationService from '@/nice-router/navigation-service'
+import EleButton from '@/components/elements/ele-button'
 
 import './login.scss'
-import EleButton from '@/components/elements/ele-button'
 
 export default function PasswordForm() {
   const [login, setLogin] = useState()

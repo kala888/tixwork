@@ -1,4 +1,4 @@
-import NiceRouter from './nice-router'
+import NiceRouterConfig from './nice-router.config'
 import { isEmpty, isNotEmpty, log } from './nice-router-util'
 import StorageTools from './storage-tools'
 
@@ -11,18 +11,14 @@ function getPageKeyByUri(uri = '') {
 
 function inBlackList(key, page) {
   const result =
-    NiceRouter.config.backendRouterPageBlackList.includes(page) ||
-    NiceRouter.config.backendRouterPageKeyBlackList.includes(key)
+    NiceRouterConfig.config.backendRouterPageBlackList.includes(page) ||
+    NiceRouterConfig.config.backendRouterPageKeyBlackList.includes(key)
   log('key and page is in black list?', result)
   return result
 }
 
-const LocalCache = {
-  ...StorageTools,
-}
-
 // 后端路由缓存
-LocalCache.saveBackendRouter = async (uri, page) => {
+const saveBackendRouter = async (uri: string, page: string) => {
   const key = getPageKeyByUri(uri)
   log('start save backend router to cache, uri:', uri, ', page:', page)
   if (!inBlackList(key, page)) {
@@ -34,13 +30,13 @@ LocalCache.saveBackendRouter = async (uri, page) => {
 }
 
 // 后端路由缓存
-LocalCache.getCachedPage = (uri) => {
+const getCachedPage = (uri: string) => {
   const key = getPageKeyByUri(uri)
-  return StorageTools.get(key)
+  return StorageTools.get(key, null)
 }
 
 // 查看 Form是否被提交成功
-LocalCache.isCachedForm = async (url, params = {}) => {
+const isCachedForm = async (url: string, params: object = {}) => {
   if (isEmpty(params)) {
     return false
   }
@@ -49,12 +45,19 @@ LocalCache.isCachedForm = async (url, params = {}) => {
   return !StorageTools.isExpired(key)
 }
 // form 提交内容 缓存 30 秒
-LocalCache.cacheForm = async (url, params = {}) => {
+const cacheForm = async (url: string, params: object = {}) => {
   if (isNotEmpty(params)) {
     const content = JSON.stringify(params)
     const key = `${url}_${content}`
     StorageTools.set(key, params, 10)
   }
 }
+const LocalCacheService = {
+  saveBackendRouter,
+  cacheForm,
+  isCachedForm,
+  getCachedPage,
+  ...StorageTools,
+}
 
-export default LocalCache
+export default LocalCacheService

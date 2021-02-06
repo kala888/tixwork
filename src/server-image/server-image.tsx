@@ -3,14 +3,14 @@ import { Image } from '@tarojs/components'
 import classNames from 'classnames'
 import { isH5 } from '@/utils/index'
 import { ImageProps } from '@tarojs/components/types/Image'
-import ImageTools from './image-tools'
+import ImageTools, { ImageSize } from './image-tools'
 import './styles.scss'
 
-type ServerImageProps = {
+export type ServerImageProps = {
   className?: string
   src?: string
   uri?: string
-  size?: 'thumbnail' | 'tiny' | 'small' | 'middle' | 'normal' | 'large' | 'xlarge' | 'origin'
+  size?: ImageSize
   customStyle?: object
 } & Partial<ImageProps>
 

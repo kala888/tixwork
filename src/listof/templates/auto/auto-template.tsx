@@ -1,7 +1,7 @@
 import React from 'react'
 import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
-import { ActionListLike, EleObject, TitleValue } from '@/nice-router/nice-router'
+import { ActionListLike, EleObject, ImageLike, TitleValue } from '@/nice-router/nice-router-types'
 
 import StatusFlag from '@/components/elements/ele-card/status-flag'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
@@ -26,7 +26,7 @@ function AutoTemplate(props: AutoTemplateProps) {
   const { item, showImageCount = 3 } = props
   const { title, brief, infoList = [], status, actionList } = item
 
-  let list = []
+  let list: ImageLike[] = []
   if (showImageCount > 0) {
     const tempList = ListofUtil.getImageList(item)
     const size = Math.min(showImageCount, tempList.length)
@@ -41,9 +41,9 @@ function AutoTemplate(props: AutoTemplateProps) {
       {list.length > 0 && (
         <View className='auto-image-list'>
           {list.map((it: any, index) => {
-            const { id } = it
+            const key = `auto-${index}-${item.id}`
             return (
-              <View key={id} className='auto-image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
+              <View key={key} className='auto-image-list-item' style={{ marginLeft: index === 0 ? 0 : '5rpx' }}>
                 <ServerImage customStyle={{ width: '100%', height: '100%' }} src={it.imageUrl} />
               </View>
             )

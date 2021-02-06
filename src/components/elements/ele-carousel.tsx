@@ -10,11 +10,12 @@ import classNames from 'classnames'
 
 import { SwiperProps } from '@tarojs/components/types/Swiper'
 
-import { ActionLike2, ImageLike, VideoLike } from '@/nice-router/nice-router'
+import { ActionLike, ImageLike, VideoLike } from '@/nice-router/nice-router-types'
 import { ImageProps } from '@tarojs/components/types/Image'
 import './styles.scss'
+import { ImageSize } from '@/server-image/image-tools'
 
-export type EleCarouselItem = ActionLike2 & ImageLike & VideoLike
+export type EleCarouselItem = ActionLike & ImageLike & VideoLike
 
 export type EleCarouselProps = {
   items?: EleCarouselItem[],
@@ -93,7 +94,7 @@ function EleCarousel(props: EleCarouselProps) {
                 />
               ) : (
                 // @ts-ignore
-                <ServerImage className='ele-carousel-item' src={it.imageUrl} mode={imageMode} size='large' />
+                <ServerImage className='ele-carousel-item' src={it.imageUrl} mode={imageMode} size={ImageSize.Large} />
               )}
             </SwiperItem>
           )

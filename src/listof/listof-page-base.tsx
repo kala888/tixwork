@@ -11,7 +11,7 @@ import Config from '@/utils/config'
 import { Block, View } from '@tarojs/components'
 import NavigationService from '@/nice-router/navigation-service'
 
-import { ActionListLike } from '@/nice-router/nice-router'
+import { ActionListLike } from '@/nice-router/nice-router-types'
 import { EleTabsProps } from '@/components/elements/ele-tabs'
 import Listof, { ListofProps } from './listof'
 import './styles.scss'

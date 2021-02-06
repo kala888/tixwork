@@ -9,7 +9,7 @@ const imageList = [
 ]
 
 const MockDataCache = {}
-const mockResp = (uri = '', xclass, data) => {
+const mockResp = (uri: string = '', xclass: string, data: {}) => {
   const key = uri.toLowerCase().trim()
   const value = {
     xclass,
@@ -20,8 +20,8 @@ const mockResp = (uri = '', xclass, data) => {
 }
 const MockService = {
   mockResp,
-  getMockResp: (uri = '') => MockDataCache[uri.toLowerCase().trim()],
-  randomImage: () => _.sample(imageList),
+  getMockResp: (uri: string = '') => MockDataCache[uri.toLowerCase().trim()],
+  randomImage: (): string => _.sample(imageList) || '',
   defaultImage: imageList[2],
 }
 // 凑活用

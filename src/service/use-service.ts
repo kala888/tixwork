@@ -5,6 +5,7 @@ import Config from '@/utils/config'
 import _ from 'lodash'
 import Taro, { usePullDownRefresh } from '@tarojs/taro'
 import ActionUtil from '@/nice-router/action-util'
+import { ActionLike } from '@/nice-router/nice-router-types'
 
 // boolean类型的控制属性，show，close，toggle
 export function useVisible(initial = false) {
@@ -42,11 +43,11 @@ export function usePageTitle(value) {
 }
 
 // 下拉刷新, 应该传入ActionLike
-export function useAjaxPullDown(action) {
+export function useAjaxPullDown(action: ActionLike) {
   usePullDown(action, true)
 }
 
-export function usePullDown(action, statInPage = false) {
+export function usePullDown(action: ActionLike, statInPage = false) {
   console.log('pulldown refresh', action)
   usePullDownRefresh(() => {
     if (!ActionUtil.isActionLike(action)) {
@@ -60,7 +61,7 @@ export function usePullDown(action, statInPage = false) {
       {
         statInPage,
         onSuccess: () => Taro.stopPullDownRefresh(),
-        loading: LoadingType.modal,
+        loading: LoadingType.Modal,
       }
     )
   })
@@ -80,6 +81,7 @@ export function useCountdown(maxCount = 60, onEndOfCounting) {
     }
     setCounting(true)
     console.log('countdown....run')
+    // @ts-ignore
     interval.current = setInterval(() => {
       setSecond((t) => {
         const result = t - 1

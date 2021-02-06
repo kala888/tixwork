@@ -4,7 +4,7 @@ import { useVisible } from '@/service/use-service'
 import { formatTime, transToDate } from '@/utils/index'
 import { Picker } from '@tarojs/components'
 import { AtActionSheet, AtCalendar } from 'taro-ui'
-import { ModeClass } from '@/nice-router/nice-router'
+import { ModeClass } from '@/nice-router/nice-router-types'
 
 import ActionField from './action-field'
 import './ele-calendar.scss'

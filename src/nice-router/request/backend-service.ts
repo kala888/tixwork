@@ -4,11 +4,13 @@ import StorageTools from '../storage-tools'
 import HttpRequest from './http-request'
 import MockService from './mock-service'
 import TestData from '../../pages/mock-data/test-data'
+import { BackendServiceSendProps } from '@/nice-router/request/reqeust'
+
+
 
 TestData.initial()
 
 const EMPTY_PARAMETER_TOKEN = '+'
-const BackendService = {}
 
 const replaceUrlPlaceholder = (uri = '', params) => {
   let theParams = _.cloneDeep(params)
@@ -35,16 +37,16 @@ function removeEmptyValues(params = {}) {
   return result
 }
 
-BackendService.send = async (action = {}) => {
+const send = async (action: BackendServiceSendProps) => {
   const {
     method = 'get', // get,post,put 等http方法
     uri, // uri或者url
     params = {}, // 请求的参数
     headers = {}, // 请求header
-    loading = LoadingType.none, //loading的处理方式
+    loading = LoadingType.None, //loading的处理方式
     asForm, // 请后台约定，如果是form提交的话，把body包装成一个json字符串放到body里面
     cache = 0,
-  } = action
+  } = action || {}
 
   // 将url中的替代变量替换掉
   const { uri: actionUri, params: lastParams } = replaceUrlPlaceholder(uri, params)
@@ -67,7 +69,7 @@ BackendService.send = async (action = {}) => {
 
   console.log('do request, then cache it', cache)
   if (cache > 0) {
-    const resp = StorageTools.get(actionUri)
+    const resp = StorageTools.get(actionUri, '')
     if (isNotEmpty(resp)) {
       return resp
     }
@@ -85,6 +87,7 @@ function isCacheable(resp) {
   if (!_.isObject(resp)) {
     return false
   }
+  // @ts-ignore
   const { headers = {} } = resp
   if (headers['x-redirect'] === true || headers['x-redirect'] === 'true') {
     return false
@@ -95,6 +98,10 @@ function isCacheable(resp) {
     return false
   }
   return true
+}
+
+const BackendService = {
+  send,
 }
 
 export default BackendService

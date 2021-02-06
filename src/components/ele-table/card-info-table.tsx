@@ -6,7 +6,7 @@ import _ from 'lodash'
 import EleTable from '@/components/ele-table/ele-table'
 import EleTableRow from '@/components/ele-table/ele-table-row'
 import EleTableCell from '@/components/ele-table/ele-table-cell'
-import { TitleValue } from '@/nice-router/nice-router'
+import { TitleValue } from '@/nice-router/nice-router-types'
 
 import './card-info-table.scss'
 

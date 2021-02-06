@@ -12,7 +12,8 @@ type ProductProps = {
   tags: string[],
   brand: string,
   name: string,
-  price: number
+  price: number,
+  imageUrl:string,
 }
 
 function Product(props: ProductProps) {

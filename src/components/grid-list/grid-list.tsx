@@ -5,10 +5,10 @@ import classNames from 'classnames'
 import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import { getGroupListByColumn } from '@/utils/index'
 import NavigationService from '@/nice-router/navigation-service'
-import { ActionLike2, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router'
+import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types'
 import './grid-list.scss'
 
-type GridListItemProps = ImageLike & IconLike & ActionLike2 & EleObject
+type GridListItemProps = ImageLike & IconLike & ActionLike & EleObject
 
 type GridListProps = {
   items: GridListItemProps [],

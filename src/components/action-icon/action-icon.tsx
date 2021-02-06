@@ -1,13 +1,13 @@
 import React from 'react'
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
-import ServerImage from '@/server-image/server-image'
+import ServerImage, { ServerImageProps } from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import classNames from 'classnames'
-import { IconLike, ImageLike, ModeClass } from '@/nice-router/nice-router'
+import { IconLike, ImageLike } from '@/nice-router/nice-router-types'
 
 import './action-icon.scss'
 
-type ActionIconProps = IconLike & ImageLike & ModeClass
+type ActionIconProps = IconLike & ImageLike & ServerImageProps
 
 /**
  *  有icon，优先展示ICON

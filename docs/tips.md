@@ -1,4 +1,4 @@
-# NiceRouter 开发Tips
+# NiceRouterConfig 开发Tips
 
 1. nice-router很多功能都是基于后端数据驱动的。
 

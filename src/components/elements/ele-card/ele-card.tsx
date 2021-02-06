@@ -7,7 +7,7 @@ import ServerImage from '@/server-image/server-image'
 import { Text, View } from '@tarojs/components'
 import CardInfoTable from '@/components/ele-table/card-info-table'
 
-import { ActionListLike, EleObject, ImageLike } from '@/nice-router/nice-router'
+import { ActionListLike, EleObject, ImageLike } from '@/nice-router/nice-router-types'
 
 import './ele-card.scss'
 

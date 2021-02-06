@@ -21,7 +21,7 @@ const currentTime = () => Math.floor(new Date().getTime() / EXPIRY_UNITS)
 const StorageTools = {
   PageCachePrefix: 'page-cache-',
 
-  get(key, defaultValue = null) {
+  get(key: string, defaultValue: any) {
     const { exprKey, theKey } = getKeys(key)
     const expiry = Taro.getStorageSync(exprKey)
     if (expiry && currentTime() >= parseInt(expiry, 10)) {
@@ -39,7 +39,7 @@ const StorageTools = {
    * @param value
    * @param time unit: second
    */
-  set(key, value = '', time) {
+  set(key: string, value: any = '', time?: number) {
     const { exprKey, theKey } = getKeys(key)
     if (time) {
       const strTime = (currentTime() + time).toString()
@@ -51,13 +51,13 @@ const StorageTools = {
     Taro.setStorageSync(theKey, JSON.stringify(value))
   },
 
-  remove(key) {
+  remove(key: string) {
     const { exprKey, theKey } = getKeys(key)
     Taro.removeStorageSync(exprKey)
     Taro.removeStorageSync(theKey)
   },
 
-  isExpired(key) {
+  isExpired(key: string) {
     const { exprKey } = getKeys(key)
     const expiry = Taro.getStorageSync(exprKey)
     if (expiry > 0) {
@@ -78,17 +78,17 @@ const StorageTools = {
     })
   },
 
-  flushWithPrefix(prefix) {
-    const { keys } = Taro.getStorageInfoSync()
-    keys.map((key) => {
-      const remove =
-        key.indexOf(`${CACHE_PREFIX}${prefix}`) === 0 || key.indexOf(`${CACHE_EXPIRATION_PREFIX}${prefix}`) === 0
-      if (remove) {
-        // noinspection JSIgnoredPromiseFromCall
-        Taro.removeStorage({ key })
-      }
-    })
-  },
+  // flushWithPrefix(prefix) {
+  //   const { keys } = Taro.getStorageInfoSync()
+  //   keys.map((key) => {
+  //     const remove =
+  //       key.indexOf(`${CACHE_PREFIX}${prefix}`) === 0 || key.indexOf(`${CACHE_EXPIRATION_PREFIX}${prefix}`) === 0
+  //     if (remove) {
+  //       // noinspection JSIgnoredPromiseFromCall
+  //       Taro.removeStorage({ key })
+  //     }
+  //   })
+  // },
 
   flushExpired() {
     const { keys } = Taro.getStorageInfoSync()
@@ -110,16 +110,3 @@ const StorageTools = {
 StorageTools.flushExpired()
 
 export default StorageTools
-
-//
-// import CacheStore from 'react-native-cache-store';
-//
-// CacheStore.set('key', 'value', 10); // Expires in 10 minutes
-//
-// CacheStore.get('key').then((value) => {
-//   // Do something with value
-// });
-//
-// CacheStore.isExpired('key')
-//   .then(() => {/* true */ })
-//   .catch(() => {/* false */})

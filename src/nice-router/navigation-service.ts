@@ -1,9 +1,11 @@
 import { isH5 } from '@/utils/index'
 import _ from 'lodash'
+
 import Taro, { Current } from '@tarojs/taro'
 import ActionUtil from './action-util'
 
 import localCacheService from './local-cache-service'
+import { ActionLike } from './nice-router-types'
 import {
   isEmpty,
   isLocalPagePath,
@@ -15,9 +17,11 @@ import {
   toTaroUrl,
 } from './nice-router-util'
 
+type NavationActionType = string | ActionLike | object
+
 const PAGE_LEVEL_LIMIT = 10
 
-let _container = {} // eslint-disable-line
+let _container: any = {} // eslint-disable-line
 
 const isH5Path = (uri = '') => {
   const str = uri.trim().toLowerCase()
@@ -52,7 +56,7 @@ const NavigationService = {
     _container = container
   },
 
-  dispatch(action, params) {
+  dispatch(action: string, params?: object) {
     const { dispatch, props = {} } = _container || {}
     const func = dispatch || props.dispatch || noop
     func({
@@ -77,8 +81,8 @@ const NavigationService = {
    *
    * eg. 后退传参 NavigationService.back({data},this)
    */
-  back(data = {}, delta = 1) {
-    const { path: key } = Current.router
+  back(data: object = {}, delta: number = 1) {
+    const key: any = Current?.router?.path
     return new Promise((resolve, reject) => {
       Taro.navigateBack({ delta })
         .then(() => {
@@ -100,7 +104,7 @@ const NavigationService = {
    * @param options
    * @returns {Promise<any>}
    */
-  navigate(routeName, params = {}, options = {}) {
+  navigate(routeName?: string, params: object = {}, options: object = {}) {
     return new Promise((resolve, reject) => {
       const url = toTaroUrl(routeName, params)
       // console.log('taro-redirect', url)
@@ -137,25 +141,25 @@ const NavigationService = {
     })
   },
 
-  view(action, params = {}, options = {}) {
+  view(action: NavationActionType, params: object = {}, options: object = {}) {
     return this.routeTo({ action, params, ...options })
   },
 
-  ajax(action, params, options = {}) {
+  ajax(action: NavationActionType, params: object = {}, options: object = {}) {
     return this.routeTo({
       action,
       params,
-      loading: LoadingType.none,
+      loading: LoadingType.None,
       ...options,
       statInPage: true,
     })
   },
 
-  refresh(action, params, options = {}) {
+  refresh(action: NavationActionType, params: object = {}, options: object = {}) {
     return this.ajax(action, params, { ...options, refresh: true })
   },
 
-  post(action, params, options = {}) {
+  post(action: NavationActionType, params: object = {}, options: object = {}) {
     return this.routeTo({
       action,
       params,
@@ -164,7 +168,7 @@ const NavigationService = {
     })
   },
 
-  put(action, params, options = {}) {
+  put(action: NavationActionType, params: object = {}, options: object = {}) {
     return this.routeTo({
       action,
       params,
@@ -173,7 +177,13 @@ const NavigationService = {
     })
   },
 
-  async routeTo(routerParams) {
+  routeTo: async function(routerParams: {
+    action: NavationActionType
+    params?: object
+    method?: 'put' | 'post' | 'get'
+    loading?: any
+    statInPage?: boolean
+  }) {
     const action = ActionUtil.trans2Action(routerParams)
     const { linkToUrl, cache = false, params, statInPage } = action
     if (isEmpty(linkToUrl)) {
@@ -195,23 +205,23 @@ const NavigationService = {
 
     // 1, 前端页面跳转, page:///pages/home/home-page?type=qa 或跳转到HomePage的screen
     if (!statInPage && isLocalPagePath(linkToUrl)) {
-      const { queryParams, pathname } = parseTaroUri(linkToUrl)
+      const { params: queryParams, pathname } = parseTaroUri(linkToUrl)
       return this.navigate(pathname, { ...params, ...queryParams })
     }
 
     // 2, H5跳转：目标页面是Http页面，小程序中需要跳转到webview
     if (!statInPage && isH5Path(linkToUrl)) {
       let h5PageTarget = linkToUrl
-      const h5Param = {}
+      const h5Param: any = {}
       if (!isH5()) {
         h5PageTarget = '/nice-router/h5-page'
         h5Param.uri = linkToUrl
       }
-      return this.navigate(h5PageTarget, h5Param)
+      return this.navigate(h5PageTarget || '', h5Param)
     }
 
     // 3, 后端路由, 获取后端路由缓存
-    const cachedPage = localCacheService.getCachedPage(linkToUrl)
+    const cachedPage = localCacheService.getCachedPage(linkToUrl || '')
     log('go to cached page first', cachedPage)
     // 如果缓存存在，做页面跳转
     if (cachedPage) {

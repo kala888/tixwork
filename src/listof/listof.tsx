@@ -60,7 +60,7 @@ function Listof(props: ListofProps) {
       listMeta,
       {},
       {
-        loading: LoadingType.barLoading,
+        loading: LoadingType.BarLoading,
         arrayMerge: 'append',
         onSuccess: () => {
           hideLoading()

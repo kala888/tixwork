@@ -3,28 +3,29 @@ import { isNotEmpty, LoadingType } from '@/nice-router/nice-router-util'
 import OverlayLoading from '@/nice-router/overlay-loading'
 import ViewmappingService from '@/nice-router/viewmapping-service'
 import Taro from '@tarojs/taro'
+import { HttpResponse } from '@/nice-router/request/reqeust'
 
 const systemErrorXClass = 'com.terapico.caf.local.NetworkException'
 
-function showLoading(loading) {
-  if (loading === LoadingType.modal) {
+function showLoading(loading: LoadingType) {
+  if (loading === LoadingType.Modal) {
     OverlayLoading.showLoadingModal()
   }
-  if (loading === LoadingType.barLoading) {
+  if (loading === LoadingType.BarLoading) {
     Taro.showNavigationBarLoading()
   }
 }
 
-async function hideLoading(loading) {
-  if (loading === LoadingType.modal) {
+async function hideLoading(loading: LoadingType) {
+  if (loading === LoadingType.Modal) {
     OverlayLoading.hideLoadingModal()
   }
-  if (loading === LoadingType.barLoading) {
+  if (loading === LoadingType.BarLoading) {
     Taro.hideNavigationBarLoading()
   }
 }
 
-function showError({ xclass, data = {} }) {
+function showError({ xclass, data = {} }: HttpResponse) {
   console.error('request got error', xclass, data)
 
   const view = ViewmappingService.getView(xclass)
@@ -33,6 +34,7 @@ function showError({ xclass, data = {} }) {
     return
   }
 
+  // @ts-ignore
   const { localizedMessage, messageList = [], message } = data
 
   const text = localizedMessage || message || messageList.map((msg) => msg.body).join('\n')
@@ -51,7 +53,7 @@ const LoadingAndLogsProcessor = (chain) => {
   const { loading } = requestParams
   showLoading(loading)
 
-  return chain.proceed(requestParams).then(async (resp) => {
+  return chain.proceed(requestParams).then(async (resp: HttpResponse) => {
     const { success, headers = {}, data } = resp
     await hideLoading(loading)
 

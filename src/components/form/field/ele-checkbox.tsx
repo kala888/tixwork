@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { AtCheckbox, AtRadio } from 'taro-ui'
 import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
-import { CandidateValue } from '@/nice-router/nice-router'
+import { CandidateValue } from '@/nice-router/nice-router-types'
 import './styles.scss'
 
 type EleCheckboxProps = {
