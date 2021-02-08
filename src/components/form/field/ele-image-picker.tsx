@@ -6,9 +6,9 @@ import Taro from '@tarojs/taro'
 import { AtImagePicker, AtProgress } from 'taro-ui'
 
 import './styles.scss'
+import { ImageLike } from '@/nice-router/nice-router-types'
 
 // TODO image picker 有个bug，可以暂时等待Taro ui 升级，要修改源码，https://github.com/NervJS/taro-ui/pull/1290
-
 
 type EleImage = {
   imageUrl?: string,
@@ -20,7 +20,7 @@ type EleAtImage = {
 
 type EleImagePickerProps = {
   value: EleImage [] | string,
-  onChange?: Function,
+  onChange?: (imageList:ImageLike[])=>void,
   maxLength?: number,
   disabled?: boolean,
   brief?: string

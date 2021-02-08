@@ -1,10 +1,13 @@
 import React from 'react'
 import _ from 'lodash'
 import { View } from '@tarojs/components'
+import { AtInputProps } from 'taro-ui/types/input'
+
 import NumberInput from './ele-number-input'
 import './styles.scss'
 
-function EleMoney(props) {
+
+function EleMoney(props: AtInputProps) {
   const { value } = props
   const theValue = _.isString(value) ? _.toNumber(value) : value
   return (

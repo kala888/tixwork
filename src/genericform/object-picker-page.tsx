@@ -6,16 +6,18 @@ import { Current } from '@tarojs/taro'
 import _ from 'lodash'
 import { LoadingType } from '@/nice-router/nice-router-util'
 import ListofPageBase from '@/listof/listof-page-base'
-import './object-picker-page.scss'
 import { AtFloatLayout } from 'taro-ui'
 import Listof from '@/listof/listof'
 import { useVisible } from '@/service/use-service'
+
+import './object-picker-page.scss'
 
 function ObjectPickerPage() {
   const { visible, close, show } = useVisible(false)
   const root = useSelector((state) => state.objectPicker)
 
   // q如果变化了，就发送一个后台请求
+  // @ts-ignore
   const { linkToUrl } = Current.router.params
   useEffect(() => {
     if (linkToUrl) {

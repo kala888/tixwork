@@ -2,10 +2,18 @@ import React from 'react'
 import ServerImage from '@/server-image/server-image'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
+import { ImageLike } from '@/nice-router/nice-router-types'
+import { ImageProps } from '@tarojs/components/types/Image'
 
 import './styles.scss'
 
-function EleImage(props) {
+type EleImageProps={
+  src?:string,
+  className?:string,
+  customStyle?:object,
+}&ImageLike& Partial<ImageProps>
+
+function EleImage(props:EleImageProps) {
   const { imageUrl, src, className, customStyle, mode } = props
   const rootClass = classNames('ele-image', className)
   const path = imageUrl || src

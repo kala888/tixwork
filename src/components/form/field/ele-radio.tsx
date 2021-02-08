@@ -5,7 +5,14 @@ import { Label, Radio, RadioGroup, View } from '@tarojs/components'
 import { CandidateValue } from '@/nice-router/nice-router-types'
 import './styles.scss'
 
-function EleRadio(props) {
+type EleRadioProps = {
+  value: any,
+  candidateValues: CandidateValue[],
+  onChange?: Function,
+  mode?: 'vertical' | 'horizontal'
+}
+
+function EleRadio(props: EleRadioProps) {
   const [selected, setSelected] = useState<CandidateValue>()
 
   const { candidateValues = [], onChange = noop, value, mode = [] } = props
@@ -26,10 +33,11 @@ function EleRadio(props) {
     <View className={rootClass}>
       <RadioGroup onChange={handleChange}>
         <View className='ele-radio-body'>
-          {candidateValues.map((item, i) => {
+          {candidateValues.map((item, idx) => {
             const checked = isNotEmpty(selected) ? selected?.id === item.id : false
+            const key = `radio-${idx}`
             return (
-              <Label className='radio-list__label' for={i} key={i}>
+              <Label className='radio-list__label' for={key} key={key}>
                 <Radio className='radio-list__radio' value={item.id} checked={checked}>
                   {item.title}
                 </Radio>

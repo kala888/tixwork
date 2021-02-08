@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react'
 import _ from 'lodash'
 import { Picker, View } from '@tarojs/components'
@@ -5,7 +6,18 @@ import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
 import classNames from 'classnames'
 
+import { CandidateValue } from '@/nice-router/nice-router-types'
 import './styles.scss'
+
+export type ElePickerProps = {
+  value?: string | CandidateValue | CandidateValue[],
+  onChange?: (values: CandidateValue[]) => void,
+  placeholder?: string,
+  candidateValues: CandidateValue[],
+  numberOfColumn?: number,
+  disabled?: boolean,
+  mode?: 'multiSelector' | 'selector'
+}
 
 const getOptions = (v) => _.get(v, 'candidateValues', [])
 const getValue = (list, idx = 0) => _.get(list, idx, {})
@@ -19,7 +31,7 @@ const getTips = (value, placeholder) => {
   return placeholder
 }
 
-function ElePicker(props) {
+function ElePicker(props: ElePickerProps) {
   const [tips, setTips] = useState()
   const { visible, show, close } = useVisible(false)
   const [range, setRange] = useState([])
@@ -42,7 +54,7 @@ function ElePicker(props) {
   }, [value, source, placeholder])
 
   const reBuildRangeList = (col, idx = 0) => {
-    setRange((pre:any) => {
+    setRange((pre: any) => {
       const tempRange = col === 0 ? [source] : _.clone(pre)
       for (let i = col; i < numberOfColumn; i++) {
         const v = getValue(tempRange[i], i === col ? idx : 0)
@@ -89,23 +101,17 @@ function ElePicker(props) {
     placeholder: tips === placeholder,
   })
 
+
+
   return (
     <View className='ele-picker'>
-      <Picker
-        disabled={disabled}
-        mode={mode}
-        onChange={handleCommit}
-        range={range}
-        rangeKey='title'
-        onColumnChange={handleColumnChange}
-        onCancel={close}
-        onClick={show}
-      >
+      { // @ts-ignore
+      <Picker disabled={disabled} mode={mode} onChange={handleCommit} range={range} rangeKey='title' onColumnChange={handleColumnChange} onCancel={close} onClick={show}>
         <View className='ele-picker-body'>
           <View className={tipsClass}>{tips}</View>
           {visible ? <View className='iconfont iconfont-down' /> : <View className='iconfont iconfont-right' />}
         </View>
-      </Picker>
+      </Picker>}
     </View>
   )
 }

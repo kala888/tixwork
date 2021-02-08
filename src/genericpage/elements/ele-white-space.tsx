@@ -2,7 +2,12 @@ import React from 'react'
 import { toRpx } from '@/utils/index'
 import { View } from '@tarojs/components'
 
-function EleWhiteSpace({ height, color }) {
+type EleWhiteSpaceProps = {
+  height: number,
+  color: string,
+}
+
+function EleWhiteSpace({ height, color }: EleWhiteSpaceProps) {
   return <View style={{ height: toRpx(height), backgroundColor: color }} />
 }
 

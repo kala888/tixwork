@@ -10,22 +10,40 @@ import FlexField from './field/flex-field'
 import FormItemLabel from './form-item-label'
 import './form-item.scss'
 
-function FormItem(props) {
+type FormItemProps = { //TODO
+  name: string,
+  required?: boolean,
+  rules: object[],
+  showRequired?: boolean,
+  clear?: boolean,
+  value: any,
+  errors?: string[],
+  bordered?: boolean,
+  inline?: boolean,
+  disabled?: boolean,
+  label?: string,
+  title?: string,
+  tips?: string,
+  onChange?: (name: string, value: any) => void,
+  children?: any
+}
+
+function FormItem(props: FormItemProps) {
   const {
     name,
     required,
-    rules,
+    rules = [],
     showRequired,
     clear,
     value,
-    errors,
+    errors = [],
     bordered,
     inline,
     disabled,
     label,
     title,
     tips,
-    onChange,
+    onChange = noop,
   } = props
 
   const handleChange = (v, e) => {
@@ -40,6 +58,7 @@ function FormItem(props) {
 
   const showRequiredIcon = () => {
     if (showRequired) {
+      // @ts-ignore
       return _.isNil(required) ? !!rules.find((rule) => rule.required) : required
     }
     return false

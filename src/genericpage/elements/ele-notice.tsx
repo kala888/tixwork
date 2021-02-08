@@ -4,9 +4,16 @@ import NavigationService from '@/nice-router/navigation-service'
 import { Swiper, SwiperItem, Text, View } from '@tarojs/components'
 
 import classNames from 'classnames'
+import { EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types'
 import './styles.scss'
 
-function EleNotice(props) {
+type EleNoticeProps = {
+  items: EleObject[],
+  customStyle?: object,
+  className?: string
+} & ImageLike & IconLike
+
+function EleNotice(props: EleNoticeProps) {
   const { items, icon, imageUrl, customStyle, className } = props
 
   const handleItemClick = (item) => {
@@ -23,7 +30,7 @@ function EleNotice(props) {
           const { id } = it
           return (
             <SwiperItem key={id} className='ele-notice-bar-messages-item' onClick={handleItemClick.bind(this, it)}>
-              <Text className='ele-notice-bar-messages-item-txt'>{it.text}</Text>
+              <Text className='ele-notice-bar-messages-item-txt'>{it.title}</Text>
             </SwiperItem>
           )
         })}

@@ -14,7 +14,7 @@ export enum ImageSize {
   Origin,
 }
 
-const isStyledUrl = (url = '') => {
+const isSkipUrl = (url = '') => {
   return (
     !/^(http|https):/.test(url) || // 不是http（本地文件）
     url.indexOf('x-oss-process') > -1 || // 或者已经包含style
@@ -24,7 +24,7 @@ const isStyledUrl = (url = '') => {
 
 const getServerImagUrl = (uri: string = '', size: ImageSize = ImageSize.Normal) => {
   const url = _.trim(uri)
-  if (isEmpty(url) || !isStyledUrl(url)) {
+  if (isEmpty(url) || isSkipUrl(url)) {
     console.log("image uri don't need styled")
     return url
   }

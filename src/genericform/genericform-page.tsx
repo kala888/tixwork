@@ -9,6 +9,7 @@ import { View } from '@tarojs/components'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import { useSelector } from 'react-redux'
 import _ from 'lodash'
+import { ActionLike } from '@/nice-router/nice-router-types'
 import ActionUtil from '@/nice-router/action-util'
 import FormSteps from './form-steps'
 import './styles.scss'
@@ -20,9 +21,10 @@ function GenericformPage() {
   usePageTitle(root)
   usePullDown(root)
 
-  const handleActionClick = async (action = {}) => {
+  const handleActionClick = async (action: ActionLike = {}) => {
     const { code } = action
     if (code === 'reset') {
+      // @ts-ignore
       formRef.current.resetFields()
       return
     }
@@ -36,6 +38,7 @@ function GenericformPage() {
 
   const handleSubmit = async (action) => {
     console.log('11111', formRef)
+    // @ts-ignore
     const result = await formRef.current.validateFields()
     const { errors, values } = result
     if (isEmpty(errors)) {
@@ -83,7 +86,7 @@ function GenericformPage() {
         defaultValues={defaultValues}
         handleActionClick={handleActionClick}
       />
-      <EleActionList mode='full' list={footerActionList} />
+      <EleActionList mode='full' items={footerActionList} />
     </View>
   )
 }

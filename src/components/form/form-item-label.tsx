@@ -1,13 +1,27 @@
 import React from 'react'
 import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
+import _ from 'lodash'
 import { Text, View } from '@tarojs/components'
 import { AtActionSheet } from 'taro-ui'
 import './form-item-label.scss'
 
-function FormItemLabel(props) {
+type FormItemLabelTips = {
+  title?: string,
+  brief: string,
+}
+
+type FormItemLabelProps = {
+  required?: boolean,
+  tips?: string | FormItemLabelTips,
+  layout?: 'vertical' | 'horizontal',
+  tail?: boolean,
+  children?: any
+}
+
+function FormItemLabel(props: FormItemLabelProps) {
   const { visible, show, close } = useVisible(false)
-  const { required, tips, layout, tail } = props
+  const { required = true, tips, layout = 'horizontal', tail } = props
 
   const hasTips = isNotEmpty(tips)
 
@@ -31,16 +45,12 @@ function FormItemLabel(props) {
       {tail}
       <AtActionSheet onClose={close} isOpened={visible}>
         <View className='form-item-label-tips'>
-          <View className='form-item-label-tips-title'>{tips?.title || ''}</View>
-          <View className='form-item-label-tips-brief'>{tips?.content || tips}</View>
+          <View className='form-item-label-tips-title'>{_.get(tips, 'title', '')}</View>
+          <View className='form-item-label-tips-brief'>{_.get(tips, 'brief', tips)}</View>
         </View>
       </AtActionSheet>
     </View>
   )
-}
-
-FormItemLabel.defaultProps = {
-  required: true,
 }
 
 export default FormItemLabel

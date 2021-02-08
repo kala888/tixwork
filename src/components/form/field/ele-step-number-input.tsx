@@ -1,9 +1,10 @@
 import React from 'react'
 import { AtInputNumber } from 'taro-ui'
+import { AtInputNumberProps } from 'taro-ui/types/input-number'
 
 // max,min, step
-const EleStepNumberInput = (props) => {
-  return <AtInputNumber border={false} {...props} />
+const EleStepNumberInput = (props: AtInputNumberProps) => {
+  return <AtInputNumber {...props} />
 }
 
 export default EleStepNumberInput

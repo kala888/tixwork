@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import _ from 'lodash'
 import { AtCheckbox, AtRadio } from 'taro-ui'
 import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'
@@ -9,12 +9,12 @@ import './styles.scss'
 type EleCheckboxProps = {
   candidateValues?: CandidateValue[],
   onChange?: Function,
-  value?: any,
+  value: string[],
   radio?: boolean,
 }
 
 function EleCheckbox(props: EleCheckboxProps) {
-  const [selected, setSelected] = useState<CandidateValue[]>()
+  const [selected, setSelected] = useState<string[]>()
 
   const { candidateValues = [], onChange = noop, value, radio = false } = props
 

@@ -50,54 +50,15 @@
     align-items: center;
     line-height: 80px;
     border-top: 1px solid rgb(250, 240, 250);
+    .iconfont{
+      color:$primary-color;
+    }
 
     &-txt {
       margin-left: 20px;
       font-size: 30px;
       color: $text-color;
       @include text-ellipsis;
-    }
-  }
-}
-
-.store-location-big {
-  margin: 20px 0;
-  background-color: $white;
-  box-sizing: border-box;
-  border-radius: 10px;
-  box-shadow: 0 10px 19px 1px rgba(0, 0, 0, 0.08);
-
-  &-face-image {
-    width: 100%;
-    height: 400px;
-  }
-
-  &-title {
-    padding: 20px;
-    align-items: center;
-    @extend %flex-row;
-
-    &-logo {
-      padding-right: 20px;
-      height: 40px;
-      width: 40px;
-    }
-  }
-
-  &-content {
-    padding: 20px 40px 20px 20px;
-    @extend %flex-row;
-    justify-content: center;
-    font-size: 26px;
-    width: 100%;
-
-    &-address {
-      padding: 0 15px;
-      @extend %flex-1;
-    }
-
-    &-icon {
-      color: $primary-color;
     }
   }
 }
@@ -130,6 +91,7 @@
     &-item {
       @extend %flex;
       align-items: center;
+      padding-left: 40px;
       &-txt {
         color: $text-color-light;
         font-size: 30px;

@@ -7,14 +7,24 @@ import classNames from 'classnames'
 import { AtInput } from 'taro-ui'
 import GlobalToast from '@/nice-router/global-toast'
 import './styles.scss'
+import { AtInputProps } from 'taro-ui/types/input'
 
-function EleMobileVerifyCode(props) {
-  const { second, counting, startCount } = useCountdown(props.maxCount)
+type EleMobileVerifyCodeProps = {
+  maxCount?: number,
+  className?: string,
+  linkToUrl?: string,
+  value?: string,
+  onChange: Function,
+  name: string,
+} & Partial<AtInputProps>
 
-  const { className, linkToUrl, ...others } = props
+function EleMobileVerifyCode(props: EleMobileVerifyCodeProps) {
+  const { maxCount = 60, value = '', className, linkToUrl = '', ...others } = props
+
+  const { second, counting, startCount } = useCountdown(maxCount, null)
 
   const sendCode = async () => {
-    if (!/^1\d{10}$/.test(props.value)) {
+    if (!/^1\d{10}$/.test(value)) {
       GlobalToast.show({
         text: '手机号码有误！',
       })
@@ -39,9 +49,4 @@ function EleMobileVerifyCode(props) {
   )
 }
 
-EleMobileVerifyCode.defaultProps = {
-  name: '',
-  placeholder: '请输入验证码',
-  maxCount: 60,
-}
 export default EleMobileVerifyCode

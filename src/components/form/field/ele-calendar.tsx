@@ -14,7 +14,7 @@ type EleCalendarProps = {
   onChange?: Function,
   placeholder?: string,
   label?: string,
-  value?: any,
+  value?: string,
   disabled?: boolean
 } & ModeClass
 

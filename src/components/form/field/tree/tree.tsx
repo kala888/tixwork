@@ -7,16 +7,16 @@ import classNames from 'classnames'
 import './style.scss'
 
 
-type TreeProps = {
+export type TreeProps = {
   id?: string,
   selected?: boolean,
   onChange?: Function,
-  value: any,
+  value?: any,
   disabled?: boolean,
   nodes: TreeProps[],
   expandAll?: boolean,
-  title: string,
-  brief: string
+  title?: string,
+  brief?: string
 }
 
 function Tree(props: TreeProps) {

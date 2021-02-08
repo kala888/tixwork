@@ -5,10 +5,20 @@ import { AtActionSheet } from 'taro-ui'
 import ActionField from './action-field'
 import './styles.scss'
 
-import Tree from './tree/tree'
+import Tree, { TreeProps } from './tree/tree'
 
-function findValueFromTheTree(value, treeItem = {}) {
-  const { value: currentValue, title: currentTitle, nodes = [] } = treeItem
+type EleTreeProps = {
+  value?: string,
+  title?: string,
+  root?: TreeProps,
+  onChange?: any,
+  disabled?: boolean,
+  placeholder?: string,
+  label?: string,
+}
+
+function findValueFromTheTree(value, treeItem?: TreeProps) {
+  const { value: currentValue, title: currentTitle, nodes = [] } = treeItem || {}
   if (currentValue === value) {
     return {
       currentValue: currentValue,
@@ -23,8 +33,8 @@ function findValueFromTheTree(value, treeItem = {}) {
   }
 }
 
-function EleTree(props) {
-  const { visible, show, close, toggle } = useVisible(false)
+function EleTree(props: EleTreeProps) {
+  const { visible, show, close } = useVisible(false)
 
   const { value, title, root, onChange, disabled, placeholder, label } = props
 
@@ -40,6 +50,7 @@ function EleTree(props) {
   }
 
   const { currentValue, displayValue } = getValue()
+
   return (
     <ActionField
       onClick={show}

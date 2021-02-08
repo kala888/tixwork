@@ -49,11 +49,17 @@ function transformValue(type, value) {
 
 function handleErrors(errors = [], fields) {
   console.log('fields', fields)
-  return errors.map((err) => err.message)
+  // @ts-ignore
+  return errors.map((err) => err?.message)
 }
 
-const validator = (field = {}, value) => {
-  const { name, rules = [], type } = field
+
+const validator = (field:{
+  name:string,
+  rules:object [],
+  type:string
+} , value) => {
+  const { name, rules = [], type } = field||{}
   if (isEmpty(name) || isEmpty(rules)) {
     return Promise.resolve()
   }

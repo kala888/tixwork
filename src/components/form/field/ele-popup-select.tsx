@@ -1,16 +1,27 @@
 import React from 'react'
-import { isEmpty } from '@/nice-router/nice-router-util'
+import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
 import _ from 'lodash'
 import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtRadio } from 'taro-ui'
 
 import ActionField from './action-field'
 import './styles.scss'
+import { CandidateValue } from '@/nice-router/nice-router-types'
 
-function ElePopupSelect(props) {
+type ElePopupSelectProps = {
+  onChange?: Function,
+  multiple?: boolean,
+  value: string | string[],
+  placeholder?: string,
+  label?: string,
+  candidateValues: CandidateValue[],
+  disabled?: boolean
+}
+
+function ElePopupSelect(props: ElePopupSelectProps) {
   const { visible, show, close } = useVisible(false)
 
-  const { onChange, multiple, value, placeholder, label, candidateValues, disabled } = props
+  const { onChange = noop, multiple, value, placeholder, label, candidateValues, disabled } = props
 
   const handleChange = (v) => {
     onChange(v)
@@ -28,7 +39,7 @@ function ElePopupSelect(props) {
       currentValue = [value]
     }
     const displayValue = candidateValues
-      .filter((it) => (multiple ? currentValue.includes(it.value) : currentValue === it.value))
+      .filter((it) => (multiple ? currentValue.includes(it.id) : currentValue === it.id))
       .map((it) => it.title)
       .join('、')
 
@@ -41,11 +52,13 @@ function ElePopupSelect(props) {
   const { currentValue, displayValue } = getValue()
 
   const options = candidateValues.map((it) => ({
-    ...it,
     label: it.title,
+    value:it.id,
+    ...it,
   }))
 
   const cancelText = multiple ? '确定' : '取消'
+
 
   return (
     <ActionField
@@ -58,6 +71,7 @@ function ElePopupSelect(props) {
       <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText={cancelText}>
         <AtActionSheetItem className='popup-view'>
           {multiple ? (
+            // @ts-ignore
             <AtCheckbox options={options} selectedList={currentValue} onChange={handleChange} />
           ) : (
             <AtRadio options={options} value={currentValue} onClick={handleChange} />

@@ -8,7 +8,13 @@ import EleButton from '@/components/elements/ele-button'
 
 import './styles.scss'
 
-function EleQrScan(props) {
+type EleQrScanProps = {
+  value: string,
+  disabled?: boolean,
+  onChange?: (result: string) => void
+}
+
+function EleQrScan(props: EleQrScanProps) {
   const { value = '', disabled, onChange = noop } = props
 
   const handleScan = async () => {

@@ -5,8 +5,8 @@ const storeLocation = {
   type: 'store-location',
   imageUrl,
   phoneNumber: '13880964614',
-  name: '优荣小店',
-  summary: '品牌形象店',
+  title: '优荣小店',
+  brief: '品牌形象店',
   address: '成都市高新区天祥广场',
   latitude: 104.06476,
   longitude: 30.5702,
@@ -236,14 +236,13 @@ const articleList = {
 const messageSwiper = {
   imageUrl: 'https://m.360buyimg.com/babel/jfs/t22534/23/795940699/14893/3457ee4/5b442279N1dde2af1.png',
   items: [
-    { id: 1, text: '恭喜城北旗舰店，大麦1个亿' },
-    { id: 2, text: '热烈庆祝优荣之星成功上市' },
+    { id: 1, title: '恭喜城北旗舰店，大麦1个亿' },
+    { id: 2, title: '热烈庆祝优荣之星成功上市' },
   ],
 }
 
 const productList = {
   displayMode: 'product',
-  numColumns: 2,
   list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }, { id: 'p4' }],
   dataContainer: {
     p1: {
@@ -251,7 +250,7 @@ const productList = {
       preTag: '自营',
       tags: ['618'],
       brand: '西门子',
-      name: '大冰箱，超级大，610L让你生活无忧，心情好才是真的好',
+      title: '大冰箱，超级大，610L让你生活无忧，心情好才是真的好',
       price: 500.12,
       imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
     },
@@ -260,7 +259,7 @@ const productList = {
       preTag: '双链小超',
       tags: ['券'],
       brand: '可口可乐',
-      name: '300ml，冰霜开心',
+      title: '300ml，冰霜开心',
       price: 2.5,
       imageUrl:
         'https://m.360buyimg.com/babel/s823x404_jfs/t21784/201/795134266/176047/3dad2026/5b18c66eN8c4deacf.jpg!q70.dpg',
@@ -270,7 +269,7 @@ const productList = {
       preTag: '',
       tags: [''],
       brand: '靓家私',
-      name: '这是一个超级大的家居',
+      title: '这是一个超级大的家居',
       price: 200.12,
       imageUrl:
         'https://m.360buyimg.com/babel/s370x259_jfs/t1/20729/24/4177/80676/5c2f1aeaE062589aa/ee7cc78db75d62ed.jpg!q70.dpg',
@@ -280,7 +279,7 @@ const productList = {
       preTag: '官方旗舰',
       tags: ['券'],
       brand: '美丽新时代',
-      name: '毛巾被，超级大的那么中，估计有100斤，全国包邮',
+      title: '毛巾被，超级大的那么中，估计有100斤，全国包邮',
       price: 30000.55,
       imageUrl,
     },
@@ -289,7 +288,6 @@ const productList = {
 
 const waterfallList = {
   displayMode: 'image-on-top-waterfall',
-  numColumns: 2,
   list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
   dataContainer: {
     p1: {
@@ -382,19 +380,19 @@ const mockGenericPageData = {
     { id: '0', type: 'carousel', ...carousel },
     { id: '1', type: 'box-bar', ...boxBar },
     { id: '2', type: 'notice-bar', ...messageSwiper },
-    { id: '3', type: 'break-line', text: '商家', ...breakLine },
+    { id: '3', type: 'break-line', title: '商家', ...breakLine },
     { id: '4', type: 'listof', ...shopList },
-    { id: '5', type: 'break-line', text: '精品文章', ...breakLine, color: '#39a7fc', fontColor: '#39a7fc' },
+    { id: '5', type: 'break-line', title: '精品文章', ...breakLine, color: '#39a7fc', fontColor: '#39a7fc' },
     { id: '6', type: 'listof', ...articleList },
-    { id: '7', type: 'break-line', text: '商品列表', ...breakLine },
+    { id: '7', type: 'break-line', title: '商品列表', ...breakLine },
     { id: '8', type: 'listof', ...productList },
     { id: '9', type: 'listof', ...waterfallList },
-    { id: '10', type: 'break-line', text: '精品商家推荐', ...breakLine },
+    { id: '10', type: 'break-line', title: '精品商家推荐', ...breakLine },
     { id: '11', type: 'listof', ...horizontalList },
-    { id: '13', type: 'break-line', text: '线下门店', ...breakLine },
+    { id: '13', type: 'break-line', title: '线下门店', ...breakLine },
     { id: '14', type: 'store-location', ...storeLocation },
     { id: '14.1', type: 'break-line' },
-    { id: '15', type: 'break-line', text: '一道菜', ...breakLine },
+    { id: '15', type: 'break-line', title: '一道菜', ...breakLine },
     { id: '16', type: 'rich-text', ...richText },
 
     // { id: '41', type: 'popup', ...popup },

@@ -3,24 +3,32 @@ import { toRpx } from '@/utils/index'
 import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { AtDivider } from 'taro-ui'
+import { isNotEmpty } from '@/nice-router/nice-router-util'
 
-function EleBreakLine({ color, height, text, fontColor, customStyle, className }) {
+type EleBreakLineProps = {
+  color?: string,
+  height?: number,
+  title?: string,
+  fontColor?: string,
+  customStyle?: object,
+  className?: string
+}
+
+function EleBreakLine(props: EleBreakLineProps) {
+  const { color, height, title, fontColor, customStyle, className } = props
   const fixedHeight = toRpx(height)
 
-  const style =
-    text.length > 0
-      ? customStyle
-      : {
-          height: fixedHeight,
-          backgroundColor: color,
-          margin: '10rpx 0',
-          ...customStyle,
-        }
+  const style = isNotEmpty(title) ? customStyle : {
+    height: fixedHeight,
+    backgroundColor: color,
+    margin: '10rpx 0',
+    ...customStyle,
+  }
 
   const rootClass = classNames('ele-break-line', className)
   return (
     <View className={rootClass} style={style}>
-      {text.length > 0 && <AtDivider height={fixedHeight} content={text} fontColor={fontColor} lineColor={color} />}
+      {isNotEmpty(title) && <AtDivider height={fixedHeight} content={title} fontColor={fontColor} lineColor={color} />}
     </View>
   )
 }

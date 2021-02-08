@@ -7,13 +7,12 @@ import ServerImage from '@/server-image/server-image'
 import { Swiper, SwiperItem, Video, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
-
 import { SwiperProps } from '@tarojs/components/types/Swiper'
-
+import { ImageSize } from '@/server-image/image-tools'
 import { ActionLike, ImageLike, VideoLike } from '@/nice-router/nice-router-types'
 import { ImageProps } from '@tarojs/components/types/Image'
 import './styles.scss'
-import { ImageSize } from '@/server-image/image-tools'
+
 
 export type EleCarouselItem = ActionLike & ImageLike & VideoLike
 

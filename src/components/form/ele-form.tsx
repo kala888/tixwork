@@ -12,6 +12,16 @@ import validator from './validator'
 
 // 参考 https://github.com/react-component/form
 
+type EleFormProps = { // TODO
+  defaultValues?: object,
+  onFieldChange?: Function,
+  fieldList?: any[],
+  groupList?: any[],
+  showRequired?: boolean,
+  bordered?: boolean,
+  handleActionClick?: any
+}
+
 const getFields = (groupList, fieldList) => {
   if (isNotEmpty(groupList)) {
     let result = []
@@ -39,7 +49,7 @@ const getGroups = (groupList, fieldList) => {
     })
 }
 
-function EleForm(props, ref) {
+function EleForm(props: EleFormProps, ref) {
   const {
     defaultValues = {},
     onFieldChange,

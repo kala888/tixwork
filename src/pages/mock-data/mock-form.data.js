@@ -55,7 +55,7 @@ const productList = {
       preTag: '自营',
       tags: ['618'],
       brand: '西门子',
-      name: '大冰箱，超级大，610L让你生活无忧，心情好才是真的好',
+      title: '大冰箱，超级大，610L让你生活无忧，心情好才是真的好',
       price: 500.12,
       imageUrl: 'http://www.eastphoto.cn/indexImages/ep-012136603.jpg',
     },
@@ -64,7 +64,7 @@ const productList = {
       preTag: '双链小超',
       tags: ['券'],
       brand: '可口可乐',
-      name: '300ml，冰霜开心',
+      title: '300ml，冰霜开心',
       price: 2.5,
       imageUrl:
         'https://m.360buyimg.com/babel/s823x404_jfs/t21784/201/795134266/176047/3dad2026/5b18c66eN8c4deacf.jpg!q70.dpg',
@@ -74,7 +74,7 @@ const productList = {
       preTag: '',
       tags: [''],
       brand: '靓家私',
-      name: '这是一个超级大的家居',
+      title: '这是一个超级大的家居',
       price: 200.12,
       imageUrl:
         'https://m.360buyimg.com/babel/s370x259_jfs/t1/20729/24/4177/80676/5c2f1aeaE062589aa/ee7cc78db75d62ed.jpg!q70.dpg',
@@ -84,7 +84,7 @@ const productList = {
       preTag: '官方旗舰',
       tags: ['券'],
       brand: '美丽新时代',
-      name: '毛巾被，超级大的那么中，估计有100斤，全国包邮',
+      title: '毛巾被，超级大的那么中，估计有100斤，全国包邮',
       price: 30000.55,
       imageUrl:
         'https://m.360buyimg.com/babel/s370x259_jfs/t1/20729/24/4177/80676/5c2f1aeaE062589aa/ee7cc78db75d62ed.jpg!q70.dpg',
