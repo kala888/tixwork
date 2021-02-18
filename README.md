@@ -49,4 +49,6 @@ nice-router 包含两部分：
 
 [nice-router-react-native 开发文档](https://github.com/kala888/nice-router) (暂未开源, 稍等片刻)
 
-###### 感谢Jetbrains提供IDE支持[![](https://github.com/kala888/nice-router-taro/blob/master/docs/assets/jetbrains.svg)](https://www.jetbrains.com)
+###### 感谢Jetbrains提供IDE支持
+
+[![](https://github.com/kala888/nice-router-taro/blob/master/docs/assets/jetbrains.svg)](https://www.jetbrains.com)
