@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
-import Config from '@/utils/config';
 import { View } from '@tarojs/components';
 import { Current, useShareAppMessage } from '@tarojs/taro';
+import Config from '@/nice-router/nice-router.config';
 import classNames from 'classnames';
 import _ from 'lodash';
-
 import EleFlex from './ele-flex';
 import './styles.scss';
+import { ApiConfig } from '@/utils/config';
 
 function GenericPageBase(props) {
-  const { pageTitle = Config.name, pageLinkToUrl = Config.api.FooterHome } = props;
+  const { pageTitle = Config.name, pageLinkToUrl = ApiConfig.FooterHome } = props;
   usePageTitle(pageTitle);
   useAjaxPullDown(props);
 

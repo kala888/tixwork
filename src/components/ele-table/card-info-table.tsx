@@ -1,57 +1,56 @@
-import React from 'react'
-import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
-import { Block, View } from '@tarojs/components'
-import classNames from 'classnames'
-import _ from 'lodash'
-import EleTable from '@/components/ele-table/ele-table'
-import EleTableRow from '@/components/ele-table/ele-table-row'
-import EleTableCell from '@/components/ele-table/ele-table-cell'
-import { TitleValue } from '@/nice-router/nice-router-types'
+import React from 'react';
+import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
+import { Block, View } from '@tarojs/components';
+import classNames from 'classnames';
+import _ from 'lodash';
+import EleTable from '@/components/ele-table/ele-table';
+import EleTableRow from '@/components/ele-table/ele-table-row';
+import EleTableCell from '@/components/ele-table/ele-table-cell';
+import { TitleValue } from '@/nice-router/nice-router-types';
 
-import './card-info-table.scss'
-
+import './card-info-table.scss';
 
 const getMaxLabelLength = (list, idx = 0) => {
   const result = _.max(
     list.map((it) => {
-      const titleLength = _.get(it, idx + '.title', '').length
-      return titleLength > 2 ? titleLength : 2
-    }),
-  )
+      const titleLength = _.get(it, idx + '.title', '').length;
+      return titleLength > 2 ? titleLength : 2;
+    })
+  );
   // @ts-ignore
-  return result > 5 ? 5 : result
-}
+  return result > 5 ? 5 : result;
+};
 
 type CardInfoTableProps = {
-  data: TitleValue[],
-  className?: string,
-}
+  data: TitleValue[];
+  className?: string;
+};
 
 export default function CardInfoTable(props: CardInfoTableProps) {
-  const { data = [], className } = props
-  const rowList = _.chunk(data, 2)
-  const rootClass = classNames('card-info-table', className)
-  const maxLabelLengthLeft = getMaxLabelLength(rowList, 0)
-  const maxLabelLengthRight = getMaxLabelLength(rowList, 1)
+  const { data = [], className } = props;
+  const rowList = _.chunk(data, 2);
+  const rootClass = classNames('card-info-table', className);
+  const maxLabelLengthLeft = getMaxLabelLength(rowList, 0);
+  const maxLabelLengthRight = getMaxLabelLength(rowList, 1);
   const leftItemLabelClass = getExtMode({
     [`width${maxLabelLengthLeft}`]: true,
-  }).classNames('card-info-table-label')
+  }).classNames('card-info-table-label');
 
   const rightItemLabelClass = getExtMode({
     [`width${maxLabelLengthRight}`]: true,
-  }).classNames('card-info-table-label')
+  }).classNames('card-info-table-label');
 
   return (
     <View className={rootClass}>
       <EleTable bordered={false}>
         {rowList.map((row: [TitleValue, TitleValue], idx) => {
-          const leftItem = row[0] || {}
-          const rightItem = row[1] || {}
-          const showRight = isNotEmpty(rightItem)
+          const leftItem = row[0] || {};
+          const rightItem = row[1] || {};
+          const showRight = isNotEmpty(rightItem);
 
-          let colspan = 1
+          let colspan = 1;
           if (!showRight) {
-            colspan = isEmpty(leftItem.title) ? 4 : 3
+            colspan = isEmpty(leftItem.title) ? 4 : 3;
           }
 
           return (
@@ -69,9 +68,9 @@ export default function CardInfoTable(props: CardInfoTableProps) {
                 </Block>
               )}
             </EleTableRow>
-          )
+          );
         })}
       </EleTable>
     </View>
-  )
+  );
 }

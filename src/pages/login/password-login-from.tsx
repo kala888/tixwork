@@ -1,23 +1,23 @@
-import EleInput from '@/components/form/field/ele-input'
-import { Block, View } from '@tarojs/components'
-import React, { useState } from 'react'
+import EleInput from '@/components/form/field/ele-input';
+import { Block, View } from '@tarojs/components';
+import React, { useState } from 'react';
 
-import NavigationService from '@/nice-router/navigation-service'
-import EleButton from '@/components/elements/ele-button'
+import NavigationService from '@/nice-router/navigation-service';
+import EleButton from '@/components/elements/ele-button';
 
-import './login.scss'
+import './login.scss';
 
 export default function PasswordForm() {
-  const [login, setLogin] = useState<any>()
-  const [password, setPassword] = useState<any>()
+  const [login, setLogin] = useState<any>();
+  const [password, setPassword] = useState<any>();
 
   const handleSubmit = () => {
     NavigationService.dispatch('app/login', {
       loginMethod: 'account_password',
       login,
       password,
-    })
-  }
+    });
+  };
 
   return (
     <Block>
@@ -42,5 +42,5 @@ export default function PasswordForm() {
         登录
       </EleButton>
     </Block>
-  )
+  );
 }

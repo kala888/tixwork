@@ -2,13 +2,13 @@ import React from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { noop } from '@/nice-router/nice-router-util';
 import { useCountdown } from '@/service/use-service';
-import Config from '@/utils/config';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classNames from 'classnames';
 import { AtInput } from 'taro-ui';
 
 import './form/field/styles.scss';
+import { ApiConfig } from '@/utils/config';
 
 type MobileVerifyCodeProps = {
   onChange?: any;
@@ -34,7 +34,7 @@ function MobileVerifyCode(props: MobileVerifyCodeProps) {
       return;
     }
     startCount();
-    NavigationService.ajax(Config.api.VerifyCode, { mobile: value }, { onSuccess: (resp) => onSendCodeSuccess(resp) });
+    NavigationService.ajax(ApiConfig.VerifyCode, { mobile: value }, { onSuccess: (resp) => onSendCodeSuccess(resp) });
   };
 
   const tips = counting ? `${second}秒...` : '验证码';

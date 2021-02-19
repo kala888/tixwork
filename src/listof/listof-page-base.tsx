@@ -7,16 +7,16 @@ import { getDeviceHeight } from '@/utils/index';
 import { useDidShow, useReady } from '@tarojs/runtime';
 import classNames from 'classnames';
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
-import Config from '@/utils/config';
 import { Block, View } from '@tarojs/components';
 import NavigationService from '@/nice-router/navigation-service';
 
-import { ActionListLike } from '@/nice-router/nice-router-types';
+import { ActionLike, ActionListLike } from '@/nice-router/nice-router-types';
 import { EleTabsProps } from '@/components/elements/ele-tabs';
 import Listof, { ListofProps } from './listof';
 import './styles.scss';
 import FlexLineItem from './templates/flex-line-item';
 import FlexHeader from './flex-header';
+import Config from '@/nice-router/nice-router.config';
 
 type listofPageBaseProps = {
   pageTitle?: string;
@@ -26,6 +26,7 @@ type listofPageBaseProps = {
   renderHeader?: Function;
   renderFooter?: Function;
 } & ActionListLike &
+  ActionLike &
   EleTabsProps &
   ListofProps;
 

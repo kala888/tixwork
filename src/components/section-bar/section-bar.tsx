@@ -1,24 +1,26 @@
-import React, { useEffect } from 'react'
-import ActionUtil from '@/nice-router/action-util'
-import NavigationService from '@/nice-router/navigation-service'
-import { View } from '@tarojs/components'
-import classNames from 'classnames'
-import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types'
+import React, { useEffect } from 'react';
+import ActionUtil from '@/nice-router/action-util';
+import NavigationService from '@/nice-router/navigation-service';
+import { View } from '@tarojs/components';
+import classNames from 'classnames';
+import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types';
 
-import { useVisible } from '@/service/use-service'
-import { getExtMode, isEmpty } from '@/nice-router/nice-router-util'
-import EleButton from '@/components/elements/ele-button'
-import ActionIcon from '@/components/action-icon/action-icon'
-import './styles.scss'
-
+import { useVisible } from '@/service/use-service';
+import { getExtMode, isEmpty } from '@/nice-router/nice-router-util';
+import EleButton from '@/components/elements/ele-button';
+import ActionIcon from '@/components/action-icon/action-icon';
+import './styles.scss';
 
 type SectionBarProps = {
-  children?: any,
-  className?: string,
-  foldable?: boolean,
-  expand?: boolean,
-  mode?: 'bordered' | 'highlight' | string[]
-} & ActionLike & ImageLike & EleObject & IconLike
+  children?: any;
+  className?: string;
+  foldable?: boolean;
+  expand?: boolean;
+  mode?: 'bordered' | 'highlight' | string[];
+} & ActionLike &
+  ImageLike &
+  EleObject &
+  IconLike;
 
 /**
  * 可折叠，支持onClick和linkToUrl
@@ -28,7 +30,7 @@ type SectionBarProps = {
  * @constructor
  */
 function SectionBar(props: SectionBarProps) {
-  const { visible, toggle, show, close } = useVisible(true)
+  const { visible, toggle, show, close } = useVisible(true);
 
   const {
     title,
@@ -43,43 +45,43 @@ function SectionBar(props: SectionBarProps) {
     onClick,
     children,
     ...others
-  } = props
+  } = props;
 
   useEffect(() => {
     if (foldable) {
       if (expand) {
-        show()
+        show();
       } else {
-        close()
+        close();
       }
     }
-  }, [foldable, expand, close, show])
+  }, [foldable, expand, close, show]);
 
-  const isAction = ActionUtil.isActionLike(props)
+  const isAction = ActionUtil.isActionLike(props);
 
   const handleClick = () => {
     if (disabled) {
-      return
+      return;
     }
     if (onClick) {
-      onClick()
-      return
+      onClick();
+      return;
     }
     if (foldable) {
-      toggle()
-      return
+      toggle();
+      return;
     }
-    NavigationService.view(props)
-  }
+    NavigationService.view(props);
+  };
 
-  const rootClass = getExtMode(mode, { foldable, disabled }).classNames('section-bar', className)
+  const rootClass = getExtMode(mode, { foldable, disabled }).classNames('section-bar', className);
 
-  const contentClass = classNames('section-bar-body', { hidden: !isAction && !visible })
+  const contentClass = classNames('section-bar-body', { hidden: !isAction && !visible });
 
-  let theIcon = isEmpty(icon) && isAction ? 'right' : icon
+  let theIcon = isEmpty(icon) && isAction ? 'right' : icon;
 
   if (foldable) {
-    theIcon = visible ? 'up' : 'down'
+    theIcon = visible ? 'up' : 'down';
   }
 
   return (
@@ -94,7 +96,7 @@ function SectionBar(props: SectionBarProps) {
       </EleButton>
       {children && <View className={contentClass}>{children}</View>}
     </View>
-  )
+  );
 }
 
-export default SectionBar
+export default SectionBar;

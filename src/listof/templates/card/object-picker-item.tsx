@@ -1,23 +1,21 @@
-import React from 'react'
-import { Text, View } from '@tarojs/components'
-import NavigationService from '@/nice-router/navigation-service'
-import { EleCardProps } from '@/components/elements/ele-card/ele-card'
-import CardTemplate from './card-template'
-import './object-picker-item.scss'
-
+import React from 'react';
+import { Text, View } from '@tarojs/components';
+import NavigationService from '@/nice-router/navigation-service';
+import { EleCardProps } from '@/components/elements/ele-card/ele-card';
+import CardTemplate from './card-template';
+import './object-picker-item.scss';
 
 type ObjectPickerItemItemProps = {
-  checked?: boolean,
-} & EleCardProps
+  checked?: boolean;
+} & EleCardProps;
 
 type ObjectPickerItemProps = {
-  item: ObjectPickerItemItemProps,
-}
-
+  item: ObjectPickerItemItemProps;
+};
 
 function ObjectPickerItem(props: ObjectPickerItemProps) {
-  const { item } = props
-  const handleClick = () => NavigationService.dispatch('objectPicker/selectItem', item)
+  const { item } = props;
+  const handleClick = () => NavigationService.dispatch('objectPicker/selectItem', item);
   return (
     <View className='object-picker-item' onClick={handleClick}>
       <View className='object-picker-item-option'>
@@ -25,7 +23,7 @@ function ObjectPickerItem(props: ObjectPickerItemProps) {
       </View>
       <CardTemplate {...props} />
     </View>
-  )
+  );
 }
 
-export default ObjectPickerItem
+export default ObjectPickerItem;

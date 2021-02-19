@@ -63,5 +63,5 @@ const mockForm2Data = {
       ],
     },
   ],
-}
-export default mockForm2Data
+};
+export default mockForm2Data;

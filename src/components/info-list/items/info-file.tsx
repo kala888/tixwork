@@ -1,11 +1,11 @@
-import React from 'react'
-import { View } from '@tarojs/components'
+import React from 'react';
+import { View } from '@tarojs/components';
 
-import EleActionList from '@/components/elements/action-list/ele-action-list'
-import './styles.scss'
+import EleActionList from '@/components/elements/action-list/ele-action-list';
+import './styles.scss';
 
 function InfoFile(props) {
-  const { value: linkToUrl } = props
+  const { value: linkToUrl } = props;
   return (
     <View className='info-file'>
       <EleActionList
@@ -32,7 +32,7 @@ function InfoFile(props) {
         ]}
       />
     </View>
-  )
+  );
 }
 
-export default InfoFile
+export default InfoFile;

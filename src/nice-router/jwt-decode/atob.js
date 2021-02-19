@@ -3,19 +3,19 @@
  * https://github.com/davidchambers/Base64.js
  */
 
-var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
+var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 
 function InvalidCharacterError(message) {
-  this.message = message
+  this.message = message;
 }
 
-InvalidCharacterError.prototype = new Error()
-InvalidCharacterError.prototype.name = 'InvalidCharacterError'
+InvalidCharacterError.prototype = new Error();
+InvalidCharacterError.prototype.name = 'InvalidCharacterError';
 
 function polyfill(input) {
-  var str = String(input).replace(/=+$/, '')
+  var str = String(input).replace(/=+$/, '');
   if (str.length % 4 == 1) {
-    throw new InvalidCharacterError("'atob' failed: The string to be decoded is not correctly encoded.")
+    throw new InvalidCharacterError("'atob' failed: The string to be decoded is not correctly encoded.");
   }
   for (
     // initialize result and counters
@@ -32,9 +32,9 @@ function polyfill(input) {
       : 0
   ) {
     // try to find character in table (0-63, not found => -1)
-    buffer = chars.indexOf(buffer)
+    buffer = chars.indexOf(buffer);
   }
-  return output
+  return output;
 }
 
-module.exports = polyfill
+module.exports = polyfill;

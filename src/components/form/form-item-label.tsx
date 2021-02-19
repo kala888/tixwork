@@ -1,39 +1,39 @@
-import React from 'react'
-import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/service/use-service'
-import _ from 'lodash'
-import { Text, View } from '@tarojs/components'
-import { AtActionSheet } from 'taro-ui'
-import './form-item-label.scss'
+import React from 'react';
+import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util';
+import { useVisible } from '@/service/use-service';
+import _ from 'lodash';
+import { Text, View } from '@tarojs/components';
+import { AtActionSheet } from 'taro-ui';
+import './form-item-label.scss';
 
 type FormItemLabelTips = {
-  title?: string,
-  brief: string,
-}
+  title?: string;
+  brief: string;
+};
 
 type FormItemLabelProps = {
-  required?: boolean,
-  tips?: string | FormItemLabelTips,
-  layout?: 'vertical' | 'horizontal',
-  tail?: boolean,
-  children?: any
-}
+  required?: boolean;
+  tips?: string | FormItemLabelTips;
+  layout?: 'vertical' | 'horizontal';
+  tail?: boolean;
+  children?: any;
+};
 
 function FormItemLabel(props: FormItemLabelProps) {
-  const { visible, show, close } = useVisible(false)
-  const { required = true, tips, layout = 'horizontal', tail } = props
+  const { visible, show, close } = useVisible(false);
+  const { required = true, tips, layout = 'horizontal', tail } = props;
 
-  const hasTips = isNotEmpty(tips)
+  const hasTips = isNotEmpty(tips);
 
   const rootClass = getExtMode({ [layout]: true }).classNames('form-item-label', {
     clickable: hasTips,
-  })
+  });
 
   const handleShowTips = () => {
     if (hasTips) {
-      show()
+      show();
     }
-  }
+  };
 
   return (
     <View className={rootClass} onClick={handleShowTips}>
@@ -50,7 +50,7 @@ function FormItemLabel(props: FormItemLabelProps) {
         </View>
       </AtActionSheet>
     </View>
-  )
+  );
 }
 
-export default FormItemLabel
+export default FormItemLabel;

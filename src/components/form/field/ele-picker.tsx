@@ -1,40 +1,40 @@
 /* eslint-disable */
-import React, { useEffect, useState } from 'react'
-import _ from 'lodash'
-import { Picker, View } from '@tarojs/components'
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/service/use-service'
-import classNames from 'classnames'
+import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
+import { Picker, View } from '@tarojs/components';
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
+import { useVisible } from '@/service/use-service';
+import classNames from 'classnames';
 
-import { CandidateValue } from '@/nice-router/nice-router-types'
-import './styles.scss'
+import { CandidateValue } from '@/nice-router/nice-router-types';
+import './styles.scss';
 
 export type ElePickerProps = {
-  value?: string | CandidateValue | CandidateValue[],
-  onChange?: (values: CandidateValue[]) => void,
-  placeholder?: string,
-  candidateValues: CandidateValue[],
-  numberOfColumn?: number,
-  disabled?: boolean,
-  mode?: 'multiSelector' | 'selector'
-}
+  value?: string | CandidateValue | CandidateValue[];
+  onChange?: (values: CandidateValue[]) => void;
+  placeholder?: string;
+  candidateValues: CandidateValue[];
+  numberOfColumn?: number;
+  disabled?: boolean;
+  mode?: 'multiSelector' | 'selector';
+};
 
-const getOptions = (v) => _.get(v, 'candidateValues', [])
-const getValue = (list, idx = 0) => _.get(list, idx, {})
+const getOptions = (v) => _.get(v, 'candidateValues', []);
+const getValue = (list, idx = 0) => _.get(list, idx, {});
 const getTips = (value, placeholder) => {
   if (Array.isArray(value) && isNotEmpty(value)) {
-    return _.trim(value.map((it) => it.title || it).join('-'), '-')
+    return _.trim(value.map((it) => it.title || it).join('-'), '-');
   }
   if (isNotEmpty(value)) {
-    return value.title || value
+    return value.title || value;
   }
-  return placeholder
-}
+  return placeholder;
+};
 
 function ElePicker(props: ElePickerProps) {
-  const [tips, setTips] = useState()
-  const { visible, show, close } = useVisible(false)
-  const [range, setRange] = useState([])
+  const [tips, setTips] = useState();
+  const { visible, show, close } = useVisible(false);
+  const [range, setRange] = useState([]);
   const {
     value,
     onChange,
@@ -43,77 +43,86 @@ function ElePicker(props: ElePickerProps) {
     numberOfColumn = 3,
     disabled,
     mode = 'multiSelector',
-  } = props
+  } = props;
 
   useEffect(() => {
     if (isNotEmpty(source)) {
-      const newTips = getTips(value, placeholder)
-      setTips(newTips)
-      reBuildRangeList(0)
+      const newTips = getTips(value, placeholder);
+      setTips(newTips);
+      reBuildRangeList(0);
     }
-  }, [value, source, placeholder])
+  }, [value, source, placeholder]);
 
   const reBuildRangeList = (col, idx = 0) => {
     setRange((pre: any) => {
-      const tempRange = col === 0 ? [source] : _.clone(pre)
+      const tempRange = col === 0 ? [source] : _.clone(pre);
       for (let i = col; i < numberOfColumn; i++) {
-        const v = getValue(tempRange[i], i === col ? idx : 0)
-        const list = getOptions(v)
+        const v = getValue(tempRange[i], i === col ? idx : 0);
+        const list = getOptions(v);
         if (isEmpty(list)) {
-          break
+          break;
         }
-        tempRange[i + 1] = list
+        tempRange[i + 1] = list;
       }
-      return tempRange
-    })
-  }
+      return tempRange;
+    });
+  };
 
   const handleCommit = (e) => {
-    const targetValue = e.detail.value
+    const targetValue = e.detail.value;
 
-    let selected = targetValue
+    let selected = targetValue;
 
     if (_.isArray(selected)) {
-      selected = selected.map((it, idx) => range[idx][it] || '')
-      const newTips = getTips(selected, placeholder)
-      setTips(newTips)
+      selected = selected.map((it, idx) => range[idx][it] || '');
+      const newTips = getTips(selected, placeholder);
+      setTips(newTips);
     } else if (source) {
-      selected = source[targetValue]
-      setTips(selected ? selected.title : '')
+      selected = source[targetValue];
+      setTips(selected ? selected.title : '');
       // selectedValue = selected ? selected.id : ''
     }
 
     if (onChange) {
-      const result = selected.map((it) => ({ id: it.id, title: it.title }))
-      onChange(result)
+      const result = selected.map((it) => ({ id: it.id, title: it.title }));
+      onChange(result);
     }
     // setInnerDisplayValue(innerDisplayValue)
-    close()
-  }
+    close();
+  };
 
   const handleColumnChange = (e) => {
-    const { column, value: selectedValueIdx } = e.detail
-    console.log('column...', column)
-    reBuildRangeList(column, selectedValueIdx)
-  }
+    const { column, value: selectedValueIdx } = e.detail;
+    console.log('column...', column);
+    reBuildRangeList(column, selectedValueIdx);
+  };
 
   const tipsClass = classNames('tips', {
     placeholder: tips === placeholder,
-  })
-
-
+  });
 
   return (
     <View className='ele-picker'>
-      { // @ts-ignore
-      <Picker disabled={disabled} mode={mode} onChange={handleCommit} range={range} rangeKey='title' onColumnChange={handleColumnChange} onCancel={close} onClick={show}>
-        <View className='ele-picker-body'>
-          <View className={tipsClass}>{tips}</View>
-          {visible ? <View className='iconfont iconfont-down' /> : <View className='iconfont iconfont-right' />}
-        </View>
-      </Picker>}
+      {
+        // @ts-ignore
+        <Picker
+          disabled={disabled}
+          mode={mode}
+          onChange={handleCommit}
+          range={range}
+          rangeKey='title'
+          onColumnChange={handleColumnChange}
+          onCancel={close}
+          onClick={show}
+        >
+          <View className='ele-picker-body'>
+            <View className={tipsClass}>{tips}</View>
+            {visible ? <View className='iconfont iconfont-down' /> : <View className='iconfont iconfont-right' />}
+          </View>
+        </Picker>
+      }
     </View>
-  )
+  );
 }
 
 ElePicker.defaultProps = {
@@ -124,6 +133,6 @@ ElePicker.defaultProps = {
   displayValue: '',
   candidateValues: [],
   placeholder: '请选择',
-}
+};
 
-export default ElePicker
+export default ElePicker;

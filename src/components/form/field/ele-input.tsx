@@ -1,7 +1,7 @@
-import React from 'react'
-import { View } from '@tarojs/components'
-import { AtInput } from 'taro-ui'
-import { AtInputProps } from 'taro-ui/types/input'
+import React from 'react';
+import { View } from '@tarojs/components';
+import { AtInput } from 'taro-ui';
+import { AtInputProps } from 'taro-ui/types/input';
 
 // type: text, password, number, idcard, digit, phone
 // type: money
@@ -12,5 +12,5 @@ export default function EleInput(props: AtInputProps) {
     <View>
       <AtInput border={false} {...props} />
     </View>
-  )
+  );
 }

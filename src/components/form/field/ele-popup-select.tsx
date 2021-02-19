@@ -1,64 +1,62 @@
-import React from 'react'
-import { isEmpty, noop } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/service/use-service'
-import _ from 'lodash'
-import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtRadio } from 'taro-ui'
-import { CandidateValue } from '@/nice-router/nice-router-types'
-import ActionField from './action-field'
-import './styles.scss'
-
+import React from 'react';
+import { isEmpty, noop } from '@/nice-router/nice-router-util';
+import { useVisible } from '@/service/use-service';
+import _ from 'lodash';
+import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtRadio } from 'taro-ui';
+import { CandidateValue } from '@/nice-router/nice-router-types';
+import ActionField from './action-field';
+import './styles.scss';
 
 type ElePopupSelectProps = {
-  onChange?: Function,
-  multiple?: boolean,
-  value: string | string[],
-  placeholder?: string,
-  label?: string,
-  candidateValues: CandidateValue[],
-  disabled?: boolean
-}
+  onChange?: Function;
+  multiple?: boolean;
+  value: string | string[];
+  placeholder?: string;
+  label?: string;
+  candidateValues: CandidateValue[];
+  disabled?: boolean;
+};
 
 function ElePopupSelect(props: ElePopupSelectProps) {
-  const { visible, show, close } = useVisible(false)
+  const { visible, show, close } = useVisible(false);
 
-  const { onChange = noop, multiple, value, placeholder, label, candidateValues, disabled } = props
+  const { onChange = noop, multiple, value, placeholder, label, candidateValues, disabled } = props;
 
   const handleChange = (v) => {
-    onChange(v)
+    onChange(v);
     if (!multiple) {
-      close()
+      close();
     }
-  }
+  };
 
   const getValue = () => {
-    let currentValue = value
+    let currentValue = value;
     if (isEmpty(value)) {
-      currentValue = multiple ? [] : ''
+      currentValue = multiple ? [] : '';
     }
     if (multiple && _.isString(value)) {
-      currentValue = [value]
+      currentValue = [value];
     }
     const displayValue = candidateValues
       .filter((it) => (multiple ? currentValue.includes(it.id) : currentValue === it.id))
       .map((it) => it.title)
-      .join('、')
+      .join('、');
 
     return {
       currentValue,
       displayValue,
-    }
-  }
+    };
+  };
 
-  const { currentValue, displayValue } = getValue()
+  const { currentValue, displayValue } = getValue();
 
   const options = candidateValues.map((it) => ({
     label: it.title,
-    value:it.id,
+    value: it.id,
     ...it,
-  }))
+  }));
 
-  const cancelText = multiple ? '确定' : '取消'
-
+  const cancelText = multiple ? '确定' : '取消';
 
   return (
     <ActionField
@@ -79,13 +77,13 @@ function ElePopupSelect(props: ElePopupSelectProps) {
         </AtActionSheetItem>
       </AtActionSheet>
     </ActionField>
-  )
+  );
 }
 
 ElePopupSelect.defaultProps = {
   multiple: false,
   value: [],
   candidateValues: [],
-}
+};
 
-export default ElePopupSelect
+export default ElePopupSelect;

@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import ServerImage from '@/server-image/server-image'
-import Config from '@/utils/config'
-import { Text, View } from '@tarojs/components'
-import Taro from '@tarojs/taro'
-import NavigationService from '@/nice-router/navigation-service'
+import React, { useEffect, useState } from 'react';
+import ServerImage from '@/server-image/server-image';
+import { ApiConfig } from '@/utils/config';
+import { Text, View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
+import NavigationService from '@/nice-router/navigation-service';
+import Config from '@/nice-router/nice-router.config';
 
-import loginLogo from '../../assets/login-logo.png'
-import VCodeLoginForm from './vcode-login-from'
-import PasswordLoginForm from './password-login-from'
-import WechatLoginForm from './wechat-login-form'
-import './login.scss'
+import loginLogo from '../../assets/login-logo.png';
+import VCodeLoginForm from './vcode-login-from';
+import PasswordLoginForm from './password-login-from';
+import WechatLoginForm from './wechat-login-form';
+import './login.scss';
 
 export default function LoginPage() {
-  const [wxLoginSuccess, setWxLoginSuccess] = useState(false)
+  const [wxLoginSuccess, setWxLoginSuccess] = useState(false);
 
   useEffect(() => {
     Taro.login({
       success: (res) => {
-        console.log('doooooologin')
+        console.log('doooooologin');
         NavigationService.ajax(
-          Config.api.WxLogin,
+          ApiConfig.WxLogin,
           { code: res.code },
           {
             onSuccess: () => setWxLoginSuccess(true),
           }
-        )
+        );
       },
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <View className='login-page'>
@@ -47,5 +48,5 @@ export default function LoginPage() {
         {Config.loginMode === 'password' && <PasswordLoginForm />}
       </View>
     </View>
-  )
+  );
 }

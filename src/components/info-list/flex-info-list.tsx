@@ -1,16 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-import FlexInfoItem, { FlexInfoItemProps } from '@/components/info-list/flex-info-item'
-import SectionBar from '@/components/section-bar/section-bar'
+import FlexInfoItem, { FlexInfoItemProps } from '@/components/info-list/flex-info-item';
+import SectionBar from '@/components/section-bar/section-bar';
 
-import EleActionList from '@/components/elements/action-list/ele-action-list'
-import { View } from '@tarojs/components'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
-import { ActionListLike } from '@/nice-router/nice-router-types'
-import './flex-info-list.scss'
+import EleActionList from '@/components/elements/action-list/ele-action-list';
+import { View } from '@tarojs/components';
+import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { ActionListLike } from '@/nice-router/nice-router-types';
+import './flex-info-list.scss';
 
-
-type FlexInfoListProps = { items: FlexInfoItemProps[] } & Partial<ActionListLike>
+type FlexInfoListProps = { items: FlexInfoItemProps[] } & Partial<ActionListLike>;
 
 /**
  * title  section 名字(optional)
@@ -24,7 +23,7 @@ type FlexInfoListProps = { items: FlexInfoItemProps[] } & Partial<ActionListLike
  * @constructor
  */
 function FlexInfoList(props: FlexInfoListProps) {
-  const { items = [], actionList, ...others } = props
+  const { items = [], actionList, ...others } = props;
 
   return (
     <SectionBar mode={['bordered', 'highlight']} {...others} className='flex-info-list'>
@@ -37,7 +36,7 @@ function FlexInfoList(props: FlexInfoListProps) {
         </View>
       )}
     </SectionBar>
-  )
+  );
 }
 
 FlexInfoList.defaultProps = {
@@ -45,5 +44,5 @@ FlexInfoList.defaultProps = {
   items: [],
   foldable: true,
   expand: true,
-}
-export default FlexInfoList
+};
+export default FlexInfoList;

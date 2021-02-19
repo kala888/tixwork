@@ -1,51 +1,51 @@
-import MobileVerifyCode from '@/components/mobile-verify-code'
-import EleInput from '@/components/form/field/ele-input'
-import { Block, View } from '@tarojs/components'
-import React, { useState } from 'react'
-import _ from 'lodash'
-import NavigationService from '@/nice-router/navigation-service'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/service/use-service'
-import EleButton from '@/components/elements/ele-button'
-import './login.scss'
+import MobileVerifyCode from '@/components/mobile-verify-code';
+import EleInput from '@/components/form/field/ele-input';
+import { Block, View } from '@tarojs/components';
+import React, { useState } from 'react';
+import _ from 'lodash';
+import NavigationService from '@/nice-router/navigation-service';
+import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { useVisible } from '@/service/use-service';
+import EleButton from '@/components/elements/ele-button';
+import './login.scss';
 
 export default function VCodeLoginForm(props) {
-  const [mobile, setMobile] = useState()
-  const [verifyCode, setVerifyCode] = useState<any>()
-  const { visible, toggle } = useVisible(true)
+  const [mobile, setMobile] = useState();
+  const [verifyCode, setVerifyCode] = useState<any>();
+  const { visible, toggle } = useVisible(true);
 
-  const { disabled } = props
+  const { disabled } = props;
 
   const handleSubmit = () => {
     NavigationService.dispatch('app/login', {
       loginMethod: 'mobile_vcode',
       mobile,
       verifyCode,
-    })
-  }
+    });
+  };
 
   const handleSendCodeSuccess = (resp) => {
-    const txt = _.get(resp, 'toast.text', '')
-    const theCode = _.get(txt.match(/验证码(\d{6})/), 1)
-    console.log('text', txt, theCode)
+    const txt = _.get(resp, 'toast.text', '');
+    const theCode = _.get(txt.match(/验证码(\d{6})/), 1);
+    console.log('text', txt, theCode);
     if (isNotEmpty(theCode)) {
-      setVerifyCode(theCode)
+      setVerifyCode(theCode);
     }
-  }
+  };
 
   const handleBindingWechatMobile = (e) => {
     if (disabled) {
-      return
+      return;
     }
-    const { encryptedData } = e.detail
-    console.log('e.detail', e.detail)
+    const { encryptedData } = e.detail;
+    console.log('e.detail', e.detail);
     if (isNotEmpty(encryptedData)) {
       NavigationService.dispatch('app/login', {
         ...e.detail,
         loginMethod: 'wechat_mobile',
-      })
+      });
     }
-  }
+  };
 
   if (visible) {
     return (
@@ -59,7 +59,7 @@ export default function VCodeLoginForm(props) {
           </EleButton>
         </View>
       </Block>
-    )
+    );
   }
 
   return (
@@ -92,5 +92,5 @@ export default function VCodeLoginForm(props) {
         登录
       </EleButton>
     </Block>
-  )
+  );
 }

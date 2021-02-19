@@ -1,6 +1,6 @@
-import { isEmpty } from '@/nice-router/nice-router-util'
-import Schema from 'async-validator'
-import _ from 'lodash'
+import { isEmpty } from '@/nice-router/nice-router-util';
+import Schema from 'async-validator';
+import _ from 'lodash';
 
 //valid OOTB type:
 // const VALIDATOR_OOTB_TYP = [
@@ -32,14 +32,14 @@ import _ from 'lodash'
 //   switch: 'boolean',
 // }
 
-const numberLikeType = ['integer', 'number', 'float', 'decimal', 'double', 'money']
+const numberLikeType = ['integer', 'number', 'float', 'decimal', 'double', 'money'];
 
 function transformValue(type, value) {
   if (isEmpty(value)) {
-    return value
+    return value;
   }
-  const isNumberLike = numberLikeType.includes(type)
-  return isNumberLike ? _.toNumber(value) : value
+  const isNumberLike = numberLikeType.includes(type);
+  return isNumberLike ? _.toNumber(value) : value;
 }
 
 // function getSpecialValidator(rule, type) {
@@ -48,20 +48,22 @@ function transformValue(type, value) {
 // }
 
 function handleErrors(errors = [], fields) {
-  console.log('fields', fields)
+  console.log('fields', fields);
   // @ts-ignore
-  return errors.map((err) => err?.message)
+  return errors.map((err) => err?.message);
 }
 
-
-const validator = (field:{
-  name:string,
-  rules:object [],
-  type:string
-} , value) => {
-  const { name, rules = [], type } = field||{}
+const validator = (
+  field: {
+    name: string;
+    rules: object[];
+    type: string;
+  },
+  value
+) => {
+  const { name, rules = [], type } = field || {};
   if (isEmpty(name) || isEmpty(rules)) {
-    return Promise.resolve()
+    return Promise.resolve();
   }
 
   // const ruleList = rules.map((it) => {
@@ -84,19 +86,19 @@ const validator = (field:{
   // processedRules.push({
   //   type: validatorType, // 通过增加rule方式做类型检测
   // })
-  const schema = new Schema({ [name]: rules })
-  const fieldValue = transformValue(type, value)
-  const source = { [name]: fieldValue }
+  const schema = new Schema({ [name]: rules });
+  const fieldValue = transformValue(type, value);
+  const source = { [name]: fieldValue };
   // console.log('validate field:', name, 'type:', type, 'value:', value, '->', fieldValue, 'rules:', rules)
   return schema
     .validate(source)
     .then((res) => {
-      console.log('validate result', res)
-      return []
+      console.log('validate result', res);
+      return [];
     })
     .catch(({ errors, fields }) => {
-      return handleErrors(errors, fields)
-    })
-}
+      return handleErrors(errors, fields);
+    });
+};
 
-export default validator
+export default validator;

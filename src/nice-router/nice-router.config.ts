@@ -1,62 +1,39 @@
+import NavigationService from '@/nice-router/navigation-service';
 import _ from 'lodash';
-import NavigationService from './navigation-service';
+import ViewMappingService from '@/nice-router/viewmapping-service';
 
-export interface BaseAppConfiguration {
+export interface AppConfiguration {
   name: string;
   baseURL: string;
   version: number;
   appType: string;
-  api: any;
   viewConfig: object;
+  api: object;
   backendRouterPageBlackList: string[];
   backendRouterPageKeyBlackList: string[];
   loginMode?: 'wechat' | 'vcode' | 'password';
+  start?: (config: AppConfiguration, container: any) => void;
+  get?: (key: string) => any;
 }
 
-type NiceRouterConfigProps = {
-  config?: BaseAppConfiguration;
-  status: 'initial' | 'done';
-  start?: (props: { config: BaseAppConfiguration; container?: any }) => void;
-};
-
-const defaultViewConfig = {
-  'com.terapico.appview.H5Page': {
-    pageName: 'H5Page',
-    stateAction: '/nice-router/h5-page',
-  },
-  'NetworkException.RetryPage': {
-    pageName: '/nice-router/network-exception-page',
-  },
-};
-
-const defaultConfig: BaseAppConfiguration = {
+const defaultConfig: AppConfiguration = {
   name: 'nice-router',
   baseURL: '',
   version: 1,
   appType: 'nice-router-taro',
+  viewConfig: {},
   api: {},
-  viewConfig: defaultViewConfig,
   backendRouterPageBlackList: [],
   backendRouterPageKeyBlackList: [],
+  start: (config: AppConfiguration, container: any) => {
+    NavigationService.setContainer(container);
+    Config = _.merge(defaultConfig, config);
+    ViewMappingService.setViewConfig(Config?.viewConfig);
+  },
+  get: (key) => _.get(this, key),
 };
 
-const NiceRouterConfig: NiceRouterConfigProps = { status: 'initial' };
+// eslint-disable-next-line import/no-mutable-exports
+let Config: AppConfiguration = defaultConfig;
 
-NiceRouterConfig.start = ({ config = {}, container }): NiceRouterConfigProps => {
-  NavigationService.setContainer(container);
-
-  NiceRouterConfig.config = _.merge(defaultConfig, config);
-
-  const tempViewConfig = {};
-  const vcfg = NiceRouterConfig.config.viewConfig;
-  Object.keys(vcfg).map((key) => {
-    tempViewConfig[key.trim()] = vcfg[key];
-  });
-  NiceRouterConfig.config.viewConfig = tempViewConfig;
-
-  NiceRouterConfig.status = 'done';
-
-  return NiceRouterConfig;
-};
-
-export default NiceRouterConfig;
+export default Config;

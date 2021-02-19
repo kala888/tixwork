@@ -1,7 +1,7 @@
 /* eslint-disable */
 import AuthTools from '@/nice-router/auth-tools';
 import NavigationService from '@/nice-router/navigation-service';
-import Config from '@/utils/config';
+import { ApiConfig } from '@/utils/config';
 import Taro from '@tarojs/taro';
 import { isNotEmpty } from '@/nice-router/nice-router-util';
 import ActionUtil from '@/nice-router/action-util';
@@ -42,7 +42,7 @@ function wechatLogin(payload: DoLoginProps) {
 
 function doRemoteLogin(payload) {
   const { options = {}, ...params } = payload;
-  NavigationService.put(Config.api.Login, params, {
+  NavigationService.put(ApiConfig.Login, params, {
     statInPage: true,
     onSuccess: async (resp, { headers }) => {
       if (options.onSuccess) {

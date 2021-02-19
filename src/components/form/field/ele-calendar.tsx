@@ -1,22 +1,21 @@
-import React, { useState } from 'react'
-import { isEmpty, noop } from '@/nice-router/nice-router-util'
-import { useVisible } from '@/service/use-service'
-import { formatTime, transToDate } from '@/utils/index'
-import { Picker } from '@tarojs/components'
-import { AtActionSheet, AtCalendar } from 'taro-ui'
-import { ModeClass } from '@/nice-router/nice-router-types'
+import React, { useState } from 'react';
+import { isEmpty, noop } from '@/nice-router/nice-router-util';
+import { useVisible } from '@/service/use-service';
+import { formatTime, transToDate } from '@/utils/index';
+import { Picker } from '@tarojs/components';
+import { AtActionSheet, AtCalendar } from 'taro-ui';
+import { ModeClass } from '@/nice-router/nice-router-types';
 
-import ActionField from './action-field'
-import './ele-calendar.scss'
-
+import ActionField from './action-field';
+import './ele-calendar.scss';
 
 type EleCalendarProps = {
-  onChange?: Function,
-  placeholder?: string,
-  label?: string,
-  value?: string,
-  disabled?: boolean
-} & ModeClass
+  onChange?: Function;
+  placeholder?: string;
+  label?: string;
+  value?: string;
+  disabled?: boolean;
+} & ModeClass;
 
 /**
  * 有时候弹不出来，记得在外层包一个View
@@ -26,62 +25,62 @@ type EleCalendarProps = {
  * @constructor
  */
 function EleCalendar(props: EleCalendarProps) {
-  const [date, setDate] = useState('')
-  const [showCalendar, setShowCalendar] = useState(true)
-  const { visible, show: showPopup, close: closePopup } = useVisible(false)
-  const { mode, onChange = noop, placeholder, label, value, disabled } = props
+  const [date, setDate] = useState('');
+  const [showCalendar, setShowCalendar] = useState(true);
+  const { visible, show: showPopup, close: closePopup } = useVisible(false);
+  const { mode, onChange = noop, placeholder, label, value, disabled } = props;
 
   const show = () => {
-    showPopup()
-    setShowCalendar(true)
-  }
+    showPopup();
+    setShowCalendar(true);
+  };
   const close = () => {
-    closePopup()
-    setShowCalendar(false)
-  }
+    closePopup();
+    setShowCalendar(false);
+  };
 
   const handleDateSelected = (e) => {
-    const { start: startDate } = e.value
-    close()
+    const { start: startDate } = e.value;
+    close();
     if (mode === 'date') {
-      onChange(startDate)
-      return
+      onChange(startDate);
+      return;
     }
-    setDate(startDate)
-  }
+    setDate(startDate);
+  };
 
   const handleTimeChange = (e) => {
     const {
       detail: { value: time },
-    } = e
-    onChange(`${date} ${time}`)
-  }
+    } = e;
+    onChange(`${date} ${time}`);
+  };
 
   const getDateTime = () => {
-    console.log('getDate-time', value)
-    const dateValue = transToDate(value)
+    console.log('getDate-time', value);
+    const dateValue = transToDate(value);
 
     if (dateValue) {
-      const fmt = mode === 'datetime' ? 'yyyy-MM-dd HH:mm' : 'yyyy-MM-dd'
-      const displayValue = formatTime(dateValue, fmt)
-      let [displayDate, displayTime] = displayValue.split(' ')
+      const fmt = mode === 'datetime' ? 'yyyy-MM-dd HH:mm' : 'yyyy-MM-dd';
+      const displayValue = formatTime(dateValue, fmt);
+      let [displayDate, displayTime] = displayValue.split(' ');
       return {
         displayValue,
         displayDate,
         displayTime,
-      }
+      };
     }
 
     if (mode === 'datetime' && isEmpty(dateValue)) {
       return {
         displayTime: formatTime(Date.now(), 'HH:mm'),
-      }
+      };
     }
 
-    return {}
-  }
+    return {};
+  };
 
-  const { displayValue, displayDate, displayTime } = getDateTime()
+  const { displayValue, displayDate, displayTime } = getDateTime();
 
   // action-sheet 里面的那个view不要干掉，不然日历有问题????? TODO
   return (
@@ -101,7 +100,7 @@ function EleCalendar(props: EleCalendarProps) {
         )}
       </AtActionSheet>
     </ActionField>
-  )
+  );
 }
 
 EleCalendar.defaultProps = {
@@ -111,6 +110,6 @@ EleCalendar.defaultProps = {
   // mode: 'datetime',
   value: '',
   disabled: false,
-}
+};
 
-export default EleCalendar
+export default EleCalendar;

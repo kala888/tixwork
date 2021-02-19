@@ -26,8 +26,8 @@
 		"dev:qq": "npm run build:qq -- --watch",
 		"dev:quickapp": "npm run build:quickapp -- --watch",
 		"format": "yarn prettier && yarn lint --fix",
-		"prettier": "prettier --write ./src/**/*",
-		"lint:fix": "eslint --fix --ext .js src && npm run lint:style",
+        "prettier": "prettier --write './src/**/*'",
+		"lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src && npm run lint:style",
 		"lint": "eslint --ext .js,.jsx,.ts,.tsx src && npm run lint:style",
 		"lint:style": "stylelint 'src/**/*.scss' --syntax scss",
 		"precommit": "lint-staged"

@@ -1,23 +1,22 @@
-import Base64 from './base64'
-import Crypto from './crypto'
-import './hmac'
-import './sha1'
-
+import Base64 from './base64';
+import Crypto from './crypto';
+import './hmac';
+import './sha1';
 
 export type OssTokenDTO = {
-  type: 'qiniu' | 'aliyun',
-  expiration: string,
-  userHome: string,
-  prefix: string,
-  uploadPrefix: string,
-  accessKeyId: string,
-  accessKeySecret: string,
-  securityToken: string,
-  bucket: string,
-}
+  type: 'qiniu' | 'aliyun';
+  expiration: string;
+  userHome: string;
+  prefix: string;
+  uploadPrefix: string;
+  accessKeyId: string;
+  accessKeySecret: string;
+  securityToken: string;
+  bucket: string;
+};
 
 function getAliyunConfig(ossToken: OssTokenDTO) {
-  const { accessKeyId, accessKeySecret, securityToken } = ossToken||{}
+  const { accessKeyId, accessKeySecret, securityToken } = ossToken || {};
 
   const policyText = {
     // "expiration": ossConfig.expiration,
@@ -26,10 +25,10 @@ function getAliyunConfig(ossToken: OssTokenDTO) {
       ['content-length-range', 0, 20 * 1024 * 1024], // 设置上传文件的大小限制,5mb
       { bucket: ossToken.bucket },
     ],
-  }
-  const policy = Base64.encode(JSON.stringify(policyText))
-  const bytes = Crypto.HMAC(Crypto.SHA1, policy, accessKeySecret, { asBytes: true })
-  const signature = Crypto.util.bytesToBase64(bytes)
+  };
+  const policy = Base64.encode(JSON.stringify(policyText));
+  const bytes = Crypto.HMAC(Crypto.SHA1, policy, accessKeySecret, { asBytes: true });
+  const signature = Crypto.util.bytesToBase64(bytes);
   return {
     policy,
     Signature: signature,
@@ -37,7 +36,7 @@ function getAliyunConfig(ossToken: OssTokenDTO) {
     OSSAccessKeyId: accessKeyId,
     'x-oss-security-token': securityToken,
     success_action_status: '200',
-  }
+  };
 }
 
-export default getAliyunConfig
+export default getAliyunConfig;

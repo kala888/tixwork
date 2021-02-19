@@ -1,14 +1,13 @@
-import React from 'react'
-import '@tarojs/taro/html.css'
-import { RichText } from '@tarojs/components'
-
+import React from 'react';
+import '@tarojs/taro/html.css';
+import { RichText } from '@tarojs/components';
 
 export type EleRichTextProps = {
-  content?: string
-}
+  content?: string;
+};
 
 function EleRichText({ content = '' }: EleRichTextProps) {
-  return <RichText space='nbsp' nodes={content} />
+  return <RichText space='nbsp' nodes={content} />;
 }
 
-export default EleRichText
+export default EleRichText;

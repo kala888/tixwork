@@ -1,25 +1,25 @@
-import React from 'react'
-import { View } from '@tarojs/components'
-import ActionIcon from '@/components/action-icon/action-icon'
-import { isEmpty } from '@/nice-router/nice-router-util'
-import ActionUtil from '@/nice-router/action-util'
-import EleButton, { EleButtonProps } from '@/components/elements/ele-button'
+import React from 'react';
+import { View } from '@tarojs/components';
+import ActionIcon from '@/components/action-icon/action-icon';
+import { isEmpty } from '@/nice-router/nice-router-util';
+import ActionUtil from '@/nice-router/action-util';
+import EleButton, { EleButtonProps } from '@/components/elements/ele-button';
 
-import './navigation-line.scss'
+import './navigation-line.scss';
 
 type NavigationLineProps = {
-  secondTitle?: string,
-  prefixIcon?: string,
-  prefixImageUrl?: string,
-} & EleButtonProps
+  secondTitle?: string;
+  prefixIcon?: string;
+  prefixImageUrl?: string;
+} & EleButtonProps;
 
 export default function NavigationLine(props: NavigationLineProps) {
-  const { title, secondTitle, brief, icon, imageUrl, prefixIcon, prefixImageUrl, ...others } = props
+  const { title, secondTitle, brief, icon, imageUrl, prefixIcon, prefixImageUrl, ...others } = props;
 
-  const useDefaultPrefix = isEmpty(prefixIcon) && isEmpty(prefixImageUrl)
+  const useDefaultPrefix = isEmpty(prefixIcon) && isEmpty(prefixImageUrl);
 
-  let showDefaultRightIcon = ActionUtil.isActionLike(props) && isEmpty(icon) && isEmpty(imageUrl)
-  const theAction = showDefaultRightIcon ? 'right' : icon
+  let showDefaultRightIcon = ActionUtil.isActionLike(props) && isEmpty(icon) && isEmpty(imageUrl);
+  const theAction = showDefaultRightIcon ? 'right' : icon;
 
   return (
     <EleButton mode='ghost' {...others}>
@@ -43,5 +43,5 @@ export default function NavigationLine(props: NavigationLineProps) {
         </View>
       </View>
     </EleButton>
-  )
+  );
 }

@@ -10,7 +10,7 @@ import { createAction, isEmpty, isNotEmpty, LoadingType, log, noop } from './nic
 import ActionUtil from './action-util';
 import PopupMessage, { PopupMessageProps } from './popup-message';
 import BackendService from './request/backend-service';
-import ViewmappingService from './viewmapping-service';
+import ViewMappingService from './viewmapping-service';
 
 function showToastOrPopup({ toast, popup }: { toast: GlobalToastProps; popup: PopupMessageProps }): void {
   // 后端说Toast
@@ -161,7 +161,7 @@ function getViewMapping({
   effectAction: string | string[];
   doRedirect: boolean;
 } {
-  const nextView = ViewmappingService.getView(xclass, statInPage);
+  const nextView = ViewMappingService.getView(xclass, statInPage);
 
   const nextPage = nextView.pageName || '';
   const newStateAction = stateAction || nextView.stateAction || [];

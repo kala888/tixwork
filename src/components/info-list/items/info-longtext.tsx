@@ -1,34 +1,34 @@
-import React from 'react'
-import { Text, View } from '@tarojs/components'
-import { useVisible } from '@/service/use-service'
+import React from 'react';
+import { Text, View } from '@tarojs/components';
+import { useVisible } from '@/service/use-service';
 
-import _ from 'lodash'
-import { getExtMode } from '@/nice-router/nice-router-util'
-import './styles.scss'
+import _ from 'lodash';
+import { getExtMode } from '@/nice-router/nice-router-util';
+import './styles.scss';
 
 type InfoLongTextProps = {
-  value?: string | object,
-  maxLength?: number,
-  useFold?: boolean,
-  className?: string,
-  children?: any
-}
+  value?: string | object;
+  maxLength?: number;
+  useFold?: boolean;
+  className?: string;
+  children?: any;
+};
 
 function InfoLongText(props: InfoLongTextProps) {
-  const { value = '', maxLength = 200, className, useFold = true } = props
-  let theValue = _.isObject(value) ? JSON.stringify(value) : value
+  const { value = '', maxLength = 200, className, useFold = true } = props;
+  let theValue = _.isObject(value) ? JSON.stringify(value) : value;
   if (_.isString(props.children)) {
-    theValue = props.children
+    theValue = props.children;
   }
 
-  const { visible, toggle } = useVisible(false)
+  const { visible, toggle } = useVisible(false);
 
-  let showFoldAction = false
+  let showFoldAction = false;
   if (useFold && theValue.length > maxLength) {
-    showFoldAction = true
+    showFoldAction = true;
   }
 
-  const rootClass = getExtMode({ fold: showFoldAction && !visible }).classNames('info-longtext', className)
+  const rootClass = getExtMode({ fold: showFoldAction && !visible }).classNames('info-longtext', className);
 
   return (
     <View className={rootClass}>
@@ -39,7 +39,7 @@ function InfoLongText(props: InfoLongTextProps) {
         </Text>
       )}
     </View>
-  )
+  );
 }
 
-export default InfoLongText
+export default InfoLongText;

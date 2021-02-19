@@ -1,43 +1,42 @@
-import React from 'react'
-import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
+import React from 'react';
+import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util';
 
-import { useVisible } from '@/service/use-service'
-import { Text, View } from '@tarojs/components'
-import classNames from 'classnames'
-import './style.scss'
-
+import { useVisible } from '@/service/use-service';
+import { Text, View } from '@tarojs/components';
+import classNames from 'classnames';
+import './style.scss';
 
 export type TreeProps = {
-  id?: string,
-  selected?: boolean,
-  onChange?: Function,
-  value?: any,
-  disabled?: boolean,
-  nodes: TreeProps[],
-  expandAll?: boolean,
-  title?: string,
-  brief?: string
-}
+  id?: string;
+  selected?: boolean;
+  onChange?: Function;
+  value?: any;
+  disabled?: boolean;
+  nodes: TreeProps[];
+  expandAll?: boolean;
+  title?: string;
+  brief?: string;
+};
 
 function Tree(props: TreeProps) {
-  const { visible, toggle } = useVisible()
-  const { selected, onChange = noop, value, disabled, nodes, expandAll, title, brief } = props
+  const { visible, toggle } = useVisible();
+  const { selected, onChange = noop, value, disabled, nodes, expandAll, title, brief } = props;
   const handleItemSelect = () => {
     if (disabled) {
-      return
+      return;
     }
-    const isLeaf = isEmpty(nodes)
+    const isLeaf = isEmpty(nodes);
     if (isLeaf) {
-      onChange(value)
+      onChange(value);
     } else {
-      toggle()
+      toggle();
     }
-  }
+  };
 
-  const isTrunk = isNotEmpty(nodes)
-  const isSelected = selected === value
-  const subTreeClass = classNames('tree-subtree', { hidden: !visible })
-  const treeItemClass = classNames('tree-item', { selected: isSelected, disabled })
+  const isTrunk = isNotEmpty(nodes);
+  const isSelected = selected === value;
+  const subTreeClass = classNames('tree-subtree', { hidden: !visible });
+  const treeItemClass = classNames('tree-item', { selected: isSelected, disabled });
 
   return (
     <View className='tree'>
@@ -64,13 +63,13 @@ function Tree(props: TreeProps) {
         ))}
       </View>
     </View>
-  )
+  );
 }
 
 Tree.defaultProps = {
   expandAll: false,
   nodes: [],
   onChange: noop,
-}
+};
 
-export default Tree
+export default Tree;

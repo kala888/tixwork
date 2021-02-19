@@ -1,92 +1,92 @@
-import React, { useEffect, useRef, useState } from 'react'
-import _ from 'lodash'
-import ActionUtil from '@/nice-router/action-util'
-import NavigationService from '@/nice-router/navigation-service'
-import { View } from '@tarojs/components'
-import { AtActivityIndicator } from 'taro-ui'
+import React, { useEffect, useRef, useState } from 'react';
+import _ from 'lodash';
+import ActionUtil from '@/nice-router/action-util';
+import NavigationService from '@/nice-router/navigation-service';
+import { View } from '@tarojs/components';
+import { AtActivityIndicator } from 'taro-ui';
 
-import { getExtMode } from '@/nice-router/nice-router-util'
-import FlexInfoList from '@/components/info-list/flex-info-list'
+import { getExtMode } from '@/nice-router/nice-router-util';
+import FlexInfoList from '@/components/info-list/flex-info-list';
 
-import ListofUtil from '../listof-util'
-import AutoTemplate from './auto/auto-template'
-import CardTemplate from './card/card-template'
-import RichTextTemplate from './rich-text-template'
-import ObjectPickerItem from './card/object-picker-item'
-import ObjectPickerPopupItem from './card/object-picker-popup-item'
-import Product from './product/product'
-import NavigationLine from './navigation-line/navigation-line'
+import ListofUtil from '../listof-util';
+import AutoTemplate from './auto/auto-template';
+import CardTemplate from './card/card-template';
+import RichTextTemplate from './rich-text-template';
+import ObjectPickerItem from './card/object-picker-item';
+import ObjectPickerPopupItem from './card/object-picker-popup-item';
+import Product from './product/product';
+import NavigationLine from './navigation-line/navigation-line';
 
-import './flex-line-item.scss'
+import './flex-line-item.scss';
 
 export type FlexLineItemProps = {
-  id?: string,
-  hashCode?: string,
-  item?: any,
-  bordered?: boolean,
-  horizontal?: boolean,
-  className?: string,
-  onItemClick?: Function,
-  displayMode?: string,
-  index?:number
-}
+  id?: string;
+  hashCode?: string;
+  item?: any;
+  bordered?: boolean;
+  horizontal?: boolean;
+  className?: string;
+  onItemClick?: Function;
+  displayMode?: string;
+  index?: number;
+};
 
 function FlexLineItem(props: FlexLineItemProps) {
-  const [loading, setLoading] = useState(false)
-  const timer = useRef()
+  const [loading, setLoading] = useState(false);
+  const timer = useRef();
 
-  const { id, hashCode } = props
+  const { id, hashCode } = props;
 
   useEffect(() => {
-    return () => clearTimeout(timer.current)
-  }, [id, hashCode])
+    return () => clearTimeout(timer.current);
+  }, [id, hashCode]);
 
   const startLoading = () => {
     if (timer.current) {
-      clearTimeout(timer.current)
+      clearTimeout(timer.current);
     }
-    setLoading(true)
+    setLoading(true);
     // @ts-ignore
-    timer.current = setTimeout(() => stopLoading(), 3000)
-  }
-  const stopLoading = () => setLoading(false)
+    timer.current = setTimeout(() => stopLoading(), 3000);
+  };
+  const stopLoading = () => setLoading(false);
 
-  const { item = {}, bordered = true, horizontal, className, onItemClick, ...others } = props
+  const { item = {}, bordered = true, horizontal, className, onItemClick, ...others } = props;
   const displayMode = _.get(item, 'displayMode', props.displayMode)
     .toLowerCase()
-    .trim()
+    .trim();
 
   // 使用节流，3面内的点击只算一次
   const handleClick = _.throttle(() => {
-    console.log('item....click')
+    console.log('item....click');
     if (onItemClick) {
-      onItemClick(item)
-      return
+      onItemClick(item);
+      return;
     }
 
     if (ListofUtil.isSelfHoldClickTemplate(displayMode, item)) {
-      return
+      return;
     }
 
     if (ActionUtil.isActionLike(item)) {
-      startLoading()
+      startLoading();
       NavigationService.view(
         item,
         {},
         {
           ajax: item.ajax,
           onSuccess: () => stopLoading(),
-        },
-      )
+        }
+      );
     }
-  }, 3000)
+  }, 3000);
 
   const wrapperClass = getExtMode({ 'no-border': !bordered }).classNames('flex-line-item', className, {
     click: ActionUtil.isActionLike(item),
-  })
+  });
 
-  const itemProps = { ...others, horizontal, item }
-  const itemWidth = ListofUtil.getItemWidth(displayMode)
+  const itemProps = { ...others, horizontal, item };
+  const itemWidth = ListofUtil.getItemWidth(displayMode);
 
   return (
     <View onClick={handleClick} className={wrapperClass} style={{ width: itemWidth }}>
@@ -123,7 +123,7 @@ function FlexLineItem(props: FlexLineItemProps) {
         </View>
       )}
     </View>
-  )
+  );
 }
 
-export default React.memo(FlexLineItem)
+export default React.memo(FlexLineItem);

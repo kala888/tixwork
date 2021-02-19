@@ -1,4 +1,4 @@
-var atob = require('./atob')
+var atob = require('./atob');
 
 function b64DecodeUnicode(str) {
   return decodeURIComponent(
@@ -6,33 +6,33 @@ function b64DecodeUnicode(str) {
       var code = p
         .charCodeAt(0)
         .toString(16)
-        .toUpperCase()
+        .toUpperCase();
       if (code.length < 2) {
-        code = '0' + code
+        code = '0' + code;
       }
-      return '%' + code
+      return '%' + code;
     })
-  )
+  );
 }
 
 module.exports = function(str) {
-  var output = str.replace(/-/g, '+').replace(/_/g, '/')
+  var output = str.replace(/-/g, '+').replace(/_/g, '/');
   switch (output.length % 4) {
     case 0:
-      break
+      break;
     case 2:
-      output += '=='
-      break
+      output += '==';
+      break;
     case 3:
-      output += '='
-      break
+      output += '=';
+      break;
     default:
-      throw 'Illegal base64url string!'
+      throw 'Illegal base64url string!';
   }
 
   try {
-    return b64DecodeUnicode(output)
+    return b64DecodeUnicode(output);
   } catch (err) {
-    return atob(output)
+    return atob(output);
   }
-}
+};

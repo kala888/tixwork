@@ -17,7 +17,7 @@
      }
    
      componentDidMount() {
-       NavigationService.ajax(Config.api.FooterHome, {}, {
+       NavigationService.ajax(ApiConfig.FooterHome, {}, {
          onSuccess: (resp) => {
            console.log('fetch data from backend,resp data:', resp)
            this.setState({
@@ -28,7 +28,7 @@
      }
    
      handleClick = () => {
-       NavigationService.view(Config.api.FooterMe)
+       NavigationService.view(ApiConfig.FooterMe)
      }
    
      render() {

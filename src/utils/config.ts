@@ -1,31 +1,33 @@
-import viewConfig from './viewmapping.config';
-import { BaseAppConfiguration } from '@/nice-router/nice-router.config';
+import { AppConfiguration } from '@/nice-router/nice-router.config';
+import ViewMappingConfig from '@/utils/viewmapping.config';
 
-const baseURL = 'https://demo2.doublechaintech.com/repairchain/wxappService/'; //后端服务地址
+const baseURL = 'https://demo.doublechaintech.com/xuntuexam/'; //后端服务地址
 
-const Config: BaseAppConfiguration = {
+const ApiConfig: any = {
+  FooterHome: 'wxappService/viewHomepage/',
+  FooterMe: 'wxappService/customerViewDashboard/',
+  Login: 'wxappService/clientLogin/',
+  WxLogin: 'wxappService/wxlogin/:code/',
+  VerifyCode: 'wxappService/sendVerifyCode/:mobile/',
+  OSSToken: 'wxappService/customGetOssToken/',
+  Logout: 'wxappService/logout/',
+};
+
+const TheCustomizedProjectConfigurationDontUseItDirectly: Omit<AppConfiguration, 'start'> = {
   name: 'NiceRouter App Start',
   baseURL,
   version: 1,
   appType: 'mini-program',
-  viewConfig,
+  api: ApiConfig,
   backendRouterPageKeyBlackList: ['refreshPage/', 'goBack/', 'goPrevious/'],
   backendRouterPageBlackList: ['NetworkException'],
-  api: {
-    FooterHome: 'viewHomepage/',
-    FooterMe: 'customerViewDashboard/',
-
-    Login: 'clientLogin/',
-    WxLogin: 'wxappService/wxlogin/:code/',
-    VerifyCode: 'sendVerifyCode/:mobile/',
-    OSSToken: 'customGetOssToken/',
-    Logout: 'logout/',
-  },
+  viewConfig: ViewMappingConfig,
   // loginMode: 'wechat',
   // loginMode: 'vcode', //包含绑定的微信登录
   loginMode: 'password',
 };
 
 console.log('***********   current env  ***********   ');
-console.log('config.js is', Config);
-export default Config;
+console.log('config.js is', TheCustomizedProjectConfigurationDontUseItDirectly);
+
+export { ApiConfig, TheCustomizedProjectConfigurationDontUseItDirectly };

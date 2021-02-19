@@ -1,4 +1,4 @@
-import NiceRouterConfig from './nice-router.config';
+import Config from './nice-router.config';
 import { isEmpty, isNotEmpty, log } from './nice-router-util';
 import StorageTools from './storage-tools';
 
@@ -10,9 +10,7 @@ function getPageKeyByUri(uri = '') {
 }
 
 function inBlackList(key, page) {
-  const result =
-    NiceRouterConfig.config.backendRouterPageBlackList.includes(page) ||
-    NiceRouterConfig.config.backendRouterPageKeyBlackList.includes(key);
+  const result = Config.backendRouterPageBlackList.includes(page) || Config.backendRouterPageKeyBlackList.includes(key);
   log('key and page is in black list?', result);
   return result;
 }

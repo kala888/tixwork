@@ -1,18 +1,17 @@
-import React from 'react'
-import _ from 'lodash'
-import { Swiper, SwiperItem, View } from '@tarojs/components'
-import NavigationBox from '@/components/navigation/navigation-box'
-import { ActionListLike } from '@/nice-router/nice-router-types'
+import React from 'react';
+import _ from 'lodash';
+import { Swiper, SwiperItem, View } from '@tarojs/components';
+import NavigationBox from '@/components/navigation/navigation-box';
+import { ActionListLike } from '@/nice-router/nice-router-types';
 
-import './action-swiper.scss'
-
+import './action-swiper.scss';
 
 function ActionSwiper(props: ActionListLike) {
-  const { actionList = [] } = props
-  const group = _.chunk(actionList, 5).map((it, idx) => ({ list: it, id: idx }))
-  const showDots = group.length > 1
+  const { actionList = [] } = props;
+  const group = _.chunk(actionList, 5).map((it, idx) => ({ list: it, id: idx }));
+  const showDots = group.length > 1;
 
-  console.log('groups', group)
+  console.log('groups', group);
   return (
     <View className='swiper-action-list'>
       <Swiper
@@ -29,7 +28,7 @@ function ActionSwiper(props: ActionListLike) {
         ))}
       </Swiper>
     </View>
-  )
+  );
 }
 
-export default ActionSwiper
+export default ActionSwiper;

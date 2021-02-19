@@ -1,15 +1,15 @@
-import MockService from '@/nice-router/request/mock-service'
-import mockGenericPageData from './mock-genericpage.data'
-import mockForm2Data from './mock-form2.data'
-import mockForm1Data from './mock-form.data'
+import MockService from '@/nice-router/request/mock-service';
+import mockGenericPageData from './mock-genericpage.data';
+import mockForm2Data from './mock-form2.data';
+import mockForm1Data from './mock-form.data';
 
-const documentUrl = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/README.docx'
-const videoUrl = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/video.mp4'
+const documentUrl = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/README.docx';
+const videoUrl = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/video.mp4';
 const slideList = [
   { id: 1, imageUrl: MockService.randomImage() },
   { id: 2, imageUrl: MockService.randomImage() },
   { id: 3, imageUrl: MockService.randomImage(), videoUrl },
-]
+];
 
 const productList = [
   {
@@ -48,7 +48,7 @@ const productList = [
     price: 39.2,
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-4.jpg',
   },
-]
+];
 const newsList = [
   {
     id: '11',
@@ -93,7 +93,7 @@ const newsList = [
     id: '44',
     title: '中国发布新冠肺炎疫情信息、推进疫情防控国际合作纪事',
   },
-]
+];
 
 const movieList = [
   {
@@ -116,7 +116,7 @@ const movieList = [
     documentUrl,
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/movie-2.jpg',
   },
-]
+];
 
 const businessCardList = [
   {
@@ -133,7 +133,7 @@ const businessCardList = [
     status: '牛',
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-2.jpg',
   },
-]
+];
 const userList = [
   {
     id: 1,
@@ -153,7 +153,7 @@ const userList = [
     brief: '关注我，嗯嗯嗯',
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-5.jpg',
   },
-]
+];
 
 const obj = {
   title: '我看好的ETF',
@@ -161,7 +161,7 @@ const obj = {
   flag: '牛',
   imageUrl: MockService.defaultImage,
   status: '待处理',
-}
+};
 const cardList = [
   //竖版
   //横版-没图
@@ -247,7 +247,7 @@ const cardList = [
       { title: '地址', value: '四川省成都市高新区天府软件园B7 502' },
     ],
   },
-]
+];
 
 const homePageData = {
   slideList,
@@ -284,13 +284,13 @@ const homePageData = {
     },
   ],
   productList,
-}
+};
 
 const initial = () => {
-  MockService.mockResp('mock-home-page/', 'com.terapico.appview.HomePage', homePageData)
-  MockService.mockResp('mock-generic-form/', 'com.terapico.caf.viewcomponent.GenericFormPage', mockForm1Data)
-  MockService.mockResp('mock-generic-form-2/', 'com.terapico.caf.viewcomponent.GenericFormPage', mockForm2Data)
-  MockService.mockResp('mock-generic-page/', 'com.terapico.caf.viewcomponent.GenericPage', mockGenericPageData)
+  MockService.mockResp('mock-home-page/', 'com.terapico.appview.HomePage', homePageData);
+  MockService.mockResp('mock-generic-form/', 'com.terapico.caf.viewcomponent.GenericFormPage', mockForm1Data);
+  MockService.mockResp('mock-generic-form-2/', 'com.terapico.caf.viewcomponent.GenericFormPage', mockForm2Data);
+  MockService.mockResp('mock-generic-page/', 'com.terapico.caf.viewcomponent.GenericPage', mockGenericPageData);
   MockService.mockResp('mock-listof-test/', 'xx', {
     singleItemList: [userList[0]],
     productList,
@@ -299,11 +299,11 @@ const initial = () => {
     businessCardList,
     movieList,
     userList,
-  })
-}
+  });
+};
 
 const TestData = {
   initial,
-}
+};
 
-export default TestData
+export default TestData;

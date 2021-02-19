@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { LoadingType } from '@/nice-router/nice-router-util';
-import Config from '@/utils/config';
 import _ from 'lodash';
 import Taro, { usePullDownRefresh } from '@tarojs/taro';
 import ActionUtil from '@/nice-router/action-util';
 import { ActionLike } from '@/nice-router/nice-router-types';
+import Config from '@/nice-router/nice-router.config';
 
 // boolean类型的控制属性，show，close，toggle
 export function useVisible(initial = false) {
@@ -68,7 +68,7 @@ export function usePullDown(action: ActionLike, statInPage = false) {
 }
 
 // 倒计时
-export function useCountdown(maxCount = 60, onEndOfCounting) {
+export function useCountdown(maxCount = 60, onEndOfCounting?: Function) {
   const [second, setSecond] = useState(maxCount);
   const [counting, setCounting] = useState(false);
   const interval = useRef();

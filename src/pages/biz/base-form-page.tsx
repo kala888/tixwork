@@ -1,29 +1,29 @@
-import React from 'react'
-import FormItem from '@/components/form/form-item'
-import FormUtil from '@/components/form/form-util'
-import { View } from '@tarojs/components'
-import { AtInput } from 'taro-ui'
-import EleButton from '@/components/elements/ele-button'
+import React from 'react';
+import FormItem from '@/components/form/form-item';
+import FormUtil from '@/components/form/form-util';
+import { View } from '@tarojs/components';
+import { AtInput } from 'taro-ui';
+import EleButton from '@/components/elements/ele-button';
 
 export default class BaseFormPage extends React.PureComponent {
   //以name为key
   state = {
     fieldValues: {},
-  }
+  };
 
   handleChange = (name, value, event) => {
-    console.log('item event maybe you needed', event)
-    const fieldValue = FormUtil.getValue(value)
+    console.log('item event maybe you needed', event);
+    const fieldValue = FormUtil.getValue(value);
     this.setState((preState) => ({
       fieldValues: {
         ...preState.fieldValues,
         [name]: fieldValue,
       },
-    }))
-  }
+    }));
+  };
   handleSubmit = () => {
-    console.log('submit to remote', this.state.fieldValues)
-  }
+    console.log('submit to remote', this.state.fieldValues);
+  };
 
   render() {
     return (
@@ -48,6 +48,6 @@ export default class BaseFormPage extends React.PureComponent {
 
         <EleButton onClick={this.handleSubmit}>提交</EleButton>
       </View>
-    )
+    );
   }
 }

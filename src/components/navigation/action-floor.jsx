@@ -1,26 +1,26 @@
-import React from 'react'
-import { Block, View } from '@tarojs/components'
-import ActionFloorItem from './action-floor-item'
+import React from 'react';
+import { Block, View } from '@tarojs/components';
+import ActionFloorItem from './action-floor-item';
 
-import './action-floor.scss'
+import './action-floor.scss';
 
 function ActionFloor({ actions = [] }) {
   if (actions.length === 0) {
-    return <Block />
+    return <Block />;
   }
 
-  let actionList = actions
+  let actionList = actions;
   if (actions.length >= 3) {
-    const t1 = actions[3]
-    const t2 = actions[4]
-    actionList = [t1, t2].concat(actions)
+    const t1 = actions[3];
+    const t2 = actions[4];
+    actionList = [t1, t2].concat(actions);
   }
 
-  const action1 = actionList[0]
-  const action2 = actionList[1]
-  const action3 = actionList[2]
-  const action4 = actionList[3]
-  const action5 = actionList[4]
+  const action1 = actionList[0];
+  const action2 = actionList[1];
+  const action3 = actionList[2];
+  const action4 = actionList[3];
+  const action5 = actionList[4];
 
   return (
     <View className='action-floor'>
@@ -64,7 +64,7 @@ function ActionFloor({ actions = [] }) {
         </View>
       )}
     </View>
-  )
+  );
 }
 
-export default ActionFloor
+export default ActionFloor;

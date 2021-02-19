@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import SectionBar from '@/components/section-bar/section-bar'
-import Listof from '@/listof/listof'
-import { View } from '@tarojs/components'
+import React, { useEffect, useState } from 'react';
+import SectionBar from '@/components/section-bar/section-bar';
+import Listof from '@/listof/listof';
+import { View } from '@tarojs/components';
 
-import NavigationService from '@/nice-router/navigation-service'
+import NavigationService from '@/nice-router/navigation-service';
 
-import './styles.scss'
+import './styles.scss';
 
 function HelloDaaSPage() {
-  const [root, setRoot] = useState({})
+  const [root, setRoot] = useState({});
 
   useEffect(() => {
     NavigationService.ajax(
@@ -16,11 +16,11 @@ function HelloDaaSPage() {
       {},
       {
         onSuccess: (resp) => {
-          setRoot(resp)
+          setRoot(resp);
         },
       }
-    )
-  }, [])
+    );
+  }, []);
   const {
     singleItemList = [],
     productList = [],
@@ -29,7 +29,7 @@ function HelloDaaSPage() {
     userList = [],
     movieList = [],
     businessCardList = [],
-  } = root
+  } = root;
   return (
     <View className='hello-daas'>
       <SectionBar title='卡片-大卡片' brief='big-card' />
@@ -63,7 +63,7 @@ function HelloDaaSPage() {
       <SectionBar title='图片在下方的Auto' brief='image-on-bottom' />
       <Listof list={newsList.slice(1, 2)} displayMode='image-on-bottom' />
     </View>
-  )
+  );
 }
 
-export default HelloDaaSPage
+export default HelloDaaSPage;

@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import StorageTools from '@/nice-router/storage-tools'
-import NavigationService from '@/nice-router/navigation-service'
-import ElePicker, { ElePickerProps } from '@/components/form/field/ele-picker'
-import { isNotEmpty } from '@/nice-router/nice-router-util'
-
+import React, { useEffect, useState } from 'react';
+import StorageTools from '@/nice-router/storage-tools';
+import NavigationService from '@/nice-router/navigation-service';
+import ElePicker, { ElePickerProps } from '@/components/form/field/ele-picker';
+import { isNotEmpty } from '@/nice-router/nice-router-util';
 
 function RegionPicker(props: ElePickerProps) {
-  const [source, setSource] = useState([])
+  const [source, setSource] = useState([]);
 
   useEffect(() => {
-    const regionData = StorageTools.get('region-data', null)
-    let initialed = false
+    const regionData = StorageTools.get('region-data', null);
+    let initialed = false;
     if (isNotEmpty(regionData)) {
-      setSource(regionData)
-      initialed = true
+      setSource(regionData);
+      initialed = true;
     }
 
     NavigationService.ajax(
@@ -22,15 +21,15 @@ function RegionPicker(props: ElePickerProps) {
       {
         onSuccess: (resp) => {
           if (!initialed) {
-            setSource(resp)
+            setSource(resp);
           }
-          StorageTools.set('region-data', resp, 3600)
+          StorageTools.set('region-data', resp, 3600);
         },
-      },
-    )
-  }, [])
+      }
+    );
+  }, []);
 
-  return <ElePicker {...props} candidateValues={source} />
+  return <ElePicker {...props} candidateValues={source} />;
 }
 
-export default RegionPicker
+export default RegionPicker;

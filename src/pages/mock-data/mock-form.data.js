@@ -41,7 +41,7 @@ const treeRoot = {
       ],
     },
   ],
-}
+};
 
 const productList = {
   id: 1,
@@ -90,7 +90,7 @@ const productList = {
         'https://m.360buyimg.com/babel/s370x259_jfs/t1/20729/24/4177/80676/5c2f1aeaE062589aa/ee7cc78db75d62ed.jpg!q70.dpg',
     },
   },
-}
+};
 
 const mockForm1Data = {
   id: 'test-form',
@@ -546,6 +546,6 @@ const mockForm1Data = {
       ],
     },
   ],
-}
+};
 
-export default mockForm1Data
+export default mockForm1Data;

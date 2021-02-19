@@ -1,12 +1,12 @@
-import React from 'react'
-import { View } from '@tarojs/components'
-import CardTemplate from './card-template'
-import NavigationService from '@/nice-router/navigation-service'
-import './object-picker-item.scss'
+import React from 'react';
+import { View } from '@tarojs/components';
+import CardTemplate from './card-template';
+import NavigationService from '@/nice-router/navigation-service';
+import './object-picker-item.scss';
 
 function ObjectPickerPopupItem(props) {
-  const { item } = props
-  const handleClick = () => NavigationService.dispatch('objectPicker/removeSelectItem', item)
+  const { item } = props;
+  const handleClick = () => NavigationService.dispatch('objectPicker/removeSelectItem', item);
   return (
     <View className='object-picker-item' onClick={handleClick}>
       <CardTemplate {...props} />
@@ -14,7 +14,7 @@ function ObjectPickerPopupItem(props) {
         移除{' '}
       </View>
     </View>
-  )
+  );
 }
 
-export default ObjectPickerPopupItem
+export default ObjectPickerPopupItem;

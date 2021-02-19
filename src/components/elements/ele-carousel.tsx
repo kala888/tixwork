@@ -1,26 +1,25 @@
-import React from 'react'
-import ActionUtil from '@/nice-router/action-util'
+import React from 'react';
+import ActionUtil from '@/nice-router/action-util';
 
-import NavigationService from '@/nice-router/navigation-service'
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util'
-import ServerImage from '@/server-image/server-image'
-import { Swiper, SwiperItem, Video, View } from '@tarojs/components'
-import Taro from '@tarojs/taro'
-import classNames from 'classnames'
-import { SwiperProps } from '@tarojs/components/types/Swiper'
-import { ImageSize } from '@/server-image/image-tools'
-import { ActionLike, ImageLike, VideoLike } from '@/nice-router/nice-router-types'
-import { ImageProps } from '@tarojs/components/types/Image'
-import './styles.scss'
+import NavigationService from '@/nice-router/navigation-service';
+import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
+import ServerImage from '@/server-image/server-image';
+import { Swiper, SwiperItem, Video, View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
+import classNames from 'classnames';
+import { SwiperProps } from '@tarojs/components/types/Swiper';
+import { ImageSize } from '@/server-image/image-tools';
+import { ActionLike, ImageLike, VideoLike } from '@/nice-router/nice-router-types';
+import { ImageProps } from '@tarojs/components/types/Image';
+import './styles.scss';
 
-
-export type EleCarouselItem = ActionLike & ImageLike & VideoLike
+export type EleCarouselItem = ActionLike & ImageLike & VideoLike;
 
 export type EleCarouselProps = {
-  items?: EleCarouselItem[],
-  customStyle?: object,
-  imageMode?: ImageProps.mode
-} & SwiperProps
+  items?: EleCarouselItem[];
+  customStyle?: object;
+  imageMode?: ImageProps.mode;
+} & SwiperProps;
 
 function EleCarousel(props: EleCarouselProps) {
   const {
@@ -35,33 +34,33 @@ function EleCarousel(props: EleCarouselProps) {
     customStyle,
     className,
     imageMode,
-  } = props
+  } = props;
 
   if (isEmpty(items)) {
-    return null
+    return null;
   }
 
   const handleClick = async (item: EleCarouselItem = {}) => {
-    const { videoUrl = '', imageUrl } = item
-    console.log('carousel viewed', item)
+    const { videoUrl = '', imageUrl } = item;
+    console.log('carousel viewed', item);
 
     if (isNotEmpty(videoUrl)) {
-      return
+      return;
     }
 
     if (ActionUtil.isActionLike(item)) {
-      NavigationService.view(item)
-      return
+      NavigationService.view(item);
+      return;
     }
 
     if (isEmpty(videoUrl) && isNotEmpty(imageUrl)) {
-      await Taro.previewImage({ urls: [imageUrl || ''] })
+      await Taro.previewImage({ urls: [imageUrl || ''] });
     }
-  }
+  };
 
-  const showDots = indicatorDots === null ? items.length > 1 : indicatorDots
+  const showDots = indicatorDots === null ? items.length > 1 : indicatorDots;
 
-  const rootClass = classNames('ele-carousel', className)
+  const rootClass = classNames('ele-carousel', className);
   return (
     <View className={rootClass} style={customStyle}>
       <Swiper
@@ -75,9 +74,9 @@ function EleCarousel(props: EleCarouselProps) {
         className='ele-carousel-item'
       >
         {items.map((it, idx) => {
-          const { videoUrl = '', imageUrl } = it
+          const { videoUrl = '', imageUrl } = it;
           // @ts-ignore
-          const key = `carousel-${idx}-${it.id}`
+          const key = `carousel-${idx}-${it.id}`;
 
           return (
             <SwiperItem key={key} onClick={() => handleClick(it)} className='ele-carousel-item'>
@@ -96,11 +95,11 @@ function EleCarousel(props: EleCarouselProps) {
                 <ServerImage className='ele-carousel-item' src={it.imageUrl} mode={imageMode} size={ImageSize.Large} />
               )}
             </SwiperItem>
-          )
+          );
         })}
       </Swiper>
     </View>
-  )
+  );
 }
 
 EleCarousel.defaultProps = {
@@ -113,6 +112,6 @@ EleCarousel.defaultProps = {
   indicatorActiveColor: '#fff',
   customStyle: {},
   mode: 'aspectFill',
-}
+};
 
-export default EleCarousel
+export default EleCarousel;

@@ -1,21 +1,21 @@
-import { View } from '@tarojs/components'
-import React from 'react'
-import EleTableCell, { EleTableCellProps } from '@/components/ele-table/ele-table-cell'
-import classNames from 'classnames'
-import './ele-table.scss'
+import { View } from '@tarojs/components';
+import React from 'react';
+import EleTableCell, { EleTableCellProps } from '@/components/ele-table/ele-table-cell';
+import classNames from 'classnames';
+import './ele-table.scss';
 
 export type EleTableRowProps = {
-  items?: EleTableCellProps [],
-  header?: any,
-  className?: string,
-  children?: any
-}
+  items?: EleTableCellProps[];
+  header?: any;
+  className?: string;
+  children?: any;
+};
 
 const EleTableRow: React.FC<EleTableRowProps> = (props) => {
-  const { items = [], header, className } = props
+  const { items = [], header, className } = props;
   const rootClass = classNames('ele-table-row', className, {
     'ele-table-row--header': header,
-  })
+  });
   return (
     <View className={rootClass}>
       {items.map((it, idx) => (
@@ -23,7 +23,7 @@ const EleTableRow: React.FC<EleTableRowProps> = (props) => {
       ))}
       {props.children}
     </View>
-  )
-}
+  );
+};
 
-export default EleTableRow
+export default EleTableRow;

@@ -1,9 +1,9 @@
-import React from 'react'
-import { toBoolean } from '@/nice-router/nice-router-util'
-import { View } from '@tarojs/components'
-import classNames from 'classnames'
-import { AtSwitch } from 'taro-ui'
-import { CandidateValue } from '@/nice-router/nice-router-types'
+import React from 'react';
+import { toBoolean } from '@/nice-router/nice-router-util';
+import { View } from '@tarojs/components';
+import classNames from 'classnames';
+import { AtSwitch } from 'taro-ui';
+import { CandidateValue } from '@/nice-router/nice-router-types';
 
 // candidateValues 就是 options
 // candidateValues = [{
@@ -17,19 +17,19 @@ import { CandidateValue } from '@/nice-router/nice-router-types'
 // }]
 
 type EleSwitchProps = {
-  value?: boolean,
-  candidateValues: CandidateValue [],
-  disabled?: boolean,
-}
+  value?: boolean;
+  candidateValues: CandidateValue[];
+  disabled?: boolean;
+};
 
 function EleSwitch(props: EleSwitchProps) {
-  const { value = false, candidateValues = [], disabled, ...others } = props
-  const checked = toBoolean(value)
-  const selected = candidateValues.find((it) => toBoolean(it.id) === checked)
-  const title = selected ? selected.title : ''
+  const { value = false, candidateValues = [], disabled, ...others } = props;
+  const checked = toBoolean(value);
+  const selected = candidateValues.find((it) => toBoolean(it.id) === checked);
+  const title = selected ? selected.title : '';
   const switchClass = classNames({
     'ele-switch-disabled': disabled,
-  })
+  });
   return (
     <View className='ele-switch'>
       <AtSwitch
@@ -41,7 +41,7 @@ function EleSwitch(props: EleSwitchProps) {
         title={title}
       />
     </View>
-  )
+  );
 }
 
-export default EleSwitch
+export default EleSwitch;

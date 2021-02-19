@@ -1,5 +1,5 @@
 const imageUrl =
-  'https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/logo_1024_no_background.png?x-oss-process=style/small'
+  'https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/logo_1024_no_background.png?x-oss-process=style/small';
 
 const storeLocation = {
   type: 'store-location',
@@ -10,7 +10,7 @@ const storeLocation = {
   address: '成都市高新区天祥广场',
   latitude: 104.06476,
   longitude: 30.5702,
-}
+};
 // const popup = {
 //   bgColor: '#fff',
 //   kids: [
@@ -46,10 +46,10 @@ const carousel = {
     },
   ],
   height: 200,
-}
+};
 const fab = {
   icon: 'app',
-}
+};
 
 const boxBar = {
   lineOfItems: 5,
@@ -85,7 +85,7 @@ const boxBar = {
         'https://m.360buyimg.com/babel/s153x153_jfs/t23554/365/505863911/13001/735a7073/5b31e8e5N91dc44e7.jpg!q70.dpg',
     },
   ],
-}
+};
 const footer = {
   tabs: [
     {
@@ -116,13 +116,13 @@ const footer = {
       max: '99',
     },
   ],
-}
+};
 
 const breakLine = {
   color: '#e4b479',
   fontColor: '#e4b479',
   customStyle: { margin: '20rpx 0px', padding: '0px 100px' },
-}
+};
 
 const shopList = {
   dataContainer: {
@@ -151,7 +151,7 @@ const shopList = {
     },
   },
   list: [{ id: 'shop1' }, { id: 'shop2' }, { id: 'shop3' }],
-}
+};
 
 const articleList = {
   dataContainer: {
@@ -231,7 +231,7 @@ const articleList = {
     },
   },
   list: [{ id: 'article1' }, { id: 'article2' }, { id: 'article3' }, { id: 'article4' }],
-}
+};
 
 const messageSwiper = {
   imageUrl: 'https://m.360buyimg.com/babel/jfs/t22534/23/795940699/14893/3457ee4/5b442279N1dde2af1.png',
@@ -239,7 +239,7 @@ const messageSwiper = {
     { id: 1, title: '恭喜城北旗舰店，大麦1个亿' },
     { id: 2, title: '热烈庆祝优荣之星成功上市' },
   ],
-}
+};
 
 const productList = {
   displayMode: 'product',
@@ -284,7 +284,7 @@ const productList = {
       imageUrl,
     },
   },
-}
+};
 
 const waterfallList = {
   displayMode: 'image-on-top-waterfall',
@@ -311,7 +311,7 @@ const waterfallList = {
         'https://m.360buyimg.com/babel/s370x259_jfs/t1/20729/24/4177/80676/5c2f1aeaE062589aa/ee7cc78db75d62ed.jpg!q70.dpg',
     },
   },
-}
+};
 
 const horizontalList = {
   displayMode: 'image-on-top',
@@ -339,7 +339,7 @@ const horizontalList = {
         'https://m.360buyimg.com/babel/s370x259_jfs/t1/20729/24/4177/80676/5c2f1aeaE062589aa/ee7cc78db75d62ed.jpg!q70.dpg',
     },
   },
-}
+};
 
 const richText = {
   content:
@@ -370,7 +370,7 @@ const richText = {
     '</li>\n' +
     '</ol>\n' +
     '<p style="padding-left: 20px;"><img alt="" src="https://nice-router.oss-cn-chengdu.aliyuncs.com/food-2.jpg" /></p>',
-}
+};
 
 const mockGenericPageData = {
   // pageTitle: 'Nice router 社区',
@@ -401,6 +401,6 @@ const mockGenericPageData = {
     { id: '9999.2', type: 'white-space' },
     { id: '9999.3', type: 'footer-tabs', ...footer },
   ],
-}
+};
 
-export default mockGenericPageData
+export default mockGenericPageData;

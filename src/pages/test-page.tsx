@@ -5,7 +5,6 @@ import { View } from '@tarojs/components';
 function TestPage() {
   useEffect(() => {
     NavigationService.view('mock-generic-page/');
-    console.log('111');
   }, []);
   return <View />;
 }

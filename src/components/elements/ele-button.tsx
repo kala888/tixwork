@@ -1,33 +1,35 @@
-import React from 'react'
-import _ from 'lodash'
-import NavigationService from '@/nice-router/navigation-service'
-import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util'
-import Taro from '@tarojs/taro'
+import React from 'react';
+import _ from 'lodash';
+import NavigationService from '@/nice-router/navigation-service';
+import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util';
+import Taro from '@tarojs/taro';
 
-import ActionIcon from '@/components/action-icon/action-icon'
-import { Button, View } from '@tarojs/components'
-import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types'
+import ActionIcon from '@/components/action-icon/action-icon';
+import { Button, View } from '@tarojs/components';
+import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types';
 
-import './ele-button.scss'
-import { ButtonProps } from '@tarojs/components/types/Button'
+import './ele-button.scss';
+import { ButtonProps } from '@tarojs/components/types/Button';
 
 // form中组件封装后，button 不会触发form的handle方法问题
 // https://github.com/NervJS/taro-ui/issues/96
 
-
 export type EleButtonProps = {
-  size?: 'small' | 'default',
-  type?: string,
-  ajax?: boolean,
-  disabled?: boolean,
-  reLaunch?: boolean,
-  openType?: string,
-  children?: any,
-  className?: string,
-  mode?: 'normal' | 'warn' | 'danger' | 'info' | 'secondary' | 'radius0' | 'ghost',
-  onGetPhoneNumber?: any
-} & IconLike & EleObject & ImageLike & ActionLike & Omit<ButtonProps, 'type' | 'size'|'id'>
-
+  size?: 'small' | 'default';
+  type?: string;
+  ajax?: boolean;
+  disabled?: boolean;
+  reLaunch?: boolean;
+  openType?: string;
+  children?: any;
+  className?: string;
+  mode?: 'normal' | 'warn' | 'danger' | 'info' | 'secondary' | 'radius0' | 'ghost';
+  onGetPhoneNumber?: any;
+} & IconLike &
+  EleObject &
+  ImageLike &
+  ActionLike &
+  Omit<ButtonProps, 'type' | 'size' | 'id'>;
 
 function EleButton(props: EleButtonProps) {
   const {
@@ -49,63 +51,63 @@ function EleButton(props: EleButtonProps) {
     code,
     id,
     ...others
-  } = props
+  } = props;
 
-  console.log('the action code & id', code, id)
+  console.log('the action code & id', code, id);
 
-  let wxOpenType = openType
+  let wxOpenType = openType;
   if (!openType && (type === 'share' || type === 'getPhoneNumber' || type === 'getUserInfo')) {
-    wxOpenType = type
+    wxOpenType = type;
   }
 
-  const formType: any = type === 'submit' || type === 'reset' ? type : null
+  const formType: any = type === 'submit' || type === 'reset' ? type : null;
 
   const handleMakeCall = () => {
-    const { phoneNumber } = extraData
+    const { phoneNumber } = extraData;
     if (phoneNumber) {
       // noinspection JSIgnoredPromiseFromCall
-      Taro.makePhoneCall({ phoneNumber })
+      Taro.makePhoneCall({ phoneNumber });
     }
-  }
+  };
 
   const handleScan = async () => {
     // @ts-ignore
-    const res = await Taro.scanCode()
-    const arg = encodeURIComponent(res.result)
-    const actionPath = `${linkToUrl}${arg}/`
-    console.log('I want to access ', actionPath)
-    await NavigationService.view(props)
-  }
+    const res = await Taro.scanCode();
+    const arg = encodeURIComponent(res.result);
+    const actionPath = `${linkToUrl}${arg}/`;
+    console.log('I want to access ', actionPath);
+    await NavigationService.view(props);
+  };
 
   const handlePreview = async () => {
-    console.log('preview document', linkToUrl)
+    console.log('preview document', linkToUrl);
     if (!linkToUrl) {
-      return
+      return;
     }
     try {
-      await Taro.showLoading({ title: '正在打开文件...', mask: true })
-      const res: any = await Taro.downloadFile({ url: linkToUrl })
-      await Taro.openDocument({ filePath: res.tempFilePath })
+      await Taro.showLoading({ title: '正在打开文件...', mask: true });
+      const res: any = await Taro.downloadFile({ url: linkToUrl });
+      await Taro.openDocument({ filePath: res.tempFilePath });
     } catch (e) {
-      await Taro.showToast({ title: '文件打开失败，稍后重试', icon: 'none' })
+      await Taro.showToast({ title: '文件打开失败，稍后重试', icon: 'none' });
     } finally {
-      Taro.hideLoading()
+      Taro.hideLoading();
     }
-  }
+  };
 
   const handleDownload = async () => {
     if (!linkToUrl) {
-      return
+      return;
     }
     try {
-      await Taro.showLoading({ title: '正在下载文件...', mask: true })
-      await Taro.downloadFile({ url: linkToUrl })
+      await Taro.showLoading({ title: '正在下载文件...', mask: true });
+      await Taro.downloadFile({ url: linkToUrl });
     } catch (e) {
-      await Taro.showToast({ title: '下载文件失败，稍后重试', icon: 'none' })
+      await Taro.showToast({ title: '下载文件失败，稍后重试', icon: 'none' });
     } finally {
-      Taro.hideLoading()
+      Taro.hideLoading();
     }
-  }
+  };
 
   const handleCopy = () => {
     if (isNotEmpty(extraData)) {
@@ -114,43 +116,43 @@ function EleButton(props: EleButtonProps) {
         data: JSON.stringify(extraData),
         success: () =>
           Taro.showToast({ title: '已经复制到内存, 请分享或在浏览器中打开', icon: 'none', duration: 5000 }),
-      })
+      });
     }
-  }
+  };
 
   const handleClick = _.debounce(async (e) => {
     if (onClick) {
-      onClick(e)
-      return
+      onClick(e);
+      return;
     }
 
     if (type === 'submit' || type === 'share' || type === 'getUserInfo') {
-      return
+      return;
     }
 
     if (type === 'makeCall') {
-      handleMakeCall()
-      return
+      handleMakeCall();
+      return;
     }
 
     if (type === 'open-document') {
-      await handlePreview()
-      return
+      await handlePreview();
+      return;
     }
     if (type === 'download') {
-      await handleDownload()
-      return
+      await handleDownload();
+      return;
     }
     if (type === 'copy') {
-      handleCopy()
-      return
+      handleCopy();
+      return;
     }
     if (type === 'scanner') {
-      await handleScan()
-      return
+      await handleScan();
+      return;
     }
 
-    console.log('type is', type, 'just do view action', props)
+    console.log('type is', type, 'just do view action', props);
 
     await NavigationService.view(
       props,
@@ -158,13 +160,13 @@ function EleButton(props: EleButtonProps) {
       {
         navigationOptions: reLaunch ? { method: 'reLaunch' } : null,
         statInPage: ajax,
-      },
-    )
-  }, 200)
+      }
+    );
+  }, 200);
 
-  const rootClass = getExtMode(mode, { disabled }).classNames('ele-button', className)
+  const rootClass = getExtMode(mode, { disabled }).classNames('ele-button', className);
 
-  const buttonSize: any = size === 'small' ? 'mini' : size
+  const buttonSize: any = size === 'small' ? 'mini' : size;
 
   return (
     <Button
@@ -184,7 +186,7 @@ function EleButton(props: EleButtonProps) {
         </View>
       )}
     </Button>
-  )
+  );
 }
 
-export default EleButton
+export default EleButton;
