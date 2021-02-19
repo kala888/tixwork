@@ -1,8 +1,9 @@
-import viewConfig from './viewmapping.config'
+import viewConfig from './viewmapping.config';
+import { BaseAppConfiguration } from '@/nice-router/nice-router.config';
 
-const baseURL = 'https://demo2.doublechaintech.com/repairchain/wxappService/' //后端服务地址
+const baseURL = 'https://demo2.doublechaintech.com/repairchain/wxappService/'; //后端服务地址
 
-const Config = {
+const Config: BaseAppConfiguration = {
   name: 'NiceRouter App Start',
   baseURL,
   version: 1,
@@ -23,8 +24,8 @@ const Config = {
   // loginMode: 'wechat',
   // loginMode: 'vcode', //包含绑定的微信登录
   loginMode: 'password',
-}
+};
 
-console.log('***********   current env  ***********   ')
-console.log('config.js is', Config)
-export default Config
+console.log('***********   current env  ***********   ');
+console.log('config.js is', Config);
+export default Config;

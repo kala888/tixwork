@@ -3,10 +3,10 @@ import { isEmpty, noop } from '@/nice-router/nice-router-util'
 import { useVisible } from '@/service/use-service'
 import _ from 'lodash'
 import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtRadio } from 'taro-ui'
-
+import { CandidateValue } from '@/nice-router/nice-router-types'
 import ActionField from './action-field'
 import './styles.scss'
-import { CandidateValue } from '@/nice-router/nice-router-types'
+
 
 type ElePopupSelectProps = {
   onChange?: Function,

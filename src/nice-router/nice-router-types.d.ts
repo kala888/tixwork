@@ -1,54 +1,54 @@
-import { EleButtonProps } from '@/components/elements/ele-button'
+import { EleButtonProps } from '@/components/elements/ele-button';
 
 export interface ImageLike {
-  imageUrl?: string
+  imageUrl?: string;
 }
 
 export interface ImageListLike {
-  imageList?: ImageLike[]
+  imageList?: ImageLike[];
 }
 
 export interface IconLike {
-  icon?: string
+  icon?: string;
 }
 
 export interface VideoLike {
-  videoUrl?: string
+  videoUrl?: string;
 }
 
 export interface ActionLike {
-  code?: string
-  linkToUrl?: string
-  onClick?: Function
-  onChange?: Function
-  extraData?: any
-  disabled?: boolean
-  statInPage?: boolean
+  code?: string;
+  linkToUrl?: string;
+  onClick?: Function;
+  onChange?: Function;
+  extraData?: any;
+  disabled?: boolean;
+  statInPage?: boolean;
 }
 
 export interface ModeClass {
-  mode?: string | string[]
-  className?: string
+  mode?: string | string[];
+  className?: string;
 }
 
 export interface EleObject {
-  id?: string
-  title?: string
-  brief?: string
+  id?: string | number;
+  title?: string;
+  brief?: string;
 }
 
 export interface CandidateValue {
-  id: string // id就是值，就是value
-  title: string // title就是name
-  brief?: string
-  selected?: boolean
+  id: string; // id就是值，就是value
+  title: string; // title就是name
+  brief?: string;
+  selected?: boolean;
 }
 
 export interface TitleValue {
-  title?: any
-  value?: any
+  title?: any;
+  value?: any;
 }
 
 export interface ActionListLike {
-  actionList: EleButtonProps[]
+  actionList: EleButtonProps[];
 }

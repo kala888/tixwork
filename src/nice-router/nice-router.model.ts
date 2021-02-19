@@ -1,25 +1,25 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { isH5 } from '@/utils/index'
-import Taro, { Current } from '@tarojs/taro'
-import _ from 'lodash'
+import { isH5 } from '@/utils/index';
+import Taro, { Current } from '@tarojs/taro';
+import _ from 'lodash';
 
-import GlobalToast, { GlobalToastProps } from './global-toast'
-import LocalCache from './local-cache-service'
-import NavigationService from './navigation-service'
-import { createAction, isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util'
-import ActionUtil from './action-util'
-import PopupMessage, { PopupMessageProps } from './popup-message'
-import BackendService from './request/backend-service'
-import ViewmappingService from './viewmapping-service'
+import GlobalToast, { GlobalToastProps } from './global-toast';
+import LocalCache from './local-cache-service';
+import NavigationService from './navigation-service';
+import { createAction, isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util';
+import ActionUtil from './action-util';
+import PopupMessage, { PopupMessageProps } from './popup-message';
+import BackendService from './request/backend-service';
+import ViewmappingService from './viewmapping-service';
 
 function showToastOrPopup({ toast, popup }: { toast: GlobalToastProps; popup: PopupMessageProps }): void {
   // 后端说Toast
   if (isNotEmpty(toast)) {
-    GlobalToast.show({ ...toast, icon: 'none' })
+    GlobalToast.show({ ...toast, icon: 'none' });
   }
   // 后端说Popup
   if (isNotEmpty(popup)) {
-    PopupMessage.show(popup)
+    PopupMessage.show(popup);
   }
 }
 
@@ -32,24 +32,24 @@ export default {
   reducers: {
     // 保存最近的路由请求信息
     saveLatestRoute(state, { payload }) {
-      log('save latest route', payload)
-      return { ...state, latestRoute: payload }
+      log('save latest route', payload);
+      return { ...state, latestRoute: payload };
     },
   },
 
   effects: {
     // 重发重试
     *retry({}, { put, select }) {
-      const { latestRoute } = yield select((state) => state.niceRouter)
-      log('retry to next', latestRoute)
+      const { latestRoute } = yield select((state) => state.niceRouter);
+      log('retry to next', latestRoute);
       if (latestRoute) {
-        yield put(createAction('route')(latestRoute))
+        yield put(createAction('route')(latestRoute));
       }
     },
 
     // 主路由逻辑
     *route({ payload: action }, { call, put }) {
-      log('niceRouter/router action', action)
+      log('niceRouter/router action', action);
       const {
         statInPage = false,
         params = {},
@@ -59,38 +59,38 @@ export default {
         loading,
         navigationOptions,
         refresh,
-      } = action
+      } = action;
 
-      const linkToUrl = ActionUtil.getActionUri(action)
+      const linkToUrl = ActionUtil.getActionUri(action);
 
       if (isEmpty(linkToUrl)) {
-        console.warn('store.modules.router.route","can not send empty url to backend')
-        return
+        console.warn('store.modules.router.route","can not send empty url to backend');
+        return;
       }
 
-      const withLoading = loading || (asForm ? LoadingType.Modal : LoadingType.None)
+      const withLoading = loading || (asForm ? LoadingType.Modal : LoadingType.None);
 
       if (asForm) {
-        const cached = yield LocalCache.isCachedForm(linkToUrl, params)
+        const cached = yield LocalCache.isCachedForm(linkToUrl, params);
         if (cached) {
           GlobalToast.show({
             text: '操作太快了，换句话试试',
             duration: 2000,
-          })
-          return
+          });
+          return;
         }
       }
 
-      yield put(createAction('saveLatestRoute')(action))
+      yield put(createAction('saveLatestRoute')(action));
 
-      const requestParams = { ...action, uri: linkToUrl, loading: withLoading }
+      const requestParams = { ...action, uri: linkToUrl, loading: withLoading };
 
-      const resp = yield call(BackendService.send, requestParams)
+      const resp = yield call(BackendService.send, requestParams);
 
-      const { success, xclass, xredirect, data } = resp
+      const { success, xclass, xredirect, data } = resp;
 
       // onSuccess回调
-      onSuccess(data, { ...resp })
+      onSuccess(data, { ...resp });
 
       //获取ViewMapping 处理预支的state和effect，以及页面跳转
       if (xclass) {
@@ -100,23 +100,23 @@ export default {
           statInPage,
           effectAction: action.effectAction,
           stateAction: action.stateAction,
-        }
+        };
         // onSuccess回调
-        const viewMapping = getViewMapping(viewMappingParams)
+        const viewMapping = getViewMapping(viewMappingParams);
 
-        const { stateAction, effectAction, pageName, doRedirect } = viewMapping
+        const { stateAction, effectAction, pageName, doRedirect } = viewMapping;
 
         const storeData = {
           ...data,
           statInPage,
           arrayMerge,
           refresh,
-        }
-        const modelActions = _.concat(stateAction, effectAction)
+        };
+        const modelActions = _.concat(stateAction, effectAction);
         for (let i = 0; i < modelActions.length; i++) {
-          const modelAction = modelActions[i]
+          const modelAction = modelActions[i];
           if (isNotEmpty(modelAction)) {
-            yield put(createAction(modelAction)(storeData))
+            yield put(createAction(modelAction)(storeData));
           }
         }
 
@@ -124,29 +124,29 @@ export default {
         if (doRedirect) {
           NavigationService.navigate(pageName, {}, { navigationOptions }).then(() =>
             showToastOrPopup({ toast: data.toast, popup: data.popup })
-          )
+          );
         } else {
-          showToastOrPopup({ toast: data.toast, popup: data.popup })
+          showToastOrPopup({ toast: data.toast, popup: data.popup });
         }
 
         if (!asForm) {
           // noinspection JSIgnoredPromiseFromCall
-          LocalCache.saveBackendRouter(linkToUrl, pageName)
+          LocalCache.saveBackendRouter(linkToUrl, pageName);
         }
         if (success && asForm) {
           // noinspection JSIgnoredPromiseFromCall
-          LocalCache.cacheForm(linkToUrl, params)
+          LocalCache.cacheForm(linkToUrl, params);
         }
       }
     },
   },
-}
+};
 
 function getCurrentPage() {
-  const pages = Taro.getCurrentPages()
-  const currentPage = _.last(pages) || { route: '' }
+  const pages = Taro.getCurrentPages();
+  const currentPage = _.last(pages) || { route: '' };
   //TODO
-  return isH5() ? Current.router?.path : '/' + currentPage.route
+  return isH5() ? Current.router?.path : '/' + currentPage.route;
 }
 
 function getViewMapping({
@@ -156,18 +156,18 @@ function getViewMapping({
   xredirect,
   statInPage,
 }): {
-  pageName: string
-  stateAction: string | string[]
-  effectAction: string | string[]
-  doRedirect: boolean
+  pageName: string;
+  stateAction: string | string[];
+  effectAction: string | string[];
+  doRedirect: boolean;
 } {
-  const nextView = ViewmappingService.getView(xclass, statInPage)
+  const nextView = ViewmappingService.getView(xclass, statInPage);
 
-  const nextPage = nextView.pageName || ''
-  const newStateAction = stateAction || nextView.stateAction || []
-  const newEffectAction = effectAction || nextView.effectAction || []
+  const nextPage = nextView.pageName || '';
+  const newStateAction = stateAction || nextView.stateAction || [];
+  const newEffectAction = effectAction || nextView.effectAction || [];
 
-  let doRedirect = false
+  let doRedirect = false;
   // if ((xredirect || (!xredirect && !statInPage))
   // && currentPage !== `pages${viewMapping}`) {
   // 1.如果没有设置class 和page 的映射，则不跳转
@@ -176,11 +176,11 @@ function getViewMapping({
   // const sameAsCurrentPage = LATEST_PAGE === url
   // console.log("latest page is", LATEST_PAGE, "current url is", url, "sameAsCurrentPage", sameAsCurrentPage)
 
-  const currentPage = getCurrentPage()
-  log('current page is', currentPage, ', next page is', nextView)
+  const currentPage = getCurrentPage();
+  log('current page is', currentPage, ', next page is', nextView);
   if (nextPage && (xredirect || (!xredirect && !statInPage))) {
     if (_.trim(nextPage, '/') !== _.trim(currentPage, '/')) {
-      doRedirect = true
+      doRedirect = true;
     }
   }
 
@@ -189,5 +189,5 @@ function getViewMapping({
     stateAction: newStateAction,
     effectAction: newEffectAction,
     doRedirect,
-  }
+  };
 }

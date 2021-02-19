@@ -11,7 +11,7 @@ import './login.scss'
 
 export default function VCodeLoginForm(props) {
   const [mobile, setMobile] = useState()
-  const [verifyCode, setVerifyCode] = useState()
+  const [verifyCode, setVerifyCode] = useState<any>()
   const { visible, toggle } = useVisible(true)
 
   const { disabled } = props

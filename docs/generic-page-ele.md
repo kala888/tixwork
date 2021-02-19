@@ -59,7 +59,7 @@ type=button
 | --------- | ------------------------------- | -------------------------------------------------------------------------------- |
 | title     | button='提交'                     | 展示的文字，也可以通过children来包装其他组件                                                       |
 | btnType   | btnType=’share‘                 | 可选值：share，getPhoneNumber，getUserInfo，submit，reset，open-document，download，scanner |
-| size      | size='small'                    | TaroUI中Button的size属性                                                             |
+| size      | size='mini'                    | TaroUI中Button的size属性                                                             |
 | uiType    | uiType='primary'                | TaroUI中Button的type属性                                                             |
 | full      | full='false'                    | TaroUI中Button的full属性                                                             |
 | circle    | circle='false'                  | TaroUI中Button的circle属性                                                           |

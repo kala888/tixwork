@@ -1,58 +1,58 @@
-import { useEffect, useRef, useState } from 'react'
-import NavigationService from '@/nice-router/navigation-service'
-import { LoadingType } from '@/nice-router/nice-router-util'
-import Config from '@/utils/config'
-import _ from 'lodash'
-import Taro, { usePullDownRefresh } from '@tarojs/taro'
-import ActionUtil from '@/nice-router/action-util'
-import { ActionLike } from '@/nice-router/nice-router-types'
+import { useEffect, useRef, useState } from 'react';
+import NavigationService from '@/nice-router/navigation-service';
+import { LoadingType } from '@/nice-router/nice-router-util';
+import Config from '@/utils/config';
+import _ from 'lodash';
+import Taro, { usePullDownRefresh } from '@tarojs/taro';
+import ActionUtil from '@/nice-router/action-util';
+import { ActionLike } from '@/nice-router/nice-router-types';
 
 // boolean类型的控制属性，show，close，toggle
 export function useVisible(initial = false) {
-  const [visible, setVisible] = useState(initial)
-  const show = () => setVisible(true)
-  const close = () => setVisible(false)
-  const toggle = () => setVisible(!visible)
+  const [visible, setVisible] = useState(initial);
+  const show = () => setVisible(true);
+  const close = () => setVisible(false);
+  const toggle = () => setVisible(!visible);
   return {
     visible,
     show,
     close,
     toggle,
-  }
+  };
 }
 
 export function useLoading(initial = false) {
-  const [loading, setLoading] = useState(initial)
-  const showLoading = () => setLoading(true)
-  const hideLoading = () => setLoading(false)
+  const [loading, setLoading] = useState(initial);
+  const showLoading = () => setLoading(true);
+  const hideLoading = () => setLoading(false);
   return {
     loading,
     showLoading,
     hideLoading,
-  }
+  };
 }
 
 // 这只page的title
 export function usePageTitle(value) {
   useEffect(() => {
-    let theTitle = _.isString(value) ? value : value?.pageTitle || value?.title
+    let theTitle = _.isString(value) ? value : value?.pageTitle || value?.title;
     Taro.setNavigationBarTitle({
       title: theTitle || Config.name,
-    })
-  }, [value])
+    });
+  }, [value]);
 }
 
 // 下拉刷新, 应该传入ActionLike
 export function useAjaxPullDown(action: ActionLike) {
-  usePullDown(action, true)
+  usePullDown(action, true);
 }
 
 export function usePullDown(action: ActionLike, statInPage = false) {
-  console.log('pulldown refresh', action)
+  console.log('pulldown refresh', action);
   usePullDownRefresh(() => {
     if (!ActionUtil.isActionLike(action)) {
-      Taro.stopPullDownRefresh()
-      return
+      Taro.stopPullDownRefresh();
+      return;
     }
 
     NavigationService.view(
@@ -63,45 +63,45 @@ export function usePullDown(action: ActionLike, statInPage = false) {
         onSuccess: () => Taro.stopPullDownRefresh(),
         loading: LoadingType.Modal,
       }
-    )
-  })
+    );
+  });
 }
 
 // 倒计时
 export function useCountdown(maxCount = 60, onEndOfCounting) {
-  const [second, setSecond] = useState(maxCount)
-  const [counting, setCounting] = useState(false)
-  const interval = useRef()
+  const [second, setSecond] = useState(maxCount);
+  const [counting, setCounting] = useState(false);
+  const interval = useRef();
 
-  const startCount = () => setCounting(true)
+  const startCount = () => setCounting(true);
 
   useEffect(() => {
     if (!counting) {
-      return
+      return;
     }
-    setCounting(true)
-    console.log('countdown....run')
+    setCounting(true);
+    console.log('countdown....run');
     // @ts-ignore
     interval.current = setInterval(() => {
       setSecond((t) => {
-        const result = t - 1
-        console.log('countdown....run....', result)
+        const result = t - 1;
+        console.log('countdown....run....', result);
         if (result === 0) {
-          clearInterval(interval.current)
-          setCounting(false)
+          clearInterval(interval.current);
+          setCounting(false);
           if (_.isFunction(onEndOfCounting)) {
-            onEndOfCounting()
+            onEndOfCounting();
           }
-          return maxCount
+          return maxCount;
         }
-        return result
-      })
-    }, 1000)
-    return () => clearInterval(interval.current)
-  }, [counting, maxCount, onEndOfCounting])
+        return result;
+      });
+    }, 1000);
+    return () => clearInterval(interval.current);
+  }, [counting, maxCount, onEndOfCounting]);
   return {
     second,
     counting,
     startCount,
-  }
+  };
 }

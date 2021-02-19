@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { ScrollView } from '@tarojs/components'
-import { AtCurtain } from 'taro-ui'
+import React, { useState } from 'react';
+import { ScrollView } from '@tarojs/components';
+import { AtCurtain } from 'taro-ui';
 
-import EleFlex from './ele-flex'
+import EleFlex from './ele-flex';
 
 export default function ElePopup(props: object) {
-  const [show, setShow] = useState(true)
-  const onClose = () => setShow(false)
+  const [show, setShow] = useState(true);
+  const onClose = () => setShow(false);
 
   return (
     <AtCurtain isOpened={show} onClose={onClose}>
@@ -14,5 +14,5 @@ export default function ElePopup(props: object) {
         <EleFlex {...props} />
       </ScrollView>
     </AtCurtain>
-  )
+  );
 }

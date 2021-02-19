@@ -1,36 +1,36 @@
 /* eslint-disable prefer-promise-reject-errors */
-import Taro from '@tarojs/taro'
-import _ from 'lodash'
-import { log, parseJSON } from './nice-router-util'
+import Taro from '@tarojs/taro';
+import _ from 'lodash';
+import { log, parseJSON } from './nice-router-util';
 
-const CACHE_PREFIX = 'cachestore-'
-const CACHE_EXPIRATION_PREFIX = 'cacheexpiration-'
-const EXPIRY_UNITS = 1000 // seconds
+const CACHE_PREFIX = 'cachestore-';
+const CACHE_EXPIRATION_PREFIX = 'cacheexpiration-';
+const EXPIRY_UNITS = 1000; // seconds
 
-const shortKey = (key = '') => key.slice(0, 200)
+const shortKey = (key = '') => key.slice(0, 200);
 
 const getKeys = _.memoize((key = '') => {
-  const short = shortKey(key)
-  const theKey = CACHE_PREFIX + short
-  const exprKey = CACHE_EXPIRATION_PREFIX + short
-  return { theKey, exprKey }
-})
+  const short = shortKey(key);
+  const theKey = CACHE_PREFIX + short;
+  const exprKey = CACHE_EXPIRATION_PREFIX + short;
+  return { theKey, exprKey };
+});
 
-const currentTime = () => Math.floor(new Date().getTime() / EXPIRY_UNITS)
+const currentTime = () => Math.floor(new Date().getTime() / EXPIRY_UNITS);
 
 const StorageTools = {
   PageCachePrefix: 'page-cache-',
 
   get(key: string, defaultValue: any) {
-    const { exprKey, theKey } = getKeys(key)
-    const expiry = Taro.getStorageSync(exprKey)
+    const { exprKey, theKey } = getKeys(key);
+    const expiry = Taro.getStorageSync(exprKey);
     if (expiry && currentTime() >= parseInt(expiry, 10)) {
-      Taro.removeStorageSync(exprKey)
-      Taro.removeStorageSync(theKey)
-      return
+      Taro.removeStorageSync(exprKey);
+      Taro.removeStorageSync(theKey);
+      return;
     }
-    const value = Taro.getStorageSync(theKey)
-    return value ? parseJSON(value) : defaultValue
+    const value = Taro.getStorageSync(theKey);
+    return value ? parseJSON(value) : defaultValue;
   },
 
   /**
@@ -40,42 +40,42 @@ const StorageTools = {
    * @param time unit: second
    */
   set(key: string, value: any = '', time?: number) {
-    const { exprKey, theKey } = getKeys(key)
+    const { exprKey, theKey } = getKeys(key);
     if (time) {
-      const strTime = (currentTime() + time).toString()
-      Taro.setStorageSync(exprKey, strTime)
-      Taro.setStorageSync(theKey, JSON.stringify(value))
-      return
+      const strTime = (currentTime() + time).toString();
+      Taro.setStorageSync(exprKey, strTime);
+      Taro.setStorageSync(theKey, JSON.stringify(value));
+      return;
     }
-    Taro.removeStorageSync(exprKey)
-    Taro.setStorageSync(theKey, JSON.stringify(value))
+    Taro.removeStorageSync(exprKey);
+    Taro.setStorageSync(theKey, JSON.stringify(value));
   },
 
   remove(key: string) {
-    const { exprKey, theKey } = getKeys(key)
-    Taro.removeStorageSync(exprKey)
-    Taro.removeStorageSync(theKey)
+    const { exprKey, theKey } = getKeys(key);
+    Taro.removeStorageSync(exprKey);
+    Taro.removeStorageSync(theKey);
   },
 
   isExpired(key: string) {
-    const { exprKey } = getKeys(key)
-    const expiry = Taro.getStorageSync(exprKey)
+    const { exprKey } = getKeys(key);
+    const expiry = Taro.getStorageSync(exprKey);
     if (expiry > 0) {
-      const expired = expiry && currentTime() >= parseInt(expiry, 10)
-      log('是否过期？', 1, expired, currentTime())
-      return expired
+      const expired = expiry && currentTime() >= parseInt(expiry, 10);
+      log('是否过期？', 1, expired, currentTime());
+      return expired;
     }
-    return true
+    return true;
   },
   flush() {
-    const { keys } = Taro.getStorageInfoSync()
+    const { keys } = Taro.getStorageInfoSync();
     keys.map((key) => {
-      const remove = key.indexOf(CACHE_PREFIX) === 0 || key.indexOf(CACHE_EXPIRATION_PREFIX) === 0
+      const remove = key.indexOf(CACHE_PREFIX) === 0 || key.indexOf(CACHE_EXPIRATION_PREFIX) === 0;
       if (remove) {
         // noinspection JSIgnoredPromiseFromCall
-        Taro.removeStorage({ key })
+        Taro.removeStorage({ key });
       }
-    })
+    });
   },
 
   // flushWithPrefix(prefix) {
@@ -91,22 +91,22 @@ const StorageTools = {
   // },
 
   flushExpired() {
-    const { keys } = Taro.getStorageInfoSync()
+    const { keys } = Taro.getStorageInfoSync();
     keys.map((key) => {
       if (key.indexOf(CACHE_EXPIRATION_PREFIX) === 0) {
-        const exprKey = key
-        const expiry = Taro.getStorageSync(exprKey)
+        const exprKey = key;
+        const expiry = Taro.getStorageSync(exprKey);
         if (expiry && currentTime() >= parseInt(expiry, 10)) {
-          const theKey = CACHE_PREFIX + key.replace(CACHE_EXPIRATION_PREFIX, '')
-          Taro.removeStorageSync(exprKey)
-          Taro.removeStorageSync(theKey)
+          const theKey = CACHE_PREFIX + key.replace(CACHE_EXPIRATION_PREFIX, '');
+          Taro.removeStorageSync(exprKey);
+          Taro.removeStorageSync(theKey);
         }
       }
-    })
+    });
   },
-}
+};
 
 // Always flush expired items on start time
-StorageTools.flushExpired()
+StorageTools.flushExpired();
 
-export default StorageTools
+export default StorageTools;

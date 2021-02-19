@@ -1,7 +1,7 @@
-import _ from 'lodash'
-import classNames from 'classnames'
+import _ from 'lodash';
+import classNames from 'classnames';
 
-const TARO_PROTOCOL_PRIFIX = 'page://'
+const TARO_PROTOCOL_PRIFIX = 'page://';
 
 export enum LoadingType {
   None,
@@ -11,13 +11,13 @@ export enum LoadingType {
   BarLoading,
 }
 
-export const createAction = (type) => (payload) => ({ type, payload })
-export const noop = () => {}
+export const createAction = (type) => (payload) => ({ type, payload });
+export const noop = () => {};
 
-export const sleep = async (longTime) => new Promise((resolve) => setTimeout(resolve, longTime))
+export const sleep = async (longTime) => new Promise((resolve) => setTimeout(resolve, longTime));
 
 export function log(...params) {
-  console.log('%c nice-router: ', 'color:#8add4c; text-shadow: 0.5px 0.5px 0.5px grey', ...params)
+  console.log('%c nice-router: ', 'color:#8add4c; text-shadow: 0.5px 0.5px 0.5px grey', ...params);
 }
 
 // null=> true
@@ -28,56 +28,56 @@ export function log(...params) {
 // {a:'1'} => false
 export const isEmpty = (value) => {
   if (_.isNumber(value) || _.isBoolean(value)) {
-    return false
+    return false;
   }
   if (_.isNil(value)) {
-    return true
+    return true;
   }
   if (_.isString(value)) {
-    return value.length === 0
+    return value.length === 0;
   }
-  return _.isEmpty(value)
-}
+  return _.isEmpty(value);
+};
 export const isNotEmpty = (value) => {
-  return !isEmpty(value)
-}
+  return !isEmpty(value);
+};
 export const toBoolean = (value) => {
   if (isEmpty(value)) {
-    return false
+    return false;
   }
   if (_.isString(value)) {
-    const p = value.toLowerCase().trim()
+    const p = value.toLowerCase().trim();
     if (p === 'true') {
-      return true
+      return true;
     }
     if (p === 'false') {
-      return false
+      return false;
     }
   }
-  return value
-}
+  return value;
+};
 
 function trimProtocal(uri = '') {
-  const str = uri.trim()
-  const idx = str.indexOf(TARO_PROTOCOL_PRIFIX)
+  const str = uri.trim();
+  const idx = str.indexOf(TARO_PROTOCOL_PRIFIX);
   if (idx > -1) {
-    return str.slice(idx + 7)
+    return str.slice(idx + 7);
   }
-  return str
+  return str;
 }
 
 export function toTaroUrl(uri = '', params) {
-  const url = trimProtocal(uri)
+  const url = trimProtocal(uri);
   if (isNotEmpty(params)) {
     const postFix = _.keys(params)
       .map((key) => key + '=' + params[key])
-      .join('&')
+      .join('&');
     if (uri.indexOf('?') > -1) {
-      return `${url}&${postFix}`
+      return `${url}&${postFix}`;
     }
-    return `${url}?${postFix}`
+    return `${url}?${postFix}`;
   }
-  return url
+  return url;
 }
 
 /**
@@ -88,44 +88,44 @@ export function toTaroUrl(uri = '', params) {
 export function parseTaroUri(
   uri = ''
 ): {
-  pathname: string
-  params: object
+  pathname: string;
+  params: object;
 } {
-  const url = trimProtocal(uri)
-  const urlData = url.split('?')
-  let params = {}
+  const url = trimProtocal(uri);
+  const urlData = url.split('?');
+  let params = {};
   if (urlData.length > 1) {
-    const strAry = _.split(urlData[1], '&').map((i) => i.split('='))
-    params = _.fromPairs(strAry)
+    const strAry = _.split(urlData[1], '&').map((i) => i.split('='));
+    params = _.fromPairs(strAry);
   }
-  const page = urlData[0]
+  const page = urlData[0];
   return {
     pathname: page.startsWith('/') ? page : '/' + page,
     params,
-  }
+  };
 }
 
 export function isLocalPagePath(uri = '') {
-  return uri.trim().startsWith(TARO_PROTOCOL_PRIFIX)
+  return uri.trim().startsWith(TARO_PROTOCOL_PRIFIX);
 }
 
 export function parseJSON(json) {
   if (_.isObject()) {
-    return json
+    return json;
   }
   if (_.isString(json)) {
     try {
-      return JSON.parse(json)
+      return JSON.parse(json);
     } catch (e) {
-      return {}
+      return {};
     }
   }
-  console.warn('shouldBeObject is not controlled value', json)
-  return json
+  console.warn('shouldBeObject is not controlled value', json);
+  return json;
 }
 
 export function mergeMode() {
-  return _.flatten(arguments).filter(isNotEmpty)
+  return _.flatten(arguments).filter(isNotEmpty);
 }
 
 /**
@@ -135,27 +135,27 @@ export function mergeMode() {
  * @returns {{mode: (function(*=): (*)), classNames: (function(*=, ...[*]=): string)}}
  */
 export function getExtMode(...props: any[]) {
-  const modeList = _.flatten(props).filter(isNotEmpty)
+  const modeList = _.flatten(props).filter(isNotEmpty);
 
   const buildWithPrefix = (prefix) => {
     if (isEmpty(prefix)) {
-      return prefix
+      return prefix;
     }
     const list = modeList.map((it) => {
       if (_.isObject(it)) {
-        return _.keys(it).map((key) => (it[key] ? key : ''))
+        return _.keys(it).map((key) => (it[key] ? key : ''));
       }
-      return it
-    })
+      return it;
+    });
     return _.flatten(list)
       .filter((it) => isNotEmpty(it))
-      .map((it) => `${prefix}--${_.trim(it)}`)
-  }
+      .map((it) => `${prefix}--${_.trim(it)}`);
+  };
 
   return {
     mode: buildWithPrefix,
     classNames: function(prefix: any, ...others: any[]) {
-      return classNames(prefix, others, buildWithPrefix(prefix))
+      return classNames(prefix, others, buildWithPrefix(prefix));
     },
-  }
+  };
 }

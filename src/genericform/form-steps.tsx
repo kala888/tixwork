@@ -1,14 +1,14 @@
-import React from 'react'
-import NavigationService from '@/nice-router/navigation-service'
-import { View } from '@tarojs/components'
-import { AtSteps } from 'taro-ui'
+import React from 'react';
+import NavigationService from '@/nice-router/navigation-service';
+import { View } from '@tarojs/components';
+import { AtSteps } from 'taro-ui';
 
-import { CandidateValue } from '@/nice-router/nice-router-types'
-import './styles.scss'
+import { CandidateValue } from '@/nice-router/nice-router-types';
+import './styles.scss';
 
 type FormStepsProps = {
-  steps: CandidateValue[]
-}
+  steps: CandidateValue[];
+};
 
 function FormSteps({ steps }: FormStepsProps) {
   const handleChange = (current) => {
@@ -18,19 +18,19 @@ function FormSteps({ steps }: FormStepsProps) {
       {
         navigationOptions: { method: 'redirectTo' },
       }
-    )
-  }
+    );
+  };
 
-  const stepList = steps.map((it) => ({ ...it, desc: it.brief || '' }))
-  let selectedIdx = steps.findIndex((it) => it.selected)
+  const stepList = steps.map((it) => ({ ...it, desc: it.brief || '' }));
+  let selectedIdx = steps.findIndex((it) => it.selected);
   return (
     <View className='form-steps'>
       <AtSteps items={stepList} current={selectedIdx} onChange={handleChange} />
     </View>
-  )
+  );
 }
 
 FormSteps.defaultProps = {
   steps: [],
-}
-export default FormSteps
+};
+export default FormSteps;

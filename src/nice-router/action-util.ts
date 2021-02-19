@@ -17,76 +17,76 @@
  *  effectAction // action还能指定获得结果后，触发哪个effect
  *  stateAction  // action还能指定获得结果后，触发哪个state
  */
-import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util'
-import _ from 'lodash'
-import { ActionLike, EleObject } from '@/nice-router/nice-router-types'
+import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util';
+import _ from 'lodash';
+import { ActionLike, EleObject } from '@/nice-router/nice-router-types';
 
-const SUBMIT_CODE_LIST = ['nextStep', 'commit', 'next', 'nextRecord']
+const SUBMIT_CODE_LIST = ['nextStep', 'commit', 'next', 'nextRecord'];
 
 const getActionUri = (action: { uri?: string; linkToUrl?: string } | string): string => {
   if (_.isString(action)) {
-    return action
+    return action;
   }
 
   if (_.isObject(action)) {
-    const { linkToUrl, uri = '' } = action
-    return linkToUrl || uri
+    const { linkToUrl, uri = '' } = action;
+    return linkToUrl || uri;
   }
-  return ''
-}
+  return '';
+};
 const isActionLike = (action: ActionLike) => {
   if (_.isFunction(_.get(action, 'onClick'))) {
-    return true
+    return true;
   }
 
   if (_.isFunction(_.get(action, 'onChange'))) {
-    return true
+    return true;
   }
-  return isNotEmpty(getActionUri(action))
-}
+  return isNotEmpty(getActionUri(action));
+};
 
 const trans2Action = (
   routerAction = {}
 ): {
-  params?: object
-  cache?: boolean
+  params?: object;
+  cache?: boolean;
 } & ActionLike &
   EleObject => {
   // @ts-ignore
-  const { action, ...others } = routerAction
-  const linkToUrl = getActionUri(action)
-  const tmp = _.isObject(action) ? action : {}
+  const { action, ...others } = routerAction;
+  const linkToUrl = getActionUri(action);
+  const tmp = _.isObject(action) ? action : {};
   return {
     ...others,
     ...tmp,
     linkToUrl,
-  }
-}
+  };
+};
 
-const getConfirmContent = (action) => action?.confirm
+const getConfirmContent = (action) => action?.confirm;
 
 const isSubmitAction = (action = {}) => {
-  const tmp = _.isString(action) ? action : _.get(action, 'code', '')
-  const theCode = _.toLower(tmp)
+  const tmp = _.isString(action) ? action : _.get(action, 'code', '');
+  const theCode = _.toLower(tmp);
 
   if (isEmpty(theCode)) {
-    return false
+    return false;
   }
   if (theCode.startsWith('submit') || theCode.startsWith('update') || theCode.startsWith('save')) {
-    return true
+    return true;
   }
 
-  const result = _.find(SUBMIT_CODE_LIST, (it) => it.toLowerCase() === theCode)
+  const result = _.find(SUBMIT_CODE_LIST, (it) => it.toLowerCase() === theCode);
 
-  return isNotEmpty(result)
-}
+  return isNotEmpty(result);
+};
 
 // @ts-ignore
 const toSubmitActionList = (actionList = [], onSubmit = noop) => {
-  const theActionList = _.isArray(actionList) ? actionList : [actionList]
+  const theActionList = _.isArray(actionList) ? actionList : [actionList];
   // @ts-ignore
-  return theActionList.map((it) => ({ ...it, onClick: isSubmitAction(it) ? onSubmit.bind(null, it) : null }))
-}
+  return theActionList.map((it) => ({ ...it, onClick: isSubmitAction(it) ? onSubmit.bind(null, it) : null }));
+};
 
 const ActionUtil = {
   getActionUri,
@@ -95,6 +95,6 @@ const ActionUtil = {
   getConfirmContent,
   isSubmitAction,
   toSubmitActionList,
-}
+};
 
-export default ActionUtil
+export default ActionUtil;

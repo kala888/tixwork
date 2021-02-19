@@ -50,7 +50,7 @@ $yarn dev:weapp
 > ```
 > 
 > 修改navigationBarBackgroundColor和tabBar的颜色（app.js中）
-> 6.  如何修改后端服务地址 (**可选**) ./src/utils/config.js
+> 6.  如何修改后端服务地址 (**可选**) ./src/utils/config.ts
 
 > ```javascript
 > const baseURL = 'https://demo2.doublechaintech.com/storedev/wxappService/'

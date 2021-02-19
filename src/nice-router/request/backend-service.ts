@@ -6,8 +6,6 @@ import MockService from './mock-service'
 import TestData from '../../pages/mock-data/test-data'
 import { BackendServiceSendProps } from '@/nice-router/request/reqeust'
 
-
-
 TestData.initial()
 
 const EMPTY_PARAMETER_TOKEN = '+'

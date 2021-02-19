@@ -62,6 +62,6 @@ const ViewmappingConfig = {
       stateAction: 'listofpage2/save',
     },
   ],
-}
+};
 
-export default ViewmappingConfig
+export default ViewmappingConfig;

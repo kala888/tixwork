@@ -11,9 +11,9 @@ import NavigationService from '@/nice-router/navigation-service'
 import { isNotEmpty } from '@/nice-router/nice-router-util'
 import EleActionList from '@/components/elements/action-list/ele-action-list'
 import Listof from '@/listof/listof'
-import EleButton from '@/components/elements/ele-button'
+import EleButton, { EleButtonProps } from '@/components/elements/ele-button'
 import './me.scss'
-import { Action } from '@/nice-router/types'
+
 
 const Box_Navigator_List = [
   {
@@ -47,7 +47,7 @@ const LineItem_Navigator_List = [
 
 function MePage() {
   const root = useSelector((state) => state.me)
-  const [footerActionList, setFooterActionList] = useState<Action[]>([])
+  const [footerActionList, setFooterActionList] = useState<EleButtonProps[]>([])
 
   usePageTitle(root)
   usePullDown(Config.api.FooterMe)
@@ -62,9 +62,9 @@ function MePage() {
   }
   useEffect(() => {
     if (isNotEmpty(root)) {
-      setFooterActionList([{ id: 1, title: '退出登录', onClick: handleLogout }])
+      setFooterActionList([{ id: 'goLogout', title: '退出登录', onClick: handleLogout }])
     } else {
-      setFooterActionList([{ id: 1, title: '去登陆', onClick: handleGoLogin }])
+      setFooterActionList([{ id: 'goLogin', title: '去登陆', onClick: handleGoLogin }])
     }
   }, [root])
   useDidShow(() => NavigationService.ajax(Config.api.FooterMe))
@@ -99,7 +99,7 @@ function MePage() {
         </View>
 
         <View className='me-page-header-actions'>
-          <NavigationBox list={boxNavigatorList} />
+          <NavigationBox items={boxNavigatorList} />
         </View>
       </View>
 

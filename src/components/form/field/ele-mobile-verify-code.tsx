@@ -6,8 +6,8 @@ import { View } from '@tarojs/components'
 import classNames from 'classnames'
 import { AtInput } from 'taro-ui'
 import GlobalToast from '@/nice-router/global-toast'
-import './styles.scss'
 import { AtInputProps } from 'taro-ui/types/input'
+import './styles.scss'
 
 type EleMobileVerifyCodeProps = {
   maxCount?: number,

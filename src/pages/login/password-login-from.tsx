@@ -8,8 +8,8 @@ import EleButton from '@/components/elements/ele-button'
 import './login.scss'
 
 export default function PasswordForm() {
-  const [login, setLogin] = useState()
-  const [password, setPassword] = useState()
+  const [login, setLogin] = useState<any>()
+  const [password, setPassword] = useState<any>()
 
   const handleSubmit = () => {
     NavigationService.dispatch('app/login', {

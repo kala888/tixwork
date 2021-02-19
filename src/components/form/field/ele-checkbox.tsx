@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import _ from 'lodash'
 import { AtCheckbox, AtRadio } from 'taro-ui'
 import { isNotEmpty, noop } from '@/nice-router/nice-router-util'
 import { View } from '@tarojs/components'

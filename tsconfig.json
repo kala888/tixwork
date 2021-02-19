@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["miniprogram-api-typings"],
     "target": "es2017",
     "module": "commonjs",
     "removeComments": false,

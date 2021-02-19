@@ -21,6 +21,7 @@ function getUrlAndParam({ uri, params }) {
 
   const match = pathToRegexp.parse(url)
   match.forEach((item) => {
+    // @ts-ignore TODO 重构时发现没有 name属性，需要测试
     const { name: key } = item
     if (item instanceof Object && key in processedParams) {
       delete processedParams[key]
@@ -28,7 +29,7 @@ function getUrlAndParam({ uri, params }) {
   })
 
   return {
-    url: NiceRouterConfig.config.baseURL + domain + url,
+    url: NiceRouterConfig?.config?.baseURL + domain + url,
     params: processedParams,
   }
 }

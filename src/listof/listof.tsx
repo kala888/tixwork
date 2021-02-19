@@ -1,61 +1,61 @@
-import NavigationService from '@/nice-router/navigation-service'
-import { getExtMode, isEmpty, LoadingType } from '@/nice-router/nice-router-util'
-import { ScrollView, Text, View } from '@tarojs/components'
-import React from 'react'
+import NavigationService from '@/nice-router/navigation-service';
+import { getExtMode, isEmpty, LoadingType } from '@/nice-router/nice-router-util';
+import { ScrollView, Text, View } from '@tarojs/components';
+import React from 'react';
 
-import FooterTips from '@/listof/footer-tips'
-import { useLoading } from '@/service/use-service'
-import ActionUtil from '@/nice-router/action-util'
+import FooterTips from '@/listof/footer-tips';
+import { useLoading } from '@/service/use-service';
+import ActionUtil from '@/nice-router/action-util';
 
-import { enrichListOfEntity } from '../utils'
-import ListofUtil from './listof-util'
-import './listof.scss'
-import FlexLineItem, { FlexLineItemProps } from './templates/flex-line-item'
+import { enrichListOfEntity } from '../utils';
+import ListofUtil from './listof-util';
+import './listof.scss';
+import FlexLineItem, { FlexLineItemProps } from './templates/flex-line-item';
 
 export type ListofProps = {
-  list?: FlexLineItemProps[]
-  items?: FlexLineItemProps[]
-  emptyMessage?: string
-  dataContainer?: object
-  listMeta?: object
-  displayMode?: string
-  onItemClick?: Function
-  horizontal?: boolean
-  longList?: boolean
-  height?: number
-  mode?: 'horizontal' | 'vertical'
-  className?: string
-}
+  list?: FlexLineItemProps[];
+  items?: FlexLineItemProps[];
+  emptyMessage?: string;
+  dataContainer?: object;
+  listMeta?: object;
+  displayMode?: string;
+  onItemClick?: Function;
+  horizontal?: boolean;
+  longList?: boolean;
+  height?: number;
+  mode?: 'horizontal' | 'vertical';
+  className?: string;
+};
 
 function Listof(props: ListofProps) {
-  const { loading, showLoading, hideLoading } = useLoading(false)
-  const { list, items, emptyMessage } = props
-  const theList = list || items || []
+  const { loading, showLoading, hideLoading } = useLoading(false);
+  const { list, items, emptyMessage } = props;
+  const theList = list || items || [];
 
   if (isEmpty(theList)) {
     if (isEmpty(emptyMessage)) {
-      return null
+      return null;
     }
-    return <Text className='listof-empty-message'>{emptyMessage}</Text>
+    return <Text className='listof-empty-message'>{emptyMessage}</Text>;
   }
 
-  const { dataContainer, listMeta = {}, displayMode, onItemClick, horizontal = false } = props
-  const { longList = false, mode, className, height } = props
+  const { dataContainer, listMeta = {}, displayMode, onItemClick, horizontal = false } = props;
+  const { longList = false, mode, className, height } = props;
 
-  const hasNextPage = ActionUtil.isActionLike(listMeta)
+  const hasNextPage = ActionUtil.isActionLike(listMeta);
   //longList=无限循环list 展示footer
-  let showFooter = longList
+  let showFooter = longList;
   //但是，如果没有下一页，且list比较小, 就不展示footer了
   if (!hasNextPage && theList.length < 15) {
-    showFooter = false
+    showFooter = false;
   }
 
   const loadMore = () => {
     if (!hasNextPage) {
-      return
+      return;
     }
 
-    showLoading()
+    showLoading();
     NavigationService.ajax(
       listMeta,
       {},
@@ -63,17 +63,17 @@ function Listof(props: ListofProps) {
         loading: LoadingType.BarLoading,
         arrayMerge: 'append',
         onSuccess: () => {
-          hideLoading()
+          hideLoading();
         },
       }
-    )
-  }
+    );
+  };
 
-  const flexLineItems = enrichListOfEntity({ dataContainer, targetList: theList })
+  const flexLineItems = enrichListOfEntity({ dataContainer, targetList: theList });
 
-  const itemWidth = ListofUtil.getItemWidth(displayMode)
-  const rootClass = getExtMode({ horizontal }, mode).classNames('listof-view', className)
-  const containerClass = getExtMode({ multiple: itemWidth }).classNames('listof-view-container')
+  const itemWidth = ListofUtil.getItemWidth(displayMode);
+  const rootClass = getExtMode({ horizontal }, mode).classNames('listof-view', className);
+  const containerClass = getExtMode({ multiple: itemWidth }).classNames('listof-view-container');
 
   return (
     <ScrollView
@@ -99,7 +99,7 @@ function Listof(props: ListofProps) {
 
       {showFooter && <FooterTips hasNextPage={hasNextPage} loading={loading} onLoadMore={loadMore} />}
     </ScrollView>
-  )
+  );
 }
 
-export default Listof
+export default Listof;

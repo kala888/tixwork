@@ -4,9 +4,9 @@ import uploadFiles from '@/service/file-upload/upload-files'
 import { Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtImagePicker, AtProgress } from 'taro-ui'
+import { ImageLike } from '@/nice-router/nice-router-types'
 
 import './styles.scss'
-import { ImageLike } from '@/nice-router/nice-router-types'
 
 // TODO image picker 有个bug，可以暂时等待Taro ui 升级，要修改源码，https://github.com/NervJS/taro-ui/pull/1290
 

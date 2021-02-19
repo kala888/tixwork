@@ -1,13 +1,13 @@
-import React from 'react'
-import EleButton from '@/components/elements/ele-button'
-import { Image, View } from '@tarojs/components'
+import React from 'react';
+import EleButton from '@/components/elements/ele-button';
+import { Image, View } from '@tarojs/components';
 
-import NavigationService from './navigation-service'
-import networkImage from './network.png'
-import './styles.scss'
+import NavigationService from './navigation-service';
+import networkImage from './network.png';
+import './styles.scss';
 
 function refresh() {
-  NavigationService.dispatch('niceRouter/retry')
+  NavigationService.dispatch('niceRouter/retry');
 }
 
 function NetworkExceptionPage() {
@@ -23,9 +23,9 @@ function NetworkExceptionPage() {
         </View>
       </View>
     </View>
-  )
+  );
 }
 
-NetworkExceptionPage.onPullDownRefresh = refresh
+NetworkExceptionPage.onPullDownRefresh = refresh;
 
-export default NetworkExceptionPage
+export default NetworkExceptionPage;

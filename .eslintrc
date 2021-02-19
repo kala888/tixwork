@@ -1,11 +1,13 @@
-module.exports = {
+{
   "extends": ["taro/react"],
   "rules": {
+    "import/first": "off",
+    "jsx-quotes": "off",
     "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts",".tsx"] }],
     "react/sort-comp": [0],
     "react/react-in-jsx-scope": [0],
     "react/jsx-uses-react": 2
   },
-    "parser": "babel-eslint"
-  }
+  "parser": "babel-eslint"
+}

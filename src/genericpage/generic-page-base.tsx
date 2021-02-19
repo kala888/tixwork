@@ -1,55 +1,55 @@
-import React, { useEffect } from 'react'
-import NavigationService from '@/nice-router/navigation-service'
-import { useAjaxPullDown, usePageTitle } from '@/service/use-service'
-import Config from '@/utils/config'
-import { View } from '@tarojs/components'
-import { Current, useShareAppMessage } from '@tarojs/taro'
-import classNames from 'classnames'
-import _ from 'lodash'
+import React, { useEffect } from 'react';
+import NavigationService from '@/nice-router/navigation-service';
+import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
+import Config from '@/utils/config';
+import { View } from '@tarojs/components';
+import { Current, useShareAppMessage } from '@tarojs/taro';
+import classNames from 'classnames';
+import _ from 'lodash';
 
-import EleFlex from './ele-flex'
-import './styles.scss'
+import EleFlex from './ele-flex';
+import './styles.scss';
 
 function GenericPageBase(props) {
-  const { pageTitle = Config.name, pageLinkToUrl = Config.api.FooterHome } = props
-  usePageTitle(pageTitle)
-  useAjaxPullDown(props)
+  const { pageTitle = Config.name, pageLinkToUrl = Config.api.FooterHome } = props;
+  usePageTitle(pageTitle);
+  useAjaxPullDown(props);
 
   // q如果变化了，就发送一个后台请求
   // @ts-ignore
-  const { q } = Current.router.params
+  const { q } = Current.router.params;
   useEffect(() => {
     if (q) {
-      const uri = decodeURIComponent(q)
-      NavigationService.view(uri)
+      const uri = decodeURIComponent(q);
+      NavigationService.view(uri);
     }
-  }, [q])
+  }, [q]);
 
   useShareAppMessage((res) => {
     if (res.from === 'button') {
-      const shareAction = _.get(res, 'target.dataset.extraData', {})
-      const { title, linkToUrl, imageUrl } = shareAction
-      const encodePath = encodeURIComponent(linkToUrl || pageLinkToUrl)
+      const shareAction = _.get(res, 'target.dataset.extraData', {});
+      const { title, linkToUrl, imageUrl } = shareAction;
+      const encodePath = encodeURIComponent(linkToUrl || pageLinkToUrl);
       return {
         title: title || pageTitle,
         path: `/pages/generic-page?q=${encodePath}`,
         imageUrl,
-      }
+      };
     }
-    const encodePath = encodeURIComponent(pageLinkToUrl)
+    const encodePath = encodeURIComponent(pageLinkToUrl);
     return {
       title: pageTitle,
       path: encodePath,
-    }
-  })
+    };
+  });
 
-  const { className } = props
-  const rootClass = classNames('generic-page', className)
+  const { className } = props;
+  const rootClass = classNames('generic-page', className);
   return (
     <View className={rootClass}>
       <EleFlex {...props} />
     </View>
-  )
+  );
 }
 
-export default GenericPageBase
+export default GenericPageBase;

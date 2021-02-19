@@ -9,6 +9,7 @@ import { Button, View } from '@tarojs/components'
 import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types'
 
 import './ele-button.scss'
+import { ButtonProps } from '@tarojs/components/types/Button'
 
 // form中组件封装后，button 不会触发form的handle方法问题
 // https://github.com/NervJS/taro-ui/issues/96
@@ -25,7 +26,7 @@ export type EleButtonProps = {
   className?: string,
   mode?: 'normal' | 'warn' | 'danger' | 'info' | 'secondary' | 'radius0' | 'ghost',
   onGetPhoneNumber?: any
-} & IconLike & EleObject & ImageLike & ActionLike
+} & IconLike & EleObject & ImageLike & ActionLike & Omit<ButtonProps, 'type' | 'size'|'id'>
 
 
 function EleButton(props: EleButtonProps) {
@@ -117,9 +118,9 @@ function EleButton(props: EleButtonProps) {
     }
   }
 
-  const handleClick = _.debounce(async () => {
+  const handleClick = _.debounce(async (e) => {
     if (onClick) {
-      onClick()
+      onClick(e)
       return
     }
 
