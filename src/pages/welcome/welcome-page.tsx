@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import EleCarousel from '@/components/elements/ele-carousel';
-import ActionFloor from '@/components/navigation/action-floor';
+import ActionFloor from '@/components/biz/action-floor';
 import SectionBar from '@/components/section-bar/section-bar';
 import Listof from '@/listof/listof';
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service';

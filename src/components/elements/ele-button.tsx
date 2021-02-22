@@ -29,7 +29,7 @@ export type EleButtonProps = {
   EleObject &
   ImageLike &
   ActionLike &
-  Omit<ButtonProps, 'type' | 'size' | 'id'>;
+  Omit<ButtonProps, 'type' | 'size' | 'id' | 'onClick'>;
 
 function EleButton(props: EleButtonProps) {
   const {
