@@ -7,7 +7,7 @@ import './ele-table.scss';
 type EleTableProps = {
   title?: string;
   data?: EleTableRowProps[];
-  children?: any;
+  children?: React.ReactNode;
   className?: string;
   bordered?: boolean;
 };

@@ -1,8 +1,8 @@
 export type BackendServiceSendProps = {
   method?: 'get' | 'post' | 'put';
   uri: string;
-  params?: object;
-  headers?: object;
+  params?: Record<string, any>;
+  headers?: Record<string, any>;
   loading: any;
   asForm?: boolean;
   cache?: number;
@@ -11,9 +11,9 @@ export type BackendServiceSendProps = {
 export type HttpResponse = {
   xclass: string;
   xredirect: boolean;
-  data: object;
+  data: any;
   message: string;
   status: string;
-  headers: object;
+  headers: Record<string, any>;
   success: boolean;
 };

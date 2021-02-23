@@ -6,7 +6,7 @@ import './ele-table.scss';
 export type EleTableCellProps = {
   title?: string;
   colspan?: number;
-  children?: any;
+  children?: React.ReactNode;
   mode: 'left' | 'right';
   className?: string;
 };

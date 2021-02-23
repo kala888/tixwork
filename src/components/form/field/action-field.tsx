@@ -12,7 +12,7 @@ type ActionFieldProps = {
   onClick?: Function;
   className?: string;
   toggleStatus?: boolean;
-  children?: any;
+  children?: React.ReactNode;
 };
 
 function ActionField(props: ActionFieldProps) {

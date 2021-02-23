@@ -48,7 +48,7 @@ const isActionLike = (action: ActionLike) => {
 const trans2Action = (
   routerAction = {}
 ): {
-  params?: object;
+  params?: Record<string, any>;
   cache?: boolean;
 } & ActionLike &
   EleObject => {

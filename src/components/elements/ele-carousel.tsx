@@ -17,7 +17,7 @@ export type EleCarouselItem = ActionLike & ImageLike & VideoLike;
 
 export type EleCarouselProps = {
   items?: EleCarouselItem[];
-  customStyle?: object;
+  customStyle?: React.CSSProperties;
   imageMode?: ImageProps.mode;
 } & SwiperProps;
 

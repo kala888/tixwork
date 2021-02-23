@@ -10,7 +10,7 @@ import './styles.scss';
 type EleImageProps = {
   src?: string;
   className?: string;
-  customStyle?: object;
+  customStyle?: React.CSSProperties;
 } & ImageLike &
   Partial<ImageProps>;
 

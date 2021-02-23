@@ -52,7 +52,7 @@ const defaultViewConfig = {
   },
 };
 
-const setViewConfig = (vcfg?: object) => {
+const setViewConfig = (vcfg?: Record<string, any>) => {
   ViewConfig = {};
   const mergedViewConfig = _.merge(defaultViewConfig, vcfg);
   Object.keys(mergedViewConfig).map((key) => {

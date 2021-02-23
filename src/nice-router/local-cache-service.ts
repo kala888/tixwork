@@ -34,7 +34,7 @@ const getCachedPage = (uri: string) => {
 };
 
 // 查看 Form是否被提交成功
-const isCachedForm = async (url: string, params: object = {}) => {
+const isCachedForm = async (url: string, params: Record<string, any> = {}) => {
   if (isEmpty(params)) {
     return false;
   }
@@ -43,7 +43,7 @@ const isCachedForm = async (url: string, params: object = {}) => {
   return !StorageTools.isExpired(key);
 };
 // form 提交内容 缓存 30 秒
-const cacheForm = async (url: string, params: object = {}) => {
+const cacheForm = async (url: string, params: Record<string, any> = {}) => {
   if (isNotEmpty(params)) {
     const content = JSON.stringify(params);
     const key = `${url}_${content}`;

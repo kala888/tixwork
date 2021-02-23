@@ -34,7 +34,7 @@ type EleFlexItem = {
 type EleFlexProps = {
   flex?: number;
   kids: EleFlexItem[];
-  customStyle?: object;
+  customStyle?: React.CSSProperties;
   className?: string;
 };
 

@@ -7,8 +7,8 @@ export interface AppConfiguration {
   baseURL: string;
   version: number;
   appType: string;
-  viewConfig: object;
-  api: object;
+  viewConfig: Record<string, any>;
+  api: Record<string, string>;
   backendRouterPageBlackList: string[];
   backendRouterPageKeyBlackList: string[];
   loginMode?: 'wechat' | 'vcode' | 'password';

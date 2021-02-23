@@ -4,7 +4,7 @@ import { AtCurtain } from 'taro-ui';
 
 import EleFlex from './ele-flex';
 
-export default function ElePopup(props: object) {
+export default function ElePopup(props: Record<string, any>) {
   const [show, setShow] = useState(true);
   const onClose = () => setShow(false);
 

@@ -26,7 +26,7 @@ type FormItemProps = {
   title?: string;
   tips?: string;
   onChange?: (name: string, value: any) => void;
-  children?: any;
+  children?: React.ReactNode;
 };
 
 function FormItem(props: FormItemProps) {

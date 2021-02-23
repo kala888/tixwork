@@ -10,7 +10,7 @@ type EleBreakLineProps = {
   height?: number;
   title?: string;
   fontColor?: string;
-  customStyle?: object;
+  customStyle?: React.CSSProperties;
   className?: string;
 };
 

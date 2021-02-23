@@ -12,7 +12,7 @@ import ActionIcon from '@/components/action-icon/action-icon';
 import './styles.scss';
 
 type SectionBarProps = {
-  children?: any;
+  children?: React.ReactNode;
   className?: string;
   foldable?: boolean;
   expand?: boolean;

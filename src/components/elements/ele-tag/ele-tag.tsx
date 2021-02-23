@@ -10,7 +10,7 @@ export type EleTagProps = {
   disabled?: boolean;
   selected?: boolean;
   size?: 'small' | 'normal';
-  children?: any;
+  children?: React.ReactNode;
   mode?: 'red' | 'primary' | string[];
   className?: string;
   onClick?: Function;

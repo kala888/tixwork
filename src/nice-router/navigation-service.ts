@@ -56,7 +56,7 @@ const NavigationService = {
     _container = container;
   },
 
-  dispatch(action: string, params?: object) {
+  dispatch(action: string, params?: Record<string, any>) {
     const { dispatch, props = {} } = _container || {};
     const func = dispatch || props.dispatch || noop;
     func({
@@ -81,7 +81,7 @@ const NavigationService = {
    *
    * eg. 后退传参 NavigationService.back({data},this)
    */
-  back(data: object = {}, delta: number = 1) {
+  back(data: Record<string, any> = {}, delta: number = 1) {
     const key: any = Current?.router?.path;
     return new Promise((resolve, reject) => {
       Taro.navigateBack({ delta })
@@ -104,7 +104,7 @@ const NavigationService = {
    * @param options
    * @returns {Promise<any>}
    */
-  navigate(routeName?: string, params: object = {}, options: object = {}) {
+  navigate(routeName?: string, params: Record<string, any> = {}, options: Record<string, any> = {}) {
     return new Promise((resolve, reject) => {
       const url = toTaroUrl(routeName, params);
       // console.log('taro-redirect', url)
@@ -141,11 +141,11 @@ const NavigationService = {
     });
   },
 
-  view(action: NavationActionType, params: object = {}, options: object = {}) {
+  view(action: NavationActionType, params: Record<string, any> = {}, options: Record<string, any> = {}) {
     return this.routeTo({ action, params, ...options });
   },
 
-  ajax(action: NavationActionType, params: object = {}, options: object = {}) {
+  ajax(action: NavationActionType, params: Record<string, any> = {}, options: Record<string, any> = {}) {
     return this.routeTo({
       action,
       params,
@@ -155,11 +155,11 @@ const NavigationService = {
     });
   },
 
-  refresh(action: NavationActionType, params: object = {}, options: object = {}) {
+  refresh(action: NavationActionType, params: Record<string, any> = {}, options: Record<string, any> = {}) {
     return this.ajax(action, params, { ...options, refresh: true });
   },
 
-  post(action: NavationActionType, params: object = {}, options: object = {}) {
+  post(action: NavationActionType, params: Record<string, any> = {}, options: Record<string, any> = {}) {
     return this.routeTo({
       action,
       params,
@@ -168,7 +168,7 @@ const NavigationService = {
     });
   },
 
-  put(action: NavationActionType, params: object = {}, options: object = {}) {
+  put(action: NavationActionType, params: Record<string, any> = {}, options: Record<string, any> = {}) {
     return this.routeTo({
       action,
       params,
@@ -179,7 +179,7 @@ const NavigationService = {
 
   routeTo: async function(routerParams: {
     action: NavationActionType;
-    params?: object;
+    params?: Record<string, any>;
     method?: 'put' | 'post' | 'get';
     loading?: any;
     statInPage?: boolean;

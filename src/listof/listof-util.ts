@@ -44,7 +44,7 @@ function getItemWidth(displayMode) {
   }
 }
 
-function isSelfHoldClickTemplate(displayMode: string, item: object = {}): boolean {
+function isSelfHoldClickTemplate(displayMode: string, item: Record<string, any> = {}): boolean {
   if ('card' === displayMode) {
     // @ts-ignore
     return isNotEmpty(item.documentUrl) || isNotEmpty(item.actionList);

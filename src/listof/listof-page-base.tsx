@@ -21,8 +21,8 @@ import Config from '@/nice-router/nice-router.config';
 type listofPageBaseProps = {
   pageTitle?: string;
   content?: string;
-  searchAction?: object;
-  header?: object;
+  searchAction?: Record<string, any>;
+  header?: Record<string, string>;
   renderHeader?: Function;
   renderFooter?: Function;
 } & ActionListLike &

@@ -8,7 +8,7 @@ type EleBadgeProps = {
   value?: number;
   maxValue?: number;
   className?: string;
-  children?: any;
+  children?: React.ReactNode;
 };
 
 export default function EleBadge(props: EleBadgeProps) {

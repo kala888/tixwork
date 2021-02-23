@@ -11,7 +11,7 @@ export type ServerImageProps = {
   src?: string;
   uri?: string;
   size?: ImageSize;
-  customStyle?: object;
+  customStyle?: React.CSSProperties;
 } & Partial<ImageProps>;
 
 function ServerImage(props: ServerImageProps) {

@@ -6,7 +6,7 @@ import './skeleton.scss';
 type SkeletonProps = {
   loading: boolean;
   size: number;
-  children?: any;
+  children?: React.ReactNode;
 };
 
 export default function Skeleton(props: SkeletonProps) {

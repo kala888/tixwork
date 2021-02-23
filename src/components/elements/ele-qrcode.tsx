@@ -17,7 +17,7 @@ type EleQrcodeProps = {
   logoSize?: number;
   logo?: number;
   text: 'string';
-  customStyle?: object;
+  customStyle?: React.CSSProperties;
 };
 
 export default class EleQrcode extends React.PureComponent<EleQrcodeProps> {

@@ -21,7 +21,7 @@ export type EleButtonProps = {
   disabled?: boolean;
   reLaunch?: boolean;
   openType?: string;
-  children?: any;
+  children?: React.ReactNode;
   className?: string;
   mode?: 'normal' | 'warn' | 'danger' | 'info' | 'secondary' | 'radius0' | 'ghost';
   onGetPhoneNumber?: any;

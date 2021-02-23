@@ -11,7 +11,7 @@ type InfoLongTextProps = {
   maxLength?: number;
   useFold?: boolean;
   className?: string;
-  children?: any;
+  children?: React.ReactNode;
 };
 
 function InfoLongText(props: InfoLongTextProps) {

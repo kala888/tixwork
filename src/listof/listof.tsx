@@ -16,8 +16,8 @@ export type ListofProps = {
   list?: FlexLineItemProps[];
   items?: FlexLineItemProps[];
   emptyMessage?: string;
-  dataContainer?: object;
-  listMeta?: object;
+  dataContainer?: Record<string, any>;
+  listMeta?: Record<string, any>;
   displayMode?: string;
   onItemClick?: Function;
   horizontal?: boolean;
@@ -30,7 +30,7 @@ export type ListofProps = {
 function Listof(props: ListofProps) {
   const { loading, showLoading, hideLoading } = useLoading(false);
   const { list, items, emptyMessage } = props;
-  const theList = list || items || [];
+  const theList :any[] = list || items || [];
 
   if (isEmpty(theList)) {
     if (isEmpty(emptyMessage)) {
@@ -69,6 +69,7 @@ function Listof(props: ListofProps) {
     );
   };
 
+  // @ts-ignore
   const flexLineItems = enrichListOfEntity({ dataContainer, targetList: theList });
 
   const itemWidth = ListofUtil.getItemWidth(displayMode);

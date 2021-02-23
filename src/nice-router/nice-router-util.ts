@@ -89,7 +89,7 @@ export function parseTaroUri(
   uri = ''
 ): {
   pathname: string;
-  params: object;
+  params: Record<string, any>;
 } {
   const url = trimProtocal(uri);
   const urlData = url.split('?');

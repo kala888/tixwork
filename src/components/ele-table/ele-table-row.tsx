@@ -8,7 +8,7 @@ export type EleTableRowProps = {
   items?: EleTableCellProps[];
   header?: any;
   className?: string;
-  children?: any;
+  children?: React.ReactNode;
 };
 
 const EleTableRow: React.FC<EleTableRowProps> = (props) => {

@@ -9,7 +9,7 @@ import './styles.scss';
 
 type EleNoticeProps = {
   items: EleObject[];
-  customStyle?: object;
+  customStyle?: React.CSSProperties;
   className?: string;
 } & ImageLike &
   IconLike;

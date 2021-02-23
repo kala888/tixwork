@@ -15,8 +15,8 @@ type FormItemLabelProps = {
   required?: boolean;
   tips?: string | FormItemLabelTips;
   layout?: 'vertical' | 'horizontal';
-  tail?: boolean;
-  children?: any;
+  tail?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 function FormItemLabel(props: FormItemLabelProps) {
