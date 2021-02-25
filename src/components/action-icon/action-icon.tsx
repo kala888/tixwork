@@ -1,4 +1,3 @@
-import React from 'react';
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
 import ServerImage, { ServerImageProps } from '@/server-image/server-image';
 import { Text, View } from '@tarojs/components';
@@ -12,7 +11,7 @@ type ActionIconProps = IconLike & ImageLike & ServerImageProps;
 /**
  *  有icon，优先展示ICON
  */
-const ActionIcon: React.FC<ActionIconProps> = (props) => {
+export default function ActionIcon(props: ActionIconProps) {
   const { icon = '', imageUrl, className, mode } = props;
   if (isEmpty(icon) && isEmpty(imageUrl)) {
     return null;
@@ -44,6 +43,4 @@ const ActionIcon: React.FC<ActionIconProps> = (props) => {
       <ServerImage customStyle={{ width: '100%', height: '100%' }} mode={mode} src={imageUrl} />
     </View>
   );
-};
-
-export default ActionIcon;
+}

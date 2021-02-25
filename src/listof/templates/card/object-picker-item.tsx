@@ -1,4 +1,3 @@
-import React from 'react';
 import { Text, View } from '@tarojs/components';
 import NavigationService from '@/nice-router/navigation-service';
 import { EleCardProps } from '@/components/elements/ele-card/ele-card';

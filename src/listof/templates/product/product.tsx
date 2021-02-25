@@ -1,4 +1,3 @@
-import React from 'react';
 import { isNotEmpty } from '@/nice-router/nice-router-util';
 import EleTag from '@/components/elements/ele-tag/ele-tag';
 import ServerImage from '@/server-image/server-image';

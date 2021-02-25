@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from '@tarojs/components';
 import _ from 'lodash';
 import { noop } from '@/nice-router/nice-router-util';

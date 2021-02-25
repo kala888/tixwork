@@ -1,4 +1,3 @@
-import React from 'react';
 import EleCarousel, { EleCarouselItem } from '@/components/elements/ele-carousel';
 import { View } from '@tarojs/components';
 import './styles.scss';

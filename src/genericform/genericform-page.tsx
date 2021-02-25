@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import EleRichText from '@/components/elements/ele-rich-text';
 
 import EleForm from '@/components/form/ele-form';

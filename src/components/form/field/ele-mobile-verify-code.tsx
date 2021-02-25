@@ -1,4 +1,3 @@
-import React from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { isNotEmpty } from '@/nice-router/nice-router-util';
 import { useCountdown } from '@/service/use-service';
@@ -21,7 +20,7 @@ type EleMobileVerifyCodeProps = {
 function EleMobileVerifyCode(props: EleMobileVerifyCodeProps) {
   const { maxCount = 60, value = '', className, linkToUrl = '', ...others } = props;
 
-  const { second, counting, startCount } = useCountdown(maxCount, null);
+  const { second, counting, startCount } = useCountdown(maxCount);
 
   const sendCode = async () => {
     if (!/^1\d{10}$/.test(value)) {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { isNotEmpty } from '@/nice-router/nice-router-util';
 import ImageTools, { ImageSize } from '@/server-image/image-tools';
 import ServerImage from '@/server-image/server-image';

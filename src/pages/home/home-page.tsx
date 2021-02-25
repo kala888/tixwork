@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import EleCarousel from '@/components/elements/ele-carousel';
 import ActionFloor from '@/components/biz/action-floor';
 import SectionBar from '@/components/section-bar/section-bar';

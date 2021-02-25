@@ -1,5 +1,4 @@
 import { View } from '@tarojs/components';
-import React from 'react';
 import { ITouchEvent } from '@tarojs/components/types/common';
 import './form-item-tail.scss';
 

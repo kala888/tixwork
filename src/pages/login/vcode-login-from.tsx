@@ -1,7 +1,7 @@
 import MobileVerifyCode from '@/components/mobile-verify-code';
 import EleInput from '@/components/form/field/ele-input';
 import { Block, View } from '@tarojs/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import _ from 'lodash';
 import NavigationService from '@/nice-router/navigation-service';
 import { isNotEmpty } from '@/nice-router/nice-router-util';

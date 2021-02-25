@@ -1,4 +1,3 @@
-import React from 'react';
 import { AtInput, AtTextarea } from 'taro-ui';
 import EleCalendar from './ele-calendar';
 import EleImagePicker from './ele-image-picker';

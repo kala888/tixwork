@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ScrollView } from '@tarojs/components';
 import { AtCurtain } from 'taro-ui';
 

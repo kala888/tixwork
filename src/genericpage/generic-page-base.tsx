@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
 import { View } from '@tarojs/components';

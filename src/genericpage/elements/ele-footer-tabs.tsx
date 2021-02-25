@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { AtTabBar } from 'taro-ui';
 import { CandidateValue, ImageLike } from '@/nice-router/nice-router-types';

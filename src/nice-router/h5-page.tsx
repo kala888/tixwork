@@ -1,4 +1,3 @@
-import React from 'react';
 import { useVisible } from '@/service/use-service';
 import { View, WebView } from '@tarojs/components';
 import { AtActivityIndicator } from 'taro-ui';

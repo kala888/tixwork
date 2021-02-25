@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SectionBar from '@/components/section-bar/section-bar';
 import Listof from '@/listof/listof';
 import { View } from '@tarojs/components';
@@ -8,7 +8,7 @@ import NavigationService from '@/nice-router/navigation-service';
 import './styles.scss';
 
 function HelloDaaSPage() {
-  const [root, setRoot] = useState({});
+  const [root, setRoot] = useState<any>({});
 
   useEffect(() => {
     NavigationService.ajax(

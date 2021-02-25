@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { getExtMode, isNotEmpty, noop } from '@/nice-router/nice-router-util';
 import { Label, Radio, RadioGroup, View } from '@tarojs/components';

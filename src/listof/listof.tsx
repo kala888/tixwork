@@ -1,7 +1,6 @@
 import NavigationService from '@/nice-router/navigation-service';
 import { getExtMode, isEmpty, LoadingType } from '@/nice-router/nice-router-util';
 import { ScrollView, Text, View } from '@tarojs/components';
-import React from 'react';
 
 import FooterTips from '@/listof/footer-tips';
 import { useLoading } from '@/service/use-service';
@@ -30,7 +29,7 @@ export type ListofProps = {
 function Listof(props: ListofProps) {
   const { loading, showLoading, hideLoading } = useLoading(false);
   const { list, items, emptyMessage } = props;
-  const theList :any[] = list || items || [];
+  const theList: any[] = list || items || [];
 
   if (isEmpty(theList)) {
     if (isEmpty(emptyMessage)) {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { getExtMode } from '@/nice-router/nice-router-util';

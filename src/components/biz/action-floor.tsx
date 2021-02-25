@@ -1,4 +1,3 @@
-import React from 'react';
 import { Block, View } from '@tarojs/components';
 import ActionFloorItem from './action-floor-item';
 

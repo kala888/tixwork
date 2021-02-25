@@ -1,4 +1,3 @@
-import React from 'react';
 import { useVisible } from '@/service/use-service';
 import { noop } from '@/nice-router/nice-router-util';
 import TagList from '@/components/elements/ele-tag/tag-list';

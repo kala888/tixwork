@@ -1,4 +1,3 @@
-import React from 'react';
 import { View } from '@tarojs/components';
 
 import EleActionList from '@/components/elements/action-list/ele-action-list';

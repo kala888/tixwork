@@ -1,4 +1,3 @@
-import React from 'react';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import _ from 'lodash';

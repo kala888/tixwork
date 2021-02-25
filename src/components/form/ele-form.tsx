@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { isNotEmpty, noop, parseJSON } from '@/nice-router/nice-router-util';
 import { View } from '@tarojs/components';
 import _ from 'lodash';
@@ -13,7 +13,8 @@ import validator from './validator';
 // 参考 https://github.com/react-component/form
 
 type EleFormProps = {
-  // TODO
+  // TODO 需要测试，优化
+  formKey?: string;
   defaultValues?: object;
   onFieldChange?: Function;
   fieldList?: any[];

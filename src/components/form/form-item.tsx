@@ -17,7 +17,7 @@ type FormItemProps = {
   rules: object[];
   showRequired?: boolean;
   clear?: boolean;
-  value: any;
+  value?: any;
   errors?: string[];
   bordered?: boolean;
   inline?: boolean;

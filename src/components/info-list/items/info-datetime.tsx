@@ -1,4 +1,3 @@
-import React from 'react';
 import { formatTime } from '@/utils/index';
 import { View } from '@tarojs/components';
 

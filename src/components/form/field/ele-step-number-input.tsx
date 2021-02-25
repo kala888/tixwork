@@ -1,4 +1,3 @@
-import React from 'react';
 import { AtInputNumber } from 'taro-ui';
 import { AtInputNumberProps } from 'taro-ui/types/input-number';
 
