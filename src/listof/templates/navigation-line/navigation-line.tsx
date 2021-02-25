@@ -1,4 +1,3 @@
-import React from 'react';
 import { View } from '@tarojs/components';
 import ActionIcon from '@/components/action-icon/action-icon';
 import { isEmpty } from '@/nice-router/nice-router-util';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Image, Text, View } from '@tarojs/components';
 import _ from 'lodash';
 import classNames from 'classnames';

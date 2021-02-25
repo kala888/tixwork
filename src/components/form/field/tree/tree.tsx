@@ -1,4 +1,3 @@
-import React from 'react';
 import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util';
 
 import { useVisible } from '@/service/use-service';

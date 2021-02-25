@@ -1,4 +1,3 @@
-import React from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { noop } from '@/nice-router/nice-router-util';
 import { useCountdown } from '@/service/use-service';

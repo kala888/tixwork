@@ -1,6 +1,6 @@
 import EleInput from '@/components/form/field/ele-input';
 import { Block, View } from '@tarojs/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import NavigationService from '@/nice-router/navigation-service';
 import EleButton from '@/components/elements/ele-button';

@@ -1,4 +1,3 @@
-import React from 'react';
 import '@tarojs/taro/html.css';
 import { RichText } from '@tarojs/components';
 

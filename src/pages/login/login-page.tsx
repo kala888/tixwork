@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ServerImage from '@/server-image/server-image';
 import { ApiConfig } from '@/utils/config';
 import { Text, View } from '@tarojs/components';

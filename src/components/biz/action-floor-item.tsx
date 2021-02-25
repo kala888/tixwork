@@ -1,4 +1,3 @@
-import React from 'react';
 import ServerImage from '@/server-image/server-image';
 import { Block, Text, View } from '@tarojs/components';
 

@@ -3,7 +3,7 @@ const path = require('path')  // 加在最上面
 
 const config = {
   projectName: 'nice-router',
-  date: '2019-5-14',
+  date: '2021-2-25',
   designWidth: 750,
   deviceRatio: {
     '640': 2.34 / 2,
@@ -16,7 +16,6 @@ const config = {
   defineConstants: {},
   copy: {
     patterns: [
-      { from: 'src/sitemap.json', to: 'dist/' },
     ],
     options: {
     }

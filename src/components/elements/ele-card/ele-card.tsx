@@ -1,4 +1,3 @@
-import React from 'react';
 import EleActionList from '@/components/elements/action-list/ele-action-list';
 import StatusFlag from '@/components/elements/ele-card/status-flag';
 import NavigationService from '@/nice-router/navigation-service';

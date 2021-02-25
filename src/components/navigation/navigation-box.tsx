@@ -1,4 +1,3 @@
-import React from 'react';
 import ActionIcon from '@/components/action-icon/action-icon';
 import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util';
 import { Text, View } from '@tarojs/components';

@@ -1,4 +1,3 @@
-import React from 'react';
 import ServerImage from '@/server-image/server-image';
 import { Text, View } from '@tarojs/components';
 import { ActionListLike, EleObject, ImageLike, TitleValue } from '@/nice-router/nice-router-types';

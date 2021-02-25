@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import _ from 'lodash';
 import Taro from '@tarojs/taro';
 import { isNotEmpty } from '@/nice-router/nice-router-util';

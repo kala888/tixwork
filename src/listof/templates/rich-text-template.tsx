@@ -1,4 +1,3 @@
-import React from 'react';
 import { View } from '@tarojs/components';
 import EleRichText, { EleRichTextProps } from '@/components/elements/ele-rich-text';
 import './flex-line-item.scss';

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import EleCarousel from '@/components/elements/ele-carousel';
 import ActionFloor from '@/components/biz/action-floor';
 import SectionBar from '@/components/section-bar/section-bar';
@@ -25,7 +25,7 @@ function WelcomePage(props) {
     <View className='home-page'>
       <EleCarousel className='home-page-carousel' items={slideList} />
       <View className='home-page-action-floor'>
-        <ActionFloor actions={actionList} />
+        <ActionFloor actionList={actionList} />
         <SectionBar title='促销抢购' linkToUrl='page:///pages/biz/listof-test-page' />
         <Listof list={productList} displayMode='product' />
         <Listof list={productList} displayMode='product' />

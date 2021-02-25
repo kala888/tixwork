@@ -1,5 +1,3 @@
-import React from 'react';
-
 import FlexInfoItem, { FlexInfoItemProps } from '@/components/info-list/flex-info-item';
 import SectionBar from '@/components/section-bar/section-bar';
 

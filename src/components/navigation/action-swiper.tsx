@@ -1,4 +1,3 @@
-import React from 'react';
 import _ from 'lodash';
 import { Swiper, SwiperItem, View } from '@tarojs/components';
 import NavigationBox from '@/components/navigation/navigation-box';

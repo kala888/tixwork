@@ -1,4 +1,3 @@
-import React from 'react';
 import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
 import { Block, View } from '@tarojs/components';
 import classNames from 'classnames';

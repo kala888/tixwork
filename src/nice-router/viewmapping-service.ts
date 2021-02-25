@@ -60,14 +60,14 @@ const setViewConfig = (vcfg?: Record<string, any>) => {
   });
 };
 
-const getView: (
-  backendKey: string,
-  stageInPage: boolean
-) => {
+const getView = (
+  backendKey = '',
+  stageInPage = false
+): {
   pageName?: string;
   stateAction?: string | string[];
   effectAction?: string | string[];
-} = (backendKey = '', stageInPage = false) => {
+} => {
   const key = _.trim(backendKey);
   let view = _.get(ViewConfig, key, {});
   if (isEmpty(view)) {

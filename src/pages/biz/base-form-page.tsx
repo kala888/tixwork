@@ -16,6 +16,7 @@ export default class BaseFormPage extends React.PureComponent {
     const fieldValue = FormUtil.getValue(value);
     this.setState((preState) => ({
       fieldValues: {
+        // @ts-ignore
         ...preState.fieldValues,
         [name]: fieldValue,
       },

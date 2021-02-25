@@ -1,4 +1,3 @@
-import React from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { Text } from '@tarojs/components';
 import classNames from 'classnames';

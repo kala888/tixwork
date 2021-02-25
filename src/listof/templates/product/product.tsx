@@ -1,4 +1,3 @@
-import React from 'react';
 import { isNotEmpty } from '@/nice-router/nice-router-util';
 import EleTag from '@/components/elements/ele-tag/ele-tag';
 import ServerImage from '@/server-image/server-image';
@@ -33,7 +32,7 @@ function Product(props: ProductProps) {
 
         <View className='product-info-brief'>
           <Text>{`￥${price}`}</Text>
-          {tags.map((it) => isNotEmpty(it) && <EleTag title={it} mode='primary' size='small' />)}
+          {tags.map((it, idx) => isNotEmpty(it) && <EleTag title={it} mode='primary' size='small' />)}
         </View>
       </View>
     </View>

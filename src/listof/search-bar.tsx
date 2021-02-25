@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from '@tarojs/components';
 import { AtSearchBar } from 'taro-ui';
 import NavigationService from '@/nice-router/navigation-service';

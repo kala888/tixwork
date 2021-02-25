@@ -1,5 +1,5 @@
-/* eslint-disable */
-import React, { useEffect, useState } from 'react';
+// @ts-nocheck
+import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { Picker, View } from '@tarojs/components';
 import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
@@ -51,6 +51,7 @@ function ElePicker(props: ElePickerProps) {
       setTips(newTips);
       reBuildRangeList(0);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, source, placeholder]);
 
   const reBuildRangeList = (col, idx = 0) => {
@@ -103,24 +104,21 @@ function ElePicker(props: ElePickerProps) {
 
   return (
     <View className='ele-picker'>
-      {
-        // @ts-ignore
-        <Picker
-          disabled={disabled}
-          mode={mode}
-          onChange={handleCommit}
-          range={range}
-          rangeKey='title'
-          onColumnChange={handleColumnChange}
-          onCancel={close}
-          onClick={show}
-        >
-          <View className='ele-picker-body'>
-            <View className={tipsClass}>{tips}</View>
-            {visible ? <View className='iconfont iconfont-down' /> : <View className='iconfont iconfont-right' />}
-          </View>
-        </Picker>
-      }
+      <Picker
+        disabled={disabled}
+        mode={mode}
+        onChange={handleCommit}
+        range={range}
+        rangeKey='title'
+        onColumnChange={handleColumnChange}
+        onCancel={close}
+        onClick={show}
+      >
+        <View className='ele-picker-body'>
+          <View className={tipsClass}>{tips}</View>
+          {visible ? <View className='iconfont iconfont-down' /> : <View className='iconfont iconfont-right' />}
+        </View>
+      </Picker>
     </View>
   );
 }

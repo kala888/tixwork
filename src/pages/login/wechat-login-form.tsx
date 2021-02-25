@@ -1,5 +1,3 @@
-import React from 'react';
-
 import NavigationService from '@/nice-router/navigation-service';
 import EleButton from '@/components/elements/ele-button';
 

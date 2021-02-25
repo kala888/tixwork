@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { isEmpty, noop } from '@/nice-router/nice-router-util';
 import uploadFiles from '@/service/file-upload/upload-files';
 import { Text, View } from '@tarojs/components';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { isEmpty, noop } from '@/nice-router/nice-router-util';
 import { useVisible } from '@/service/use-service';
 import { formatTime, transToDate } from '@/utils/index';

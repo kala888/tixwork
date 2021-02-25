@@ -1,4 +1,3 @@
-import React from 'react';
 import _ from 'lodash';
 import EleActionList, { EleActionListProps } from './ele-action-list';
 import './styles.scss';

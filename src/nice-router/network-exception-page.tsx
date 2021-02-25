@@ -1,4 +1,3 @@
-import React from 'react';
 import EleButton from '@/components/elements/ele-button';
 import { Image, View } from '@tarojs/components';
 

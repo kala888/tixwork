@@ -1,4 +1,3 @@
-import React from 'react';
 import { View } from '@tarojs/components';
 import CardTemplate from './card-template';
 import NavigationService from '@/nice-router/navigation-service';

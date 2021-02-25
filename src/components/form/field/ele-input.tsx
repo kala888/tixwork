@@ -1,4 +1,3 @@
-import React from 'react';
 import { View } from '@tarojs/components';
 import { AtInput } from 'taro-ui';
 import { AtInputProps } from 'taro-ui/types/input';

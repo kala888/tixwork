@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavigationBox from '@/components/navigation/navigation-box';
 import MockService from '@/nice-router/request/mock-service';
 import ServerImage from '@/server-image/server-image';
