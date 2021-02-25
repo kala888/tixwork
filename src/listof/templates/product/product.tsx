@@ -32,7 +32,7 @@ function Product(props: ProductProps) {
 
         <View className='product-info-brief'>
           <Text>{`￥${price}`}</Text>
-          {tags.map((it) => isNotEmpty(it) && <EleTag title={it} mode='primary' size='small' />)}
+          {tags.map((it, idx) => isNotEmpty(it) && <EleTag title={it} mode='primary' size='small' />)}
         </View>
       </View>
     </View>
