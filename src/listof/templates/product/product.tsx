@@ -9,13 +9,13 @@ type ProductProps = {
   preTag: string;
   tags: string[];
   brand: string;
-  name: string;
+  title: string;
   price: number;
   imageUrl: string;
 };
 
 function Product(props: ProductProps) {
-  const { preTag = '', tags = [], brand = '', name, price } = props;
+  const { preTag = '', tags = [], brand = '', title, price } = props;
   const src = ListofUtil.getImageUrl(props);
 
   return (
@@ -26,8 +26,8 @@ function Product(props: ProductProps) {
 
       <View className='product-info'>
         <Text className='product-info-title'>
-          <Text className='product-info-title-tag'>{preTag}</Text>
-          <Text className='product-info-title-txt'> {`${brand} ${name}`}</Text>
+          {isNotEmpty(preTag) && <Text className='product-info-title-tag'>{preTag}</Text>}
+          <Text className='product-info-title-txt'> {`${brand} ${title}`}</Text>
         </Text>
 
         <View className='product-info-brief'>

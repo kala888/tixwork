@@ -12,14 +12,14 @@ import './styles.scss';
 type AutoItemProps = {
   status: string;
   infoList?: TitleValue[];
-  mode?: 'only-title' | 'image-on-bottom';
+  mode?: 'only-title' | 'image-on-bottom' | 'small';
 } & ActionListLike &
   EleObject;
 
 type AutoTemplateProps = {
   item: AutoItemProps;
   showImageCount?: number;
-  mode?: 'only-title' | 'image-on-bottom';
+  mode?: 'only-title' | 'image-on-bottom' | 'small';
 };
 
 function AutoTemplate(props: AutoTemplateProps) {

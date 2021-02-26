@@ -56,6 +56,9 @@ function HelloDaaSPage() {
       <SectionBar title='电商-商品' brief='product' />
       <Listof list={productList} displayMode='product' />
 
+      <SectionBar title='图文-水平滑动' brief='article-small' />
+      <Listof list={movieList} displayMode='article-small' horizontal />
+
       <SectionBar title='通用图文-Auto系列' />
       <View className='note'> displayMode=auto|single-image|double-image|three-image</View>
       <Listof list={newsList} displayMode='auto' />

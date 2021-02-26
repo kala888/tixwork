@@ -98,6 +98,7 @@ function FlexLineItem(props: FlexLineItemProps) {
       {displayMode === 'three-image' && <AutoTemplate showImageCount={3} {...itemProps} />}
       {displayMode === 'image-on-bottom' && <AutoTemplate {...itemProps} mode='image-on-bottom' />}
       {displayMode === 'image-on-top' && <AutoTemplate {...itemProps} />}
+      {displayMode === 'article-small' && <AutoTemplate {...itemProps} mode='small' />}
 
       {displayMode === 'card' && <CardTemplate {...itemProps} />}
       {displayMode === 'image-on-left' && <CardTemplate {...itemProps} />}

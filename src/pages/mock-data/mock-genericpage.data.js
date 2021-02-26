@@ -314,7 +314,7 @@ const waterfallList = {
 };
 
 const horizontalList = {
-  displayMode: 'image-on-top',
+  displayMode: 'article-small',
   horizontal: true,
   list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
   dataContainer: {

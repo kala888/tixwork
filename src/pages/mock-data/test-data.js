@@ -17,7 +17,7 @@ const productList = [
     preTag: '促',
     tags: ['专业', '防水'],
     brand: '3M',
-    name: '成人雨衣半透明，粉色佳人',
+    title: '成人雨衣半透明，粉色佳人',
     price: 13.8,
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-1.jpg',
   },
@@ -26,7 +26,7 @@ const productList = [
     preTag: '柴',
     tags: ['香', '五常'],
     brand: '柴火大院',
-    name: '真五常稻花香香米',
+    title: '真五常稻花香香米',
     price: 72.99,
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-2.jpg',
   },
@@ -35,7 +35,7 @@ const productList = [
     preTag: '买',
     tags: ['iPhone', 'HDR'],
     brand: '苹果',
-    name: '新品 iPhone11 Pro',
+    title: '新品 iPhone11 Pro',
     price: 9088.0,
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-3.png',
   },
@@ -44,7 +44,7 @@ const productList = [
     preTag: '坑',
     tags: ['半成品'],
     brand: '必胜客',
-    name: '想吃披萨又觉得外面的披萨不卫生又贵',
+    title: '想吃披萨又觉得外面的披萨不卫生又贵',
     price: 39.2,
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/product-4.jpg',
   },
@@ -97,14 +97,14 @@ const newsList = [
 
 const movieList = [
   {
-    id: 1,
-    title: '始动/启动/青春催落去(台)',
+    id: 3,
+    title: '《你好，李焕英》',
     brief:
-      '离家出走的叛逆儿泽日（朴正民饰）与盲目踏入社会并满腔热血的尚弼（丁海寅饰），在遇见长风饭馆的厨师长猛男哥（马东锡饰）后，让自己明白了什么是世间愉快与开心的故事。',
-    createTime: new Date('2019-10-11'),
-    status: '韩剧',
+      '影片根据同名小品及贾玲亲身经历改编，片名中的李焕英是贾玲已故的母亲，电影讲述女演员贾晓玲在经历“子欲养而亲不待”的悲痛后，穿越时空回到过去，触摸年轻的父母和他们的梦想的故事',
+    createTime: new Date('2021-02-05'),
+    status: '喜剧',
     documentUrl,
-    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/movie-1.jpg',
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/movie-3.jpg',
   },
   {
     id: 2,
@@ -115,6 +115,16 @@ const movieList = [
     status: '喜剧',
     documentUrl,
     imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/movie-2.jpg',
+  },
+  {
+    id: 1,
+    title: '始动/启动/青春催落去(台)',
+    brief:
+      '离家出走的叛逆儿泽日（朴正民饰）与盲目踏入社会并满腔热血的尚弼（丁海寅饰），在遇见长风饭馆的厨师长猛男哥（马东锡饰）后，让自己明白了什么是世间愉快与开心的故事。',
+    createTime: new Date('2019-10-11'),
+    status: '韩剧',
+    documentUrl,
+    imageUrl: 'https://nice-router.oss-cn-chengdu.aliyuncs.com/movie-1.jpg',
   },
 ];
 
