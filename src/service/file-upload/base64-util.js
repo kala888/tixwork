@@ -1,5 +1,5 @@
 /* eslint-disable */
-const Base64 = {
+const Base64Util = {
   // private property
   _keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
 
@@ -9,7 +9,7 @@ const Base64 = {
     let chr1, chr2, chr3, enc1, enc2, enc3, enc4;
     let i = 0;
 
-    input = Base64._utf8_encode(input);
+    input = Base64Util._utf8_encode(input);
 
     while (i < input.length) {
       chr1 = input.charCodeAt(i++);
@@ -67,7 +67,7 @@ const Base64 = {
       }
     }
 
-    output = Base64._utf8_decode(output);
+    output = Base64Util._utf8_decode(output);
 
     return output;
   },
@@ -123,4 +123,4 @@ const Base64 = {
   },
 };
 
-module.exports = Base64;
+module.exports = Base64Util;

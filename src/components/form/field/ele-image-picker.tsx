@@ -55,7 +55,7 @@ function EleImagePicker(props: EleImagePickerProps) {
     const resetProgress = () => setProgress(0);
     const onProgress = ({ progress: progressValue }) => setProgress(progressValue);
 
-    const onSuccess = (remoteFile, sourceFile) => {
+    const onSuccess = (sourceFile, remoteFile) => {
       setFiles((preState) => {
         const tempList = preState.map((it) => {
           if (it.url === sourceFile) {

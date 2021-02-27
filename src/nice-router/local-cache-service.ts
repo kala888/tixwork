@@ -42,12 +42,12 @@ const isCachedForm = async (url: string, params: Record<string, any> = {}) => {
   const key = `${url}_${content}`;
   return !StorageTools.isExpired(key);
 };
-// form 提交内容 缓存 30 秒
+// form 提交内容 缓存 2 秒
 const cacheForm = async (url: string, params: Record<string, any> = {}) => {
   if (isNotEmpty(params)) {
     const content = JSON.stringify(params);
     const key = `${url}_${content}`;
-    StorageTools.set(key, params, 10);
+    StorageTools.set(key, params, 2);
   }
 };
 const LocalCacheService = {

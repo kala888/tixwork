@@ -1,7 +1,6 @@
-import Base64 from './base64';
-import Crypto from './crypto';
-import './hmac';
-import './sha1';
+import Base64Util from './base64-util';
+import { Base64 } from 'crypto-es/lib/enc-base64';
+import { HmacSHA1 } from 'crypto-es/lib/sha1';
 
 export type OssTokenDTO = {
   type: 'qiniu' | 'aliyun';
@@ -26,9 +25,9 @@ function getAliyunConfig(ossToken: OssTokenDTO) {
       { bucket: ossToken.bucket },
     ],
   };
-  const policy = Base64.encode(JSON.stringify(policyText));
-  const bytes = Crypto.HMAC(Crypto.SHA1, policy, accessKeySecret, { asBytes: true });
-  const signature = Crypto.util.bytesToBase64(bytes);
+  const policy = Base64Util.encode(JSON.stringify(policyText));
+  const signature = Base64.stringify(HmacSHA1(policy, accessKeySecret));
+  console.log('policypolicy', policy, signature);
   return {
     policy,
     Signature: signature,

@@ -1,16 +1,16 @@
 /* eslint-disable prefer-promise-reject-errors */
 import Taro from '@tarojs/taro';
 import _ from 'lodash';
+import { SHA1 } from 'crypto-es/lib/sha1.js';
 import { log, parseJSON } from './nice-router-util';
 
 const CACHE_PREFIX = 'cachestore-';
 const CACHE_EXPIRATION_PREFIX = 'cacheexpiration-';
 const EXPIRY_UNITS = 1000; // seconds
 
-const shortKey = (key = '') => key.slice(0, 200);
-
 const getKeys = _.memoize((key = '') => {
-  const short = shortKey(key);
+  const short = SHA1(key).toString();
+  console.log('SHA1(key).toString()', short);
   const theKey = CACHE_PREFIX + short;
   const exprKey = CACHE_EXPIRATION_PREFIX + short;
   return { theKey, exprKey };
