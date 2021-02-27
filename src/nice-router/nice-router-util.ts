@@ -11,7 +11,7 @@ export enum LoadingType {
   BarLoading,
 }
 
-export const createAction = (type) => (payload) => ({ type, payload });
+export const createAction = (type?: string) => (payload?: any) => ({ type, payload });
 export const noop = () => {};
 
 export const sleep = async (longTime) => new Promise((resolve) => setTimeout(resolve, longTime));

@@ -7,7 +7,7 @@ export type EleTableCellProps = {
   title?: string;
   colspan?: number;
   children?: React.ReactNode;
-  mode: 'left' | 'right';
+  mode?: 'left' | 'right';
   className?: string;
 };
 

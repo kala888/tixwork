@@ -11,10 +11,11 @@ type EleTabItemProps = {
 
 export type EleTabsProps = {
   tabs?: EleTabItemProps[] & TabItem[];
+  type?: 'scroll';
 };
 
 function EleTabs(props: EleTabsProps) {
-  const { tabs = [] } = props;
+  const { tabs = [], type } = props;
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ function EleTabs(props: EleTabsProps) {
     );
   };
 
-  const scroll = tabs.length > 4;
+  const scroll = type === 'scroll' && tabs.length > 4;
   // key={Date.now().valueOf()} 坑，这里有个bug，把Key换一下就行了
   return (
     <AtTabs

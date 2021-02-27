@@ -19,6 +19,7 @@ import './styles.scss';
 export type FlexInfoItemProps = {
   title: string;
   value?: any;
+  multiline?: boolean;
   type:
     | 'money'
     | 'longtext'

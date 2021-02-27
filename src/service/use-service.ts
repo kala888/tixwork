@@ -4,7 +4,6 @@ import { LoadingType } from '@/nice-router/nice-router-util';
 import _ from 'lodash';
 import Taro, { usePullDownRefresh } from '@tarojs/taro';
 import ActionUtil from '@/nice-router/action-util';
-import { ActionLike } from '@/nice-router/nice-router-types';
 import Config from '@/nice-router/nice-router.config';
 
 // boolean类型的控制属性，show，close，toggle
@@ -43,11 +42,11 @@ export function usePageTitle(value) {
 }
 
 // 下拉刷新, 应该传入ActionLike
-export function useAjaxPullDown(action: ActionLike) {
+export function useAjaxPullDown(action: any) {
   usePullDown(action, true);
 }
 
-export function usePullDown(action: ActionLike, statInPage = false) {
+export function usePullDown(action: any, statInPage = false) {
   console.log('pulldown refresh', action);
   usePullDownRefresh(() => {
     if (!ActionUtil.isActionLike(action)) {

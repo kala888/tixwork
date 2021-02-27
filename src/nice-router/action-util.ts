@@ -17,6 +17,7 @@
  *  effectAction // action还能指定获得结果后，触发哪个effect
  *  stateAction  // action还能指定获得结果后，触发哪个state
  */
+
 import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util';
 import _ from 'lodash';
 import { ActionLike, EleObject } from '@/nice-router/nice-router-types';
@@ -29,12 +30,12 @@ const getActionUri = (action: { uri?: string; linkToUrl?: string } | string): st
   }
 
   if (_.isObject(action)) {
-    const { linkToUrl, uri = '' } = action;
-    return linkToUrl || uri;
+    const { linkToUrl, uri } = action;
+    return linkToUrl || uri || '';
   }
   return '';
 };
-const isActionLike = (action: ActionLike) => {
+const isActionLike = (action: any) => {
   if (_.isFunction(_.get(action, 'onClick'))) {
     return true;
   }
@@ -82,7 +83,7 @@ const isSubmitAction = (action = {}) => {
 };
 
 // @ts-ignore
-const toSubmitActionList = (actionList = [], onSubmit = noop) => {
+const toSubmitActionList = (actionList: any = [], onSubmit?: Function = noop) => {
   const theActionList = _.isArray(actionList) ? actionList : [actionList];
   // @ts-ignore
   return theActionList.map((it) => ({ ...it, onClick: isSubmitAction(it) ? onSubmit.bind(null, it) : null }));

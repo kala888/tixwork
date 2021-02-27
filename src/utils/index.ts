@@ -41,7 +41,16 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
     console.log('data container is empty, and target is not empty, return itself');
     return targetList;
   }
-  const doEnrichment = (list) => list.map((ref) => refsEntityContainer[ref.id]).filter((it) => it);
+
+  const doEnrichment = (list) =>
+    list.map((ref) => {
+      const theItem = _.get(refsEntityContainer, ref.id, {});
+      return {
+        ...ref,
+        ...theItem,
+      };
+    });
+
   if (names.length === 0) {
     return targetList ? doEnrichment(targetList) : [];
   }

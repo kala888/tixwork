@@ -21,7 +21,7 @@ export type ListofProps = {
   onItemClick?: Function;
   horizontal?: boolean;
   longList?: boolean;
-  height?: number;
+  height?: number | string;
   mode?: 'horizontal' | 'vertical';
   className?: string;
 };

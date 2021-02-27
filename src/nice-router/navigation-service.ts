@@ -91,7 +91,7 @@ const NavigationService = {
             goBackCallback(data);
             this.pagesGoBackCallback[key] = null;
           }
-          resolve();
+          resolve(null);
         })
         .catch((err) => reject(err));
     });
@@ -119,7 +119,7 @@ const NavigationService = {
               if (resolveIsGoBackCallback) {
                 this.pagesGoBackCallback[routeName] = resolve;
               } else {
-                resolve && resolve();
+                resolve && resolve(null);
               }
             })
             .catch((err) => {
@@ -128,7 +128,7 @@ const NavigationService = {
                 Taro.switchTab({ url }).then(() => {
                   this.clearPagesGoBackCallback();
                   if (resolve) {
-                    resolve();
+                    resolve(null);
                   }
                 });
                 return;

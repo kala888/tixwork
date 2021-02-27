@@ -5,7 +5,7 @@ import ViewMappingService from '@/nice-router/viewmapping-service';
 export interface AppConfiguration {
   name: string;
   baseURL: string;
-  version: number;
+  version?: string | number;
   appType: string;
   viewConfig: Record<string, any>;
   api: Record<string, string>;

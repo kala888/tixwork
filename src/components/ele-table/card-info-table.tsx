@@ -21,7 +21,7 @@ const getMaxLabelLength = (list, idx = 0) => {
 };
 
 type CardInfoTableProps = {
-  data: TitleValue[];
+  data: (TitleValue | null)[];
   className?: string;
 };
 

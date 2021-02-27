@@ -32,15 +32,13 @@ export interface ModeClass {
 }
 
 export interface EleObject {
-  id?: string | number;
+  id?: string;
   title?: string;
   brief?: string;
 }
 
-export interface CandidateValue {
-  id: string; // id就是值，就是value
-  title: string; // title就是name
-  brief?: string;
+// title就是name  ,id就是值，就是value
+export interface CandidateValue extends EleObject {
   selected?: boolean;
 }
 
