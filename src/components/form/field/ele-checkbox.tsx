@@ -37,6 +37,7 @@ function EleCheckbox(props: EleCheckboxProps) {
   return (
     <View className='ele-checkbox'>
       {radio ? (
+        // @ts-ignore
         <AtRadio options={options} value={selected} onClick={handleClick} />
       ) : (
         // @ts-ignore

@@ -36,7 +36,9 @@ function ElePopupSelect(props: ElePopupSelectProps) {
     if (multiple && _.isString(value)) {
       currentValue = [value];
     }
+
     const displayValue = candidateValues
+      // @ts-ignore
       .filter((it) => (multiple ? currentValue.includes(it.id) : currentValue === it.id))
       .map((it) => it.title)
       .join('、');
@@ -71,6 +73,7 @@ function ElePopupSelect(props: ElePopupSelectProps) {
             // @ts-ignore
             <AtCheckbox options={options} selectedList={currentValue} onChange={handleChange} />
           ) : (
+            // @ts-ignore
             <AtRadio options={options} value={currentValue} onClick={handleChange} />
           )}
         </AtActionSheetItem>

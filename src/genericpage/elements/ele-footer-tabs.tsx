@@ -25,7 +25,7 @@ function EleFooterTabs(props: EleFooterTabsProps) {
   };
 
   const current = selectedIndex !== null ? selectedIndex : tabs.findIndex((it) => it.selected);
-  const tabList = tabs.map((it) => ({ ...it, image: it.imageUrl }));
+  const tabList: any = tabs.map((it) => ({ ...it, image: it.imageUrl }));
 
   return <AtTabBar fixed tabList={tabList} onClick={selectTab} current={current} />;
 }
