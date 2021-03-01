@@ -34,7 +34,6 @@ const config = {
 
   },
   mini: {
-    debugReact: true, //TODO https://github.com/NervJS/taro/issues/8750
     enableExtract: true,
     miniCssExtractPluginOption: {
       ignoreOrder: true,
