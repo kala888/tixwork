@@ -86,8 +86,8 @@ export default class EleQrcode extends React.PureComponent<EleQrcodeProps> {
     // const scale = window.devicePixelRatio || 1
     // ctx.scale(scale, scale)
 
-    cells.forEach(function(row, rdx) {
-      row.forEach(function(cell, cdx) {
+    cells.forEach(function (row, rdx) {
+      row.forEach(function (cell, cdx) {
         if (canvas) {
           canvas.fillStyle = cell ? fgColor : bgColor;
         }

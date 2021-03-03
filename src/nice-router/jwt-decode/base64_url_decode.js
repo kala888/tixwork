@@ -2,11 +2,8 @@ var atob = require('./atob');
 
 function b64DecodeUnicode(str) {
   return decodeURIComponent(
-    atob(str).replace(/(.)/g, function(m, p) {
-      var code = p
-        .charCodeAt(0)
-        .toString(16)
-        .toUpperCase();
+    atob(str).replace(/(.)/g, function (m, p) {
+      var code = p.charCodeAt(0).toString(16).toUpperCase();
       if (code.length < 2) {
         code = '0' + code;
       }
@@ -15,7 +12,7 @@ function b64DecodeUnicode(str) {
   );
 }
 
-module.exports = function(str) {
+module.exports = function (str) {
   var output = str.replace(/-/g, '+').replace(/_/g, '/');
   switch (output.length % 4) {
     case 0:

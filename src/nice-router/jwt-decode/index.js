@@ -9,7 +9,7 @@ function InvalidTokenError(message) {
 InvalidTokenError.prototype = new Error();
 InvalidTokenError.prototype.name = 'InvalidTokenError';
 
-module.exports = function(token, options) {
+module.exports = function (token, options) {
   if (typeof token !== 'string') {
     throw new InvalidTokenError('Invalid token specified');
   }

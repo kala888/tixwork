@@ -54,7 +54,7 @@ class App extends React.Component {
         Taro.showModal({
           title: '更新提示',
           content: '新版本已经准备好，是否重启应用？',
-          success: function(res) {
+          success: function (res) {
             if (res.confirm) {
               updateManager.applyUpdate();
             }

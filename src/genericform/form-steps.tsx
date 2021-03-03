@@ -15,7 +15,7 @@ function FormSteps({ steps }: FormStepsProps) {
       steps[current],
       {},
       {
-        navigationOptions: { method: 'redirectTo' },
+        navigationMethod: 'redirectTo',
       }
     );
   };

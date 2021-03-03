@@ -26,7 +26,7 @@ const defaultConfig: AppConfiguration = {
   backendRouterPageBlackList: [],
   backendRouterPageKeyBlackList: [],
   start: (config: AppConfiguration, container: any) => {
-    NavigationService.setContainer(container);
+    NavigationService.container = container;
     Config = _.merge(defaultConfig, config);
     ViewMappingService.setViewConfig(Config?.viewConfig);
   },

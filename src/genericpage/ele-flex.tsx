@@ -73,8 +73,10 @@ function EleFlex(props: EleFlexProps) {
             // Taro && wechat-mini-program could not support self reference, using it as mini-program component
             <View key={key} className='flex-row' style={{ flex: it.flex || 1 }}>
               <View style={{ width: '100%', height: '100%' }}>
-                {/* eslint-disable-next-line react/jsx-no-undef */ // @ts-ignore
-                isH5() ? <EleFlex {...it} /> : <EleFlexBox {...it} />}
+                {
+                  /* eslint-disable-next-line react/jsx-no-undef */ // @ts-ignore
+                  isH5() ? <EleFlex {...it} /> : <EleFlexBox {...it} />
+                }
               </View>
             </View>
           );

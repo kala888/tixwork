@@ -52,9 +52,7 @@ function FlexLineItem(props: FlexLineItemProps) {
   const stopLoading = () => setLoading(false);
 
   const { item = {}, bordered = true, horizontal, className, onItemClick, ...others } = props;
-  const displayMode = _.get(item, 'displayMode', props.displayMode)
-    .toLowerCase()
-    .trim();
+  const displayMode = _.get(item, 'displayMode', props.displayMode).toLowerCase().trim();
 
   // 使用节流，3面内的点击只算一次
   const handleClick = _.throttle(() => {
@@ -74,7 +72,7 @@ function FlexLineItem(props: FlexLineItemProps) {
         item,
         {},
         {
-          ajax: item.ajax,
+          statInPage: item.ajax,
           onSuccess: () => stopLoading(),
         }
       );

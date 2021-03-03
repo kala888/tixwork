@@ -1,16 +1,31 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { isH5 } from '@/utils/index';
 import Taro, { Current } from '@tarojs/taro';
 import _ from 'lodash';
 
 import GlobalToast, { GlobalToastProps } from './global-toast';
 import LocalCache from './local-cache-service';
-import NavigationService from './navigation-service';
+import NavigationService, { TaroNavigationMethod } from './navigation-service';
 import { createAction, isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util';
 import ActionUtil from './action-util';
 import PopupMessage, { PopupMessageProps } from './popup-message';
 import BackendService from './request/backend-service';
 import ViewMappingService from './viewmapping-service';
+
+export type RouterPayload = {
+  method?: 'put' | 'post' | 'get';
+  statInPage?: boolean; //前台标记为ajax, 页面不动
+  params?: Record<string, any>; //请求参数
+  asForm?: boolean; // post 数据时候把json转换为字符串 formData="{...}" 形式提交给后台
+  arrayMerge?: 'replace' | 'append';
+  onSuccess?: (resp: any, data: any) => void;
+  loading?: LoadingType;
+  navigationMethod?: TaroNavigationMethod;
+  refresh?: boolean;
+  effectAction?: string; //TODO ??
+  stateAction?: string; //TODO ??
+  cache?: number;
+  // headers = {}, // 请求header
+};
 
 function showToastOrPopup({ toast, popup }: { toast: GlobalToastProps; popup: PopupMessageProps }): void {
   // 后端说Toast
@@ -39,7 +54,8 @@ export default {
 
   effects: {
     // 重发重试
-    *retry({}, { put, select }) {
+    *retry({ payload }, { put, select }) {
+      console.log('retry payload', payload);
       const { latestRoute } = yield select((state) => state.niceRouter);
       log('retry to next', latestRoute);
       if (latestRoute) {
@@ -48,8 +64,8 @@ export default {
     },
 
     // 主路由逻辑
-    *route({ payload: action }, { call, put }) {
-      log('niceRouter/router action', action);
+    *route({ payload }: { payload: RouterPayload }, { call, put }) {
+      log('niceRouter/router Router Payload', payload);
       const {
         statInPage = false,
         params = {},
@@ -57,11 +73,11 @@ export default {
         arrayMerge = 'replace',
         onSuccess = noop,
         loading,
-        navigationOptions,
+        navigationMethod,
         refresh,
-      } = action;
+      } = payload;
 
-      const linkToUrl = ActionUtil.getActionUri(action);
+      const linkToUrl = ActionUtil.getActionUri(payload);
 
       if (isEmpty(linkToUrl)) {
         console.warn('store.modules.router.route","can not send empty url to backend');
@@ -81,9 +97,9 @@ export default {
         }
       }
 
-      yield put(createAction('saveLatestRoute')(action));
+      yield put(createAction('saveLatestRoute')(payload));
 
-      const requestParams = { ...action, uri: linkToUrl, loading: withLoading };
+      const requestParams = { ...payload, uri: linkToUrl, loading: withLoading };
 
       const resp = yield call(BackendService.send, requestParams);
 
@@ -98,8 +114,8 @@ export default {
           xclass,
           xredirect,
           statInPage,
-          effectAction: action.effectAction,
-          stateAction: action.stateAction,
+          effectAction: payload.effectAction,
+          stateAction: payload.stateAction,
         };
         // onSuccess回调
         const viewMapping = getViewMapping(viewMappingParams);
@@ -122,7 +138,7 @@ export default {
 
         //页面跳转逻辑处理
         if (doRedirect) {
-          NavigationService.navigate(pageName, {}, { navigationOptions }).then(() =>
+          NavigationService.navigate(pageName, {}, { navigationMethod }).then(() =>
             showToastOrPopup({ toast: data.toast, popup: data.popup })
           );
         } else {

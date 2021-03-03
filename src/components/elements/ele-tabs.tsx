@@ -11,7 +11,7 @@ type EleTabItemProps = {
 
 export type EleTabsProps = {
   tabs?: EleTabItemProps[] & TabItem[];
-  type?: 'scroll';
+  type?: 'scroll' | null;
 };
 
 function EleTabs(props: EleTabsProps) {
@@ -26,11 +26,12 @@ function EleTabs(props: EleTabsProps) {
   const handleTabSwitch = (index) => {
     setCurrent(index);
     const tab = tabs[index];
-    NavigationService.refresh(
+    NavigationService.routeTo(
       tab,
       {},
       {
         loading: LoadingType.BarLoading,
+        refresh: true,
       }
     );
   };

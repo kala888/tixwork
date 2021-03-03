@@ -45,7 +45,7 @@ function GenericformPage() {
       console.log('form-values', values);
       await NavigationService.post(action, values, {
         asForm: true,
-        navigationOptions: { method: 'redirectTo' },
+        navigationMethod: 'redirectTo',
       });
       return;
     }

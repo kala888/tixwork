@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import NavigationService from '@/nice-router/navigation-service';
+import NavigationService, { TaroNavigationMethod } from '@/nice-router/navigation-service';
 import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util';
 import Taro from '@tarojs/taro';
 
@@ -19,7 +19,7 @@ export type EleButtonProps = {
   type?: string;
   ajax?: boolean;
   disabled?: boolean;
-  reLaunch?: boolean;
+  navigationMethod?: TaroNavigationMethod;
   openType?: string;
   children?: React.ReactNode;
   className?: string;
@@ -43,7 +43,7 @@ function EleButton(props: EleButtonProps) {
     mode,
     ajax = false,
     disabled,
-    reLaunch,
+    navigationMethod,
     openType,
     onClick,
     className,
@@ -158,7 +158,7 @@ function EleButton(props: EleButtonProps) {
       props,
       {},
       {
-        navigationOptions: reLaunch ? { method: 'reLaunch' } : null,
+        navigationMethod,
         statInPage: ajax,
       }
     );

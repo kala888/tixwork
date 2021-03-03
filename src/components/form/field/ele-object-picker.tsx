@@ -40,7 +40,7 @@ function EleObjectPicker(props: EleObjectPickerProps) {
       OBJECT_PICKER_PAGE,
       { searchAction, linkToUrl, maxSelectCount },
       {
-        resolveIsGoBackCallback: true,
+        delayCallBack: true,
       }
     );
     const values = _.isEmpty(items) ? [] : items.map((it) => ({ id: it.id, title: it.title }));

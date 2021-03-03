@@ -3,7 +3,7 @@ import ViewMappingConfig from '@/utils/viewmapping.config';
 
 const baseURL = 'https://demo.doublechaintech.com/xuntuexam/'; //后端服务地址
 
-const ApiConfig: any = {
+const ApiConfig = {
   FooterHome: 'wxappService/viewHomepage/',
   FooterMe: 'wxappService/customerViewDashboard/',
   Login: 'wxappService/clientLogin/',

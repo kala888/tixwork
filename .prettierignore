@@ -11,3 +11,4 @@ package.json
 .DS_Store
 *.woff
 *.ttf
+*.txt

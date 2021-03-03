@@ -9,8 +9,8 @@ type FlexHeaderProps = {
 } & Partial<FlexLineItemProps>;
 
 export default function FlexHeader(props: FlexHeaderProps) {
-  const { type } = props;
-  if (type === 'search') return <SearchBar {...props} />;
-  if (type === 'tabs') return <EleTabs {...props} />;
+  const { type, ...others } = props;
+  if (type === 'search') return <SearchBar {...others} />;
+  if (type === 'tabs') return <EleTabs {...others} />;
   return <FlexLineItem {...props} />;
 }

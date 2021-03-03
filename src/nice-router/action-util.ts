@@ -13,7 +13,7 @@
  *  arrayMerge = 'replace', // dva model merge的时候，数组如何处理
  *  onSuccess = noop, // onSuccess的回调
  *  loading,  // 怎么处理loading，需要设置为LoadingType
- *  navigationOptions,  // Taro 在做页面跳转时候的option参数，例如  navigationOptions: { method: 'redirectTo' },
+ *  navigationMethod,  // Taro 在做页面跳转时候的option参数，例如  navigationMethod: 'redirectTo' ,
  *  effectAction // action还能指定获得结果后，触发哪个effect
  *  stateAction  // action还能指定获得结果后，触发哪个state
  */
@@ -24,16 +24,11 @@ import { ActionLike, EleObject } from '@/nice-router/nice-router-types';
 
 const SUBMIT_CODE_LIST = ['nextStep', 'commit', 'next', 'nextRecord'];
 
-const getActionUri = (action: { uri?: string; linkToUrl?: string } | string): string => {
+const getActionUri = (action: any): string => {
   if (_.isString(action)) {
     return action;
   }
-
-  if (_.isObject(action)) {
-    const { linkToUrl, uri } = action;
-    return linkToUrl || uri || '';
-  }
-  return '';
+  return action?.linkToUrl || action?.uri || '';
 };
 const isActionLike = (action: any) => {
   if (_.isFunction(_.get(action, 'onClick'))) {
