@@ -1,3 +1,5 @@
+import { NavigationMethodType } from '@/nice-router/navigation-service';
+
 export type BackendServiceSendProps = {
   method?: 'get' | 'post' | 'put';
   uri: string;
@@ -9,8 +11,8 @@ export type BackendServiceSendProps = {
 };
 
 export type HttpResponse = {
-  xclass: string;
-  xredirect: boolean;
+  xClass: string;
+  xNavigationMethod: NavigationMethodType;
   data: any;
   message: string;
   status: string;

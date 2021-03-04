@@ -10,13 +10,19 @@ import { isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util'
 import { Store } from 'redux';
 import { RouterPayload } from '@/nice-router/nice-router.model';
 
-export type TaroNavigationMethod =
-  | 'appLaunch'
-  | 'navigateTo'
-  | 'redirectTo'
-  | 'navigateBack'
-  | 'switchTab'
-  | 'reLaunch';
+//  push='navigateTo'
+//  replace='redirectTo'
+//  back='navigateBack'
+//  switchType='switchTab'
+//  reLaunch='reLaunch';
+export type NavigationMethodType = 'push' | 'replace' | 'back' | 'reLaunch' | 'switchTab';
+const NavigationMethodMap = {
+  push: 'navigateTo',
+  replace: 'redirectTo',
+  back: 'navigateBack',
+  switchType: 'switchTab',
+  reLaunch: 'reLaunch',
+};
 
 // 约定：pagePath 就是定义在app.config中的页面名称或者路径, 不再使用pageName, 沿用Taro叫法
 // 约定：uri或者url就是：协议 + pathPath + 参数，不再使用path之类
@@ -100,11 +106,12 @@ const isFooterTabPage = _.memoize((pagePath = '') => {
  * @param method Taro.XXX方法，默认是navigateTo
  *  @param pagePath 页面名称，config中配置的
  */
-const _getNavigationMethod = (method: TaroNavigationMethod = 'navigateTo', pagePath?: string): Function => {
+const _getNavigationMethod = (method: NavigationMethodType = 'push', pagePath?: string): Function => {
   if (isFooterTabPage(pagePath)) {
     return Taro.switchTab;
   }
-  let theFunction = Taro[method] || Taro.navigateTo;
+  const theName = _.get(NavigationMethodMap, method, 'navigateTo');
+  let theFunction = Taro[theName] || Taro.navigateTo;
   console.log('translate navigation method', method, 'to', theFunction);
   if (theFunction === Taro.navigateTo && Taro.getCurrentPages().length === PAGE_LEVEL_LIMIT) {
     console.warn('currentPages method is navigateTo，but the page stack is full, change it to redirect');
@@ -296,7 +303,6 @@ class NavigationServiceClass {
       //   return
       // }
     }
-
     // 发送请求
     this.dispatch('niceRouter/route', action);
   };

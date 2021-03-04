@@ -25,12 +25,12 @@ async function hideLoading(loading: LoadingType) {
   }
 }
 
-function showError({ xclass, data = {} }: HttpResponse) {
-  console.error('request got error', xclass, data);
+function showError({ xClass, data = {} }: HttpResponse) {
+  console.error('request got error', xClass, data);
 
-  const view = ViewmappingService.getView(xclass);
+  const view = ViewmappingService.getView(xClass);
   // 系统错误，根据xclass跳转页面
-  if (xclass === systemErrorXClass || isNotEmpty(view)) {
+  if (xClass === systemErrorXClass || isNotEmpty(view)) {
     return;
   }
 

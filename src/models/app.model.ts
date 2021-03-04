@@ -71,7 +71,7 @@ function doRemoteLogin(payload) {
           callbackAction,
           {},
           {
-            navigationMethod: 'redirectTo',
+            navigationMethod: 'replace',
             ...options,
             onSuccess: (data, resp) => {
               console.log('after login redirect resp', data);

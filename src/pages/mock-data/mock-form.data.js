@@ -111,7 +111,7 @@ const mockForm1Data = {
       code: 'preStep',
       title: '上一步',
     },
-    { code: 'nextStep', title: '下一步', linkToUrl: 'mock-generic-form-2/' },
+    { code: 'nextStep', title: '下一步', linkToUrl: 'mock-generic-form-2/', navigationMethod: 'reLaunch' },
   ],
   groupList: [
     {

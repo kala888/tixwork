@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import NavigationService, { TaroNavigationMethod } from '@/nice-router/navigation-service';
+import NavigationService, { NavigationMethodType } from '@/nice-router/navigation-service';
 import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util';
 import Taro from '@tarojs/taro';
 
@@ -19,7 +19,7 @@ export type EleButtonProps = {
   type?: string;
   ajax?: boolean;
   disabled?: boolean;
-  navigationMethod?: TaroNavigationMethod;
+  navigationMethod?: NavigationMethodType;
   openType?: string;
   children?: React.ReactNode;
   className?: string;

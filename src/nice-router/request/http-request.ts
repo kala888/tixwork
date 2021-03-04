@@ -8,7 +8,7 @@ import OptionsProcessor from './options-processor';
 type HttpRequestProps = {
   //TODO
 };
-type HttpResponseProps = {
+export type HttpResponseProps = {
   headers?: {};
 };
 

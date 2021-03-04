@@ -9,14 +9,14 @@ const imageList = [
 ];
 
 const MockDataCache = {};
-const mockResp = (uri: string = '', xclass: string, data: {}) => {
+const mockResp = (uri: string = '', xClass: string, data: {}, others) => {
   const key = uri.toLowerCase().trim();
-  const value = {
-    xclass,
+  MockDataCache[key] = {
+    xClass,
     success: true,
     data,
+    ...others,
   };
-  MockDataCache[key] = value;
 };
 const MockService = {
   mockResp,

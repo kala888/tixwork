@@ -1,10 +1,15 @@
 import _ from 'lodash';
 import { isEmpty, log } from './nice-router-util';
 
-const POINTER = {};
-let ViewConfig = {};
+export type ViewConfigStateActionType = string | string[];
 
-const defaultViewConfig = {
+export type ViewConfigItemType = {
+  pageName?: string;
+  stateAction?: ViewConfigStateActionType;
+};
+type ViewConfigType = Record<string, ViewConfigItemType | ViewConfigItemType[]>;
+
+const defaultViewConfig: ViewConfigType = {
   'com.terapico.appview.H5Page': {
     pageName: 'H5Page',
     stateAction: '/nice-router/h5-page',
@@ -52,42 +57,41 @@ const defaultViewConfig = {
   },
 };
 
-const setViewConfig = (vcfg?: Record<string, any>) => {
-  ViewConfig = {};
-  const mergedViewConfig = _.merge(defaultViewConfig, vcfg);
-  Object.keys(mergedViewConfig).map((key) => {
-    ViewConfig[key.trim()] = mergedViewConfig[key];
-  });
-};
+class ViewMappingServiceClass {
+  private pointerCache: Record<string, number> = {};
+  private _viewConfig: ViewConfigType = {};
 
-const getView = (
-  backendKey = '',
-  stageInPage = false
-): {
-  pageName?: string;
-  stateAction?: string | string[];
-  effectAction?: string | string[];
-} => {
-  const key = _.trim(backendKey);
-  let view = _.get(ViewConfig, key, {});
-  if (isEmpty(view)) {
-    const shortKey = key.substr(key.lastIndexOf('.') + 1, key.length);
-    log('the key for class', key, 'not found, try to map with shortKey', shortKey);
-    view = ViewConfig[shortKey] || {};
+  public set viewConfig(vcfg: ViewConfigType) {
+    this._viewConfig = {};
+    const mergedViewConfig = _.merge(defaultViewConfig, vcfg);
+    Object.keys(mergedViewConfig).map((key) => {
+      this._viewConfig[key.trim()] = mergedViewConfig[key];
+    });
   }
-  if (Array.isArray(view)) {
-    const pointer = _.get(POINTER, backendKey, -1);
-    const nextPageIndex = stageInPage ? pointer : pointer + 1 >= view.length ? 0 : pointer + 1;
-    const idx = _.max([nextPageIndex, 0]);
-    POINTER[backendKey] = idx;
-    return view[idx];
+
+  /**
+   *
+   * @param backendKey xClass key
+   * @param stageInPage 对于多instance页面，如果是Ajax，就不跳pointer
+   */
+  getView(backendKey = '', stageInPage = false): ViewConfigItemType {
+    const key = _.trim(backendKey);
+    let view = _.get(this._viewConfig, key, {});
+    if (isEmpty(view)) {
+      const shortKey = key.substr(key.lastIndexOf('.') + 1, key.length);
+      log('the key for class', key, 'not found, try to map with shortKey', shortKey);
+      view = this._viewConfig[shortKey] || {};
+    }
+    if (Array.isArray(view)) {
+      const pointer: number = _.get(this.pointerCache, backendKey, -1);
+      const nextPageIndex = stageInPage ? pointer : pointer + 1 >= view.length ? 0 : pointer + 1;
+      const idx = _.max([nextPageIndex, 0]) as number;
+      this.pointerCache[backendKey] = idx;
+      return view[idx];
+    }
+    return view;
   }
-  return view;
-};
+}
 
-const ViewMappingService = {
-  getView,
-  setViewConfig,
-};
-
+const ViewMappingService = new ViewMappingServiceClass();
 export default ViewMappingService;

@@ -2,12 +2,14 @@
 import { isNotEmpty } from '@/nice-router/nice-router-util';
 import _ from 'lodash';
 
-type BaseStateType = {
-  viewHashString?: string;
-  statInPage?: boolean;
-  arrayMerge?: boolean;
-  refresh?: boolean;
-};
+export type StoreDataPayload = {
+  navigationOption: {
+    statInPage?: boolean;
+    arrayMerge?: 'replace' | 'append';
+    refresh?: boolean;
+    viewHashString?: string;
+  };
+} & Record<string, any>;
 
 function replaceArray(objValue, srcValue) {
   if (Array.isArray(objValue)) {
@@ -22,8 +24,8 @@ function concatArray(objValue, srcValue) {
 }
 
 function mergeState(
-  preState: BaseStateType = {},
-  newState: BaseStateType = {},
+  preState: StoreDataPayload = {} as StoreDataPayload,
+  newState: StoreDataPayload = {} as StoreDataPayload,
   doMerge = false,
   arrayMerge = 'append'
 ) {
@@ -58,15 +60,17 @@ const createDefault = (namespace) => ({
     clear() {
       return {};
     },
-    saveSomeThing(state: BaseStateType, { payload }) {
+    saveSomeThing(state: StoreDataPayload, { payload }: { payload: StoreDataPayload }) {
       return {
         ...state,
         ...payload,
       };
     },
-    save(state: BaseStateType, { payload }) {
-      const { statInPage, arrayMerge, refresh, ...resp } = payload;
+    save(state: StoreDataPayload, { payload }: { payload: StoreDataPayload }) {
+      const { navigationOption, ...resp } = payload;
+      const { statInPage, arrayMerge, refresh } = navigationOption;
       const doMerge = refresh ? false : statInPage;
+      // @ts-ignore
       const result = mergeState(state, resp, doMerge, arrayMerge);
       return result || state;
     },

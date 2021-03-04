@@ -28,7 +28,7 @@ const defaultConfig: AppConfiguration = {
   start: (config: AppConfiguration, container: any) => {
     NavigationService.container = container;
     Config = _.merge(defaultConfig, config);
-    ViewMappingService.setViewConfig(Config?.viewConfig);
+    ViewMappingService.viewConfig = Config?.viewConfig;
   },
   get: (key) => _.get(this, key),
 };

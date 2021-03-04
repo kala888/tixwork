@@ -22,13 +22,13 @@ const CustomProcessor = async (chain) => {
           responseHeaders[key.toLocaleLowerCase()] = header[key];
         });
 
-        const xclass = _.get(responseHeaders, 'x-class', '');
-        const xredirect = _.get(responseHeaders, 'x-redirect', '');
+        const xClass = _.get(responseHeaders, 'x-class', '');
+        const xNavigationMethod = _.get(responseHeaders, 'x-navigation-method', '');
         // 返回response的body是对象，并且xclass不是Exception结尾，那么应该就是正常 biz的数据
-        const success = _.isObjectLike(data) && !xclass.endsWith('Exception');
+        const success = _.isObjectLike(data) && !xClass.endsWith('Exception');
         return {
-          xclass,
-          xredirect,
+          xClass,
+          xNavigationMethod,
           data,
           message: statusText,
           status,
@@ -41,7 +41,7 @@ const CustomProcessor = async (chain) => {
       const { errMsg } = error;
       console.error('Request error', error);
       return {
-        xclass: systemErrorXClass,
+        xClass: systemErrorXClass,
         message: `error code:${errMsg}`,
         data: {
           ...(error.response || {}),

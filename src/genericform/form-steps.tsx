@@ -15,7 +15,7 @@ function FormSteps({ steps }: FormStepsProps) {
       steps[current],
       {},
       {
-        navigationMethod: 'redirectTo',
+        navigationMethod: 'replace',
       }
     );
   };
