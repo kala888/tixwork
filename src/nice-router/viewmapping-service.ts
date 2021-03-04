@@ -72,9 +72,9 @@ class ViewMappingServiceClass {
   /**
    *
    * @param backendKey xClass key
-   * @param stageInPage 对于多instance页面，如果是Ajax，就不跳pointer
+   * @param ajax 对于多instance页面，如果是Ajax，就不跳pointer
    */
-  getView(backendKey = '', stageInPage = false): ViewConfigItemType {
+  getView(backendKey = '', ajax = false): ViewConfigItemType {
     const key = _.trim(backendKey);
     let view = _.get(this._viewConfig, key, {});
     if (isEmpty(view)) {
@@ -84,7 +84,7 @@ class ViewMappingServiceClass {
     }
     if (Array.isArray(view)) {
       const pointer: number = _.get(this.pointerCache, backendKey, -1);
-      const nextPageIndex = stageInPage ? pointer : pointer + 1 >= view.length ? 0 : pointer + 1;
+      const nextPageIndex = ajax ? pointer : pointer + 1 >= view.length ? 0 : pointer + 1;
       const idx = _.max([nextPageIndex, 0]) as number;
       this.pointerCache[backendKey] = idx;
       return view[idx];

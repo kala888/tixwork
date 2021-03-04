@@ -6,7 +6,7 @@ export type StoreDataPayload = {
   navigationOption: {
     statInPage?: boolean;
     arrayMerge?: 'replace' | 'append';
-    refresh?: boolean;
+    dataRefresh?: boolean;
     viewHashString?: string;
   };
 } & Record<string, any>;
@@ -68,8 +68,9 @@ const createDefault = (namespace) => ({
     },
     save(state: StoreDataPayload, { payload }: { payload: StoreDataPayload }) {
       const { navigationOption, ...resp } = payload;
-      const { statInPage, arrayMerge, refresh } = navigationOption;
-      const doMerge = refresh ? false : statInPage;
+      const { statInPage, arrayMerge, dataRefresh } = navigationOption;
+      // 如果是refresh page 就不merge数据
+      const doMerge = dataRefresh ? false : statInPage;
       // @ts-ignore
       const result = mergeState(state, resp, doMerge, arrayMerge);
       return result || state;

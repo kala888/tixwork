@@ -235,6 +235,15 @@ class NavigationServiceClass {
     return this.routeTo(action, params, options);
   };
 
+  // refreshPage: RouteFunction = (action, params, options) => {
+  //   return this.routeTo(action, params, {
+  //     loading: LoadingType.None,
+  //     statInPage: true,
+  //     dataRefresh: true,
+  //     ...(options || {}),
+  //   });
+  // };
+
   ajax: RouteFunction = (action, params, options) => {
     return this.routeTo(action, params, {
       loading: LoadingType.None,

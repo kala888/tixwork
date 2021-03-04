@@ -17,11 +17,12 @@ export type RouterPayload = {
   statInPage?: boolean; //前台标记为ajax, 页面不动
   params?: Record<string, any>; //请求参数
   asForm?: boolean; // post 数据时候把json转换为字符串 formData="{...}" 形式提交给后台
-  arrayMerge?: 'replace' | 'append';
   onSuccess?: (resp: any, data: any) => void;
   loading?: LoadingType;
   navigationMethod?: NavigationMethodType;
-  refresh?: boolean; // TODO???
+  arrayMerge?: 'replace' | 'append';
+  dataRefresh?: boolean; // 如果想页面刷：发送的是ajax，但是数据不错merge
+
   cache?: number;
   // headers = {}, // 请求header
 };
@@ -73,7 +74,7 @@ export default {
         onSuccess = noop,
         loading,
         navigationMethod,
-        refresh,
+        dataRefresh,
       } = payload;
 
       const linkToUrl = ActionUtil.getActionUri(payload);
@@ -107,13 +108,13 @@ export default {
       //获取ViewMapping 处理预支的state和effect，以及页面跳转
       if (xClass) {
         // onSuccess回调
-        const { modelActions, pagePath, pageChanged } = getViewMapping(xClass, statInPage);
+        const { modelActions, pagePath, pageChanged } = getViewMapping(xClass, dataRefresh || statInPage);
 
         const storeData: StoreDataPayload = {
           navigationOption: {
             statInPage,
             arrayMerge,
-            refresh,
+            dataRefresh,
           },
           ...data,
         };
@@ -161,20 +162,20 @@ function getCurrentPage() {
 
 function getViewMapping(
   xClass: string,
-  statInPage?: boolean
+  ajax?: boolean
 ): {
   pageChanged: boolean;
   pagePath: string;
   modelActions: string[];
 } {
-  const nextView: ViewConfigItemType = ViewMappingService.getView(xClass, statInPage);
+  const nextView: ViewConfigItemType = ViewMappingService.getView(xClass, ajax);
   const nextPage = _.get(nextView, 'pageName', '');
   const modelActions = _.concat([], nextView.stateAction) as string[];
   let pageChanged = false;
   const currentPage = getCurrentPage();
   log('current page is', currentPage, ', next page is', nextView);
   //存在下一个页面并且不是ajax，判断页面是否是同一页面，如果相同，如果不相同，则需要跳转
-  if (nextPage && !statInPage) {
+  if (nextPage && !ajax) {
     if (_.trim(nextPage, '/') !== _.trim(currentPage, '/')) {
       pageChanged = true;
     }

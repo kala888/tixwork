@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { LoadingType } from '@/nice-router/nice-router-util';
 import _ from 'lodash';
-import Taro, { usePullDownRefresh } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 import ActionUtil from '@/nice-router/action-util';
 import Config from '@/nice-router/nice-router.config';
 
@@ -41,14 +41,12 @@ export function usePageTitle(value) {
   }, [value]);
 }
 
-// 下拉刷新, 应该传入ActionLike
 export function useAjaxPullDown(action: any) {
-  usePullDown(action, true);
+  this.usePullDown(action);
 }
 
-export function usePullDown(action: any, statInPage = false) {
-  console.log('pulldown refresh', action);
-  usePullDownRefresh(() => {
+export function usePullDown(action: any) {
+  Taro.usePullDownRefresh(() => {
     if (!ActionUtil.isActionLike(action)) {
       Taro.stopPullDownRefresh();
       return;
@@ -58,7 +56,7 @@ export function usePullDown(action: any, statInPage = false) {
       action,
       {},
       {
-        statInPage,
+        dataRefresh: true,
         onSuccess: () => Taro.stopPullDownRefresh(),
         loading: LoadingType.Modal,
       }

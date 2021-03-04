@@ -31,7 +31,7 @@ function EleTabs(props: EleTabsProps) {
       {},
       {
         loading: LoadingType.BarLoading,
-        refresh: true,
+        dataRefresh: true,
       }
     );
   };
