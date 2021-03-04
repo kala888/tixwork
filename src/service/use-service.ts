@@ -42,7 +42,7 @@ export function usePageTitle(value) {
 }
 
 export function useAjaxPullDown(action: any) {
-  this.usePullDown(action);
+  usePullDown(action);
 }
 
 export function usePullDown(action: any) {
