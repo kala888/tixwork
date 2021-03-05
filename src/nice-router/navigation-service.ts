@@ -9,6 +9,7 @@ import { ActionLike } from './nice-router-types';
 import { isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util';
 import { Store } from 'redux';
 import { RouterPayload } from '@/nice-router/nice-router.model';
+import { H5PageProps } from '@/nice-router/h5-page';
 
 //  push='navigateTo'
 //  replace='redirectTo'
@@ -292,12 +293,18 @@ class NavigationServiceClass {
     // 2, H5跳转：目标页面是Http页面，小程序中需要跳转到webview
     if (!statInPage && isH5Page(linkToUrl)) {
       let h5PageTarget = linkToUrl;
-      const h5Param: any = {};
-      if (!isH5()) {
-        h5PageTarget = '/nice-router/h5-page';
-        h5Param.uri = linkToUrl;
+      const h5Param: H5PageProps = {} as H5PageProps;
+      if (isH5()) {
+        console.warn(
+          '兼容在H5中使用了带schema的linkToUrl，不推荐，H5代码应该只关心自己，不应该带Schema, 除非是不同业务域名的跳转'
+        );
+        // @ts-ignore
+        window.location = linkToUrl;
+        return;
       }
-      return this.navigate(h5PageTarget || '', h5Param);
+      h5PageTarget = '/nice-router/h5-page';
+      h5Param.uri = linkToUrl;
+      return this.navigate(h5PageTarget, h5Param);
     }
 
     // 3, 后端路由, 获取后端路由缓存
