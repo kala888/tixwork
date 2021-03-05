@@ -7,7 +7,7 @@ import { getDeviceHeight } from '@/utils/index';
 import { useDidShow, useReady } from '@tarojs/runtime';
 import classNames from 'classnames';
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
-import { Block, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import NavigationService from '@/nice-router/navigation-service';
 
 import { ActionLike, ActionListLike } from '@/nice-router/nice-router-types';
@@ -81,12 +81,12 @@ function ListofPageBase(props: listofPageBaseProps) {
   } = props;
 
   const theHeader = (
-    <Block>
+    <>
       {isNotEmpty(header) && <FlexLineItem item={header} {...header} />}
       {isNotEmpty(searchAction) && <FlexHeader {...searchAction} type='search' />}
       {isNotEmpty(content) && <FlexHeader item={{ content }} displayMode='rich-text' />}
       {isNotEmpty(tabs) && <FlexHeader type='tabs' tabs={tabs} />}
-    </Block>
+    </>
   );
   const theFooter = <EleActionList mode={['footer-bar', 'colorful']} items={actionList} />;
 

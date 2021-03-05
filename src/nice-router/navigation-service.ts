@@ -113,7 +113,6 @@ const _getNavigationMethod = (method: NavigationMethodType = 'push', pagePath?: 
   }
   const theName = _.get(NavigationMethodMap, method, 'navigateTo');
   let theFunction = Taro[theName] || Taro.navigateTo;
-  console.log('translate navigation method', method, 'to', theFunction);
   if (theFunction === Taro.navigateTo && Taro.getCurrentPages().length === PAGE_LEVEL_LIMIT) {
     console.warn('currentPages method is navigateTo，but the page stack is full, change it to redirect');
     return Taro.redirectTo;

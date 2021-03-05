@@ -1,5 +1,5 @@
 import EleInput from '@/components/form/field/ele-input';
-import { Block, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import { useState } from 'react';
 
 import NavigationService from '@/nice-router/navigation-service';
@@ -20,7 +20,7 @@ export default function PasswordForm() {
   };
 
   return (
-    <Block>
+    <>
       <View className='login-form-fields'>
         <EleInput
           className='login-form-fields-input'
@@ -41,6 +41,6 @@ export default function PasswordForm() {
       <EleButton className='login-button' onClick={handleSubmit}>
         登录
       </EleButton>
-    </Block>
+    </>
   );
 }

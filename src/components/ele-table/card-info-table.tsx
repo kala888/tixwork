@@ -1,5 +1,5 @@
 import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
-import { Block, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import classNames from 'classnames';
 import _ from 'lodash';
 import EleTable from '@/components/ele-table/ele-table';
@@ -61,10 +61,10 @@ export default function CardInfoTable(props: CardInfoTableProps) {
               <EleTableCell title={leftItem.value} colspan={colspan} mode='left' />
 
               {showRight && (
-                <Block>
+                <>
                   <EleTableCell title={rightItem.title} className={rightItemLabelClass} mode='left' />
                   <EleTableCell title={rightItem.value} mode='left' />
-                </Block>
+                </>
               )}
             </EleTableRow>
           );

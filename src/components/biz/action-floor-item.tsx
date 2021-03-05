@@ -1,5 +1,5 @@
 import ServerImage from '@/server-image/server-image';
-import { Block, Text, View } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 
 import EleButton, { EleButtonProps } from '@/components/elements/ele-button';
 import { getExtMode, isEmpty } from '@/nice-router/nice-router-util';
@@ -12,7 +12,7 @@ type ActionFloorItemProps = {
 function ActionFloorItem(props: ActionFloorItemProps) {
   const { title, brief, imageUrl, color, ...others } = props || {};
   if (isEmpty(title) && isEmpty(brief) && isEmpty(imageUrl)) {
-    return <Block />;
+    return null;
   }
 
   const rootCls = getExtMode(color).classNames('action-floor-item');

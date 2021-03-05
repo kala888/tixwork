@@ -1,4 +1,4 @@
-import { Block, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import ActionFloorItem from './action-floor-item';
 
 import './action-floor.scss';
@@ -7,7 +7,7 @@ import { ActionListLike } from '@/nice-router/nice-router-types';
 function ActionFloor(props: ActionListLike) {
   const { actionList } = props || {};
   if (actionList.length === 0) {
-    return <Block />;
+    return null;
   }
 
   let list = actionList;

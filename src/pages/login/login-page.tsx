@@ -5,6 +5,7 @@ import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import NavigationService from '@/nice-router/navigation-service';
 import Config from '@/nice-router/nice-router.config';
+import { isWeapp } from '@/utils/index';
 
 import loginLogo from '../../assets/login-logo.png';
 import VCodeLoginForm from './vcode-login-from';
@@ -16,18 +17,20 @@ export default function LoginPage() {
   const [wxLoginSuccess, setWxLoginSuccess] = useState(false);
 
   useEffect(() => {
-    Taro.login({
-      success: (res) => {
-        console.log('doooooologin');
-        NavigationService.ajax(
-          ApiConfig.WxLogin,
-          { code: res.code },
-          {
-            onSuccess: () => setWxLoginSuccess(true),
-          }
-        );
-      },
-    });
+    if (isWeapp()) {
+      Taro.login({
+        success: (res) => {
+          console.log('doooooologin');
+          NavigationService.ajax(
+            ApiConfig.WxLogin,
+            { code: res.code },
+            {
+              onSuccess: () => setWxLoginSuccess(true),
+            }
+          );
+        },
+      });
+    }
   }, []);
 
   return (

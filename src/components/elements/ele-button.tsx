@@ -53,8 +53,7 @@ function EleButton(props: EleButtonProps) {
     ...others
   } = props;
 
-  console.log('the action code & id', code, id);
-
+  // console.log('the action code & id', code, id);
   let wxOpenType = openType;
   if (!openType && (type === 'share' || type === 'getPhoneNumber' || type === 'getUserInfo')) {
     wxOpenType = type;

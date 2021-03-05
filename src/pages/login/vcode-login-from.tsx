@@ -1,6 +1,6 @@
 import MobileVerifyCode from '@/components/mobile-verify-code';
 import EleInput from '@/components/form/field/ele-input';
-import { Block, View } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import { useState } from 'react';
 import _ from 'lodash';
 import NavigationService from '@/nice-router/navigation-service';
@@ -49,7 +49,7 @@ export default function VCodeLoginForm(props) {
 
   if (visible) {
     return (
-      <Block>
+      <>
         <EleButton openType='getPhoneNumber' className='login-button' onGetPhoneNumber={handleBindingWechatMobile}>
           使用微信绑定的手机号
         </EleButton>
@@ -58,12 +58,12 @@ export default function VCodeLoginForm(props) {
             其他手机号码
           </EleButton>
         </View>
-      </Block>
+      </>
     );
   }
 
   return (
-    <Block>
+    <>
       <View className='login-form-fields'>
         <MobileVerifyCode
           name='mobile'
@@ -91,6 +91,6 @@ export default function VCodeLoginForm(props) {
       <EleButton className='login-button' onClick={handleSubmit}>
         登录
       </EleButton>
-    </Block>
+    </>
   );
 }
