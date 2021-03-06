@@ -37,15 +37,10 @@
       @extend %flex-center;
       height: 90px;
 
-      &-image {
+      .action-image {
         width: 60px;
         height: 60px;
         //border-radius: 50%;
-      }
-
-      .iconfont {
-        font-size: 60px;
-        color: lighten($color-brand-light, 1%);
       }
 
       img {

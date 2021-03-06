@@ -1,4 +1,4 @@
-import { Image, Text, View } from '@tarojs/components';
+import { Text, View } from '@tarojs/components';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
@@ -6,6 +6,7 @@ import { getGroupListByColumn } from '@/utils/index';
 import NavigationService from '@/nice-router/navigation-service';
 import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types';
 import './grid-list.scss';
+import ActionIcon from '@/components/action-icon/action-icon';
 
 type GridListItemProps = ImageLike & IconLike & ActionLike & EleObject;
 
@@ -65,11 +66,7 @@ export default function GridList(props: GridListProps) {
               return (
                 <View key={key} className={bodyClass} style={itemStyle} onClick={handleClick.bind(this, item)}>
                   <View className='grid-list-item_icon'>
-                    {isNotEmpty(imageUrl) ? (
-                      <Image className='grid-list-item_icon-image' src={imageUrl || ''} mode='heightFix' />
-                    ) : (
-                      <Text className={`iconfont iconfont-${icon}`} />
-                    )}
+                    <ActionIcon icon={icon} imageUrl={imageUrl} />
                   </View>
                   <Text className='grid-list-item_title'>{actionTitle}</Text>
                 </View>
