@@ -1,6 +1,8 @@
+import { isH5 } from '@/utils/index';
 import jwtDecode from './jwt-decode';
 import { isNotEmpty, log } from './nice-router-util';
 import StorageTools from './storage-tools';
+
 
 const TOKEN = 'TOKEN';
 const AUTH_INFO = 'AUTH_INFO';
@@ -51,4 +53,9 @@ const AuthTools = {
   // syncToken,
   isValidateToken,
 };
+
+//兼容RN里嵌入H5时候的localStorage同步
+// @ts-ignore
+isH5() && (window.saveTokenAsync = saveTokenAsync);
+
 export default AuthTools;

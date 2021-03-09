@@ -4,8 +4,8 @@ import _ from 'lodash';
 import { SHA1 } from 'crypto-es/lib/sha1.js';
 import { log, parseJSON } from './nice-router-util';
 
-const CACHE_PREFIX = 'cachestore-';
-const CACHE_EXPIRATION_PREFIX = 'cacheexpiration-';
+const CACHE_PREFIX = '';
+const CACHE_EXPIRATION_PREFIX = 'exp-';
 const EXPIRY_UNITS = 1000; // seconds
 
 const getKeys = _.memoize((key = '') => {
@@ -35,9 +35,14 @@ const StorageTools = {
 
   /**
    *
+   * Taro存储localStorage存的是对象 => {data:''}
+   *
+   * 所有H5中使用localStorage和Taro交互时候注意存取
+   *
    * @param key
    * @param value
    * @param time unit: second
+   *
    */
   set(key: string, value: any = '', time?: number) {
     const { exprKey, theKey } = getKeys(key);
