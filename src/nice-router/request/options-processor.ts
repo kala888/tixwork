@@ -1,6 +1,7 @@
 import Config from '@/nice-router/nice-router.config';
 import _ from 'lodash';
 import pathToRegexp from 'path-to-regexp';
+import { isEmpty } from '../nice-router-util';
 
 function getUrlAndParam({ uri, params }) {
   const processedParams = _.cloneDeep(params);
@@ -29,7 +30,7 @@ function getUrlAndParam({ uri, params }) {
   });
 
   return {
-    url: Config.baseURL + domain + url,
+    url: (isEmpty(domain) ? Config.baseURL : domain) + url,
     params: processedParams,
   };
 }
