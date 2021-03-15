@@ -103,7 +103,7 @@ export default {
       const { success, xClass, xNavigationMethod, data } = resp;
 
       // onSuccess回调
-      onSuccess(data, { ...resp });
+      onSuccess(data, resp);
 
       //获取ViewMapping 处理预支的state和effect，以及页面跳转
       if (xClass) {

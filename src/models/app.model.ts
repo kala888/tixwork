@@ -1,9 +1,8 @@
 /* eslint-disable */
-import AuthTools from '@/nice-router/auth-tools';
+import AuthTools, { AuthInfoSecurityStatus, AuthInfoType } from '@/nice-router/auth-tools';
 import NavigationService from '@/nice-router/navigation-service';
 import { ApiConfig } from '@/utils/config';
 import Taro from '@tarojs/taro';
-import { isNotEmpty } from '@/nice-router/nice-router-util';
 import ActionUtil from '@/nice-router/action-util';
 
 export type DoLoginProps = {
@@ -27,9 +26,9 @@ function wechatLogin(payload: DoLoginProps) {
   // noinspection JSIgnoredPromiseFromCall
   wxObj.checkSession({
     success: async () => {
-      const isValidate = await AuthTools.isValidateToken();
-      console.log('token isValidate?', isValidate);
-      if (!isValidate) {
+      const isLoginToken = await AuthTools.isLoginToken();
+      console.log('Is an validate login token??', isLoginToken);
+      if (!isLoginToken) {
         doLogin();
       }
     },
@@ -44,42 +43,43 @@ function doRemoteLogin(payload) {
   const { options = {}, ...params } = payload;
   NavigationService.put(ApiConfig.Login, params, {
     statInPage: true,
-    onSuccess: async (resp, { headers }) => {
+    onSuccess: async (data, resp) => {
       if (options.onSuccess) {
-        options.onSuccess(resp);
+        options.onSuccess(data);
       }
 
-      const { authorization } = headers;
-      console.log('wx login response, headers', headers);
+      const { authorization } = resp.headers;
+      let authInfo: AuthInfoType = {} as AuthInfoType;
+      console.log('wx login response, headers', resp.headers);
       if (authorization) {
         // noinspection JSIgnoredPromiseFromCall
         await AuthTools.saveTokenAsync(authorization);
+        authInfo = AuthTools.toAuthInfo(authorization);
       }
 
-      const { callbackUrl, loginSuccess = false } = resp;
-      if (loginSuccess) {
-        let callbackAction = resp;
-        if (isNotEmpty(callbackUrl)) {
-          callbackAction = { linkToUrl: callbackUrl };
-        }
+      // 登录成功
+      if (authInfo.securityStatus === AuthInfoSecurityStatus.CERTIFICATE || data.loginSuccess) {
+        const callbackAction = { linkToUrl: data.callbackUrl, ...data };
+        // 如果resp 不是Action或者不包含callbackUrl，则直接后退,
         if (!ActionUtil.isActionLike(callbackAction)) {
           await NavigationService.back();
           return;
         }
 
+        // do login success callback
         await NavigationService.view(
           callbackAction,
           {},
           {
             navigationMethod: 'replace',
             ...options,
-            onSuccess: (data, resp) => {
-              console.log('after login redirect resp', data);
-              if (resp.success) {
+            onSuccess: (cbData, cbResp) => {
+              console.log('success login an success do callback', cbData);
+              if (cbResp.success) {
                 NavigationService.back();
               }
             },
-          }
+          },
         );
       }
     },
@@ -94,7 +94,7 @@ export default {
   },
   reducers: {},
   effects: {
-    *login({ payload }: { payload: DoLoginProps }) {
+    * login({ payload }: { payload: DoLoginProps }) {
       const { loginMethod } = payload || {};
       if (loginMethod === 'wechat_work_app' || loginMethod === 'wechat_app') {
         wechatLogin(payload);
@@ -104,7 +104,7 @@ export default {
       doRemoteLogin(payload);
     },
 
-    *logout() {
+    * logout() {
       console.log('logout from app');
       yield AuthTools.logout();
     },

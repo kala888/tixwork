@@ -166,7 +166,7 @@ class NavigationServiceClass {
     return new Promise((resolve, reject) => {
       Taro.navigateBack({ delta })
         .then(() => {
-          const { callback } = this.pageHistory[key];
+          const { callback } = this.pageHistory[key] || {};
           if (callback) {
             callback(data);
             _.omit(this.pageHistory, key);
