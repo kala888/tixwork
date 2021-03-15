@@ -145,7 +145,7 @@ function EleForm(props: EleFormProps, ref) {
 
   return (
     <View className='ele-form'>
-      {groups.map((groupItem) => {
+      {groups.map((groupItem, groupIdx) => {
         const { name: groupId, title, brief, fieldList: fields = [], actionList: groupActionList = [] } = groupItem;
 
         const actionList = groupActionList.map((it) => ({
@@ -154,15 +154,15 @@ function EleForm(props: EleFormProps, ref) {
         }));
 
         return (
-          <View key={groupId}>
+          <View key={groupId + '_' + groupIdx}>
             {isNotEmpty(title) && <SectionBar title={title} brief={brief} />}
 
             <View className='ele-form-fields'>
-              {fields.map((it) => {
+              {fields.map((it, idx) => {
                 const field = FormUtil.mergeConfig(it);
                 const { name, type } = field;
                 const value = fieldValues[name];
-                const key = name + '_'; // key重做，因为有taro bug
+                const key = name + '_' + idx; // key重做，因为有taro bug
 
                 if (type === 'display-field' && isNotEmpty(field.value)) {
                   const ele = _.isString(field.value) ? parseJSON(field.value) : field.value;

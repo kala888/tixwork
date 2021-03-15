@@ -5,7 +5,7 @@ import ElePicker, { ElePickerProps } from '@/components/form/field/ele-picker';
 import { isNotEmpty } from '@/nice-router/nice-router-util';
 
 function RegionPicker(props: ElePickerProps) {
-  const [source, setSource] = useState([]);
+  const [source, setSource] = useState<Record<string, any[]>[]>([]);
 
   useEffect(() => {
     const regionData = StorageTools.get('region-data', null);
@@ -20,12 +20,15 @@ function RegionPicker(props: ElePickerProps) {
       {},
       {
         onSuccess: (resp) => {
+          if (!Array.isArray(resp)) {
+            return;
+          }
           if (!initialed) {
             setSource(resp);
           }
           StorageTools.set('region-data', resp, 3600);
         },
-      }
+      },
     );
   }, []);
 
