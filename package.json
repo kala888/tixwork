@@ -61,8 +61,9 @@
 		"redux": "^4.0.0",
 		"redux-logger": "^3.0.6",
 		"redux-thunk": "^2.3.0",
-		"taro-ui": "^3.0.0-alpha"
-	},
+		"taro-ui": "^3.0.0-alpha",
+        "mime": "^2.5.2"
+    },
 	"devDependencies": {
 		"@babel/core": "^7.8.0",
 		"@tarojs/mini-runner": "3.1.2",

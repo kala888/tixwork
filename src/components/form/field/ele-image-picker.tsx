@@ -49,7 +49,7 @@ function EleImagePicker(props: EleImagePickerProps) {
   const uploadNewFiles = (currentFiles) => {
     const todoList = currentFiles.filter((it) => {
       const { url = '' } = it;
-      return url.startsWith('http://tmp') || url.startsWith('wxfile://tmp');
+      return url.startsWith('blob:') || url.startsWith('http://tmp') || url.startsWith('wxfile://tmp');
     });
 
     const resetProgress = () => setProgress(0);

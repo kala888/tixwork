@@ -79,7 +79,7 @@ function doRemoteLogin(payload) {
                 NavigationService.back();
               }
             },
-          },
+          }
         );
       }
     },
@@ -94,7 +94,7 @@ export default {
   },
   reducers: {},
   effects: {
-    * login({ payload }: { payload: DoLoginProps }) {
+    *login({ payload }: { payload: DoLoginProps }) {
       const { loginMethod } = payload || {};
       if (loginMethod === 'wechat_work_app' || loginMethod === 'wechat_app') {
         wechatLogin(payload);
@@ -104,7 +104,7 @@ export default {
       doRemoteLogin(payload);
     },
 
-    * logout() {
+    *logout() {
       console.log('logout from app');
       yield AuthTools.logout();
     },

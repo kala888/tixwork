@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import Taro from '@tarojs/taro';
 import { isNotEmpty } from '@/nice-router/nice-router-util';
@@ -79,6 +79,10 @@ function ListofPageBase(props: listofPageBaseProps) {
     renderFooter,
     onItemClick,
   } = props;
+
+  useEffect(() => {
+    Taro.nextTick(initialHeight);
+  }, [header, searchAction, content, tabs, renderHeader]);
 
   const theHeader = (
     <>

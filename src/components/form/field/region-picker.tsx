@@ -28,7 +28,7 @@ function RegionPicker(props: ElePickerProps) {
           }
           StorageTools.set('region-data', resp, 3600);
         },
-      },
+      }
     );
   }, []);
 

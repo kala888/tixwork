@@ -1,8 +1,9 @@
 import NavigationService from '@/nice-router/navigation-service';
 import { isNotEmpty } from '@/nice-router/nice-router-util';
 import { ApiConfig } from '@/utils/config';
-import { formatTime } from '@/utils/index';
+import { formatTime, isH5 } from '@/utils/index';
 import Taro from '@tarojs/taro';
+import mime from 'mime';
 import getAliyunConfig, { OssTokenDTO } from './aliyun-oss-helper';
 
 export type FileUploadTask = {
@@ -28,11 +29,16 @@ function isValidateToken(): boolean {
   return false;
 }
 
-function getFileName(filePath = '') {
-  const startPos = filePath.lastIndexOf('.');
-  const enPos = filePath.length;
-  const suffix = filePath.substring(startPos + 1, enPos);
+function getFileName(filePath = '', fileType) {
   const randomFileName = formatTime(Date.now(), 'yyyyMMddhhmmss_') + (Math.random() * 1000000 + 100000).toFixed();
+  let suffix = '';
+  if (isH5()) {
+    suffix = mime.getExtension(fileType);
+  } else {
+    const startPos = filePath.lastIndexOf('.');
+    const enPos = filePath.length;
+    suffix = filePath.substring(startPos + 1, enPos);
+  }
   return `${randomFileName}.${suffix}`;
 }
 
@@ -75,7 +81,11 @@ function uploadFiles2OSS(params: FileUploadProps) {
       onStart(it);
     }
 
-    const fileName = getFileName(it.url);
+    // const fileName = getFileName(it.url);
+    const { url: sourceFile = '' } = it;
+    // @ts-ignore
+    const fileName = getFileName(sourceFile, it?.file?.type);
+
     const key = `${userHome}/${fileName}`;
     await Taro.showLoading({ title: '上传凭证中' });
 
