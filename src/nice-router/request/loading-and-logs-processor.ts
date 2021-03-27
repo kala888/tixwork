@@ -4,6 +4,7 @@ import OverlayLoading from '@/nice-router/overlay-loading';
 import ViewmappingService from '@/nice-router/viewmapping-service';
 import Taro from '@tarojs/taro';
 import { HttpResponse } from '@/nice-router/request/reqeust';
+import { isWeapp } from '@/utils/index';
 
 const systemErrorXClass = 'com.terapico.caf.local.NetworkException';
 
@@ -11,7 +12,7 @@ function showLoading(loading: LoadingType) {
   if (loading === LoadingType.Modal) {
     OverlayLoading.showLoadingModal();
   }
-  if (loading === LoadingType.BarLoading) {
+  if (isWeapp() && loading === LoadingType.BarLoading) {
     Taro.showNavigationBarLoading();
   }
 }
@@ -20,7 +21,7 @@ async function hideLoading(loading: LoadingType) {
   if (loading === LoadingType.Modal) {
     OverlayLoading.hideLoadingModal();
   }
-  if (loading === LoadingType.BarLoading) {
+  if (isWeapp() && loading === LoadingType.BarLoading) {
     Taro.hideNavigationBarLoading();
   }
 }

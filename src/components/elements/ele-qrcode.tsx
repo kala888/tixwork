@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { toRpx } from '@/utils/index';
 import { Canvas } from '@tarojs/components';
-import Taro, { useReady } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 import _ from 'lodash';
 import ErrorCorrectLevel from 'qr.js/lib/ErrorCorrectLevel';
 import QRCodeImpl from 'qr.js/lib/QRCode';
