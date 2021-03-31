@@ -41,11 +41,12 @@ function GenericformPage() {
     // @ts-ignore
     const result = await formRef.current.validateFields();
     const { errors, values } = result;
+    const { navigationMethod = 'replace' } = action;
     if (isEmpty(errors)) {
       console.log('form-values', values);
       await NavigationService.post(action, values, {
         asForm: true,
-        navigationMethod: 'replace',
+        navigationMethod,
       });
       return;
     }
