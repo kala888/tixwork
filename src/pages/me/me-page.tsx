@@ -11,7 +11,7 @@ import NavigationService from '@/nice-router/navigation-service';
 import { isNotEmpty } from '@/nice-router/nice-router-util';
 import EleActionList from '@/components/elements/action-list/ele-action-list';
 import Listof from '@/listof/listof';
-import EleButton, { EleButtonProps } from '@/components/elements/ele-button';
+import { EleButtonProps } from '@/components/elements/ele-button';
 import './me.scss';
 
 const Box_Navigator_List = [
@@ -68,8 +68,6 @@ function MePage() {
   }, [root]);
   useDidShow(() => NavigationService.ajax(ApiConfig.FooterMe));
 
-  const handleUpdateProfileInfo = (e) => console.log('111', e);
-
   const {
     boxNavigatorList = Box_Navigator_List,
     navigationLineItems = LineItem_Navigator_List,
@@ -82,15 +80,7 @@ function MePage() {
     <View className='me-page'>
       <View className='me-page-header'>
         <View className='me-page-header-info'>
-          <EleButton
-            mode='ghost'
-            openType='getUserInfo'
-            className='transparent-btn'
-            onGetUserInfo={handleUpdateProfileInfo}
-          >
-            <ServerImage className='me-avatar' src={avatar || MockService.randomImage()} />
-          </EleButton>
-
+          <ServerImage className='me-avatar' src={avatar || MockService.randomImage()} />
           <View className='me-title'>
             <View className='me-title-name'>{name}</View>
             <View className='me-title-brief'>{brief}</View>

@@ -55,7 +55,7 @@ function EleButton(props: EleButtonProps) {
 
   // console.log('the action code & id', code, id);
   let wxOpenType = openType;
-  if (!openType && (type === 'share' || type === 'getPhoneNumber' || type === 'getUserInfo')) {
+  if (!openType && (type === 'share' || type === 'getPhoneNumber')) {
     wxOpenType = type;
   }
 
@@ -125,7 +125,7 @@ function EleButton(props: EleButtonProps) {
       return;
     }
 
-    if (type === 'submit' || type === 'share' || type === 'getUserInfo') {
+    if (type === 'submit' || type === 'share') {
       return;
     }
 
