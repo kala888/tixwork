@@ -10,8 +10,8 @@ const AUTH_INFO = 'AUTH_INFO';
 const SAFETY_TIME = 1800; //预留半个小时过期（单位秒）
 
 export enum AuthInfoSecurityStatus {
-  ANONYMOUS,
-  CERTIFICATE,
+  ANONYMOUS = 'ANONYMOUS',
+  CERTIFICATE = 'CERTIFICATE',
 }
 
 export type AuthInfoType = {

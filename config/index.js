@@ -107,6 +107,18 @@ const config = {
     router: {
       mode: 'browser' // 或者是 'hash'
     },
+    output: {
+      filename: 'js/[name].[hash].js',
+      chunkFilename: 'js/[name].[chunkhash].js'
+    },
+    imageUrlLoaderOption: {
+      limit: 5000,
+      name: 'static/images/[name].[hash].[ext]'
+    },
+    miniCssExtractPluginOption: {
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[name].[chunkhash].css',
+    },
     postcss: {
       autoprefixer: {
         enable: true,

@@ -1,3 +1,7 @@
+
+// 作为h5嵌入到其他webview中时，如果需要调试，打开注释
+// const vConsolePlugin = require('vconsole-webpack-plugin');
+
 module.exports = {
   env: {
     NODE_ENV: '"production"'
@@ -14,5 +18,9 @@ module.exports = {
      *     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
      * }
      */
+
+    // webpackChain (chain) {
+    //   chain.plugin('vconsole-webpack-plugin').use(vConsolePlugin, [{enable: true}]);
+    // }
   }
 }

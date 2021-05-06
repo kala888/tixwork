@@ -40,7 +40,6 @@
 	"author": "Kala <kalaliu@aliyun.com>",
 	"license": "MIT",
 	"dependencies": {
-		"@tarojs/cli": "3.1.4",
 		"@babel/runtime": "^7.7.7",
 		"@tarojs/components": "3.1.4",
 		"@tarojs/react": "3.1.4",
@@ -62,9 +61,11 @@
 		"redux-logger": "^3.0.6",
 		"redux-thunk": "^2.3.0",
 		"taro-ui": "^3.0.0-alpha",
-		"mime": "^2.5.2"
-	},
+		"mime": "^2.5.2",
+        "vconsole": "^3.4.1"
+    },
 	"devDependencies": {
+        "@tarojs/cli": "3.1.4",
 		"@babel/core": "^7.8.0",
 		"@tarojs/mini-runner": "3.1.4",
 		"@tarojs/webpack-runner": "3.1.4",
@@ -87,7 +88,8 @@
 		"eslint-plugin-react-hooks": "^3.0.0",
 		"stylelint": "^13.3.0",
 		"stylelint-config-standard": "^20.0.0",
-		"stylelint-scss": "^3.16.0",
+        "vconsole-webpack-plugin": "^1.5.2",
+        "stylelint-scss": "^3.16.0",
 		"eslint-plugin-taro": "3.1.4",
 		"eslint-config-taro": "3.1.4",
 		"lint-staged": "^7.2.2",

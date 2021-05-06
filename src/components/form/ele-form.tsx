@@ -115,7 +115,7 @@ function EleForm(props: EleFormProps, ref) {
     }
     setFieldErrors(errors);
     return {
-      errors: fieldErrors,
+      errors: errors,
       values: fieldValues,
     };
   };

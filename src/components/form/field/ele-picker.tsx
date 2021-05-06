@@ -35,6 +35,8 @@ function ElePicker(props: ElePickerProps) {
   const [tips, setTips] = useState();
   const { visible, show, close } = useVisible(false);
   const [range, setRange] = useState([]);
+  const [theValue, setTheValue] = useState([]);
+
   const {
     value,
     onChange,
@@ -96,6 +98,11 @@ function ElePicker(props: ElePickerProps) {
     const { column, value: selectedValueIdx } = e.detail;
     console.log('column...', column);
     reBuildRangeList(column, selectedValueIdx);
+    setTheValue((pre) => {
+      const result = [].concat(pre);
+      result[column] = selectedValueIdx;
+      return result;
+    });
   };
 
   const tipsClass = classNames('tips', {
@@ -113,6 +120,7 @@ function ElePicker(props: ElePickerProps) {
         onColumnChange={handleColumnChange}
         onCancel={close}
         onClick={show}
+        value={theValue}
       >
         <View className='ele-picker-body'>
           <View className={tipsClass}>{tips}</View>

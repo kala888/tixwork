@@ -14,6 +14,7 @@ const AuthTokenProcessor = async (chain) => {
       ...headers,
       Authorization: token,
     },
+    credentials: 'omit',
   };
   return chain.proceed(theParam).then(async (theData) => {
     const authorization = _.get(theData, 'headers.authorization', '');

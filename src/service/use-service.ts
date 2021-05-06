@@ -34,7 +34,7 @@ export function useLoading(initial = false) {
 // 这只page的title
 export function usePageTitle(value) {
   useEffect(() => {
-    let theTitle = _.isString(value) ? value : value?.pageTitle || value?.title;
+    let theTitle = _.isString(value) ? value : value?.pageTitle || value?.title || Config.name;
     Taro.setNavigationBarTitle({
       title: theTitle || Config.name,
     });

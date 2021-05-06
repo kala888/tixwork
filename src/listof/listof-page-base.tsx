@@ -82,6 +82,7 @@ function ListofPageBase(props: listofPageBaseProps) {
 
   useEffect(() => {
     Taro.nextTick(initialHeight);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [header, searchAction, content, tabs, renderHeader]);
 
   const theHeader = (

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import pathToRegexp from 'path-to-regexp';
 import { isEmpty } from '../nice-router-util';
 
-function getUrlAndParam({ uri, params }) {
+function getUrlAndParam({ uri, params }): { url: string; params: Record<string, any> } {
   const processedParams = _.cloneDeep(params);
   let url = uri;
 

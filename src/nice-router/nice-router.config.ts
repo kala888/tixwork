@@ -25,15 +25,16 @@ const defaultConfig: AppConfiguration = {
   api: {},
   backendRouterPageBlackList: [],
   backendRouterPageKeyBlackList: [],
-  start: (config: AppConfiguration, container: any) => {
-    NavigationService.container = container;
-    Config = _.merge(defaultConfig, config);
-    ViewMappingService.viewConfig = Config?.viewConfig;
-  },
   get: (key) => _.get(this, key),
 };
 
 // eslint-disable-next-line import/no-mutable-exports
 let Config: AppConfiguration = defaultConfig;
+
+Config.start = (config: AppConfiguration, container: any) => {
+  NavigationService.container = container;
+  Config = _.merge(defaultConfig, config);
+  ViewMappingService.viewConfig = Config?.viewConfig;
+};
 
 export default Config;
