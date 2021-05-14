@@ -58,27 +58,27 @@ type=button
 |           | 样例                              | 描述                                                                               |
 | --------- | ------------------------------- | -------------------------------------------------------------------------------- |
 | title     | button='提交'                     | 展示的文字，也可以通过children来包装其他组件                                                       |
-| btnType   | btnType=’share‘                 | 可选值：share，getPhoneNumber，submit，reset，open-document，download，scanner |
+| type   | type=’share‘                 | 可选值：share，getPhoneNumber，submit，reset，open-document，download，scanner |
 | size      | size='mini'                    | TaroUI中Button的size属性                                                             |
 | uiType    | uiType='primary'                | TaroUI中Button的type属性                                                             |
 | full      | full='false'                    | TaroUI中Button的full属性                                                             |
 | circle    | circle='false'                  | TaroUI中Button的circle属性                                                           |
-| linkToUrl | linkToUrl='/m/view/'            | 当btnType是空的时候，默认执行Navigation.view(linkToUrl)                                     |
+| linkToUrl | linkToUrl='/m/view/'            | 当type是空的时候，默认执行Navigation.view(linkToUrl)                                     |
 | onClick   | onClick={()=>console.log("11")} | EleButton优先执行传入的onClick事件                                                        |
 
-- btnType='share' 实际调用 Taro button的openType='share'
+- type='share' 实际调用 Taro button的openType='share'
 
-- btnType='getPhoneNumber' 实际调用 Taro button的openType='getPhoneNumber'
+- type='getPhoneNumber' 实际调用 Taro button的openType='getPhoneNumber'
 
-- btnType='submit' 实际调用 Taro button的openType='submit'
+- type='submit' 实际调用 Taro button的openType='submit'
 
-- btnType='submit' 实际调用 Taro button的openType='reset'
+- type='submit' 实际调用 Taro button的openType='reset'
 
-- btnType='open-document'  ，下载linkToUrl对应的文档文件并打开
+- type='open-document'  ，下载linkToUrl对应的文档文件并打开
 
-- btnType='download' ，下载linkToUrl对应的文件
+- type='download' ，下载linkToUrl对应的文件
 
-- btnType='scanner' ，调用摄像头扫描二维码，并将扫描到的参数作为参数拼接到linkToUrl上。
+- type='scanner' ，调用摄像头扫描二维码，并将扫描到的参数作为参数拼接到linkToUrl上。
 
 ```javascript
 <EleButton

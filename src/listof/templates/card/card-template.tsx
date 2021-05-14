@@ -24,19 +24,19 @@ function CardTemplate(props: CardTemplateProps) {
     ? [
         {
           id: 'open-document',
-          btnType: 'open-document',
+          type: 'open-document',
           linkToUrl: documentUrl,
           title: '查看',
         },
         {
           id: 'download-document',
-          btnType: 'download',
+          type: 'download',
           linkToUrl: documentUrl,
           title: '下载',
         },
         {
           id: 'copy-document',
-          btnType: 'copy',
+          type: 'copy',
           linkToUrl: documentUrl,
           title: '复制连接',
         },

@@ -182,7 +182,7 @@ const cardList = [
     flag: '急',
     actionList: [
       {
-        btnType: 'confirm',
+        type: 'confirm',
         id: 1,
         title: '删除',
         extraData: {
