@@ -48,17 +48,19 @@ function MePage() {
   const root = useSelector((state) => state.me);
   const [footerActionList, setFooterActionList] = useState<EleButtonProps[]>([]);
 
+  const refresh = () => NavigationService.ajax(ApiConfig.FooterMe);
+
   usePageTitle(root);
   usePullDown(ApiConfig.FooterMe);
-  useEffect(() => {
-    NavigationService.ajax(ApiConfig.FooterMe);
-  }, []);
+  useDidShow(refresh, []);
+
   const handleGoLogin = () => NavigationService.navigate('/pages/login/login-page');
   const handleLogout = () => {
     NavigationService.dispatch('app/logout');
     NavigationService.dispatch('me/clear');
     NavigationService.ajax(ApiConfig.Logout);
   };
+
   useEffect(() => {
     if (isNotEmpty(root)) {
       setFooterActionList([{ id: 'goLogout', title: '退出登录', onClick: handleLogout }]);
@@ -66,7 +68,6 @@ function MePage() {
       setFooterActionList([{ id: 'goLogin', title: '去登陆', onClick: handleGoLogin }]);
     }
   }, [root]);
-  useDidShow(() => NavigationService.ajax(ApiConfig.FooterMe));
 
   const {
     boxNavigatorList = Box_Navigator_List,

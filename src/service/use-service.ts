@@ -42,30 +42,28 @@ export function usePageTitle(value) {
 }
 
 export function useAjaxPullDown(action: any) {
-  usePullDown(action);
+  usePullDown(action, true);
 }
 
-export function usePullDown(action: any) {
+export function usePullDown(action: any, ajax?: boolean) {
   Taro.usePullDownRefresh(() => {
     if (!ActionUtil.isActionLike(action)) {
       Taro.stopPullDownRefresh();
       return;
     }
 
-    NavigationService.view(
-      action,
-      {},
-      {
+    NavigationService.view(action, {}, {
         dataRefresh: true,
+        statInPage: ajax,
         onSuccess: () => Taro.stopPullDownRefresh(),
         loading: LoadingType.Modal,
-      }
+      },
     );
   });
 }
 
 // 倒计时
-export function useCountdown(maxCount = 60, onEndOfCounting?: Function) {
+export function useCountdown(maxCount = 60, onEndOfCounting?: () => void) {
   const [second, setSecond] = useState(maxCount);
   const [counting, setCounting] = useState(false);
   const interval = useRef();
@@ -86,7 +84,7 @@ export function useCountdown(maxCount = 60, onEndOfCounting?: Function) {
         if (result === 0) {
           clearInterval(interval.current);
           setCounting(false);
-          if (_.isFunction(onEndOfCounting)) {
+          if (onEndOfCounting) {
             onEndOfCounting();
           }
           return maxCount;
