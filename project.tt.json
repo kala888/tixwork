@@ -1,0 +1,16 @@
+{
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true
+  },
+  "appid": "tt8ea1f81c1199734e",
+  "projectname": "nice-router-taro",
+  "condition": {
+    "miniprogram": {
+      "current": -1
+    }
+  }
+}
