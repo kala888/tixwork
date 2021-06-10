@@ -1,9 +1,10 @@
 #### 环境与知识准备
 
-1.  下载安装 [Taro cli](http://taro-docs.jd.com/taro/docs/GETTING-STARTED.html)
 
+1.  下载安装 [Taro cli](http://taro-docs.jd.com/taro/docs/GETTING-STARTED.html)
 ```bash
-# 安装taro，首页你得有一个合适的nodejs环境，然后通过yarn安装taro-cli，或者使用npm：npm install -g @tarojs/cli 
+# 首页你得有一个合适的nodejs环境, 我现在使用的是v12.14.1
+# 安装taro，然后通过yarn安装taro-cli（可选）
 $ yarn global add @tarojs/cli
 ```
 
