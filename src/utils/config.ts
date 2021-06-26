@@ -1,7 +1,7 @@
 import { AppConfiguration } from '@/nice-router/nice-router.config';
 import ViewMappingConfig from '@/utils/viewmapping.config';
 
-const baseURL = 'https://demo.doublechaintech.com/xuntuexam/'; //后端服务地址
+const baseURL = 'https://demo.doublechaintech.com/repairchain/'; //后端服务地址
 
 const ApiConfig = {
   FooterHome: 'wxappService/viewHomepage/',
@@ -23,8 +23,8 @@ const TheCustomizedProjectConfigurationDontUseItDirectly: Omit<AppConfiguration,
   backendRouterPageBlackList: ['NetworkException'],
   viewConfig: ViewMappingConfig,
   // loginMode: 'wechat',
-  // loginMode: 'vcode', //包含绑定的微信登录
-  loginMode: 'password',
+  loginMode: 'vcode', //包含绑定的微信登录
+  // loginMode: 'password',
 };
 
 console.log('***********   current env  ***********   ');

@@ -1,5 +1,5 @@
 import { isH5 } from '@/utils/index';
-import jwtDecode from './jwt-decode';
+import jwtDecode from 'jwt-decode';
 import _ from 'lodash';
 import { isNotEmpty, log } from './nice-router-util';
 import StorageTools from './storage-tools';
@@ -22,7 +22,9 @@ export type AuthInfoType = {
   tags: string[]; //这个token的标签
 };
 
-const toAuthInfo = _.memoize((token: string): AuthInfoType => (isNotEmpty(token) ? jwtDecode(token) : {}));
+const toAuthInfo = _.memoize(
+  (token: string): AuthInfoType => (isNotEmpty(token) ? jwtDecode(token) : ({} as AuthInfoType))
+);
 
 async function saveTokenAsync(token: string) {
   StorageTools.set(TOKEN, token);

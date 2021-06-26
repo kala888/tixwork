@@ -52,12 +52,15 @@ export function usePullDown(action: any, ajax?: boolean) {
       return;
     }
 
-    NavigationService.view(action, {}, {
+    NavigationService.view(
+      action,
+      {},
+      {
         dataRefresh: true,
         statInPage: ajax,
         onSuccess: () => Taro.stopPullDownRefresh(),
         loading: LoadingType.Modal,
-      },
+      }
     );
   });
 }
