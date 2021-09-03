@@ -56,7 +56,7 @@ export const toBoolean = (value) => {
 };
 
 export function parseJSON(json) {
-  if (_.isObject()) {
+  if (_.isObject(json)) {
     return json;
   }
   if (_.isString(json)) {

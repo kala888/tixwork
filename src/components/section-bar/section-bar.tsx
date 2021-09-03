@@ -86,14 +86,16 @@ function SectionBar(props: SectionBarProps) {
 
   return (
     <View className={rootClass}>
-      <EleButton mode='ghost' className='section-bar-header' onClick={handleClick} {...others}>
+      <View className='section-bar-header'>
         <View className='section-bar-prefix' />
         <View className='section-bar-title'>{title}</View>
-        <View className='section-bar-brief'>{brief}</View>
-        <View className='section-bar-postfix'>
-          <ActionIcon imageUrl={imageUrl} icon={theIcon} mode='widthFix' />
-        </View>
-      </EleButton>
+        <EleButton mode='ghost' className='section-bar-header' onClick={handleClick} {...others}>
+          <View className='section-bar-brief'>{brief}</View>
+          <View className='section-bar-postfix'>
+            <ActionIcon imageUrl={imageUrl} icon={theIcon} mode='widthFix' />
+          </View>
+        </EleButton>
+      </View>
       {children && <View className={contentClass}>{children}</View>}
     </View>
   );
