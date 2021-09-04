@@ -306,10 +306,10 @@ const mockForm1Data = {
           tips: '不能填写男女关系',
           value: ['pia-pia'],
           candidateValues: [
-            { title: '吃饭', value: 'eat' },
-            { title: '睡觉', value: 'sleep' },
-            { title: '打豆豆', value: 'pia-pia' },
-            { title: '唱歌', value: 'sing-song' },
+            { title: '吃饭', id: 'eat' },
+            { title: '睡觉', id: 'sleep' },
+            { title: '打豆豆', id: 'pia-pia' },
+            { title: '唱歌', id: 'sing-song' },
           ],
           rules: [
             {
@@ -326,10 +326,10 @@ const mockForm1Data = {
           tips: '不能填写男女关系222222',
           value: ['sing-song3'],
           candidateValues: [
-            { title: '吃饭2', value: 'eat3' },
-            { title: '睡觉3', value: 'sleep2' },
-            { title: '打豆豆4', value: 'pia-pia2' },
-            { title: '唱歌5', value: 'sing-song3' },
+            { title: '吃饭2', id: 'eat3' },
+            { title: '睡觉3', id: 'sleep2' },
+            { title: '打豆豆4', id: 'pia-pia2' },
+            { title: '唱歌5', id: 'sing-song3' },
           ],
           rules: [
             {
@@ -391,14 +391,12 @@ const mockForm1Data = {
 
           candidateValues: [
             {
-              name: 1,
               title: '男',
-              value: true,
+              id: true,
             },
             {
-              name: 2,
               title: '女',
-              value: false,
+              id: false,
             },
           ],
         },
@@ -509,9 +507,9 @@ const mockForm1Data = {
           placeholder: '请选择职位',
           value: 'role2',
           candidateValues: [
-            { title: '铲墙工', value: 'role1' },
-            { title: '木工', value: 'role2' },
-            { title: '水电工', value: 'role3' },
+            { title: '铲墙工', id: 'role1' },
+            { title: '木工', id: 'role2' },
+            { title: '水电工', id: 'role3' },
           ],
         },
         {

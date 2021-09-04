@@ -32,7 +32,7 @@ export interface ModeClass {
 }
 
 export interface EleObject {
-  id?: string;
+  id?: string | number | boolean;
   title?: string;
   brief?: string;
 }

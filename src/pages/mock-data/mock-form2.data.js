@@ -48,10 +48,10 @@ const mockForm2Data = {
           tips: '不能填写男女关系',
           value: ['sleep'],
           candidateValues: [
-            { title: '吃饭', value: 'eat' },
-            { title: '睡觉', value: 'sleep' },
-            { title: '打豆豆', value: 'pia-pia' },
-            { title: '唱歌', value: 'sing-song' },
+            { title: '吃饭', id: 'eat' },
+            { title: '睡觉', id: 'sleep' },
+            { title: '打豆豆', id: 'pia-pia' },
+            { title: '唱歌', id: 'sing-song' },
           ],
           rules: [
             {
