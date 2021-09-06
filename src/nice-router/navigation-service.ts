@@ -6,10 +6,14 @@ import ActionUtil from './action-util';
 
 import localCacheService from './local-cache-service';
 import { ActionLike } from './nice-router-types';
-import { isEmpty, isNotEmpty, LoadingType, log, noop } from './nice-router-util';
+import { isEmpty, isNotEmpty, LoadingType, noop } from './nice-router-util';
 import { Store } from 'redux';
 import { RouterPayload } from '@/nice-router/nice-router.model';
 import { H5PageProps } from '@/nice-router/h5-page';
+
+function log(...params) {
+  console.log('%c nice-router: ', 'color:#8add4c; text-shadow: 0.5px 0.5px 0.5px grey', ...params);
+}
 
 //  push='navigateTo'
 //  replace='redirectTo'
@@ -40,7 +44,7 @@ type PageHistoryType = {
 type RouteFunction = (
   action: string | ActionLike | object,
   params?: Record<string, any>,
-  options?: NavigationOptionType
+  options?: NavigationOptionType,
 ) => Promise<any> | null;
 
 // Local page
@@ -295,7 +299,7 @@ class NavigationServiceClass {
       const h5Param: H5PageProps = {} as H5PageProps;
       if (isH5()) {
         console.warn(
-          '兼容在H5中使用了带schema的linkToUrl，不推荐，H5代码应该只关心自己，不应该带Schema, 除非是不同业务域名的跳转'
+          '兼容在H5中使用了带schema的linkToUrl，不推荐，H5代码应该只关心自己，不应该带Schema, 除非是不同业务域名的跳转',
         );
         // @ts-ignore
         window.location = linkToUrl;

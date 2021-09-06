@@ -1,5 +1,5 @@
 import Config from './nice-router.config';
-import { isEmpty, isNotEmpty, log } from './nice-router-util';
+import { isEmpty, isNotEmpty } from './nice-router-util';
 import StorageTools from './storage-tools';
 
 function getPageKeyByUri(uri = '') {
@@ -11,14 +11,14 @@ function getPageKeyByUri(uri = '') {
 
 function inBlackList(key, page) {
   const result = Config.backendRouterPageBlackList.includes(page) || Config.backendRouterPageKeyBlackList.includes(key);
-  log('key and page is in black list?', result);
+  console.log('key and page is in black list?', result);
   return result;
 }
 
 // 后端路由缓存
 const saveBackendRouter = async (uri: string, page: string) => {
   const key = getPageKeyByUri(uri);
-  log('start save backend router to cache, uri:', uri, ', page:', page);
+  console.log('start save backend router to cache, uri:', uri, ', page:', page);
   if (!inBlackList(key, page)) {
     // 缓存前端路由3天
     if (key.length > 0) {

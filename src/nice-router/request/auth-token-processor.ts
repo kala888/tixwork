@@ -1,13 +1,13 @@
 import _ from 'lodash';
 import AuthTools from '../auth-tools';
-import { isNotEmpty, log } from '../nice-router-util';
+import { isNotEmpty } from '../nice-router-util';
 
 const AuthTokenProcessor = async (chain) => {
   const token = await AuthTools.getTokenAsync();
   const { requestParams } = chain;
   const { headers = {} } = requestParams;
 
-  log('set Authorization token to Request Header:', token);
+  console.log('set Authorization token to Request Header:', token);
   const theParam: any = {
     ...requestParams,
     headers: {

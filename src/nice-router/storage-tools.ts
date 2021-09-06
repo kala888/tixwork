@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import Taro from '@tarojs/taro';
 import { SHA1 } from 'crypto-es/lib/sha1.js';
-import { log, parseJSON } from './nice-router-util';
+import { parseJSON } from './nice-router-util';
 
 const setItem = (key: string, value: any) => Taro.setStorageSync(key, value);
 const getItem = (key) => Taro.getStorageSync(key);
@@ -74,7 +74,7 @@ const StorageTools = {
     if (_.isNumber(expiry) && expiry > 0) {
       // @ts-ignore
       const expired = expiry && currentTime() >= parseInt(expiry, 10);
-      log('是否过期？', 1, expired, currentTime());
+      console.log('是否过期？', 1, expired, currentTime());
       return expired;
     }
     return true;

@@ -1,5 +1,4 @@
 import Taro from '@tarojs/taro';
-import { log } from '../nice-router-util';
 import AuthTokenProcessor from './auth-token-processor';
 import customProcessor from './custom-processor';
 import loadingAndLogsProcessor from './loading-and-logs-processor';
@@ -24,7 +23,7 @@ interceptors.forEach((interceptorItem) => Taro.addInterceptor(interceptorItem));
 
 class httpRequest {
   async send(options: HttpRequestProps = {}, loading): Promise<HttpResponseProps> {
-    log('http-request options', options);
+    console.log('http-request options', options);
     // @ts-ignore
     return Taro.request({ ...options, loading });
   }

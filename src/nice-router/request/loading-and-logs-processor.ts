@@ -1,6 +1,6 @@
 import GlobalToast from '@/nice-router/global-toast';
 import { isNotEmpty, LoadingType } from '@/nice-router/nice-router-util';
-import OverlayLoading from '@/nice-router/overlay-loading';
+import GlobalLoading from '@/nice-router/global-loading';
 import ViewmappingService from '@/nice-router/viewmapping-service';
 import Taro from '@tarojs/taro';
 import { HttpResponse } from '@/nice-router/request/reqeust';
@@ -10,7 +10,7 @@ const systemErrorXClass = 'com.terapico.caf.local.NetworkException';
 
 function showLoading(loading: LoadingType) {
   if (loading === LoadingType.Modal) {
-    OverlayLoading.showLoadingModal();
+    GlobalLoading.showLoadingModal();
   }
   if (isWeapp() && loading === LoadingType.BarLoading) {
     Taro.showNavigationBarLoading();
@@ -19,7 +19,7 @@ function showLoading(loading: LoadingType) {
 
 async function hideLoading(loading: LoadingType) {
   if (loading === LoadingType.Modal) {
-    OverlayLoading.hideLoadingModal();
+    GlobalLoading.hideLoadingModal();
   }
   if (isWeapp() && loading === LoadingType.BarLoading) {
     Taro.hideNavigationBarLoading();

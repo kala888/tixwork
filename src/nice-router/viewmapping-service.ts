@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { isEmpty, log } from './nice-router-util';
+import { isEmpty } from './nice-router-util';
 
 export type ViewConfigStateActionType = string | string[];
 
@@ -79,7 +79,7 @@ class ViewMappingServiceClass {
     let view = _.get(this._viewConfig, key, {});
     if (isEmpty(view)) {
       const shortKey = key.substr(key.lastIndexOf('.') + 1, key.length);
-      log('the key for class', key, 'not found, try to map with shortKey', shortKey);
+      console.log('the key for class', key, 'not found, try to map with shortKey', shortKey);
       view = this._viewConfig[shortKey] || {};
     }
     if (Array.isArray(view)) {

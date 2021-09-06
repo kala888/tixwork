@@ -1,7 +1,7 @@
 import { isH5 } from '@/utils/index';
 import jwtDecode from 'jwt-decode';
 import _ from 'lodash';
-import { isNotEmpty, log } from './nice-router-util';
+import { isNotEmpty } from './nice-router-util';
 import StorageTools from './storage-tools';
 
 const TOKEN = 'TOKEN';
@@ -23,15 +23,15 @@ export type AuthInfoType = {
 };
 
 const toAuthInfo = _.memoize(
-  (token: string): AuthInfoType => (isNotEmpty(token) ? jwtDecode(token) : ({} as AuthInfoType))
+  (token: string): AuthInfoType => (isNotEmpty(token) ? jwtDecode(token) : ({} as AuthInfoType)),
 );
 
 async function saveTokenAsync(token: string) {
   StorageTools.set(TOKEN, token);
-  log('saveToken', token);
+  console.log('saveToken', token);
   const authInfo: AuthInfoType = toAuthInfo(token);
   StorageTools.set(AUTH_INFO, authInfo);
-  log('saveAuthInfo', authInfo);
+  console.log('saveAuthInfo', authInfo);
   return authInfo;
 }
 
@@ -41,7 +41,7 @@ async function saveTokenAsync(token: string) {
 async function isLoginToken() {
   const authInfo = await getAuthInfoAsync();
   if (authInfo.securityStatus === AuthInfoSecurityStatus.CERTIFICATE && authInfo.exp > 0) {
-    log('the token expTime is', authInfo.exp, 'will exp ', authInfo.exp - Date.now() / 1000, 'latter');
+    console.log('the token expTime is', authInfo.exp, 'will exp ', authInfo.exp - Date.now() / 1000, 'latter');
     return authInfo.exp - Date.now() / 1000 > SAFETY_TIME;
   }
   return false;

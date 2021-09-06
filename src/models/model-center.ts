@@ -6,7 +6,7 @@ import objectPicker from './object-picker.model';
 
 import ModelTools from './model-tools';
 
-const modelListOOTB = [
+const modelList = [
   niceRouter,
   app,
   'home',
@@ -26,15 +26,6 @@ const modelListOOTB = [
   'listofpage4',
   //biz
 ];
-
-const customizedModelList = [];
-
-let modelList: any[] = [];
-modelList = modelList.concat(modelListOOTB.filter((it) => _.isString(it)));
-modelList = modelList.concat(customizedModelList.filter((it) => _.isString(it)));
-
-modelList = modelList.concat(modelListOOTB.filter((it) => _.isObject(it)));
-modelList = modelList.concat(customizedModelList.filter((it) => _.isObject(it)));
 
 const modelContainer = {};
 console.log('prepare to initial models from modelList', modelList);

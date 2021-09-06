@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { isEmpty, isNotEmpty, LoadingType, log } from '../nice-router-util';
+import { isEmpty, isNotEmpty, LoadingType } from '../nice-router-util';
 import StorageTools from '../storage-tools';
 import HttpRequest, { HttpResponseProps } from './http-request';
 import MockService from './mock-service';
@@ -17,10 +17,10 @@ const isCacheable = (resp: HttpResponseProps) => {
   const xClass = headers['x-class'] || '';
   const xNavigationMethod = headers['x-navigation-method'] || '';
   if (xNavigationMethod === 'replace' || xClass.indexOf('LoginForm') > -1) {
-    log(
+    console.log(
       'the response will not cached, bc the xNavigationMethod is replace or xClass is LoginForm',
       xNavigationMethod,
-      xClass
+      xClass,
     );
     return false;
   }
@@ -29,7 +29,7 @@ const isCacheable = (resp: HttpResponseProps) => {
 
 const replaceUrlPlaceholder = (
   uri: string = '',
-  params: Record<string, any>
+  params: Record<string, any>,
 ): {
   uri: string;
   params: Record<string, any>;
