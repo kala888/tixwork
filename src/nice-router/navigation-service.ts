@@ -44,7 +44,7 @@ type PageHistoryType = {
 type RouteFunction = (
   action: string | ActionLike | object,
   params?: Record<string, any>,
-  options?: NavigationOptionType,
+  options?: NavigationOptionType
 ) => Promise<any> | null;
 
 // Local page
@@ -299,7 +299,7 @@ class NavigationServiceClass {
       const h5Param: H5PageProps = {} as H5PageProps;
       if (isH5()) {
         console.warn(
-          '兼容在H5中使用了带schema的linkToUrl，不推荐，H5代码应该只关心自己，不应该带Schema, 除非是不同业务域名的跳转',
+          '兼容在H5中使用了带schema的linkToUrl，不推荐，H5代码应该只关心自己，不应该带Schema, 除非是不同业务域名的跳转'
         );
         // @ts-ignore
         window.location = linkToUrl;

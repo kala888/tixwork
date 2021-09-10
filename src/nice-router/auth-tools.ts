@@ -23,7 +23,7 @@ export type AuthInfoType = {
 };
 
 const toAuthInfo = _.memoize(
-  (token: string): AuthInfoType => (isNotEmpty(token) ? jwtDecode(token) : ({} as AuthInfoType)),
+  (token: string): AuthInfoType => (isNotEmpty(token) ? jwtDecode(token) : ({} as AuthInfoType))
 );
 
 async function saveTokenAsync(token: string) {

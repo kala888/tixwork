@@ -22,8 +22,13 @@ export function useVisible(initial = false) {
 
 export function useLoading(initial = false) {
   const [loading, setLoading] = useState(initial);
-  const showLoading = () => setLoading(true);
   const hideLoading = () => setLoading(false);
+  const showLoading = (timeout) => {
+    setLoading(true);
+    if (timeout) {
+      setTimeout(() => hideLoading(), timeout);
+    }
+  };
   return {
     loading,
     showLoading,

@@ -105,3 +105,9 @@ export function getExtMode(...props: any[]) {
     },
   };
 }
+
+/**
+ * 字符长度
+ * 一个中文两个字符,
+ */
+export const codeLength = _.memoize((str) => _.reduce(str, (sum, it) => sum + (it.charCodeAt(0) > 255 ? 2 : 1), 0));

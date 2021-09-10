@@ -9,20 +9,29 @@ const imageList = [
 ];
 
 const MockDataCache = {};
-const mockResp = (uri: string = '', xClass: string, data: {}, others) => {
+const mockResp = (uri = '', xClass, data) => {
   const key = uri.toLowerCase().trim();
   MockDataCache[key] = {
     xClass,
     success: true,
     data,
-    ...others,
   };
 };
+
+const getMockResp = async (uri = '') => {
+  return new Promise((resolve) => {
+    const resp = MockDataCache[uri.toLowerCase().trim()];
+    // 这里可以测试delay和异常
+    setTimeout(() => resolve(resp), 200);
+  });
+};
+
 const MockService = {
   mockResp,
-  getMockResp: (uri: string = '') => MockDataCache[uri.toLowerCase().trim()],
-  randomImage: (): string => _.sample(imageList) || '',
+  getMockResp,
+  randomImage: () => _.sample(imageList),
   defaultImage: imageList[2],
 };
+
 // 凑活用
 export default MockService;

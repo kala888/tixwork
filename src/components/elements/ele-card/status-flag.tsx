@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from '@tarojs/components';
-import { getExtMode, isEmpty } from '@/nice-router/nice-router-util';
+import { codeLength, getExtMode, isEmpty } from '@/nice-router/nice-router-util';
 import './status-flag.scss';
 
 interface StatusFlagProps {
@@ -13,12 +13,12 @@ const StatusFlag: React.FC<StatusFlagProps> = (props) => {
   if (isEmpty(title)) {
     return null;
   }
-  const length = title.length;
+  const length = codeLength(title);
   const txtClass = getExtMode({
-    txt_large: length < 3,
-    txt_normal: length === 3,
-    txt_small: title.length === 4,
-    txt_tiny: title.length > 4,
+    txt_large: length <= 4,
+    txt_normal: length > 4 && length <= 6,
+    txt_small: length > 6 && length <= 8,
+    txt_tiny: length >= 10,
   }).classNames('status-flag-txt');
 
   const rootClass = getExtMode({ [size]: size }).classNames('status-flag');
