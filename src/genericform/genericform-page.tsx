@@ -66,6 +66,21 @@ function GenericformPage() {
     }
     return defaultValues;
   };
+
+  const handleFieldChange = async (field = {} as any) => {
+    const { onChangeAction } = field;
+    if (onChangeAction) {
+      const { navigationMethod = 'replace' } = onChangeAction;
+      // @ts-ignore
+      const values = await formRef.current.getValues();
+      console.log('field change, just post form to backend', values);
+      await NavigationService.post(onChangeAction, values, {
+        asForm: true,
+        navigationMethod,
+      });
+    }
+  };
+
   const footerActionList = actionList.map((it) => ({
     uiType: ActionUtil.isSubmitAction(it.code) ? 'primary' : 'secondary',
     ...it,
@@ -85,7 +100,8 @@ function GenericformPage() {
         groupList={groupList}
         fieldList={fieldList}
         defaultValues={defaultValues}
-        handleActionClick={handleActionClick}
+        onActionClick={handleActionClick}
+        onFieldChange={handleFieldChange}
       />
       <EleActionList mode='full' items={footerActionList} />
     </View>

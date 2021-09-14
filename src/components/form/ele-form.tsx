@@ -21,7 +21,7 @@ type EleFormProps = {
   groupList?: any[];
   showRequired?: boolean;
   bordered?: boolean;
-  handleActionClick?: any;
+  onActionClick?: any;
 };
 
 const getFields = (groupList, fieldList) => {
@@ -91,8 +91,10 @@ function EleForm(props: EleFormProps, ref) {
       [name]: value,
     }));
 
-    if (_.isFunction(onFieldChange)) {
-      onFieldChange(name, fieldValues);
+    if (onFieldChange && _.isFunction(onFieldChange)) {
+      const fields = getFields(groupList, fieldList);
+      const field = fields.find((it) => it.name === name);
+      onFieldChange(field);
     }
   };
 
@@ -101,28 +103,41 @@ function EleForm(props: EleFormProps, ref) {
     setFieldErrors({});
   };
 
+  const getValues = async () => {
+    const fields = getFields(groupList, fieldList).filter((it) => !it.disabled);
+    const values = {};
+    fields.forEach((it) => {
+      values[it.name] = fieldValues[it.name];
+    });
+    return values;
+  };
+
   const validateFields = async () => {
-    const fields = getFields(groupList, fieldList);
+    const values = await getValues();
     const errors = {};
-    for (const field of fields) {
-      const { name } = field;
-      const value = fieldValues[name];
-      const e = await _validateField(name, value);
+
+    const fieldNameList = Object.keys(values);
+    for (const name of fieldNameList) {
+      const e = await _validateField(name, values[name]);
       if (isNotEmpty(e)) {
         console.log('set errors', e);
         errors[name] = e;
       }
     }
     setFieldErrors(errors);
+
+    console.log('validate fields result, errors:', errors);
+    console.log('validate fields result, values', values);
     return {
-      errors: errors,
-      values: fieldValues,
+      errors,
+      values,
     };
   };
 
   useImperativeHandle(ref, () => ({
     validateFields,
     resetFields,
+    getValues,
   }));
 
   // 导出，外用
@@ -141,7 +156,7 @@ function EleForm(props: EleFormProps, ref) {
     });
   };
 
-  const { handleActionClick = noop } = props;
+  const { onActionClick = noop } = props;
 
   return (
     <View className='ele-form'>
@@ -150,7 +165,7 @@ function EleForm(props: EleFormProps, ref) {
 
         const actionList = groupActionList.map((it) => ({
           ...it,
-          onClick: () => handleActionClick(it),
+          onClick: () => onActionClick(it),
         }));
 
         return (
