@@ -14,6 +14,7 @@ import './object-picker-page.scss';
 
 function ObjectPickerPage() {
   const { visible, close, show } = useVisible(false);
+  // @ts-ignore
   const root = useSelector((state) => state.objectPicker);
 
   // q如果变化了，就发送一个后台请求

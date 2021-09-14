@@ -16,6 +16,7 @@ import './styles.scss';
 
 function GenericformPage() {
   const formRef = useRef(null);
+  // @ts-ignore
   const root = useSelector((state) => state.genericform);
   const { id, groupList = [], fieldList = [], stepList = [], actionList = [], content } = root;
   usePageTitle(root);

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { isEmpty } from '@/nice-router/nice-router-util';
 
 const imageList = [
   'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
@@ -21,6 +22,10 @@ const mockResp = (uri = '', xClass, data) => {
 const getMockResp = async (uri = '') => {
   return new Promise((resolve) => {
     const resp = MockDataCache[uri.toLowerCase().trim()];
+    if (isEmpty(resp)) {
+      resolve(resp);
+      return;
+    }
     // 这里可以测试delay和异常
     setTimeout(() => resolve(resp), 200);
   });

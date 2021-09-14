@@ -20,7 +20,7 @@ const isCacheable = (resp: HttpResponseProps) => {
     console.log(
       'the response will not cached, bc the xNavigationMethod is replace or xClass is LoginForm',
       xNavigationMethod,
-      xClass
+      xClass,
     );
     return false;
   }
@@ -29,7 +29,7 @@ const isCacheable = (resp: HttpResponseProps) => {
 
 const replaceUrlPlaceholder = (
   uri: string = '',
-  params: Record<string, any>
+  params: Record<string, any>,
 ): {
   uri: string;
   params: Record<string, any>;
@@ -84,7 +84,7 @@ class BackendServiceClass {
       headers,
     };
     // // mock 数据处理
-    const mockData = MockService.getMockResp(actionUri);
+    const mockData = await MockService.getMockResp(actionUri);
     if (mockData) {
       return mockData;
     }
