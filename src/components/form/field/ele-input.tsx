@@ -9,7 +9,7 @@ import { AtInputProps } from 'taro-ui/types/input';
 export default function EleInput(props: AtInputProps) {
   return (
     <View>
-      <AtInput border={false} {...props} />
+      <AtInput placeholder='请输入' border={false} {...props} />
     </View>
   );
 }

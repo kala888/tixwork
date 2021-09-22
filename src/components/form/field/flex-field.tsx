@@ -27,7 +27,8 @@ export default function FlexField(props) {
   // }
 
   // email，区分email应该是在校验规则上做手脚
-  if (type === 'text' || type === 'email') return <AtInput {...props} type='text' border={false} />;
+  if (type === 'text' || type === 'email')
+    return <AtInput placeholder='请输入' {...props} type='text' border={false} />;
 
   // double，decimal 应该在校验规则，精度上做手脚
   if (type === 'integer' || type === 'double' || type === 'decimal') return <NumberInput {...props} />;
