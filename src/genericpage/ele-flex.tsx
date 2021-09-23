@@ -25,6 +25,7 @@ import EleText from './elements/ele-text';
 import EleWhiteSpace from './elements/ele-white-space';
 
 import './styles.scss';
+import FlexInfoList from '@/components/info-list/flex-info-list';
 
 type EleFlexItem = {
   id: string;
@@ -65,6 +66,7 @@ function EleFlex(props: EleFlexProps) {
         if (it.type === 'listof') return <Listof key={key} {...it} />;
         if (it.type === 'rich-text') return <EleRichText key={key} {...it} />;
         if (it.type === 'ele-card') return <EleCard key={key} {...it} />;
+        if (it.type === 'info-list') return <FlexInfoList key={key} {...it} />;
 
         if (it.type === 'form') return <EleForm key={key} {...it} fields={it.kids} />;
 
