@@ -24,10 +24,8 @@ export type EleCarouselProps = {
 function EleCarousel(props: EleCarouselProps) {
   const {
     items = [],
-    autoplay,
     interval,
     duration,
-    circular,
     indicatorColor,
     indicatorActiveColor,
     indicatorDots,
