@@ -1,4 +1,4 @@
-import '@tarojs/taro/html.css';
+// import '@tarojs/taro/html.css';
 import { RichText } from '@tarojs/components';
 
 export type EleRichTextProps = {

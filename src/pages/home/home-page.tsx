@@ -11,6 +11,7 @@ import NavigationService from '@/nice-router/navigation-service';
 import './home.scss';
 
 function HomePage(props) {
+  // @ts-ignore
   const root = useSelector((state) => state.home);
   usePageTitle(root);
   useAjaxPullDown(props);

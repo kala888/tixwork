@@ -1,9 +1,8 @@
-module.exports = {
-  parser: "@typescript-eslint/parser", // Specifies the ESLint parser
-  extends: [
-    "taro/react",
-  ],
+module.exports ={
+  "extends": ["taro/react"],
   "rules": {
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "import/first": "off",
     "jsx-quotes": "off",
     "react/sort-comp": [0],

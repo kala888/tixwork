@@ -64,10 +64,10 @@ function EleCarousel(props: EleCarouselProps) {
   return (
     <View className={rootClass} style={customStyle}>
       <Swiper
-        autoplay={autoplay}
+        autoplay={false}
         interval={interval}
         duration={duration}
-        circular={circular}
+        // circular={circular}
         indicatorColor={indicatorColor}
         indicatorActiveColor={indicatorActiveColor}
         indicatorDots={showDots}
@@ -86,6 +86,7 @@ function EleCarousel(props: EleCarouselProps) {
                   src={videoUrl}
                   controls
                   poster={imageUrl}
+                  autoplay={false}
                   loop
                   muted={false}
                   direction={90}

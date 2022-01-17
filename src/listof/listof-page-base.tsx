@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import Taro from '@tarojs/taro';
+import Taro, { useDidShow, useReady } from '@tarojs/taro';
 import { isNotEmpty } from '@/nice-router/nice-router-util';
 import EleActionList from '@/components/elements/action-list/ele-action-list';
 import { getDeviceHeight } from '@/utils/index';
-import { useDidShow, useReady } from '@tarojs/runtime';
 import classNames from 'classnames';
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
 import { View } from '@tarojs/components';
