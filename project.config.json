@@ -1,5 +1,5 @@
 {
-  "miniprogramRoot": "dist/",
+  "miniprogramRoot": "./dist",
   "projectname": "nice-router-taro",
   "description": "nice-router-taro a wx development framework base on Taro and React",
   "appid": "wxd7ff628dc0e8870d",
