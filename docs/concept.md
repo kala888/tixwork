@@ -4,7 +4,7 @@ tixwork-taro  提供基础的，请求，路由，数据处理，异常处理等
 
 - [nice-router.model](/docs/navigation-service.md)
   
-  基于dva的核心路由组件。封装了https请求前后的一些常见行为方法。
+  基于model的核心路由组件。封装了https请求前后的一些常见行为方法。
 
 - [NavigationService](/docs/navigation-service.md) 
   
