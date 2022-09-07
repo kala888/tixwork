@@ -1,4 +1,4 @@
-import { toRpx } from '@/utils/index';
+import { toRpx } from '@/utils';
 import { View } from '@tarojs/components';
 
 type EleWhiteSpaceProps = {

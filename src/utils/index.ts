@@ -1,8 +1,10 @@
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
+import { isEmpty, isNotEmpty } from '@/utils/object-utils';
 import Taro from '@tarojs/taro';
 import _ from 'lodash';
 
 let device: Taro.getSystemInfoSync.Result;
+
+export const noop = () => {};
 
 function getDevice(): Taro.getSystemInfoSync.Result {
   if (isEmpty(device)) {
@@ -161,29 +163,29 @@ export function removeOrPush<T>(list: T[] = [], item: T, withClone = false) {
   return result;
 }
 
-export type Group<T> = {
-  id: number;
-  title: string;
-  items: T[];
-};
-
-export function getGroupList<T>(items: T[]): Group<T>[] {
-  const groupList: Group<T>[] = [];
-  _.forEach(items, (it: any, idx) => {
-    const { group = '' } = it;
-    let theGroup: Group<T> | undefined = _.find(groupList, { title: group });
-    if (isEmpty(theGroup)) {
-      theGroup = {
-        id: idx,
-        title: group,
-        items: [],
-      };
-      groupList.push(theGroup);
-    }
-    theGroup && theGroup.items.push({ id: idx, ...it });
-  });
-  return groupList;
-}
+// export type Group<T> = {
+//   id: number;
+//   title: string;
+//   items: T[];
+// };
+//
+// export function getGroupList<T>(items: T[]): Group<T>[] {
+//   const groupList: Group<T>[] = [];
+//   _.forEach(items, (it: any, idx) => {
+//     const { group = '' } = it;
+//     let theGroup: Group<T> | undefined = _.find(groupList, { title: group });
+//     if (isEmpty(theGroup)) {
+//       theGroup = {
+//         id: idx,
+//         title: group,
+//         items: [],
+//       };
+//       groupList.push(theGroup);
+//     }
+//     theGroup && theGroup.items.push({ id: idx, ...it });
+//   });
+//   return groupList;
+// }
 
 export function getGroupListByColumn<T>(items: T[] = [], columnNum = 3) {
   const data = items.map((it, idx) => ({ id: idx, ...it }));
@@ -191,48 +193,55 @@ export function getGroupListByColumn<T>(items: T[] = [], columnNum = 3) {
   return groupList.map((list, idx) => ({ id: idx, list }));
 }
 
-export function diffTime(end, start = Date.now()) {
-  const dateDiff = end - start;
-  if (_.isNaN(dateDiff)) {
-    return '';
-  }
+//
+// export function diffTime(end, start = Date.now()) {
+//   const dateDiff = end - start;
+//   if (_.isNaN(dateDiff)) {
+//     return '';
+//   }
+//
+//   const dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000)); //计算出相差天数
+//   const leave1 = dateDiff % (24 * 3600 * 1000); //计算天数后剩余的毫秒数
+//   const hours = Math.floor(leave1 / (3600 * 1000)); //计算出小时数
+//   //计算相差分钟数
+//   const leave2 = leave1 % (3600 * 1000); //计算小时数后剩余的毫秒数
+//   const minutes = Math.floor(leave2 / (60 * 1000)); //计算相差分钟数
+//   //计算相差秒数
+//   const leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
+//   const seconds = Math.round(leave3 / 1000);
+//
+//   const result: string[] = [];
+//   if (dayDiff > 0) {
+//     result.push(`${dayDiff}天`);
+//   }
+//   if (hours > 0) {
+//     result.push(`${hours}时`);
+//   }
+//   if (minutes > 0) {
+//     result.push(`${minutes}分`);
+//   }
+//   if (seconds > 0) {
+//     result.push(`${seconds}秒`);
+//   }
+//   return result.join('');
+// }
 
-  const dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000)); //计算出相差天数
-  const leave1 = dateDiff % (24 * 3600 * 1000); //计算天数后剩余的毫秒数
-  const hours = Math.floor(leave1 / (3600 * 1000)); //计算出小时数
-  //计算相差分钟数
-  const leave2 = leave1 % (3600 * 1000); //计算小时数后剩余的毫秒数
-  const minutes = Math.floor(leave2 / (60 * 1000)); //计算相差分钟数
-  //计算相差秒数
-  const leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
-  const seconds = Math.round(leave3 / 1000);
+// export function getParametersFromUrl(url = '') {
+//   let query = {};
+//   const startIndex = url.indexOf('?');
+//   if (startIndex > -1) {
+//     const str = url.substr(startIndex + 1);
+//     const pairs = str.split('&');
+//     for (let i = 0; i < pairs.length; i++) {
+//       const pair = pairs[i].split('=');
+//       query[pair[0]] = pair[1];
+//     }
+//   }
+//   return query; // 返回对象
+// }
 
-  const result: string[] = [];
-  if (dayDiff > 0) {
-    result.push(`${dayDiff}天`);
-  }
-  if (hours > 0) {
-    result.push(`${hours}时`);
-  }
-  if (minutes > 0) {
-    result.push(`${minutes}分`);
-  }
-  if (seconds > 0) {
-    result.push(`${seconds}秒`);
-  }
-  return result.join('');
-}
-
-export function getParametersFromUrl(url = '') {
-  let query = {};
-  const startIndex = url.indexOf('?');
-  if (startIndex > -1) {
-    const str = url.substr(startIndex + 1);
-    const pairs = str.split('&');
-    for (let i = 0; i < pairs.length; i++) {
-      const pair = pairs[i].split('=');
-      query[pair[0]] = pair[1];
-    }
-  }
-  return query; // 返回对象
-}
+/**
+ * 字符长度
+ * 一个中文两个字符,
+ */
+export const codeLength = _.memoize((str) => _.reduce(str, (sum, it) => sum + (it.charCodeAt(0) > 255 ? 2 : 1), 0));

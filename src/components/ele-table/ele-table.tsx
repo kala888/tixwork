@@ -1,8 +1,10 @@
 import { View } from '@tarojs/components';
 import React from 'react';
 import EleTableRow, { EleTableRowProps } from '@/components/ele-table/ele-table-row';
-import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util';
-import './ele-table.scss';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import { isNotEmpty } from '@/utils/object-utils';
+
+import './ele-table.less';
 
 type EleTableProps = {
   title?: string;

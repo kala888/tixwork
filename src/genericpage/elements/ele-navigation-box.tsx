@@ -5,7 +5,7 @@
  */
 import NavigationBox from '@/components/navigation/navigation-box';
 import classNames from 'classnames';
-import './styles.scss';
+import './styles.less';
 
 function EleNavigationBox(props) {
   const { kids, className } = props;

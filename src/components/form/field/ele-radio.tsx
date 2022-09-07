@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { getExtMode, isNotEmpty, noop } from '@/nice-router/nice-router-util';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import { isNotEmpty } from '@/utils/object-utils';
+import { noop } from '@/utils';
 import { Label, Radio, RadioGroup, View } from '@tarojs/components';
 import { CandidateValue } from '@/nice-router/nice-router-types';
-import './styles.scss';
+import './styles.less';
 
 type EleRadioProps = {
   value: any;
@@ -36,8 +38,10 @@ function EleRadio(props: EleRadioProps) {
           {candidateValues.map((item, idx) => {
             const checked = isNotEmpty(selected) ? selected?.id === item.id : false;
             const key = `radio-${idx}`;
+
             return (
               <Label className='radio-list__label' for={key} key={key}>
+                {/*// @ts-ignore*/}
                 <Radio className='radio-list__radio' value={item.id} checked={checked}>
                   {item.title}
                 </Radio>

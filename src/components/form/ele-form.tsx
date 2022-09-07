@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
-import { isNotEmpty, noop, parseJSON } from '@/nice-router/nice-router-util';
+import { noop } from '@/utils';
 import { View } from '@tarojs/components';
 import _ from 'lodash';
 import EleFlex from '@/genericpage/ele-flex';
@@ -7,8 +7,9 @@ import EleActionList from '@/components/elements/action-list/ele-action-list';
 import SectionBar from '../section-bar/section-bar';
 import FormItem from './form-item';
 import FormUtil from './form-util';
-import './ele-form.scss';
 import validator from './validator';
+import { isNotEmpty, parseToObject } from '@/utils/object-utils';
+import './ele-form.less';
 
 // 参考 https://github.com/react-component/form
 
@@ -180,7 +181,7 @@ function EleForm(props: EleFormProps, ref) {
                 const key = name + '_' + idx; // key重做，因为有taro bug
 
                 if (type === 'display-field' && isNotEmpty(field.value)) {
-                  const ele = _.isString(field.value) ? parseJSON(field.value) : field.value;
+                  const ele = _.isString(field.value) ? parseToObject(field.value) : field.value;
                   return <EleFlex key={key} {...ele} />;
                 }
                 const errors = fieldErrors[name];

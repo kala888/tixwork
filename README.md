@@ -1,5 +1,5 @@
 #### 第0适合后端程序员的前端小程序开发框架
-nice-router 是一个前端低代码框架(低码)，可以使用JSON数据驱动页面渲染，可以极大节省页面开发工作量，极大提升开发前端界面的效率。(可手动定制页面)
+tixwork-taro 是一个前端低代码框架(低码)，可以使用JSON数据驱动页面渲染，可以极大节省页面开发工作量，极大提升开发前端界面的效率。(可手动定制页面)
 
 多端统一开发体验 + 满足前端页面驱动和后端路由驱动的需求 + 给予后端开发页面控制权（方便实现客CS程序的千人千面，业务变更）
 
@@ -17,7 +17,7 @@ nice-router 是一个前端低代码框架(低码)，可以使用JSON数据驱�
 
 
 
-# nice-router-taro (现已升级到Taro3)
+# tixwork-taro
 
 #### 基础知识：React + DVA + Taro3 + TaroUI
 
@@ -40,15 +40,13 @@ nice-router 是一个前端低代码框架(低码)，可以使用JSON数据驱�
   <img src='http://img13.360buyimg.com/img/jfs/t1/112451/27/7969/1164755/5ec76253E3c56630a/b26b11c83f7062a1.png.webp'/>
 </div>
 
-### nice-router 已经组件共享提供了基础的支持。希望各位兄弟贡献各种常用的组件，尤其是那些促销组件。让体力活变为OOTB。
+### tixwork-taro 已经组件共享提供了基础的支持。希望各位兄弟贡献各种常用的组件，尤其是那些促销组件。让体力活变为OOTB。
 
-nice-router 包含两部分：
+tixwork-taro  包含两部分：
 
 
-[nice-router-taro 开发文档](https://github.com/kala888/nice-router-taro/blob/master/docs/README.md)
-
-[nice-router-react-native 开发文档](https://github.com/kala888/nice-router) (暂未开源, 稍等片刻)
+[tixwork-taro 开发文档](https://github.com/kala888/tixwork-taro/blob/master/docs/README.md)
 
 ###### 感谢Jetbrains提供IDE支持
 
-[![](https://github.com/kala888/nice-router-taro/blob/master/docs/assets/jetbrains.svg)](https://www.jetbrains.com)
+[![](https://github.com/kala888/tixwork-taro/blob/master/docs/assets/jetbrains.svg)](https://www.jetbrains.com)

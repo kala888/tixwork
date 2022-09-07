@@ -1,56 +1,25 @@
-import { useEffect, useState } from 'react';
-import { AtCheckbox, AtRadio } from 'taro-ui';
-import { isNotEmpty, noop } from '@/nice-router/nice-router-util';
+import { noop } from '@/utils';
 import { View } from '@tarojs/components';
 import { CandidateValue } from '@/nice-router/nice-router-types';
-import './styles.scss';
+import './styles.less';
+import CheckboxGroup from '@/components/checkbox-group';
+import RadioGroup from '@/components/radio-group';
 
 type EleCheckboxProps = {
-  candidateValues?: CandidateValue[];
-  onChange?: Function;
-  value: string[];
+  candidateValues: CandidateValue[];
+  onChange: (value: string | string[]) => void;
+  value: string[] | string;
   radio?: boolean;
 };
 
 function EleCheckbox(props: EleCheckboxProps) {
-  const [selected, setSelected] = useState<string[]>();
-
   const { candidateValues = [], onChange = noop, value, radio = false } = props;
-
-  useEffect(() => {
-    if (isNotEmpty(value)) {
-      setSelected(value);
-    }
-  }, [value]);
-
-  const handleClick = (items) => {
-    setSelected(items);
-    onChange(items);
-  };
-
-  const options = candidateValues.map((it) => ({
-    value: it.id,
-    label: it.title,
-    ...it,
-  }));
-
+  const Component = radio ? RadioGroup : CheckboxGroup;
   return (
     <View className='ele-checkbox'>
-      {radio ? (
-        // @ts-ignore
-        <AtRadio options={options} value={selected} onClick={handleClick} />
-      ) : (
-        // @ts-ignore
-        <AtCheckbox options={options} selectedList={selected} onChange={handleClick} />
-      )}
+      <Component options={candidateValues} value={value} onChange={onChange} />
     </View>
   );
 }
-
-EleCheckbox.defaultProps = {
-  candidateValues: [],
-  onChange: noop,
-  radio: false,
-};
 
 export default EleCheckbox;

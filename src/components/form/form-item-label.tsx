@@ -1,10 +1,11 @@
 import React from 'react';
-import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util';
+import { getExtMode } from '@/nice-router/nice-router-utils';
 import { useVisible } from '@/service/use-service';
 import _ from 'lodash';
 import { Text, View } from '@tarojs/components';
-import { AtActionSheet } from 'taro-ui';
-import './form-item-label.scss';
+import { isNotEmpty } from '@/utils/object-utils';
+import './form-item-label.less';
+import FloatLayout from '@/components/float-layout';
 
 type FormItemLabelTips = {
   title?: string;
@@ -43,12 +44,12 @@ function FormItemLabel(props: FormItemLabelProps) {
       </Text>
       {isNotEmpty(tips) && <Text className='iconfont iconfont-question-circle' />}
       {tail}
-      <AtActionSheet onClose={close} isOpened={visible}>
+      <FloatLayout visible={visible} onCancel={close}>
         <View className='form-item-label-tips'>
           <View className='form-item-label-tips-title'>{_.get(tips, 'title', '')}</View>
           <View className='form-item-label-tips-brief'>{_.get(tips, 'brief', tips)}</View>
         </View>
-      </AtActionSheet>
+      </FloatLayout>
     </View>
   );
 }

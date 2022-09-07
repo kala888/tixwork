@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
-import ActionUtil from '@/nice-router/action-util';
+import ActionUtil from '@/utils/action-util';
 import NavigationService from '@/nice-router/navigation-service';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types';
 
 import { useVisible } from '@/service/use-service';
-import { getExtMode, isEmpty } from '@/nice-router/nice-router-util';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import { isEmpty } from '@/utils/object-utils';
 import EleButton from '@/components/elements/ele-button';
 import ActionIcon from '@/components/action-icon/action-icon';
-import './styles.scss';
+import './styles.less';
 
 type SectionBarProps = {
   children?: React.ReactNode;

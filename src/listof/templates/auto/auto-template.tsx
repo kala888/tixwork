@@ -4,10 +4,10 @@ import { ActionListLike, EleObject, ImageLike, TitleValue } from '@/nice-router/
 
 import StatusFlag from '@/components/elements/ele-card/status-flag';
 import EleActionList from '@/components/elements/action-list/ele-action-list';
-import { getExtMode } from '@/nice-router/nice-router-util';
+import { getExtMode } from '@/nice-router/nice-router-utils';
 import CardInfoTable from '@/components/ele-table/card-info-table';
 import ListofUtil from '../../listof-util';
-import './styles.scss';
+import './styles.less';
 
 type AutoItemProps = {
   status: string;

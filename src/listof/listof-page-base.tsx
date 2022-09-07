@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import Taro, { useDidShow, useReady } from '@tarojs/taro';
-import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { isNotEmpty } from '@/utils/object-utils';
 import EleActionList from '@/components/elements/action-list/ele-action-list';
-import { getDeviceHeight } from '@/utils/index';
+import { getDeviceHeight } from '@/utils';
 import classNames from 'classnames';
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
 import { View } from '@tarojs/components';
 import NavigationService from '@/nice-router/navigation-service';
-
 import { ActionLike, ActionListLike } from '@/nice-router/nice-router-types';
 import { EleTabsProps } from '@/components/elements/ele-tabs';
+import Config from '@/utils/config';
 import Listof, { ListofProps } from './listof';
-import './styles.scss';
 import FlexLineItem from './templates/flex-line-item';
 import FlexHeader from './flex-header';
-import Config from '@/nice-router/nice-router.config';
+import './styles.less';
 
 type listofPageBaseProps = {
   pageTitle?: string;
@@ -65,7 +64,7 @@ function ListofPageBase(props: listofPageBaseProps) {
 
   const {
     tabs,
-    list,
+    items,
     listMeta,
     displayMode,
     emptyMessage,
@@ -101,7 +100,7 @@ function ListofPageBase(props: listofPageBaseProps) {
       <View id='listof-header'>{renderHeader ? renderHeader() : theHeader}</View>
       <Listof
         dataContainer={dataContainer}
-        list={list}
+        items={items}
         listMeta={listMeta}
         displayMode={displayMode}
         emptyMessage={emptyMessage}

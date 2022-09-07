@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import _ from 'lodash';
-import ActionUtil from '@/nice-router/action-util';
+import ActionUtil from '@/utils/action-util';
 import NavigationService from '@/nice-router/navigation-service';
 import { View } from '@tarojs/components';
-import { AtActivityIndicator } from 'taro-ui';
 
-import { getExtMode } from '@/nice-router/nice-router-util';
+import { getExtMode } from '@/nice-router/nice-router-utils';
 import FlexInfoList from '@/components/info-list/flex-info-list';
 
 import ListofUtil from '../listof-util';
@@ -17,7 +16,8 @@ import ObjectPickerPopupItem from './card/object-picker-popup-item';
 import Product from './product/product';
 import NavigationLine from './navigation-line/navigation-line';
 
-import './flex-line-item.scss';
+import './flex-line-item.less';
+import Spin from '@/components/spin';
 
 export type FlexLineItemProps = {
   id?: string;
@@ -118,7 +118,7 @@ function FlexLineItem(props: FlexLineItemProps) {
 
       {loading && (
         <View className='inline-loading'>
-          <AtActivityIndicator size={50} mode='center' />
+          <Spin size='large' />
         </View>
       )}
     </View>

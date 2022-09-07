@@ -1,0 +1,25 @@
+@import '/src/styles/theme';
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-top: 20px;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  &__label:last-child {
+    border-bottom: none;
+  }
+}
+
+.checkbox-group.horizontal {
+  display: flex;
+  flex-direction: row;
+
+  .checkbox-group__label {
+    border-bottom: none;
+  }
+}

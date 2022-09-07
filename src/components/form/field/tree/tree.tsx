@@ -1,9 +1,9 @@
-import { isEmpty, isNotEmpty, noop } from '@/nice-router/nice-router-util';
-
+import { noop } from '@/utils';
+import { isEmpty, isNotEmpty } from '@/utils/object-utils';
 import { useVisible } from '@/service/use-service';
 import { Text, View } from '@tarojs/components';
 import classNames from 'classnames';
-import './style.scss';
+import './styles.less';
 
 export type TreeProps = {
   id?: string;

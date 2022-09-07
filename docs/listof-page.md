@@ -1,7 +1,7 @@
 ### 使用ListofPage
 
  各种list页面在移动端非常常见，而且很多页面的代码相似度极高，只是中间的line-item展示方式不同而已。并且大量的页面就是一个tab和一堆line-item组成，
- 开发人员需要单独处理下拉刷新，上拉加载更多，没有数据的时候展示empty message。基于这些套路，nice-router内置了ListofPage和listof组件（冗余设计+数据驱动）
+ 开发人员需要单独处理下拉刷新，上拉加载更多，没有数据的时候展示empty message。基于这些套路，tixwork-taro内置了ListofPage和listof组件（冗余设计+数据驱动）
 
 #### 概念和对象
 
@@ -43,16 +43,16 @@
 
 2. ListofPage 页面
    
-   nice-router 内置了几个（目前是4个）listof-page实例，用来展示标准的list页面。
+   tixwork-taro 内置了几个（目前是4个）listof-page实例，用来展示标准的list页面。
    
    ListofPage包含一个tabs（可选）和一个无线集的list（能够下拉刷新，上拉加载更多）并且当没有数据的时候展示Empty Message。
    
    举个栗子：首页的carousel有个图片是双11促销，点击以后跳转到一个促销商品列表。
 - 点击图片-> NavigationService.view('....')发送后台请求。
 
-- 后台response返回listof的数据，且header中需要包含x-class = "com.terapico.appview.ListOfPage"。
+- 后台response返回listof的数据，且header中需要包含x-class = "com.tiandtech.appview.ListOfPage"。
 
-- nice-router则会自动跳转到ListofPage.
+- tixwork-taro则会自动跳转到ListofPage.
 
 response:
 
@@ -117,7 +117,7 @@ displayMode：line-item默认使用的模板（所有模板都应注册到line-i
 
 > 这里要解释一下，list, dataContainer和listMeta。
 > 
-> list里包含了要展示的数据（id），nice-router会根据id从dataContainer里将数据组装成一个完成整的list。
+> list里包含了要展示的数据（id），tixwork-taro会根据id从dataContainer里将数据组装成一个完成整的list。
 > 
 > 当listofpage页面中的line-item组件发送ajax请求，例如点赞，服务端需要返回dataContainer数据，里面只需要包含变化了的那个list-item数据就行了，从而达到了统一的局部刷新。
 > 
@@ -129,7 +129,7 @@ displayMode：line-item默认使用的模板（所有模板都应注册到line-i
 
 
 
-目前nice-router-taro内置了4个listof-page实例，如果您的项目在这方面需求量大，可以增加listof-page.js的数量，通过冗余设计达避免多个listof-page之间数据切换的问题.
+目前tixwork-taro内置了4个listof-page实例，如果您的项目在这方面需求量大，可以增加listof-page.js的数量，通过冗余设计达避免多个listof-page之间数据切换的问题.
 
 
 

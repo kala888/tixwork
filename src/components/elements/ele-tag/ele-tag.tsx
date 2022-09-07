@@ -1,9 +1,10 @@
 import React from 'react';
-import { getExtMode, noop } from '@/nice-router/nice-router-util';
 import { Text } from '@tarojs/components';
 import _ from 'lodash';
 import { CandidateValue } from '@/nice-router/nice-router-types';
-import './ele-tag.scss';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import './ele-tag.less';
+import { noop } from '@/utils';
 
 export type EleTagProps = {
   hidden?: boolean;

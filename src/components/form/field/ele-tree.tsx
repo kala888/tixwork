@@ -1,10 +1,10 @@
 import { useVisible } from '@/service/use-service';
 import { View } from '@tarojs/components';
-import { AtActionSheet } from 'taro-ui';
 import ActionField from './action-field';
-import './styles.scss';
+import './styles.less';
 
 import Tree, { TreeProps } from './tree/tree';
+import FloatLayout from '@/components/float-layout';
 
 type EleTreeProps = {
   value?: string;
@@ -58,11 +58,11 @@ function EleTree(props: EleTreeProps) {
       placeholder={placeholder}
       toggleStatus={visible}
     >
-      <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText='确认'>
+      <FloatLayout title={label} onCancel={close} visible={visible}>
         <View style='height:80vh'>
           <Tree {...root} onChange={onChange} selected={currentValue} />
         </View>
-      </AtActionSheet>
+      </FloatLayout>
     </ActionField>
   );
 }

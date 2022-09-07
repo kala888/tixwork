@@ -1,9 +1,9 @@
-import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { isNotEmpty } from '@/utils/object-utils';
 import EleTag from '@/components/elements/ele-tag/ele-tag';
 import ServerImage from '@/server-image/server-image';
 import { Text, View } from '@tarojs/components';
 import ListofUtil from '../../listof-util';
-import './styles.scss';
+import './styles.less';
 
 type ProductProps = {
   preTag: string;

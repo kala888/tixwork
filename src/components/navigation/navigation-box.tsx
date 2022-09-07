@@ -1,11 +1,11 @@
 import ActionIcon from '@/components/action-icon/action-icon';
-import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util';
+import { getExtMode } from '@/nice-router/nice-router-utils';
 import { Text, View } from '@tarojs/components';
-
+import { isNotEmpty } from '@/utils/object-utils';
 import EleBadge from '@/components/elements/ele-badge/ele-badge';
 import EleButton, { EleButtonProps } from '@/components/elements/ele-button';
 
-import './navigation-box.scss';
+import './navigation-box.less';
 
 type NavigationBoxItem = { badge?: number } & EleButtonProps;
 

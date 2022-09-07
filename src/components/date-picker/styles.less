@@ -1,0 +1,24 @@
+@import '/src/styles/theme';
+
+.date-picker {
+  &--toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 40px;
+    color: @text-color-light;
+  }
+
+  &--view {
+    width: 100%;
+    height: 600px;
+
+    .picker-view-column {
+      text-align: center;
+
+      .pick-view-column-item {
+        line-height: 50px;
+      }
+    }
+  }
+}

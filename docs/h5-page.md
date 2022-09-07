@@ -20,7 +20,7 @@ const isH5Path = (uri) => startsWith(uri, 'https://') || startsWith(uri, 'http:/
 举个实际的栗子：
 
 1. 运营同学在首页的carousel 中配置了一个通知，点击通知展示公众号上的一篇各种图文混编的文章
-2. 一些Terms等条款，或者about简介，反正这些访问量很低，怎么简单怎么来的页面，在CMS系统中弄成普通H5页面，镶嵌到nice-router的项目中
+2. 一些Terms等条款，或者about简介，反正这些访问量很低，怎么简单怎么来的页面，在CMS系统中弄成普通H5页面，镶嵌到tixwork-taro的项目中
 
 #### 相关的代码文件
 

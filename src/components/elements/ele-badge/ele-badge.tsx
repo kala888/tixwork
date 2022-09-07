@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
-import './ele-badge.scss';
+import './ele-badge.less';
 
 type EleBadgeProps = {
   dot?: boolean;

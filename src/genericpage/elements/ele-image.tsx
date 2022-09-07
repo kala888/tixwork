@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { ImageLike } from '@/nice-router/nice-router-types';
 import { ImageProps } from '@tarojs/components/types/Image';
 
-import './styles.scss';
+import './styles.less';
 
 type EleImageProps = {
   src?: string;

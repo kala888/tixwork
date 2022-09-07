@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
-import { LoadingType } from '@/nice-router/nice-router-util';
-import { AtTabs } from 'taro-ui';
 import { ActionLike } from '@/nice-router/nice-router-types';
-import { TabItem } from 'taro-ui/types/tabs';
+import LoadingType from '@/nice-router/loading-type';
+import Tabs from '@/components/tabs';
 
 type EleTabItemProps = {
   selected?: boolean;
 } & ActionLike;
 
 export type EleTabsProps = {
-  tabs?: EleTabItemProps[] & TabItem[];
+  tabs?: EleTabItemProps[];
   type?: 'scroll' | null;
 };
 
@@ -26,7 +25,7 @@ function EleTabs(props: EleTabsProps) {
   const handleTabSwitch = (index) => {
     setCurrent(index);
     const tab = tabs[index];
-    NavigationService.routeTo(
+    NavigationService.send(
       tab,
       {},
       {
@@ -37,17 +36,7 @@ function EleTabs(props: EleTabsProps) {
   };
 
   const scroll = type === 'scroll' && tabs.length > 4;
-  // key={Date.now().valueOf()} 坑，这里有个bug，把Key换一下就行了
-  return (
-    <AtTabs
-      key={Date.now().valueOf()}
-      height='50px'
-      current={current}
-      scroll={scroll}
-      tabList={tabs}
-      onClick={handleTabSwitch}
-    />
-  );
+  return <Tabs key={Date.now().valueOf()} current={current} scroll={scroll} items={tabs} onClick={handleTabSwitch} />;
 }
 
 EleTabs.defaultProps = {

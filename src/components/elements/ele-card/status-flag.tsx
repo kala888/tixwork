@@ -1,7 +1,9 @@
 import React from 'react';
 import { Text, View } from '@tarojs/components';
-import { codeLength, getExtMode, isEmpty } from '@/nice-router/nice-router-util';
-import './status-flag.scss';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import { isEmpty } from '@/utils/object-utils';
+import './status-flag.less';
+import { codeLength } from '@/utils';
 
 interface StatusFlagProps {
   title?: string;

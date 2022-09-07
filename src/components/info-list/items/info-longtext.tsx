@@ -3,8 +3,8 @@ import { Text, View } from '@tarojs/components';
 import { useVisible } from '@/service/use-service';
 
 import _ from 'lodash';
-import { getExtMode } from '@/nice-router/nice-router-util';
-import './styles.scss';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import './styles.less';
 
 type InfoLongTextProps = {
   value?: string | object;

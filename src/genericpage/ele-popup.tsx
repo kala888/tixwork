@@ -1,18 +1,15 @@
-import { useState } from 'react';
 import { ScrollView } from '@tarojs/components';
-import { AtCurtain } from 'taro-ui';
-
+import Modal from '@/components/modal';
+import { useVisible } from '@/service/use-service';
 import EleFlex from './ele-flex';
 
 export default function ElePopup(props: Record<string, any>) {
-  const [show, setShow] = useState(true);
-  const onClose = () => setShow(false);
-
+  const { visible, close } = useVisible(true);
   return (
-    <AtCurtain isOpened={show} onClose={onClose}>
+    <Modal visible={visible} onCancel={close}>
       <ScrollView scrollY scrollWithAnimation scrollTop={0} style='max-height: 750rpx;'>
         <EleFlex {...props} />
       </ScrollView>
-    </AtCurtain>
+    </Modal>
   );
 }

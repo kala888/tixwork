@@ -1,8 +1,7 @@
-import { useSelector } from 'react-redux';
 import GenericPageBase from './generic-page-base';
+import useModel from '@/model/use-model';
 
 export default () => {
-  // @ts-ignore
-  const root = useSelector((state) => state.genericpage);
+  const { root } = useModel('genericpage');
   return <GenericPageBase {...root} />;
 };

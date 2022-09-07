@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 import PropTypes from 'prop-types';
-import './base-page.scss';
+import './base-page.less';
 
 function BasePage(props) {
   return <View className='base-page'>{props.children}</View>;

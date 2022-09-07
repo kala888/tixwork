@@ -1,4 +1,4 @@
-import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { isNotEmpty } from '@/utils/object-utils';
 import { EleObject, ImageLike, ImageListLike } from '@/nice-router/nice-router-types';
 
 const defaultImage = '';

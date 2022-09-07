@@ -1,33 +1,12 @@
-import { AppConfiguration } from '@/nice-router/nice-router.config';
-import ViewMappingConfig from '@/utils/viewmapping.config';
-
-const baseURL = 'https://demo.doublechaintech.com/repairchain/'; //后端服务地址
-
-const ApiConfig = {
-  FooterHome: 'wxappService/viewHomepage/',
-  FooterMe: 'wxappService/customerViewDashboard/',
-  Login: 'wxappService/clientLogin/',
-  WxLogin: 'wxappService/wxlogin/:code/',
-  VerifyCode: 'wxappService/sendVerifyCode/:mobile/',
-  OSSToken: 'wxappService/customGetOssToken/',
-  Logout: 'wxappService/logout/',
-};
-
-const TheCustomizedProjectConfigurationDontUseItDirectly: Omit<AppConfiguration, 'start'> = {
-  name: 'NiceRouter App Start',
-  baseURL,
+const Config = {
+  // baseURL: 'https://www.tiandtech.com/api/', //后端服务地址
+  baseURL: 'https://cmstest.ggas.com/cmes/', //后端服务地址
   version: 1,
+  name: 'Tixwork',
   appType: 'mini-program',
-  api: ApiConfig,
-  backendRouterPageKeyBlackList: ['goBack/', 'goPrevious/'],
-  backendRouterPageBlackList: ['NetworkException'],
-  viewConfig: ViewMappingConfig,
   // loginMode: 'wechat',
-  loginMode: 'vcode', //包含绑定的微信登录
-  // loginMode: 'password',
+  // loginMode: 'mobile', //包含绑定的微信登录
+  loginMode: 'account',
 };
 
-console.log('***********   current env  ***********   ');
-console.log('config.js is', TheCustomizedProjectConfigurationDontUseItDirectly);
-
-export { ApiConfig, TheCustomizedProjectConfigurationDontUseItDirectly };
+export default Config;

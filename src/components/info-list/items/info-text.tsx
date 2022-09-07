@@ -1,8 +1,8 @@
 import { View } from '@tarojs/components';
 import _ from 'lodash';
-import { getExtMode } from '@/nice-router/nice-router-util';
+import { getExtMode } from '@/nice-router/nice-router-utils';
 
-import './styles.scss';
+import './styles.less';
 
 type InfoTextProps = {
   value: string | object;

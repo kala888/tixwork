@@ -3,7 +3,7 @@ import { Swiper, SwiperItem, View } from '@tarojs/components';
 import NavigationBox from '@/components/navigation/navigation-box';
 import { ActionListLike } from '@/nice-router/nice-router-types';
 
-import './action-swiper.scss';
+import './action-swiper.less';
 
 function ActionSwiper(props: ActionListLike) {
   const { actionList = [] } = props;

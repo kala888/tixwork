@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import EleActionList, { EleActionListProps } from './ele-action-list';
-import './styles.scss';
+import './styles.less';
 
 function EleFooterActionList(props: EleActionListProps) {
   const { mode = ['full'] } = props;

@@ -1,14 +1,12 @@
 import React from 'react';
-import { noop } from '@/nice-router/nice-router-util';
-import { isH5, isWeapp } from '@/utils/index';
+import { isH5, isWeapp, noop } from '@/utils';
 import Taro from '@tarojs/taro';
-import { Provider } from 'react-redux';
+import { ModelProvider } from '@/model/model-provider';
+import './app.less';
+import TestData from './pages/mock-data/test-data';
+import { models } from '@/model/models';
 
-import './app.scss';
-import dva from './dva';
-import models from './models/model-center';
-import Config from '@/nice-router/nice-router.config';
-import { TheCustomizedProjectConfigurationDontUseItDirectly } from './utils/config';
+TestData.initial();
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -23,18 +21,6 @@ if (isH5()) {
     Taro.useShareAppMessage = noop;
   }
 }
-
-const dvaApp = dva.createApp({
-  initialState: {},
-  enableLog: false,
-  models: models,
-});
-const store = dvaApp.getStore();
-
-// do initial
-Config.start && Config.start(TheCustomizedProjectConfigurationDontUseItDirectly, dvaApp);
-
-// end initial
 
 class App extends React.Component {
   componentDidMount() {
@@ -82,7 +68,12 @@ class App extends React.Component {
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render() {
-    return <Provider store={store}> {this.props.children} </Provider>;
+    return (
+      <ModelProvider models={models}>
+        {/*// @ts-ignore*/}
+        {this.props.children}
+      </ModelProvider>
+    );
   }
 }
 

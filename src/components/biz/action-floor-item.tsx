@@ -1,9 +1,10 @@
 import ServerImage from '@/server-image/server-image';
 import { Text, View } from '@tarojs/components';
-
 import EleButton, { EleButtonProps } from '@/components/elements/ele-button';
-import { getExtMode, isEmpty } from '@/nice-router/nice-router-util';
-import './action-floor.scss';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import { isEmpty } from '@/utils/object-utils';
+
+import './styles.less';
 
 type ActionFloorItemProps = {
   color?: 'blue';

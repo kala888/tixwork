@@ -1,10 +1,10 @@
 # NiceRouterConfig 开发Tips
 
-1. nice-router很多功能都是基于后端数据驱动的。
+1. tixwork-taro很多功能都是基于后端数据驱动的。
 
 2. 使用Taro作为基础框架，理论上多端统一。目前NiceRouter内置组件只做了微信小程序的兼容。
 
-3. nice-router内部使用了dva，所有dva的所有开发方式这里都合适。
+3. tixwork-taro内部使用了dva，所有dva的所有开发方式这里都合适。
 
 4. 文件上传尽量上传到阿里云OSS等对象存储服务上，可以降低图片访问对服务端带宽压力。
 

@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import NavigationBox from '@/components/navigation/navigation-box';
-import MockService from '@/nice-router/request/mock-service';
 import ServerImage from '@/server-image/server-image';
 import { usePageTitle, usePullDown } from '@/service/use-service';
-import { ApiConfig } from '@/utils/config';
+import ApiConfig from '@/utils/api-config';
 import { View } from '@tarojs/components';
-import { useSelector } from 'react-redux';
 import { useDidShow } from '@tarojs/taro';
 import NavigationService from '@/nice-router/navigation-service';
-import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { isNotEmpty } from '@/utils/object-utils';
 import EleActionList from '@/components/elements/action-list/ele-action-list';
 import Listof from '@/listof/listof';
 import { EleButtonProps } from '@/components/elements/ele-button';
-import './me.scss';
+import MockService from '../../http/mock-service';
+import useModel from '@/model/use-model';
+import Q from '@/http/q';
+import AuthTools from '@/utils/auth-tools';
+import './me.less';
 
 const Box_Navigator_List = [
   {
@@ -45,8 +47,7 @@ const LineItem_Navigator_List = [
 ];
 
 function MePage() {
-  // @ts-ignore
-  const root = useSelector((state) => state.me);
+  const { root = {} as any } = useModel('me');
   const [footerActionList, setFooterActionList] = useState<EleButtonProps[]>([]);
 
   const refresh = () => NavigationService.ajax(ApiConfig.FooterMe);
@@ -55,11 +56,11 @@ function MePage() {
   usePullDown(ApiConfig.FooterMe);
   useDidShow(refresh);
 
-  const handleGoLogin = () => NavigationService.navigate('/pages/login/login-page');
-  const handleLogout = () => {
-    NavigationService.dispatch('app/logout');
-    NavigationService.dispatch('me/clear');
-    NavigationService.ajax(ApiConfig.Logout);
+  const handleGoLogin = () => NavigationService.goPage('/pages/login/login-page');
+  const handleLogout = async () => {
+    await AuthTools.logout();
+    await NavigationService.dispatch('me/clear');
+    await Q.get(ApiConfig.Logout);
   };
 
   useEffect(() => {

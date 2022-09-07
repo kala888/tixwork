@@ -1,10 +1,10 @@
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
 import ServerImage, { ServerImageProps } from '@/server-image/server-image';
 import { Text, View } from '@tarojs/components';
 import classNames from 'classnames';
 import { IconLike, ImageLike } from '@/nice-router/nice-router-types';
+import { isEmpty, isNotEmpty } from '@/utils/object-utils';
 
-import './action-icon.scss';
+import './styles.less';
 
 type ActionIconProps = IconLike & ImageLike & ServerImageProps;
 

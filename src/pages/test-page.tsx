@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
-import NavigationService from '@/nice-router/navigation-service';
 import { View } from '@tarojs/components';
+import ActionIcon from '@/components/action-icon/action-icon';
 
 function TestPage() {
-  useEffect(() => {
-    NavigationService.view('mock-generic-page/');
-  }, []);
-  return <View />;
+  return (
+    <View>
+      <ActionIcon icon='iconfont iconfont-plus' />
+    </View>
+  );
 }
 
 export default TestPage;

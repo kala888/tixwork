@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
-import { AtTabBar } from 'taro-ui';
 import { CandidateValue, ImageLike } from '@/nice-router/nice-router-types';
+import TabBar from '@/components/tab-bar';
 
 type EleFooterTabItemProps = CandidateValue & ImageLike;
 type EleFooterTabsProps = {
@@ -26,8 +26,7 @@ function EleFooterTabs(props: EleFooterTabsProps) {
 
   const current = selectedIndex !== null ? selectedIndex : tabs.findIndex((it) => it.selected);
   const tabList: any = tabs.map((it) => ({ ...it, image: it.imageUrl }));
-
-  return <AtTabBar fixed tabList={tabList} onClick={selectTab} current={current} />;
+  return <TabBar onClick={selectTab} items={tabList} current={current} />;
 }
 
 EleFooterTabs.defaultProps = {

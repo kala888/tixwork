@@ -1,7 +1,8 @@
 import { Text, View } from '@tarojs/components';
 import React from 'react';
-import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util';
-import './ele-table.scss';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import { isNotEmpty } from '@/utils/object-utils';
+import './ele-table.less';
 
 export type EleTableCellProps = {
   title?: string;

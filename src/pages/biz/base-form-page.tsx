@@ -2,8 +2,8 @@ import React from 'react';
 import FormItem from '@/components/form/form-item';
 import FormUtil from '@/components/form/form-util';
 import { View } from '@tarojs/components';
-import { AtInput } from 'taro-ui';
 import EleButton from '@/components/elements/ele-button';
+import EleInput from '@/components/form/field/ele-input';
 
 export default class BaseFormPage extends React.PureComponent {
   //以name为key
@@ -30,19 +30,19 @@ export default class BaseFormPage extends React.PureComponent {
     return (
       <View style='padding:20px'>
         <FormItem label='姓名' rules={[{ required: true }]}>
-          <AtInput
+          <EleInput
             name='name'
             placeholder='大名。。。。'
-            border={false}
+            bordered={false}
             onChange={this.handleChange.bind(this, 'name')}
           />
         </FormItem>
 
         <FormItem label='小名'>
-          <AtInput
+          <EleInput
             name='nickname'
             placeholder='你的小名是啥'
-            border={false}
+            bordered={false}
             onChange={this.handleChange.bind(this, 'nickname')}
           />
         </FormItem>

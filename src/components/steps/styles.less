@@ -1,0 +1,52 @@
+@import '/src/styles/theme';
+
+.steps {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .step-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      width: 60px;
+      height: 60px;
+      border-radius: 40px;
+      background-color: #ccc;
+      color: #999;
+    }
+
+    &__title {
+      margin-top: 10px;
+      color: @text-color-light;
+    }
+
+    &__brief {
+      margin-top: 10px;
+      color: @text-color-lighter;
+      font-size: 20px;
+    }
+  }
+
+  .connect-line {
+    height: 60px;
+    flex: 1;
+    padding: 0 20px;
+    display: flex;
+  }
+
+  .step-item.active {
+    .step-item__icon {
+      background-color: @primary-color;
+      color: @white;
+    }
+  }
+}

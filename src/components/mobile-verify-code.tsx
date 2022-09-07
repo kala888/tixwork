@@ -1,13 +1,13 @@
 import NavigationService from '@/nice-router/navigation-service';
-import { noop } from '@/nice-router/nice-router-util';
+import { noop } from '@/utils';
 import { useCountdown } from '@/service/use-service';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classNames from 'classnames';
-import { AtInput } from 'taro-ui';
+import ApiConfig from '@/utils/api-config';
 
-import './form/field/styles.scss';
-import { ApiConfig } from '@/utils/config';
+import './form/field/styles.less';
+import EleInput from '@/components/form/field/ele-input';
 
 type MobileVerifyCodeProps = {
   onChange?: any;
@@ -40,10 +40,10 @@ function MobileVerifyCode(props: MobileVerifyCodeProps) {
   const rootClass = classNames('ele-vcode', className);
   const txtClass = classNames('ele-vcode-txt', { 'ele-vcode-txt-disabled': counting });
   return (
-    <AtInput
+    <EleInput
       name={name}
-      border={false}
-      type='phone'
+      bordered={false}
+      type='number'
       placeholder={placeholder}
       value={value}
       onChange={onChange}
@@ -52,7 +52,7 @@ function MobileVerifyCode(props: MobileVerifyCodeProps) {
       <View className={txtClass} onClick={sendCode}>
         {tips}
       </View>
-    </AtInput>
+    </EleInput>
   );
 }
 

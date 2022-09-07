@@ -8,10 +8,10 @@
 $ yarn global add @tarojs/cli
 ```
 
-2.  下载 nice-router-taro
+2.  下载 tixwork-taro
 
 ```bash
-git clone https://github.com/kala888/nice-router-taro
+git clone https://github.com/kala888/tixwork-taro
 ```
 
 3.  编译，启动开发环境
@@ -28,7 +28,7 @@ $yarn dev:weapp
 
 > **小提示:**
 > 
-> 1.  nice-router-taro已集成prettier，代码提交到git前，先 'yarn format' 一道，有助于团队成员间代码merge.
+> 1.  tixwork-taro已集成prettier，代码提交到git前，先 'yarn format' 一道，有助于团队成员间代码merge.
 >     
 > 2.  文档中提到的“服务端”是指供前端开发使用**Façade**层，根据项目架构不同可能指代的是后台或者中台应用。（Façade 读音： 法萨）
 > 
@@ -43,7 +43,7 @@ $yarn dev:weapp
 > 
 > 5.  如何修改 默认title和theme (**可选**)
 >     修改主色：通过 [Taro UI](https://nervjs.github.io/taro-ui-theme-preview/) 填入主色后，下载并打开文件
->     修改./src/styles.theme.scss中的三个值就行了
+>     修改./src/styles.theme.less中的三个值就行了
 >     
 > 
 > ```css
@@ -65,7 +65,7 @@ $yarn dev:weapp
 #### 我需要一个后端服务，最好搭配一个中台
 
 -   这里强力安利一款牛逼的低码平台，通过使用自动代码生成技术，告别996。
-[DaaS Start Kit](https://github.com/doublechaintech/daas-start-kit)，可以与nice-router完美配合。
+[Tixwork-generator](https://github.com/kala888/tixwork-generator)，可以与nice-router完美配合。
 
 
 ### 开发手册

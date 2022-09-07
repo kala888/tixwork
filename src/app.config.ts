@@ -1,15 +1,17 @@
 export default {
   pages: [
     'pages/home/home-page',
-    'pages/me/me-page',
     'pages/test-page',
+    'pages/login/login-page',
+    'pages/search/search-page',
+    'pages/policy/policy-detail-page',
+    'pages/login/bind-mobile-page',
+    'pages/me/me-page',
     // 'pages/biz/listof-test-page', // 有问题
 
-    'pages/login/login-page',
-
     // base
-    'nice-router/h5-page',
-    'nice-router/network-exception-page',
+    'pages/h5/h5-page',
+    'pages/network-error/network-exception-page',
 
     'listof/listof-page',
     'listof/listof-page2',
@@ -43,28 +45,8 @@ export default {
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#28aaff',
-    navigationBarTitleText: 'nice-router',
+    navigationBarTitleText: '新都办事指南',
     navigationBarTextStyle: 'white',
     enablePullDownRefresh: true,
-  },
-  tabBar: {
-    color: '#666',
-    selectedColor: '#28aaff',
-    backgroundColor: '#fafafa',
-    borderStyle: 'black',
-    list: [
-      {
-        pagePath: 'pages/home/home-page',
-        iconPath: './assets/icon/icon_home_n@2x.png',
-        selectedIconPath: './assets/icon/icon_home_s@2x.png',
-        text: '首页',
-      },
-      {
-        pagePath: 'pages/me/me-page',
-        iconPath: './assets/icon/icon_me_n@2x.png',
-        selectedIconPath: './assets/icon/icon_me_s@2x.png',
-        text: '我的',
-      },
-    ],
   },
 };

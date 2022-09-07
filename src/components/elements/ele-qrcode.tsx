@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { toRpx } from '@/utils/index';
+import { toRpx } from '@/utils';
 import { Canvas } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import _ from 'lodash';

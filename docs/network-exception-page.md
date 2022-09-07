@@ -9,7 +9,7 @@
 在viewmapping.config下配置新的页面就行了
 
 ```javascript
-  'com.terapico.caf.local.NetworkException': {
+  'com.tiandtech.local.NetworkException': {
     pageName: '/your-new-pate-path',
   },
 ```

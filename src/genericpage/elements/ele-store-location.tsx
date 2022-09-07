@@ -3,10 +3,10 @@ import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classNames from 'classnames';
 import TagList from '@/components/elements/ele-tag/tag-list';
-import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { isNotEmpty } from '@/utils/object-utils';
 import { EleTagProps } from '@/components/elements/ele-tag/ele-tag';
 import { EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types';
-import './styles.scss';
+import './styles.less';
 
 type EleStoreLocationProps = {
   address?: string;

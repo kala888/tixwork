@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 import CardTemplate from './card-template';
 import NavigationService from '@/nice-router/navigation-service';
-import './object-picker-item.scss';
+import './object-picker-item.less';
 
 function ObjectPickerPopupItem(props) {
   const { item } = props;

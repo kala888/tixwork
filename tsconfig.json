@@ -24,15 +24,7 @@
       "global.d.ts"
     ],
     "paths": {
-      "@/components/*": ["./src/components/*"],
-      "@/utils/*": ["./src/utils/*"],
-      "@/service/*": ["./src/service/*"],
-
-      "@/nice-router/*": ["./src/nice-router/*"],
-      "@/genericpage/*": ["./src/genericpage/*"],
-      "@/genericform/*": ["./src/genericform/*"],
-      "@/server-image/*": ["./src/server-image/*"],
-      "@/listof/*": ["./src/listof/*"]
+      "@/*": ["./src/*"],
     }
   },
   "include": ["./src", "global.d.ts"],

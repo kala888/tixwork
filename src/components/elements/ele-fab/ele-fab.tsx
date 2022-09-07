@@ -1,7 +1,7 @@
 import EleButton, { EleButtonProps } from '@/components/elements/ele-button';
 import { View } from '@tarojs/components';
-import { getExtMode } from '@/nice-router/nice-router-util';
-import './ele-fab.scss';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import './ele-fab.less';
 
 type EleFabProps = {
   mode?: 'round' | 'left-side';

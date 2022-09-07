@@ -1,0 +1,35 @@
+.image-picker {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.image-item {
+  position: relative;
+  height: 220px;
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid #ccc;
+  margin: 0 4px 10px;
+
+  &--image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  &--remove {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+  }
+}

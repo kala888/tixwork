@@ -3,14 +3,16 @@ import NavigationService from '@/nice-router/navigation-service';
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
 import { View } from '@tarojs/components';
 import { Current, useShareAppMessage } from '@tarojs/taro';
-import Config from '@/nice-router/nice-router.config';
+// import Config from '@/nice-router/nice-router.config';
 import classNames from 'classnames';
 import _ from 'lodash';
+import Config from '@/utils/config';
+import ApiConfig from '@/utils/api-config';
 import EleFlex from './ele-flex';
-import './styles.scss';
-import { ApiConfig } from '@/utils/config';
+import './styles.less';
 
 function GenericPageBase(props) {
+  console.log('generic page', props);
   const { pageTitle = Config.name, pageLinkToUrl = ApiConfig.FooterHome } = props;
   usePageTitle(pageTitle);
   useAjaxPullDown(props);

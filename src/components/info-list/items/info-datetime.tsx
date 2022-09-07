@@ -1,7 +1,7 @@
-import { formatTime } from '@/utils/index';
+import { formatTime } from '@/utils';
 import { View } from '@tarojs/components';
 
-import './styles.scss';
+import './styles.less';
 
 type InfoDatetimeProps = {
   value: any;

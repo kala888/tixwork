@@ -17,7 +17,7 @@ GenericPage的设计原理很简单，通过解析服务端返回的数据结合
 
 服务端返回x-class=com.terapico.caf.viewcomponent.GenericPage
 
-nice-router 会路由到GenericPage页面渲染数据。
+tixwork-taro 会路由到GenericPage页面渲染数据。
 
 又来一个栗子（数据：mock-genericpage.data.js）
 
@@ -74,7 +74,7 @@ GenericPage需要服务端返回的数据结构
 
 - 5. 每个组件的实现都略微不同，详细的属性需要参考代码
 
-目前nice-router-taro内置了两个generic-page实例，如果您的项目在这方面需求量大（可多页面都是数据驱动出来的），可以增加generic-page.js的数量，通过冗余设计达避免多个generic-page之间数据切换的问题
+目前tixwork-taro内置了两个generic-page实例，如果您的项目在这方面需求量大（可多页面都是数据驱动出来的），可以增加generic-page.js的数量，通过冗余设计达避免多个generic-page之间数据切换的问题
 
 话外提：其实针对一些项目，整个小程序可以完全由genericpage组成，不需要前端程序员做啥页面，完全由服务端数据驱动。甚至可以轻松的实现，不需要小程序审核的情况下，上午菠菜，下午聊天，晚上视频，想想力空间很大。
 

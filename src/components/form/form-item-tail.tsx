@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 import { ITouchEvent } from '@tarojs/components/types/common';
-import './form-item-tail.scss';
+import './form-item-tail.less';
 
 type FormItemTailProps = {
   showClear?: boolean;

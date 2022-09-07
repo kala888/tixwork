@@ -1,24 +1,53 @@
-import { useEffect } from 'react';
 import EleCarousel from '@/components/elements/ele-carousel';
 import ActionFloor from '@/components/biz/action-floor';
 import SectionBar from '@/components/section-bar/section-bar';
 import Listof from '@/listof/listof';
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
 import { View } from '@tarojs/components';
-import { useSelector } from 'react-redux';
+import useModel from '@/model/use-model';
+import { CommonModel } from '@/model/models';
+import { useEffect } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
+import './home.less';
 
-import './home.scss';
+type HomeDataType = {
+  slideList: any[];
+  actionList: any[];
+  productList: any[];
+};
 
 function HomePage(props) {
-  // @ts-ignore
-  const root = useSelector((state) => state.home);
+  const { root } = useModel<CommonModel<HomeDataType>>('home');
+
   usePageTitle(root);
   useAjaxPullDown(props);
 
+  console.log('root....', root);
   useEffect(() => {
     NavigationService.ajax('mock-home-page/');
   }, []);
+
+  //
+  // useEffect(() => {
+  //   NavigationService.ajax(
+  //     'mock-home-page/',
+  //     {},
+  //     {
+  //       onSuccess: (data, resp) => {
+  //         console.log('ajax....,', data, resp);
+  //       },
+  //     }
+  //   );
+  //   // HttpRequest.customRequest(ApiConfig.FooterHome).then((resp) => {
+  //   //   console.log('resp111....,', resp);
+  //   //   console.log('resp1111....,', resp.responseData);
+  //   // });
+  //   //
+  //   // Q.get<HomeData>(ApiConfig.FooterHome).then((resp) => {
+  //   //   console.log('resp222....,', resp);
+  //   //   console.log('resp2222....,', resp.data.slideList);
+  //   // });
+  // }, []);
 
   const { slideList = [], actionList = [], productList = [] } = root;
 
@@ -27,8 +56,8 @@ function HomePage(props) {
       <EleCarousel className='home-page-carousel' items={slideList} />
       <View className='home-page-action-floor'>
         <ActionFloor actionList={actionList} />
-        <SectionBar title='促销抢购11' linkToUrl='page:///pages/biz/listof-test-page' />
-        <Listof list={productList} displayMode='product' />
+        <SectionBar title='促销抢购' linkToUrl='page:///pages/biz/listof-test-page' />
+        <Listof items={productList} displayMode='product' />
       </View>
     </View>
   );

@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
-import { LoadingType } from '@/nice-router/nice-router-util';
 import _ from 'lodash';
 import Taro from '@tarojs/taro';
-import ActionUtil from '@/nice-router/action-util';
-import Config from '@/nice-router/nice-router.config';
+import ActionUtil from '@/utils/action-util';
+import Config from '@/utils/config';
+import LoadingType from '@/nice-router/loading-type';
 
 // boolean类型的控制属性，show，close，toggle
 export function useVisible(initial = false) {
@@ -23,7 +23,7 @@ export function useVisible(initial = false) {
 export function useLoading(initial = false) {
   const [loading, setLoading] = useState(initial);
   const hideLoading = () => setLoading(false);
-  const showLoading = (timeout) => {
+  const showLoading = (timeout?: any) => {
     setLoading(true);
     if (timeout) {
       setTimeout(() => hideLoading(), timeout);

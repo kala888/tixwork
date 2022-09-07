@@ -1,0 +1,25 @@
+@import '/src/styles/theme';
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-bottom: 20px;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  &__label:last-child {
+    border-bottom: none;
+  }
+}
+
+.radio-group.horizontal {
+  display: flex;
+  flex-direction: row;
+
+  .radio-group__label {
+    border-bottom: none;
+  }
+}

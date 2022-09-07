@@ -1,8 +1,7 @@
-import { toBoolean } from '@/nice-router/nice-router-util';
-import { View } from '@tarojs/components';
+import { Switch, Text, View } from '@tarojs/components';
 import classNames from 'classnames';
-import { AtSwitch } from 'taro-ui';
 import { CandidateValue } from '@/nice-router/nice-router-types';
+import { toBoolean } from '@/utils/object-utils';
 
 // candidateValues 就是 options
 // candidateValues = [{
@@ -26,19 +25,13 @@ function EleSwitch(props: EleSwitchProps) {
   const checked = toBoolean(value);
   const selected = candidateValues.find((it) => toBoolean(it.id) === checked);
   const title = selected ? selected.title : '';
-  const switchClass = classNames({
-    'ele-switch-disabled': disabled,
+  const switchClass = classNames('ele-switch', {
+    disabled: disabled,
   });
   return (
-    <View className='ele-switch'>
-      <AtSwitch
-        className={switchClass}
-        disabled={disabled}
-        {...others}
-        border={false}
-        checked={checked}
-        title={title}
-      />
+    <View className={switchClass}>
+      <Switch disabled={disabled} {...others} checked={checked} />
+      <Text className='ele-switch__title'>{title}</Text>
     </View>
   );
 }

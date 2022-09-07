@@ -6,7 +6,7 @@ import EleQrcode from '@/components/elements/ele-qrcode';
 import EleRichText from '@/components/elements/ele-rich-text';
 //从主要包中引入
 import EleForm from '@/components/form/ele-form';
-import { isH5 } from '@/utils/index';
+import { isH5 } from '@/utils';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 import Listof from '@/listof/listof';
@@ -24,7 +24,7 @@ import EleStoreLocation from './elements/ele-store-location';
 import EleText from './elements/ele-text';
 import EleWhiteSpace from './elements/ele-white-space';
 
-import './styles.scss';
+import './styles.less';
 import FlexInfoList from '@/components/info-list/flex-info-list';
 
 type EleFlexItem = {

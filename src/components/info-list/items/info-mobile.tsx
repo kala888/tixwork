@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
-import { getExtMode } from '@/nice-router/nice-router-util';
-import './styles.scss';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import './styles.less';
 
 type InfoMobileProps = {
   value: string;

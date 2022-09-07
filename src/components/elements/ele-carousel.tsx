@@ -1,8 +1,6 @@
 import React from 'react';
-import ActionUtil from '@/nice-router/action-util';
 
 import NavigationService from '@/nice-router/navigation-service';
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
 import ServerImage from '@/server-image/server-image';
 import { Swiper, SwiperItem, Video, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
@@ -11,14 +9,16 @@ import { SwiperProps } from '@tarojs/components/types/Swiper';
 import { ImageSize } from '@/server-image/image-tools';
 import { ActionLike, ImageLike, VideoLike } from '@/nice-router/nice-router-types';
 import { ImageProps } from '@tarojs/components/types/Image';
-import './styles.scss';
+import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ActionUtil from '@/utils/action-util';
+import './styles.less';
 
 export type EleCarouselItem = ActionLike & ImageLike & VideoLike;
 
 export type EleCarouselProps = {
   items?: EleCarouselItem[];
   customStyle?: React.CSSProperties;
-  imageMode?: ImageProps.mode;
+  imageMode?: ImageProps.Mode;
 } & SwiperProps;
 
 function EleCarousel(props: EleCarouselProps) {
@@ -62,7 +62,7 @@ function EleCarousel(props: EleCarouselProps) {
   return (
     <View className={rootClass} style={customStyle}>
       <Swiper
-        autoplay={false}
+        autoplay
         interval={interval}
         duration={duration}
         // circular={circular}

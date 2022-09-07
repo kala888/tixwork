@@ -1,9 +1,8 @@
 import React from 'react';
-import { toRpx } from '@/utils/index';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
-import { AtDivider } from 'taro-ui';
-import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { isNotEmpty } from '@/utils/object-utils';
+import Divider from '@/components/divider';
 
 type EleBreakLineProps = {
   color?: string;
@@ -15,13 +14,11 @@ type EleBreakLineProps = {
 };
 
 function EleBreakLine(props: EleBreakLineProps) {
-  const { color, height, title, fontColor, customStyle, className } = props;
-  const fixedHeight = toRpx(height);
+  const { color, title, fontColor, customStyle, className } = props;
 
   const style = isNotEmpty(title)
     ? customStyle
     : {
-        height: fixedHeight,
         backgroundColor: color,
         margin: '10rpx 0',
         ...customStyle,
@@ -30,7 +27,7 @@ function EleBreakLine(props: EleBreakLineProps) {
   const rootClass = classNames('ele-break-line', className);
   return (
     <View className={rootClass} style={style}>
-      {isNotEmpty(title) && <AtDivider height={fixedHeight} content={title} fontColor={fontColor} lineColor={color} />}
+      {isNotEmpty(title) && <Divider title={title} fontColor={fontColor} lineColor={color} />}
     </View>
   );
 }

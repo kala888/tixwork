@@ -5,7 +5,7 @@ import { Swiper, SwiperItem, Text, View } from '@tarojs/components';
 
 import classNames from 'classnames';
 import { EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types';
-import './styles.scss';
+import './styles.less';
 
 type EleNoticeProps = {
   items: EleObject[];

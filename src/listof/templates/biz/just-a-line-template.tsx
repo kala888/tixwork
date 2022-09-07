@@ -1,6 +1,6 @@
-import { formatMoney } from '@/utils/index';
+import { formatMoney } from '@/utils';
 import { View } from '@tarojs/components';
-import './styles.scss';
+import './styles.less';
 
 export default function JustALineTemplate(props) {
   const { item = {} } = props;

@@ -1,25 +1,25 @@
 import { useEffect } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { View } from '@tarojs/components';
-import { useSelector } from 'react-redux';
 import { Current } from '@tarojs/taro';
 import _ from 'lodash';
-import { LoadingType } from '@/nice-router/nice-router-util';
 import ListofPageBase from '@/listof/listof-page-base';
-import { AtFloatLayout } from 'taro-ui';
 import Listof from '@/listof/listof';
 import { useVisible } from '@/service/use-service';
 
-import './object-picker-page.scss';
+import useModel from '@/model/use-model';
+import LoadingType from '@/nice-router/loading-type';
+import FloatLayout from '@/components/float-layout';
+import './object-picker-page.less';
 
 function ObjectPickerPage() {
   const { visible, close, show } = useVisible(false);
-  // @ts-ignore
-  const root = useSelector((state) => state.objectPicker);
+  const { root = {} as any } = useModel('objectPicker');
 
   // q如果变化了，就发送一个后台请求
   // @ts-ignore
   const { linkToUrl } = Current.router.params;
+  // @ts-ignore
   useEffect(() => {
     if (linkToUrl) {
       NavigationService.ajax(
@@ -51,15 +51,15 @@ function ObjectPickerPage() {
   return (
     <View className='object-picker'>
       <ListofPageBase {...inbound} list={theList} displayMode='object-picker' actionList={actionList} />
-      <AtFloatLayout
+      <FloatLayout
         className='large-float-layout'
-        isOpened={visible}
-        onClose={close}
+        visible={visible}
+        onCancel={close}
         title={`已选择，最多可选${maxSelectCount}`}
       >
-        <Listof list={selectedItems} displayMode='object-picker-popup' emptyMessage='还没有选择！' />
+        <Listof items={selectedItems} displayMode='object-picker-popup' emptyMessage='还没有选择！' />
         <View className='object-picker-popup-bottom' />
-      </AtFloatLayout>
+      </FloatLayout>
     </View>
   );
 }

@@ -1,0 +1,88 @@
+@import '/src/styles/theme';
+
+@keyframes progress-active {
+  from {
+    opacity: 0.5;
+    transform: translate(-100%);
+  }
+
+  to {
+    opacity: 0.1;
+    transform: translate(0);
+  }
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+
+  &__outer {
+    flex: 1 1 100%;
+    margin-right: 0;
+    padding-right: 0;
+
+    &-inner {
+      width: 100%;
+      background-color: #ccc;
+      border-radius: 8px;
+      vertical-align: middle;
+
+      &-background {
+        position: relative;
+        height: 16px;
+        border-radius: 8px;
+        background-color: @primary-color;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        overflow: hidden;
+      }
+    }
+  }
+
+  &__content {
+    flex: 1 1 70px;
+    margin-left: 10px;
+    font-size: 24px;
+    text-align: center;
+
+    .iconfont {
+      font-size: 34px;
+    }
+  }
+
+  /* modifiers */
+
+  &--progress {
+    .progress__outer-inner-background::before {
+      content: '';
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: @white;
+      border-radius: 8px;
+      animation: progress-active 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+    }
+  }
+
+  &--error {
+    .progress__outer-inner-background {
+      background: @red-color;
+    }
+
+    .iconfont {
+      color: @red-color;
+    }
+  }
+
+  &--success {
+    .progress__outer-inner-background {
+      background: @green-color;
+    }
+
+    .iconfont {
+      color: @green-color;
+    }
+  }
+}

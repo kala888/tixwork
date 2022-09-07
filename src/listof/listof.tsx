@@ -1,22 +1,22 @@
 import NavigationService from '@/nice-router/navigation-service';
-import { getExtMode, isEmpty, LoadingType } from '@/nice-router/nice-router-util';
 import { ScrollView, Text, View } from '@tarojs/components';
-
+import { isEmpty } from '@/utils/object-utils';
 import FooterTips from '@/listof/footer-tips';
 import { useLoading } from '@/service/use-service';
-import ActionUtil from '@/nice-router/action-util';
-
-import { enrichListOfEntity } from '../utils';
-import ListofUtil from './listof-util';
-import './listof.scss';
+import ActionUtil from '@/utils/action-util';
+import { enrichListOfEntity } from '@/utils';
 import FlexLineItem, { FlexLineItemProps } from './templates/flex-line-item';
+import { ActionLike } from '@/nice-router/nice-router-types';
+import LoadingType from '@/nice-router/loading-type';
+import NiceRouterUtils from '@/nice-router/nice-router-utils';
+import ListofUtil from './listof-util';
+import './listof.less';
 
 export type ListofProps = {
-  list?: FlexLineItemProps[];
   items?: FlexLineItemProps[];
   emptyMessage?: string;
   dataContainer?: Record<string, any>;
-  listMeta?: Record<string, any>;
+  listMeta?: ActionLike;
   displayMode?: string;
   onItemClick?: Function;
   horizontal?: boolean;
@@ -28,10 +28,9 @@ export type ListofProps = {
 
 function Listof(props: ListofProps) {
   const { loading, showLoading, hideLoading } = useLoading(false);
-  const { list, items, emptyMessage } = props;
-  const theList: any[] = list || items || [];
+  const { items = [], emptyMessage } = props;
 
-  if (isEmpty(theList)) {
+  if (isEmpty(items)) {
     if (isEmpty(emptyMessage)) {
       return null;
     }
@@ -45,7 +44,7 @@ function Listof(props: ListofProps) {
   //longList=无限循环list 展示footer
   let showFooter = longList;
   //但是，如果没有下一页，且list比较小, 就不展示footer了
-  if (!hasNextPage && theList.length < 15) {
+  if (!hasNextPage && items.length < 15) {
     showFooter = false;
   }
 
@@ -69,11 +68,11 @@ function Listof(props: ListofProps) {
   };
 
   // @ts-ignore
-  const flexLineItems = enrichListOfEntity({ dataContainer, targetList: theList });
+  const flexLineItems = enrichListOfEntity({ dataContainer, targetList: items });
 
   const itemWidth = ListofUtil.getItemWidth(displayMode);
-  const rootClass = getExtMode({ horizontal }, mode).classNames('listof-view', className);
-  const containerClass = getExtMode({ multiple: itemWidth }).classNames('listof-view-container');
+  const rootClass = NiceRouterUtils.getExtMode({ horizontal }, mode).classNames('listof-view', className);
+  const containerClass = NiceRouterUtils.getExtMode({ multiple: itemWidth }).classNames('listof-view-container');
 
   return (
     <ScrollView

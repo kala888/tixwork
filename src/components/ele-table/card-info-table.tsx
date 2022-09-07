@@ -1,4 +1,4 @@
-import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
+import { getExtMode } from '@/nice-router/nice-router-utils';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
 import _ from 'lodash';
@@ -6,8 +6,8 @@ import EleTable from '@/components/ele-table/ele-table';
 import EleTableRow from '@/components/ele-table/ele-table-row';
 import EleTableCell from '@/components/ele-table/ele-table-cell';
 import { TitleValue } from '@/nice-router/nice-router-types';
-
-import './card-info-table.scss';
+import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import './card-info-table.less';
 
 const getMaxLabelLength = (list, idx = 0) => {
   const result = _.max(

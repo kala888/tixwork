@@ -1,4 +1,4 @@
-import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { isNotEmpty } from '@/utils/object-utils';
 
 const SHOW_AS_MULTIPLE_LINE = ['image', 'image-list'];
 

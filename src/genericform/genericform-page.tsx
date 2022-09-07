@@ -3,21 +3,20 @@ import EleRichText from '@/components/elements/ele-rich-text';
 
 import EleForm from '@/components/form/ele-form';
 import NavigationService from '@/nice-router/navigation-service';
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
+import { isEmpty, isNotEmpty } from '@/utils/object-utils';
 import { usePageTitle, usePullDown } from '@/service/use-service';
 import { View } from '@tarojs/components';
 import EleActionList from '@/components/elements/action-list/ele-action-list';
-import { useSelector } from 'react-redux';
 import _ from 'lodash';
 import { ActionLike } from '@/nice-router/nice-router-types';
-import ActionUtil from '@/nice-router/action-util';
+import ActionUtil from '@/utils/action-util';
+import useModel from '@/model/use-model';
 import FormSteps from './form-steps';
-import './styles.scss';
+import './styles.less';
 
 function GenericformPage() {
   const formRef = useRef(null);
-  // @ts-ignore
-  const root = useSelector((state) => state.genericform);
+  const { root } = useModel('genericform');
   const { id, groupList = [], fieldList = [], stepList = [], actionList = [], content } = root;
   usePageTitle(root);
   usePullDown(root);

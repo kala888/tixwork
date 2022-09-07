@@ -1,6 +1,6 @@
 import EleCarousel, { EleCarouselItem } from '@/components/elements/ele-carousel';
 import { View } from '@tarojs/components';
-import './styles.scss';
+import './styles.less';
 
 type InfoImageListProps = {
   value: EleCarouselItem[];

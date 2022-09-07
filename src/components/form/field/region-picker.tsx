@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import StorageTools from '@/nice-router/storage-tools';
-import NavigationService from '@/nice-router/navigation-service';
 import ElePicker, { ElePickerProps } from '@/components/form/field/ele-picker';
-import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { isNotEmpty } from '@/utils/object-utils';
+import StorageTools from '@/utils/storage-tools';
+import Q from '@/http/q';
 
 function RegionPicker(props: ElePickerProps) {
   const [source, setSource] = useState<Record<string, any[]>[]>([]);
@@ -14,22 +14,16 @@ function RegionPicker(props: ElePickerProps) {
       setSource(regionData);
       initialed = true;
     }
-
-    NavigationService.ajax(
-      'wxappService/makeRegionList/',
-      {},
-      {
-        onSuccess: (resp) => {
-          if (!Array.isArray(resp)) {
-            return;
-          }
-          if (!initialed) {
-            setSource(resp);
-          }
-          StorageTools.set('region-data', resp, 3600);
-        },
+    Q.get('city-region/list').then((resp) => {
+      const { data } = resp;
+      if (!Array.isArray(data)) {
+        return;
       }
-    );
+      if (!initialed) {
+        setSource(data);
+      }
+      StorageTools.set('region-data', data, 3600);
+    });
   }, []);
 
   return <ElePicker {...props} candidateValues={source} />;

@@ -1,10 +1,13 @@
-import { isEmpty, noop } from '@/nice-router/nice-router-util';
+import { noop } from '@/utils';
+import { isEmpty } from '@/utils/object-utils';
 import { useVisible } from '@/service/use-service';
 import _ from 'lodash';
-import { AtActionSheet, AtActionSheetItem, AtCheckbox, AtRadio } from 'taro-ui';
 import { CandidateValue } from '@/nice-router/nice-router-types';
 import ActionField from './action-field';
-import './styles.scss';
+import './styles.less';
+import { View } from '@tarojs/components';
+import FloatLayout from '@/components/float-layout';
+import EleCheckbox from '@/components/form/field/ele-checkbox';
 
 type ElePopupSelectProps = {
   onChange?: Function;
@@ -57,7 +60,7 @@ function ElePopupSelect(props: ElePopupSelectProps) {
     ...it,
   }));
 
-  const cancelText = multiple ? '确定' : '取消';
+  // const cancelText = multiple ? '确定' : '取消';
 
   return (
     <ActionField
@@ -67,17 +70,11 @@ function ElePopupSelect(props: ElePopupSelectProps) {
       placeholder={placeholder}
       toggleStatus={visible}
     >
-      <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText={cancelText}>
-        <AtActionSheetItem className='popup-view'>
-          {multiple ? (
-            // @ts-ignore
-            <AtCheckbox options={options} selectedList={currentValue} onChange={handleChange} />
-          ) : (
-            // @ts-ignore
-            <AtRadio options={options} value={currentValue} onClick={handleChange} />
-          )}
-        </AtActionSheetItem>
-      </AtActionSheet>
+      <FloatLayout visible={visible} onCancel={close} title={label}>
+        <View className='popup-view'>
+          <EleCheckbox candidateValues={options} onChange={handleChange} value={currentValue} radio={!multiple} />
+        </View>
+      </FloatLayout>
     </ActionField>
   );
 }

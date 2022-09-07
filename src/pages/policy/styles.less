@@ -1,0 +1,80 @@
+@import '/src/styles/theme';
+
+.policy-preview {
+  width: 100%;
+  min-height: 100vh;
+  overflow: scroll;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+  padding: 20px 20px 200px;
+
+  .preview-logo {
+    &:extend(.flex-center);
+    position: absolute;
+    top: 400px;
+    left: 0;
+    right: 0;
+
+    &-image {
+      width: 448px;
+      height: 199px;
+      opacity: 0.5;
+    }
+  }
+
+  &-title {
+    font-size: 46px;
+    text-align: center;
+    font-weight: 800;
+    min-height: 60px;
+    box-sizing: border-box;
+  }
+
+  &-content {
+    box-sizing: border-box;
+    border: 2px solid #999999;
+    padding: 40px 20px 20px;
+    border-radius: 40px;
+  }
+}
+
+.policy-section {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  &-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &-text {
+      box-sizing: border-box;
+      height: 50px;
+      color: white;
+      padding: 0 20px;
+      background-color: #999999;
+      text-align: center;
+      font-size: 32px;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+    }
+
+    &-triangle {
+      box-sizing: border-box;
+      width: 0;
+      height: 0;
+      border: 25px solid transparent;
+      border-left: 25px solid #999999;
+    }
+  }
+
+  &-content {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-indent: 50px;
+    color: #666;
+  }
+}

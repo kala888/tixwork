@@ -24,7 +24,7 @@
              Hello DaaS, from
            </View>
            <Button type='primary' onClick={this.handleClick}>
-             nice-router-taro
+             tixwork-taro
            </Button>
          </View>
        )

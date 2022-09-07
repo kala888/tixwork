@@ -1,0 +1,44 @@
+@import '/src/styles/theme';
+
+.tabs-wrap {
+  .tabs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 26px 20px 26px;
+
+    &__item {
+      color: @text-color-light;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 120px;
+    }
+
+    &__line {
+      background: @primary-color;
+      width: 100%;
+      height: 4px;
+      margin-top: 4px;
+      transform: scaleX(0);
+      transition: all 0.15s;
+    }
+
+    &__line--active {
+      transform: scaleX(1) !important;
+    }
+
+    &--active {
+      font-size: 34px;
+      color: @text-color;
+      font-weight: bold;
+    }
+  }
+}
+
+.tabs-wrap.scroll {
+  .tabs {
+    justify-content: space-between;
+  }
+}

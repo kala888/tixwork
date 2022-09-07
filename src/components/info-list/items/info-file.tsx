@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components';
 
 import EleActionList from '@/components/elements/action-list/ele-action-list';
-import './styles.scss';
+import './styles.less';
 
 function InfoFile(props) {
   const { value: linkToUrl } = props;

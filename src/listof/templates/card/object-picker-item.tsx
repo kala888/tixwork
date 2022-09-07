@@ -2,7 +2,7 @@ import { Text, View } from '@tarojs/components';
 import NavigationService from '@/nice-router/navigation-service';
 import { EleCardProps } from '@/components/elements/ele-card/ele-card';
 import CardTemplate from './card-template';
-import './object-picker-item.scss';
+import './object-picker-item.less';
 
 type ObjectPickerItemItemProps = {
   checked?: boolean;

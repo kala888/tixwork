@@ -1,0 +1,50 @@
+// mixin
+
+.text-ellipsis() {
+  /*postcss-pxtransform rn eject enable*/
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /*postcss-pxtransform rn eject disable*/
+}
+
+.lamp-clamp(@line) {
+  /*postcss-pxtransform rn eject enable*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @line;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  /*postcss-pxtransform rn eject disable*/
+}
+
+.hairline-base(@color) {
+  content: '';
+  position: absolute;
+  transform-origin: center;
+  box-sizing: border-box;
+  pointer-events: none;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  border: 0 solid @color;
+  transform: scale(0.5);
+}
+
+.hairline-surround(@color) {
+  position: relative;
+  &::after {
+    .hairline-base(@color);
+    border-width: 1px;
+  }
+}
+
+.hairline-bottom(@color) {
+  position: relative;
+  &::after {
+    .hairline-base(@color);
+    border-bottom-width: 1px;
+  }
+}

@@ -1,18 +1,18 @@
 import NavigationService from '@/nice-router/navigation-service';
 import { View } from '@tarojs/components';
-import { AtSteps } from 'taro-ui';
 
 import { CandidateValue } from '@/nice-router/nice-router-types';
-import './styles.scss';
+import Steps from '@/components/steps';
+import './styles.less';
 
 type FormStepsProps = {
   steps: CandidateValue[];
 };
 
 function FormSteps({ steps }: FormStepsProps) {
-  const handleChange = (current) => {
+  const handleChange = (__, value) => {
     NavigationService.view(
-      steps[current],
+      value,
       {},
       {
         navigationMethod: 'replace',
@@ -20,11 +20,10 @@ function FormSteps({ steps }: FormStepsProps) {
     );
   };
 
-  const stepList = steps.map((it) => ({ ...it, desc: it.brief || '' }));
   let selectedIdx = steps.findIndex((it) => it.selected);
   return (
     <View className='form-steps'>
-      <AtSteps items={stepList} current={selectedIdx} onChange={handleChange} />
+      <Steps items={steps} current={selectedIdx} onChange={handleChange} />
     </View>
   );
 }

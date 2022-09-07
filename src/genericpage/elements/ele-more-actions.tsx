@@ -3,11 +3,11 @@ import { Text } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classNames from 'classnames';
 import { ActionLike, ActionListLike, IconLike, ImageLike } from '@/nice-router/nice-router-types';
-import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { isNotEmpty } from '@/utils/object-utils';
 import ActionIcon from '@/components/action-icon/action-icon';
 import EleButton from '@/components/elements/ele-button';
 
-import './styles.scss';
+import './styles.less';
 
 type EleMoreActionsProps = {
   text?: string;

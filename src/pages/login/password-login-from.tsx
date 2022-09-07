@@ -1,22 +1,30 @@
 import EleInput from '@/components/form/field/ele-input';
 import { View } from '@tarojs/components';
 import { useState } from 'react';
-
-import NavigationService from '@/nice-router/navigation-service';
 import EleButton from '@/components/elements/ele-button';
+import ElePassword from '@/components/form/field/ele-input/ele-password';
+import GlobalToast from '@/components/global-popup/global-toast';
+import AuthTools from '@/utils/auth-tools';
 
-import './login.scss';
+import './login.less';
+import LoginUtils from './login-utils';
 
 export default function PasswordForm() {
-  const [login, setLogin] = useState<any>();
+  const [username, setUsername] = useState<any>();
   const [password, setPassword] = useState<any>();
 
-  const handleSubmit = () => {
-    NavigationService.dispatch('app/login', {
-      loginMethod: 'account_password',
-      login,
-      password,
-    });
+  const handleSubmit = async () => {
+    const theTokenIsLoginToken = await AuthTools.isLoginToken();
+    console.log('Is an validate login token??', theTokenIsLoginToken);
+
+    const params = { username, password, loginMethod: 'account_password' };
+    try {
+      await LoginUtils.getWxObj().checkSession();
+      await LoginUtils.remoteLogin({ params });
+    } catch (e) {
+      console.log('error when login', e);
+      GlobalToast.show({ text: '登录失败，稍后重试！' });
+    }
   };
 
   return (
@@ -25,15 +33,14 @@ export default function PasswordForm() {
         <EleInput
           className='login-form-fields-input'
           placeholder='请输入用户名'
-          name='login'
-          value={login}
-          onChange={setLogin}
+          name='username'
+          value={username}
+          onChange={setUsername}
         />
-        <EleInput
+        <ElePassword
           className='login-form-fields-input'
           placeholder='请输入密码'
           name='password'
-          type='password'
           value={password}
           onChange={setPassword}
         />

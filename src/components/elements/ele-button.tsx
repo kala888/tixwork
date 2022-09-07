@@ -1,18 +1,17 @@
 import React from 'react';
 import _ from 'lodash';
-import NavigationService, { NavigationMethodType } from '@/nice-router/navigation-service';
-import { getExtMode, isNotEmpty } from '@/nice-router/nice-router-util';
+import NavigationService from '@/nice-router/navigation-service';
+
 import Taro from '@tarojs/taro';
 
 import ActionIcon from '@/components/action-icon/action-icon';
 import { Button, View } from '@tarojs/components';
-import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types';
+import { ActionLike, EleObject, IconLike, ImageLike, NavigationMethodType } from '@/nice-router/nice-router-types';
 
-import './ele-button.scss';
+import './ele-button.less';
 import { ButtonProps } from '@tarojs/components/types/Button';
-
-// form中组件封装后，button 不会触发form的handle方法问题
-// https://github.com/NervJS/taro-ui/issues/96
+import { isNotEmpty } from '@/utils/object-utils';
+import NiceRouterUtils from '@/nice-router/nice-router-utils';
 
 export type EleButtonProps = {
   size?: 'small' | 'default';
@@ -163,7 +162,7 @@ function EleButton(props: EleButtonProps) {
     );
   }, 200);
 
-  const rootClass = getExtMode(mode, { disabled }).classNames('ele-button', className);
+  const rootClass = NiceRouterUtils.getExtMode(mode, { disabled }).classNames('ele-button', className);
 
   const buttonSize: any = size === 'small' ? 'mini' : size;
 

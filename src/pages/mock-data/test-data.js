@@ -1,7 +1,7 @@
-import MockService from '@/nice-router/request/mock-service';
 import mockGenericPageData from './mock-genericpage.data';
 import mockForm2Data from './mock-form2.data';
 import mockForm1Data from './mock-form.data';
+import MockService from '../../http/mock-service';
 
 const documentUrl = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/README.docx';
 const videoUrl = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/video.mp4';
@@ -297,10 +297,10 @@ const homePageData = {
 };
 
 const initial = () => {
-  MockService.mockResp('mock-home-page/', 'com.terapico.appview.HomePage', homePageData);
-  MockService.mockResp('mock-generic-form/', 'com.terapico.caf.viewcomponent.GenericFormPage', mockForm1Data);
-  MockService.mockResp('mock-generic-form-2/', 'com.terapico.caf.viewcomponent.GenericFormPage', mockForm2Data);
-  MockService.mockResp('mock-generic-page/', 'com.terapico.caf.viewcomponent.GenericPage', mockGenericPageData);
+  MockService.mockResp('mock-home-page/', 'com.tiandtech.appview.HomePage', homePageData);
+  MockService.mockResp('mock-generic-form/', 'com.tiandtech.appview.GenericFormPage', mockForm1Data);
+  MockService.mockResp('mock-generic-form-2/', 'com.tiandtech.appview.GenericFormPage', mockForm2Data);
+  MockService.mockResp('mock-generic-page/', 'com.tiandtech.appview.GenericPage', mockGenericPageData);
   MockService.mockResp('mock-listof-test/', 'xx', {
     singleItemList: [userList[0]],
     productList,

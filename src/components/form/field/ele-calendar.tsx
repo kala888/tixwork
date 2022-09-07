@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { isEmpty, noop } from '@/nice-router/nice-router-util';
 import { useVisible } from '@/service/use-service';
-import { formatTime, transToDate } from '@/utils/index';
-import { Picker } from '@tarojs/components';
-import { AtActionSheet, AtCalendar } from 'taro-ui';
+import { formatTime, noop, transToDate } from '@/utils';
 import { ModeClass } from '@/nice-router/nice-router-types';
+import FloatLayout from '@/components/float-layout';
+import DateTimePicker from '@/components/date-picker';
+import { useState } from 'react';
+import { View } from '@tarojs/components';
 
 import ActionField from './action-field';
-import './ele-calendar.scss';
+import './ele-calendar.less';
 
 type EleCalendarProps = {
   onChange?: Function;
@@ -25,64 +25,21 @@ type EleCalendarProps = {
  * @constructor
  */
 function EleCalendar(props: EleCalendarProps) {
-  const [date, setDate] = useState('');
-  const [showCalendar, setShowCalendar] = useState(true);
-  const { visible, show: showPopup, close: closePopup } = useVisible(false);
+  const { visible, show, close } = useVisible(false);
   const { mode, onChange = noop, placeholder, label, value, disabled } = props;
+  const [date, setDate] = useState(value);
 
-  const show = () => {
-    showPopup();
-    setShowCalendar(true);
-  };
-  const close = () => {
-    closePopup();
-    setShowCalendar(false);
-  };
-
-  const handleDateSelected = (e) => {
-    const { start: startDate } = e.value;
+  const handleDateSelected = (dateOfStr) => {
     close();
+    setDate(dateOfStr);
     if (mode === 'date') {
-      onChange(startDate);
+      onChange(dateOfStr);
       return;
     }
-    setDate(startDate);
   };
 
-  const handleTimeChange = (e) => {
-    const {
-      detail: { value: time },
-    } = e;
-    onChange(`${date} ${time}`);
-  };
-
-  const getDateTime = () => {
-    console.log('getDate-time', value);
-    const dateValue = transToDate(value);
-
-    if (dateValue) {
-      const fmt = mode === 'datetime' ? 'yyyy-MM-dd HH:mm' : 'yyyy-MM-dd';
-      const displayValue = formatTime(dateValue, fmt);
-      let [displayDate, displayTime] = displayValue.split(' ');
-      return {
-        displayValue,
-        displayDate,
-        displayTime,
-      };
-    }
-
-    if (mode === 'datetime' && isEmpty(dateValue)) {
-      return {
-        displayTime: formatTime(Date.now(), 'HH:mm'),
-      };
-    }
-
-    return {};
-  };
-
-  const { displayValue, displayDate, displayTime } = getDateTime();
-
-  // action-sheet 里面的那个view不要干掉，不然日历有问题????? TODO
+  const theValue = transToDate(date);
+  const displayValue = formatTime(theValue, mode === 'datetime' ? 'yyyy-MM-dd HH:mm' : 'yyyy-MM-dd');
   return (
     <ActionField
       onClick={show}
@@ -91,14 +48,10 @@ function EleCalendar(props: EleCalendarProps) {
       placeholder={placeholder}
       className='ele-calendar'
     >
-      <AtActionSheet title={label} onClose={close} isOpened={visible} cancelText='取消'>
-        {mode === 'date' && <AtCalendar isVertical currentDate={displayDate} onSelectDate={handleDateSelected} />}
-        {mode === 'datetime' && (
-          <Picker mode='time' value={displayTime} onChange={handleTimeChange} onCancel={close}>
-            {showCalendar && <AtCalendar isVertical currentDate={date} onSelectDate={handleDateSelected} />}
-          </Picker>
-        )}
-      </AtActionSheet>
+      <FloatLayout visible={visible} title={false} onCancel={close}>
+        <View>{label}</View>
+        <DateTimePicker defaultValue={displayValue} onChange={handleDateSelected} onCancel={close} />
+      </FloatLayout>
     </ActionField>
   );
 }
@@ -107,7 +60,6 @@ EleCalendar.defaultProps = {
   placeholder: '请选择',
   onChange: noop,
   mode: 'date',
-  // mode: 'datetime',
   value: '',
   disabled: false,
 };

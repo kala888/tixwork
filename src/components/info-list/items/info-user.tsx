@@ -1,14 +1,14 @@
 import NavigationService from '@/nice-router/navigation-service';
-import { isNotEmpty } from '@/nice-router/nice-router-util';
+import { isNotEmpty } from '@/utils/object-utils';
 import ImageTools, { ImageSize } from '@/server-image/image-tools';
 import ServerImage from '@/server-image/server-image';
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
-import ActionUtil from '@/nice-router/action-util';
+import ActionUtil from '@/utils/action-util';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { ActionLike, EleObject, ImageLike } from '@/nice-router/nice-router-types';
-import './styles.scss';
+import './styles.less';
 
 type InfoUserProps = ImageLike & EleObject & ActionLike;
 

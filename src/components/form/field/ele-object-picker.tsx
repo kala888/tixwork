@@ -1,9 +1,10 @@
 import NavigationService from '@/nice-router/navigation-service';
-import { isEmpty, noop } from '@/nice-router/nice-router-util';
+import { noop } from '@/utils';
 import _ from 'lodash';
 import { ActionLike, CandidateValue } from '@/nice-router/nice-router-types';
+import { isEmpty } from '@/utils/object-utils';
 import ActionField from './action-field';
-import './styles.scss';
+import './styles.less';
 
 const OBJECT_PICKER_PAGE = '/genericform/object-picker-page';
 
@@ -36,7 +37,7 @@ function EleObjectPicker(props: EleObjectPickerProps) {
   const { searchAction, linkToUrl, maxSelectCount } = props;
 
   const goObjectPickerPage = async () => {
-    const items: any = await NavigationService.navigate(
+    const items: any = await NavigationService.goPage(
       OBJECT_PICKER_PAGE,
       { searchAction, linkToUrl, maxSelectCount },
       {

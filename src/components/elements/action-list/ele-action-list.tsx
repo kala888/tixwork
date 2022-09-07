@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from '@tarojs/components';
-import { isH5 } from '@/utils/index';
+import { isH5 } from '@/utils';
 import _ from 'lodash';
-import { getExtMode, isEmpty } from '@/nice-router/nice-router-util';
-
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import { isEmpty } from '@/utils/object-utils';
 import EleButton, { EleButtonProps } from '../ele-button';
-import './styles.scss';
+import './styles.less';
 
 const MixClass = [
   ['mix0'],

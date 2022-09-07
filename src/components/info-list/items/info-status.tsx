@@ -1,8 +1,8 @@
-import { getExtMode } from '@/nice-router/nice-router-util';
+import { getExtMode } from '@/nice-router/nice-router-utils';
 import { Text, View } from '@tarojs/components';
 import _ from 'lodash';
 
-import './styles.scss';
+import './styles.less';
 
 const LEVEL = ['default', 'primary', 'normal', 'warn', 'danger'];
 

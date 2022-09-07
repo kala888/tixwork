@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { isEmpty } from '@/nice-router/nice-router-util';
+import { isEmpty } from '@/utils/object-utils';
 
 // const logo = require('./images/default_id_icon.png')
 

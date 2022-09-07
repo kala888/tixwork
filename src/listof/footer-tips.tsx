@@ -1,9 +1,8 @@
 import { View } from '@tarojs/components';
-import { AtActivityIndicator } from 'taro-ui';
 import _ from 'lodash';
-import { getExtMode } from '@/nice-router/nice-router-util';
-
-import './footer-tips.scss';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import Spin from '@/components/spin';
+import './footer-tips.less';
 
 type FooterTipsProps = {
   hasNextPage?: boolean;
@@ -32,7 +31,7 @@ function FooterTips(props: FooterTipsProps) {
     <View className={rootClass} onClick={handleLoadMore}>
       <View className='listof-footer-tips-line' />
       <View className='listof-footer-tips-loading'>
-        <AtActivityIndicator size={28} />
+        <Spin size='small' />
       </View>
       <View className='listof-footer-tips-txt'>{tips}</View>
       <View className='listof-footer-tips-line' />

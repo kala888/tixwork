@@ -1,6 +1,6 @@
 # HomePage
 
-   服务端返回x-class=com.terapico.appview.HomePage
+   服务端返回x-class=com.tiandtech.appview.HomePage
    router 会默认跳转home页面
 
 #### 设计目标

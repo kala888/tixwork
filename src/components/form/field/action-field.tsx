@@ -1,9 +1,11 @@
 import React from 'react';
-import { getExtMode, isEmpty, noop } from '@/nice-router/nice-router-util';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import { isEmpty } from '@/utils/object-utils';
 import { View } from '@tarojs/components';
 import _ from 'lodash';
 import classNames from 'classnames';
-import './action-field.scss';
+import { noop } from '@/utils';
+import './action-field.less';
 
 type ActionFieldProps = {
   value: string | { title: string };

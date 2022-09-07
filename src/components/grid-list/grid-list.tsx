@@ -1,12 +1,13 @@
 import { Text, View } from '@tarojs/components';
 import _ from 'lodash';
 import classNames from 'classnames';
-import { getExtMode, isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
-import { getGroupListByColumn } from '@/utils/index';
+import { getExtMode } from '@/nice-router/nice-router-utils';
+import { getGroupListByColumn } from '@/utils';
 import NavigationService from '@/nice-router/navigation-service';
 import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types';
-import './grid-list.scss';
 import ActionIcon from '@/components/action-icon/action-icon';
+import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import './grid-list.less';
 
 type GridListItemProps = ImageLike & IconLike & ActionLike & EleObject;
 
@@ -18,7 +19,6 @@ type GridListProps = {
 };
 
 /**
- * 参考 taro-ui的grid写了写了一个
  * @param props
  * @returns {JSX.Element}
  * @constructor

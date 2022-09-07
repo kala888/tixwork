@@ -1,0 +1,95 @@
+@import '/src/styles/theme';
+
+.float-layout {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  z-index: 999999;
+  transition: visibility 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+
+  &.active {
+    visibility: visible;
+
+    .float-layout__overlay {
+      opacity: 1;
+    }
+
+    .float-layout__container {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+.float-layout__overlay {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 150ms ease-in;
+}
+
+.float-layout__container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  min-height: 600px;
+  max-height: 950px;
+  background-color: #fff;
+  transform: translate3d(0, 100%, 0);
+  transition: -webkit-transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+  transition: transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+  transition: transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1),
+    -webkit-transform 300ms cubic-bezier(0.36, 0.66, 0.04, 1);
+}
+
+.float-layout .layout-header {
+  position: relative;
+  padding: 20px 0 10px;
+  text-align: center;
+
+  .close-img {
+    position: absolute;
+    right: 28px;
+    top: 20px;
+    font-size: 40px;
+    color: @text-color-lighter;
+  }
+}
+
+.float-layout .layout-header__title {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 32px;
+  display: block;
+  padding-right: 80px;
+}
+
+.float-layout .layout-header__icon {
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  padding: 10px;
+  transform: translate(0, -50%);
+}
+
+.float-layout .layout-body {
+  font-size: 28px;
+  padding: 20px;
+  height: 602px;
+}
+
+.float-layout .layout-body__content {
+  position: relative;
+  height: 500px;
+  overflow-y: scroll;
+}

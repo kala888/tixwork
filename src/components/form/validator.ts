@@ -1,6 +1,6 @@
-import { isEmpty } from '@/nice-router/nice-router-util';
 import Schema from 'async-validator';
 import _ from 'lodash';
+import { isEmpty } from '@/utils/object-utils';
 
 //valid OOTB type:
 // const VALIDATOR_OOTB_TYP = [

@@ -1,0 +1,66 @@
+@import '/src/styles/theme';
+
+.ele-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__label {
+    margin-right: 16px;
+    width: 172px;
+    font-size: 32px;
+    line-height: 1.5;
+    vertical-align: middle;
+    text-align: left;
+  }
+
+  &__value {
+    padding: 8px;
+    width: 100%;
+  }
+
+  &--bordered {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  &__children {
+    padding-left: 10px;
+  }
+
+  &--required {
+    &::before {
+      display: inline-block;
+      margin-right: 8px;
+      color: red;
+      font-size: 28px;
+      line-height: 1;
+      content: '*';
+    }
+  }
+}
+
+.ele-password {
+  padding-right: 40px;
+}
+
+.ele-vcode {
+  &-txt {
+    font-size: 28px !important;
+    width: 150px !important;
+  }
+
+  &-txt-disabled {
+    color: @disabled-color !important;
+  }
+}
+
+.ele-money {
+  display: flex;
+  flex-direction: row;
+
+  &-icon {
+    color: #999;
+    margin-left: -1rem;
+  }
+}

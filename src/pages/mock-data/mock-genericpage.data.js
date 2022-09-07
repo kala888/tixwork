@@ -150,7 +150,7 @@ const shopList = {
         'https://m.360buyimg.com/babel/s823x404_jfs/t21784/201/795134266/176047/3dad2026/5b18c66eN8c4deacf.jpg!q70.dpg',
     },
   },
-  list: [{ id: 'shop1' }, { id: 'shop2' }, { id: 'shop3' }],
+  items: [{ id: 'shop1' }, { id: 'shop2' }, { id: 'shop3' }],
 };
 
 const articleList = {
@@ -230,7 +230,7 @@ const articleList = {
       ],
     },
   },
-  list: [{ id: 'article1' }, { id: 'article2' }, { id: 'article3' }, { id: 'article4' }],
+  items: [{ id: 'article1' }, { id: 'article2' }, { id: 'article3' }, { id: 'article4' }],
 };
 
 const messageSwiper = {
@@ -243,7 +243,7 @@ const messageSwiper = {
 
 const productList = {
   displayMode: 'product',
-  list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }, { id: 'p4' }],
+  items: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }, { id: 'p4' }],
   dataContainer: {
     p1: {
       id: 'p1',
@@ -288,7 +288,7 @@ const productList = {
 
 const waterfallList = {
   displayMode: 'image-on-top-waterfall',
-  list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
+  items: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
   dataContainer: {
     p1: {
       id: 'p111',
@@ -316,7 +316,7 @@ const waterfallList = {
 const horizontalList = {
   displayMode: 'article-small',
   horizontal: true,
-  list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
+  items: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }],
   dataContainer: {
     p1: {
       id: 'p11',

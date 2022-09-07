@@ -1,10 +1,9 @@
-import { isNotEmpty } from '@/nice-router/nice-router-util';
 import ImageTools, { ImageSize } from '@/server-image/image-tools';
 import ServerImage from '@/server-image/server-image';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
-
-import './styles.scss';
+import { isNotEmpty } from '@/utils/object-utils';
+import './styles.less';
 
 function InfoImage({ imageUrl }) {
   const handleImagePreview = () => {

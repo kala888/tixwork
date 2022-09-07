@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
 import ListofPageBase from './listof-page-base';
+import useModel from '@/model/use-model';
 
 export default () => {
-  const root = useSelector((state) => state.listofpage5);
+  const { root = {} as any } = useModel('listofpage5');
   return <ListofPageBase {...root} />;
 };

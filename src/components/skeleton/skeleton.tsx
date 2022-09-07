@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from '@tarojs/components';
 import _ from 'lodash';
-import './skeleton.scss';
+import './skeleton.less';
 
 type SkeletonProps = {
   loading: boolean;

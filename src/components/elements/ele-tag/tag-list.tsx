@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { View } from '@tarojs/components';
 import _ from 'lodash';
-import { noop } from '@/nice-router/nice-router-util';
+import { noop } from '@/utils';
 import EleTag, { EleTagProps } from '@/components/elements/ele-tag/ele-tag';
-import './tag-list.scss';
+import './tag-list.less';
 
 type TagListProps = {
   onItemClick?: Function;

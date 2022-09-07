@@ -12,11 +12,11 @@
 
 SPA开发中点击一个button后，前端先路由到这个页面，然后通过在componentDidMount发送ajax请求来改变当前页面的state。
 
-在Nice-router中怎么写呢？
+在tixwork-taro中怎么写呢？
 
 ```javascript
-<Button onClick = {()=>NavigationService.navigate("/pages/me-page")}>
-    查看我的
+<Button onClick={() => NavigationService.goPage("/pages/me-page")}>
+  查看我的
 </Button>
 ```
 
@@ -80,7 +80,7 @@ NavigationService.view(action) //action={linkToUrl:'http://www.b.com'}
 
 ##### 2. linkToUrl
 
-  linkToUrl这个是在nice-router中前后端的一个语义化属性。类型是字符串
+  linkToUrl这个是在tixwork-taro中前后端的一个语义化属性。类型是字符串
 
 他通常是一个url或者uri，是该对象的资源定位的语义化标识。
 
@@ -120,7 +120,7 @@ NavigationService.view(action) //action={linkToUrl:'http://www.b.com'}
 
 > 也许是一个button, 一个 list中的line-item, 一个签到的link，也可能是Carousel上的一个图片，或者是某个category的小图标。
 
-nice-router 支持服务端数据据驱动页面展示。将这个与后端交互的诉求抽象为一个action。
+tixwork-taro 支持服务端数据据驱动页面展示。将这个与后端交互的诉求抽象为一个action。
 
   举个栗子：一个标准的action
 
@@ -332,8 +332,8 @@ nice-router 支持服务端数据据驱动页面展示。将这个与后端交�
 4. 如何静态页面跳转(注意这里的action可以是由服务端提供的数据，这样服务端也可以控制这个action做静态页面跳转了)
 
 ```javascript
-  NavigationService.navigate("/pages/home-page")
-  或者
-  const action={...,linkToUrl:'page://pages/home-page'} //来自服务端数据驱动
-  NavigationService.view(action)
+  NavigationService.goPage("/pages/home-page")
+或者
+const action = { ..., linkToUrl: 'page://pages/home-page' } //来自服务端数据驱动
+NavigationService.view(action)
 ```

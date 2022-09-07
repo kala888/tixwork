@@ -6,7 +6,7 @@ line-item是为了配合listof和ListofPage做展示用的，这里以增加一�
    
    ```javascript
    import React from 'react'
-   import { formatMoney } from '@/utils/index'
+   import { formatMoney } from '@/utils'
    import { View } from '@tarojs/components'
    
    export default class JustALineTemplate extends React.PureComponent {

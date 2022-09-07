@@ -1,12 +1,11 @@
 import NavigationService from '@/nice-router/navigation-service';
-import { isNotEmpty } from '@/nice-router/nice-router-util';
-import ActionUtil from '@/nice-router/action-util';
 import { Text, View } from '@tarojs/components';
 import _ from 'lodash';
 import classNames from 'classnames';
-
 import { ActionLike, EleObject } from '@/nice-router/nice-router-types';
-import './styles.scss';
+import ActionUtil from '@/utils/action-util';
+import { isNotEmpty } from '@/utils/object-utils';
+import './styles.less';
 
 function InfoObjectLink(props: EleObject & ActionLike) {
   const { id, title, brief } = props;

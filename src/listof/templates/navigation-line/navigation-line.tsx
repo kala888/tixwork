@@ -1,10 +1,10 @@
 import { View } from '@tarojs/components';
 import ActionIcon from '@/components/action-icon/action-icon';
-import { isEmpty } from '@/nice-router/nice-router-util';
-import ActionUtil from '@/nice-router/action-util';
+import { isEmpty } from '@/utils/object-utils';
+import ActionUtil from '@/utils/action-util';
 import EleButton, { EleButtonProps } from '@/components/elements/ele-button';
 
-import './navigation-line.scss';
+import './navigation-line.less';
 
 type NavigationLineProps = {
   secondTitle?: string;

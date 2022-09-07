@@ -48,7 +48,7 @@ const productList = {
   type: 'listof',
   displayMode: 'product',
   numColumns: 2,
-  list: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }, { id: 'p4' }],
+  items: [{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }, { id: 'p4' }],
   dataContainer: {
     p1: {
       id: 'p1',

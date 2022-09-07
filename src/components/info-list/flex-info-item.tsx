@@ -1,5 +1,5 @@
 import TagList from '@/components/elements/ele-tag/tag-list';
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
+import { isEmpty, isNotEmpty } from '@/utils/object-utils';
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
@@ -14,7 +14,7 @@ import InfoStatus from './items/info-status';
 import InfoText from './items/info-text';
 import InfoUser from './items/info-user';
 
-import './styles.scss';
+import './styles.less';
 
 export type FlexInfoItemProps = {
   title: string;

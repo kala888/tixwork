@@ -1,11 +1,12 @@
 import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import _ from 'lodash';
-import { isNotEmpty, noop } from '@/nice-router/nice-router-util';
-import GlobalToast from '@/nice-router/global-toast';
+import { noop } from '@/utils';
+import { isNotEmpty } from '@/utils/object-utils';
 import EleButton from '@/components/elements/ele-button';
 
-import './styles.scss';
+import './styles.less';
+import GlobalToast from '@/components/global-popup/global-toast';
 
 type EleQrScanProps = {
   value: string;

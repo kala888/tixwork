@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 import React from 'react';
 import EleTableCell, { EleTableCellProps } from '@/components/ele-table/ele-table-cell';
 import classNames from 'classnames';
-import './ele-table.scss';
+import './ele-table.less';
 
 export type EleTableRowProps = {
   items?: EleTableCellProps[];

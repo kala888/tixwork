@@ -2,12 +2,12 @@
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { Picker, View } from '@tarojs/components';
-import { isEmpty, isNotEmpty } from '@/nice-router/nice-router-util';
+import { isEmpty, isNotEmpty } from '@/utils/object-utils';
 import { useVisible } from '@/service/use-service';
 import classNames from 'classnames';
 
 import { CandidateValue } from '@/nice-router/nice-router-types';
-import './styles.scss';
+import './styles.less';
 
 export type ElePickerProps = {
   value?: string | CandidateValue | CandidateValue[];
