@@ -1,7 +1,10 @@
 
 ##### nice-router-taro 已经移除对dva和taro-ui的依赖，并改名为tixwork-ui
 
+##### 旧的nice-router-taro（dva+taroui） 已经归档到branch： 1.0
+
 ##### 后面会陆续开放，配套的中台，后台，以及低码平台，尽情期待。
+
 
 
 #### 第0适合后端程序员的前端小程序开发框架
@@ -25,16 +28,13 @@ tixwork-taro 是一个前端低代码框架(低码)，可以使用JSON数据驱�
 
 # tixwork-taro 
 
-已经以后旧版（nice-router-taro）对于dva和taro-ui的依赖.
-
-对于ui，具体的项目，可以尝试使用最近开源的【网易严选OSSA](https://github.com/NeteaseYanxuan/OSSA) 
+对于ui，具体的项目，可以尝试使用最近开源的【网易严选OSSA](https://github.com/NeteaseYanxuan/OSSA)  看来还不错。
 
 #### 基础知识：Taro3 
 
 [Taro(读音：泰罗)](https://github.com/NervJS/taro) 是京东家的小程序开发框架，基于react（vue也可以）实现的跨多端开发框架（微信小程序，支付宝小程序，RN，抖音小程序......）
 
 [开始安装看效果](/docs/README.md)
-
 
 
 #### 部分项目截图
