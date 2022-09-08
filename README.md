@@ -1,5 +1,5 @@
 
-##### nice-router-taro 已经移除对dva和taro-ui的依赖，并改名为tixwork-ui
+##### nice-router-taro 已经移除对dva和taro-ui的依赖，并改名为tixwork-taro
 
 ##### 旧的nice-router-taro（dva+taroui） 已经归档到branch： 1.0
 
