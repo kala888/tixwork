@@ -88,7 +88,7 @@ const send: SendRequestType = (url = '', options = {}) => {
 /**
  * 为啥叫Q，应为比R（request）更Q
  */
-const Q = {
+const Query = {
   get,
   post,
   put,
@@ -99,4 +99,4 @@ const Q = {
   Send: send,
 };
 
-export default Q;
+export default Query;

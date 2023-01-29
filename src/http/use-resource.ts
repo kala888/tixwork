@@ -1,4 +1,4 @@
-import Q from './q';
+import Query from './query';
 import ActionUtil from '@/utils/action-util';
 import type React from 'react';
 import { ActionLike } from '@/nice-router/nice-router-types';
@@ -39,7 +39,7 @@ export function getResource<T>(resource: string | ActionLike): BizResourceType<T
 
   const list: TypeOfList<T> = async (params, options) => {
     const listUrl = uri + '/list';
-    const resp = await Q.send(listUrl, {
+    const resp = await Query.send(listUrl, {
       method: method,
       params: {
         pageNum: params?.current,
@@ -59,24 +59,22 @@ export function getResource<T>(resource: string | ActionLike): BizResourceType<T
 
   const get: TypeOfGet<T> = async (id) => {
     const getUrl = uri + '/' + id;
-    const resp = await Q.get(getUrl);
+    const resp = await Query.get(getUrl);
     return resp.data;
   };
 
-  const add = async (data: Record<string, any>) => Q.post(uri, data);
-  const update = async (data: Record<string, any>) => Q.put(uri, data);
+  const add = async (data: Record<string, any>) => Query.post(uri, data);
+  const update = async (data: Record<string, any>) => Query.put(uri, data);
 
   const remove = async (id: React.Key, options?: Record<string, any>) => {
-    return Q.send(uri + '/' + id, {
+    return Query.send(uri + '/' + id, {
       method: 'DELETE',
       ...(options || {}),
     });
   };
 
-  const exportData: TypeOfSearch = async (params, options) =>
-    await Q.get(uri + '/export', params, options);
-  const importData: TypeOfSearch = async (params, options) =>
-    await Q.post(uri + '/import', params, options);
+  const exportData: TypeOfSearch = async (params, options) => await Query.get(uri + '/export', params, options);
+  const importData: TypeOfSearch = async (params, options) => await Query.post(uri + '/import', params, options);
 
   return {
     list,

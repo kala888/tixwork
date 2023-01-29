@@ -4,13 +4,13 @@ import Listof from '@/listof/listof';
 import { View } from '@tarojs/components';
 
 import './styles.less';
-import Q from '@/http/q';
+import Query from '@/http/query';
 
 function HelloDaaSPage() {
   const [root, setRoot] = useState<any>({});
 
   useEffect(() => {
-    Q.get('mock-listof-test/').then((resp) => setRoot(resp.data));
+    Query.get('mock-listof-test/').then((resp) => setRoot(resp.data));
   }, []);
 
   const {

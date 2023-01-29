@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { isNotEmpty } from '@/utils/object-utils';
 import './styles.less';
 import GlobalToast from '@/components/global-popup/global-toast';
-import Q from '@/http/q';
+import Query from '@/http/query';
 import EleInput, { EleInputType } from '@/components/form/field/ele-input';
 
 type EleMobileVerifyCodeProps = {
@@ -30,7 +30,7 @@ function EleMobileVerifyCode(props: EleMobileVerifyCodeProps) {
     if (isNotEmpty(linkToUrl)) {
       startCount();
       console.log('props...', props);
-      await Q.get(linkToUrl, { mobile: props.value });
+      await Query.get(linkToUrl, { mobile: props.value });
       // NavigationService.ajax(linkToUrl, { mobile: props.value });
     }
   };

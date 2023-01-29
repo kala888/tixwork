@@ -4,7 +4,7 @@ import AuthTools, { AuthInfoSecurityStatus, AuthInfoType } from '@/utils/auth-to
 import ActionUtil from '@/utils/action-util';
 import NavigationService from '@/nice-router/navigation-service';
 import ApiConfig from '@/utils/api-config';
-import Q from '@/http/q';
+import Query from '@/http/query';
 import _ from 'lodash';
 // @ts-ignore
 const wxObj = wx.qy || Taro;
@@ -22,7 +22,7 @@ const getCode = () => {
 
 const remoteLogin = async ({ params, onCompleted }: { params: any; onCompleted?: () => void }) => {
   console.log('do remote login, params', params);
-  const resp = await Q.post(ApiConfig.Login, params);
+  const resp = await Query.post(ApiConfig.Login, params);
   const { data, responseOptions } = resp;
   //1. 回调后保存token
   const authorization = _.get(responseOptions, 'headers.authorization');

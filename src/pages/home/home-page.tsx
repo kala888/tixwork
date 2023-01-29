@@ -25,10 +25,9 @@ function HomePage(props) {
   console.log('root....', root);
   useEffect(() => {
     // NavigationService.ajax('mock-home-page/');
-    resource.get(1).then(resp => {
+    resource.get(1).then((resp) => {
       setRoot(resp);
     });
-
   }, []);
 
   //
