@@ -4,11 +4,9 @@ import SectionBar from '@/components/section-bar/section-bar';
 import Listof from '@/listof/listof';
 import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
 import { View } from '@tarojs/components';
-import useModel from '@/model/use-model';
-import { CommonModel } from '@/model/models';
-import { useEffect } from 'react';
-import NavigationService from '@/nice-router/navigation-service';
+import { useEffect, useState } from 'react';
 import './home.less';
+import useResource from '@/http/use-resource';
 
 type HomeDataType = {
   slideList: any[];
@@ -17,14 +15,20 @@ type HomeDataType = {
 };
 
 function HomePage(props) {
-  const { root } = useModel<CommonModel<HomeDataType>>('home');
+  const [root, setRoot] = useState<HomeDataType>();
+  const resource = useResource<HomeDataType>('user');
+  // const { root } = useModel<CommonModel<HomeDataType>>('home');
 
   usePageTitle(root);
   useAjaxPullDown(props);
 
   console.log('root....', root);
   useEffect(() => {
-    NavigationService.ajax('mock-home-page/');
+    // NavigationService.ajax('mock-home-page/');
+    resource.get(1).then(resp => {
+      setRoot(resp);
+    });
+
   }, []);
 
   //
@@ -49,7 +53,7 @@ function HomePage(props) {
   //   // });
   // }, []);
 
-  const { slideList = [], actionList = [], productList = [] } = root;
+  const { slideList = [], actionList = [], productList = [] } = root || data;
 
   return (
     <View className='home-page'>
