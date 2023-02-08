@@ -1,0 +1,100 @@
+@import './default.less';
+
+.ant-radio-button-wrapper {
+  padding: 0 15px !important;
+
+  &:last-child {
+    border-radius: 0 4px 4px 0 !important;
+  }
+
+  &:first-child {
+    border-radius: 4px 0 0 4px !important;
+  }
+}
+
+.ant-pro-sider-collapsed img {
+  height: 20px;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
+}
+
+.ant-layout-content {
+  margin: 12px;
+}
+
+.icon,
+.action-icon {
+  z-index: 9999999;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: -0.15em;
+  border: 1px solid red;
+  fill: currentColor;
+}
+
+.ant-form-vertical {
+  .ant-form-item {
+    padding-bottom: 0;
+  }
+
+  .ant-form-item-required::before {
+    position: absolute;
+    top: 4px;
+    right: 0;
+  }
+
+  .ant-form-item-required {
+    padding-right: 14px;
+  }
+}
+
+.ant-modal-header {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+// Custom Theme 通过https://nervjs.github.io/taro-ui-theme-preview/ 处理
+@color-brand: #28aaff;
+@color-brand-light: #5ebfff;
+@color-brand-dark: #2088cc;
+// end Custom Theme
+
+@primary-color: @color-brand;
+@primary-color-light: @color-brand-light;
+@primary-color-lighter: lighten(@color-brand-light, 20%);
+@primary-color-dark: @color-brand-dark;
+@primary-color-darker: darken(@color-brand-light, 20%);
+
+@price-color: #f2270c;
+@color-page-bg: #f0f2f5;
+@under-line-color: #c4d8e7;
+
+@color-border-grey: #ccc;
+@border-default: 1px solid @color-border-grey;
+@disabled-color: #ddd;
+
+@shadow-color: rgba(40, 170, 255, 0.1);
+//@shadow-color: @primary-color;
+
+@black: #000;
+@white: #fff;
+@orange-color: #fd8814;
+@red-color: #f23030;
+@golden-color: #ab956d;
+@silver-grey-color: #ccc;
+@light-grey-color: #ededed;
+@ice-blue-color: #53c7ca; //冰蓝
+@green-color: #07c160;
+
+@text-color: #333;
+@text-color-light: #56585c;
+@text-color-lighter: #999;
+
+@level-default: @text-color-light;
+@level-normal: @green-color;
+@level-primary: @primary-color;
+@level-warn: #ffc300;
+@level-danger: #fa5151;
+@level-info: @ice-blue-color;
+
+@placeholder: #ccc;

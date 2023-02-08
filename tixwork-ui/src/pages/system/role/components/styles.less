@@ -1,0 +1,23 @@
+@import '~antd/es/style/themes/default.less';
+
+.detail {
+  :global {
+    .ant-tree-checkbox-inner {
+      border-radius: 2px;
+    }
+
+    .ant-tree-checkbox,
+    .ant-tree-switcher,
+    .ant-tree-node-content-wrapper {
+      padding-top: 4px;
+    }
+  }
+
+  &RoleMenuTree {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 100px;
+  }
+}

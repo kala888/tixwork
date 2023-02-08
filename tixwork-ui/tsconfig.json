@@ -1,0 +1,14 @@
+{
+  "extends": "./src/.umi/tsconfig.json",
+
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false
+  }
+}

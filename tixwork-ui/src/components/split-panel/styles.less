@@ -1,0 +1,54 @@
+.container {
+  height: 100%;
+  background-color: #fff;
+
+  .trigger {
+    position: absolute;
+    top: 16px;
+    right: -1px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 30px;
+    padding: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 30px;
+    border: 1px solid rgb(235, 237, 240);
+    border-right: 1px solid #fff;
+    border-radius: 2px;
+  }
+
+  :global {
+    .ant-layout-sider {
+      position: relative;
+      z-index: 1;
+      min-height: 86vh;
+      //min-height: calc(100vh - 70px);
+      padding: 16px 10px;
+      border-right: 1px solid rgb(235, 237, 240);
+    }
+
+    .ant-layout-has-sider {
+      position: relative;
+      z-index: 999;
+      background: #fff;
+    }
+  }
+
+  :global(.ant-layout-sider-collapsed.ant-layout-sider) {
+    padding: 16px 0;
+    border: 0;
+  }
+
+  :global(.ant-layout-sider-collapsed) {
+    .trigger {
+      position: absolute;
+      right: -20px;
+      border: 1px solid rgb(235, 237, 240);
+      border-left: 1px solid #fff;
+    }
+  }
+}

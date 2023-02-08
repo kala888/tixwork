@@ -1,0 +1,51 @@
+@import '~antd/es/style/themes/default.less';
+@import '../../theme/tixwork-theme.less';
+
+.card {
+  height: 100%;
+  margin-top: 10px;
+
+  :global(.ant-descriptions-item-label) {
+    color: @primary-color-light;
+    font-weight: 800;
+  }
+}
+
+.tab {
+  padding: 10px;
+}
+
+.detail {
+  :global(h2) {
+    margin-bottom: 0 !important;
+  }
+}
+
+.listContent {
+  :global(.ant-tabs-content .ant-pro-card-body) {
+    padding: 0 !important;
+  }
+}
+
+.groupCard {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 20px 10px 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+
+  &Title {
+    position: absolute;
+    top: -10px;
+    left: 30px;
+    min-width: 40px;
+    padding: 0 5px;
+    color: #444;
+    font-weight: 600;
+    background-color: #fff;
+  }
+
+  :global(.ant-descriptions-item) {
+    padding-bottom: 10px;
+  }
+}

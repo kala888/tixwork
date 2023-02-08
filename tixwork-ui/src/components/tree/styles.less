@@ -1,0 +1,67 @@
+@import '~antd/es/style/themes/default.less';
+
+.search {
+  align-self: center;
+  padding: 0 20px 20px 8px;
+
+  :global(.ant-input-group-addon) {
+    left: 0 !important;
+  }
+
+  :global(.ant-input-group .ant-input) {
+    box-sizing: border-box;
+    height: 30px;
+    padding-right: 32px;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  :global(.ant-input-search-button) {
+    z-index: 99999;
+    height: 22px;
+    margin-left: -32px;
+    border-width: 0;
+  }
+}
+
+.switchIcon {
+  color: @primary-color;
+}
+
+.tree {
+  :global(.ant-tree-title) {
+    display: inline-block;
+    min-width: 4em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.empty {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+  color: @text-color-secondary;
+  text-align: center;
+
+  :global(.anticon) {
+    padding-right: 10px;
+    font-size: 20px;
+  }
+}
+
+.treeSelector {
+  min-width: 100px;
+
+  .icon {
+    z-index: 9999;
+    align-self: center;
+    margin-right: -10px;
+    padding: 0 10px;
+    color: #333;
+  }
+}
