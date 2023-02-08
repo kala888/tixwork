@@ -12,7 +12,7 @@ import Listof from '@/listof/listof';
 import { EleButtonProps } from '@/components/elements/ele-button';
 import MockService from '../../http/mock-service';
 import useModel from '@/model/use-model';
-import Query from '@/http/query';
+import Q from '@/http/q';
 import AuthTools from '@/utils/auth-tools';
 import './me.less';
 
@@ -60,7 +60,7 @@ function MePage() {
   const handleLogout = async () => {
     await AuthTools.logout();
     await NavigationService.dispatch('me/clear');
-    await Query.get(ApiConfig.Logout);
+    await Q.get(ApiConfig.Logout);
   };
 
   useEffect(() => {

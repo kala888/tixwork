@@ -4,7 +4,7 @@ import { formatTime, isH5 } from '@/utils';
 import Taro from '@tarojs/taro';
 import mime from 'mime';
 import getAliyunConfig, { OssTokenDTO } from './aliyun-oss-helper';
-import Query from '@/http/query';
+import Q from '@/http/q';
 import { TaroImageFile } from '@/components/image-picker/image-item';
 
 export type FileUploadType = {
@@ -108,7 +108,7 @@ const uploadFile = async (params: FileUploadType) => {
 
   if (!checkTokenPass()) {
     console.log('invalidate token, get new one');
-    const resp = await Query.get(ApiConfig.OSSToken);
+    const resp = await Q.get(ApiConfig.OSSToken);
     ossToken = resp.data;
   }
   await uploadToRemote(params || {});

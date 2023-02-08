@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ElePicker, { ElePickerProps } from '@/components/form/field/ele-picker';
 import { isNotEmpty } from '@/utils/object-utils';
 import StorageTools from '@/utils/storage-tools';
-import Query from '@/http/query';
+import Q from '@/http/q';
 
 function RegionPicker(props: ElePickerProps) {
   const [source, setSource] = useState<Record<string, any[]>[]>([]);
@@ -14,7 +14,7 @@ function RegionPicker(props: ElePickerProps) {
       setSource(regionData);
       initialed = true;
     }
-    Query.get('city-region/list').then((resp) => {
+    Q.get('city-region/list').then((resp) => {
       const { data } = resp;
       if (!Array.isArray(data)) {
         return;
