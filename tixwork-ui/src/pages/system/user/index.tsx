@@ -1,17 +1,17 @@
-import React, { useRef, useState } from 'react';
+import { OptionAction } from '@/components/action/more-option-action';
 import EleTableList from '@/components/ele-table-list/ele-table-list';
+import type { EleTableListRef } from '@/components/ele-table-list/ele-table-list-types';
 import BasePage from '@/components/layout/base-page';
-import SplitPanel from '@/components/split-panel/split-panel';
+import SplitCard from '@/components/split-card';
 import DeptTree from '@/components/tree/dept-tree';
 import type { EleValueType } from '@/components/value-type';
 import CommonColumn from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
-import type { ProColumnType } from '@ant-design/pro-components';
-import type { EleTableListRef } from '@/components/ele-table-list/ele-table-list-types';
-import EditForm from './edit-form';
-import { OptionAction } from '@/components/value-type/action-list/more-option-action';
-import { Modal, Space, Typography } from 'antd';
 import Q from '@/http/http-request/q';
+import type { ProColumnType } from '@ant-design/pro-components';
+import { Modal, Space, Typography } from 'antd';
+import React, { useRef, useState } from 'react';
+import EditForm from './edit-form';
 
 const columns: ProColumnType<API.User, EleValueType>[] = [
   {
@@ -88,7 +88,7 @@ export default () => {
 
   return (
     <BasePage>
-      <SplitPanel renderLeft={renderLeft}>
+      <SplitCard renderLeft={renderLeft}>
         <EleTableList<API.User>
           title="用户列表"
           ref={ref}
@@ -99,7 +99,7 @@ export default () => {
           editForm={EditForm}
           lineActionList={lineActionList}
         />
-      </SplitPanel>
+      </SplitCard>
     </BasePage>
   );
 };

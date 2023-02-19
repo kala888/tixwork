@@ -23,11 +23,15 @@ const codeMessage = {
 
 const isExceptionXClass = (xClass) => _.endsWith(_.toLower(xClass), 'exception');
 
-const ErrorResponseInterceptors = (response: AxiosResponse) => {
+const getHeaders = (response) => {
   const headers = {};
-  Object.keys(response.headers).forEach((key) => {
+  Object.keys(response.headers || []).forEach((key) => {
     headers[key.toLowerCase()] = response.headers[key];
   });
+  return headers;
+};
+const ErrorResponseInterceptors = (response: AxiosResponse) => {
+  const headers = getHeaders(response);
   const xClass = headers['x-class'];
   const resp = response.data;
   console.log('resp....', response.status, isExceptionXClass(xClass));
@@ -53,10 +57,7 @@ export const ErrorHandler = (error: any) => {
     throw error;
   }
 
-  const headers = {};
-  Object.keys(response.headers).forEach((key) => {
-    headers[key.toLowerCase()] = response.headers[key];
-  });
+  const headers = getHeaders(response);
   const xClass = headers['x-class'];
   if (isExceptionXClass(xClass)) {
     notification.info({
@@ -70,7 +71,8 @@ export const ErrorHandler = (error: any) => {
   if (response.status) {
     const { status, statusText, url } = response;
     console.error('url got error', url);
-    const errorDescription = response?.msg || response.data?.msg || codeMessage[status] || statusText;
+    const errorDescription =
+      response?.msg || response.data?.msg || codeMessage[status] || statusText;
     notification.error({
       message: '出错啦。',
       description: errorDescription,

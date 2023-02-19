@@ -4,8 +4,8 @@ import TreeExpandIcon from '@/components/tree/tree-expand-icon';
 import type { EleValueType } from '@/components/value-type';
 import CommonColumn from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
-import EditForm from './edit-form';
 import type { ProColumnType } from '@ant-design/pro-components';
+import EditForm from './edit-form';
 
 const columns: ProColumnType<API.Menu, EleValueType>[] = [
   {

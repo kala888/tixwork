@@ -1,14 +1,38 @@
+@import '../../../theme/tixwork-theme.less';
+
 .basePage {
   min-height: 80vh;
 
   :global {
     .ant-page-header {
-      padding-right: 15px !important;
-      padding-left: 15px !important;
+      margin-bottom: 10px !important;
+      padding: 0 20px !important;
+      background-color: #fff;
     }
 
     .ant-pro-page-container-children-content {
-      margin: 0 15px;
+      padding: 0 !important;
+    }
+
+    //.ant-pro-grid-content {
+    //  //background-color: #fff;
+    //}
+  }
+
+  .pageTitle {
+
+    :global(.ant-pro-card-header) {
+      padding-block: 0;
+    }
+
+    &Text {
+      color: @text-color-light;
+      font-weight: 500;
+      font-size: 24px;
+    }
+
+    &Brief {
+      color: @text-color-lighter;
     }
   }
 }

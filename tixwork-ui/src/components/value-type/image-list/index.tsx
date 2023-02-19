@@ -1,7 +1,7 @@
-import EleImageList from '@/components/value-type/image-list/ele-image-list';
-import ProImagePicker from '@/components/value-type/image-list/image-picker';
+import EleImageList from './ele-image-list';
+import ImagePicker from './image-picker';
 
-const ImageList = {
+const ImageListValueType = {
   render: (item, props) => {
     const { fieldProps } = props;
     let items = item;
@@ -12,7 +12,7 @@ const ImageList = {
   },
   renderFormItem: (__, props) => {
     const { fieldProps, ...rest } = props;
-    return <ProImagePicker {...rest} {...fieldProps} />;
+    return <ImagePicker {...rest} {...fieldProps} />;
   },
 };
-export default ImageList;
+export default ImageListValueType;

@@ -22,7 +22,7 @@ const columns: ProColumnType<any, EleValueType>[] = [
     width: 100,
     valueEnum: {
       '0': '其它',
-      '1': '新增',
+      '1': '新建',
       '2': '修改',
       '3': '删除',
     },

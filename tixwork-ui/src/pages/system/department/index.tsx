@@ -1,9 +1,9 @@
 import EleTableList from '@/components/ele-table-list/ele-table-list';
-import ApiConfig from '@/http/api-config';
 import BasePage from '@/components/layout/base-page';
 import TreeExpandIcon from '@/components/tree/tree-expand-icon';
 import type { EleValueType } from '@/components/value-type';
 import CommonColumn from '@/components/value-type/common-column';
+import ApiConfig from '@/http/api-config';
 import type { ProColumnType } from '@ant-design/pro-components';
 import EditForm from './edit-form';
 

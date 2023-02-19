@@ -24,16 +24,15 @@ export default function DetailPage() {
   const { id } = params;
   const schema = BizSchema.get(objectType);
   useEffect(() => {
-    const pageTitle = `${schema.label}-${id} ${BizSchema.project?.title}`;
+    const pageTitle = `${schema.label}-${id} ${BizSchema.Root?.title}`;
     setTimeout(() => (document.title = pageTitle), 200);
   }, [schema]);
 
   if (isEmpty(id) || isEmpty(schema)) {
     return <Empty description="没有找到对应的页面" />;
   }
-
   return (
-    <BasePage>
+    <BasePage title={`${schema.label}详情`} brief={id}>
       <EleDetail id={id} objectType={objectType} />
     </BasePage>
   );

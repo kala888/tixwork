@@ -1,44 +1,43 @@
-import Config from '@/utils/config';
-import { isEmpty } from '@/utils/object-utils';
 import _ from 'lodash';
 import { compile, parse } from 'path-to-regexp';
 
-function replaceUrl(source: any, params = {}) {
-  const finalParams = _.cloneDeep(params);
-  let url = source;
-  let domain = '';
-  if (url.match(/[a-zA-z]+:\/\/[^/]*/)) {
-    [domain] = url.match(/[a-zA-z]+:\/\/[^/]*/);
-    url = url.slice(domain.length);
-  }
+const FAKE_HOST = 'https://www.this-is-fake-host.com';
 
-  const toPath = compile(url);
+function buildUrl(uri: any, params = {}, data = {}) {
+  const theParams = _.cloneDeep(params);
+  const theData = _.cloneDeep(data);
+  let pathname = uri;
   try {
-    url = toPath(finalParams);
+    const str = pathname.replace('?', '\\?');
+    const compiled = compile(str)({ ...params, ...data });
+    const match = parse(str);
+    match.forEach((item) => {
+      const { name } = item as any;
+      if (name in theParams) {
+        delete theParams[name];
+      }
+      if (name in theData) {
+        delete theData[name];
+      }
+    });
+    pathname = compiled;
   } catch (e) {
     console.warn('解析uri错误, 多半是带":"的替代变量为空了，请尽量避免在url中使用":"', e);
   }
-  const match = parse(url);
-  match.forEach((item) => {
-    // @ts-ignore
-    const { name } = item;
-    if (name in finalParams) {
-      delete finalParams[name];
-    }
-  });
 
+  const urlObj = new URL(pathname, FAKE_HOST);
+  console.log('dddd2', urlObj, uri);
+  const prefix = urlObj.origin === FAKE_HOST ? '' : urlObj.origin;
   return {
-    url: isEmpty(domain) ? url : Config.baseURL + url,
-    params: finalParams,
+    url: prefix + urlObj.pathname + urlObj.search,
+    params: theParams,
+    data: theData,
   };
 }
 
 const RequestUrl = (config) => {
   // 将params 处理成url
-  const { url: paramUrl, params } = replaceUrl(config.url, config?.params);
-  // 将data 处理成url
-  const { url, params: data } = replaceUrl(paramUrl, config?.data);
-
+  const { url, params, data } = buildUrl(config.url, config?.params, config.data);
   return {
     ...config,
     url,

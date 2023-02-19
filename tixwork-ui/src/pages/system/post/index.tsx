@@ -10,7 +10,7 @@ import EditForm from './edit-form';
 const columns: ProColumnType<API.Post, EleValueType>[] = [
   {
     title: 'ID',
-    dataIndex: 'postId',
+    dataIndex: 'id',
     align: 'center',
     width: 50,
     hideInForm: true,
@@ -48,7 +48,6 @@ export default () => {
       </Text>
       <EleTableList<API.Post>
         resource={ApiConfig.post}
-        rowKey="postId"
         title="职务管理"
         columns={columns}
         editForm={EditForm}

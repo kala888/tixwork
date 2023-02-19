@@ -6,6 +6,7 @@ import { isEmpty } from '@/utils/object-utils';
 import { Empty } from 'antd';
 import _ from 'lodash';
 import { useLocation, useParams } from 'umi';
+import styles from './styles.less';
 
 export default () => {
   const params = useParams<{ objectType; id }>();
@@ -23,9 +24,10 @@ export default () => {
   }
 
   return (
-    <BasePage>
+    <BasePage title={`${schema.label}`} brief={schema.brief}>
       <EleTableList
-        resource={schema.uri}
+        className={styles.listofPage}
+        resource={schema.linkToUrl}
         rowKey="id"
         title={schema.label}
         columns={schema.columns}

@@ -1,13 +1,15 @@
 import type { ResourceNameType } from '@/biz-model/biz-schema';
+import BizSchema from '@/biz-model/biz-schema';
 import GroupCard from '@/components/detail/group-card';
+import type { ListItemsInfoType } from '@/components/detail/list-items-info';
 import ObjectLink from '@/components/value-type/object/object-link';
 import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import { RightOutlined } from '@ant-design/icons';
+import type { CardProps } from '@ant-design/pro-card/es/typing';
 import { ProCard, ProDescriptions } from '@ant-design/pro-components';
 import { Empty, Space } from 'antd';
 import _ from 'lodash';
 import styles from './styles.less';
-import { RightOutlined } from '@ant-design/icons';
-import type { CardProps } from '@ant-design/pro-card/es/type';
 
 type ObjectEntityInfoType = {
   title?: any;
@@ -15,6 +17,7 @@ type ObjectEntityInfoType = {
   dataSource: any;
   objectType?: ResourceNameType;
   collapsible?: boolean;
+  column?: number;
 } & CardProps;
 
 const EmptyInfo = ({ title }) => (
@@ -42,6 +45,8 @@ const collapsibleIconRender = ({ collapsed }) => (
     <RightOutlined rotate={!collapsed ? 90 : undefined} />
   </span>
 );
+
+const isSingleLine = (type) => _.includes(['textarea', 'ObjectList'], type);
 /**
  * 把textarea弄成单独的一行
  */
@@ -59,14 +64,20 @@ const buildColumns = (columns) => {
   let globalPointer = 0;
   return theColumn.map((it, idx) => {
     // 2.1 本身是textarea
-    if (it.valueType === 'textarea') {
+    if (isSingleLine(it.valueType)) {
+      const result = { ...it, span: 3 };
       globalPointer = 0;
-      // ellipsis导致description ui有问题，临时在desc中干掉
-      return { ...it, ellipsis: false, span: 3, copyable: true };
+      if (it.valueType === 'textarea') {
+        // ellipsis导致description ui有问题，临时在desc中干掉
+        result.ellipsis = false;
+        result.copyable = true;
+      }
+      return result;
     }
+
     const next = theColumn[idx + 1];
     let span = 1;
-    if (next && next.valueType === 'textarea') {
+    if (next && isSingleLine(next.valueType)) {
       span = 3 - globalPointer;
     }
     globalPointer = (globalPointer + 1) % 3;
@@ -74,8 +85,27 @@ const buildColumns = (columns) => {
   });
 };
 
+export const getObjectFieldProps = (props, parent) => {
+  const { dataIndex = 'id', title, fieldProps } = props;
+  const obj = _.get(parent, dataIndex);
+  const objectType = fieldProps?.objectType;
+  const columns = BizSchema.get(objectType)?.columns;
+  const result: ListItemsInfoType = {
+    ...fieldProps,
+    parent,
+    editable: fieldProps.editable,
+    key: dataIndex,
+    dataSource: obj,
+    searchKey: fieldProps?.searchKey,
+    objectType,
+    columns,
+    title,
+  };
+  return result;
+};
+
 const ObjectEntityInfo = (props: ObjectEntityInfoType) => {
-  const { title, columns, dataSource, objectType, collapsible = false, ...rest } = props;
+  const { title, columns, dataSource, objectType, collapsible = false, column, ...rest } = props;
   if (isEmpty(dataSource)) {
     return <EmptyInfo title={title} />;
   }
@@ -86,10 +116,14 @@ const ObjectEntityInfo = (props: ObjectEntityInfoType) => {
     params.collapsibleIconRender = collapsibleIconRender;
     params.collapsible = true;
   }
-  const grouped = _.groupBy(
-    columns.filter((it) => it.valueType !== 'Object'),
-    (it) => it.group,
-  );
+
+  const grouped = _.groupBy(columns, (it) => {
+    if (it.valueType === 'Object') {
+      return '关联信息';
+    }
+    return it.group;
+  });
+  // const grouped = _.groupBy(columns.filter((it) => it.valueType !== 'Object'), (it) => it.group  );
 
   const groupNames = Object.keys(grouped);
   return (
@@ -97,14 +131,15 @@ const ObjectEntityInfo = (props: ObjectEntityInfoType) => {
       title={title}
       bordered={false}
       subTitle={<SubTitle objectType={objectType} data={data} />}
-      headerBordered={true}
       className={styles.card}
       {...params}
       {...rest}
     >
       {groupNames.map((it, idx) => {
         const theColumn = buildColumns(grouped[it]);
-        const theDesc = <ProDescriptions dataSource={dataSource} columns={theColumn} />;
+        const theDesc = (
+          <ProDescriptions dataSource={dataSource} columns={theColumn} column={column} />
+        );
         if (groupNames.length === 1) {
           return theDesc;
         }

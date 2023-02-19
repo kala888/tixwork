@@ -1,6 +1,6 @@
 import BaseForm from '@/components/form/base-form';
+import RemoteSelect from '@/components/form/remote/remote-select';
 import { CommonRule } from '@/components/value-type/common-column';
-import { RemoteSelect } from '@/components/value-type/remote-enum';
 import {
   ProFormDigit,
   ProFormRadio,
@@ -9,9 +9,9 @@ import {
 } from '@ant-design/pro-components';
 
 export default function SubItemEditForm(props) {
-  const { parent, initialValues = {}, ...rest } = props;
+  const { parent, values = {}, ...rest } = props;
 
-  const values = {
+  const theValues = {
     parent: {
       id: parent.id,
     },
@@ -20,12 +20,12 @@ export default function SubItemEditForm(props) {
     isDefault: 'N',
     status: 'ENABLED',
     type: 'VALUE',
-    ...initialValues,
+    ...values,
   };
   const isEnumValue = parent.type === 'ENUMS';
 
   return (
-    <BaseForm {...rest} initialValues={values}>
+    <BaseForm {...rest} values={theValues}>
       <ProFormText name={'id'} hidden={true} />
       <ProFormText name={['parent', 'id']} hidden={true} />
       <ProFormText name="type" hidden={true} />
@@ -52,8 +52,7 @@ export default function SubItemEditForm(props) {
       <ProFormRadio.Group
         label="是否默认值"
         name="isDefault"
-        //@ts-ignore
-        valueType="radioButton"
+        radioType="button"
         fieldProps={{
           buttonStyle: 'solid',
         }}

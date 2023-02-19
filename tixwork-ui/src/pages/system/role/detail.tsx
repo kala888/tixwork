@@ -14,7 +14,7 @@ type RoleDetailType = {
 const columns: any[] = [
   {
     title: 'ID',
-    dataIndex: 'roleId',
+    dataIndex: 'id',
   },
   {
     title: '角色名',

@@ -99,7 +99,7 @@ declare namespace API {
   };
 
   type Role = {
-    roleId: number;
+    id: number;
     roleName: string;
     roleKey: string;
     roleSort: number;
@@ -235,7 +235,7 @@ declare namespace API {
   };
 
   type Notice = {
-    noticeId: number;
+    id: number;
     noticeTitle: string;
     noticeType: '1' | '2'; //（1通知 2公告）
     noticeContent: string;
@@ -255,5 +255,11 @@ declare namespace API {
     datetime?: string;
     description?: string;
     type?: NoticeIconItemType;
+  };
+
+  export type Screen = {
+    title: string;
+    brief?: string;
+    template: string;
   };
 }

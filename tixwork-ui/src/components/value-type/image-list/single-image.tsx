@@ -1,6 +1,6 @@
-import EleImageList from '@/components/value-type/image-list/ele-image-list';
-import ProImagePicker from '@/components/value-type/image-list/image-picker';
 import { ensureArray } from '@/utils';
+import EleImageList from './ele-image-list';
+import ImagePicker from './image-picker';
 
 const SingleImage = {
   render: (item, props) => {
@@ -10,7 +10,7 @@ const SingleImage = {
   },
   renderFormItem: (__, props) => {
     const { fieldProps, ...rest } = props;
-    return <ProImagePicker {...rest} {...fieldProps} single={true} />;
+    return <ImagePicker {...rest} {...fieldProps} single={true} />;
   },
 };
 export default SingleImage;

@@ -1,7 +1,7 @@
-import _ from 'lodash';
-import type { ProColumns } from '@ant-design/pro-components';
 import type { EleValueType } from '@/components/value-type';
 import type { ActionLike, ActionList } from '@/utils/nice-router-types';
+import type { ProColumns } from '@ant-design/pro-components';
+import _ from 'lodash';
 
 export const mergeProps = (inbound, defaultValues) => {
   return _.isBoolean(inbound) ? inbound : { ...defaultValues, ...inbound };
@@ -50,7 +50,7 @@ export const getLineActionListColumn = (params: {
     title: '操作',
     key: 'option',
     // dataIndex: 'the-option', //有时候有问题！？
-    valueType: 'ActionList',
+    valueType: 'OptionActions',
     align: 'center',
     hideInForm: true,
     hideInSearch: true,

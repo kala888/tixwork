@@ -4,7 +4,7 @@ import { history } from '@umijs/max';
 import { Avatar, Dropdown, Spin } from 'antd';
 import type { ItemType } from 'antd/es/menu/hooks/useItems';
 import { useCallback } from 'react';
-import logo from '../../../assets/logo.svg';
+import logo from '../../../assets/logo.png';
 import styles from './index.less';
 
 export default function AvatarDropdown() {

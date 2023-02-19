@@ -223,7 +223,7 @@ export interface NoticeIconData {
 
 ## RightContent
 
-RightContent 是以上几个组件的组合，同时新增了 plugins 的 `SelectLang` 插件。
+RightContent 是以上几个组件的组合，同时新建了 plugins 的 `SelectLang` 插件。
 
 ```tsx | pure
 <Space>

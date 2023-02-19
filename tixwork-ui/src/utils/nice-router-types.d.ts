@@ -1,5 +1,5 @@
-import type React from 'react';
 import type { BaseType } from 'antd/es/typography/Base';
+import type React from 'react';
 
 export interface ImageLike {
   imageUrl?: string;
@@ -16,6 +16,17 @@ export interface IconLike {
 export interface VideoLike {
   videoUrl?: string;
 }
+
+export type ResourceLike = {
+  list: ActionLike;
+  get: ActionLike;
+  add: ActionLike;
+  update: ActionLike;
+  remove: ActionLike;
+  importData: ActionLike;
+  exportData: ActionLike;
+  search: ActionLike;
+};
 
 export interface ActionLike {
   id?: React.Key;
@@ -44,6 +55,7 @@ export interface ModeClass {
 
 export interface EleObject {
   id?: string;
+  value?: string;
   title?: string;
   brief?: string;
 }

@@ -1,11 +1,11 @@
 import ApiConfig from '@/http/api-config';
 import Q from '@/http/http-request/q';
+import { ProFormField } from '@ant-design/pro-components';
 import { useAsyncEffect } from 'ahooks';
 import { TreeSelect } from 'antd';
 import classNames from 'classnames';
 import { useState } from 'react';
 import styles from './styles.less';
-import { ProFormField } from '@ant-design/pro-form';
 
 function TreePicker(props) {
   const [treeData, setTreeData] = useState([]);

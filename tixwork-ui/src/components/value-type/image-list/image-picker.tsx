@@ -1,3 +1,4 @@
+import StyleUtils from '@/components/value-type/style-utils';
 import ApiConfig from '@/http/api-config';
 import { useVisible } from '@/services/use-service';
 import { ensureArray } from '@/utils';
@@ -5,6 +6,7 @@ import { isEmpty, isNotEmpty } from '@/utils/object-utils';
 import { PlusOutlined } from '@ant-design/icons';
 import { message, Modal, Upload } from 'antd';
 import type { UploadFile } from 'antd/es/upload/interface';
+import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 
 function getBase64(file) {
@@ -21,7 +23,7 @@ export default function ImagePicker(props) {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [previewImage, setPreviewImage] = useState<any>();
 
-  const { value = [], single = false, onChange } = props;
+  const { value = [], single = false, onChange, width = 'lg', disabled } = props;
   const maxCount = single ? 1 : props.maxCount || 3;
   useEffect(() => {
     if (isNotEmpty(previewImage)) {
@@ -81,8 +83,9 @@ export default function ImagePicker(props) {
     </div>
   );
 
+  const rootCls = classNames(StyleUtils.proFieldClass(width, disabled));
   return (
-    <>
+    <div className={rootCls} style={{ border: 'none', paddingLeft: 0 }}>
       <Upload
         listType="picture-card"
         fileList={fileList}
@@ -99,6 +102,6 @@ export default function ImagePicker(props) {
       <Modal open={visible} footer={null} onCancel={handleCancel}>
         <img alt="图片" style={{ width: '100%' }} src={previewImage} />
       </Modal>
-    </>
+    </div>
   );
 }

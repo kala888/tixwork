@@ -41,7 +41,7 @@ export const toBoolean = (value: any) => {
   return value;
 };
 
-export function parseToObject(json: any) {
+export function parseToObject(json: any, defaultValue: any = {}) {
   if (_.isObject(json)) {
     return json;
   }
@@ -49,11 +49,21 @@ export function parseToObject(json: any) {
     try {
       return JSON.parse(json);
     } catch (e) {
-      return {};
+      return defaultValue;
     }
   }
-  console.warn('shouldBeObject is not controlled value', json);
-  return json;
+  return defaultValue;
+}
+
+export function parseToArray(obj: any) {
+  if (_.isNil(obj)) {
+    return [];
+  }
+  const result = parseToObject(obj);
+  if (!Array.isArray(result)) {
+    return [result];
+  }
+  return result;
 }
 
 export function parseToString(obj: any) {
@@ -62,3 +72,14 @@ export function parseToString(obj: any) {
   }
   return obj;
 }
+
+const ObjectUtils = {
+  isEmpty,
+  isNotEmpty,
+  noop,
+  toBoolean,
+  parseToObject,
+  parseToArray,
+  parseToString,
+};
+export default ObjectUtils;

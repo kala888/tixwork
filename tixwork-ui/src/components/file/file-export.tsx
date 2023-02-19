@@ -1,21 +1,21 @@
-import React from 'react';
-import axios from 'axios';
-import { saveAs } from 'file-saver';
+import { useLoading, useVisible } from '@/services/use-service';
 import { DownloadOutlined } from '@ant-design/icons';
 import { Button, notification, Popconfirm } from 'antd';
-import { useLoading, useVisible } from '@/services/use-service';
+import axios from 'axios';
+import { saveAs } from 'file-saver';
+import React from 'react';
 
 type FileExportType = {
   title?: string | React.ReactElement;
   linkToUrl: string;
-  values: Record<string, any>;
+  params: Record<string, any>;
 };
 
 export default function FileExport(props: FileExportType) {
   const { loading, showLoading, hideLoading } = useLoading(false);
   const { visible, close, show } = useVisible();
 
-  const { title = '导出Excel', linkToUrl, values = {} } = props;
+  const { title = '导出Excel', linkToUrl, params = {} } = props;
 
   const showTips = async (resp) => {
     const blob = new Blob([resp?.data], { type: 'application/octet-stream' });
@@ -28,7 +28,7 @@ export default function FileExport(props: FileExportType) {
       const resp = await axios({
         method: 'post',
         url: linkToUrl,
-        data: values,
+        data: params,
         responseType: 'blob',
         headers: { authorization: `Bearer ${localStorage.getItem('token')}` },
       });

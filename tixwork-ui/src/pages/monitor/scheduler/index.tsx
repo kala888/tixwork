@@ -3,8 +3,8 @@ import BasePage from '@/components/layout/base-page';
 import type { EleValueType } from '@/components/value-type';
 import CommonColumn from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
-import { CaretRightOutlined } from '@ant-design/icons';
 import type { ActionList } from '@/utils/nice-router-types';
+import { CaretRightOutlined } from '@ant-design/icons';
 import type { ProColumnType } from '@ant-design/pro-components';
 
 const columns: ProColumnType<any, EleValueType>[] = [

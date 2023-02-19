@@ -34,12 +34,12 @@ export default function ListItemsInfo(props: ListItemsInfoType) {
   console.log('objectType', objectType);
 
   const relationshipSchema = BizSchema.get(relationship as any);
-  const relationshipApi = useResource<any>(relationshipSchema.uri);
+  const relationshipApi = useResource<any>(relationshipSchema.linkToUrl);
 
   const tableProps: any = {
     dataSource,
     // @ts-ignore
-    resource: BizSchema.get(objectType)?.uri,
+    resource: BizSchema.get(objectType)?.linkToUrl,
     params: {
       [searchKey]: {
         id: parent?.id,

@@ -13,6 +13,9 @@ const ApiConfig = {
   operationLog: '/api/monitor/operation-log',
   online: '/api/monitor/online',
   scheduler: '/api/monitor/scheduler',
+  //common data
+  dataCities: '/api/data/cities',
+  dataProvinces: '/api/data/provinces',
 
   //oss
   oss: '/api/system/oss',
@@ -59,6 +62,9 @@ const ApiConfig = {
 
   //admin相关的url
   resetUserPassword: '/api/system/admin/resetUserPassword/:userId',
+
+  // sealProduct
+  sealProduct: '/api/engineseals/seal-product',
 };
 
 export default ApiConfig;

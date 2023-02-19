@@ -1,7 +1,7 @@
 import DeptSelector from '@/components/tree/dept-selector';
 
-const Department = {
+const DepartmentValueType = {
   render: (text) => <a>{text}</a>,
   renderFormItem: (__, props) => <DeptSelector {...props} />,
 };
-export default Department;
+export default DepartmentValueType;

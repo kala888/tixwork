@@ -2,8 +2,13 @@ import { colors } from '@/components/value-type/style-utils';
 import { Tag as AntdTag } from 'antd';
 import _ from 'lodash';
 
-const render = (text, props) => {
-  const { valueEnum } = props;
+type ProTagType = {
+  text: string;
+  valueEnum?: Record<string, object>;
+};
+export const ProTag = (props: ProTagType) => {
+  const { text, valueEnum } = props;
+
   if (valueEnum) {
     const theText = _.get(valueEnum, text);
     const valueIdx = _.keys(valueEnum).indexOf(text) || 0;
@@ -17,5 +22,7 @@ const render = (text, props) => {
   return <AntdTag style={{ paddingLeft: 12, paddingRight: 12 }}>{text}</AntdTag>;
 };
 
-const Tag = { render };
-export default Tag;
+const TagValueType = {
+  render: (text, props) => <ProTag {...props} text={text} />,
+};
+export default TagValueType;

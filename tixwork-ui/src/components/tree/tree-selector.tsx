@@ -2,11 +2,10 @@ import ActionIcon from '@/components/elements/action-icon';
 import { useVisible } from '@/services/use-service';
 import { isNotEmpty } from '@/utils/object-utils';
 import type { ProFormFieldProps } from '@ant-design/pro-components';
-import { ProCard } from '@ant-design/pro-components';
+import { ProCard, ProFormItem } from '@ant-design/pro-components';
 import { List, Modal, Space, Tag } from 'antd';
 import React, { useState } from 'react';
 
-import ProFormItem from '@ant-design/pro-form/es/components/FormItem';
 import deepdash from 'deepdash';
 import lodash from 'lodash';
 

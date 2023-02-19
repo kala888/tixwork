@@ -80,9 +80,9 @@ const Login: React.FC = () => {
   };
   const showCaptcha = !!captcha?.uuid;
 
-  const brief = BizSchema?.project?.brief || '一套数据驱动的普通脚手架';
-  const logo = BizSchema?.project?.logo || '/logo.svg';
-  const system = BizSchema?.project?.title || 'Tixwork';
+  const brief = BizSchema?.Root?.brief || '一套数据驱动的普通脚手架';
+  const logo = BizSchema?.Root?.logo || '/logo.svg';
+  const system = BizSchema?.Root?.title || 'Tixwork';
 
   return (
     <div className={styles.container}>
@@ -131,7 +131,7 @@ const Login: React.FC = () => {
                   fieldProps={{
                     prefix: <UserOutlined className={styles.prefixIcon} />,
                   }}
-                  placeholder={'用户名: admin'}
+                  placeholder={'用户名'}
                   rules={[
                     {
                       required: true,
@@ -145,7 +145,7 @@ const Login: React.FC = () => {
                     onPressEnter: handleEnter,
                     prefix: <LockOutlined className={styles.prefixIcon} />,
                   }}
-                  placeholder={'密码: admin123'}
+                  placeholder={'密码'}
                   rules={[
                     {
                       required: true,
@@ -184,7 +184,7 @@ const Login: React.FC = () => {
               <ProFormCheckbox noStyle name="rememberMe">
                 自动登录
               </ProFormCheckbox>
-              <a style={{ float: 'right' }}>忘记密码</a>
+              <a style={{ float: 'right' }} />
             </div>
           </ProForm>
           {/*<Space className={styles.other}>*/}

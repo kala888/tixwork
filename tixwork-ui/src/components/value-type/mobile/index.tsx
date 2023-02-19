@@ -13,16 +13,16 @@ const formatMobile = (mobile: string) => {
     return purePhone.replace(/(\d{3})(\d{4})/, '$1 $2 ');
   }
 };
-const render = (mobile) => (
-  <Paragraph
-    copyable={{ icon: [<MobileTwoTone key="copy" />], text: mobile }}
-    style={{ marginBottom: 0 }}
-  >
-    {formatMobile(mobile)}
-  </Paragraph>
-);
-const Mobile = {
-  render,
+
+const MobileValueType = {
+  render: (mobile) => (
+    <Paragraph
+      copyable={{ icon: [<MobileTwoTone key="copy" />], text: mobile }}
+      style={{ marginBottom: 0 }}
+    >
+      {formatMobile(mobile)}
+    </Paragraph>
+  ),
   renderFormItem: (__, props) => (
     <ProFormText
       formItemProps={{ className: 'customized-form-item' }}
@@ -31,4 +31,4 @@ const Mobile = {
     />
   ),
 };
-export default Mobile;
+export default MobileValueType;

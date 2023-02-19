@@ -1,18 +1,25 @@
 import IconFont from '@/components/icon-font';
-import styles from '@/components/value-type/styles.less';
 import { Space } from 'antd';
 import _ from 'lodash';
+import styles from './styles.less';
 
-export const render = (dom, props) => {
-  const { icon, deptType } = props.record;
+type IconTextType = {
+  icon?: string;
+  deptType?: string;
+  children: any;
+};
+const IconText = (props: IconTextType) => {
+  const { icon, deptType } = props;
   const theIcon = icon || _.toLower(deptType);
-  console.log('vvvvvvv', props, theIcon);
   return (
     <Space className={styles.iconText}>
       <IconFont icon={theIcon} className={styles.iconTextIcon} />
-      {dom}
+      {props.children}
     </Space>
   );
 };
-const IconText = { render };
-export default IconText;
+
+const IconTextValueType = {
+  render: (dom, props) => <IconText {...props.record}> {dom}</IconText>,
+};
+export default IconTextValueType;

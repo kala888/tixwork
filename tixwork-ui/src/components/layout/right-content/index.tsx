@@ -1,13 +1,13 @@
+import Q from '@/http/http-request/q';
+import useVersionCheck from '@/services/use-version-check';
 import { useModel } from '@umijs/max';
 import { Alert, Space } from 'antd';
+import moment from 'moment';
+import { useEffect, useState } from 'react';
+import Marquee from 'react-fast-marquee';
 import NoticeIconView from '../notice-icon';
 import AvatarDropdown from './avatar-dropdown';
 import styles from './index.less';
-import Marquee from 'react-fast-marquee';
-import moment from 'moment';
-import { useEffect, useState } from 'react';
-import Q from '@/http/http-request/q';
-import useVersionCheck from '@/services/use-version-check';
 
 const GlobalHeaderRight = () => {
   const { initialState } = useModel('@@initialState');

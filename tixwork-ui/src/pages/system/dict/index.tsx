@@ -22,6 +22,7 @@ export default () => {
     <Button key="refresh-cache" type={'primary'} danger onClick={handleRefresh}>
       缓存刷新
     </Button>,
+    { code: 'create' },
   ];
 
   const handleViewDetail = (record) => {
@@ -33,7 +34,7 @@ export default () => {
   };
   const lineActions: ActionList = [
     {
-      code: 'edit'
+      code: 'edit',
     },
     {
       code: 'detail',

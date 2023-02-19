@@ -32,11 +32,11 @@ export default function ClickableItem(props: ClickableItemType) {
 
   const rootCls = classNames(
     styles.clickableItem,
-    className,
     StyleUtils.proFieldClass(width, disabled),
     {
       [styles.placeholder]: isEmpty(value),
     },
+    className,
   );
   let title = value;
   if (!disabled && isEmpty(value)) {

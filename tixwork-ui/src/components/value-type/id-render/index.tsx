@@ -1,12 +1,13 @@
 import ObjectLink from '@/components/value-type/object/object-link';
+import { ProFormText } from '@ant-design/pro-components';
 import _ from 'lodash';
-import { ProFormText } from '@ant-design/pro-form';
 
-const IdRender = {
+const IdRenderValueType = {
   align: 'center',
   render: (text, props) => {
     const { fieldProps } = props;
-    return <ObjectLink displayName={text} id={text} {...fieldProps} />;
+    const id = _.get(props?.record, 'id', text);
+    return <ObjectLink displayName={text} id={id} {...fieldProps} />;
   },
   renderFormItem: (__, props) => {
     const rest = _.omit(props.fieldProps, 'objectType');
@@ -15,4 +16,4 @@ const IdRender = {
     );
   },
 };
-export default IdRender;
+export default IdRenderValueType;

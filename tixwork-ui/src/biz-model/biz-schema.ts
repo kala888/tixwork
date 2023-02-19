@@ -1,47 +1,34 @@
-import type { EleValueType } from '@/components/value-type';
-import type { ProColumnType } from '@ant-design/pro-components';
 import { CommonRule } from '@/components/value-type/common-column';
+import type { BizResourceType } from '@/http/use-resource';
+import { getResource } from '@/http/use-resource';
 import _ from 'lodash';
+import type { BizSchemaTypes } from './biz-schema-types';
 
 // IMPORTANT: 这个是自动生成的，不要修改。。。。
 // IMPORTANT: 这个是自动生成的，不要修改。。。。
 // IMPORTANT: 这个是自动生成的，不要修改。。。。
 
-type ResourceExtraDef = {
-  group?: string;
-};
+console.log('load rules', CommonRule);
 
-type ActionType = {
-  title: string;
-  type: 'import' | 'view' | string;
-  linkToUrl: string;
-};
-
-type ResourceDefine = {
-  name: string;
-  label: string;
-  uri: string;
-  linkToUrl: string;
-  actionList?: ActionType[];
-  columns: (ProColumnType<any, EleValueType> & ResourceExtraDef)[];
-  listProps?: ProColumnType<any, EleValueType>[];
-  tableConfig: {
-    rowKey?: string;
-    search?: false;
-    options?: false;
-    toolBarRender?: false;
-    lineActionList?: false;
-    [key: string]: any;
-  };
-};
-
-const courseRecord: ResourceDefine = {
-  name: 'courseRecord',
-  label: '历程',
-  uri: '/api/engineseals/course-record',
-  linkToUrl: '/engineseals/course-record',
+const projectInfo: BizSchemaTypes.ResourceDefine = {
+  name: 'projectInfo',
+  label: '项目信息',
+  linkToUrl: '/api/cdsz/project-info',
   actionList: [
     // entity级别的action
+    {
+      title: 'Excel导入',
+      code: 'import',
+      linkToUrl: '/api/cdsz/project-info/import',
+    },
+    {
+      title: 'Excel导出',
+      code: 'export',
+      linkToUrl: '/api/cdsz/project-info/export',
+    },
+    {
+      code: 'create',
+    },
   ],
   tableConfig: {
     // table 定义
@@ -49,16 +36,18 @@ const courseRecord: ResourceDefine = {
   columns: [
     {
       title: 'ID',
+      key: 'id',
       dataIndex: 'id',
       valueType: 'IdRender',
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
       fieldProps: {
-        objectType: 'courseRecord',
+        objectType: 'projectInfo',
       },
       formItemProps: {
         rules: [
@@ -67,14 +56,35 @@ const courseRecord: ResourceDefine = {
       },
     },
     {
-      title: '历程信息',
-      dataIndex: 'title',
-      valueType: 'textarea',
+      title: '项目名称',
+      key: 'projectName',
+      dataIndex: 'projectName',
+      valueType: 'text',
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
-      tooltip: '',
+      tooltip: '投资主体+项目名称',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          CommonRule.required,
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '项目简介',
+      key: 'projectDescription',
+      dataIndex: 'projectDescription',
+      valueType: 'textarea',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '投资内容：     项目选址：    用地规模：',
       width: 160,
       ellipsis: true,
       copyable: true,
@@ -88,100 +98,67 @@ const courseRecord: ResourceDefine = {
       },
     },
     {
-      title: '历程类型',
-      dataIndex: 'courseType',
-      valueType: 'RemoteEnum',
+      title: '企业简介',
+      key: 'companyDescription',
+      dataIndex: 'companyDescription',
+      valueType: 'textarea',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '不超过500字',
+      width: 160,
+      ellipsis: true,
+      copyable: true,
+      formItemProps: {
+        // @ts-ignore
+        width: 1024,
+        rules: [
+          // rules 定义
+          { max: 500, message: '最多只能输入500个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      // special for range search
+      title: '投资额（亿元）',
+      dataIndex: ['params', 'totalInvestment'],
+      valueType: 'digitRange',
+      hideInForm: true,
+      hideInTable: true,
+      hideInDescriptions: true,
+      group: '',
+      tooltip: '',
+    },
+    {
+      title: '投资额（亿元）',
+      key: 'totalInvestment',
+      dataIndex: 'totalInvestment',
+      valueType: 'digit',
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
         rules: [
           // rules 定义
-        ],
-      },
-      fieldProps: {
-        types: 'CourseType',
-      },
-    },
-    {
-      title: '密封件',
-      dataIndex: 'accessories',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '',
-      group: '历程',
-      fieldProps: {
-        objectType: 'Accessories',
-        searchUrl: '/api/engineseals/accessories/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '名称' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const factoryInformation: ResourceDefine = {
-  name: 'factoryInformation',
-  label: '出厂信息',
-  uri: '/api/engineseals/factory-information',
-  linkToUrl: '/engineseals/factory-information',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'factoryInformation',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
+          CommonRule.required,
         ],
       },
     },
     {
-      title: '出厂试验',
-      dataIndex: 'title',
-      valueType: 'text',
+      title: '产业链领域',
+      key: 'industryChain',
+      dataIndex: 'industryChain',
+      valueType: 'RemoteEnum',
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      group: '出厂试验',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '出厂试验图片',
-      dataIndex: 'titleImage',
-      valueType: 'ImageList',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '出厂试验',
+      hideInDescriptions: false,
+      group: '',
       tooltip: '',
       formItemProps: {
         rules: [
@@ -189,33 +166,19 @@ const factoryInformation: ResourceDefine = {
         ],
       },
       fieldProps: {
-        maxCount: 3,
+        types: 'IndustryChain',
       },
     },
     {
-      title: '审理单',
-      dataIndex: 'checkList',
-      valueType: 'text',
+      title: '产业链地位',
+      key: 'industryChainLevel',
+      dataIndex: 'industryChainLevel',
+      valueType: 'RemoteEnum',
       hideInTable: false,
-      hideInSearch: true,
+      hideInSearch: false,
       hideInForm: false,
-      group: '审理单',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '审理单图片',
-      dataIndex: 'checkListImage',
-      valueType: 'ImageList',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '审理单',
+      hideInDescriptions: false,
+      group: '',
       tooltip: '',
       formItemProps: {
         rules: [
@@ -223,187 +186,18 @@ const factoryInformation: ResourceDefine = {
         ],
       },
       fieldProps: {
-        maxCount: 3,
+        types: 'IndustryChainLevel',
       },
     },
     {
-      title: '合格证',
-      dataIndex: 'certificate',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '合格证',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '合格证图片',
-      dataIndex: 'certificateImage',
-      valueType: 'ImageList',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '合格证',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-      fieldProps: {
-        maxCount: 3,
-      },
-    },
-    {
-      title: '质量证明',
-      dataIndex: 'qualityCertificate',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '质量证明',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '质量证明图片',
-      dataIndex: 'qualityCertificateImage',
-      valueType: 'ImageList',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '质量证明',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-      fieldProps: {
-        maxCount: 3,
-      },
-    },
-    {
-      title: '加工过程及状态',
+      title: '进展状态',
+      key: 'processStatus',
       dataIndex: 'processStatus',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '加工过程及状态',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '加工过程及状态图片',
-      dataIndex: 'processStatusImage',
-      valueType: 'ImageList',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '加工过程及状态',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-      fieldProps: {
-        maxCount: 3,
-      },
-    },
-    {
-      title: '密封件',
-      dataIndex: 'accessories',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '',
-      group: '历程',
-      fieldProps: {
-        objectType: 'Accessories',
-        searchUrl: '/api/engineseals/accessories/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '名称' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const assembleInfo: ResourceDefine = {
-  name: 'assembleInfo',
-  label: '装配信息',
-  uri: '/api/engineseals/assemble-info',
-  linkToUrl: '/engineseals/assemble-info',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'assembleInfo',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '装配描述',
-      dataIndex: 'title',
-      valueType: 'text',
+      valueType: 'RemoteEnum',
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '装配日期',
-      dataIndex: 'experimentalTime',
-      valueType: 'dateTime',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -411,97 +205,81 @@ const assembleInfo: ResourceDefine = {
           // rules 定义
         ],
       },
+      fieldProps: {
+        types: 'ProcessStatus',
+      },
     },
     {
-      title: '装配测量值',
-      dataIndex: 'measurementValues',
-      valueType: 'jsonCode',
+      title: '进展情况',
+      key: 'processBrief',
+      dataIndex: 'processBrief',
+      valueType: 'textarea',
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
-      tooltip: '',
+      tooltip: '最近对接情况及促进建议',
+      width: 160,
+      ellipsis: true,
+      copyable: true,
       formItemProps: {
+        // @ts-ignore
+        width: 1024,
         rules: [
           // rules 定义
-          { max: 4000, message: '最多只能输入4000个字符', type: 'string' },
+          { max: 500, message: '最多只能输入500个字符', type: 'string' },
         ],
       },
     },
     {
-      title: '装配情况',
-      dataIndex: 'inventoryRecord',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: true,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'inventoryRecord',
-        searchUrl: '/api/engineseals/inventory-record/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-    {
-      title: '密封件',
-      dataIndex: 'accessories',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '',
-      group: '历程',
-      fieldProps: {
-        objectType: 'Accessories',
-        searchUrl: '/api/engineseals/accessories/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '名称' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const dismantlingInfo: ResourceDefine = {
-  name: 'dismantlingInfo',
-  label: '分解信息',
-  uri: '/api/engineseals/dismantling-info',
-  linkToUrl: '/engineseals/dismantling-info',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
+      title: '企业所在地（城市）',
+      key: 'city',
+      dataIndex: 'city',
+      valueType: 'text',
       hideInTable: false,
       hideInSearch: true,
-      hideInForm: true,
+      hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'dismantlingInfo',
-      },
       formItemProps: {
         rules: [
           // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
         ],
       },
     },
     {
-      title: '状态',
-      dataIndex: 'title',
+      title: '责任区（市）县',
+      key: 'ownerRegion',
+      dataIndex: 'ownerRegion',
+      valueType: 'RemoteEnum',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          CommonRule.required,
+        ],
+      },
+      fieldProps: {
+        types: 'OwnerRegion',
+      },
+    },
+    {
+      title: '项目经理',
+      key: 'projectManager',
+      dataIndex: 'projectManager',
       valueType: 'text',
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -512,129 +290,14 @@ const dismantlingInfo: ResourceDefine = {
       },
     },
     {
-      title: '磨损',
-      dataIndex: 'wear',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '泄漏率',
-      dataIndex: 'leakRate',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '外观',
-      dataIndex: 'exterior',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '密封件',
-      dataIndex: 'accessories',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '',
-      group: '历程',
-      fieldProps: {
-        objectType: 'Accessories',
-        searchUrl: '/api/engineseals/accessories/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '名称' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const experimentalInfo: ResourceDefine = {
-  name: 'experimentalInfo',
-  label: '试验信息',
-  uri: '/api/engineseals/experimental-info',
-  linkToUrl: '/engineseals/experimental-info',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'experimentalInfo',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '试验内容',
-      dataIndex: 'title',
-      valueType: 'text',
+      title: '初审评级',
+      key: 'reviewrRate',
+      dataIndex: 'reviewrRate',
+      valueType: 'RemoteEnum',
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '时长',
-      dataIndex: 'experimentalTime',
-      valueType: 'dateTime',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -642,131 +305,19 @@ const experimentalInfo: ResourceDefine = {
           // rules 定义
         ],
       },
-    },
-    {
-      title: '关键参数1',
-      dataIndex: 'data1',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '关键参数2',
-      dataIndex: 'data2',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '关键参数3',
-      dataIndex: 'data3',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '密封件',
-      dataIndex: 'accessories',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '',
-      group: '历程',
       fieldProps: {
-        objectType: 'Accessories',
-        searchUrl: '/api/engineseals/accessories/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '名称' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const troubleInfo: ResourceDefine = {
-  name: 'troubleInfo',
-  label: '故障信息',
-  uri: '/api/engineseals/trouble-info',
-  linkToUrl: '/engineseals/trouble-info',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'troubleInfo',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
+        types: 'ReviewrRate',
       },
     },
     {
-      title: '故障描述',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '故障类型',
-      dataIndex: 'troubleType',
+      title: '项目等级',
+      key: 'projectLevel',
+      dataIndex: 'projectLevel',
       valueType: 'RemoteEnum',
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -775,103 +326,75 @@ const troubleInfo: ResourceDefine = {
         ],
       },
       fieldProps: {
-        types: 'TroubleType',
+        types: 'ProjectLevel',
       },
     },
     {
-      title: '密封件',
-      dataIndex: 'accessories',
-      valueType: 'Object',
+      title: '进展更新',
+      key: 'processUpdate',
+      dataIndex: 'processUpdate',
+      valueType: 'textarea',
+      hideInTable: true,
       hideInSearch: true,
-      tooltip: '',
-      group: '历程',
-      fieldProps: {
-        objectType: 'Accessories',
-        searchUrl: '/api/engineseals/accessories/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '名称' },
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '不超过500字',
+      width: 160,
+      ellipsis: true,
+      copyable: true,
+      formItemProps: {
+        // @ts-ignore
+        width: 1024,
+        rules: [
+          // rules 定义
+          { max: 500, message: '最多只能输入500个字符', type: 'string' },
         ],
       },
     },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const inventoryRecord: ResourceDefine = {
-  name: 'inventoryRecord',
-  label: '出入库记录',
-  uri: '/api/engineseals/inventory-record',
-  linkToUrl: '/engineseals/inventory-record',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
+      title: '备注',
+      key: 'brief',
+      dataIndex: 'brief',
+      valueType: 'textarea',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '不超过500字',
+      width: 160,
+      ellipsis: true,
+      copyable: true,
+      formItemProps: {
+        // @ts-ignore
+        width: 1024,
+        rules: [
+          // rules 定义
+          { max: 500, message: '最多只能输入500个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      // special for range search
+      title: '创建时间',
+      dataIndex: ['params', 'createTime'],
+      valueType: 'dateRange',
+      hideInForm: true,
+      hideInTable: true,
+      hideInDescriptions: true,
+      group: '',
+      tooltip: '',
+    },
+    {
+      title: '创建时间',
+      key: 'createTime',
+      dataIndex: 'createTime',
+      valueType: 'date',
+      hideInTable: true,
       hideInSearch: true,
       hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'inventoryRecord',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '库存信息',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '方向',
-      dataIndex: 'recordOption',
-      valueType: 'RemoteEnum',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-      fieldProps: {
-        types: 'RecordOption',
-      },
-    },
-    {
-      title: '变动时间',
-      dataIndex: 'recordTime',
-      valueType: 'dateTime',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -886,13 +409,25 @@ const inventoryRecord: ResourceDefine = {
   ],
 };
 
-const repairRecord: ResourceDefine = {
-  name: 'repairRecord',
-  label: '配件维修记录',
-  uri: '/api/engineseals/repair-record',
-  linkToUrl: '/engineseals/repair-record',
+const visitRecord: BizSchemaTypes.ResourceDefine = {
+  name: 'visitRecord',
+  label: '招商拜访情况',
+  linkToUrl: '/api/cdsz/visit-record',
   actionList: [
     // entity级别的action
+    {
+      title: 'Excel导入',
+      code: 'import',
+      linkToUrl: '/api/cdsz/visit-record/import',
+    },
+    {
+      title: 'Excel导出',
+      code: 'export',
+      linkToUrl: '/api/cdsz/visit-record/export',
+    },
+    {
+      code: 'create',
+    },
   ],
   tableConfig: {
     // table 定义
@@ -900,16 +435,18 @@ const repairRecord: ResourceDefine = {
   columns: [
     {
       title: 'ID',
+      key: 'id',
       dataIndex: 'id',
       valueType: 'IdRender',
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
       fieldProps: {
-        objectType: 'repairRecord',
+        objectType: 'visitRecord',
       },
       formItemProps: {
         rules: [
@@ -918,12 +455,98 @@ const repairRecord: ResourceDefine = {
       },
     },
     {
-      title: '开始时间',
-      dataIndex: 'startTime',
+      // special for range search
+      title: '时间',
+      dataIndex: ['params', 'visitDate'],
+      valueType: 'dateRange',
+      hideInForm: true,
+      hideInTable: true,
+      hideInDescriptions: true,
+      group: '',
+      tooltip: '访问时间',
+    },
+    {
+      title: '时间',
+      key: 'visitDate',
+      dataIndex: 'visitDate',
       valueType: 'date',
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '访问时间',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          CommonRule.required,
+        ],
+      },
+    },
+    {
+      title: '企业名称',
+      key: 'companyName',
+      dataIndex: 'companyName',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          CommonRule.required,
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '拜访高层职务姓名',
+      key: 'visitUser',
+      dataIndex: 'visitUser',
+      valueType: 'text',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '例如：副总裁 张三丰',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '拜访城市',
+      key: 'visitCity',
+      dataIndex: 'visitCity',
+      valueType: 'text',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '例如：深圳',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '企业类别',
+      key: 'companyType',
+      dataIndex: 'companyType',
+      valueType: 'RemoteEnum',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -931,65 +554,280 @@ const repairRecord: ResourceDefine = {
           // rules 定义
         ],
       },
+      fieldProps: {
+        types: 'CompanyType',
+      },
     },
     {
-      title: '结束时间',
-      dataIndex: 'endTime',
+      title: '产业领域',
+      key: 'industryChain',
+      dataIndex: 'industryChain',
+      valueType: 'RemoteEnum',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+      fieldProps: {
+        types: 'IndustryChain',
+      },
+    },
+    {
+      title: '产业链地位',
+      key: 'industryChainLevel',
+      dataIndex: 'industryChainLevel',
+      valueType: 'RemoteEnum',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+      fieldProps: {
+        types: 'IndustryChainLevel',
+      },
+    },
+    {
+      title: '促进情况',
+      key: 'processState',
+      dataIndex: 'processState',
+      valueType: 'textarea',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '洽淡主要内容',
+      width: 160,
+      ellipsis: true,
+      copyable: true,
+      formItemProps: {
+        // @ts-ignore
+        width: 1024,
+        rules: [
+          // rules 定义
+          { max: 500, message: '最多只能输入500个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '对接方式',
+      key: 'contactType',
+      dataIndex: 'contactType',
+      valueType: 'RemoteEnum',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+      fieldProps: {
+        types: 'ContactType',
+      },
+    },
+    {
+      title: '对接成效',
+      key: 'contactResult',
+      dataIndex: 'contactResult',
+      valueType: 'RemoteEnum',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+      fieldProps: {
+        types: 'ContactResult',
+      },
+    },
+    {
+      title: '获取项目信息',
+      key: 'projectInfo',
+      dataIndex: 'projectInfo',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '项目名称',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '是否重大及高能级项目',
+      key: 'bigProject',
+      dataIndex: 'bigProject',
+      valueType: 'switch',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      align: 'center',
+      fieldProps: {
+        checkedChildren: '是',
+        unCheckedChildren: '否',
+      },
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+    },
+    {
+      title: '带队领导级别',
+      key: 'leaderType',
+      dataIndex: 'leaderType',
+      valueType: 'RemoteEnum',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+      fieldProps: {
+        types: 'LeaderType',
+      },
+    },
+    {
+      title: '人员职务姓名',
+      key: 'leaderName',
+      dataIndex: 'leaderName',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '责任区（市）县',
+      key: 'ownerRegion',
+      dataIndex: 'ownerRegion',
+      valueType: 'RemoteEnum',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          CommonRule.required,
+        ],
+      },
+      fieldProps: {
+        types: 'OwnerRegion',
+      },
+    },
+    {
+      title: '共同促进情况',
+      key: 'pushStatus',
+      dataIndex: 'pushStatus',
+      valueType: 'RemoteEnum',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+      fieldProps: {
+        types: 'PushStatus',
+      },
+    },
+    {
+      title: '备注',
+      key: 'brief',
+      dataIndex: 'brief',
+      valueType: 'textarea',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '不超过500字',
+      width: 160,
+      ellipsis: true,
+      copyable: true,
+      formItemProps: {
+        // @ts-ignore
+        width: 1024,
+        rules: [
+          // rules 定义
+          { max: 500, message: '最多只能输入500个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      // special for range search
+      title: '创建时间',
+      dataIndex: ['params', 'createTime'],
+      valueType: 'dateRange',
+      hideInForm: true,
+      hideInTable: true,
+      hideInDescriptions: true,
+      group: '',
+      tooltip: '',
+    },
+    {
+      title: '创建时间',
+      key: 'createTime',
+      dataIndex: 'createTime',
       valueType: 'date',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '维修原因',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '维修厂商',
-      dataIndex: 'supplier',
-      valueType: 'Object',
-      hideInSearch: true,
       hideInTable: true,
+      hideInSearch: true,
+      hideInForm: true,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
-      fieldProps: {
-        objectType: 'supplier',
-        searchUrl: '/api/engineseals/supplier/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-    {
-      title: '密封件',
-      dataIndex: 'accessories',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '',
-      group: '历程',
-      fieldProps: {
-        objectType: 'Accessories',
-        searchUrl: '/api/engineseals/accessories/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '名称' },
+      formItemProps: {
+        rules: [
+          // rules 定义
         ],
       },
     },
@@ -999,13 +837,25 @@ const repairRecord: ResourceDefine = {
   ],
 };
 
-const engineModel: ResourceDefine = {
-  name: 'engineModel',
-  label: '发动机型号',
-  uri: '/api/engineseals/engine-model',
-  linkToUrl: '/engineseals/engine-model',
+const companyContact: BizSchemaTypes.ResourceDefine = {
+  name: 'companyContact',
+  label: '企业联络信息',
+  linkToUrl: '/api/cdsz/company-contact',
   actionList: [
     // entity级别的action
+    {
+      title: 'Excel导入',
+      code: 'import',
+      linkToUrl: '/api/cdsz/company-contact/import',
+    },
+    {
+      title: 'Excel导出',
+      code: 'export',
+      linkToUrl: '/api/cdsz/company-contact/export',
+    },
+    {
+      code: 'create',
+    },
   ],
   tableConfig: {
     // table 定义
@@ -1013,16 +863,18 @@ const engineModel: ResourceDefine = {
   columns: [
     {
       title: 'ID',
+      key: 'id',
       dataIndex: 'id',
       valueType: 'IdRender',
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
       fieldProps: {
-        objectType: 'engineModel',
+        objectType: 'companyContact',
       },
       formItemProps: {
         rules: [
@@ -1031,15 +883,21 @@ const engineModel: ResourceDefine = {
       },
     },
     {
-      title: '名称',
+      title: '姓名',
+      key: 'title',
       dataIndex: 'title',
       valueType: 'text',
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
+      width: 80,
+      align: 'center',
       formItemProps: {
+        //@ts-ignore
+        width: 'lg',
         rules: [
           // rules 定义
           CommonRule.required,
@@ -1048,31 +906,211 @@ const engineModel: ResourceDefine = {
       },
     },
     {
-      title: '代号',
-      dataIndex: 'code',
+      title: '企业名称',
+      key: 'companyName',
+      dataIndex: 'companyName',
       valueType: 'text',
       hideInTable: false,
-      hideInSearch: true,
+      hideInSearch: false,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
         rules: [
           // rules 定义
-          CommonRule.required,
           { max: 100, message: '最多只能输入100个字符', type: 'string' },
         ],
       },
     },
     {
-      title: '描述',
-      dataIndex: 'brief',
+      title: '职务',
+      key: 'job',
+      dataIndex: 'job',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      width: 100,
+      align: 'center',
+      formItemProps: {
+        //@ts-ignore
+        width: 'lg',
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '高管',
+      key: 'seniorManager',
+      dataIndex: 'seniorManager',
+      valueType: 'switch',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      align: 'center',
+      fieldProps: {
+        checkedChildren: '是',
+        unCheckedChildren: '否',
+      },
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+    },
+    {
+      title: '手机号',
+      key: 'mobile',
+      dataIndex: 'mobile',
+      valueType: 'text',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '电子邮件',
+      key: 'email',
+      dataIndex: 'email',
+      valueType: 'text',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '所在省份',
+      key: 'addressProvince',
+      dataIndex: 'addressProvince',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '地址',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '所在城市',
+      key: 'addressCity',
+      dataIndex: 'addressCity',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '地址',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '详细地址',
+      key: 'address',
+      dataIndex: 'address',
       valueType: 'textarea',
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
+      hideInDescriptions: false,
+      group: '地址',
+      tooltip: '',
+      width: 160,
+      ellipsis: true,
+      copyable: true,
+      formItemProps: {
+        // @ts-ignore
+        width: 1024,
+        rules: [
+          // rules 定义
+          { max: 200, message: '最多只能输入200个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '产业类别',
+      key: 'industryType',
+      dataIndex: 'industryType',
+      valueType: 'RemoteEnum',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+      fieldProps: {
+        types: 'IndustryType',
+      },
+    },
+    {
+      title: '来源',
+      key: 'source',
+      dataIndex: 'source',
+      valueType: 'text',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '备注',
+      key: 'brief',
+      dataIndex: 'brief',
+      valueType: 'textarea',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '不超过500字',
       width: 160,
       ellipsis: true,
       copyable: true,
@@ -1086,65 +1124,31 @@ const engineModel: ResourceDefine = {
       },
     },
     {
-      title: '密封位置配置',
-      dataIndex: 'sealTypeConfig',
-      valueType: 'jsonCode',
+      // special for range search
+      title: '创建时间',
+      dataIndex: ['params', 'createTime'],
+      valueType: 'dateRange',
+      hideInForm: true,
+      hideInTable: true,
+      hideInDescriptions: true,
+      group: '',
+      tooltip: '',
+    },
+    {
+      title: '创建时间',
+      key: 'createTime',
+      dataIndex: 'createTime',
+      valueType: 'date',
       hideInTable: true,
       hideInSearch: true,
-      hideInForm: false,
+      hideInForm: true,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
         rules: [
           // rules 定义
-          { max: 4000, message: '最多只能输入4000个字符', type: 'string' },
         ],
-      },
-    },
-    {
-      title: '示意图',
-      dataIndex: 'modelImage',
-      valueType: 'Image',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 400, message: '最多只能输入400个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '可视化配置',
-      dataIndex: 'dataVision',
-      valueType: 'jsonCode',
-      hideInTable: true,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '发动机可视化配置',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 4000, message: '最多只能输入4000个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '总装单位',
-      dataIndex: 'assembleFactory',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: false,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'supplier',
-        searchUrl: '/api/engineseals/supplier/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
       },
     },
   ],
@@ -1153,52 +1157,19 @@ const engineModel: ResourceDefine = {
   ],
 };
 
-const engine: ResourceDefine = {
-  name: 'engine',
-  label: '发动机台份',
-  uri: '/api/engineseals/engine',
-  linkToUrl: '/engineseals/engine',
+const governmentAffairsLocation: BizSchemaTypes.ResourceDefine = {
+  name: 'governmentAffairsLocation',
+  label: '政务点位',
+  linkToUrl: '/api/cdsz/government-affairs-location',
   actionList: [
     // entity级别的action
     {
-      title: '变更状态',
-      type: '',
-      linkToUrl: '/api/engineseals/engine/变更状态',
+      title: 'Excel导出',
+      code: 'export',
+      linkToUrl: '/api/cdsz/government-affairs-location/export',
     },
     {
-      title: '变更位置',
-      type: '',
-      linkToUrl: '/api/engineseals/engine/变更位置',
-    },
-    {
-      title: '替换零件',
-      type: '',
-      linkToUrl: '/api/engineseals/engine/替换零件',
-    },
-    {
-      title: '装配',
-      type: '',
-      linkToUrl: '/api/engineseals/engine/装配',
-    },
-    {
-      title: '分解',
-      type: '',
-      linkToUrl: '/api/engineseals/engine/分解',
-    },
-    {
-      title: '维修',
-      type: '',
-      linkToUrl: '/api/engineseals/engine/维修',
-    },
-    {
-      title: '试验',
-      type: '',
-      linkToUrl: '/api/engineseals/engine/试验',
-    },
-    {
-      title: '故障',
-      type: '',
-      linkToUrl: '/api/engineseals/engine/故障',
+      code: 'create',
     },
   ],
   tableConfig: {
@@ -1207,16 +1178,18 @@ const engine: ResourceDefine = {
   columns: [
     {
       title: 'ID',
+      key: 'id',
       dataIndex: 'id',
       valueType: 'IdRender',
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
       fieldProps: {
-        objectType: 'engine',
+        objectType: 'governmentAffairsLocation',
       },
       formItemProps: {
         rules: [
@@ -1225,66 +1198,14 @@ const engine: ResourceDefine = {
       },
     },
     {
-      title: '编号',
-      dataIndex: 'code',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          CommonRule.required,
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '描述',
-      dataIndex: 'brief',
-      valueType: 'textarea',
-      hideInTable: true,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      width: 160,
-      ellipsis: true,
-      copyable: true,
-      formItemProps: {
-        // @ts-ignore
-        width: 1024,
-        rules: [
-          // rules 定义
-          { max: 500, message: '最多只能输入500个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '批次号',
-      dataIndex: 'batchNumber',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '阶段',
-      dataIndex: 'stage',
+      title: '类别',
+      key: 'affairsType',
+      dataIndex: 'affairsType',
       valueType: 'RemoteEnum',
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1293,211 +1214,18 @@ const engine: ResourceDefine = {
         ],
       },
       fieldProps: {
-        types: 'Stage',
+        types: 'GovernmentAffairsType',
       },
     },
     {
-      title: '状态',
-      dataIndex: 'engineStatus',
-      valueType: 'RemoteEnum',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-      fieldProps: {
-        types: 'EngineStatus',
-      },
-    },
-    {
-      title: '当前状态开始时间',
-      dataIndex: 'engineStatusStartTime',
-      valueType: 'dateTime',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '当前状态结束时间',
-      dataIndex: 'engineStatusEndTime',
-      valueType: 'dateTime',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '存放时间',
-      dataIndex: 'instockTime',
-      valueType: 'dateTime',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '示意图',
-      dataIndex: 'modelImage',
-      valueType: 'Image',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 400, message: '最多只能输入400个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '型号',
-      dataIndex: 'engineModel',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: true,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'engineModel',
-        searchUrl: '/api/engineseals/engine-model/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-    {
-      title: '存放位置',
-      dataIndex: 'instockLocation',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: true,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'location',
-        searchUrl: '/api/engineseals/location/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-    {
-      title: '密封位置',
-      dataIndex: 'accessoriesList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'engine',
-        objectType: 'Accessories',
-        relationship: 'Accessories',
-      },
-    },
-  ],
-};
-
-const experimentalDevice: ResourceDefine = {
-  name: 'experimentalDevice',
-  label: '试验器',
-  uri: '/api/engineseals/experimental-device',
-  linkToUrl: '/engineseals/experimental-device',
-  actionList: [
-    // entity级别的action
-    {
-      title: '修改状态',
-      type: '',
-      linkToUrl: '/api/engineseals/experimental-device/修改状态',
-    },
-    {
-      title: '变更位置',
-      type: '',
-      linkToUrl: '/api/engineseals/experimental-device/变更位置',
-    },
-    {
-      title: '替换零件',
-      type: '',
-      linkToUrl: '/api/engineseals/experimental-device/替换零件',
-    },
-    {
-      title: '装配',
-      type: '',
-      linkToUrl: '/api/engineseals/experimental-device/装配',
-    },
-    {
-      title: '分解',
-      type: '',
-      linkToUrl: '/api/engineseals/experimental-device/分解',
-    },
-    {
-      title: '维修',
-      type: '',
-      linkToUrl: '/api/engineseals/experimental-device/维修',
-    },
-    {
-      title: '试验',
-      type: '',
-      linkToUrl: '/api/engineseals/experimental-device/试验',
-    },
-    {
-      title: '故障',
-      type: '',
-      linkToUrl: '/api/engineseals/experimental-device/故障',
-    },
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'experimentalDevice',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '名称',
+      title: '点位名称',
+      key: 'title',
       dataIndex: 'title',
       valueType: 'text',
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1509,12 +1237,37 @@ const experimentalDevice: ResourceDefine = {
       },
     },
     {
-      title: '代号',
-      dataIndex: 'code',
+      title: '点位简介',
+      key: 'description',
+      dataIndex: 'description',
+      valueType: 'textarea',
+      hideInTable: true,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '不超过2000字',
+      width: 160,
+      ellipsis: true,
+      copyable: true,
+      formItemProps: {
+        // @ts-ignore
+        width: 1024,
+        rules: [
+          // rules 定义
+          { max: 2000, message: '最多只能输入2000个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '城市',
+      key: 'city',
+      dataIndex: 'city',
       valueType: 'text',
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1526,30 +1279,14 @@ const experimentalDevice: ResourceDefine = {
       },
     },
     {
-      title: '状态',
-      dataIndex: 'experimentalDeviceStatus',
-      valueType: 'RemoteEnum',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-      fieldProps: {
-        types: 'ExperimentalDeviceStatus',
-      },
-    },
-    {
-      title: '描述',
-      dataIndex: 'brief',
+      title: '地址',
+      key: 'address',
+      dataIndex: 'address',
       valueType: 'textarea',
-      hideInTable: true,
-      hideInSearch: true,
+      hideInTable: false,
+      hideInSearch: false,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 160,
@@ -1560,111 +1297,39 @@ const experimentalDevice: ResourceDefine = {
         width: 1024,
         rules: [
           // rules 定义
-          { max: 500, message: '最多只能输入500个字符', type: 'string' },
+          { max: 300, message: '最多只能输入300个字符', type: 'string' },
         ],
       },
     },
     {
-      title: '归属',
-      dataIndex: 'owner',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: true,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'supplier',
-        searchUrl: '/api/engineseals/supplier/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-    {
-      title: '存放位置',
-      dataIndex: 'instockLocation',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: true,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'location',
-        searchUrl: '/api/engineseals/location/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-    {
-      title: '密封装置',
-      dataIndex: 'accessoriesList',
-      tooltip: '装配的密封装置，试验件等',
-      fieldProps: {
-        editable: false,
-        searchKey: 'experimentalDevice',
-        objectType: 'Accessories',
-        relationship: 'Accessories',
-      },
-    },
-  ],
-};
-
-const location: ResourceDefine = {
-  name: 'location',
-  label: '位置库',
-  uri: '/api/engineseals/location',
-  linkToUrl: '/engineseals/location',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'location',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '位置名称',
-      dataIndex: 'title',
+      title: '联系人',
+      key: 'contact',
+      dataIndex: 'contact',
       valueType: 'text',
       hideInTable: false,
-      hideInSearch: false,
+      hideInSearch: true,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
         rules: [
           // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+          { max: 200, message: '最多只能输入200个字符', type: 'string' },
         ],
       },
     },
     {
-      title: '描述',
+      title: '备注',
+      key: 'brief',
       dataIndex: 'brief',
       valueType: 'textarea',
-      hideInTable: false,
+      hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
-      tooltip: '',
+      tooltip: '不超过500字',
       width: 160,
       ellipsis: true,
       copyable: true,
@@ -1683,13 +1348,20 @@ const location: ResourceDefine = {
   ],
 };
 
-const extType1: ResourceDefine = {
-  name: 'extType1',
-  label: '润滑件',
-  uri: '/api/engineseals/ext-type1',
-  linkToUrl: '/engineseals/ext-type1',
+const hotel: BizSchemaTypes.ResourceDefine = {
+  name: 'hotel',
+  label: '接待酒店',
+  linkToUrl: '/api/cdsz/hotel',
   actionList: [
     // entity级别的action
+    {
+      title: 'Excel导出',
+      code: 'export',
+      linkToUrl: '/api/cdsz/hotel/export',
+    },
+    {
+      code: 'create',
+    },
   ],
   tableConfig: {
     // table 定义
@@ -1697,16 +1369,18 @@ const extType1: ResourceDefine = {
   columns: [
     {
       title: 'ID',
+      key: 'id',
       dataIndex: 'id',
       valueType: 'IdRender',
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
       fieldProps: {
-        objectType: 'extType1',
+        objectType: 'hotel',
       },
       formItemProps: {
         rules: [
@@ -1715,1004 +1389,14 @@ const extType1: ResourceDefine = {
       },
     },
     {
-      title: '名称',
-      dataIndex: 'title',
+      title: '城市',
+      key: 'city',
+      dataIndex: 'city',
       valueType: 'text',
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const extType2: ResourceDefine = {
-  name: 'extType2',
-  label: '轴承件',
-  uri: '/api/engineseals/ext-type2',
-  linkToUrl: '/engineseals/ext-type2',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'extType2',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '名称',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const extType3: ResourceDefine = {
-  name: 'extType3',
-  label: '传动件',
-  uri: '/api/engineseals/ext-type3',
-  linkToUrl: '/engineseals/ext-type3',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'extType3',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '名称',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const accessories: ResourceDefine = {
-  name: 'accessories',
-  label: '密封件',
-  uri: '/api/engineseals/accessories',
-  linkToUrl: '/engineseals/accessories',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'accessories',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '类型',
-      dataIndex: 'accessoryType',
-      valueType: 'RemoteEnum',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-      fieldProps: {
-        types: 'AccessoryType',
-      },
-    },
-    {
-      title: '名称',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '图号',
-      dataIndex: 'designCode',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '版本',
-      dataIndex: 'designVersion',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '批次号',
-      dataIndex: 'batchNumber',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '状态',
-      dataIndex: 'status',
-      valueType: 'RemoteEnum',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-      fieldProps: {
-        types: 'Status',
-      },
-    },
-    {
-      title: '卷宗名称',
-      dataIndex: 'documentName',
-      valueType: 'Image',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: 'pdf文件',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 400, message: '最多只能输入400个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '描述',
-      dataIndex: 'brief',
-      valueType: 'textarea',
-      hideInTable: true,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      width: 160,
-      ellipsis: true,
-      copyable: true,
-      formItemProps: {
-        // @ts-ignore
-        width: 1024,
-        rules: [
-          // rules 定义
-          { max: 500, message: '最多只能输入500个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '发动机台份',
-      dataIndex: 'engine',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '',
-      group: '密封位置',
-      fieldProps: {
-        objectType: 'Engine',
-        searchUrl: '/api/engineseals/engine/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'code', fieldLabel: '编号' },
-        ],
-      },
-    },
-    {
-      title: '试验器',
-      dataIndex: 'experimentalDevice',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '装配的密封装置，试验件等',
-      group: '',
-      fieldProps: {
-        objectType: 'ExperimentalDevice',
-        searchUrl: '/api/engineseals/experimental-device/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '名称' },
-        ],
-      },
-    },
-    {
-      title: '供应商',
-      dataIndex: 'supplier',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: true,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'supplier',
-        searchUrl: '/api/engineseals/supplier/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-    {
-      title: '材料及标准',
-      dataIndex: 'material',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: true,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'material',
-        searchUrl: '/api/engineseals/material/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-    {
-      title: '密封件',
-      dataIndex: 'parentGroup',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '',
-      group: '',
-      fieldProps: {
-        objectType: 'Accessories',
-        searchUrl: '/api/engineseals/accessories/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '名称' },
-        ],
-      },
-    },
-    {
-      title: '密封类型',
-      dataIndex: 'sealType',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: true,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'sealType',
-        searchUrl: '/api/engineseals/seal-type/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-    {
-      title: '密封部位',
-      dataIndex: 'sealPart',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: true,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'sealPart',
-        searchUrl: '/api/engineseals/seal-part/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-    {
-      title: '摩擦副',
-      dataIndex: 'frictionPair',
-      valueType: 'Object',
-      hideInSearch: true,
-      hideInTable: true,
-      group: '',
-      tooltip: '',
-      fieldProps: {
-        objectType: 'frictionPair',
-        searchUrl: '/api/engineseals/friction-pair/list',
-        fields: [{ fieldName: 'id', fieldLabel: 'ID' }],
-      },
-    },
-    {
-      title: '密封件',
-      dataIndex: 'parentKits',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '',
-      group: '',
-      fieldProps: {
-        objectType: 'Accessories',
-        searchUrl: '/api/engineseals/accessories/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '名称' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-    {
-      title: '子组件组成',
-      dataIndex: 'subAccessoriesList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'parentGroup',
-        objectType: 'Accessories',
-        relationship: 'Accessories',
-      },
-    },
-    {
-      title: '密封装置组成',
-      dataIndex: 'accessoriesList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'parentKits',
-        objectType: 'Accessories',
-        relationship: 'Accessories',
-      },
-    },
-    {
-      title: '历程',
-      dataIndex: 'courseRecordList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'accessories',
-        objectType: 'CourseRecord',
-        relationship: 'CourseRecord',
-      },
-    },
-    {
-      title: '出厂信息',
-      dataIndex: 'factoryInformationList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'accessories',
-        objectType: 'FactoryInformation',
-        relationship: 'FactoryInformation',
-      },
-    },
-    {
-      title: '装配信息',
-      dataIndex: 'assembleInfoList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'accessories',
-        objectType: 'AssembleInfo',
-        relationship: 'AssembleInfo',
-      },
-    },
-    {
-      title: '分解信息',
-      dataIndex: 'dismantlingInfoList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'accessories',
-        objectType: 'DismantlingInfo',
-        relationship: 'DismantlingInfo',
-      },
-    },
-    {
-      title: '试验信息',
-      dataIndex: 'experimentalInfoList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'accessories',
-        objectType: 'ExperimentalInfo',
-        relationship: 'ExperimentalInfo',
-      },
-    },
-    {
-      title: '故障信息',
-      dataIndex: 'troubleInfoList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'accessories',
-        objectType: 'TroubleInfo',
-        relationship: 'TroubleInfo',
-      },
-    },
-    {
-      title: '维修记录',
-      dataIndex: 'repairRecordList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'accessories',
-        objectType: 'RepairRecord',
-        relationship: 'RepairRecord',
-      },
-    },
-  ],
-};
-
-const dynField: ResourceDefine = {
-  name: 'dynField',
-  label: '性能参数',
-  uri: '/api/engineseals/dyn-field',
-  linkToUrl: '/engineseals/dyn-field',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'dynField',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '名称',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '类型',
-      dataIndex: 'fieldType',
-      valueType: 'RemoteEnum',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-      fieldProps: {
-        types: 'FieldType',
-      },
-    },
-    {
-      title: '描述',
-      dataIndex: 'brief',
-      valueType: 'textarea',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      width: 160,
-      ellipsis: true,
-      copyable: true,
-      formItemProps: {
-        // @ts-ignore
-        width: 1024,
-        rules: [
-          // rules 定义
-          { max: 500, message: '最多只能输入500个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '密封类型',
-      dataIndex: 'sealType',
-      valueType: 'Object',
-      hideInSearch: true,
-      tooltip: '',
-      group: '',
-      fieldProps: {
-        objectType: 'SealType',
-        searchUrl: '/api/engineseals/seal-type/list',
-        fields: [
-          { fieldName: 'id', fieldLabel: 'ID' },
-          { fieldName: 'title', fieldLabel: '密封类型名称' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const sealType: ResourceDefine = {
-  name: 'sealType',
-  label: '密封类型',
-  uri: '/api/engineseals/seal-type',
-  linkToUrl: '/engineseals/seal-type',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'sealType',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '密封类型名称',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '描述',
-      dataIndex: 'brief',
-      valueType: 'textarea',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      width: 160,
-      ellipsis: true,
-      copyable: true,
-      formItemProps: {
-        // @ts-ignore
-        width: 1024,
-        rules: [
-          // rules 定义
-          { max: 500, message: '最多只能输入500个字符', type: 'string' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-    {
-      title: '动态参数',
-      dataIndex: 'dynFieldList',
-      tooltip: '',
-      fieldProps: {
-        editable: false,
-        searchKey: 'sealType',
-        objectType: 'DynField',
-        relationship: 'DynField',
-      },
-    },
-  ],
-};
-
-const sealPart: ResourceDefine = {
-  name: 'sealPart',
-  label: '密封部位',
-  uri: '/api/engineseals/seal-part',
-  linkToUrl: '/engineseals/seal-part',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'sealPart',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '密封部位名称',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '描述',
-      dataIndex: 'brief',
-      valueType: 'textarea',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      width: 160,
-      ellipsis: true,
-      copyable: true,
-      formItemProps: {
-        // @ts-ignore
-        width: 1024,
-        rules: [
-          // rules 定义
-          { max: 500, message: '最多只能输入500个字符', type: 'string' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const frictionPair: ResourceDefine = {
-  name: 'frictionPair',
-  label: '摩擦副',
-  uri: '/api/engineseals/friction-pair',
-  linkToUrl: '/engineseals/friction-pair',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'frictionPair',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '摩擦副名称',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '描述',
-      dataIndex: 'brief',
-      valueType: 'textarea',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      width: 160,
-      ellipsis: true,
-      copyable: true,
-      formItemProps: {
-        // @ts-ignore
-        width: 1024,
-        rules: [
-          // rules 定义
-          { max: 500, message: '最多只能输入500个字符', type: 'string' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const material: ResourceDefine = {
-  name: 'material',
-  label: '材料',
-  uri: '/api/engineseals/material',
-  linkToUrl: '/engineseals/material',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'material',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '材料名称',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '材料牌号',
-      dataIndex: 'code',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      title: '材料标准',
-      dataIndex: 'standard',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
-          { max: 100, message: '最多只能输入100个字符', type: 'string' },
-        ],
-      },
-    },
-  ],
-  listProps: [
-    // protable 定义
-  ],
-};
-
-const supplier: ResourceDefine = {
-  name: 'supplier',
-  label: '供应商',
-  uri: '/api/engineseals/supplier',
-  linkToUrl: '/engineseals/supplier',
-  actionList: [
-    // entity级别的action
-  ],
-  tableConfig: {
-    // table 定义
-  },
-  columns: [
-    {
-      title: 'ID',
-      dataIndex: 'id',
-      valueType: 'IdRender',
-      hideInTable: false,
-      hideInSearch: true,
-      hideInForm: true,
-      group: '',
-      tooltip: '',
-      width: 50,
-      fieldProps: {
-        objectType: 'supplier',
-      },
-      formItemProps: {
-        rules: [
-          // rules 定义
-        ],
-      },
-    },
-    {
-      title: '名称',
-      dataIndex: 'title',
-      valueType: 'text',
-      hideInTable: false,
-      hideInSearch: false,
-      hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -2724,12 +1408,14 @@ const supplier: ResourceDefine = {
       },
     },
     {
-      title: '供应商所在地',
-      dataIndex: 'location',
+      title: '区域',
+      key: 'region',
+      dataIndex: 'region',
       valueType: 'text',
       hideInTable: false,
-      hideInSearch: true,
+      hideInSearch: false,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -2741,14 +1427,128 @@ const supplier: ResourceDefine = {
       },
     },
     {
-      title: '业务范围',
-      dataIndex: 'brief',
-      valueType: 'textarea',
-      hideInTable: true,
-      hideInSearch: true,
+      title: '酒店名称',
+      key: 'title',
+      dataIndex: 'title',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          CommonRule.required,
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '订房电话',
+      key: 'phone',
+      dataIndex: 'phone',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '联系人',
+      key: 'contact',
+      dataIndex: 'contact',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '联系电话',
+      key: 'contactMobile',
+      dataIndex: 'contactMobile',
+      valueType: 'Mobile',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 16, message: '最多只能输入16个字符', type: 'string' },
+          CommonRule.mobile,
+        ],
+      },
+    },
+    {
+      title: '营业地址',
+      key: 'address',
+      dataIndex: 'address',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 300, message: '最多只能输入300个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '等级评价',
+      key: 'hotelRate',
+      dataIndex: 'hotelRate',
+      valueType: 'RemoteEnum',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+      fieldProps: {
+        types: 'HotelRate',
+      },
+    },
+    {
+      title: '备注',
+      key: 'brief',
+      dataIndex: 'brief',
+      valueType: 'textarea',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '不超过500字',
       width: 160,
       ellipsis: true,
       copyable: true,
@@ -2761,13 +1561,61 @@ const supplier: ResourceDefine = {
         ],
       },
     },
+  ],
+  listProps: [
+    // protable 定义
+  ],
+};
+
+const restaurant: BizSchemaTypes.ResourceDefine = {
+  name: 'restaurant',
+  label: '接待餐厅',
+  linkToUrl: '/api/cdsz/restaurant',
+  actionList: [
+    // entity级别的action
     {
-      title: '供应商评价',
-      dataIndex: 'supplierReview',
-      valueType: 'text',
+      title: 'Excel导出',
+      code: 'export',
+      linkToUrl: '/api/cdsz/restaurant/export',
+    },
+    {
+      code: 'create',
+    },
+  ],
+  tableConfig: {
+    // table 定义
+  },
+  columns: [
+    {
+      title: 'ID',
+      key: 'id',
+      dataIndex: 'id',
+      valueType: 'IdRender',
       hideInTable: false,
       hideInSearch: true,
+      hideInForm: true,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      width: 50,
+      fieldProps: {
+        objectType: 'restaurant',
+      },
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+    },
+    {
+      title: '城市',
+      key: 'city',
+      dataIndex: 'city',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
       hideInForm: false,
+      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -2775,6 +1623,161 @@ const supplier: ResourceDefine = {
           // rules 定义
           CommonRule.required,
           { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '区域',
+      key: 'region',
+      dataIndex: 'region',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          CommonRule.required,
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '餐厅',
+      key: 'title',
+      dataIndex: 'title',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          CommonRule.required,
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '菜系',
+      key: 'menuType',
+      dataIndex: 'menuType',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          CommonRule.required,
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '特色',
+      key: 'restaurantSpecial',
+      dataIndex: 'restaurantSpecial',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          CommonRule.required,
+          { max: 100, message: '最多只能输入100个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '接待分类',
+      key: 'restaurantType',
+      dataIndex: 'restaurantType',
+      valueType: 'RemoteEnum',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+        ],
+      },
+      fieldProps: {
+        types: 'RestaurantType',
+      },
+    },
+    {
+      title: '订餐电话',
+      key: 'phone',
+      dataIndex: 'phone',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: true,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 200, message: '最多只能输入200个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '营业地址',
+      key: 'address',
+      dataIndex: 'address',
+      valueType: 'text',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      formItemProps: {
+        rules: [
+          // rules 定义
+          { max: 300, message: '最多只能输入300个字符', type: 'string' },
+        ],
+      },
+    },
+    {
+      title: '备注',
+      key: 'brief',
+      dataIndex: 'brief',
+      valueType: 'textarea',
+      hideInTable: false,
+      hideInSearch: false,
+      hideInForm: false,
+      hideInDescriptions: false,
+      group: '',
+      tooltip: '',
+      width: 160,
+      ellipsis: true,
+      copyable: true,
+      formItemProps: {
+        // @ts-ignore
+        width: 1024,
+        rules: [
+          // rules 定义
+          { max: 500, message: '最多只能输入500个字符', type: 'string' },
         ],
       },
     },
@@ -2785,69 +1788,61 @@ const supplier: ResourceDefine = {
 };
 
 export type ResourceNameType =
-  | 'courseRecord'
-  | 'factoryInformation'
-  | 'assembleInfo'
-  | 'dismantlingInfo'
-  | 'experimentalInfo'
-  | 'troubleInfo'
-  | 'inventoryRecord'
-  | 'repairRecord'
-  | 'engineModel'
-  | 'engine'
-  | 'experimentalDevice'
-  | 'location'
-  | 'extType1'
-  | 'extType2'
-  | 'extType3'
-  | 'accessories'
-  | 'dynField'
-  | 'sealType'
-  | 'sealPart'
-  | 'frictionPair'
-  | 'material'
-  | 'supplier'
+  | 'projectInfo'
+  | 'visitRecord'
+  | 'companyContact'
+  | 'governmentAffairsLocation'
+  | 'hotel'
+  | 'restaurant'
   | any;
 
-const data: Record<ResourceNameType, ResourceDefine> = {
-  courseRecord,
-  factoryInformation,
-  assembleInfo,
-  dismantlingInfo,
-  experimentalInfo,
-  troubleInfo,
-  inventoryRecord,
-  repairRecord,
-  engineModel,
-  engine,
-  experimentalDevice,
-  location,
-  extType1,
-  extType2,
-  extType3,
-  accessories,
-  dynField,
-  sealType,
-  sealPart,
-  frictionPair,
-  material,
-  supplier,
-};
+function mergeListByDataIndex(parent, sub) {
+  const sorted = _.unionBy(parent, sub, 'dataIndex') as any[];
+  const list = _.unionBy(sub, parent, 'dataIndex') as any[];
+  return sorted.map((it) => _.find(list, (v) => v.dataIndex === it.dataIndex)) as any;
+}
 
-const get: (name: ResourceNameType) => ResourceDefine = (name: ResourceNameType) => {
-  const key = _.camelCase(name);
-  return data[key] || {};
+function enhanceSchema<T>(
+  sub: any,
+  parent?: any,
+): {
+  getResource: () => BizResourceType<T>;
+} & BizSchemaTypes.ResourceDefine {
+  const result = {
+    ...(parent || {}),
+    ...(sub || {}),
+    resource: getResource<T>(sub?.linkToUrl || parent?.linkToUrl),
+  };
+  if (parent && sub) {
+    return {
+      ...result,
+      columns: mergeListByDataIndex(parent.columns, sub.columns),
+      listProps: mergeListByDataIndex(parent.listProps, sub.listProps),
+    };
+  }
+  return result;
+}
+
+const schemas = {
+  projectInfo: enhanceSchema(projectInfo),
+  visitRecord: enhanceSchema(visitRecord),
+  companyContact: enhanceSchema(companyContact),
+  governmentAffairsLocation: enhanceSchema(governmentAffairsLocation),
+  hotel: enhanceSchema(hotel),
+  restaurant: enhanceSchema(restaurant),
 };
 
 const BizSchema = {
-  project: {
-    title: '密封大数据',
-    logo: '/logo.svg',
-    name: 'engineseals',
-    brief: '发动机密封大数据管理系统',
+  Root: {
+    //当前项目信息
+    title: '线上办公系统',
+    logo: 'https://tiandtech.oss-cn-chengdu.aliyuncs.com/cdsz/logo.png',
+    name: 'cdsz',
+    brief: '成都驻深办',
+    owner: '钛安科技',
   },
-  data,
-  get,
+  ...schemas,
+  get: (name) => schemas[_.camelCase(name)] || {},
 };
 
 export default BizSchema;

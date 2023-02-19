@@ -4,7 +4,7 @@ import EleDetail from '@/components/detail';
 import EleTableList from '@/components/ele-table-list/ele-table-list';
 import BaseForm from '@/components/form/base-form';
 import BasePage from '@/components/layout/base-page';
-import SplitPanel from '@/components/split-panel/split-panel';
+import SplitCard from '@/components/split-card';
 import { isEmpty } from '@/utils/object-utils';
 import { useLocation, useParams } from '@@/exports';
 import { useTitle } from 'ahooks';
@@ -32,9 +32,9 @@ export default () => {
 
   return (
     <BasePage className={styles.splitPanelPage}>
-      <SplitPanel leftWidth={380}>
+      <SplitCard leftWidth={380}>
         <EleTableList
-          resource={schema.uri}
+          resource={schema.linkToUrl}
           title={schema.label}
           columns={schema.columns}
           formProps={{ columns: schema.columns }}
@@ -46,7 +46,7 @@ export default () => {
           {...schema.tableConfig}
         />
         <EleDetail id={currentRow?.id} objectType={objectType} />
-      </SplitPanel>
+      </SplitCard>
     </BasePage>
   );
 };

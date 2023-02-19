@@ -1,21 +1,15 @@
-import { isNotEmpty } from '@/utils/object-utils';
-import { ProFormSelect, ProFormText } from '@ant-design/pro-components';
-import ProFormItem from '@ant-design/pro-form/es/components/FormItem';
+import { ProFormItem, ProFormSelect, ProFormText } from '@ant-design/pro-components';
 import { Space } from 'antd';
 
-export type FieldSearchOptionType = {
-  fieldName: string;
-  fieldLabel: string;
-};
 type FieldSearchType = {
-  fields?: FieldSearchOptionType | FieldSearchOptionType[];
+  fields?: {
+    label: string;
+    value: string;
+  }[];
   [key: string]: any;
 };
 
-const defaultFields = [
-  { fieldName: 'title', fieldLabel: '名称' },
-  { fieldName: 'id', fieldLabel: 'ID' },
-];
+const defaultFields = [{ value: 'id', label: 'ID' }];
 
 const FieldSearchInput = (props) => {
   const { options = [] } = props;
@@ -38,17 +32,12 @@ const FieldSearchInput = (props) => {
   );
 };
 
-export default function FieldSearch(props: FieldSearchType) {
-  const { label, fields, ...rest } = props;
-  let fieldList: any[] = defaultFields;
-  if (isNotEmpty(fields)) {
-    fieldList = Array.isArray(fields) ? fields : [fields];
-  }
-  const options = fieldList.map((it) => ({ label: it.fieldLabel, value: it.fieldName }));
+export default (props: FieldSearchType) => {
+  const { label, fields = defaultFields, ...rest } = props;
 
   return (
     <ProFormItem label={label} {...rest}>
-      <FieldSearchInput options={options} {...rest} />
+      <FieldSearchInput options={fields} {...rest} />
     </ProFormItem>
   );
-}
+};

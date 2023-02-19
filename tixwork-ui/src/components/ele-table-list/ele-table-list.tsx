@@ -1,4 +1,11 @@
-import React, { useRef, useState } from 'react';
+import { getLineActionListColumn, mergeProps } from '@/components/ele-table-list/utils';
+import BaseForm from '@/components/form/base-form';
+import TreeUtils from '@/components/tree/tree-uitls';
+import type { EleValueType } from '@/components/value-type';
+import EleProProvider from '@/components/value-type/ele-pro-provider';
+import useResource from '@/http/use-resource';
+import { useLoading } from '@/services/use-service';
+import { isNotEmpty } from '@/utils/object-utils';
 import type { ActionType, BaseQueryFilterProps, ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import type { SearchConfig } from '@ant-design/pro-table/es/components/Form/FormRender';
@@ -6,17 +13,10 @@ import type { OptionConfig } from '@ant-design/pro-table/es/components/ToolBar';
 import { message } from 'antd';
 import classNames from 'classnames';
 import _ from 'lodash';
-import { getLineActionListColumn, mergeProps } from '@/components/ele-table-list/utils';
-import BaseForm from '@/components/form/base-form';
-import TreeUtils from '@/components/tree/tree-uitls';
-import EleProProvider from '@/components/value-type/ele-pro-provider';
-import useResource from '@/http/use-resource';
-import { useLoading } from '@/services/use-service';
-import type { EleValueType } from '@/components/value-type';
-import { isNotEmpty } from '@/utils/object-utils';
-import TableActionList from './table-action-list';
+import React, { useRef, useState } from 'react';
 import type { EleTableListProps, EleTableListRef } from './ele-table-list-types';
 import styles from './styles.less';
+import TableActionList from './table-action-list';
 
 function EleTableListInner<T extends Record<string, any>>(
   props: EleTableListProps<T, any>,
@@ -89,14 +89,12 @@ function EleTableListInner<T extends Record<string, any>>(
 
   /**
    * 默认的request
-   * @param params
-   * @param plist
    */
-  const defaultRequest = async (params, plist) => {
-    console.log('params,props', params, plist);
+  const defaultRequest = async (params, sorter, filter) => {
+    console.log('params,sorter,filter', params, sorter, filter);
     showLoading();
     try {
-      const resp = await api.list(params);
+      const resp = await api.list({ ...params, ...sorter, ...filter });
       hideLoading();
       if (expandable) {
         let tree = TreeUtils.toTree(resp.data, rowKey);
@@ -225,6 +223,7 @@ function EleTableListInner<T extends Record<string, any>>(
     selfRef.current.onEdit = handleEdit;
     selfRef.current.onRemove = handleRemove;
     selfRef.current.refresh = refresh;
+    selfRef.current.showForm = showForm;
     selfRef.current.action = actionRef.current;
   }
 
@@ -243,15 +242,18 @@ function EleTableListInner<T extends Record<string, any>>(
   /**
    * 处理toolBarRender
    */
-  const toolBarRender = () => [
-    <TableActionList
-      key="toolBar"
-      items={actionList}
-      searchValues={searchRef?.current?.form?.getFieldsValue()}
-      onRefresh={refresh}
-      onAdd={showForm}
-    />,
-  ];
+  const toolBarRender =
+    actionList === false
+      ? false
+      : () => [
+          <TableActionList
+            key="toolBar"
+            items={actionList}
+            params={searchRef?.current?.form?.getFieldsValue()}
+            onSuccess={refresh}
+            onAdd={() => showForm()}
+          />,
+        ];
 
   const optionConfig: OptionConfig = mergeProps(options, { density: false, fullScreen: true });
 
@@ -259,10 +261,12 @@ function EleTableListInner<T extends Record<string, any>>(
   const rootCls = classNames('ele-table-list', styles.eleTableList, className);
   const rowClassName = (record) => (record[rowKey] === id ? styles.rowSelected : '');
 
+  const EditForm = editForm || BaseForm;
   return (
     <div className={rootCls} ref={ref as any}>
       <EleProProvider>
         <ProTable<T>
+          className="ele-table-list"
           loading={loading}
           actionRef={actionRef}
           rowKey={rowKey}
@@ -276,9 +280,12 @@ function EleTableListInner<T extends Record<string, any>>(
           defaultSize={'small'}
           options={optionConfig}
           toolBarRender={toolBarRender}
+          pagination={{
+            pageSize: 10,
+          }}
           {...rest}
         />
-        {editForm ? editForm(theFormProps) : <BaseForm {...theFormProps} />}
+        <EditForm {...theFormProps} />
       </EleProProvider>
     </div>
   );
@@ -286,7 +293,9 @@ function EleTableListInner<T extends Record<string, any>>(
 
 // 多种泛型的ref方案：https://fettblog.eu/typescript-react-generic-forward-refs/
 const EleTableList = React.forwardRef(EleTableListInner) as <T>(
-  props: EleTableListProps<T, any> & { ref?: React.ForwardedRef<EleTableListRef<any> | undefined> },
+  props: EleTableListProps<T, any> & {
+    ref?: React.ForwardedRef<EleTableListRef<any> | undefined>;
+  },
 ) => ReturnType<typeof EleTableListInner>;
 
 export default EleTableList;

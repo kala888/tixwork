@@ -19,32 +19,6 @@ type InitialStateType = {
 };
 
 const loginPath = '/login';
-const appList = [
-  {
-    icon: '/logo.svg',
-    title: '钛安科技',
-    desc: '企业数字化转性领导者',
-    url: 'https://www.tiandtech.com',
-  },
-  {
-    icon: 'http://www.scts-law.com/views/new/assets/images/logo.jpg',
-    title: '韬世律所',
-    desc: '工作中的生活家，生活里的勤勉者',
-    url: 'https://scts-law.com/',
-  },
-  {
-    icon: 'http://www.scts-law.com/views/new/assets/images/logo.jpg',
-    title: '韬世律所',
-    desc: '工作中的生活家，生活里的勤勉者',
-    url: 'https://scts-law.com/',
-  },
-  {
-    icon: '/logo.svg',
-    title: '钛安科技',
-    desc: '企业数字化转性领导者',
-    url: 'https://www.tiandtech.com',
-  },
-];
 
 export const request = requestConfig;
 
@@ -54,7 +28,7 @@ export const request = requestConfig;
 export async function getInitialState(): Promise<InitialStateType> {
   const settings = {
     ...defaultSettings,
-    ...(BizSchema?.project || {}),
+    ...(BizSchema?.Root || {}),
   };
   try {
     const resp = await getProfile();
@@ -78,14 +52,14 @@ const loopMenu = (routes) =>
   routes.map((it) => ({
     ...it,
     icon: it.icon && <IconFont type={it.icon} />,
-    routes: isNotEmpty(it.routes) ? loopMenu(it.routes) : [],
+    children: isNotEmpty(it.routes) ? loopMenu(it.routes) : [],
   }));
 
 // ！！！！next版本ProLayout 支持的api https://next-procomponents.ant.design/components/layout/#api
 export const layout: RunTimeLayoutConfig = (props) => {
   const { initialState } = props;
   const userId = initialState?.profile?.user?.userId;
-  const userName = initialState?.profile?.user?.userName;
+  // const userName = initialState?.profile?.user?.userName;
   return {
     contentStyle: {
       padding: 10,
@@ -97,10 +71,9 @@ export const layout: RunTimeLayoutConfig = (props) => {
         colorBgMenuItemHover: 'rgba(94, 191, 255,0.2)',
       },
     },
-    appList,
-    waterMarkProps: {
-      content: `${userName}-${userId}`,
-    },
+    // waterMarkProps: {
+    //   content: `${userName}-${userId}`,
+    // },
     rightRender: () => <RightContent />,
     onPageChange: (location) => {
       console.log(props);
@@ -124,8 +97,8 @@ export const layout: RunTimeLayoutConfig = (props) => {
         // 动态加载页面，也可以移除route，直接使用命名约定页面
 
         if (isNotEmpty(params?.userId)) {
-          const remoteRouters = await Q.get<any[]>(ApiConfig.getRouters);
-          return loopMenu(remoteRouters.data);
+          const resp = await Q.get<any[]>(ApiConfig.getRouters);
+          return loopMenu(resp.data);
         }
         return loopMenu(defaultMenuData);
       },

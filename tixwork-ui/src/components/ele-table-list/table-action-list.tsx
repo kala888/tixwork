@@ -1,58 +1,31 @@
-import React from 'react';
-import { Button, Space } from 'antd';
+import ActionList from '@/components/action/action-list';
 import { PlusOutlined } from '@ant-design/icons';
-import FileExport from '@/components/file/file-export';
-import FileImport from '@/components/file/file-import';
-import type { ActionList } from '@/utils/nice-router-types';
-import _ from 'lodash';
-import SimpleViewButton from './simple-view-button';
+import { Button } from 'antd';
 
-type TableActionListType = {
-  items?: ActionList | false;
-  searchValues: Record<string, any>;
-  onRefresh: () => void;
-  onAdd: () => void;
-};
-
-const ActionsMapping = {
-  export: FileExport,
-  import: FileImport,
-  view: SimpleViewButton,
-};
-
-export default function TableActionList(props: TableActionListType) {
-  const { items = [], searchValues, onRefresh, onAdd } = props;
+export default function TableActionList(props) {
+  const { items = [], onAdd } = props;
   if (items === false) {
     return null;
   }
-  const actionList = [...items];
-
-  if (onAdd) {
-    actionList.push(
-      <Button key="add-button" type="primary" onClick={onAdd}>
-        <PlusOutlined />
-        新增
-      </Button>,
-    );
+  let actionList: any[] = [...items];
+  if (actionList.length === 0) {
+    actionList.push({ code: 'create' });
   }
-  return (
-    <Space>
-      {actionList.map((it) => {
-        if (React.isValidElement(it)) {
-          return it;
-        }
-        //@ts-ignore
-        const Component = _.get(ActionsMapping, it.type) || SimpleViewButton;
-        return (
-          <Component
-            key={it?.code + '_' + it.title}
-            title={it.title}
-            linkToUrl={it.linkToUrl}
-            values={searchValues}
-            onSuccess={onRefresh}
-          />
-        );
-      })}
-    </Space>
-  );
+  actionList = actionList.map((it) => {
+    if (it.code === 'create' && onAdd) {
+      return (
+        <Button key="add-button" type="primary" onClick={onAdd} {...it}>
+          {it.title || (
+            <>
+              <PlusOutlined />
+              新建
+            </>
+          )}
+        </Button>
+      );
+    }
+    return it;
+  });
+
+  return <ActionList {...props} items={actionList} />;
 }

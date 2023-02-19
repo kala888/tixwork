@@ -17,14 +17,14 @@ export default function DetailRoleDataScope(props) {
 
   useAsyncEffect(
     async function* () {
-      const resp = await Q.get<API.Dept>(ApiConfig.roleDeptTreeselect, { roleId: role.roleId });
+      const resp = await Q.get<API.Dept>(ApiConfig.roleDeptTreeselect, { roleId: role.id });
       const { data = {} as any } = resp;
       yield;
       setCheckedKeys(data.checkedKeys);
       setDataSource(data.depts);
       setDataScope(role.dataScope);
     },
-    [role.roleId],
+    [role.id],
   );
 
   if (dataSource.length === 0) {
@@ -34,7 +34,7 @@ export default function DetailRoleDataScope(props) {
     setSaving(true);
     try {
       await Q.put(ApiConfig.changeRoleDataScope, {
-        roleId: role.roleId,
+        roleId: role.id,
         deptIds: checkedKeys,
         dataScope,
       });
@@ -58,7 +58,7 @@ export default function DetailRoleDataScope(props) {
     </Button>
   );
   return (
-    <ProCard title="角色-数据权限" extra={role.roleId && extra} ghost>
+    <ProCard title="角色-数据权限" extra={role.id && extra} ghost>
       <Select value={dataScope} style={{ width: 250 }} onChange={handleSelectChange}>
         <Select.Option value="1">全部数据权限</Select.Option>
         <Select.Option value="2">自定义数据权限</Select.Option>

@@ -2,12 +2,12 @@ import { CommonRule } from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
 import Q from '@/http/http-request/q';
 import useProfile from '@/services/use-profile';
+import type { ProFormInstance } from '@ant-design/pro-components';
 import { ProDescriptions, ProForm, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
 import { message } from 'antd';
 import { useEffect, useRef } from 'react';
 import AvatarSetting from './components/avatar-setting';
 import styles from './styles.less';
-import type { ProFormInstance } from '@ant-design/pro-form';
 
 const ProfileSetting = () => {
   const formRef = useRef<ProFormInstance>();

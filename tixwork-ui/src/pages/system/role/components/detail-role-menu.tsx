@@ -23,11 +23,11 @@ export default function DetailRoleMenu(props) {
 
   useAsyncEffect(
     async function* () {
-      if (!role.roleId) {
+      if (!role.id) {
         return;
       }
 
-      const resp = await Q.get(ApiConfig.getMenuByRoleId, { roleId: role.roleId });
+      const resp = await Q.get(ApiConfig.getMenuByRoleId, { roleId: role.id });
       yield;
       const menus = _.get(resp, 'data.menus', []);
       const checkedList = _.get(resp, 'data.checkedKeys', []);
@@ -49,7 +49,7 @@ export default function DetailRoleMenu(props) {
     console.log('update role-menu', role, menuIds);
     showLoading();
     try {
-      await Q.put(ApiConfig.changeRoleMenu, { roleId: role.roleId, menuIds });
+      await Q.put(ApiConfig.changeRoleMenu, { roleId: role.id, menuIds });
       message.success('更新成功');
     } catch (e) {
       message.success('更新失败');
@@ -83,11 +83,11 @@ export default function DetailRoleMenu(props) {
   };
   const list = _.values(menuState) || [];
   return (
-    <ProCard title="角色-菜单权限" extra={role.roleId && extra} ghost>
+    <ProCard title="角色-菜单权限" extra={role.id && extra} ghost>
       <div className={styles.detailRoleMenuTree}>
         {list.map((it) => {
           const { checkedList, menu } = it;
-          const key = role.roleId + '_' + it.id;
+          const key = role.id + '_' + it.id;
           return (
             <ProCard key={key} bordered title={menu.title} style={menuCardStyle}>
               <ProTree root={menu} checkedList={checkedList} onChange={handleChange} />

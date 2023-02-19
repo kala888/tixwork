@@ -18,7 +18,7 @@ const render = _.memoize((text = '', props) => {
   );
 });
 
-const NickName = {
+const NickNameValueType = {
   render,
   renderFormItem: (__, props) => (
     <ProFormText
@@ -28,4 +28,4 @@ const NickName = {
     />
   ),
 };
-export default NickName;
+export default NickNameValueType;

@@ -22,6 +22,8 @@ canvas {
 }
 
 body {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    '微软雅黑', Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -279,7 +281,32 @@ ol {
 }
 
 .customized-form-item {
-  margin-bottom: 0;
+  margin-bottom: 2px;
+}
+
+.flex-1 {
+  display: flex;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 //.ant-pro-layout-content {

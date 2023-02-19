@@ -1,4 +1,4 @@
 const Config = {
-  baseURL: '//www.tiandtech.com',
+  baseURL: '//cdzsb.org.cn/',
 };
 export default Config;

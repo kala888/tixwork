@@ -1,10 +1,10 @@
 import type { BaseFormType } from '@/components/form/base-form';
 import BaseForm from '@/components/form/base-form';
 import EleStatus from '@/components/form/fields/ele-status';
+import RemoteRadio from '@/components/form/remote/remote-radio';
 import DeptSelector from '@/components/tree/dept-selector';
 import { CommonRule } from '@/components/value-type/common-column';
 import ProMobile from '@/components/value-type/mobile/pro-mobile';
-import { RemoteRadioGroup } from '@/components/value-type/remote-enum/remote-radio';
 import ApiConfig from '@/http/api-config';
 import Q from '@/http/http-request/q';
 import { isEmpty } from '@/utils/object-utils';
@@ -12,12 +12,12 @@ import { ProFormSelect, ProFormText } from '@ant-design/pro-components';
 
 export async function getPostOptions() {
   const resp = await Q.get(ApiConfig.getPostOptions);
-  return resp?.data?.map((it) => ({ label: it.postName, value: it.postId }));
+  return resp?.data?.map((it) => ({ label: it.postName, value: it.id }));
 }
 
 export async function getRoleOptions() {
   const resp = await Q.get(ApiConfig.getRoleOptions);
-  return resp?.data?.map((it) => ({ label: it.roleName, value: it.roleId }));
+  return resp?.data?.map((it) => ({ label: it.roleName, value: it.id }));
 }
 
 const EditForm = (props: BaseFormType) => {
@@ -54,12 +54,7 @@ const EditForm = (props: BaseFormType) => {
       {isNew && <ProFormText.Password label="密码" name="password" width="sm" />}
 
       <EleStatus />
-      <RemoteRadioGroup
-        label="性别"
-        name="gender"
-        types="GenderType"
-        rules={[CommonRule.required]}
-      />
+      <RemoteRadio label="性别" name="gender" types="GenderType" rules={[CommonRule.required]} />
     </BaseForm>
   );
 };

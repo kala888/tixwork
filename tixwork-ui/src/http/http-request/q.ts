@@ -1,7 +1,9 @@
 import { request } from '@umijs/max';
 
+export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'PATCH';
+
 type RequestOptionType = {
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'PATCH';
+  method?: HttpMethod;
   asParams?: any; // 将post、put的参数转化为params提交
   params?: any;
   data?: any;
@@ -11,7 +13,7 @@ type RequestOptionType = {
 
 type RequestParamsType = Record<string, any>;
 
-interface RequestType {
+export interface RequestType {
   <R = any>(url: string, data?: RequestParamsType, options?: RequestOptionType): Promise<
     API.WebResult<R>
   >;

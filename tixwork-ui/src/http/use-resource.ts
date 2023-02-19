@@ -1,6 +1,7 @@
 import Q from '@/http/http-request/q';
 import ActionUtil from '@/utils/action-util';
-import type { ActionLike } from '@/utils/nice-router-types';
+import type { ActionLike, ResourceLike } from '@/utils/nice-router-types';
+import _ from 'lodash';
 import type React from 'react';
 
 type ParamType = {
@@ -16,54 +17,128 @@ type TableList<T> = {
   pageSize?: number;
 };
 
-export default function useResource<T>(resource: string | ActionLike) {
-  const uri = ActionUtil.getActionUri(resource);
-  // @ts-ignore
-  const method = resource?.method || 'POST';
+type TypeOfList<T> = (params?: ParamType, options?: Record<string, any>) => Promise<TableList<T>>;
+type TypeOfGet<T> = (id: React.Key) => Promise<T>;
+type TypeOfUpdate = (data: Record<string, any>) => Promise<any>;
+type TypeOfRemove = (id: React.Key, options?: Record<string, any>) => Promise<any>;
+type TypeOfSearch = (params: ParamType, options?: Record<string, any>) => Promise<any>;
 
-  const list = async (params?: ParamType, options?: Record<string, any>): Promise<TableList<T>> => {
-    const listUrl = uri + '/list';
-    const resp = await Q.send(listUrl, {
-      method: method,
+export type BizResourceType<T> = {
+  list: TypeOfList<T>;
+  get: TypeOfGet<T>;
+  add: TypeOfUpdate;
+  update: TypeOfUpdate;
+  remove: TypeOfRemove;
+  exportData: TypeOfSearch;
+  importData: TypeOfSearch;
+};
+
+class SubUri {
+  private readonly uri: any;
+
+  constructor(uri) {
+    this.uri = uri;
+  }
+
+  getSubUri(resource) {
+    const obj = new URL(this.uri, 'http://localhost/');
+    const pathname = _.trimEnd(obj.pathname, '/');
+    const sub = _.trimEnd(_.trimStart(resource, '/'), '/');
+    return `${pathname}/${sub}${obj.search}`;
+  }
+}
+
+function toResource(param) {
+  const url = ActionUtil.getActionUri(param);
+  const uri = new SubUri(url);
+
+  const list: ActionLike = {
+    linkToUrl: uri.getSubUri('/list'),
+    method: 'POST',
+  };
+  const get: ActionLike = {
+    linkToUrl: uri.getSubUri('/:id'),
+    method: 'GET',
+  };
+  const add: ActionLike = {
+    linkToUrl: url,
+    method: 'POST',
+  };
+  const update: ActionLike = {
+    linkToUrl: uri.getSubUri('/:id'),
+    method: 'PUT',
+  };
+  const remove: ActionLike = {
+    linkToUrl: url,
+    method: 'DELETE',
+  };
+  const exportData: ActionLike = {
+    linkToUrl: uri.getSubUri('/export'),
+    method: 'GET',
+  };
+  const importData: ActionLike = {
+    linkToUrl: uri.getSubUri('/import'),
+    method: 'POST',
+  };
+
+  const resource: ResourceLike = {
+    list,
+    get,
+    add,
+    update,
+    remove,
+    exportData,
+    importData,
+    search: {
+      ...list,
+    },
+  };
+  if (_.isObject(param)) {
+    _.merge(resource, param);
+  }
+  return resource;
+}
+
+export function getResource<T>(
+  theResource: string | ActionLike | ResourceLike,
+): BizResourceType<T> {
+  const resource: ResourceLike = toResource(theResource);
+
+  const send = async (action, data, option = {}) => {
+    const url = ActionUtil.getActionUri(action);
+    return await Q.send(url, { data, method: action.method, ...option });
+  };
+
+  const list: TypeOfList<T> = async (data, options = {}) => {
+    const resp = await send(resource.list, data, {
       params: {
-        pageNum: params?.current,
-        pageSize: params?.pageSize,
+        pageNum: data?.current,
+        pageSize: data?.pageSize,
       },
-      data: params || {},
-      ...(options || {}),
+      ...options,
     });
     return {
       data: resp.data?.rows,
       success: true,
       total: resp.data?.total,
-      current: params?.current,
-      pageSize: params?.pageSize,
+      current: data?.current,
+      pageSize: data?.pageSize,
     };
   };
 
-  const get = async (id: React.Key): Promise<T> => {
-    const getUrl = uri + '/' + id;
-    const resp = await Q.get(getUrl);
+  const get: TypeOfGet<T> = async (id) => {
+    const resp = await send(resource.get, { id });
     return resp.data;
   };
 
-  const add = async (data: Record<string, any>) => Q.post(uri, data);
-  const update = async (data: Record<string, any>) => Q.put(uri, data);
-
-  const remove = async (id: React.Key, options?: Record<string, any>) => {
-    return Q.send(uri + '/' + id, {
-      method: 'DELETE',
-      ...(options || {}),
-    });
-  };
-
-  const exportData = async (params: ParamType, options?: Record<string, any>) => {
-    return Q.get(uri + '/export', params, options);
-  };
-
-  const importData = async (params: ParamType, options?: Record<string, any>) => {
-    return Q.post(uri + '/import', params, options);
-  };
+  const add = async (data: Record<string, any>) => send(resource.add, data);
+  const update = async (data: Record<string, any>) => send(resource.update, data);
+  const remove = async (id: React.Key, options?: Record<string, any>) =>
+    send(resource.remove, {}, options);
+  const exportData: TypeOfSearch = async (params, options) =>
+    send(resource.exportData, {}, options);
+  const importData: TypeOfSearch = async (params, options) =>
+    send(resource.importData, {}, options);
 
   return {
     list,
@@ -75,3 +150,6 @@ export default function useResource<T>(resource: string | ActionLike) {
     importData,
   };
 }
+
+const useResource = getResource;
+export default useResource;

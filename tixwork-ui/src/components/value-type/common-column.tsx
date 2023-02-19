@@ -1,6 +1,12 @@
 import type { ProColumnType } from '@ant-design/pro-components';
 
-export const CommonRule: Record<string, any> = {
+type CommonRuleKey = 'text' | 'required' | 'mobile' | 'email';
+export const CommonRule: Record<CommonRuleKey, any> = {
+  text: {
+    max: 100,
+    message: '最多只能输入100个字符',
+    type: 'string',
+  },
   required: {
     required: true,
     message: '此项为必填项',

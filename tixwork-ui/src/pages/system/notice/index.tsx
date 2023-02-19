@@ -36,7 +36,6 @@ export default () => {
     <BasePage>
       <EleTableList<API.Notice>
         resource={ApiConfig.notice}
-        rowKey="noticeId"
         title="通知公告"
         columns={columns}
         formProps={{ columns }}

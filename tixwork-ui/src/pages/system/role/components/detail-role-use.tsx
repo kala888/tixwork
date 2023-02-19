@@ -9,9 +9,9 @@ export default function DetailRoleUse(props) {
   const { role } = props;
 
   const request = async (params) => {
-    if (params.roleId) {
+    if (params.id) {
       const resp = await Q.get<API.TableDataInfo<API.User>>(ApiConfig.getRoleUserList, {
-        roleId: params.roleId,
+        roleId: params.id,
       });
       console.log('the....resp', resp);
       return {

@@ -1,11 +1,10 @@
-import type React from 'react';
-import type { ParamsType, ProColumns, RequestData } from '@ant-design/pro-components';
-import { ActionType } from '@ant-design/pro-components';
-import type { SortOrder } from 'antd/es/table/interface';
 import type { BaseFormType } from '@/components/form/base-form';
 import type { EleValueType } from '@/components/value-type';
-import type { ActionLike, ActionList } from '@/utils/nice-router-types';
+import type { ActionLike, ActionList, ResourceLike } from '@/utils/nice-router-types';
+import type { ActionType, ParamsType, ProColumns, RequestData } from '@ant-design/pro-components';
 import type { SizeType } from '@ant-design/pro-form/es/BaseForm';
+import type { SortOrder } from 'antd/es/table/interface';
+import type React from 'react';
 
 // ProTable的OOTB透传部分
 export type TablePropsBridge = {
@@ -36,6 +35,7 @@ export type EleTableListRef<T> = {
   onEdit: (record: T) => void;
   onRemove: (record: T) => void;
   onRow: (record: T) => void;
+  showForm: (record: T) => void;
   refresh: () => void;
   action?: ActionType;
 } & Partial<React.ReactHTMLElement> &
@@ -44,7 +44,7 @@ export type EleTableListRef<T> = {
 //自定义部分
 export type EleTableListProps<T, U extends ParamsType> = {
   ref?: React.MutableRefObject<EleTableListRef<T> | undefined>;
-  resource: string | ActionLike;
+  resource: string | ActionLike | ResourceLike;
   title?: React.ReactNode;
   rowKey?: string;
   columns: ProColumns<T, EleValueType>[];
@@ -66,4 +66,7 @@ export type EleTableListProps<T, U extends ParamsType> = {
     sort: Record<string, SortOrder>,
     filter: Record<string, React.ReactText[] | null>,
   ) => Promise<Partial<RequestData<T>>>;
+  rowSelection?: any;
+  tableAlertRender?: any;
+  tableAlertOptionRender?: any;
 } & Partial<TablePropsBridge>;

@@ -35,7 +35,7 @@ const StorageTools = {
       return defaultValue;
     }
     const value = getItem(theKey);
-    return value ? parseToObject(value) : defaultValue;
+    return parseToObject(value, defaultValue);
   },
 
   /**

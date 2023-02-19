@@ -26,13 +26,13 @@ export default function StatusChart(props) {
         label: {
           normal: {
             borderColor: 'red',
-            formatter: '{b}:  {c} 个' + '\n\r' + '({d}%)',
+            formatter: '{b}:  {c} 亿' + '\n\r' + '({d}%)',
           },
         },
         emphasis: {
           label: {
             show: true,
-            fontSize: '40',
+            fontSize: '18',
             fontWeight: 'bold',
           },
         },
@@ -43,5 +43,5 @@ export default function StatusChart(props) {
       },
     ],
   };
-  return <ReactECharts option={theOptions} style={{ height: '40%', width: '100%' }} />;
+  return <ReactECharts option={theOptions} style={{ height: '100%', width: '100%' }} />;
 }

@@ -1,6 +1,6 @@
 import EleTableList from '@/components/ele-table-list/ele-table-list';
 import BasePage from '@/components/layout/base-page';
-import SplitPanel from '@/components/split-panel/split-panel';
+import SplitCard from '@/components/split-card';
 import type { EleValueType } from '@/components/value-type';
 import CommonColumn from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
@@ -33,18 +33,17 @@ export default () => {
 
   const handleRowSelect = async (record) => {
     setLoading(true);
-    const item = await api.get(record.roleId);
+    const item = await api.get(record.id);
     setCurrentRow(item);
     setLoading(false);
   };
 
   return (
     <BasePage>
-      <SplitPanel style={{ height: '100%' }} leftWidth={450}>
+      <SplitCard style={{ height: '100%' }} leftWidth={450}>
         <EleTableList<API.Role>
           title="角色管理"
           resource={ApiConfig.role}
-          rowKey={'roleId'}
           columns={columns}
           search={false}
           options={false}
@@ -56,7 +55,7 @@ export default () => {
         <Spin spinning={loading}>
           <Detail item={currentRow} />
         </Spin>
-      </SplitPanel>
+      </SplitCard>
     </BasePage>
   );
 };
