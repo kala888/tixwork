@@ -1,17 +1,30 @@
-import { InfoCircleOutlined, UploadOutlined } from '@ant-design/icons';
-import { Button, Modal, notification, Space, Typography, Upload } from 'antd';
+import ObjectUtils from '@/utils/object-utils';
+import { InfoCircleOutlined, ThunderboltOutlined, UploadOutlined } from '@ant-design/icons';
+import { Button, Modal, notification, Popover, Space, Typography, Upload } from 'antd';
+import classNames from 'classnames';
 import React, { useState } from 'react';
+import styles from './styles.less';
 
 type FileImportType = {
   title?: string | React.ReactElement;
   linkToUrl: string;
   onSuccess?: (resp: any) => void;
   onFailed?: (resp: any) => void;
+  templateUrl?: string;
+  templateTips?: string;
 };
+
 export default function FileImport(props: FileImportType) {
   const [loading, setLoading] = useState(false);
 
-  const { title = '导入', linkToUrl, onSuccess, onFailed } = props;
+  const {
+    title = '导入',
+    linkToUrl,
+    onSuccess,
+    onFailed,
+    templateUrl,
+    templateTips = '下载导入用模版',
+  } = props;
 
   const uploadPrams = {
     name: 'file',
@@ -62,12 +75,24 @@ export default function FileImport(props: FileImportType) {
     },
   };
 
+  const clxUpload = classNames(styles.importButtonUpload, 'button-color-cyan');
+  const clxTemplate = classNames(styles.importButtonTemplate, 'button-color-cyan');
+
   return (
-    <Upload {...uploadPrams}>
-      <Button className="button-color-green" loading={loading}>
-        <UploadOutlined />
-        {title}
-      </Button>
-    </Upload>
+    <div className={styles.importButton}>
+      <Upload {...uploadPrams}>
+        <Button loading={loading} className={clxUpload}>
+          <UploadOutlined />
+          {title}
+        </Button>
+      </Upload>
+      {ObjectUtils.isNotEmpty(templateUrl) && (
+        <Popover content={templateTips} trigger="hover">
+          <Button className={clxTemplate} href={templateUrl}>
+            <ThunderboltOutlined />
+          </Button>
+        </Popover>
+      )}
+    </div>
   );
 }

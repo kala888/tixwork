@@ -87,10 +87,10 @@ export default () => {
   ];
 
   return (
-    <BasePage>
+    <BasePage title="用户管理">
       <SplitCard renderLeft={renderLeft}>
         <EleTableList<API.User>
-          title="用户列表"
+          title="用户管理"
           ref={ref}
           params={{ deptId: selectDeptId }}
           resource={ApiConfig.user}

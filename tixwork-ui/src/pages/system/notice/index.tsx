@@ -27,16 +27,17 @@ const columns: ProColumnType<API.Notice, EleValueType>[] = [
     ellipsis: true,
     valueType: 'textarea',
     width: 'lg',
+    hideInSearch: true,
   },
   CommonColumn.createTime,
 ];
 
 export default () => {
   return (
-    <BasePage>
+    <BasePage title="通知公告">
       <EleTableList<API.Notice>
-        resource={ApiConfig.notice}
         title="通知公告"
+        resource={ApiConfig.notice}
         columns={columns}
         formProps={{ columns }}
       />

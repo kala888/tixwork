@@ -44,11 +44,11 @@ export default () => {
   ];
 
   return (
-    <BasePage>
+    <BasePage title="字典管理">
       <EleTableList<API.Dict>
+        title="字典管理"
         resource={ApiConfig.dict}
         rowKey="id"
-        title="系统参数设置"
         columns={columns}
         options={false}
         pagination={false}

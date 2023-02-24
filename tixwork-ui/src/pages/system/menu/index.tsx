@@ -52,11 +52,10 @@ const columns: ProColumnType<API.Menu, EleValueType>[] = [
 
 export default () => {
   return (
-    <BasePage>
+    <BasePage title="菜单管理">
       <EleTableList<API.Menu>
         resource={ApiConfig.menu}
         rowKey="id"
-        title="菜单管理"
         columns={columns as any}
         editForm={EditForm}
         search={false}

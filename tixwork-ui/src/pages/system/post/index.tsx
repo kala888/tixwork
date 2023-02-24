@@ -37,7 +37,7 @@ const columns: ProColumnType<API.Post, EleValueType>[] = [
 
 export default () => {
   return (
-    <BasePage>
+    <BasePage title="岗位管理">
       <Text>TODO 实际上这里叫岗位有问题，这个职务信息。岗位应该是和人绑定的。</Text>
       <Text>
         例如，公司可以有两个开发岗，开发1和开发2。铁打的岗位，流水的人。再例如，管理员应该是个岗位，而不是个账号。因为人是有变更需求的。

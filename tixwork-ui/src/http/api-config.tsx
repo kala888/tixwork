@@ -15,7 +15,6 @@ const ApiConfig = {
   scheduler: '/api/monitor/scheduler',
   //common data
   dataCities: '/api/data/cities',
-  dataProvinces: '/api/data/provinces',
 
   //oss
   oss: '/api/system/oss',

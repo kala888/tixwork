@@ -19,6 +19,7 @@ type TableList<T> = {
 
 type TypeOfList<T> = (params?: ParamType, options?: Record<string, any>) => Promise<TableList<T>>;
 type TypeOfGet<T> = (id: React.Key) => Promise<T>;
+type TypeOfAdd = (data: Record<string, any>) => Promise<any>;
 type TypeOfUpdate = (data: Record<string, any>) => Promise<any>;
 type TypeOfRemove = (id: React.Key, options?: Record<string, any>) => Promise<any>;
 type TypeOfSearch = (params: ParamType, options?: Record<string, any>) => Promise<any>;
@@ -26,7 +27,7 @@ type TypeOfSearch = (params: ParamType, options?: Record<string, any>) => Promis
 export type BizResourceType<T> = {
   list: TypeOfList<T>;
   get: TypeOfGet<T>;
-  add: TypeOfUpdate;
+  add: TypeOfAdd;
   update: TypeOfUpdate;
   remove: TypeOfRemove;
   exportData: TypeOfSearch;
@@ -40,44 +41,47 @@ class SubUri {
     this.uri = uri;
   }
 
-  getSubUri(resource) {
+  getUrl() {
+    return this.uri;
+  }
+
+  subUrl(sub) {
     const obj = new URL(this.uri, 'http://localhost/');
     const pathname = _.trimEnd(obj.pathname, '/');
-    const sub = _.trimEnd(_.trimStart(resource, '/'), '/');
-    return `${pathname}/${sub}${obj.search}`;
+    const subPath = _.trimEnd(_.trimStart(sub, '/'), '/');
+    return `${pathname}/${subPath}${obj.search}`;
   }
 }
 
 function toResource(param) {
-  const url = ActionUtil.getActionUri(param);
-  const uri = new SubUri(url);
+  const uri = new SubUri(ActionUtil.getActionUri(param));
 
   const list: ActionLike = {
-    linkToUrl: uri.getSubUri('/list'),
+    linkToUrl: uri.subUrl('/list'),
     method: 'POST',
   };
   const get: ActionLike = {
-    linkToUrl: uri.getSubUri('/:id'),
+    linkToUrl: uri.subUrl('/:id'),
     method: 'GET',
   };
   const add: ActionLike = {
-    linkToUrl: url,
+    linkToUrl: uri.getUrl(),
     method: 'POST',
   };
   const update: ActionLike = {
-    linkToUrl: uri.getSubUri('/:id'),
+    linkToUrl: uri.getUrl(),
     method: 'PUT',
   };
   const remove: ActionLike = {
-    linkToUrl: url,
+    linkToUrl: uri.subUrl('/:id'),
     method: 'DELETE',
   };
   const exportData: ActionLike = {
-    linkToUrl: uri.getSubUri('/export'),
+    linkToUrl: uri.subUrl('/export'),
     method: 'GET',
   };
   const importData: ActionLike = {
-    linkToUrl: uri.getSubUri('/import'),
+    linkToUrl: uri.subUrl('/import'),
     method: 'POST',
   };
 
@@ -134,7 +138,7 @@ export function getResource<T>(
   const add = async (data: Record<string, any>) => send(resource.add, data);
   const update = async (data: Record<string, any>) => send(resource.update, data);
   const remove = async (id: React.Key, options?: Record<string, any>) =>
-    send(resource.remove, {}, options);
+    send(resource.remove, { id }, options);
   const exportData: TypeOfSearch = async (params, options) =>
     send(resource.exportData, {}, options);
   const importData: TypeOfSearch = async (params, options) =>

@@ -39,10 +39,9 @@ export default () => {
   };
 
   return (
-    <BasePage>
+    <BasePage title="角色管理">
       <SplitCard style={{ height: '100%' }} leftWidth={450}>
         <EleTableList<API.Role>
-          title="角色管理"
           resource={ApiConfig.role}
           columns={columns}
           search={false}

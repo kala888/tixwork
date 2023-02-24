@@ -11,6 +11,7 @@ const columns: ProColumnType<any, EleValueType>[] = [
     dataIndex: 'tokenId',
     ellipsis: true,
     align: 'center',
+    hideInSearch: true,
   },
   {
     title: '登录名称',
@@ -21,6 +22,7 @@ const columns: ProColumnType<any, EleValueType>[] = [
     title: '部门名称',
     dataIndex: 'deptName',
     align: 'center',
+    hideInSearch: true,
   },
   {
     title: '登录地址',
@@ -32,16 +34,19 @@ const columns: ProColumnType<any, EleValueType>[] = [
     title: '登录地点',
     dataIndex: 'loginLocation',
     align: 'center',
+    hideInSearch: true,
   },
   {
     title: '浏览器',
     dataIndex: 'browser',
     align: 'center',
+    hideInSearch: true,
   },
   {
     title: '操作系统',
     dataIndex: 'os',
     align: 'center',
+    hideInSearch: true,
   },
   {
     title: '登录时间',
@@ -49,21 +54,18 @@ const columns: ProColumnType<any, EleValueType>[] = [
     width: 180,
     align: 'center',
     valueType: 'dateTime',
+    hideInSearch: true,
   },
 ];
 
 export default () => {
   const lineActions: ActionList = [{ code: 'remove', title: '强制下线' }];
   return (
-    <BasePage>
+    <BasePage title="在线用户">
       <EleTableList
         lineActionList={lineActions}
         rowKey="tokenId"
-        resource={{
-          linkToUrl: ApiConfig.online,
-          method: 'GET',
-        }}
-        title="在线用户"
+        resource={ApiConfig.online}
         columns={columns}
         options={false}
         toolBarRender={false}

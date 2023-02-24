@@ -44,8 +44,7 @@ const groupColumns = (props) => {
   const { defaultItemWidth } = smartLayout(props);
   const result: any[] = [];
   let group: any = {
-    valueType: 'group',
-    columns: [],
+    title: 'this_is_a_fake_group',
   };
   columns.forEach((it) => {
     if (it.group !== group.title) {

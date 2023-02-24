@@ -8,8 +8,6 @@ import type { BizSchemaTypes } from './biz-schema-types';
 // IMPORTANT: 这个是自动生成的，不要修改。。。。
 // IMPORTANT: 这个是自动生成的，不要修改。。。。
 
-console.log('load rules', CommonRule);
-
 const projectInfo: BizSchemaTypes.ResourceDefine = {
   name: 'projectInfo',
   label: '项目信息',
@@ -18,16 +16,13 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
     // entity级别的action
     {
       title: 'Excel导入',
-      code: 'import',
+      type: 'import',
       linkToUrl: '/api/cdsz/project-info/import',
     },
     {
       title: 'Excel导出',
-      code: 'export',
+      type: 'export',
       linkToUrl: '/api/cdsz/project-info/export',
-    },
-    {
-      code: 'create',
     },
   ],
   tableConfig: {
@@ -42,7 +37,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
@@ -63,7 +57,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '投资主体+项目名称',
       formItemProps: {
@@ -82,7 +75,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '投资内容：     项目选址：    用地规模：',
       width: 160,
@@ -105,7 +97,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '不超过500字',
       width: 160,
@@ -139,7 +130,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -157,7 +147,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -175,9 +164,8 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       dataIndex: 'industryChainLevel',
       valueType: 'RemoteEnum',
       hideInTable: false,
-      hideInSearch: false,
+      hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -197,7 +185,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -217,7 +204,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '最近对接情况及促进建议',
       width: 160,
@@ -240,7 +226,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -258,7 +243,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -279,7 +263,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -297,7 +280,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -317,7 +299,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -337,7 +318,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '不超过500字',
       width: 160,
@@ -360,7 +340,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '不超过500字',
       width: 160,
@@ -372,34 +351,6 @@ const projectInfo: BizSchemaTypes.ResourceDefine = {
         rules: [
           // rules 定义
           { max: 500, message: '最多只能输入500个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      // special for range search
-      title: '创建时间',
-      dataIndex: ['params', 'createTime'],
-      valueType: 'dateRange',
-      hideInForm: true,
-      hideInTable: true,
-      hideInDescriptions: true,
-      group: '',
-      tooltip: '',
-    },
-    {
-      title: '创建时间',
-      key: 'createTime',
-      dataIndex: 'createTime',
-      valueType: 'date',
-      hideInTable: true,
-      hideInSearch: true,
-      hideInForm: true,
-      hideInDescriptions: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
         ],
       },
     },
@@ -417,16 +368,8 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
     // entity级别的action
     {
       title: 'Excel导入',
-      code: 'import',
+      type: 'import',
       linkToUrl: '/api/cdsz/visit-record/import',
-    },
-    {
-      title: 'Excel导出',
-      code: 'export',
-      linkToUrl: '/api/cdsz/visit-record/export',
-    },
-    {
-      code: 'create',
     },
   ],
   tableConfig: {
@@ -441,7 +384,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
@@ -473,7 +415,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '访问时间',
       formItemProps: {
@@ -491,7 +432,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -510,7 +450,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '例如：副总裁 张三丰',
       formItemProps: {
@@ -528,7 +467,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '例如：深圳',
       formItemProps: {
@@ -546,7 +484,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -566,7 +503,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -586,7 +522,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -606,7 +541,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '洽淡主要内容',
       width: 160,
@@ -629,7 +563,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -649,7 +582,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -669,7 +601,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '项目名称',
       formItemProps: {
@@ -687,7 +618,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       align: 'center',
@@ -709,7 +639,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -729,7 +658,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -747,7 +675,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -768,7 +695,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -788,7 +714,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '不超过500字',
       width: 160,
@@ -800,34 +725,6 @@ const visitRecord: BizSchemaTypes.ResourceDefine = {
         rules: [
           // rules 定义
           { max: 500, message: '最多只能输入500个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      // special for range search
-      title: '创建时间',
-      dataIndex: ['params', 'createTime'],
-      valueType: 'dateRange',
-      hideInForm: true,
-      hideInTable: true,
-      hideInDescriptions: true,
-      group: '',
-      tooltip: '',
-    },
-    {
-      title: '创建时间',
-      key: 'createTime',
-      dataIndex: 'createTime',
-      valueType: 'date',
-      hideInTable: true,
-      hideInSearch: true,
-      hideInForm: true,
-      hideInDescriptions: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
         ],
       },
     },
@@ -845,16 +742,13 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
     // entity级别的action
     {
       title: 'Excel导入',
-      code: 'import',
+      type: 'import',
       linkToUrl: '/api/cdsz/company-contact/import',
     },
     {
       title: 'Excel导出',
-      code: 'export',
+      type: 'export',
       linkToUrl: '/api/cdsz/company-contact/export',
-    },
-    {
-      code: 'create',
     },
   ],
   tableConfig: {
@@ -869,7 +763,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
@@ -890,14 +783,9 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
-      width: 80,
-      align: 'center',
       formItemProps: {
-        //@ts-ignore
-        width: 'lg',
         rules: [
           // rules 定义
           CommonRule.required,
@@ -913,7 +801,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -931,14 +818,9 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
-      width: 100,
-      align: 'center',
       formItemProps: {
-        //@ts-ignore
-        width: 'lg',
         rules: [
           // rules 定义
           { max: 100, message: '最多只能输入100个字符', type: 'string' },
@@ -953,7 +835,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       align: 'center',
@@ -975,7 +856,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -993,7 +873,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1011,7 +890,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '地址',
       tooltip: '',
       formItemProps: {
@@ -1029,7 +907,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '地址',
       tooltip: '',
       formItemProps: {
@@ -1047,7 +924,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '地址',
       tooltip: '',
       width: 160,
@@ -1070,7 +946,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1090,7 +965,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1108,7 +982,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '不超过500字',
       width: 160,
@@ -1120,34 +993,6 @@ const companyContact: BizSchemaTypes.ResourceDefine = {
         rules: [
           // rules 定义
           { max: 500, message: '最多只能输入500个字符', type: 'string' },
-        ],
-      },
-    },
-    {
-      // special for range search
-      title: '创建时间',
-      dataIndex: ['params', 'createTime'],
-      valueType: 'dateRange',
-      hideInForm: true,
-      hideInTable: true,
-      hideInDescriptions: true,
-      group: '',
-      tooltip: '',
-    },
-    {
-      title: '创建时间',
-      key: 'createTime',
-      dataIndex: 'createTime',
-      valueType: 'date',
-      hideInTable: true,
-      hideInSearch: true,
-      hideInForm: true,
-      hideInDescriptions: false,
-      group: '',
-      tooltip: '',
-      formItemProps: {
-        rules: [
-          // rules 定义
         ],
       },
     },
@@ -1163,14 +1008,6 @@ const governmentAffairsLocation: BizSchemaTypes.ResourceDefine = {
   linkToUrl: '/api/cdsz/government-affairs-location',
   actionList: [
     // entity级别的action
-    {
-      title: 'Excel导出',
-      code: 'export',
-      linkToUrl: '/api/cdsz/government-affairs-location/export',
-    },
-    {
-      code: 'create',
-    },
   ],
   tableConfig: {
     // table 定义
@@ -1184,7 +1021,6 @@ const governmentAffairsLocation: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
@@ -1205,7 +1041,6 @@ const governmentAffairsLocation: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1225,7 +1060,6 @@ const governmentAffairsLocation: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1244,7 +1078,6 @@ const governmentAffairsLocation: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '不超过2000字',
       width: 160,
@@ -1267,7 +1100,6 @@ const governmentAffairsLocation: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1286,7 +1118,6 @@ const governmentAffairsLocation: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 160,
@@ -1309,7 +1140,6 @@ const governmentAffairsLocation: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1327,7 +1157,6 @@ const governmentAffairsLocation: BizSchemaTypes.ResourceDefine = {
       hideInTable: true,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '不超过500字',
       width: 160,
@@ -1354,14 +1183,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
   linkToUrl: '/api/cdsz/hotel',
   actionList: [
     // entity级别的action
-    {
-      title: 'Excel导出',
-      code: 'export',
-      linkToUrl: '/api/cdsz/hotel/export',
-    },
-    {
-      code: 'create',
-    },
   ],
   tableConfig: {
     // table 定义
@@ -1375,7 +1196,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
@@ -1396,7 +1216,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1415,7 +1234,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1434,7 +1252,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1453,7 +1270,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1471,7 +1287,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1489,7 +1304,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1508,7 +1322,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1526,7 +1339,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1546,7 +1358,6 @@ const hotel: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '不超过500字',
       width: 160,
@@ -1573,14 +1384,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
   linkToUrl: '/api/cdsz/restaurant',
   actionList: [
     // entity级别的action
-    {
-      title: 'Excel导出',
-      code: 'export',
-      linkToUrl: '/api/cdsz/restaurant/export',
-    },
-    {
-      code: 'create',
-    },
   ],
   tableConfig: {
     // table 定义
@@ -1594,7 +1397,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: true,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 50,
@@ -1615,7 +1417,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1634,7 +1435,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1653,7 +1453,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1672,7 +1471,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1691,7 +1489,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1710,7 +1507,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1730,7 +1526,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: true,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1748,7 +1543,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       formItemProps: {
@@ -1766,7 +1560,6 @@ const restaurant: BizSchemaTypes.ResourceDefine = {
       hideInTable: false,
       hideInSearch: false,
       hideInForm: false,
-      hideInDescriptions: false,
       group: '',
       tooltip: '',
       width: 160,

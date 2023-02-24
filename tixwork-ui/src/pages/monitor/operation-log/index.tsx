@@ -129,10 +129,9 @@ const columns: ProColumnType<any, EleValueType>[] = [
 
 export default () => {
   return (
-    <BasePage>
+    <BasePage title="操作记录">
       <EleTableList
         resource={ApiConfig.operationLog}
-        title="通知公告"
         columns={columns}
         options={false}
         toolBarRender={false}

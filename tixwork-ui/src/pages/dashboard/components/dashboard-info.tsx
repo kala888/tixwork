@@ -1,4 +1,4 @@
-import logo from '@/assets/logo.png';
+import logo from '@/assets/logo.svg';
 import useProfile from '@/services/use-profile';
 import { ProCard } from '@ant-design/pro-components';
 import { Avatar } from 'antd';

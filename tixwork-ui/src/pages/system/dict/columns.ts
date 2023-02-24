@@ -77,7 +77,7 @@ export const columns: ProColumnType<API.Dict, EleValueType>[] = [
     title: '数据级别',
     dataIndex: 'dataScope',
     valueType: 'RemoteEnum',
-    initialValue: 'PUBLIC', // 自定义搜索的默认值
+    // initialValue: 'PUBLIC', // 自定义搜索的默认值
     formItemProps: {
       rules: [CommonRule.required],
     },

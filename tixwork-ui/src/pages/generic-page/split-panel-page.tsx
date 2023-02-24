@@ -31,7 +31,7 @@ export default () => {
   }
 
   return (
-    <BasePage className={styles.splitPanelPage}>
+    <BasePage title={`${schema.label}`} brief={schema.brief} className={styles.splitPanelPage}>
       <SplitCard leftWidth={380}>
         <EleTableList
           resource={schema.linkToUrl}

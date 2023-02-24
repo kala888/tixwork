@@ -38,7 +38,7 @@ const useRemoteOption = (props: RemoteOptionType) => {
   const fetchData = async () => {
     const { data = [] } = await request(url);
     const result = transform(data);
-    console.log('remote option', result);
+    console.log(result);
     return result;
   };
   return useRequest(fetchData, { cacheKey: 'cache-options-' + url });

@@ -51,11 +51,11 @@ const columns: ProColumnType<API.Dept, EleValueType>[] = [
 
 export default () => {
   return (
-    <BasePage>
+    <BasePage title="部门管理">
       <EleTableList<API.Dept>
+        title="部门管理"
         resource={ApiConfig.dept}
         rowKey="id"
-        title="组织结构"
         columns={columns}
         editForm={EditForm}
         search={false}

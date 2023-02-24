@@ -184,7 +184,7 @@ const Login: React.FC = () => {
               <ProFormCheckbox noStyle name="rememberMe">
                 自动登录
               </ProFormCheckbox>
-              <a style={{ float: 'right' }} />
+              <a style={{ float: 'right' }}>忘记密码</a>
             </div>
           </ProForm>
           {/*<Space className={styles.other}>*/}

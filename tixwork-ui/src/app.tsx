@@ -19,6 +19,32 @@ type InitialStateType = {
 };
 
 const loginPath = '/login';
+const appList = [
+  {
+    icon: '/logo.svg',
+    title: '钛安科技',
+    desc: '企业数字化转性领导者',
+    url: 'https://www.tiandtech.com',
+  },
+  {
+    icon: 'http://www.scts-law.com/views/new/assets/images/logo.jpg',
+    title: '韬世律所',
+    desc: '工作中的生活家，生活里的勤勉者',
+    url: 'https://scts-law.com/',
+  },
+  {
+    icon: 'http://www.scts-law.com/views/new/assets/images/logo.jpg',
+    title: '韬世律所',
+    desc: '工作中的生活家，生活里的勤勉者',
+    url: 'https://scts-law.com/',
+  },
+  {
+    icon: '/logo.svg',
+    title: '钛安科技',
+    desc: '企业数字化转性领导者',
+    url: 'https://www.tiandtech.com',
+  },
+];
 
 export const request = requestConfig;
 
@@ -71,6 +97,7 @@ export const layout: RunTimeLayoutConfig = (props) => {
         colorBgMenuItemHover: 'rgba(94, 191, 255,0.2)',
       },
     },
+    appList,
     // waterMarkProps: {
     //   content: `${userName}-${userId}`,
     // },
