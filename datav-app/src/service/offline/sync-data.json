@@ -1,0 +1,213 @@
+{
+  "factory": {
+    "id": "FC000001",
+    "title": "佛山工厂"
+  },
+  "userList": [
+    {
+      "id": "SU000001",
+      "pwd": "24327F1C00D22210298A18D0DB9AA6C4C22DEAC4BEAE7C02E616442CA7764246",
+      "name": "Admin",
+      "employeeId": "User000001",
+      "roleList": [
+        {
+          "id": "111",
+          "title": "主管"
+        }
+      ],
+      "mobile": "18113000602",
+      "currentCarNumber": "无车可用",
+      "currentFactory": "佛山工厂"
+    },
+    {
+      "id": "SU000002",
+      "pwd": "BB5210DAE99659C7164D7DBCFC51FB2D167D0DA372D58EF26A9F8533EEA2967C",
+      "name": "司机大哥",
+      "employeeId": "User000002",
+      "roleList": [
+        {
+          "id": "DRIVER",
+          "title": "司机"
+        }
+      ],
+      "mobile": "13880964614",
+      "currentCarNumber": "川A-5DD21",
+      "currentFactory": "佛山工厂"
+    }
+  ],
+  "planList": [
+    {
+      "id": "P000001",
+      "vehicle": "川A.5DD21",
+      "trip": "1",
+      "planStatus": "PLANNED",
+      "planStatusName": "未配送"
+    },
+    {
+      "id": "P000002",
+      "vehicle": "川A.5DD21",
+      "trip": "2",
+      "planStatus": "PLANNED",
+      "planStatusName": "未配送"
+    },
+    {
+      "id": "P000003",
+      "vehicle": "川A.5DD21",
+      "trip": "3",
+      "planStatus": "PLANNED",
+      "planStatusName": "未配送"
+    },
+    {
+      "id": "P000004",
+      "vehicle": "粤B.332A1",
+      "trip": "1",
+      "planStatus": "PLANNED",
+      "planStatusName": "未配送"
+    },
+    {
+      "id": "P000005",
+      "vehicle": "粤C.988DD",
+      "trip": "1",
+      "planStatus": "PLANNED",
+      "planStatusName": "未配送"
+    }
+  ],
+  "orders": {
+    "D000001": {
+      "id": "D000001",
+      "orderId": "Order000001",
+      "customer": "广州市第一人民医院手术部1001",
+      "customerNo": "CN000001",
+      "planId": "P000001",
+      "vehicle": "粤V-77Y77",
+      "trip": "1",
+      "address": "四川省成都市高新区天府软件园B7-502",
+      "comments": "买10瓶医用氧，请老王配送。别迟到，扣钱",
+      "orderStatus": "PLANNED",
+      "orderStatusName": "待配送",
+      "planStatus": "PLANNED",
+      "planStatusName": "未开始",
+      "orderItems": [
+        {
+          "id": "OI000001",
+          "productId": "PROD000001",
+          "title": "医用氧(99.5%，196L)",
+          "orderedTotal": 5,
+          "planReturnTotal": 4
+        },
+        {
+          "id": "OI000002",
+          "productId": "PROD000002",
+          "title": "混合气(2%O2+N2，40L,150Bar)",
+          "orderedTotal": 3,
+          "planReturnTotal": 2
+        }
+      ],
+      "courierList": [
+        "张三",
+        "李四"
+      ],
+      "notMatchReasonList": [
+        "客户不要",
+        "漏气"
+      ]
+    },
+    "D000002": {
+      "planId": "P000001",
+      "id": "D000002",
+      "orderId": "Order000002",
+      "customer": "成都华西医院",
+      "customerNo": "CN000002",
+      "vehicle": "川V-33F33",
+      "trip": "2",
+      "address": "四川省成都市高新区天府软件园B7-502",
+      "comments": "退瓶子",
+      "orderStatus": "PLANNED",
+      "orderStatusName": "待配送",
+      "planStatus": "PLANNED",
+      "planStatusName": "未开始",
+      "orderItems": [
+        {
+          "id": "OI000001",
+          "productId": "PROD000001",
+          "title": "医用氧(99.5%，196L)",
+          "orderedTotal": 10,
+          "planReturnTotal": 8
+        }
+      ],
+      "courierList": [
+        "王二麻子",
+        "李四"
+      ],
+      "notMatchReasonList": [
+        "客户不要",
+        "漏气"
+      ]
+    }
+  },
+  "cylinders": {
+    "44020000001": {
+      "id": "CY000001",
+      "productId": "PROD000001",
+      "barcode": "44020000001",
+      "title": "医用氧(99.5%，196L)",
+      "status": "full"
+    },
+    "44020000002": {
+      "id": "CY000002",
+      "productId": "PROD000001",
+      "barcode": "44020000002",
+      "title": "医用氧(99.5%，196L)",
+      "status": "full"
+    },
+    "44020000003": {
+      "id": "CY000003",
+      "productId": "PROD000001",
+      "barcode": "44020000003",
+      "title": "医用氧(99.5%，196L)",
+      "status": "full"
+    },
+    "44020000007": {
+      "id": "CY000007",
+      "productId": "PROD000001",
+      "barcode": "44020000007",
+      "title": "医用氧(99.5%，196L)",
+      "status": "empty"
+    },
+    "44020000008": {
+      "id": "CY000008",
+      "productId": "PROD000001",
+      "barcode": "44020000008",
+      "title": "医用氧(99.5%，196L)",
+      "status": "empty"
+    },
+    "44020000009": {
+      "id": "CY000009",
+      "productId": "PROD000001",
+      "barcode": "44020000009",
+      "title": "医用氧(99.5%，196L)",
+      "status": "empty"
+    },
+    "44020000013": {
+      "id": "CY000013",
+      "productId": "PROD000002",
+      "barcode": "44020000013",
+      "title": "混合气(2%O2+N2，40L,150Bar)",
+      "status": "full"
+    },
+    "44020000014": {
+      "id": "CY000014",
+      "productId": "PROD000002",
+      "barcode": "44020000014",
+      "title": "混合气(2%O2+N2，40L,150Bar)",
+      "status": "full"
+    },
+    "44020000015": {
+      "id": "CY000015",
+      "productId": "PROD000002",
+      "barcode": "44020000015",
+      "title": "混合气(2%O2+N2，40L,150Bar)",
+      "status": "empty"
+    }
+  }
+}

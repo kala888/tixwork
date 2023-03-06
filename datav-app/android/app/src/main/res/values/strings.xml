@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">实验大屏</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">mplRsMX_QaKc2JwP_Pssa7ErEL8sqaVLz7gP1</string>
+</resources>
+
+<!--Stage  LttD0YebMMCpO-TIcBR_6Ye8CZurLypR1nN7Q-->
+<!--Production  mplRsMX_QaKc2JwP_Pssa7ErEL8sqaVLz7gP1-->

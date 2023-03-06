@@ -1,0 +1,27 @@
+module.exports = {
+  root: true,
+  extends: '@react-native-community',
+  rules: {
+    'react-native/no-inline-styles': 0,
+    'arrow-parens': 0,
+    'global-require': 0,
+    'import/prefer-default-export': 0,
+    'no-console': 0,
+    'no-mixed-operators': 0,
+    'no-use-before-define': 0,
+    'react/destructuring-assignment': 0,
+    'react/jsx-filename-extension': [1, { 'extensions': [".js", ".jsx",".ts",".tsx"] }],
+    'react/prop-types': 0,
+    'eslint-comments/no-unlimited-disable': 0,
+    'eslint-comments/no-unused-disable': 0,
+    'no-unused-expressions': ['warn', { allowShortCircuit: true, allowTernary: true }],
+    'import/first': 'off',
+    'jsx-quotes': 'off',
+    'react/sort-comp': [0],
+    'no-shadow': 'off',
+    semi: 0,
+    'prettier/prettier': 0,
+    'no-trailing-spaces': 0,
+    'comma-dangle':0
+  },
+}

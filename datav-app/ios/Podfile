@@ -1,0 +1,77 @@
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+platform :ios, '10.0'
+
+target 'rnapp' do
+  config = use_native_modules!
+
+  use_react_native!(:path => config["reactNativePath"])
+
+
+  permissions_path = '../node_modules/react-native-permissions/ios'
+
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+  pod 'Permission-FaceID', :path => "#{permissions_path}/FaceID.podspec"
+  pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways.podspec"
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse.podspec"
+  pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone.podspec"
+  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary.podspec"
+
+  target 'rnappTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+
+  # Enables Flipper.
+  #
+  # Note that if you have use_frameworks! enabled, Flipper will not work and
+  # you should disable these next few lines.
+#  use_flipper!
+#   use_flipper!({ 'Flipper-Folly' => '2.3.0' })
+#   post_install do |installer|
+#     flipper_post_install(installer)
+#   end
+
+#⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄修复iOS 14.5新建RN0.64无法运行⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄
+  def find_and_replace(dir, findstr, replacestr)
+	 Dir[dir].each do |name|
+		 text = File.read(name)
+		 replace = text.gsub(findstr,replacestr)
+		 if text != replace
+		   puts "Fix: " + name
+		   File.open(name, "w") { |file| file.puts replace }
+		   STDOUT.flush
+		 end
+	 end
+	 Dir[dir + '*/'].each(&method(:find_and_replace))
+  end
+
+  post_install do |installer|
+
+   installer.pods_project.targets.each do |target|
+          target.build_configurations.each do |config|
+              config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+                config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+          end
+      end
+
+    flipper_post_install(installer)
+    find_and_replace("Pods/Flipper-Folly/folly/synchronization/DistributedMutex-inl.h",
+    "atomic_notify_one(state)", "folly::atomic_notify_one(state)")
+
+    find_and_replace("Pods/Flipper-Folly/folly/synchronization/DistributedMutex-inl.h",
+    "atomic_wait_until(&state, previous | data, deadline)", "folly::atomic_wait_until(&state, previous | data, deadline)")
+  end
+#⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃修复iOS 14.5新建RN0.64无法运行⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃⌃
+
+end
+
+target 'rnapp-tvOS' do
+  # Pods for rnapp-tvOS
+
+  target 'rnapp-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end
