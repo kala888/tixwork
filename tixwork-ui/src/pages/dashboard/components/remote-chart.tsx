@@ -5,12 +5,14 @@ import SlotNotSupport from '@/pages/dashboard/components/slot-not-support';
 import SlotTable from '@/pages/dashboard/components/slot-table';
 import { useRequest } from 'ahooks';
 import ReactECharts from 'echarts-for-react';
+import _ from 'lodash';
 import { useEffect, useRef } from 'react';
 
 type RemoteChartType = {
   title?: any;
   linkToUrl?: any;
   interval?: any;
+  options?: any;
 };
 export type ChartSlotType = {
   title: string;
@@ -19,7 +21,7 @@ export type ChartSlotType = {
   type?: 'TABLE' | 'CARD' | 'BAR' | 'PIE' | 'ROSE' | 'LINE' | 'NOT_SUPPORT';
 };
 export default function RemoteChart(props: RemoteChartType) {
-  const { title, linkToUrl, interval } = props;
+  const { title, linkToUrl, interval, ...rest } = props;
   const fetch = async () => await Q.get<ChartSlotType>(linkToUrl);
   const resp = useRequest(fetch, {
     pollingInterval: interval,
@@ -35,15 +37,15 @@ export default function RemoteChart(props: RemoteChartType) {
     return null;
   }
   if (slot?.type === 'TABLE') {
-    return <SlotTable {...slot} />;
+    return <SlotTable {...rest} {...slot} />;
   }
   if (slot?.type === 'CARD') {
-    return <SlotCard {...slot} />;
+    return <SlotCard {...rest} {...slot} />;
   }
   if (slot?.type === 'NOT_SUPPORT') {
     return <SlotNotSupport />;
   }
-  // @ts-ignore
-  const option = getChartOption({ title, ...slot });
+  const chatOption = getChartOption({ ...rest, ...slot });
+  const option = _.merge(chatOption, props?.options);
   return <ReactECharts ref={ref} option={option} style={{ height: '100%', width: '100%' }} />;
 }

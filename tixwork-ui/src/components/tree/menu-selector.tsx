@@ -11,7 +11,7 @@ function TreePicker(props) {
   const [treeData, setTreeData] = useState([]);
 
   useAsyncEffect(async function* () {
-    const resp = await Q.Get(ApiConfig.getMenuTree);
+    const resp = await Q.get(ApiConfig.getMenuTree);
     yield;
     setTreeData(resp.data);
   }, []);

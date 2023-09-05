@@ -4,7 +4,8 @@ import { Avatar, Space } from 'antd';
 import _ from 'lodash';
 
 const render = _.memoize((text = '', props) => {
-  const { avatar, userName } = props.record;
+  const userName = _.get(props, 'record.userName');
+  const avatar = _.get(props, 'record.avatar', '');
   const txtColorIdx = userName ? userName.length : text.length;
   const bgColor = colors.colorList[txtColorIdx];
   const style = { borderRadius: 4, color: '#fff', backgroundColor: bgColor };

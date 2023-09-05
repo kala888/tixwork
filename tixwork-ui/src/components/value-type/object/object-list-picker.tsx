@@ -1,22 +1,22 @@
-import { parseToArray } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProFormItem } from '@ant-design/pro-components';
-import { Button } from 'antd';
+import { Typography } from 'antd';
 import _ from 'lodash';
 import { ObjectListTable } from './object-list-table';
 import type { ObjectPickerType } from './object-picker';
 import type { ObjectPickerFieldType } from './object-picker-field';
-import { ObjectPickerField } from './object-picker-field';
+import ObjectPickerField from './object-picker-field';
 import styles from './styles.less';
 
 const LinkTarget = (props) => {
   const { onClick, disabled } = props;
   return (
     <div className={styles.linkTarget}>
-      <Button type={'link'} onClick={onClick} disabled={disabled}>
+      <Typography.Link onClick={onClick} disabled={disabled}>
         <PlusOutlined />
         添加
-      </Button>
+      </Typography.Link>
     </div>
   );
 };
@@ -24,12 +24,12 @@ const LinkTarget = (props) => {
 const ObjectListPickerField = (props: ObjectPickerFieldType) => {
   const { onChange, allDuplicates = false, value = [] } = props;
   const handleAdd = (record, all) => {
-    const result = parseToArray(value);
+    const result = ObjectUtils.parseToArray(value);
     if (record && (allDuplicates || !_.find(result, record))) {
       result.push(record);
     }
     if (onChange) {
-      onChange(all || result);
+      onChange(_.clone(all || result));
     }
   };
   return (
@@ -39,8 +39,7 @@ const ObjectListPickerField = (props: ObjectPickerFieldType) => {
   );
 };
 export default function ObjectListPicker(props: ObjectPickerType) {
-  const { label, value, fields, linkToUrl, objectType, width, fieldProps, proFieldKey, ...rest } =
-    props;
+  const { label, value, fields, linkToUrl, objectType, width, fieldProps, allDuplicates, proFieldKey, ...rest } = props;
 
   return (
     <ProFormItem label={label} {...rest} className="customized-form-item">

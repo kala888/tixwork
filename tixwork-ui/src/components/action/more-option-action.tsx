@@ -1,10 +1,11 @@
+import { disableClickEventBubbling } from '@/utils';
 import type { ActionLike } from '@/utils/nice-router-types';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, Popconfirm, Typography } from 'antd';
 
 export const MoreOptionAction = ({ menus }) => {
-  if (isEmpty(menus)) {
+  if (ObjectUtils.isEmpty(menus)) {
     return null;
   }
   const items = menus.map((it, idx) => ({ label: it, key: 'item' + idx + '_' + it }));
@@ -32,9 +33,10 @@ export const OptionAction = (props: ActionLike) => {
         cancelText="放弃"
         overlayStyle={{ minWidth: 200 }}
         onConfirm={onClick}
+        onCancel={disableClickEventBubbling}
         disabled={disabled}
       >
-        <Typography.Link type="danger" disabled={disabled}>
+        <Typography.Link type="danger" disabled={disabled} onClick={disableClickEventBubbling}>
           {title}
         </Typography.Link>
       </Popconfirm>

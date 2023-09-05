@@ -1,5 +1,5 @@
+import ProMobile from '@/components/value-type/mobile/pro-mobile';
 import { MobileTwoTone } from '@ant-design/icons';
-import { ProFormText } from '@ant-design/pro-components';
 import Paragraph from 'antd/es/typography/Paragraph';
 
 const formatMobile = (mobile: string) => {
@@ -16,15 +16,12 @@ const formatMobile = (mobile: string) => {
 
 const MobileValueType = {
   render: (mobile) => (
-    <Paragraph
-      copyable={{ icon: [<MobileTwoTone key="copy" />], text: mobile }}
-      style={{ marginBottom: 0 }}
-    >
+    <Paragraph copyable={{ icon: [<MobileTwoTone key="copy" />], text: mobile }} style={{ marginBottom: 0 }}>
       {formatMobile(mobile)}
     </Paragraph>
   ),
   renderFormItem: (__, props) => (
-    <ProFormText
+    <ProMobile
       formItemProps={{ className: 'customized-form-item' }}
       {...props}
       fieldProps={{ maxLength: 11, ...props.fieldProps }}

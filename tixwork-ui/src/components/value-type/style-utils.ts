@@ -1,7 +1,8 @@
 import type { ProFormFieldProps } from '@ant-design/pro-components';
+import { theme } from 'antd';
 import _ from 'lodash';
-import defaultSettings from '../../../config/defaultSettings';
-
+const { defaultAlgorithm, defaultSeed } = theme;
+const mapToken = defaultAlgorithm(defaultSeed);
 export type EleSizeType = ProFormFieldProps['width'];
 
 const Size: Record<any, any> = {
@@ -13,8 +14,7 @@ const Size: Record<any, any> = {
 };
 
 const colorValues = {
-  primaryColor: defaultSettings.colorPrimary,
-
+  primaryColor: mapToken.colorPrimary,
   red: '#f23030',
   orange: '#F38709',
   golden: '#ab956d',

@@ -3,11 +3,17 @@ import ProStatus from '@/components/pro-status';
 import RemoteCascade from '@/components/form/remote/remote-cascade';
 import RemoteRadio from '@/components/form/remote/remote-radio';
 import RemoteSelect from '@/components/form/remote/remote-select';
+import { renderObject } from '@/components/value-type/object/object-link';
 import useRemoteOption from '@/services/use-remote-option';
 
-const RemoteOptionStatus = (props) => {
+export const RemoteOptionStatus = (props) => {
   const { data } = useRemoteOption(props);
   return <ProStatus options={data} {...props} />;
+};
+
+export const RemoteSelectValueType = {
+  render: renderObject,
+  renderFormItem: (__, props) => <RemoteSelect {...props} {...props.fieldProps} />,
 };
 
 export const RemoteEnumValueType = {

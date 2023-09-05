@@ -1,52 +1,121 @@
-import { useVisible } from '@/services/use-service';
+import { useOpen } from '@/services/use-service';
 import { DoubleLeftOutlined, DoubleRightOutlined } from '@ant-design/icons';
 import { Layout, Spin } from 'antd';
 import classNames from 'classnames';
+import React from 'react';
 import styles from './styles.less';
 
 type SplitCardType = {
-  renderLeft?: () => JSX.Element;
   children?: any;
-  style?: any;
   loading?: boolean;
-  leftWidth?: number | string;
-  [key: string]: any;
+  sliderWidth?: number | string;
+  direction?: 'left' | 'right';
+  style?: any;
+  collapsed?: boolean;
 };
 
-export default function SplitCard(props: SplitCardType) {
-  const { visible, toggle } = useVisible();
-  const { renderLeft, children, loading = false, style, leftWidth = 200, ...rest } = props;
+type WrapByAsContentType = {
+  loading: boolean;
+  className: any;
+  children: any;
+};
+const WrapByAsContent = (props: WrapByAsContentType) => {
+  const { className, loading } = props;
+  const cls = classNames(styles.splitCardContent, className);
+  return (
+    <Layout.Content className={cls}>
+      <Spin spinning={loading}>{props.children}</Spin>
+    </Layout.Content>
+  );
+};
 
-  const left = renderLeft ? renderLeft() : children[0];
-  const right = renderLeft ? children : children[1];
+type WrapAsSliderType = {
+  visible: boolean;
+  collapseToLeft: boolean;
+  width: number | string;
+  className: any;
+  children: any;
+  toggle: () => void;
+};
+const WrapAsSlider = (props: WrapAsSliderType) => {
+  const cls = classNames(styles.splitCardSlider, props.className);
+  const { visible, collapseToLeft, width, toggle } = props;
+  return (
+    <Layout.Sider
+      collapsed={visible}
+      collapsedWidth={0}
+      theme="light"
+      collapsible
+      trigger={null}
+      zeroWidthTriggerStyle={{ padding: 0 }}
+      className={cls}
+      width={width}
+    >
+      {props.children}
+      <div className={styles.trigger} onClick={toggle}>
+        {visible === collapseToLeft ? <DoubleRightOutlined /> : <DoubleLeftOutlined />}
+      </div>
+    </Layout.Sider>
+  );
+};
+
+function SplitCard(props: SplitCardType) {
+  const { collapsed, children, loading = false, sliderWidth = 250, direction = 'left', style } = props;
+  const { open, toggle } = useOpen(collapsed);
+  if (React.Children.count(children) <= 1) {
+    return children;
+  }
+
+  const collapseToLeft = direction === 'left';
 
   // width={200}
-  const rootClass = classNames('split-card', styles.splitCard, style, {
-    [styles.expanded]: visible,
+  const rootClass = classNames('split-card', styles.splitCard, {
+    [styles.collapseToRight]: !collapseToLeft,
+    [styles.expanded]: open,
   });
 
+  const left = children[0];
+  const right = React.Children.map(children, (it, idx) => idx > 0 && it);
+  if (collapseToLeft) {
+    return (
+      <div className={rootClass} style={style}>
+        <Layout>
+          <WrapAsSlider
+            className={styles.left}
+            width={sliderWidth}
+            collapseToLeft={collapseToLeft}
+            visible={open}
+            toggle={toggle}
+          >
+            {left}
+          </WrapAsSlider>
+          <WrapByAsContent loading={loading} className={styles.right}>
+            {right}
+          </WrapByAsContent>
+        </Layout>
+      </div>
+    );
+  }
+
   return (
-    <div className={rootClass} {...rest}>
+    <div className={rootClass} style={style}>
       <Layout>
-        <Layout.Sider
-          collapsed={visible}
-          collapsedWidth={0}
-          width={leftWidth}
-          theme="light"
-          collapsible
-          trigger={null}
-          zeroWidthTriggerStyle={{ padding: 0 }}
-          className={styles.left}
-        >
+        <WrapByAsContent loading={loading} className={styles.left}>
           {left}
-          <div className={styles.trigger} onClick={toggle}>
-            {visible ? <DoubleRightOutlined /> : <DoubleLeftOutlined />}
-          </div>
-        </Layout.Sider>
-        <Layout.Content className={styles.right}>
-          <Spin spinning={loading}>{right}</Spin>
-        </Layout.Content>
+        </WrapByAsContent>
+        <WrapAsSlider
+          className={styles.right}
+          width={sliderWidth}
+          collapseToLeft={collapseToLeft}
+          visible={open}
+          toggle={toggle}
+        >
+          {right}
+        </WrapAsSlider>
       </Layout>
     </div>
   );
 }
+
+SplitCard.isCard = true;
+export default SplitCard;

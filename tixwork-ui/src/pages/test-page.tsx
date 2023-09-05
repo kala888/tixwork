@@ -1,41 +1,51 @@
-import RemoteCascade from '@/components/form/remote/remote-cascade';
 import EleProProvider from '@/components/value-type/ele-pro-provider';
-import { BetaSchemaForm, ProForm } from '@ant-design/pro-components';
-import { message } from 'antd';
+import { getDisplayName } from '@/utils';
+import ObjectUtils from '@/utils/object-utils';
+import { BetaSchemaForm, ProForm, ProTable } from '@ant-design/pro-components';
+import { useState } from 'react';
 
+const transform = (items) => {
+  if (ObjectUtils.isEmpty(items)) {
+    return [];
+  }
+  return items.map((it) => {
+    const result: any = {
+      ...it,
+      label: getDisplayName(it),
+      value: it.id,
+    };
+    if (ObjectUtils.isNotEmpty(it.children)) {
+      result.children = transform(it.children);
+    }
+    return result;
+  });
+};
+
+const columns = [
+  {
+    title: '状态',
+    dataIndex: 'list',
+    valueType: 'TextList',
+    hideInSearch: true,
+  },
+];
 export default () => {
+  const [state, setState] = useState<any>({ list: ['111', '222'] });
   return (
     <EleProProvider>
+      <ProTable columns={columns} dataSource={[state]} />
       <ProForm
         onFinish={async (values) => {
-          message.success('提交成功' + JSON.stringify(values));
+          console.log('....valeus', values);
+          setState(values);
         }}
+        initialValues={state}
+        labelWrap={true}
+        labelCol={{ span: 4 }}
+        wrapperCol={{ span: 20 }}
+        layout="horizontal"
       >
-        <BetaSchemaForm
-          layoutType="Embed"
-          columns={[
-            {
-              title: '所在城市',
-              valueType: 'RemoteCascade',
-              dataIndex: 'addressProvinceCity',
-              fieldProps: {
-                width: 'md',
-                names: ['addressProvince', 'addressCity'],
-                linkToUrl: '/api/data/cities',
-                placeholder: '请选择所22在城市',
-              },
-            },
-          ]}
-        />
-
-        <RemoteCascade
-          linkToUrl={'/api/data/cities'}
-          width="md"
-          name="data2"
-          label="合同生效时间"
-          names={['addressProvince2', 'addressCity2']}
-          placeholder="请选择所2在城市"
-        />
+        <BetaSchemaForm layoutType="Embed" columns={columns} />
       </ProForm>
     </EleProProvider>
   );

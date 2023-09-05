@@ -1,10 +1,14 @@
+import Q from '@/http/http-request/q';
+
 const AuthHeaderInterceptor = (config) => {
   const { headers = {} } = config;
   return {
     ...config,
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      ...Q.authHeader(),
       ...headers,
+      // Authorization: `Bearer ${localStorage.getItem('token')}`,
+      // clientid: Config.clientid,
     },
   };
 };

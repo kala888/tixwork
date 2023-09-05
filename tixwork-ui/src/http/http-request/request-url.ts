@@ -26,7 +26,6 @@ function buildUrl(uri: any, params = {}, data = {}) {
   }
 
   const urlObj = new URL(pathname, FAKE_HOST);
-  console.log('dddd2', urlObj, uri);
   const prefix = urlObj.origin === FAKE_HOST ? '' : urlObj.origin;
   return {
     url: prefix + urlObj.pathname + urlObj.search,

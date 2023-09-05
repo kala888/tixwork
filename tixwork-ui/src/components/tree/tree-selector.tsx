@@ -1,6 +1,5 @@
 import ActionIcon from '@/components/elements/action-icon';
-import { useVisible } from '@/services/use-service';
-import { isNotEmpty } from '@/utils/object-utils';
+import { useOpen } from '@/services/use-service';
 import type { ProFormFieldProps } from '@ant-design/pro-components';
 import { ProCard, ProFormItem } from '@ant-design/pro-components';
 import { List, Modal, Space, Tag } from 'antd';
@@ -12,6 +11,8 @@ import lodash from 'lodash';
 import ClickableItem from '@/components/form/fields/clickable-item';
 import type { EleTreeNodeType } from '@/components/tree/ele-tree';
 import EleTree from '@/components/tree/ele-tree';
+import { useGet } from '@/http/use-http';
+import ObjectUtils from '@/utils/object-utils';
 import styles from './styles.less';
 
 const _ = deepdash(lodash);
@@ -27,8 +28,26 @@ type TreePanelType = {
   dataSource: EleTreeNodeType[];
 };
 
+function getValue(dataSource: any[], value) {
+  if (ObjectUtils.isEmpty(value)) {
+    return null;
+  }
+  const item = _.findDeep(
+    dataSource,
+    (it) => {
+      if (Array.isArray(value)) {
+        return _.includes(value, it.id);
+      }
+      return it?.id === value;
+    },
+    // @ts-ignore
+    { childrenPath: 'children' },
+  );
+  return item?.value;
+}
+
 const TreePanel = (props: TreePanelType) => {
-  const { visible, show, close } = useVisible();
+  const { open, show, close } = useOpen();
   const [selected, setSelected] = useState<any>();
   const {
     title = '选择',
@@ -40,18 +59,7 @@ const TreePanel = (props: TreePanelType) => {
     disabled,
     dataSource = [],
   } = props;
-
-  const theItem = _.findDeep(
-    dataSource,
-    (it) => {
-      if (Array.isArray(value)) {
-        return _.includes(value, it.id);
-      }
-      return it?.id === value;
-    },
-    // @ts-ignore
-    { childrenPath: 'children' },
-  );
+  const theValue = getValue(dataSource, value);
 
   const handleConfirm = () => {
     close();
@@ -61,45 +69,38 @@ const TreePanel = (props: TreePanelType) => {
   };
 
   const handleSelected = (key, node) => {
-    setSelected(isNotEmpty(key) ? node : {});
+    setSelected(ObjectUtils.isNotEmpty(key) ? node : {});
     show();
   };
   const handleClear = () => {
     if (onChange) {
-      onChange({} as any);
+      onChange('' as any);
     }
   };
 
-  const list = isNotEmpty(selected) ? [selected] : [];
-
-  let theValue = theItem?.value?.title || value;
-  if (isNotEmpty(theValue) && !disabled) {
-    theValue = (
-      <Tag closable onClose={handleClear} color={'cyan'}>
-        {theValue}
-      </Tag>
-    );
-  }
+  const list = ObjectUtils.isNotEmpty(selected) ? [selected] : [];
 
   return (
     <>
       <ClickableItem
+        onClear={handleClear}
         width={width}
         disabled={disabled}
         placeholder={placeholder}
         className={styles.treeSelector}
         onClick={show}
         value={theValue}
+        itemRender={(displayName, item) => (
+          <Tag key={displayName + '_' + item?.id} closable onClose={handleClear} color={'cyan'}>
+            {displayName}
+          </Tag>
+        )}
         suffix={<ActionIcon icon={icon} />}
       />
-      <Modal open={visible} onCancel={close} okText="确定" onOk={handleConfirm}>
+      <Modal open={open} onCancel={close} okText="确定" onOk={handleConfirm}>
         <ProCard title={title} split="vertical" bordered headerBordered style={{ marginTop: 20 }}>
           <ProCard colSpan="50%">
-            <EleTree
-              onSelect={handleSelected}
-              dataSource={dataSource}
-              searchPlaceholder="输入并回车搜索"
-            />
+            <EleTree onSelect={handleSelected} dataSource={dataSource} searchPlaceholder="输入并回车搜索" />
           </ProCard>
           <ProCard>
             <List
@@ -125,17 +126,12 @@ const TreePanel = (props: TreePanelType) => {
  * 自定义ProComponent 例子, TreePanel展开了fieldProps，也可以不展开
  */
 export default function TreeSelector(props) {
-  const { dataSource, title, icon, width = 'sm', label, ...rest } = props;
+  const { rules, linkToUrl, name, title, icon, label, fieldProps, ...rest } = props;
+  const { data } = useGet(linkToUrl);
+
   return (
-    <ProFormItem label={label} {...rest}>
-      <TreePanel
-        dataSource={dataSource}
-        title={title || icon}
-        icon={icon}
-        width={width}
-        {...rest}
-        {...rest.fieldProps}
-      />
+    <ProFormItem label={label} name={name} rules={rules}>
+      <TreePanel dataSource={data} title={title || icon} icon={icon} {...rest} {...fieldProps} />
     </ProFormItem>
   );
 }

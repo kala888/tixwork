@@ -1,8 +1,8 @@
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import _ from 'lodash';
 
 const toTree = (list, idKey = 'id', parentKey = 'parentId') => {
-  if (isEmpty(list) || !Array.isArray(list)) {
+  if (ObjectUtils.isEmpty(list) || !Array.isArray(list)) {
     return [];
   }
 
@@ -16,7 +16,7 @@ const toTree = (list, idKey = 'id', parentKey = 'parentId') => {
   };
 
   _.each(parents, (children, parentId) => {
-    if (isNotEmpty(children)) {
+    if (ObjectUtils.isNotEmpty(children)) {
       const item: any = _.get(items, parentId);
       if (!item) {
         root.children = _.concat(root.children, children);
@@ -25,7 +25,6 @@ const toTree = (list, idKey = 'id', parentKey = 'parentId') => {
       }
     }
   });
-  console.log('rootrootroot', root);
   return root.children;
 };
 

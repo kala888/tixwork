@@ -110,8 +110,9 @@ const getSmartValueEnum = (options: any[] = []) => {
   return valueEnum;
 };
 
-export default function Index(props) {
-  const valueEnum = getSmartValueEnum(props.options);
+export default function ProStatus(props) {
+  const { options = [] } = props;
+  const valueEnum = getSmartValueEnum(options);
   const rootCls = classNames(styles.proStatus, 'pro-status');
   return (
     <span className={rootCls}>

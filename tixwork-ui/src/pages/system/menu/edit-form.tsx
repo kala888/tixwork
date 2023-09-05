@@ -1,5 +1,5 @@
-import BaseForm from '@/components/form/base-form';
 import EleStatus from '@/components/form/fields/ele-status';
+import ProEditForm from '@/components/form/pro-edit-form';
 import RemoteRadio from '@/components/form/remote/remote-radio';
 import RemoteSelect from '@/components/form/remote/remote-select';
 import MenuSelector from '@/components/tree/menu-selector';
@@ -12,8 +12,9 @@ import {
   ProFormTextArea,
 } from '@ant-design/pro-components';
 
+const initialValues = { status: '0', visible: 'SHOW', sortOrder: 10, menuType: 'MENU' };
 const EditForm = (props) => (
-  <BaseForm {...props} title="菜单信息" size={'large'}>
+  <ProEditForm {...props} title="菜单信息" size={'large'} initialValues={initialValues}>
     <ProFormGroup>
       <MenuSelector label="上级菜单" width="sm" name="parentId" rules={[CommonRule.required]} />
 
@@ -33,8 +34,7 @@ const EditForm = (props) => (
       <ProFormDependency name={['menuType']}>
         {({ menuType }) => {
           // 目录类型，不需要地权限标识
-          const params =
-            menuType === 'FOLDER' ? { disabled: true } : { rules: [CommonRule.required] };
+          const params = menuType === 'FOLDER' ? { disabled: true } : { rules: [CommonRule.required] };
           return (
             <ProFormGroup>
               <ProFormText label="权限标识" name="perms" width="sm" {...params} />
@@ -49,16 +49,11 @@ const EditForm = (props) => (
       <ProFormDigit label="排序" name="sortOrder" width="sm" rules={[CommonRule.required]} />
     </ProFormGroup>
     <ProFormGroup>
-      <RemoteRadio
-        label="是否隐藏"
-        name="visible"
-        types="VisibleType"
-        rules={[CommonRule.required]}
-      />
+      <RemoteRadio label="是否隐藏" name="visible" types="VisibleType" rules={[CommonRule.required]} />
       <EleStatus />
     </ProFormGroup>
     <ProFormTextArea label="备注" name="remark" />
-  </BaseForm>
+  </ProEditForm>
 );
 
 export default EditForm;

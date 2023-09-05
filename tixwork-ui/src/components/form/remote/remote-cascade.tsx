@@ -1,11 +1,10 @@
 import type { RemoteOptionType } from '@/services/use-remote-option';
 import useRemoteOption from '@/services/use-remote-option';
 import type { ProFormFieldProps } from '@ant-design/pro-components';
-import type { CascaderProps } from 'antd';
-import React from 'react';
-// ProFormCascader 这里有bug,不要导入ProForm https://github.com/ant-design/pro-components/issues/6290
 import { ProFormCascader } from '@ant-design/pro-components';
+import type { CascaderProps } from 'antd';
 import _ from 'lodash';
+import React from 'react';
 
 type RemoteCascadeType = {
   name: React.Key;
@@ -18,11 +17,11 @@ type RemoteCascadeType = {
 const RemoteCascade = (props: RemoteCascadeType) => {
   const { names = [], joinBy = '-', linkToUrl, fieldProps, ...rest } = props;
   const { data } = useRemoteOption({ linkToUrl });
+  const name = (props?.name || props?.id) as any;
 
-  //有bug。 schema 定义使用时，未触发https://github.com/ant-design/pro-components/issues/6291
+  // schema 定义使用时，未触发https://github.com/ant-design/pro-components/issues/6291
+  // 解决方案就是要传递name=props?.name || props?.id到ProComponent
   const handleTransform = (values) => {
-    // @ts-ignore
-    const name: any = props?.name || props?.dataIndex || props?.key;
     const result = { [name]: values };
     names.forEach((subName, idx) => {
       result[subName] = values![idx];
@@ -40,6 +39,7 @@ const RemoteCascade = (props: RemoteCascadeType) => {
         ...fieldParams,
       }}
       transform={handleTransform}
+      name={name}
     />
   );
 };

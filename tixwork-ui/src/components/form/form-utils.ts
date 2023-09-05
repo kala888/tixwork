@@ -18,23 +18,26 @@ function smartLayout(props) {
   // }
   if (columns.length > 10 || size === 'large') {
     const layout = props.layout || 'vertical';
-    const popupWidth =
-      layout === 'horizontal' ? StyleUtils.getSize(3) + 180 : StyleUtils.getSize(3);
+    const popupWidth = layout === 'horizontal' ? StyleUtils.getSize(3) + 180 : StyleUtils.getSize(3);
     return {
-      labelWrap: true,
+      // labelWrap: true,
       popupWidth,
       defaultItemWidth: 'sm',
       layout,
     };
   }
   const layout = props.layout || 'horizontal';
-  const popupWidth = StyleUtils.getSize(2);
+  const popupWidth = StyleUtils.getSize(2) + 80;
   return {
     popupWidth,
     defaultItemWidth: 'xl',
-    labelWrap: true, // todo test
-    labelCol: { span: 4 },
-    wrapperCol: { span: 20 },
+    labelWrap: true,
+    labelCol: { span: 5 },
+    wrapperCol: { span: 19 },
+    grid: true,
+    rowProps: {
+      gutter: [16, 16],
+    } as any,
     layout,
   };
 }
@@ -46,21 +49,23 @@ const groupColumns = (props) => {
   let group: any = {
     title: 'this_is_a_fake_group',
   };
-  columns.forEach((it) => {
-    if (it.group !== group.title) {
-      group = {
-        valueType: 'group',
-        title: it.group,
-        columns: [],
-      };
-      result.push(group);
-    }
-    group.columns.push({
-      ...it,
-      width: it.formItemProps?.width || it.width || defaultItemWidth,
+  columns
+    .filter((it) => !it.hideInForm)
+    .forEach((it) => {
+      const groupName = it.group === 'default' ? '' : it.group;
+      if (groupName !== group.title) {
+        group = {
+          valueType: 'group',
+          title: groupName,
+          columns: [],
+        };
+        result.push(group);
+      }
+      group.columns.push({
+        ...it,
+        width: it.formItemProps?.width || it.width || defaultItemWidth,
+      });
     });
-  });
-  console.log('result', result);
   return result;
 };
 

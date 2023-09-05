@@ -149,22 +149,8 @@ export default () => {
         emptyText="你已查看所有通知"
         showViewMore
       />
-      <NoticeIcon.Tab
-        tabKey="message"
-        count={2}
-        list={list}
-        title="消息"
-        emptyText="您已读完所有消息"
-        showViewMore
-      />
-      <NoticeIcon.Tab
-        tabKey="event"
-        title="待办"
-        emptyText="你已完成所有待办"
-        count={2}
-        list={list}
-        showViewMore
-      />
+      <NoticeIcon.Tab tabKey="message" count={2} list={list} title="消息" emptyText="您已读完所有消息" showViewMore />
+      <NoticeIcon.Tab tabKey="event" title="待办" emptyText="你已完成所有待办" count={2} list={list} showViewMore />
     </NoticeIcon>
   );
 };
@@ -223,7 +209,7 @@ export interface NoticeIconData {
 
 ## RightContent
 
-RightContent 是以上几个组件的组合，同时新建了 plugins 的 `SelectLang` 插件。
+RightContent 是以上几个组件的组合，同时创建了 plugins 的 `SelectLang` 插件。
 
 ```tsx | pure
 <Space>

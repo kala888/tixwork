@@ -1,16 +1,17 @@
-import EleTableList from '@/components/ele-table-list/ele-table-list';
 import BasePage from '@/components/layout/base-page';
+import TableList from '@/components/table-list';
 import TreeExpandIcon from '@/components/tree/tree-expand-icon';
 import type { EleValueType } from '@/components/value-type';
 import CommonColumn from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
+import type { API } from '@/http/api-types';
 import type { ProColumnType } from '@ant-design/pro-components';
 import EditForm from './edit-form';
 
 const columns: ProColumnType<API.Dept, EleValueType>[] = [
   {
     title: '部门名称',
-    dataIndex: 'name',
+    dataIndex: 'deptName',
     valueType: 'IconText',
   },
   {
@@ -27,17 +28,16 @@ const columns: ProColumnType<API.Dept, EleValueType>[] = [
   },
   {
     title: '联系电话',
-    dataIndex: 'phone',
+    dataIndex: 'mobile',
     hideInSearch: true,
     align: 'center',
   },
-  {
-    title: '邮箱',
-    dataIndex: 'email',
-    hideInSearch: true,
-    align: 'center',
-  },
-
+  // {
+  //   title: '邮箱',
+  //   dataIndex: 'email',
+  //   hideInSearch: true,
+  //   align: 'center',
+  // },
   {
     title: '排序',
     dataIndex: 'sortOrder',
@@ -51,8 +51,8 @@ const columns: ProColumnType<API.Dept, EleValueType>[] = [
 
 export default () => {
   return (
-    <BasePage title="部门管理">
-      <EleTableList<API.Dept>
+    <BasePage>
+      <TableList<API.Dept>
         title="部门管理"
         resource={ApiConfig.dept}
         rowKey="id"

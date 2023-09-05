@@ -1,4 +1,4 @@
-import BizSchema from '@/biz-model/biz-schema';
+import BizSchema from '@/biz-models/biz-schema';
 import { DefaultFooter } from '@ant-design/pro-components';
 
 export default function LoginFooter() {
@@ -8,7 +8,7 @@ export default function LoginFooter() {
   const links = [
     {
       key: 'beian',
-      title: '粤ICP备2022135551号',
+      title: '蜀ICP备----号',
       href: 'https://beian.miit.gov.cn/',
       blankTarget: true,
     },

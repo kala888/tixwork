@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* globals workbox */
 workbox.core.setCacheNameDetails({
-  prefix: 'antd-pro',
+  prefix: 'tixwork-ui',
   suffix: 'v5',
 });
 // Control all opened tabs ASAP

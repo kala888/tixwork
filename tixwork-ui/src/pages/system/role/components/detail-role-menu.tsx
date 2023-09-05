@@ -1,13 +1,13 @@
 import ProTree from '@/components/pro-tree';
 import ApiConfig from '@/http/api-config';
+import type { API } from '@/http/api-types';
 import Q from '@/http/http-request/q';
 import { useLoading } from '@/services/use-service';
 import { ProCard } from '@ant-design/pro-components';
 import { useAsyncEffect } from 'ahooks';
-import { Button, message } from 'antd';
+import { App, Button } from 'antd';
 import _ from 'lodash';
 import React, { useState } from 'react';
-import styles from './styles.less';
 
 type RootMenuType = {
   id: React.Key;
@@ -15,7 +15,21 @@ type RootMenuType = {
   checkedList: React.Key[];
 };
 
+const getCheckedList = (menu: API.Menu, checkedList: React.Key[]) => {
+  const list: any[] = [];
+  if (checkedList.includes(menu.id)) {
+    list.push(menu.id);
+  }
+  if (menu.children) {
+    menu.children.forEach((it) => {
+      list.push(...getCheckedList(it, checkedList));
+    });
+  }
+  return list;
+};
+
 export default function DetailRoleMenu(props) {
+  const { message } = App.useApp();
   const { hideLoading, showLoading, loading } = useLoading();
   const [menuState, setMenuState] = useState<Record<React.Key, RootMenuType>>({});
 
@@ -36,7 +50,7 @@ export default function DetailRoleMenu(props) {
         state[it.id] = {
           id: it.id,
           menu: it,
-          checkedList,
+          checkedList: getCheckedList(it, checkedList),
         };
       });
       setMenuState(state);
@@ -49,10 +63,10 @@ export default function DetailRoleMenu(props) {
     console.log('update role-menu', role, menuIds);
     showLoading();
     try {
-      await Q.put(ApiConfig.changeRoleMenu, { roleId: role.id, menuIds });
-      message.success('更新成功');
+      await Q.put(ApiConfig.changeRoleMenu, { id: role.id, menuIds });
+      message.success('保存成功');
     } catch (e) {
-      message.success('更新失败');
+      message.error('更新失败');
     }
     hideLoading();
   };
@@ -84,7 +98,15 @@ export default function DetailRoleMenu(props) {
   const list = _.values(menuState) || [];
   return (
     <ProCard title="角色-菜单权限" extra={role.id && extra} ghost>
-      <div className={styles.detailRoleMenuTree}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          width: '100%',
+          minHeight: 100,
+        }}
+      >
         {list.map((it) => {
           const { checkedList, menu } = it;
           const key = role.id + '_' + it.id;

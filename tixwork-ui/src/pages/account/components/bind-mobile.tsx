@@ -1,21 +1,23 @@
 import { CommonRule } from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
+import type { API } from '@/http/api-types';
 import Q from '@/http/http-request/q';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { LockOutlined, MobileOutlined } from '@ant-design/icons';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { ModalForm, ProFormCaptcha, ProFormText } from '@ant-design/pro-components';
-import { message } from 'antd';
+import { App } from 'antd';
 import _ from 'lodash';
 import { useRef } from 'react';
 
 export default function BindMobile(props) {
+  const { message } = App.useApp();
   const formRef = useRef<ProFormInstance>();
 
   const handleSubmit = async (values) => {
     const resp = await Q.post<API.Toast>(ApiConfig.updateMobile, values, { asParams: true });
     if (resp.code === 200) {
-      message.success('更新成功');
+      message.success('保存成功');
       if (props.onSuccess) {
         props.onSuccess();
       }
@@ -28,7 +30,7 @@ export default function BindMobile(props) {
     const resp = await Q.get<API.Toast>(ApiConfig.getMobileVerifyCode, { mobile });
     const txt = _.get(resp, 'data.toast.text', '');
     const code = _.get(txt.match(/验证码(\d{6})/), 1);
-    if (isNotEmpty(code)) {
+    if (ObjectUtils.isNotEmpty(code)) {
       formRef.current?.setFieldsValue({ code });
     }
   };

@@ -20,7 +20,13 @@ export interface VideoLike {
 export type ResourceLike = {
   list: ActionLike;
   get: ActionLike;
-  add: ActionLike;
+  /**
+   * 支持 insert or update
+   */
+  save: ActionLike;
+  /**
+   * 支持put方法
+   */
   update: ActionLike;
   remove: ActionLike;
   importData: ActionLike;

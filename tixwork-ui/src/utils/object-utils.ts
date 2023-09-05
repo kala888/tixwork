@@ -8,7 +8,7 @@ export const noop = () => {};
 // [1,2]=> false
 // {} => true
 // {a:'1'} => false
-export const isEmpty = (value: any) => {
+const isEmpty = (value: any) => {
   if (_.isNumber(value) || _.isBoolean(value)) {
     return false;
   }
@@ -21,11 +21,11 @@ export const isEmpty = (value: any) => {
   return _.isEmpty(value);
 };
 
-export const isNotEmpty = (value: any) => {
+const isNotEmpty = (value: any) => {
   return !isEmpty(value);
 };
 
-export const toBoolean = (value: any) => {
+const toBoolean = (value: any) => {
   if (isEmpty(value)) {
     return false;
   }
@@ -41,7 +41,7 @@ export const toBoolean = (value: any) => {
   return value;
 };
 
-export function parseToObject(json: any, defaultValue: any = {}) {
+function parseToObject(json: any, defaultValue: any = {}) {
   if (_.isObject(json)) {
     return json;
   }
@@ -55,7 +55,7 @@ export function parseToObject(json: any, defaultValue: any = {}) {
   return defaultValue;
 }
 
-export function parseToArray(obj: any) {
+function parseToArray(obj: any) {
   if (_.isNil(obj)) {
     return [];
   }
@@ -66,7 +66,7 @@ export function parseToArray(obj: any) {
   return result;
 }
 
-export function parseToString(obj: any) {
+function parseToString(obj: any) {
   if (_.isObject(obj)) {
     return JSON.stringify(obj);
   }

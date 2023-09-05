@@ -1,12 +1,13 @@
 import ApiConfig from '@/http/api-config';
 import Q from '@/http/http-request/q';
 import { ModalForm, ProFormField, ProFormText } from '@ant-design/pro-components';
-import { notification } from 'antd';
+import { App } from 'antd';
 
 type ResetPasswordType = {
   trigger: any;
 };
 export default function ResetPassword(props: ResetPasswordType) {
+  const { notification } = App.useApp();
   const trigger = props.trigger || <a key="changePassword">重置密码</a>;
 
   const handleSubmit = async (values) => {

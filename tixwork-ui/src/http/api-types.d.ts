@@ -1,5 +1,7 @@
 // @ts-ignore
 /* eslint-disable */
+import { BaseEntity } from '@/biz-models/biz-schema-types';
+import React from 'react';
 
 declare namespace API {
   type Status = 'ENABLED' | 'DISABLED';
@@ -10,6 +12,17 @@ declare namespace API {
     code: number;
     msg: string;
     data: T;
+    total?: number;
+  };
+
+  type TableDataInfo<T = any> = {
+    code: number;
+    msg: string;
+    data: T[];
+    total: number;
+    success: boolean;
+    current?: number;
+    pageSize?: number;
   };
 
   type Toast = {
@@ -18,17 +31,10 @@ declare namespace API {
   };
 
   type ProfileInfo = {
-    user: API.User;
+    user: User;
     roleGroup: string;
     postGroup: string;
-    roles: string[];
-    permissions: string[];
-    unreadCount?: number;
-  };
-
-  type TableDataInfo<T> = {
-    total: number;
-    rows: T[];
+    superAdmin: boolean;
   };
 
   type TreeSelect = {
@@ -43,14 +49,19 @@ declare namespace API {
     img: string;
     captchaOnOff?: boolean;
   };
+
   type User = {
     userId: number;
+    id: number;
+    userType: 'SYS_USER' | 'CLIENT';
+    gender: 'MALE' | 'FEMALE';
+    tenantId: string;
+
     deptId: number;
     userName: string;
     nickName: string;
     email: string;
     mobile: string;
-    gender: string;
     avatar: string;
     openid?: any;
     unionid?: any;
@@ -69,8 +80,7 @@ declare namespace API {
     posts: Post[];
     roleIds?: any;
     postIds?: any;
-    roleId?: any;
-    admin: boolean;
+    roleId: number;
   };
   // type LoginProfile={
   //   permissions?: string[];
@@ -116,7 +126,6 @@ declare namespace API {
     flag: boolean;
     menuIds?: any;
     deptIds?: any;
-    admin: boolean;
   };
 
   type AjaxResult = {
@@ -140,9 +149,11 @@ declare namespace API {
   }
 
   type LoginResult = {
-    token: string;
-    loginSuccess: boolean;
-    callbackUrl: string;
+    access_token: string;
+    client_id: string;
+    expire_in: number;
+    login_success: boolean;
+    callback_url: string;
   };
 
   type PageParams = {
@@ -151,7 +162,7 @@ declare namespace API {
   };
 
   type LoginParams = {
-    username?: string;
+    userName?: string;
     password?: string;
     rememberMe?: boolean;
     type?: string;
@@ -219,19 +230,45 @@ declare namespace API {
     remark: string;
   };
 
-  type Dict = {
+  type Config = {
     id: number;
-    label: string;
-    code: string;
+    key: string;
+    title: string;
     value?: string;
-    type: 'VALUE' | 'GROUP';
+    type: 'CONFIG' | 'DICT' | 'VALUE';
     dataScope: 'PRIVATE' | 'PUBLIC' | 'SYSTEM';
     status: Status;
     sortOrder: number;
     isDefault?: YesOrNo;
     remark?: string;
-    parent?: Dict;
-    valueList?: Dict[];
+    parent?: Config;
+    values?: Config[];
+  };
+
+  type OssObject = BaseEntity & {
+    id: React.Key;
+    fileName: string;
+    originalName: string;
+    fileSuffix: string;
+    url: string;
+    service: string;
+  };
+
+  type OssConfig = BaseEntity & {
+    id: React.Key;
+    configKey: string;
+    accessKey: string;
+    secretKey: string;
+    bucketName: string;
+    prefix: string;
+    endpoint: string;
+    domain: string;
+    isHttps: string;
+    region: string;
+    status: string;
+    ext1: string;
+    remark: string;
+    accessPolicy: string;
   };
 
   type Notice = {
@@ -240,7 +277,30 @@ declare namespace API {
     noticeType: '1' | '2'; //（1通知 2公告）
     noticeContent: string;
     remark: string;
-  };
+  } & BaseEntity;
+
+  type Tenant = {
+    tenantId: string;
+    companyName: string;
+    creditCode: string;
+    contactUserName: string;
+    contactMobile: string;
+    address: string;
+    domain: string;
+    intro: string;
+    remark: string;
+    packageId: number;
+    expireTime: string;
+    accountCount: number;
+    status: string;
+  } & BaseEntity;
+  type TenantPackage = {
+    packageName: string;
+    menuIds: any[];
+    remark: string;
+    createTime: string;
+    status: string;
+  } & BaseEntity;
 
   type NoticeIconItemType = 'notification' | 'message' | 'event';
 

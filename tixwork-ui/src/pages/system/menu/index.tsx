@@ -1,9 +1,10 @@
-import EleTableList from '@/components/ele-table-list/ele-table-list';
 import BasePage from '@/components/layout/base-page';
+import TableList from '@/components/table-list';
 import TreeExpandIcon from '@/components/tree/tree-expand-icon';
 import type { EleValueType } from '@/components/value-type';
 import CommonColumn from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
+import type { API } from '@/http/api-types';
 import type { ProColumnType } from '@ant-design/pro-components';
 import EditForm from './edit-form';
 
@@ -52,8 +53,9 @@ const columns: ProColumnType<API.Menu, EleValueType>[] = [
 
 export default () => {
   return (
-    <BasePage title="菜单管理">
-      <EleTableList<API.Menu>
+    <BasePage>
+      <TableList<API.Menu>
+        title="菜单管理"
         resource={ApiConfig.menu}
         rowKey="id"
         columns={columns as any}

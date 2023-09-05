@@ -1,4 +1,20 @@
-@import '~antd/es/style/themes/default.less';
+.tenant {
+  position: relative;
+  .prefixIcon {
+    position: absolute;
+    left: 20px;
+    z-index: 9999;
+    font-size: 30px;
+  }
+  :global {
+    input {
+      padding-right: 20px;
+    }
+    .ant-form-item {
+      width: 100%;
+    }
+  }
+}
 
 .container {
   display: flex;
@@ -8,14 +24,7 @@
   height: 100vh;
   padding-top: 50px;
   overflow: auto;
-  background: @layout-body-background;
-}
-
-@media (min-width: @screen-md-min) {
-  .container {
-    background: url('../../assets/background.svg') no-repeat center 110px;
-    background-size: 100%;
-  }
+  background: #f5f7f9;
 }
 
 .content {
@@ -30,45 +39,12 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-.brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 360px;
-  height: 500px;
-  background-image: url('../../assets/login-banner/bg-1.png');
-  background-size: 360px 500px;
-}
-
-.brandHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.brandLogo {
-  width: 70px;
-  height: 70px;
-  margin-top: 60px;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 10px;
-}
-
 .brandTitle {
   top: 2px;
   padding-top: 20px;
   padding-bottom: 10px;
   color: #fff;
   font-weight: 600;
-  font-size: 24px;
-  font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-}
-
-.brandBrief {
-  top: 2px;
-  color: #fff;
-  font-size: 20px;
 }
 
 .loginForm {

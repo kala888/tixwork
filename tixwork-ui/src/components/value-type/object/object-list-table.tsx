@@ -1,8 +1,8 @@
-import { isEmpty, isNotEmpty, parseToArray } from '@/utils/object-utils';
 import { ProCard, ProTable } from '@ant-design/pro-components';
 import { Typography } from 'antd';
 import _ from 'lodash';
 
+import ObjectUtils from '@/utils/object-utils';
 import { v4 as uuidv4 } from 'uuid';
 
 const defaultFields: any[] = [
@@ -27,10 +27,13 @@ type ObjectListTableType = {
 
 export const ObjectListTable = (props: ObjectListTableType) => {
   const { onChange, fields = defaultFields, readOnly = false, objectType } = props;
-  const list = parseToArray(props.value).map((it) => ({ ...it, uuid: it.uuid || uuidv4() }));
+  const list = ObjectUtils.parseToArray(props.value).map((it) => ({
+    ...it,
+    uuid: it.uuid || uuidv4(),
+  }));
 
-  if (isEmpty(list)) {
-    return <ProCard bordered />;
+  if (ObjectUtils.isEmpty(list)) {
+    return <ProCard bordered style={{ height: 28 }} />;
   }
 
   const handleRemove = (record) => {
@@ -46,21 +49,20 @@ export const ObjectListTable = (props: ObjectListTableType) => {
       title: '',
       valueType: 'option',
       width: 60,
-      render: (__, record) => (
-        <Typography.Link onClick={() => handleRemove(record)}>移除</Typography.Link>
-      ),
+      render: (__, record) => <Typography.Link onClick={() => handleRemove(record)}>移除</Typography.Link>,
     });
   }
   columns = columns.filter((it) => !it.hideInTable);
   const idColumn = columns.find((it) => _.lowerCase(it.dataIndex) === 'id');
-  if (isEmpty(idColumn?.fieldProps?.objectType) && isNotEmpty(objectType)) {
+  if (ObjectUtils.isEmpty(idColumn?.fieldProps?.objectType) && ObjectUtils.isNotEmpty(objectType)) {
     _.set(idColumn, 'fieldProps.objectType', objectType);
   }
 
-  const dataSource = [...list];
+  const dataSource = [...list].map((it, idx) => ({ ...it, rowKey: it.id + '_' + idx }));
   const pagination = dataSource.length >= 10 && {
     pageSize: 10,
   };
+  console.log('datasource', dataSource);
   return (
     <ProTable
       size={'small'}
@@ -68,7 +70,7 @@ export const ObjectListTable = (props: ObjectListTableType) => {
       bordered
       dataSource={dataSource}
       columns={columns}
-      rowKey="id"
+      rowKey="rowKey"
       search={false}
       pagination={pagination}
       options={false}

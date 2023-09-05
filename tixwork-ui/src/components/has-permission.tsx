@@ -1,4 +1,4 @@
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { useModel } from '@umijs/max';
 import type React from 'react';
 
@@ -14,7 +14,7 @@ const HasPermission: React.FC<HasPermissionProps> = (props) => {
   const allPermission = '*:*:*';
   const userPermissions = initialState?.profile?.permissions; //TODO 没测试
 
-  if (isNotEmpty(permissions)) {
+  if (ObjectUtils.isNotEmpty(permissions)) {
     const hasPermissions = userPermissions.some((p) => {
       return allPermission === p || permissions?.includes(p);
     });

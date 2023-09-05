@@ -4,12 +4,13 @@ import Q from '@/http/http-request/q';
 import useProfile from '@/services/use-profile';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { ProDescriptions, ProForm, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
-import { message } from 'antd';
+import { App } from 'antd';
 import { useEffect, useRef } from 'react';
 import AvatarSetting from './components/avatar-setting';
 import styles from './styles.less';
 
 const ProfileSetting = () => {
+  const { message } = App.useApp();
   const formRef = useRef<ProFormInstance>();
   const { profile, syncProfile } = useProfile();
   const { user, postGroup, roleGroup } = profile;
@@ -19,7 +20,11 @@ const ProfileSetting = () => {
   }, [user]);
 
   const handleFinish = async (values) => {
-    Q.post(ApiConfig.profile, values).then((res) => {
+    Q.post(ApiConfig.profile, {
+      ...values,
+      userId: user.userId,
+      userName: user.userName,
+    }).then((res) => {
       if (res.code === 200) {
         message.success('更新基本信息成功');
         syncProfile();
@@ -51,13 +56,8 @@ const ProfileSetting = () => {
 
       <div className={styles.content}>
         <div className={styles.left}>
-          <ProForm
-            formRef={formRef}
-            layout="vertical"
-            onFinish={handleFinish}
-            submitter={submitter}
-          >
-            <ProFormText width="md" name="nickName" label="昵称" rules={[CommonRule.required]} />
+          <ProForm formRef={formRef} layout="vertical" onFinish={handleFinish} submitter={submitter}>
+            <ProFormText width="md" name="nickName" label="名称" rules={[CommonRule.required]} />
             <ProFormText width="md" name="email" label="邮箱" rules={[CommonRule.email]} />
             <ProFormTextArea name="remark" label="个人简介" placeholder="个人简介" />
           </ProForm>

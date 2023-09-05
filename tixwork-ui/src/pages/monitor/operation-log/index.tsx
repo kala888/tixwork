@@ -1,11 +1,32 @@
-import EleTableList from '@/components/ele-table-list/ele-table-list';
 import BasePage from '@/components/layout/base-page';
+import TableList from '@/components/table-list';
 import type { EleValueType } from '@/components/value-type';
 import CommonColumn from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
+import Q from '@/http/http-request/q';
 import type { ProColumnType } from '@ant-design/pro-components';
+import { App } from 'antd';
+import { useRef } from 'react';
 
 const columns: ProColumnType<any, EleValueType>[] = [
+  {
+    title: '状态',
+    dataIndex: 'status',
+    align: 'center',
+    valueType: 'radioButton',
+    valueEnum: {
+      '0': {
+        text: '成功',
+        status: 'Processing',
+      },
+      '1': {
+        text: '失败',
+        status: 'Error',
+      },
+    },
+    width: 100,
+    hideInSearch: true,
+  },
   {
     title: '系统模块',
     dataIndex: 'title',
@@ -22,7 +43,7 @@ const columns: ProColumnType<any, EleValueType>[] = [
     width: 100,
     valueEnum: {
       '0': '其它',
-      '1': '新建',
+      '1': '创建',
       '2': '修改',
       '3': '删除',
     },
@@ -39,7 +60,6 @@ const columns: ProColumnType<any, EleValueType>[] = [
   {
     title: 'URL',
     dataIndex: 'url',
-    align: 'center',
     width: 150,
     ellipsis: true,
     hideInSearch: true,
@@ -61,11 +81,6 @@ const columns: ProColumnType<any, EleValueType>[] = [
     hideInSearch: true,
   },
   {
-    ...CommonColumn.status,
-    width: 100,
-    hideInSearch: true,
-  },
-  {
     title: '错误消息',
     dataIndex: 'errorMsg',
     align: 'center',
@@ -81,9 +96,8 @@ const columns: ProColumnType<any, EleValueType>[] = [
     width: 100,
     hideInSearch: true,
     valueEnum: {
-      '0': '其它',
-      '1': '后台用户',
-      '2': '手机端用户',
+      SYSTEM: '后台用户',
+      CLIENT: '手机端用户',
     },
   },
   {
@@ -128,13 +142,34 @@ const columns: ProColumnType<any, EleValueType>[] = [
 ];
 
 export default () => {
+  const { modal, message } = App.useApp();
+  const ref = useRef<any>();
+
+  const actionList: any[] = [
+    {
+      code: 'clean',
+      title: '清理全部',
+      level: 'danger',
+      onClick: () => {
+        modal.confirm({
+          title: '确定清理全部操作日志吗？',
+          onOk: async () => {
+            await Q.remove(ApiConfig.operationLog + '/clean');
+            ref.current?.refresh();
+            await message.success('清空成功');
+          },
+        });
+      },
+    },
+  ];
   return (
-    <BasePage title="操作记录">
-      <EleTableList
+    <BasePage>
+      <TableList
+        ref={ref}
+        title="操作记录"
         resource={ApiConfig.operationLog}
         columns={columns}
-        options={false}
-        toolBarRender={false}
+        actionList={actionList}
         lineActionList={false}
         scroll={{ x: 1300 }}
       />

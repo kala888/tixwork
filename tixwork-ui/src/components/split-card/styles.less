@@ -1,10 +1,27 @@
+@trigger-border-color: rgb(235, 237, 240);
+
 .splitCard {
-  height: 100%;
   background-color: #fff;
+
+  &Slider {
+    height: auto;
+  }
+
+  &Content {
+    height: auto;
+  }
+
+  .left {
+    height: auto;
+  }
+
+  .right {
+    height: auto;
+  }
 
   .trigger {
     position: absolute;
-    top: 16px;
+    top: 20px;
     right: -1px;
     z-index: 1;
     display: flex;
@@ -16,18 +33,15 @@
     color: #666;
     font-size: 14px;
     line-height: 30px;
-    border: 1px solid rgb(235, 237, 240);
+    border: 1px solid @trigger-border-color;
     border-right: 1px solid #fff;
     border-radius: 2px;
   }
 
-  .left {
-    background-color: #fff;
-  }
-
-  .right {
-    min-height: 100%;
-    background-color: #fff;
+  .disabled {
+    .trigger {
+      color: red;
+    }
   }
 
   :global {
@@ -36,7 +50,45 @@
       z-index: 1;
       //min-height: 86vh;
       padding: 16px 10px;
-      border-right: 1px solid rgb(235, 237, 240);
+      border-right: 1px solid @trigger-border-color;
+    }
+
+    .ant-layout-has-sider {
+      position: relative;
+      z-index: 999;
+      background: #fff;
+    }
+
+    .ant-layout-sider-collapsed.ant-layout-sider {
+      padding: 16px 0;
+      border: 0;
+    }
+  }
+
+  :global(.ant-layout-sider-collapsed) {
+    .trigger {
+      position: absolute;
+      right: -20px;
+      border: 1px solid @trigger-border-color;
+      border-left: 1px solid #fff;
+    }
+  }
+}
+
+.collapseToRight {
+  .right {
+    padding-left: 24px;
+  }
+
+  .trigger {
+    left: -1px;
+    border: 1px solid @trigger-border-color;
+    border-left: 1px solid #fff;
+  }
+
+  :global {
+    .ant-layout-sider {
+      border-left: 1px solid @trigger-border-color;
     }
 
     .ant-layout-has-sider {
@@ -46,21 +98,24 @@
     }
   }
 
-  :global(.ant-layout-sider-collapsed.ant-layout-sider) {
-    padding: 16px 0;
-    border: 0;
-  }
-
   :global(.ant-layout-sider-collapsed) {
     .trigger {
-      position: absolute;
-      right: -20px;
-      border: 1px solid rgb(235, 237, 240);
-      border-left: 1px solid #fff;
+      left: -20px;
+      width: 30px;
+      height: 50px;
+      color: white;
+      font-size: 25px;
+      background-color: @ice-blue-color;
+      border: 1px solid @ice-blue-color;
+      border-right: 1px solid #fff;
     }
   }
 }
 
 .expanded .right {
   padding-left: 12px;
+}
+
+.expanded .left {
+  padding-right: 12px;
 }

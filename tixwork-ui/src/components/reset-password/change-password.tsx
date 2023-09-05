@@ -1,11 +1,12 @@
 import { ModalForm, ProFormField, ProFormText } from '@ant-design/pro-components';
-import { notification } from 'antd';
+import { App } from 'antd';
 
 type ResetPasswordType = {
   title: string;
   onSubmit: (values: any) => Promise<boolean>;
 };
 export default function ChangePassword(props: ResetPasswordType) {
+  const { notification } = App.useApp();
   const { title = '修改密码', onSubmit } = props;
 
   const handleSubmit = async (values) => {

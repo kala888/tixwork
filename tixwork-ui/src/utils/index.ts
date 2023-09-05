@@ -1,4 +1,4 @@
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import _ from 'lodash';
 
 export const isDev = (): boolean => {
@@ -12,7 +12,7 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
     // @ts-ignore
     refsEntityContainer = root.dataContainer;
   }
-  if (!refsEntityContainer || (isEmpty(refsEntityContainer) && isNotEmpty(targetList))) {
+  if (!refsEntityContainer || (ObjectUtils.isEmpty(refsEntityContainer) && ObjectUtils.isNotEmpty(targetList))) {
     console.log('data container is empty, and target is not empty, return itself');
     return targetList;
   }
@@ -41,7 +41,7 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
 
 //坑！！ ios只能识别yyyy/MM/dd hh:mm:ss
 export function transToDate(value: any): Date | null {
-  if (_.isDate(value) || isEmpty(value)) {
+  if (_.isDate(value) || ObjectUtils.isEmpty(value)) {
     return value;
   }
   let temp = value;
@@ -89,9 +89,7 @@ function dateFormat(dateTime: any, fmt: string) {
     if (new RegExp(`(${key})`).test(format)) {
       format = format.replace(
         RegExp.$1,
-        RegExp.$1.length === 1
-          ? values[key]
-          : ('00' + values[key]).substr(('' + values[key]).length),
+        RegExp.$1.length === 1 ? values[key] : ('00' + values[key]).substr(('' + values[key]).length),
       );
     }
   }
@@ -106,7 +104,7 @@ export function formatTime(time: any, fmt = 'yyyy-MM-dd') {
 }
 
 export function formatMoney(money: any) {
-  if (isEmpty(money)) {
+  if (ObjectUtils.isEmpty(money)) {
     return '';
   }
   if (_.isNumber(money)) {
@@ -143,7 +141,7 @@ export function getGroupList<T>(items: T[]): Group<T>[] {
   _.forEach(items, (it: any, idx) => {
     const { group = '' } = it;
     let theGroup: Group<T> | undefined = _.find(groupList, { title: group });
-    if (isEmpty(theGroup)) {
+    if (ObjectUtils.isEmpty(theGroup)) {
       theGroup = {
         id: idx,
         title: group,
@@ -211,20 +209,28 @@ export function getParametersFromUrl(url = '') {
   return query; // 返回对象
 }
 
-export function guessTitle(obj) {
+export function getDisplayName(obj) {
   if (_.isObject(obj)) {
     // @ts-ignore
-    return obj?.displayName || obj?.title || obj?.displayName || obj?.name || obj?.id;
+    return obj?.displayName || obj?.title || obj?.name || obj?.id;
   }
   return obj;
 }
 
 export function ensureArray<T>(value: T | T[]): T[] {
-  if (isEmpty(value)) {
+  if (ObjectUtils.isEmpty(value)) {
     return [];
   }
   if (_.isArray(value)) {
     return value;
   }
   return [value];
+}
+
+/**
+ * 阻止冒泡
+ */
+export function disableClickEventBubbling(e) {
+  e.stopPropagation();
+  e.preventDefault();
 }

@@ -77,7 +77,8 @@ const getBarOption: getOptionType = (title, items) => {
       {
         data: dataList,
         type: 'bar',
-        barMaxWidth: '100',
+        barWidth: 35,
+        // barMaxWidth: 100,
         label: {
           show: true,
           position: 'top',
@@ -209,16 +210,7 @@ const getLineOption: getOptionType = (title, items = []) => {
 const getRoseOption: getOptionType = (title, items = []) => {
   const theItems = items.slice(0, 8);
   const category = theItems.map((it) => it.title);
-  const colors = [
-    '#FE4441',
-    '#F89747',
-    '#EBCD49',
-    '#45DAF5',
-    '#43ABEC',
-    '#4573EF',
-    '#A03FE2',
-    '#ED40E5',
-  ];
+  const colors = ['#FE4441', '#F89747', '#EBCD49', '#45DAF5', '#43ABEC', '#4573EF', '#A03FE2', '#ED40E5'];
 
   const dataList = theItems.map((it, idx) => {
     const color = _.get(colors, idx);

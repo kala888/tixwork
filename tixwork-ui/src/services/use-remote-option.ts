@@ -1,45 +1,57 @@
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
-import { request } from '@@/plugin-request/request';
+import BizSchema from '@/biz-models/biz-schema';
+import Q from '@/http/http-request/q';
+import { getResource } from '@/http/use-resource';
+import { getDisplayName } from '@/utils';
+import ObjectUtils from '@/utils/object-utils';
 import { useRequest } from 'ahooks';
 
 export type RemoteOptionType = {
-  types?: string;
   linkToUrl?: string;
-  optionType?: 'enums' | 'dict';
+  types?: string;
+  objectType?: string;
+  isObject?: boolean;
+  params?: any;
 };
 
 /**
  * /api/options/gender  获取enums和字典的值
  */
 const getUrl = (props) => {
-  const { types, linkToUrl } = props;
-  const optionUrl = `/api/options/${types}`;
-  return linkToUrl || optionUrl;
+  const { types, linkToUrl, objectType } = props;
+  if (ObjectUtils.isNotEmpty(linkToUrl)) {
+    return linkToUrl;
+  }
+  if (objectType) {
+    const schema = BizSchema.get(objectType);
+    return getResource(schema?.linkToUrl).resourceLike?.list?.linkToUrl;
+  }
+  return `/api/options/${types}`;
 };
 
 const transform = (items) => {
-  if (isEmpty(items)) {
+  if (ObjectUtils.isEmpty(items)) {
     return [];
   }
   return items.map((it) => {
     const result: any = {
-      label: it.title,
+      ...it,
+      label: getDisplayName(it),
       value: it.id,
     };
-    if (isNotEmpty(it.children)) {
+    if (ObjectUtils.isNotEmpty(it.children)) {
       result.children = transform(it.children);
     }
     return result;
   });
 };
-
+// 有时候报错。Warning: Can't perform a React state update on a component that hasn't mounted yet. 可以忽略，
+// react官方bug，未来会处理掉：https://github.com/reactwg/react-18/discussions/82
 const useRemoteOption = (props: RemoteOptionType) => {
   const url = getUrl(props);
+  const { params } = props;
   const fetchData = async () => {
-    const { data = [] } = await request(url);
-    const result = transform(data);
-    console.log(result);
-    return result;
+    const resp = await Q.post(url, params);
+    return transform(resp?.data);
   };
   return useRequest(fetchData, { cacheKey: 'cache-options-' + url });
 };

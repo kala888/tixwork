@@ -13,12 +13,7 @@ export type EleGlobalPopupProps = {
 
 export default class EleGlobalPopup {
   static confirm(options: EleGlobalPopupProps): Promise<{ confirm: boolean }> {
-    const {
-      title = '提示',
-      text = '？',
-      closeActionText = '取消',
-      confirmActionText = '确定',
-    } = options || {};
+    const { title = '提示', text = '？', closeActionText = '取消', confirmActionText = '确定' } = options || {};
     return new Promise((resolve) => {
       Modal.confirm({
         title,
@@ -32,12 +27,7 @@ export default class EleGlobalPopup {
   }
 
   static show(options: EleGlobalPopupProps) {
-    const {
-      title = '提示',
-      text = '？',
-      actionList = [],
-      closeActionText = '关闭',
-    } = options || {};
+    const { title = '提示', text = '？', actionList = [], closeActionText = '关闭' } = options || {};
     const action = (actionList.length > 0 ? actionList[0] : {}) as ActionLike;
     const { title: confirmText = '确定' } = action;
     const handleOk = () => {

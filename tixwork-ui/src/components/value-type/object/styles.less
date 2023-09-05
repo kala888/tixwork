@@ -1,21 +1,32 @@
-@import '~antd/es/style/themes/default.less';
+/* @import '~antd/es/style/themes/default.less'; */
 
 .objectLink {
-  width: 100%;
   color: @primary-color;
   font-weight: 500;
   cursor: pointer;
 
   &:hover {
-    color: #f38709;
-    text-align: center;
-    cursor: pointer;
+    color: #f38709 !important;
+  }
+}
+
+.objectLinkPopupContent {
+  :global(:first-child.group-card) {
+    padding: 0;
+    border: none;
+  }
+
+  :global(.ant-pro-card-body) {
+    padding: 10px 0 0;
   }
 }
 
 .objectPicker {
-  :global(.pro-field) {
-    margin-bottom: 0;
+  :global {
+    .ant-form-item,
+    .pro-field {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -24,4 +35,5 @@
   flex-direction: row-reverse;
   width: 100%;
   margin-top: -28px;
+  padding-bottom: 6px;
 }

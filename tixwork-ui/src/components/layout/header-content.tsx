@@ -1,9 +1,9 @@
 import { useModel } from '@@/plugin-model';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { ProBreadcrumb } from '@ant-design/pro-components';
+import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { Space } from 'antd';
 import _ from 'lodash';
-import styles from './styles.less';
 
 export default function HeaderContent() {
   const { initialState, setInitialState } = useModel<any>('@@initialState');
@@ -21,10 +21,15 @@ export default function HeaderContent() {
       };
     }).then();
   };
+  const css = useEmotionCss(({ token }) => ({
+    color: token.colorPrimary,
+    fontSize: 20,
+    cursor: 'pointer',
+  }));
 
   return (
-    <Space className={styles.headerContent}>
-      <Space className={styles.switchIcon} onClick={handleToggle}>
+    <Space>
+      <Space className={css} onClick={handleToggle}>
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Space>
       <ProBreadcrumb />

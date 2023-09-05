@@ -8,21 +8,22 @@
  */
 export default {
   dev: {
-    // // localhost:8000/api/** -> https://preview.pro.ant.design/api/**
     '/api/': {
       target: 'http://localhost:8080/',
+      changeOrigin: true,
+      pathRewrite: { '^': '' },
+    },
+  },
+  // 可以使用yarn start:demo 来时用这个代理
+  // 代理将localhost:8000/api/** 转给 https://demo.tiandtech.com/api/**
+  demo: {
+    '/api/': {
+      target: 'https://demo.tiandtech.com/',
       // 配置了这个可以从 http 代理到 https
       // 依赖 origin 的功能可能需要这个，比如 cookie
       changeOrigin: true,
       pathRewrite: { '^': '' },
       // pathRewrite: {'^/api/': ''},  //取消api
-    },
-  },
-  demo: {
-    '/api/': {
-      target: 'https://demo.tiandtech.com/',
-      changeOrigin: true,
-      pathRewrite: { '^': '' },
     },
   },
 };

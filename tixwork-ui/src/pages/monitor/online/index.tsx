@@ -1,5 +1,5 @@
-import EleTableList from '@/components/ele-table-list/ele-table-list';
 import BasePage from '@/components/layout/base-page';
+import TableList from '@/components/table-list';
 import type { EleValueType } from '@/components/value-type';
 import ApiConfig from '@/http/api-config';
 import type { ActionList } from '@/utils/nice-router-types';
@@ -14,7 +14,7 @@ const columns: ProColumnType<any, EleValueType>[] = [
     hideInSearch: true,
   },
   {
-    title: '登录名称',
+    title: '登录账号',
     dataIndex: 'userName',
     align: 'center',
   },
@@ -61,8 +61,8 @@ const columns: ProColumnType<any, EleValueType>[] = [
 export default () => {
   const lineActions: ActionList = [{ code: 'remove', title: '强制下线' }];
   return (
-    <BasePage title="在线用户">
-      <EleTableList
+    <BasePage>
+      <TableList
         lineActionList={lineActions}
         rowKey="tokenId"
         resource={ApiConfig.online}

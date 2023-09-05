@@ -1,14 +1,16 @@
 import type { EleTreeNodeType } from '@/components/tree/ele-tree';
 import styles from '@/components/tree/styles.less';
 import ApiConfig from '@/http/api-config';
+import type { API } from '@/http/api-types';
 import Q from '@/http/http-request/q';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { ProCard } from '@ant-design/pro-components';
 import { useAsyncEffect } from 'ahooks';
-import { Button, message, Select, Tree } from 'antd';
+import { App, Button, Select, Tree } from 'antd';
 import React, { useState } from 'react';
 
 export default function DetailRoleDataScope(props) {
+  const { message } = App.useApp();
   const [saving, setSaving] = useState(false);
   const [dataSource, setDataSource] = useState<EleTreeNodeType[]>([]);
   const [checkedKeys, setCheckedKeys] = useState<React.Key[]>([]);
@@ -34,13 +36,13 @@ export default function DetailRoleDataScope(props) {
     setSaving(true);
     try {
       await Q.put(ApiConfig.changeRoleDataScope, {
-        roleId: role.id,
+        id: role.id,
         deptIds: checkedKeys,
         dataScope,
       });
-      message.success('更新成功');
+      message.success('保存成功');
     } catch (e) {
-      message.success('更新失败');
+      message.error('更新失败');
     }
     setSaving(false);
   };

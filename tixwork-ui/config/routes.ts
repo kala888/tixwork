@@ -1,6 +1,18 @@
 ﻿import _ from 'lodash';
 import bizRoutes from './biz-routes';
-// 多tab模式实现与问题，https://github.com/ant-design/ant-design-pro/issues/220
+
+/**
+ * @name umi 的路由配置
+ * @description 只支持 path,component,routes,redirect,wrappers,name,icon 的配置
+ * @param path  path 只支持两种占位符配置，第一种是动态参数 :id 的形式，第二种是 * 通配符，通配符只能出现路由字符串的最后。
+ * @param component 配置 location 和 path 匹配后用于渲染的 React 组件路径。可以是绝对路径，也可以是相对路径，如果是相对路径，会从 src/pages 开始找起。
+ * @param routes 配置子路由，通常在需要为多个路径增加 layout 组件时使用。
+ * @param redirect 配置路由跳转
+ * @param wrappers 配置路由组件的包装组件，通过包装组件可以为当前的路由组件组合进更多的功能。 比如，可以用于路由级别的权限校验
+ * @param name 配置路由的标题，默认读取国际化文件 menu.ts 中 menu.xxxx 的值，如配置 name 为 login，则读取 menu.ts 中 menu.login 的取值作为标题
+ * @param icon 配置路由的图标，取值参考 https://ant.design/components/icon-cn， 注意去除风格后缀和大小写，如想要配置图标为 <StepBackwardOutlined /> 则取值应为 stepBackward 或 StepBackward，如想要配置图标为 <UserOutlined /> 则取值应为 user 或者 User
+ * @doc https://umijs.org/docs/guides/routes
+ */
 
 // 专门挖一块地，用来复写自动生成的页面
 const customRoutes: any[] = [];
@@ -40,9 +52,8 @@ const routes = [
     name: '列表',
     path: '/panel/:objectType',
     hideInMenu: true,
-    component: './generic-page/split-panel-page',
+    component: './generic-page/panel-page',
   },
-
   {
     path: '/',
     redirect: '/dashboard',
@@ -57,7 +68,6 @@ const routes = [
     name: '系统管理',
     icon: 'iconfont-system',
     path: '/system',
-
     routes: [
       { path: '/system', redirect: '/system/user' },
       {
@@ -91,16 +101,33 @@ const routes = [
         component: './system/menu',
       },
       {
-        name: '字典管理',
-        icon: 'iconfont-system',
-        path: '/system/dict',
-        component: './system/dict',
+        name: '文件管理',
+        icon: 'iconfont-file',
+        path: '/system/oss-object',
+        component: './system/oss-object',
       },
       {
         name: '通知公告',
         icon: 'iconfont-notice',
         path: '/system/notice',
         component: './system/notice',
+      },
+      {
+        name: '参数设置',
+        icon: 'iconfont-system',
+        path: '/system/setting',
+        component: './system/setting',
+      },
+      {
+        name: 'OSS配置详情',
+        path: '/system/oss-config/:id',
+        hideInMenu: true,
+        component: './system/setting/oss-config/detail-page',
+      },
+      {
+        name: '客户端管理',
+        path: '/system/client',
+        component: './system/client',
       },
     ],
   },
@@ -109,7 +136,7 @@ const routes = [
     icon: 'iconfont-monitor',
     path: '/monitor',
     routes: [
-      { path: '/monitor', redirect: '/monitor/online2' },
+      { path: '/monitor', redirect: '/monitor/online' },
       {
         name: '在线用户',
         icon: 'iconfont-online',
@@ -127,30 +154,39 @@ const routes = [
         component: './monitor/login-record',
       },
       {
-        name: '定时任务',
-        icon: 'iconfont-scheduler',
-        path: '/monitor/scheduler',
-        component: './monitor/scheduler',
+        name: '导入导出日志',
+        icon: 'iconfont-cloud-file',
+        path: '/monitor/import-export-record',
+        component: './monitor/import-export-record',
+      },
+    ],
+  },
+  {
+    name: '租户管理',
+    icon: 'iconfont-tenant',
+    path: '/tenant',
+    routes: [
+      {
+        path: '/tenant',
+        redirect: '/tenant/account',
       },
       {
-        name: '数据监控',
-        icon: 'iconfont-druid',
-        path: '/monitor/druid',
+        name: '租户管理',
+        path: '/tenant/account',
+        component: './tenant/account',
+        icon: 'iconfont-tenant',
       },
       {
-        name: '服务监控',
-        icon: 'iconfont-cloud-sync',
-        path: '/monitor/server',
+        name: '租户详情',
+        path: '/tenant/account/:id',
+        component: './generic-page/detail-page.tsx',
+        hideInMenu: true,
       },
       {
-        name: '缓存监控',
-        icon: 'riconfont-edis',
-        path: '/monitor/cache',
-      },
-      {
-        name: 'Admin监控',
-        icon: 'iconfont-admin',
-        path: '/monitor/admin',
+        name: '租户套餐',
+        path: '/tenant/package',
+        component: './tenant/package',
+        icon: 'iconfont-tenant-package',
       },
     ],
   },
@@ -169,7 +205,9 @@ const routes = [
     ],
   },
   {
-    component: '404',
+    path: '*',
+    layout: false,
+    component: './404',
   },
 ];
 

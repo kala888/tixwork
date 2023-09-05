@@ -1,11 +1,12 @@
-import EleTableList from '@/components/ele-table-list/ele-table-list';
 import BasePage from '@/components/layout/base-page';
+import TableList from '@/components/table-list';
 import type { EleValueType } from '@/components/value-type';
 import { CommonRule } from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
 import type { ActionList } from '@/utils/nice-router-types';
 import { CaretRightOutlined } from '@ant-design/icons';
 import type { ProColumnType } from '@ant-design/pro-components';
+import { Space } from 'antd';
 
 const columns: ProColumnType<any, EleValueType>[] = [
   {
@@ -70,10 +71,10 @@ export default () => {
     {
       code: 'runOnce',
       title: (
-        <div>
+        <Space>
           <CaretRightOutlined />
           执行一下
-        </div>
+        </Space>
       ),
       onClick: handleRun,
       type: 'warning',
@@ -82,7 +83,7 @@ export default () => {
   ];
   return (
     <BasePage title="任务管理">
-      <EleTableList
+      <TableList
         title="任务管理"
         lineActionList={lineActions}
         resource={ApiConfig.scheduler}

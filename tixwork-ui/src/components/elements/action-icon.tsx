@@ -1,6 +1,6 @@
 import type { IconFontType } from '@/components/icon-font';
 import IconFont from '@/components/icon-font';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 
 type ActionIconType = {
   imageUrl?: string;
@@ -8,7 +8,7 @@ type ActionIconType = {
 
 const ActionIcon = (props: ActionIconType) => {
   const { imageUrl, ...rest } = props;
-  if (isNotEmpty(imageUrl)) {
+  if (ObjectUtils.isNotEmpty(imageUrl)) {
     return <img src={imageUrl} alt="img" />;
   }
   return <IconFont {...rest} />;

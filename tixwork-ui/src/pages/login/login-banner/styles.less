@@ -1,0 +1,83 @@
+.loginBanner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 360px;
+  height: 500px;
+  padding: 0;
+  background-image: url('../../../assets/login-banner/bg-1.png');
+  background-size: 360px 500px;
+}
+
+.bannerLogo {
+  width: 70px;
+  height: 70px;
+  margin-top: 60px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.combined {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  height: 100px;
+  margin: 150px 30px auto;
+  color: #fff;
+}
+
+.combinedShape {
+  position: relative;
+}
+
+.combinedShape > * {
+  position: absolute;
+  width: 50%;
+  height: 64px;
+  overflow: hidden;
+}
+
+.combinedShape > * > * {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  //background: rgba(193, 248, 244, 0.6);
+  border-radius: 4px;
+}
+
+.combinedShape .shapeLeft {
+  left: 0;
+}
+
+.combinedShape .shapeRight {
+  right: 0;
+}
+
+.combined .title {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  //width: 350px;
+  overflow: hidden;
+  font-size: 24px;
+  letter-spacing: 8px;
+}
+
+.combinedBar {
+  position: absolute;
+  top: 45px;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+}
+
+.combined .content {
+  margin-top: 60px;
+  font-size: 14px;
+  text-align: center;
+}

@@ -1,11 +1,11 @@
 import CommonColumn from '@/components/value-type/common-column';
+import type { API } from '@/http/api-types';
 import DetailRoleDataScope from '@/pages/system/role/components/detail-role-data-scope';
 import DetailRoleMenu from '@/pages/system/role/components/detail-role-menu';
 import DetailRoleUse from '@/pages/system/role/components/detail-role-use';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { ProCard, ProDescriptions } from '@ant-design/pro-components';
 import { Result, Tabs } from 'antd';
-import styles from './components/styles.less';
 
 type RoleDetailType = {
   item: API.Role;
@@ -39,9 +39,9 @@ const title = '角色详情与权限';
 
 export default function Detail(props: RoleDetailType) {
   const { item = {} as any } = props;
-  if (item?.admin) {
+  if (item?.superAdmin) {
     return (
-      <ProCard title={title} className={styles.detail} ghost>
+      <ProCard title={title} ghost>
         <Result
           status="success"
           title={item.roleName}
@@ -50,21 +50,31 @@ export default function Detail(props: RoleDetailType) {
       </ProCard>
     );
   }
-  const disabled = isEmpty(item);
+  const disabled = ObjectUtils.isEmpty(item);
+  const items = [
+    {
+      label: `菜单权限`,
+      key: 'menu-privilege',
+      disabled,
+      children: <DetailRoleMenu role={item} />,
+    },
+    {
+      label: `自定义权限`,
+      key: 'data-privilege',
+      disabled,
+      children: <DetailRoleDataScope role={item} />,
+    },
+    {
+      label: `关联用户`,
+      key: 'users',
+      disabled,
+      children: <DetailRoleUse role={item} />,
+    },
+  ];
   return (
-    <ProCard title={title} className={styles.detail}>
+    <ProCard title={title}>
       <ProDescriptions title="基本信息" dataSource={item} column={3} columns={columns} />
-      <Tabs defaultActiveKey="menu-privilege">
-        <Tabs.TabPane tab="菜单权限" key="menu-privilege" disabled={disabled}>
-          <DetailRoleMenu role={item} />
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="自定义权限" key="data-privilege" disabled={disabled}>
-          <DetailRoleDataScope role={item} />
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="关联用户" key="users" disabled={disabled}>
-          <DetailRoleUse role={item} />
-        </Tabs.TabPane>
-      </Tabs>
+      <Tabs defaultActiveKey="menu-privilege" items={items} />
     </ProCard>
   );
 }

@@ -1,18 +1,19 @@
-import EleTableList from '@/components/ele-table-list/ele-table-list';
 import BasePage from '@/components/layout/base-page';
+import TableList from '@/components/table-list';
 import type { EleValueType } from '@/components/value-type';
 import CommonColumn from '@/components/value-type/common-column';
 import ApiConfig from '@/http/api-config';
+import type { API } from '@/http/api-types';
 import type { ProColumnType } from '@ant-design/pro-components';
 
 const columns: ProColumnType<API.Notice, EleValueType>[] = [
   {
     title: '公告类型',
     dataIndex: 'noticeType',
-    align: 'center',
-    valueEnum: {
-      '1': '通知',
-      '2': '公告',
+    valueType: 'RemoteRadio',
+    width: 100,
+    fieldProps: {
+      types: 'NoticeType',
     },
   },
   {
@@ -34,13 +35,8 @@ const columns: ProColumnType<API.Notice, EleValueType>[] = [
 
 export default () => {
   return (
-    <BasePage title="通知公告">
-      <EleTableList<API.Notice>
-        title="通知公告"
-        resource={ApiConfig.notice}
-        columns={columns}
-        formProps={{ columns }}
-      />
+    <BasePage>
+      <TableList<API.Notice> title="通知公告" resource={ApiConfig.notice} columns={columns} formProps={{ columns }} />
     </BasePage>
   );
 };

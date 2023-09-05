@@ -1,18 +1,13 @@
-import BizSchema from '@/biz-model/biz-schema';
+import BizSchema from '@/biz-models/biz-schema';
 import ClickableItem from '@/components/form/fields/clickable-item';
-import Q from '@/http/http-request/q';
-import { useVisible } from '@/services/use-service';
-import { guessTitle } from '@/utils';
-import { isNotEmpty } from '@/utils/object-utils';
+import SearchForm from '@/components/value-type/object/search-form';
+import { getDisplayName } from '@/utils';
+import ObjectUtils from '@/utils/object-utils';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ProFormFieldProps } from '@ant-design/pro-components';
-import { ProCard, ProForm } from '@ant-design/pro-components';
-import { useAsyncEffect } from 'ahooks';
-import { message, Modal } from 'antd';
+import { App, Typography } from 'antd';
 import _ from 'lodash';
-import React, { useState } from 'react';
-import ChooseTable from './choose-table';
-import FieldSearch from './field-search';
+import React from 'react';
 
 export type ObjectPickerSearchFieldType = {
   dataIndex: string;
@@ -32,6 +27,9 @@ export type ObjectPickerFieldType = {
   target: React.FC<{ onClick: () => void; disabled?: boolean }>;
   children?: React.ReactElement;
   allDuplicates?: boolean; //结果是否允许重复值
+  params?: Record<string, any>;
+  suffix?: false | React.ReactNode;
+  tips?: string;
 };
 
 const defaultFields: any[] = [
@@ -39,101 +37,71 @@ const defaultFields: any[] = [
   { dataIndex: 'displayName', title: '名称', hideInSearch: true },
 ];
 
-const getUrl = (props: ObjectPickerFieldType) => {
-  if (isNotEmpty(props.linkToUrl)) {
+const getUrl = (props) => {
+  if (ObjectUtils.isNotEmpty(props.linkToUrl)) {
     return props.linkToUrl;
   }
-  return BizSchema.get(props.objectType)?.linkToUrl + '/list';
+  const schema = BizSchema.get(props.objectType);
+  if (!schema) {
+    throw new Error('没有在BizSchema中找到' + props.objectType);
+  }
+  return `${schema?.linkToUrl}/list`;
 };
 
-export function ObjectPickerField(props: ObjectPickerFieldType) {
-  const { visible, show, close } = useVisible();
-  const [items, setItems] = useState<any[]>([]);
-  const { target, onChange, width, disabled, fields = defaultFields } = props;
-
+export default (props: ObjectPickerFieldType) => {
+  const { modal } = App.useApp();
+  const { tips, placeholder, suffix, target, onChange, width, disabled, params, fields = defaultFields } = props;
   const linkToUrl = getUrl(props);
+  let modalKey: any = null;
 
-  const handleSelect = (v) => {
+  const handleChange = (row) => {
     if (onChange) {
-      onChange(v);
-      close();
+      onChange(row);
+      if (modalKey) {
+        modalKey.destroy();
+      }
+    }
+  };
+  const handleClear = () => {
+    if (onChange) {
+      onChange(null);
     }
   };
 
-  useAsyncEffect(
-    async function* () {
-      //1.首先根据linkToUrl获取到对应的初始化数据
-      if (visible) {
-        const resp = await Q.post<API.TableDataInfo<any>>(linkToUrl);
-        const theItems = _.slice(resp?.data.rows, 0, 100);
-        setItems(theItems);
-      }
-    },
-    [linkToUrl, visible],
-  );
-
-  const handleSearch = async (values) => {
-    //1.点击search后向linkToUrl搜索数据
-    const resp = await Q.post<API.TableDataInfo<any>>(linkToUrl, {
-      [values.fieldName]: values.fieldValue,
+  const handleShow = () => {
+    modalKey = modal.success({
+      closable: true,
+      icon: null,
+      okButtonProps: { style: { display: 'none' } },
+      width: '60vw',
+      content: (
+        <div>
+          {ObjectUtils.isNotEmpty(tips) && (
+            <div style={{ paddingBottom: 20 }}>
+              <Typography.Text type={'secondary'}>{tips}</Typography.Text>
+            </div>
+          )}
+          <SearchForm columns={fields} onChange={handleChange} params={params} linkToUrl={linkToUrl} />
+        </div>
+      ),
     });
-    const rows = resp.data.rows || [];
-    if (rows.length === 0) {
-      message.info('没找到更多的数据');
-      setItems([]);
-      return;
-    }
-    if (rows.length > 100) {
-      message.info('数据太多了，请修改输入搜索条件');
-      setItems(_.slice(rows, 0, 100));
-      return;
-    }
-    setItems(rows);
   };
 
   const Target: any = target || ClickableItem;
-  const title = guessTitle(props.value);
-
-  const searchFields = fields
-    .filter((it) => !it.hideInSearch)
-    .map((it) => ({
-      label: it.title,
-      value: it.dataIndex,
-    }));
-  const tableFields = fields.filter((it) => !it.hideInTable);
+  const value = getDisplayName(props.value);
+  let theSuffix = !_.isNil(suffix) ? suffix : <SearchOutlined style={{ color: '#ccc' }} />;
   return (
     <>
       <Target
-        onClick={show}
-        value={title}
+        onClick={handleShow}
+        value={value}
         width={width}
         disabled={disabled}
-        suffix={<SearchOutlined />}
+        onClear={handleClear}
+        suffix={theSuffix}
+        placeholder={placeholder}
       />
       {props.children && React.cloneElement(props.children, props)}
-      <Modal
-        open={visible}
-        closable
-        onCancel={close}
-        okButtonProps={{ style: { display: 'none' } }}
-        cancelButtonProps={{ style: { display: 'none' } }}
-        width="60vw"
-      >
-        <ProCard>
-          <ProForm
-            onFinish={handleSearch}
-            layout={'inline'}
-            submitter={{
-              searchConfig: {
-                submitText: '搜索',
-              },
-            }}
-          >
-            <FieldSearch fields={searchFields} />
-          </ProForm>
-        </ProCard>
-        <ChooseTable items={items} onSelect={handleSelect} fields={tableFields} />
-      </Modal>
     </>
   );
-}
+};

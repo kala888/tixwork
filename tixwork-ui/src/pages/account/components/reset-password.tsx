@@ -1,9 +1,10 @@
 import ApiConfig from '@/http/api-config';
 import Q from '@/http/http-request/q';
 import { ModalForm, ProFormField, ProFormText } from '@ant-design/pro-components';
-import { notification } from 'antd';
+import { App } from 'antd';
 
 export default function ResetPassword(props) {
+  const { notification } = App.useApp();
   const handleSubmit = async (values) => {
     if (values.newPassword !== values.newPassword2) {
       notification.error({ message: '两次输入的密码不一致' });

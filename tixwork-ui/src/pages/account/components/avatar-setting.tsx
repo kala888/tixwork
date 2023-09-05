@@ -1,22 +1,40 @@
 import ApiConfig from '@/http/api-config';
 import Q from '@/http/http-request/q';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { UploadOutlined } from '@ant-design/icons';
+import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { Button, Upload } from 'antd';
 import { useEffect, useState } from 'react';
-import styles from './styles.less';
-
-const defaultIcon = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
+import logo from '../../../assets/logo.svg';
 
 type AvatarSettingType = {
   imageUrl: string;
   onChange: (avatar: string) => void;
 };
 const AvatarSetting = (props: AvatarSettingType) => {
+  const css = useEmotionCss(({ token }) => ({
+    '.title': {
+      color: token.colorTextHeading,
+    },
+    '.image': {
+      width: 144,
+      height: 144,
+      marginBottom: 12,
+      overflow: 'hidden',
+      img: {
+        width: '100%',
+      },
+    },
+    '.upload-button': {
+      width: 144,
+      textAlign: 'center',
+    },
+  }));
+
   const { imageUrl, onChange } = props;
-  const [avatar, setAvatar] = useState(imageUrl || defaultIcon);
+  const [avatar, setAvatar] = useState(imageUrl || logo);
   useEffect(() => {
-    if (isNotEmpty(imageUrl)) {
+    if (ObjectUtils.isNotEmpty(imageUrl)) {
       setAvatar(imageUrl);
     }
   }, [imageUrl]);
@@ -24,7 +42,7 @@ const AvatarSetting = (props: AvatarSettingType) => {
   const handleChange = ({ file }) => {
     if (file.status === 'done') {
       const url = file.response?.data?.url;
-      if (isNotEmpty(url)) {
+      if (ObjectUtils.isNotEmpty(url)) {
         Q.post(ApiConfig.updateAvatar, { avatar: url }, { asParams: true }).then(() => {
           setAvatar(url);
           if (onChange) {
@@ -36,9 +54,9 @@ const AvatarSetting = (props: AvatarSettingType) => {
   };
 
   return (
-    <div className={styles.avatarSetting}>
-      <div className={styles.avatarSettingTitle}>头像</div>
-      <div className={styles.avatarSettingImage}>
+    <div className={css}>
+      <div className="title">头像</div>
+      <div className="image">
         <img src={avatar} alt="avatar" />
       </div>
 
@@ -47,11 +65,9 @@ const AvatarSetting = (props: AvatarSettingType) => {
         onChange={handleChange}
         action={ApiConfig.upload}
         maxCount={1}
-        headers={{
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        }}
+        headers={Q.authHeader()}
       >
-        <div className={styles.uploadButton}>
+        <div className="upload-button">
           <Button>
             <UploadOutlined />
             更换头像

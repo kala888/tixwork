@@ -1,4 +1,4 @@
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import jwtDecode from 'jwt-decode';
 import _ from 'lodash';
 import StorageTools from './storage-tools';
@@ -22,7 +22,7 @@ export type AuthInfoType = {
 };
 
 const toAuthInfo = _.memoize(
-  (token: string): AuthInfoType => (isNotEmpty(token) ? jwtDecode(token) : ({} as AuthInfoType)),
+  (token: string): AuthInfoType => (ObjectUtils.isNotEmpty(token) ? jwtDecode(token) : ({} as AuthInfoType)),
 );
 
 async function saveTokenAsync(token: string) {
@@ -34,6 +34,11 @@ async function saveTokenAsync(token: string) {
   return authInfo;
 }
 
+async function getAuthInfoAsync(): Promise<AuthInfoType> {
+  const authInfo = StorageTools.get(AUTH_INFO, {});
+  return authInfo as AuthInfoType;
+}
+
 /**
  * 是否是一个有效的登录token
  */
@@ -42,21 +47,10 @@ async function isLoginToken() {
   if (authInfo.exp > 0) {
     // TODO 应该判断securityStatus，临时注释
     // if (authInfo.securityStatus === AuthInfoSecurityStatus.CERTIFICATE && authInfo.exp > 0) {
-    console.log(
-      'the token expTime is',
-      authInfo.exp,
-      'will exp ',
-      authInfo.exp - Date.now() / 1000,
-      'latter',
-    );
+    console.log('the token expTime is', authInfo.exp, 'will exp ', authInfo.exp - Date.now() / 1000, 'latter');
     return authInfo.exp - Date.now() / 1000 > SAFETY_TIME;
   }
   return false;
-}
-
-async function getAuthInfoAsync(): Promise<AuthInfoType> {
-  const authInfo = StorageTools.get(AUTH_INFO, {});
-  return authInfo as AuthInfoType;
 }
 
 async function getTokenAsync() {

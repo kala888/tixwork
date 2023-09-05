@@ -1,17 +1,21 @@
-import ImageListValueType from '@/components/value-type/image-list';
-import SingleImage from '@/components/value-type/image-list/single-image';
 import type { ProColumnType, ProFieldValueType, ProSchema } from '@ant-design/pro-components';
 import DepartmentValueType from './department';
-import IconTextValueType from './icon-text';
 import IdRenderValueType from './id-render';
 import MobileValueType from './mobile';
 import NickNameValueType from './nick-name';
-import ObjectValueType, { ObjectListValueType } from './object';
 import OptionActionsValueType from './option-actions';
-import QRCodeValueType from './qrcode';
 import TagValueType from './tag';
+import { IconTextValueType, ProMultipleTextLineValueType } from './text';
 
-import { RemoteCascadeValueType, RemoteEnumValueType, RemoteRadioValueType } from './remote';
+import {
+  FileListValueType,
+  FileValueType,
+  ImageListValueType,
+  SingleImageValueType,
+} from '@/components/value-type/file';
+import { ObjectValueType } from './object/object-link';
+import { ObjectListValueType } from './object/object-list';
+import { RemoteCascadeValueType, RemoteEnumValueType, RemoteRadioValueType, RemoteSelectValueType } from './remote';
 
 type PartialRecord<K extends string | number | symbol, T> = { [P in K]?: T };
 export type BizColumnType = { group?: string } & ProColumnType<any, EleValueType>;
@@ -21,17 +25,22 @@ export type CustomerValueType =
   | 'Department'
   | 'NickName'
   | 'IconText'
+  | 'TextList'
   | 'Tag'
   | 'OptionActions'
   | 'Mobile'
   | 'Object'
   | 'ObjectList'
-  | 'QRCode'
   | 'IdRender'
   | 'Image'
   | 'ImageList'
   | 'RemoteRadio'
   | 'RemoteEnum'
+  | 'RemoteSelect'
+  | 'Uid'
+  | 'RichEdit'
+  | 'File'
+  | 'FileList'
   | 'RemoteCascade';
 
 export type EleValueType = CustomerValueType | ProFieldValueType;
@@ -41,17 +50,20 @@ const elements: PartialRecord<EleValueType, ProSchema> = {
   Department: DepartmentValueType,
   NickName: NickNameValueType,
   IconText: IconTextValueType,
+  TextList: ProMultipleTextLineValueType,
   Tag: TagValueType,
   OptionActions: OptionActionsValueType,
   Mobile: MobileValueType,
   Object: ObjectValueType,
   ObjectList: ObjectListValueType,
-  QRCode: QRCodeValueType,
   IdRender: IdRenderValueType,
-  Image: SingleImage,
+  Image: SingleImageValueType,
   ImageList: ImageListValueType,
+  File: FileValueType,
+  FileList: FileListValueType,
   RemoteRadio: RemoteRadioValueType,
   RemoteEnum: RemoteEnumValueType,
+  RemoteSelect: RemoteSelectValueType,
   RemoteCascade: RemoteCascadeValueType,
 };
 

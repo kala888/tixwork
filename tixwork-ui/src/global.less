@@ -1,8 +1,3 @@
-@import '~antd/es/style/themes/default.less';
-@import './theme/tixwork-theme.less';
-
-// TODO 优先级覆盖问题
-
 html,
 body,
 #root {
@@ -22,8 +17,7 @@ canvas {
 }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
-    '微软雅黑', Arial, sans-serif;
+  font-family: @font-family;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -122,166 +116,8 @@ ol {
   }
 }
 
-// button color
-/* 扩展ant design pro按钮组件颜色 */
-.button-color {
-  color: #fff;
-}
-
-.button-color-dust&:extend(.button-color) {
-  background-color: #f5222d;
-  border-color: #f5222d;
-
-  &:hover,
-  &:focus {
-    color: #fff;
-    background-color: #ff4d4f;
-    border-color: #ff4d4f;
-  }
-
-  &:active,
-  &.active {
-    color: #fff;
-    background-color: #cf1322;
-    border-color: #cf1322;
-  }
-}
-
-.button-color-volcano:extend(.button-color) {
-  background-color: #fa541c;
-  border-color: #fa541c;
-
-  &:hover,
-  &:focus {
-    color: #fff;
-    background-color: #ff7a45;
-    border-color: #ff7a45;
-  }
-
-  &:active,
-  &.active {
-    color: #fff;
-    background-color: #d4380d;
-    border-color: #d4380d;
-  }
-}
-
-.button-color-sunset :extend(.button-color) {
-  background-color: #faad14;
-  border-color: #faad14;
-
-  &:hover,
-  &:focus {
-    color: #fff;
-    background-color: #ffc53d;
-    border-color: #ffc53d;
-  }
-
-  &:active,
-  &.active {
-    color: #fff;
-    background-color: #d48806;
-    border-color: #d48806;
-  }
-}
-
-.button-color-cyan :extend(.button-color) {
-  background-color: #13c2c2;
-  border-color: #13c2c2;
-
-  &:hover,
-  &:focus {
-    color: #fff;
-    background-color: #36cfc9;
-    border-color: #36cfc9;
-  }
-
-  &:active,
-  &.active {
-    color: #fff;
-    background-color: #08979c;
-    border-color: #08979c;
-  }
-}
-
-.button-color-green:extend(.button-color) {
-  background-color: #52c41a;
-  border-color: #52c41a;
-
-  &:hover,
-  &:focus {
-    color: #fff;
-    background-color: #73d13d;
-    border-color: #73d13d;
-  }
-
-  &:active,
-  &.active {
-    color: #fff;
-    background-color: #389e0d;
-    border-color: #389e0d;
-  }
-}
-
-.button-color-daybreak :extend(.button-color) {
-  background-color: #1890ff;
-  border-color: #1890ff;
-
-  &:hover,
-  &:focus {
-    color: #fff;
-    background-color: #096dd9;
-    border-color: #096dd9;
-  }
-
-  &:active,
-  &.active {
-    color: #fff;
-    background-color: #40a9ff;
-    border-color: #40a9ff;
-  }
-}
-
-.button-color-blue:extend(.button-color) {
-  background-color: #2f54eb;
-  border-color: #2f54eb;
-
-  &:hover,
-  &:focus {
-    color: #fff;
-    background-color: #1d39c4;
-    border-color: #1d39c4;
-  }
-
-  &:active,
-  &.active {
-    color: #fff;
-    background-color: #597ef7;
-    border-color: #597ef7;
-  }
-}
-
-.button-color-purple:extend(.button-color) {
-  background-color: #722ed1;
-  border-color: #722ed1;
-
-  &:hover,
-  &:focus {
-    color: #fff;
-    background-color: #9254de;
-    border-color: #9254de;
-  }
-
-  &:active,
-  &.active {
-    color: #fff;
-    background-color: #531dab;
-    border-color: #531dab;
-  }
-}
-
 .customized-form-item {
-  margin-bottom: 2px;
+  margin-bottom: 2px !important;
 }
 
 .flex-1 {
@@ -313,3 +149,135 @@ ol {
 //  padding-bottom: 0 !important;
 //  padding-left: 0 !important;
 //}
+
+.inner-tab > .ant-pro-card {
+  background: transparent;
+}
+
+.inner-tab > .ant-pro-card > .ant-pro-card-body {
+  padding: 0 !important;
+}
+
+.ant-form-item-has-error .clickable-item {
+  border-color: red;
+}
+
+.ant-modal-confirm-content {
+  width: 100%;
+}
+
+/* @import '~antd/es/style/themes/default.less';*/
+
+.ant-radio-button-wrapper {
+  padding: 0 15px !important;
+
+  &:last-child {
+    border-radius: 0 4px 4px 0 !important;
+  }
+
+  &:first-child {
+    border-radius: 4px 0 0 4px !important;
+  }
+}
+
+.ant-pro-sider-collapsed img {
+  height: 20px;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
+}
+
+.ant-layout-content {
+  margin: 12px;
+}
+
+.icon,
+.action-icon {
+  z-index: 9999999;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: -0.15em;
+  border: 1px solid red;
+  fill: currentColor;
+}
+
+.ant-form-vertical {
+  .ant-form-item {
+    padding-bottom: 0;
+  }
+
+  .ant-form-item-required::before {
+    position: absolute;
+    top: 4px;
+    right: 0;
+  }
+
+  .ant-form-item-required {
+    padding-right: 14px;
+  }
+}
+
+.ant-modal-header {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+// 设置多个等宽字体
+@monospaced-font-family: Menlo, SFMono-Regular, Consolas, Liberation Mono, monospace, @font-family;
+.monospaced {
+  font-family: @monospaced-font-family;
+
+  .ant-typography {
+    font-family: @monospaced-font-family;
+  }
+}
+
+//// Custom Theme 通过https://nervjs.github.io/taro-ui-theme-preview/ 处理
+//@color-brand: #28aaff;
+//@color-brand-light: #5ebfff;
+//@color-brand-dark: #2088cc;
+//// end Custom Theme
+//
+//@primary-color: @color-brand;
+//@primary-color-light: @color-brand-light;
+//@primary-color-lighter: lighten(@color-brand-light, 20%);
+//@primary-color-dark: @color-brand-dark;
+//@primary-color-darker: darken(@color-brand-light, 20%);
+//
+//@price-color: #f2270c;
+//@color-page-bg: #f0f2f5;
+//@under-line-color: #c4d8e7;
+//
+//@color-border-grey: #ccc;
+//@border-default: 1px solid @color-border-grey;
+//@disabled-color: #ddd;
+//
+//@shadow-color: rgba(40, 170, 255, 0.1);
+////@shadow-color: @primary-color;
+//
+//@black: #000;
+//@white: #fff;
+//@orange-color: #fd8814;
+//@red-color: #f23030;
+//@golden-color: #ab956d;
+//@silver-grey-color: #ccc;
+//@light-grey-color: #ededed;
+//@ice-blue-color: #53c7ca; //冰蓝
+//@green-color: #07c160;
+//
+//@text-color: #333;
+//@text-color-light: #56585c;
+//@text-color-lighter: #999;
+//
+//@level-default: @text-color-light;
+//@level-normal: @green-color;
+//@level-primary: @primary-color;
+//@level-warn: #ffc300;
+//@level-danger: #fa5151;
+//@level-info: @ice-blue-color;
+//
+//@placeholder: #ccc;

@@ -1,5 +1,6 @@
+import { disableClickEventBubbling } from '@/utils';
 import type { ActionLike, ActionList } from '@/utils/nice-router-types';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { Divider, Space } from 'antd';
 import _ from 'lodash';
 import React from 'react';
@@ -13,14 +14,19 @@ type OptionActionListType = {
 
 const listTheActions = (items = [], record) => {
   const list = items.map((it, idx) => {
-    // merge action
+    //1. 如果是dom就直接返回,复制一个并把record传进去
+    if (React.isValidElement(it)) {
+      return React.cloneElement(it, { record });
+    }
+    //2. json配置
+    // 2.1 merge action
     const theAction = it as ActionLike;
-    const recordAction = _.find(record?.actionList, (ac) => ac.code == theAction?.code);
+    const recordAction = _.find(record?.actionList, (ac) => ac.code === theAction?.code);
     const action = { ...theAction, ...(recordAction || {}) };
 
     const key = action.id + '_' + idx + '_' + action.code;
 
-    //如果action包含render方法, 执行render
+    //2.2 如果json，存在render方法，执行render
     if (_.isFunction(action.render)) {
       const dom = action.render(record, action);
       if (dom) {
@@ -30,18 +36,18 @@ const listTheActions = (items = [], record) => {
     }
 
     const handleClick = (e) => {
+      disableClickEventBubbling(e);
       if (action.disabled) {
         return;
       }
-      e.stopPropagation();
       if (action.onClick) {
         action.onClick(record, action);
       }
     };
-
+    //2.3 使用默认的OptionAction
     return <OptionAction key={key} {...action} onClick={handleClick} />;
   });
-  return list.filter((it) => isNotEmpty(it));
+  return list.filter((it) => ObjectUtils.isNotEmpty(it));
 };
 
 /**

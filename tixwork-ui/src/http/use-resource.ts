@@ -1,3 +1,4 @@
+import { API } from '@/http/api-types';
 import Q from '@/http/http-request/q';
 import ActionUtil from '@/utils/action-util';
 import type { ActionLike, ResourceLike } from '@/utils/nice-router-types';
@@ -9,17 +10,10 @@ type ParamType = {
   size?: number;
   [key: string]: any;
 };
-type TableList<T> = {
-  data: T[];
-  success: boolean;
-  total: number;
-  current?: number;
-  pageSize?: number;
-};
 
-type TypeOfList<T> = (params?: ParamType, options?: Record<string, any>) => Promise<TableList<T>>;
+type TypeOfList<T> = (params?: ParamType, options?: Record<string, any>) => Promise<API.TableDataInfo<T>>;
 type TypeOfGet<T> = (id: React.Key) => Promise<T>;
-type TypeOfAdd = (data: Record<string, any>) => Promise<any>;
+type TypeOfSave = (data: Record<string, any>) => Promise<any>;
 type TypeOfUpdate = (data: Record<string, any>) => Promise<any>;
 type TypeOfRemove = (id: React.Key, options?: Record<string, any>) => Promise<any>;
 type TypeOfSearch = (params: ParamType, options?: Record<string, any>) => Promise<any>;
@@ -27,11 +21,12 @@ type TypeOfSearch = (params: ParamType, options?: Record<string, any>) => Promis
 export type BizResourceType<T> = {
   list: TypeOfList<T>;
   get: TypeOfGet<T>;
-  add: TypeOfAdd;
+  save: TypeOfSave;
   update: TypeOfUpdate;
   remove: TypeOfRemove;
   exportData: TypeOfSearch;
   importData: TypeOfSearch;
+  resourceLike: ResourceLike;
 };
 
 class SubUri {
@@ -64,7 +59,7 @@ function toResource(param) {
     linkToUrl: uri.subUrl('/:id'),
     method: 'GET',
   };
-  const add: ActionLike = {
+  const save: ActionLike = {
     linkToUrl: uri.getUrl(),
     method: 'POST',
   };
@@ -88,7 +83,7 @@ function toResource(param) {
   const resource: ResourceLike = {
     list,
     get,
-    add,
+    save,
     update,
     remove,
     exportData,
@@ -103,18 +98,15 @@ function toResource(param) {
   return resource;
 }
 
-export function getResource<T>(
-  theResource: string | ActionLike | ResourceLike,
-): BizResourceType<T> {
-  const resource: ResourceLike = toResource(theResource);
-
+function _getResource<T>(resource) {
+  const resourceLike: ResourceLike = toResource(resource);
   const send = async (action, data, option = {}) => {
     const url = ActionUtil.getActionUri(action);
     return await Q.send(url, { data, method: action.method, ...option });
   };
 
   const list: TypeOfList<T> = async (data, options = {}) => {
-    const resp = await send(resource.list, data, {
+    const resp = await send(resourceLike.list, data, {
       params: {
         pageNum: data?.current,
         pageSize: data?.pageSize,
@@ -122,38 +114,44 @@ export function getResource<T>(
       ...options,
     });
     return {
-      data: resp.data?.rows,
-      success: true,
-      total: resp.data?.total,
+      ...resp,
+      total: resp.total as any,
       current: data?.current,
       pageSize: data?.pageSize,
+      success: true,
     };
   };
 
   const get: TypeOfGet<T> = async (id) => {
-    const resp = await send(resource.get, { id });
+    const resp = await send(resourceLike.get, { id });
     return resp.data;
   };
 
-  const add = async (data: Record<string, any>) => send(resource.add, data);
-  const update = async (data: Record<string, any>) => send(resource.update, data);
-  const remove = async (id: React.Key, options?: Record<string, any>) =>
-    send(resource.remove, { id }, options);
-  const exportData: TypeOfSearch = async (params, options) =>
-    send(resource.exportData, {}, options);
-  const importData: TypeOfSearch = async (params, options) =>
-    send(resource.importData, {}, options);
+  const save = async (data: Record<string, any>) => send(resourceLike.save, data);
+  const update = async (data: Record<string, any>) => send(resourceLike.update, data);
+  const remove = async (id: React.Key, options?: Record<string, any>) => send(resourceLike.remove, { id }, options);
+  const exportData: TypeOfSearch = async (params, options) => send(resourceLike.exportData, {}, options);
+  const importData: TypeOfSearch = async (params, options) => send(resourceLike.importData, {}, options);
 
   return {
     list,
     get,
-    add,
+    save,
     update,
     remove,
     exportData,
     importData,
+    resourceLike,
   };
 }
 
-const useResource = getResource;
+export const getResource: <T = any>(resource: string | ActionLike | ResourceLike) => BizResourceType<T> = <T>(
+  resource,
+) => {
+  return _getResource<T>(resource);
+};
+export const useResource: <T = any>(resource: string | ActionLike | ResourceLike) => BizResourceType<T> = <T>(
+  resource,
+) => getResource<T>(resource);
+
 export default useResource;

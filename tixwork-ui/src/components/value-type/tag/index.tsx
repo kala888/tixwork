@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 type ProTagType = {
   text: string;
-  valueEnum?: Record<string, object>;
+  valueEnum?: Record<string, any>;
 };
 export const ProTag = (props: ProTagType) => {
   const { text, valueEnum } = props;

@@ -66,11 +66,7 @@ const Settings = () => {
     <GridContent>
       <div className={styles.account} ref={ref}>
         <div className={styles.accountLeft}>
-          <Menu
-            mode={initConfig.mode}
-            selectedKeys={[initConfig.selectKey]}
-            onClick={handleMenuClick}
-          >
+          <Menu mode={initConfig.mode} selectedKeys={[initConfig.selectKey]} onClick={handleMenuClick}>
             <Menu.Item key={'base'}>基本设置</Menu.Item>
             <Menu.Item key={'security'}>安全设置</Menu.Item>
             <Menu.Item key={'notification'}>通知设置</Menu.Item>

@@ -16,14 +16,10 @@ const AVATAR_IMAGES = [
   'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-5.jpg',
 ];
 const FIRST_NAME = [
-  '奕辰',
-  '宇轩',
-  '子墨',
-  '浩然',
-  '一诺',
-  '子涵',
-  '可欣',
-  '梦瑶',
+  '英',
+  '华',
+  '玉',
+  '秀',
   '飞',
   '三',
   '磊',
@@ -36,23 +32,23 @@ const FIRST_NAME = [
   '建国',
   '铁蛋',
   '长海',
+  '小丽',
+  '桂梅',
+  '云芳',
+  '四海',
+  '春梅',
+  '文明',
+  '奕辰',
+  '宇轩',
+  '子墨',
+  '浩然',
+  '一诺',
+  '子涵',
+  '可欣',
+  '梦瑶',
 ];
 
-const LAST_NAME = [
-  '李',
-  '王',
-  '张',
-  '刘',
-  '陈',
-  '杨',
-  '黄',
-  '赵',
-  '周',
-  '吴',
-  '阿不力孜•',
-  '迪丽热巴•',
-  '阿卜杜拉•',
-];
+const LAST_NAME = ['李', '王', '张', '刘', '陈', '杨', '黄', '赵', '周', '吴', '阿不力孜•', '迪丽热巴•', '阿卜杜拉•'];
 
 const NICK_NAME = [
   '最浪漫的事',
@@ -140,8 +136,7 @@ const SHORT_BRIEF = [
 const TITLE_BRIEF = [
   {
     title: '华为 P40 Pro+ 的十倍光变是怎样实现的？',
-    brief:
-      '从过去的数字变焦、混合变焦，再到今天的光学变焦，手机的远摄能力正如它们的性能一样在不停变化',
+    brief: '从过去的数字变焦、混合变焦，再到今天的光学变焦，手机的远摄能力正如它们的性能一样在不停变化',
   },
   { title: '我退役了，要专注练习龙吸水', brief: '退役专注龙吸水！“田径泥石流”张国伟的沙雕日常' },
   {
@@ -169,6 +164,15 @@ const userName = () => _.sample(LAST_NAME) + _.sample(FIRST_NAME);
 const titleBrief = () => _.sample(TITLE_BRIEF);
 const brief = () => _.sample(SHORT_BRIEF);
 const nickName = () => _.sample(NICK_NAME);
+const idCard = () => {
+  const region = _.toString(_.random(100, 599));
+  const region2 = _.toString(_.random(100, 499));
+  const year = _.toString(_.random(1900, 2010));
+  const month = _.toString(_.random(1, 12));
+  const day = _.toString(_.random(1, 30));
+  const last = _.toString(_.random(1000, 9999));
+  return region + region2 + year + _.padStart(month, 2, '0') + _.padStart(day, 2, '0') + last;
+};
 
 const MockDataCache = {};
 const mockResp = (uri: string = '', xClass: string, data: any = {}, others) => {
@@ -191,6 +195,7 @@ const MockService = {
   titleBrief,
   brief,
   nickName,
+  idCard,
 };
 // 凑活用
 export default MockService;

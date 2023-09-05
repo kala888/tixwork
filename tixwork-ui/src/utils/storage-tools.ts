@@ -1,4 +1,4 @@
-import { parseToObject } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import _ from 'lodash';
 
 const SHA1 = require('sha1');
@@ -35,7 +35,7 @@ const StorageTools = {
       return defaultValue;
     }
     const value = getItem(theKey);
-    return parseToObject(value, defaultValue);
+    return ObjectUtils.parseToObject(value, defaultValue);
   },
 
   /**

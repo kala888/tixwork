@@ -1,6 +1,6 @@
 import IconFont from '@/components/icon-font';
 import { colors } from '@/components/value-type/style-utils';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { ProCard } from '@ant-design/pro-components';
 import { Empty, Input, Space, Tree } from 'antd';
@@ -24,7 +24,7 @@ export type EleTreeType = {
 };
 
 const highLight = (str = '', key = '') => {
-  if (isEmpty(key) || isEmpty(str) || str.indexOf(key) === -1) {
+  if (ObjectUtils.isEmpty(key) || ObjectUtils.isEmpty(str) || str.indexOf(key) === -1) {
     return <span>{str}</span>;
   }
 
@@ -52,7 +52,8 @@ export default function EleTree(props: EleTreeType) {
   const { onSelect, dataSource = [], searchPlaceholder = '输入名称查询' } = props;
 
   const handleSelect = (selectedKeys, { selected, node }) => {
-    const key = selectedKeys[0];
+    const key = selectedKeys[0]; //二次点击会uncheck
+    // const key = node.id;  // 二次点击不会uncheck，但是数据不刷新
     console.log('key...', selected, key);
     if (onSelect) {
       onSelect(key, node);
@@ -60,14 +61,14 @@ export default function EleTree(props: EleTreeType) {
   };
 
   const handleChange = _.debounce((e) => {
-    if (isEmpty(e.target.value)) {
+    if (ObjectUtils.isEmpty(e.target.value)) {
       setKeyword('');
     }
   }, 200);
 
   const handleSearch = (value) => {
     setKeyword(value);
-    if (isNotEmpty(value)) {
+    if (ObjectUtils.isNotEmpty(value)) {
       const result = filter(dataSource, value);
       setFilteredData(result);
       return;
@@ -75,7 +76,7 @@ export default function EleTree(props: EleTreeType) {
     setFilteredData([]);
   };
 
-  const treeData: any = isNotEmpty(keyword) ? filteredData : dataSource;
+  const treeData: any = ObjectUtils.isNotEmpty(keyword) ? filteredData : dataSource;
 
   const titleRender = (node) => {
     const { title, icon } = node;
@@ -86,17 +87,12 @@ export default function EleTree(props: EleTreeType) {
       </Space>
     );
   };
-  console.log('ttttttt', treeData);
   return (
     <ProCard ghost>
       <div className={styles.search}>
-        <Input.Search
-          placeholder={searchPlaceholder}
-          onChange={handleChange}
-          onSearch={handleSearch}
-        />
+        <Input.Search placeholder={searchPlaceholder} onChange={handleChange} onSearch={handleSearch} />
       </div>
-      {isNotEmpty(treeData) ? (
+      {ObjectUtils.isNotEmpty(treeData) ? (
         <Tree
           titleRender={titleRender}
           switcherIcon={<CaretDownOutlined className={styles.switchIcon} />}

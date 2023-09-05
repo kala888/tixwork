@@ -1,4 +1,4 @@
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import deepdash from 'deepdash';
 import lodash from 'lodash';
 import type React from 'react';
@@ -14,12 +14,12 @@ type CheckType = 'checked' | 'unchecked' | 'halfChecked' | undefined;
 export const getCheckType = (root, keys: any[] = []): CheckType => {
   const { children = [], id = '' } = root;
   // 没有儿子，就返回自身状态
-  if (isEmpty(children)) {
+  if (ObjectUtils.isEmpty(children)) {
     return keys.indexOf(id) > -1 ? 'checked' : 'unchecked';
   }
 
   let type: CheckType;
-  if (isNotEmpty(children)) {
+  if (ObjectUtils.isNotEmpty(children)) {
     for (let i = 0; i < children.length; i++) {
       const childCheckedType = getCheckType(children[i], keys);
       if (_.isNil(type)) {

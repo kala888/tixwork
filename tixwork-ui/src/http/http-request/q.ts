@@ -1,3 +1,5 @@
+import type { API } from '@/http/api-types';
+import Config from '@/utils/config';
 import { request } from '@umijs/max';
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'PATCH';
@@ -14,9 +16,7 @@ type RequestOptionType = {
 type RequestParamsType = Record<string, any>;
 
 export interface RequestType {
-  <R = any>(url: string, data?: RequestParamsType, options?: RequestOptionType): Promise<
-    API.WebResult<R>
-  >;
+  <R = any>(url: string, data?: RequestParamsType, options?: RequestOptionType): Promise<API.WebResult<R>>;
 }
 
 interface SendRequestType {
@@ -76,6 +76,13 @@ const put: RequestType = (url = '', data = {}, options = {}) => {
   return request(url, theOptions);
 };
 
+const remove: RequestType = (url = '', params = {}, options = {}) => {
+  return request(url, {
+    method: 'DELETE',
+    params,
+    ...(options || {}),
+  });
+};
 /**
  * 暴露request出去，例如使用Delete的时候可以用这个.
  * <b>注意只有两个参数</b>
@@ -86,6 +93,11 @@ const send: SendRequestType = (url = '', options = {}) => {
   return request(url, options);
 };
 
+const authHeader = () => ({
+  Authorization: `Bearer ${localStorage.getItem('token')}`,
+  clientid: Config.clientid,
+});
+
 /**
  * 为啥叫Q，应为比R（request）更Q
  */
@@ -94,10 +106,12 @@ const Q = {
   post,
   put,
   send,
-  Get: get,
-  Post: post,
-  Put: put,
-  Send: send,
+  remove,
+  authHeader,
+  // Get: get,
+  // Post: post,
+  // Put: put,
+  // Send: send,
 };
 
 export default Q;
