@@ -71,15 +71,18 @@ export default function FileImport(props: FileImportType) {
   };
   const css = useEmotionCss(({ token }) => ({
     '.ant-btn': {
-      backgroundColor: '#faab00',
-      borderColor: ' #faab00',
+      backgroundColor: '#bc9575',
+      borderColor: ' #bc9575',
       color: '#fff',
       '&:hover, &:active': {
-        color: '#fff',
-        backgroundColor: '#ffc53d',
-        borderColor: ' #ffc53d',
+        color: '#eee !important',
+        backgroundColor: '#bca984 !important',
+        borderColor: ' #bca984  !important',
       },
     },
+  }));
+
+  const templateCss = useEmotionCss(({ token }) => ({
     '.upload-button': {
       borderTopRightRadius: 0,
       borderBottomRightRadius: 0,
@@ -97,8 +100,8 @@ export default function FileImport(props: FileImportType) {
     },
   }));
 
-  const rootCls = classNames('file-import', {
-    [css]: ObjectUtils.isNotEmpty(templateUrl),
+  const rootCls = classNames('file-import', css, {
+    [templateCss]: ObjectUtils.isNotEmpty(templateUrl),
   });
 
   return (

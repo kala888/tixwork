@@ -59,7 +59,7 @@ const Login: React.FC = () => {
       const loginData = {
         ...params,
         grantType: type,
-        clientId: Config.clientid,
+        clientId: Config.getClientId(),
       };
       const resp = await Q.post<API.LoginResult>(ApiConfig.login, loginData);
       if (resp.code === 200) {

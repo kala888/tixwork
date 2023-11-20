@@ -1,0 +1,55 @@
+.timeLineContainer {
+  display: flex;
+  width: 100%;
+  position: relative;
+  margin: 40px 0;
+  user-select: none;
+
+  .timeLine {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    transition: all .3s;
+  }
+
+  .point {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #E4002B;
+    //background-color: #06187D;
+    box-shadow: 0 0 0 5px #D8D8D8;
+  }
+
+  .activePoint {
+    background-color: #67D9FF;
+    box-shadow: 0 0 0 5px #2986ED;
+  }
+
+  .topText {
+    position: absolute;
+    width: fit-content;
+    bottom: 22px;
+    transform: translateX(-50%);
+    font-size: 16px;
+    font-family: PingFangSC-Semibold, PingFang SC, sans-serif;
+    font-weight: 600;
+    color: #FFFFFF;
+  }
+
+  .bottomText {
+    position: absolute;
+    width: fit-content;
+    top: 22px;
+    transform: translateX(-50%);
+    height: 27px;
+    font-size: 16px;
+    font-family: AlibabaPuHuiTi-Regular, AlibabaPuHuiTi, sans-serif;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 27px;
+  }
+}

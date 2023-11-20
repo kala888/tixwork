@@ -39,8 +39,8 @@ export default function LoginPage(props) {
       return
     }
     // mock-check
-    if (userName === '100001' && password === '200002') {
-      onSuccess && onSuccess('http://xxxx.com?' + Date.now().valueOf())
+    if (userName === '111111' && password === '222222') {
+      onSuccess && onSuccess('http://datav.tiandtech.com/ggas?' + Date.now().valueOf())
       return
     }
     GlobalToast.show({text: '账号密码错误，请稍后再试'})

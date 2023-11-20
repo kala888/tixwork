@@ -1,0 +1,44 @@
+.totalPanel {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.orderTotalHistory {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .historyTotal {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    box-sizing: border-box;
+
+    &Title {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    &Value {
+      font-size: 24px;
+      color: #66FFFF;
+    }
+
+    &Image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

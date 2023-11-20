@@ -1,9 +1,9 @@
 import {AppConfiguration} from '@/nice-router/nice-router.config'
 import ViewMappingConfig from '@/utils/viewmapping.config'
 
-const baseURL = 'http://xxx.com/' //测试地址
+const baseURL = 'http://lab-vision.tiandtech.com/' //测试地址
 
-const h5Prefix = 'http://xxx.com/h5/pages' //H5页面
+const h5Prefix = 'http://lab-vision.tiandtech.com/h5/pages' //H5页面
 
 const ApiConfig = {
   FooterHome: 'wxappService/viewHomePage/',

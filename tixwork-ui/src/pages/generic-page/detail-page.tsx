@@ -40,8 +40,8 @@ export default function DetailPage() {
   if (ObjectUtils.isEmpty(id) || ObjectUtils.isEmpty(schema)) {
     return <Empty description="没有找到对应的页面" />;
   }
-
-  const extra = (
+  const editAction = schema.lineActionList?.find((it) => it.code === 'edit');
+  const extra = editAction ? (
     <EditForm
       schema={schema}
       values={dataSource}
@@ -52,7 +52,7 @@ export default function DetailPage() {
         </Button>
       }
     />
-  );
+  ) : null;
   return (
     <BasePage title={schema.label + '详情'} brief={id} className="detail-page" extra={extra} loading={loading}>
       <EleDetail objectType={objectType} dataSource={dataSource} onRefresh={refresh} />

@@ -1,7 +1,7 @@
-import StorageTools from "@/nice-router/storage-tools";
-import {useEffect, useState} from "react";
+import StorageTools from '@/nice-router/storage-tools';
+import {useEffect, useState} from 'react';
 
-const DASHBOARD_URL_KEY = "dashboard-url";
+const DASHBOARD_URL_KEY = 'dashboard-url';
 
 export default function useRemoteUrl() {
   const [url, setUrl] = useState('');

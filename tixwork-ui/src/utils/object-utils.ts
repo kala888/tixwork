@@ -18,6 +18,9 @@ const isEmpty = (value: any) => {
   if (_.isString(value)) {
     return value.length === 0;
   }
+  if (value?.size > 0) {
+    return false;
+  }
   return _.isEmpty(value);
 };
 

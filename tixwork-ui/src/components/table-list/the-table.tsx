@@ -164,8 +164,15 @@ function _ProList<T extends Record<string, any>>(props: ProListType<T>, ref: Rea
   /**
    * 处理toolBarRender
    */
-  const toolBarRender = () => [<TableActionList key="toolBar" items={actionList} onAdd={onAdd} onRefresh={refresh} />];
-
+  const toolBarRender = () => [
+    <TableActionList
+      key="toolBar"
+      params={searchRef?.current?.form?.getFieldsValue}
+      items={actionList}
+      onAdd={onAdd}
+      onRefresh={refresh}
+    />,
+  ];
   // // 通过ref导出可调用方法
   React.useImperativeHandle(ref, () => ({
     remove: onRemove,

@@ -1,0 +1,44 @@
+body {
+  padding: 0 24px;
+  font-size: 15px;
+  font-family: SimSun, Source Han Serif CN, serif;
+  word-break: break-all;
+}
+
+.title {
+  width: 100%;
+  font-weight: 500;
+  font-size: 30px;
+  text-align: center;
+}
+
+.title span {
+  padding: 0 10px;
+}
+
+.content div {
+  margin: 8px 0;
+}
+
+.new-line {
+  color: red;
+  line-height: 1.3em;
+  text-indent: 2em;
+}
+
+.footer {
+  width: 100%;
+  padding-top: 50px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.footer-content {
+  float: right;
+  padding-right: 20px;
+}
+
+.under-line {
+  padding: 0 4px 2px;
+  border-bottom: 1px solid #666;
+}

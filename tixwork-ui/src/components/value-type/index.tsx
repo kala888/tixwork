@@ -13,6 +13,7 @@ import {
   ImageListValueType,
   SingleImageValueType,
 } from '@/components/value-type/file';
+import { RichEditorValueType } from '@/components/value-type/rich-editor';
 import { ObjectValueType } from './object/object-link';
 import { ObjectListValueType } from './object/object-list';
 import { RemoteCascadeValueType, RemoteEnumValueType, RemoteRadioValueType, RemoteSelectValueType } from './remote';
@@ -65,6 +66,7 @@ const elements: PartialRecord<EleValueType, ProSchema> = {
   RemoteEnum: RemoteEnumValueType,
   RemoteSelect: RemoteSelectValueType,
   RemoteCascade: RemoteCascadeValueType,
+  RichEdit: RichEditorValueType,
 };
 
 export default elements;

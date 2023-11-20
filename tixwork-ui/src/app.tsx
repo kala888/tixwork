@@ -27,10 +27,10 @@ const appList = [
     url: 'https://www.tiandtech.com',
   },
   {
-    icon: 'http://www.scts-law.com/views/new/assets/images/logo.jpg',
-    title: '韬世律所',
-    desc: '工作中的生活家，生活里的勤勉者',
-    url: 'https://scts-law.com/',
+    icon: '/logo.svg',
+    title: '阿什力',
+    desc: '法律科技服务供应商',
+    url: 'https://www.aslzz.com/',
   },
 ];
 // 动态路由方案，通过patchClientRoutes，将路由信息注入到路由表。

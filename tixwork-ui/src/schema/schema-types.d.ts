@@ -13,6 +13,7 @@ export type ResourceDefine = {
   brief?: string;
   linkToUrl: string;
   actionList?: ActionType[];
+  lineActionList?: ActionType[];
   columns: BizColumnType[];
   listProps?: BizColumnType[];
   tableConfig: {

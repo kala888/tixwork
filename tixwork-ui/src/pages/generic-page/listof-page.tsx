@@ -30,6 +30,8 @@ export default () => {
       minHeight: '70vh',
     },
   }));
+  const actionList = ObjectUtils.isEmpty(schema.actionList) ? false : schema.actionList;
+  const lineActionList = ObjectUtils.isEmpty(schema.lineActionList) ? false : schema.lineActionList;
 
   return (
     <BasePage className="main-page" title={schema.label} brief={schema.brief} header={!isTopMenu}>
@@ -39,7 +41,8 @@ export default () => {
         title={schema.label}
         columns={schema.columns}
         formProps={{ columns: schema.columns }}
-        actionList={schema.actionList as any}
+        actionList={actionList}
+        lineActionList={lineActionList}
         editForm={(plist) => <EditForm {...plist} schema={schema} />}
         {...schema.tableConfig}
       />

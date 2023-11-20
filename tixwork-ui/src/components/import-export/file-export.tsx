@@ -5,19 +5,21 @@ import { DownloadOutlined } from '@ant-design/icons';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { Button, message, Popconfirm } from 'antd';
 import FileSaver from 'file-saver';
+import _ from 'lodash';
 import React from 'react';
 
 type FileExportType = {
   title?: string | React.ReactElement;
+  popupTitle?: string | React.ReactElement;
   linkToUrl: string;
-  params: Record<string, any>;
+  params?: Record<string, any>;
 };
 
 export default function FileExport(props: FileExportType) {
   const { loading, showLoading, hideLoading } = useLoading(false);
   const { open, close, show } = useOpen();
 
-  const { title = '导出Excel', linkToUrl, params = {} } = props;
+  const { popupTitle, title = '导出Excel', linkToUrl, params } = props;
 
   const handleOk = async () => {
     if (ObjectUtils.isEmpty(linkToUrl)) {
@@ -25,8 +27,10 @@ export default function FileExport(props: FileExportType) {
       return;
     }
     showLoading();
+    console.log('props', props);
+    const theParams = _.isFunction(params) ? params() : params || {};
     try {
-      const resp = await Q.post(linkToUrl, params, {
+      const resp = await Q.post(linkToUrl, theParams, {
         responseType: 'blob',
         getResponse: true,
       });
@@ -44,13 +48,13 @@ export default function FileExport(props: FileExportType) {
 
   const css = useEmotionCss(({ token }) => ({
     '.ant-btn': {
-      backgroundColor: '#13c2c2',
-      borderColor: ' #13c2c2',
+      backgroundColor: '#68945c',
+      borderColor: ' #68945c',
       color: '#fff',
       '&:hover, &:active': {
-        color: '#fff',
-        backgroundColor: '#36cfc9',
-        borderColor: ' #36cfc9',
+        color: '#eee !important',
+        backgroundColor: '#9bb496 !important',
+        borderColor: ' #9bb496 !important',
       },
     },
   }));
@@ -59,7 +63,7 @@ export default function FileExport(props: FileExportType) {
 
   return (
     <Popconfirm
-      title="确定是否导出当前查询数据？"
+      title={popupTitle || '确定是否导出当前查询数据？'}
       open={open}
       onConfirm={handleOk}
       okButtonProps={{ loading }}

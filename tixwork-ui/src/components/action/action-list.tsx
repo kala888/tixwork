@@ -45,6 +45,7 @@ function DefaultButton(props) {
 
 type ActionListType = {
   items: Actions;
+  params?: Record<string, any>;
 };
 
 const ActionsMapping: Record<string, any> = {
@@ -53,7 +54,7 @@ const ActionsMapping: Record<string, any> = {
 };
 
 export default function ActionList(props: ActionListType) {
-  const { items = [] } = props;
+  const { items = [], params } = props;
   return (
     <Space>
       {items.map((it) => {
@@ -61,7 +62,7 @@ export default function ActionList(props: ActionListType) {
           return it;
         }
         const Component = _.get(ActionsMapping, it?.code as any) || DefaultButton;
-        return <Component key={it?.code + '_' + it.title} {...it} />;
+        return <Component key={it?.code + '_' + it.title} params={params} {...it} />;
       })}
     </Space>
   );

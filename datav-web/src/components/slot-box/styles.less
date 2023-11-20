@@ -1,0 +1,34 @@
+.slotBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &Title {
+    letter-spacing: 0.3rem;
+    display: flex;
+    flex-direction: row;
+    opacity: 0.8;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  &Content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    min-height: 100px;
+  }
+  &Mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.07;
+    background: linear-gradient(90deg, rgba(2, 119, 198, 1) 0%, rgba(2, 119, 198, 1) 0%, rgba(2, 119, 198, 1) 100%, rgba(2, 119, 198, 1) 100%);
+  }
+}
+

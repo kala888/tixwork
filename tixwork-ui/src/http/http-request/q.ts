@@ -95,7 +95,7 @@ const send: SendRequestType = (url = '', options = {}) => {
 
 const authHeader = () => ({
   Authorization: `Bearer ${localStorage.getItem('token')}`,
-  clientid: Config.clientid,
+  clientid: Config.getClientId(),
 });
 
 /**

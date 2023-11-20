@@ -2,14 +2,20 @@ import ActionList from '@/components/action/action-list';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Space } from 'antd';
 
+type TableActionListType = {
+  items: any[] | false;
+  onAdd: any;
+  onRefresh: any;
+  params?: (() => Record<string, any>) | Record<string, any>;
+};
 const defaultTitle = (
   <Space>
     <PlusOutlined />
     创建
   </Space>
 );
-export default function TableActionList(props) {
-  const { items = [], onAdd, onRefresh } = props;
+export default function TableActionList(props: TableActionListType) {
+  const { items = [], onAdd, onRefresh, params } = props;
   if (items === false) {
     return null;
   }
@@ -31,5 +37,5 @@ export default function TableActionList(props) {
     return it;
   });
 
-  return <ActionList {...props} items={actionList} />;
+  return <ActionList {...props} params={params} items={actionList} />;
 }

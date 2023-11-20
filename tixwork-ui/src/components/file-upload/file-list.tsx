@@ -1,4 +1,5 @@
 import ActionIcon from '@/components/elements/action-icon';
+import PDFView from '@/components/pdf';
 import FileTypeUtils from '@/services/file-type-utils';
 import ObjectUtils from '@/utils/object-utils';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
@@ -37,6 +38,20 @@ export function FileList(props: FileListType) {
         }
         const icon = FileTypeUtils.getFileIconByType(fileType);
         const fileName = url.substring(url.lastIndexOf('/') + 1);
+        if (fileType === 'pdf') {
+          return (
+            <PDFView
+              key={index + icon}
+              source={url}
+              trigger={
+                <>
+                  <ActionIcon key={index + icon} icon={icon} size={15} />
+                  {fileName}
+                </>
+              }
+            />
+          );
+        }
         return (
           <Popover key={index + url} className={'flex-center'} content="点击下载">
             <a rel="noreferrer" href={url} target="_blank" style={{ cursor: 'pointer' }}>

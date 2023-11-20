@@ -1,0 +1,102 @@
+@pageWidth: 100vw;
+@pageHeight: 100vh;
+
+@headerHeight: 10vh;
+@bodyHeight: @pageHeight - @headerHeight;
+@topHeight: 60vh;
+@bottomHeight: @bodyHeight - @topHeight;
+
+html, body {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(3, 33, 71, 1) 0%, rgba(3, 33, 71, 1) 0%, rgba(16, 62, 112, 1) 13%, rgba(16, 62, 112, 1) 87%, rgba(3, 33, 71, 1) 100%, rgba(3, 33, 71, 1) 100%);
+}
+
+.main {
+  position: absolute;
+  z-index: 0;
+  width: @pageWidth;
+  height: @pageHeight;
+
+  &Header {
+    height: @headerHeight;
+    width: @pageWidth;
+    position: relative;
+    background: url("../../assets/header-bg.png") no-repeat center;
+    background-size: auto 85%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    &Text {
+      letter-spacing: 0.5rem;
+      display: flex;
+      font-size: 32px;
+      font-weight: 400;
+      color: #FFFFFF;
+      z-index: 99999;
+    }
+
+    &Logo {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  }
+
+  &Content {
+    width: @pageWidth;
+    height: @bodyHeight;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    padding: 0 10px;
+  }
+
+  &Top {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    height: @topHeight;
+    width: 100%;
+
+    &Left {
+      display: flex;
+      flex: 3;
+      flex-direction: column;
+    }
+
+    &Center {
+      display: flex;
+      flex: 6;
+      flex-direction: column;
+      padding: 10px 10px 0;
+    }
+
+    &Right {
+      display: flex;
+      flex: 3;
+      flex-direction: column;
+    }
+  }
+
+  &Bottom {
+    margin-top: 10px;
+    height: @bottomHeight;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+
+    &Center {
+      padding: 0 10px;
+    }
+  }
+
+
+}

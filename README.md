@@ -1,49 +1,107 @@
-#### 第0适合后端程序员的前端小程序开发框架
-tixwork-taro 是一个前端低代码框架(低码)，可以使用JSON数据驱动页面渲染，可以极大节省页面开发工作量，极大提升开发前端界面的效率。(可手动定制页面)
+# 项目Tixwork
+版本3.0.5
 
-多端统一开发体验 + 满足前端页面驱动和后端路由驱动的需求 + 给予后端开发页面控制权（方便实现客CS程序的千人千面，业务变更）
+### 项目结构
 
+目前系统包含6个大的模块。
 
-###### 已经上线的小程序(界面截图在最下面)
-
-<div>
-  
-  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/chainqa-qr.jpg'/><span style='margin-right:20px'>链问链答(区块链)</span>
-  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/xiaohuanglong-qr.png'/><span style='margin-right:20px'>小黄龙(环保供应链)</span>
-   <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/shuxiang-qr.png'/><span style='margin-right:20px'>爱书香(社交类)</span>
-  <img width='100px' height='100px' src='https://doublechain.oss-cn-hangzhou.aliyuncs.com/logo/doublechain-qr.jpg'/><span style='margin-right:20px'>双链索骥(大数据)</span>
-  
-</div>
-
-
-
-# tixwork-taro
-
-#### 基础知识：React + DVA + Taro3 + TaroUI
-
-[Taro(读音：泰罗)](https://github.com/NervJS/taro) 是京东家的小程序开发框架，基于react（vue也可以）实现的跨多端开发框架（微信小程序，支付宝小程序，RN，抖音小程序......）
-
-- 目前来说Taro可能是综合评分最高的第三方小程序开发框架（相比wepy和mpvue）
-
-[开始安装看效果](/docs/README.md)
+|  模块    |  说明  |
+|  ----  |  ----  |
+| datav-app       |  大屏用App      |
+| datav-web       |  数据大屏应用      |
+| models          |  模型定义   |
+| tixwork-service |  基于Springboot的后台应用     |
+| tixwork-taro    |  基于taro的小程序跨多端移动框架     |
+| tixwork-ui      |  基于Antd的中台框架     |
 
 
 
-#### 部分项目截图
+### 如何开始新的项目"demo"
 
-[![B站视频](https://nice-router.oss-cn-chengdu.aliyuncs.com/docs/video-image.png)](https://www.bilibili.com/video/BV1F5411b74Q)
+##### 1.准备代码
 
-<div>
-  <img src='http://img13.360buyimg.com/img/jfs/t1/112451/27/7969/1164755/5ec76253E3c56630a/b26b11c83f7062a1.png.webp'/>
-</div>
+```shell
 
-### tixwork-taro 已经组件共享提供了基础的支持。希望各位兄弟贡献各种常用的组件，尤其是那些促销组件。让体力活变为OOTB。
+echo "1. copy files"
+cp -R -H tixwork demo
+cd demo
+git checkout master
+rm -rf .git
 
-tixwork-taro  包含两部分：
+echo "2. should create project at github"
+
+echo "3. init project"
+git init
+git add *.* 
+git commit -am "first commit"
+
+echo "4. push code to remote"
+git remote add origin git@github.com:kala888/demo.git
+git push
+
+echo "5.add code gen base remote: tixwork "
+git remote add tixwork git@github.com:kala888/tixwork.git
+git fetch tixwork
+git merge --allow-unrelated-histories tixwork/dev
+
+```
+
+##### 2.修改模型并生成
+
+2.1. 在tixwork-generator目录中建立软连接
+```shell
+cd tixwork-generator/code-service/models
+ln -s ~/tiandtech/demo/models demo
+```
+
+2.2 修改code-service/models/demo/index.xml 模型
+
+2.3 修改项目属性，clientid, logo, 数据库schema TODO
 
 
-[tixwork-taro 开发文档](https://github.com/kala888/nice-router-taro/blob/master/tixwork-taro/docs/README.md)
+##### 3.本地开发测试
 
-###### 感谢Jetbrains提供IDE支持
+1.启动redis和pgsql
+```shell
+cd tixwork-service/docker
+docker-compose -f docker-compose-dev.yml up -d  
+````
 
-[![](https://github.com/kala888/tixwork-taro/blob/master/docs/assets/jetbrains.svg)](https://www.jetbrains.com)
+2.启动后台服务
+```shell
+cd tixwork-service/tixwork-api
+gradle clean bR 
+````
+
+3.启动前台服务
+```shell
+cd tixwork-ui
+yarn && yarn start
+````
+
+4.访问
+
+    http://localhost:8000
+    tixwork/tixwork998
+
+
+##### 4.准备远程部署
+
+1. 修改script/init-remote-server.sh
+2. 处理nginx和端口 TODO
+3. 处理sync-jar TODO
+4. 处理sync-web TODO
+
+
+##### 5.远程部署
+
+
+
+##### 如何merge remote code
+
+```shell
+echo " merge code"
+git fetch tixwork
+git merge --allow-unrelated-histories tixwork/dev
+ ## git merge tixwork/dev
+```

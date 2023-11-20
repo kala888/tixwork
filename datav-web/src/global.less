@@ -1,0 +1,76 @@
+@import '~antd/es/style/themes/default.less';
+
+html, body {
+  font-family: 'Arial Normal', 'Arial', serif;
+  width: 100%;
+  height: 100%;
+  min-height: 635px;
+  background-size: 100% 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  //color: #fff;
+  //background: linear-gradient(90deg, rgba(3, 33, 71, 1) 0%, rgba(3, 33, 71, 1) 0%, rgba(16, 62, 112, 1) 13%, rgba(16, 62, 112, 1) 87%, rgba(3, 33, 71, 1) 100%, rgba(3, 33, 71, 1) 100%);
+}
+
+body {
+  margin: 0 auto;
+  min-width: 375px;
+  max-width: 1920px;
+}
+
+.flex {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.flex-1 {
+  &:extend(.flex);
+  flex: 1;
+}
+
+//二十四分
+each(range(23), {
+  .flex-@{value} {
+    display: flex;
+    box-sizing: border-box;
+    flex: @value;
+  }
+});
+
+.margin-5 {
+  margin: 5px;
+}
+
+
+.flex-row {
+  &:extend(.flex);
+  flex-direction: row;
+}
+
+.flex-column {
+  &:extend(.flex);
+  flex-direction: column;
+}
+
+.flex-center {
+  &:extend(.flex);
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
