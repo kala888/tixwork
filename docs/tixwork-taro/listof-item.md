@@ -26,15 +26,15 @@ listof 列表中哪些一个一个的小组件
 
 #### 测试页面和数据
 
-![](/tixwork-taro/docs/assets/listof-item_big-card.png)
-![](/tixwork-taro/docs/assets/listof-item_h-card.png)
-![](/tixwork-taro/docs/assets/listof-item_v-card.png)
-![](/tixwork-taro/docs/assets/listof-card_user.png)
-![](/tixwork-taro/docs/assets/listof-item_card-1.png)
-![](/tixwork-taro/docs/assets/listof-item_card-2.png)
-![](/tixwork-taro/docs/assets/listof-item_card-3.png)
-![](/tixwork-taro/docs/assets/listof-item_product.png)
-![](/tixwork-taro/docs/assets/listof-item_auto.png)
+![](/docs/tixwork-taro/assets/listof-item_big-card.png)
+![](/docs/tixwork-taro/assets/listof-item_h-card.png)
+![](/docs/tixwork-taro/assets/listof-item_v-card.png)
+![](/docs/tixwork-taro/assets/listof-card_user.png)
+![](/docs/tixwork-taro/assets/listof-item_card-1.png)
+![](/docs/tixwork-taro/assets/listof-item_card-2.png)
+![](/docs/tixwork-taro/assets/listof-item_card-3.png)
+![](/docs/tixwork-taro/assets/listof-item_product.png)
+![](/docs/tixwork-taro/assets/listof-item_auto.png)
 
 各种displayMode
 

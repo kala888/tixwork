@@ -21,7 +21,7 @@ tixwork-taro 会路由到GenericPage页面渲染数据。
 
 又来一个栗子（数据：mock-genericpage.data.js）
 
-![](/tixwork-taro/docs/assets/generic-page.gif)
+![](/docs/tixwork-taro/assets/generic-page.gif)
 
 结合Daas系统生成的前端，可以由运营同学拖拽完成。（**拖拽部分正在研发，有兴趣的同学要添砖加瓦**）
 

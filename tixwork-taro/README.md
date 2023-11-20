@@ -26,7 +26,7 @@ tixwork-taro 是一个前端低代码框架(低码)，可以使用JSON数据驱�
 - 目前来说Taro可能是综合评分最高的第三方小程序开发框架（相比wepy和mpvue）
 
 
-[开始安装看效果](/docs/README.md)
+[开始文档](/docs/tixwork-taro/README.md)
 
 
 
@@ -40,11 +40,7 @@ tixwork-taro 是一个前端低代码框架(低码)，可以使用JSON数据驱�
 
 ### tixwork-taro 已经组件共享提供了基础的支持。希望各位兄弟贡献各种常用的组件，尤其是那些促销组件。让体力活变为OOTB。
 
-tixwork-taro  包含两部分：
-
-
-[tixwork-taro 开发文档](https://github.com/kala888/nice-router-taro/tree/master/tixwork-taro/docs/README.md)
 
 ###### 感谢Jetbrains提供IDE支持
 
-[![](https://github.com/kala888/tixwork-taro/blob/master/docs/assets/jetbrains.svg)](https://www.jetbrains.com)
+[![](https://github.com/kala888/nice-router-taro/blob/master/docs/tixwork-taro/assets/jetbrains.svg)](https://www.jetbrains.com)

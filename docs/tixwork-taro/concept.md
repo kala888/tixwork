@@ -2,19 +2,19 @@ tixwork-taro 目标是统一多端的开发体验，具体就是说无论前端�
 
 tixwork-taro  提供基础的，请求，路由，数据处理，异常处理等功能，同时额外支持listof和genericpage。
 
-- [nice-router.model](/tixwork-taro/docs/navigation-service.md)
+- [nice-router.model](/docs/tixwork-taro/navigation-service.md)
   
   基于dva的核心路由组件。封装了https请求前后的一些常见行为方法。
 
-- [NavigationService](/tixwork-taro/docs/navigation-service.md) 
+- [NavigationService](/docs/tixwork-taro/navigation-service.md) 
   
   工具类。通过基础配置后，随时随地无脑享用页面跳转和请求服务端数据。
 
-- [Listofpage](/tixwork-taro/docs/navigation-service.md)
+- [Listofpage](/docs/tixwork-taro/navigation-service.md)
   
   一个通用的list页面，可以用来展示各种list。
 
-- [GenericPage](/tixwork-taro/docs/navigation-service.md)
+- [GenericPage](/docs/tixwork-taro/navigation-service.md)
   
   一个基于数据驱动的动态页面，根据服务端返回的数据，来render不同的页面
 

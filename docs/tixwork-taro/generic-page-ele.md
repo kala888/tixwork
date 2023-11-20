@@ -27,7 +27,7 @@ type=text
  <EleText text="hello daas" customStyle={{ color: 'red' }} />
 ```
 
-![](/tixwork-taro/docs/assets/ele-text.jpg)
+![](/docs/tixwork-taro/assets/ele-text.jpg)
 
 ###### 图片 EleImage
 
@@ -48,7 +48,7 @@ type=image
     />
 ```
 
-![](/tixwork-taro/docs/assets/ele-image.jpg)
+![](/docs/tixwork-taro/assets/ele-image.jpg)
 
 ###### 按钮 EleButton
 
@@ -98,7 +98,7 @@ type=button
 </EleButton>
 ```
 
-![](/tixwork-taro/docs/assets/ele-button2.jpg)
+![](/docs/tixwork-taro/assets/ele-button2.jpg)
 
 ###### 跑马灯 EleCarousel
 
@@ -126,7 +126,7 @@ Items中支持视频和图片
 | autoplay  | 视频是否自动播放           |
 | id        | 必须的                |
 
-![](/tixwork-taro/docs/assets/ele-carousel.gif)
+![](/docs/tixwork-taro/assets/ele-carousel.gif)
 
 ###### EleMessageSwiper
 
@@ -150,7 +150,7 @@ Items中支持视频和图片
         />
 ```
 
-![](/tixwork-taro/docs/assets/message.gif)
+![](/docs/tixwork-taro/assets/message.gif)
 
 ###### EleBreakLine
 
@@ -174,7 +174,7 @@ type=break-line
 <EleBreakLine />
 ```
 
-![](/tixwork-taro/docs/assets/ele-breakline.jpg)
+![](/docs/tixwork-taro/assets/ele-breakline.jpg)
 
 ###### EleWhiteSpace
 
@@ -191,7 +191,7 @@ type=white-space
         <EleWhiteSpace color='green' />
 ```
 
-![](/tixwork-taro/docs/assets/white-space.jpg)
+![](/docs/tixwork-taro/assets/white-space.jpg)
 
 ###### EleNavigationBox
 
@@ -221,7 +221,7 @@ type=fab
  <EleFab icon='clock' />
 ```
 
-![](/tixwork-taro/docs/assets/fab.jpg)
+![](/docs/tixwork-taro/assets/fab.jpg)
 
 ###### EleStoreLocation
 
@@ -249,7 +249,7 @@ type=store-location
         />
 ```
 
-![](/tixwork-taro/docs/assets/store-location.jpg)
+![](/docs/tixwork-taro/assets/store-location.jpg)
 
 ###### ElePopup
 
@@ -275,7 +275,7 @@ const popup = {
 }
 ```
 
-![](/tixwork-taro/docs/assets/popup2.png)
+![](/docs/tixwork-taro/assets/popup2.png)
 
 ###### EleFooterTabs
 
@@ -318,7 +318,7 @@ const footer = {
 }
 ```
 
-![](/tixwork-taro/docs/assets/footer.png)
+![](/docs/tixwork-taro/assets/footer.png)
 
 ###### EleQrcode
 
@@ -345,7 +345,7 @@ type=qrcode
       />
 ```
 
-![](/tixwork-taro/docs/assets/qrcode.png)
+![](/docs/tixwork-taro/assets/qrcode.png)
 
 ###### EleMoreActions
 
@@ -394,7 +394,7 @@ type=more-actions
         />
 ```
 
-![](/tixwork-taro/docs/assets/action-sheet.png)
+![](/docs/tixwork-taro/assets/action-sheet.png)
 
 ###### EleListof
 
@@ -428,7 +428,7 @@ type=listof
     )
 ```
 
-![](/tixwork-taro/docs/assets/listof.png)
+![](/docs/tixwork-taro/assets/listof.png)
 
 ###### EleCheckbox
 

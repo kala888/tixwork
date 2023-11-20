@@ -65,59 +65,59 @@ $yarn dev:weapp
 #### 我需要一个后端服务，最好搭配一个中台
 
 -   这里强力安利一款牛逼的低码平台，通过使用自动代码生成技术，告别996。
-[Tixwork-generator](https://github.com/kala888/tixwork-generator)，可以与nice-router完美配合。
+[Tixwork-generator](https://github.com/kala888/tixwork-generator)，可以与tixwork完美配合。
 
 
 ### 开发手册
 
-[新增简单页面](/tixwork-taro/docs/hello-daas-page.md)
+[新增简单页面](/docs/tixwork-taro/hello-daas-page.md)
 
-[让页面与后端进行数据交互](/tixwork-taro/docs/fetch-data-for-first-page.md)
+[让页面与后端进行数据交互](/docs/tixwork-taro/fetch-data-for-first-page.md)
 
-[来几个概念和约定](/tixwork-taro/docs/concept.md)
+[来几个概念和约定](/docs/tixwork-taro/concept.md)
 
-[简单使用listof组件](/tixwork-taro/docs/use-listof.md)
+[简单使用listof组件](/docs/tixwork-taro/use-listof.md)
 
-[如何创建新的line-item](/tixwork-taro/docs/how-to-create-new-line-item.md)
+[如何创建新的line-item](/docs/tixwork-taro/how-to-create-new-line-item.md)
 
-[图片上传](/tixwork-taro/docs/file-upload-service.md)
+[图片上传](/docs/tixwork-taro/file-upload-service.md)
 
-[提交一个Form](/tixwork-taro/docs/submit-form.md)
+[提交一个Form](/docs/tixwork-taro/submit-form.md)
 
 [Step-Form]
 
-[ServerImage](/tixwork-taro/docs/server-image.md)
+[ServerImage](/docs/tixwork-taro/server-image.md)
 
-[使用后端驱动Toast消息](/tixwork-taro/docs/taost-from-backend.md)
+[使用后端驱动Toast消息](/docs/tixwork-taro/taost-from-backend.md)
 
-[使用后端驱动的Popup消息](/tixwork-taro/docs/popup-from-backend.md)
+[使用后端驱动的Popup消息](/docs/tixwork-taro/popup-from-backend.md)
 
-[使用后端驱动的登录跳转](/tixwork-taro/docs/listof-page.md)
+[使用后端驱动的登录跳转](/docs/tixwork-taro/listof-page.md)
 
-[NavigationService](/tixwork-taro/docs/navigation-service.md)
+[NavigationService](/docs/tixwork-taro/navigation-service.md)
 
-[view-mapping](/tixwork-taro/docs/view-mapping.md)
+[view-mapping](/docs/tixwork-taro/view-mapping.md)
 
-[nice-router.model](/tixwork-taro/docs/nice-router.model.md)
+[nice-router.model](/docs/tixwork-taro/nice-router.model.md)
 
 ### 几个内置页面
 
-[混搭H5页面](/tixwork-taro/docs/h5-page.md)
+[混搭H5页面](/docs/tixwork-taro/h5-page.md)
 
-[断网重试network-exception-page](/tixwork-taro/docs/network-exception-page.md)
+[断网重试network-exception-page](/docs/tixwork-taro/network-exception-page.md)
 
-[使用HomePage](/tixwork-taro/docs/home-page.md)
+[使用HomePage](/docs/tixwork-taro/home-page.md)
 
-[使用LoginPage](/tixwork-taro/docs/login-page.md)
+[使用LoginPage](/docs/tixwork-taro/login-page.md)
 
-[使用Listofpage](/tixwork-taro/docs/listof-page.md)
+[使用Listofpage](/docs/tixwork-taro/listof-page.md)
 
-[使用GenericPage](/tixwork-taro/docs/generic-page.md)
+[使用GenericPage](/docs/tixwork-taro/generic-page.md)
 
-[内置的Genericpage UI Element](/tixwork-taro/docs/generic-page-ele.md)
+[内置的Genericpage UI Element](/docs/tixwork-taro/generic-page-ele.md)
 
-[内置的Listof item](/tixwork-taro/docs/listof-item.md)
+[内置的Listof item](/docs/tixwork-taro/listof-item.md)
 
 ##### ......
 
-##### 100. [Tips](/tixwork-taro/docs/tips.md)
+##### 100. [Tips](/docs/tixwork-taro/tips.md)
