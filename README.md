@@ -1,3 +1,5 @@
+原来nice-router-taro项目已迁移到tixwork/tixwork-taro
+
 # 项目Tixwork
 版本3.0.5
 
