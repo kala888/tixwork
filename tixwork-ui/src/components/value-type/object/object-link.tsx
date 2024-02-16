@@ -12,7 +12,6 @@ import { LinkOutlined } from '@ant-design/icons';
 import { ProCard } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import classNames from 'classnames';
-import styles from './styles.less';
 
 type ObjectLinkType = {
   id?: React.Key;
@@ -59,9 +58,15 @@ const InnerLink = (props) => {
   const linkToUrl = getLinkToUrl(props) as string;
   const { displayName, record = {}, className } = props;
   const title = displayName || getDisplayName(record);
-  const rootCls = classNames(className, {
-    [styles.objectLink]: ObjectUtils.isNotEmpty(linkToUrl),
-  });
+  const css = useEmotionCss(({ token }) => ({
+    color: token.colorPrimary,
+    fontWeight: 500,
+    cursor: 'pointer !important',
+    '&:hover': {
+      color: '#f38709 !important',
+    },
+  }));
+  const rootCls = classNames('object-link', className, ObjectUtils.isNotEmpty(linkToUrl) && css);
   return (
     <Typography.Link href={linkToUrl} ellipsis className={rootCls}>
       {title}
@@ -71,6 +76,16 @@ const InnerLink = (props) => {
 
 const PopupContent = (props) => {
   const { displayName, objectType, record = {} } = props;
+  const css = useEmotionCss(() => ({
+    ':first-child.group-card': {
+      padding: 0,
+      border: 'none',
+    },
+    '.ant-pro-card-body': {
+      padding: '10px 0 0',
+    },
+  }));
+
   const title = displayName || getDisplayName(record);
   const schema = BizSchema.get(objectType);
   const columns = (schema?.columns || []).filter((it) => it.valueType !== 'Object');
@@ -98,7 +113,7 @@ const PopupContent = (props) => {
         padding: 0,
         paddingBottom: 10,
       }}
-      className={styles.objectLinkPopupContent}
+      className={css}
     >
       <ObjectEntityInfo columns={columns} dataSource={record} bodyStyle={{ padding: 0, width }} column={column} />
     </ProCard>
@@ -126,6 +141,7 @@ const ObjectLink = (props: ObjectLinkType) => {
     </Popover>
   );
 };
+
 export function renderObject(item, props) {
   const { fieldProps } = props;
   const obj = _.isObject(item) ? item : ({ displayName: item } as any);

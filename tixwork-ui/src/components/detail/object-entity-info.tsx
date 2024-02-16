@@ -1,17 +1,15 @@
 import type { ResourceNameType } from '@/biz-models/biz-schema';
-import BizSchema from '@/biz-models/biz-schema';
-import BoxWrapper from '@/components/box-wrapper/box-wrapper';
-import type { ListItemsInfoType } from '@/components/detail/relative-entity-items';
 import ObjectLink from '@/components/value-type/object/object-link';
 import { colors } from '@/components/value-type/style-utils';
 import ObjectUtils from '@/utils/object-utils';
 import { RightOutlined } from '@ant-design/icons';
 import type { CardProps } from '@ant-design/pro-card/es/typing';
-import { ProCard, ProDescriptions } from '@ant-design/pro-components';
+import { ProCard } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { Empty, Space } from 'antd';
 import classNames from 'classnames';
 import _ from 'lodash';
+import GroupBox from './group-box';
 import styles from './styles.less';
 
 type ObjectEntityInfoType = {
@@ -43,60 +41,6 @@ const collapsibleIconRender = ({ collapsed }) => (
   </span>
 );
 
-const isSingleLine = (type) => _.includes(['textarea', 'ObjectList'], type);
-/**
- * 把textarea弄成单独的一行
- */
-const buildColumns = (columns) => {
-  let theColumn = columns.filter((it) => !it.hideInDescriptions).map((it) => ({ ...it, tooltip: '' }));
-  //1. 处理Id字段，在detail作为text
-  if (theColumn[0].dataIndex === 'id') {
-    theColumn = [{ ...theColumn[0], valueType: 'text' }].concat(theColumn.slice(1, theColumn.length));
-  }
-  //2.
-  let globalPointer = 0;
-  return theColumn.map((it, idx) => {
-    // 2.1 本身是textarea
-    if (isSingleLine(it.valueType)) {
-      const result = { ...it, span: 3 };
-      globalPointer = 0;
-      if (it.valueType === 'textarea') {
-        // ellipsis导致description ui有问题，临时在desc中干掉
-        result.ellipsis = false;
-        // result.copyable = true;
-      }
-      return result;
-    }
-
-    const next = theColumn[idx + 1];
-    let span = 1;
-    if (next && isSingleLine(next.valueType)) {
-      span = 3 - globalPointer;
-    }
-    globalPointer = (globalPointer + 1) % 3;
-    return { ...it, span };
-  });
-};
-
-export const getObjectFieldProps = (props, parent) => {
-  const { dataIndex = 'id', title, fieldProps } = props;
-  const obj = _.get(parent, dataIndex);
-  const objectType = fieldProps?.objectType;
-  const columns = BizSchema.get(objectType)?.columns;
-  const result: ListItemsInfoType & { dataSource: any } = {
-    ...fieldProps,
-    parent,
-    editable: fieldProps.editable,
-    key: dataIndex,
-    dataSource: obj,
-    searchKey: fieldProps?.searchKey,
-    objectType,
-    columns,
-    title,
-  };
-  return result;
-};
-
 const ObjectEntityInfo = (props: ObjectEntityInfoType) => {
   const infoCss = useEmotionCss(({ token }) => ({
     height: '100%',
@@ -119,13 +63,14 @@ const ObjectEntityInfo = (props: ObjectEntityInfoType) => {
 
   const theColumns = columns.filter((it) => !it.hideInDescriptions);
   const grouped = _.groupBy(theColumns, (it) => {
-    if (ObjectUtils.isNotEmpty(it.group)) {
-      return it.group;
+    const isDefault = it.group === 'default';
+    if (it.valueType === 'ObjectList' || it.valueType === 'RichText') {
+      return isDefault ? it.title : it.group;
     }
     if (it.valueType === 'Object') {
-      return '关联信息';
+      return isDefault ? '关联信息' : it.group;
     }
-    return 'default';
+    return it.group;
   });
   // const grouped = _.groupBy(columns.filter((it) => it.valueType !== 'Object'), (it) => it.group  );
 
@@ -140,16 +85,15 @@ const ObjectEntityInfo = (props: ObjectEntityInfoType) => {
       {...params}
       {...rest}
     >
-      {groupNames.map((groupName, idx) => {
-        const theColumn = buildColumns(grouped[groupName]);
-        const key = groupName + '_' + idx;
-        const showColumnLength = _.min([theColumn.length, column]);
-        return (
-          <BoxWrapper key={key} title={groupName !== 'default' ? groupName : ''}>
-            <ProDescriptions dataSource={dataSource} columns={theColumn} column={showColumnLength} />
-          </BoxWrapper>
-        );
-      })}
+      {groupNames.map((groupName, idx) => (
+        <GroupBox
+          key={groupName + '_' + idx}
+          name={groupName}
+          column={column}
+          columns={grouped[groupName]}
+          dataSource={data}
+        />
+      ))}
       {props.children}
     </ProCard>
   );

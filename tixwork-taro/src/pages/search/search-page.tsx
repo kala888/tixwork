@@ -73,7 +73,7 @@ export default function SearchPage() {
       </View>
 
       <View className={'search-result'}>
-        <Listof displayMode='rich-text' emptyMessage={'新都区审批局'} items={items} onItemClick={handleItemClick} />
+        <Listof displayMode='rich-text' emptyMessage={'Tixwork'} items={items} onItemClick={handleItemClick} />
       </View>
     </View>
   );

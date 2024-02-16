@@ -68,7 +68,7 @@ export const _RemoteSelect = (props: RemoteSelectType) => {
 const RemoteSelect = (props) => {
   const { label, name, rules, labelCol, ...rest } = props;
   return (
-    <ProFormItem label={label} name={name} rules={rules} labelCol={labelCol}>
+    <ProFormItem label={label} name={name} rules={rules} labelCol={labelCol} className="customized-form-item">
       <_RemoteSelect {...rest} />
     </ProFormItem>
   );

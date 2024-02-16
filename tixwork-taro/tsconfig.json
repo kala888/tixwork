@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "types": ["miniprogram-api-typings"],
+    "types": [
+      "miniprogram-api-typings"
+    ],
     "target": "es2017",
     "module": "commonjs",
     "removeComments": false,
@@ -24,10 +26,17 @@
       "global.d.ts"
     ],
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["./src", "global.d.ts"],
+  "include": [
+    "./src",
+    "./types",
+    "./config",
+    "global.d.ts"
+  ],
   "exclude": [
     "node_modules",
     "dist"

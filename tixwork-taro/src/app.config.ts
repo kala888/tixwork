@@ -45,7 +45,7 @@ export default {
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#28aaff',
-    navigationBarTitleText: '新都办事指南',
+    navigationBarTitleText: 'Tixwork',
     navigationBarTextStyle: 'white',
     enablePullDownRefresh: true,
   },

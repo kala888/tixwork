@@ -31,7 +31,7 @@ const getCheckedList = (menu: API.Menu, checkedList: React.Key[]) => {
 export default function DetailRoleMenu(props) {
   const { message } = App.useApp();
   const { hideLoading, showLoading, loading } = useLoading();
-  const [menuState, setMenuState] = useState<Record<React.Key, RootMenuType>>({});
+  const [menuState, setMenuState] = useState<Record<any, RootMenuType>>({});
 
   const { role } = props;
 

@@ -10,6 +10,7 @@ import { useEffect, useRef } from 'react';
 
 type RemoteChartType = {
   title?: any;
+  brief?: any;
   linkToUrl?: any;
   interval?: any;
   options?: any;

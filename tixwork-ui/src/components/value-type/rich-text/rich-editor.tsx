@@ -19,6 +19,7 @@ export default function RichEditor(props: RichEditorType) {
   const [content, setContent] = useState(value ?? '');
 
   useEffect(() => {
+    console.log('vvvvvvvv', value);
     setContent(value ?? '');
   }, [value]);
 
@@ -29,9 +30,10 @@ export default function RichEditor(props: RichEditorType) {
     }
     onChange?.(html);
   };
+  const rootClz = classNames('rich-editor', className);
 
   return (
-    <div className={classNames('rich-editor', className)}>
+    <div className={rootClz}>
       <Editor
         disabled={readonly}
         initialValue={value}
@@ -42,7 +44,8 @@ export default function RichEditor(props: RichEditorType) {
         tinymceScriptSrc={script}
         init={{
           language: 'zh-Hans', //注意大小写
-          height: 500,
+          height: 300,
+          width: '100%',
           plugins: [
             'preview',
             'autosave',
@@ -61,6 +64,7 @@ export default function RichEditor(props: RichEditorType) {
           element_format: 'xhtml',
           menubar: false,
           branding: false, //去掉tinymce的水印
+          // toolbar:'',
           toolbar:
             'undo redo | fontsize forecolor bold italic underline strikethrough|newLine outdent indent lineheight align numlist bullist |pagebreak table  removeformat| charmap emoticons | preview searchreplace code',
           pagebreak_split_block: true,

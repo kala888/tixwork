@@ -1,4 +1,4 @@
-import RichEditor, { RichEditorType } from '@/components/value-type/rich-editor/rich-editor';
+import RichEditor, { RichEditorType } from '@/components/value-type/rich-text/rich-editor';
 import { ProFormField, ProFormFieldProps } from '@ant-design/pro-components';
 
 export default function ProFormRichEditor(props: RichEditorType & Partial<ProFormFieldProps>) {
@@ -11,7 +11,7 @@ export default function ProFormRichEditor(props: RichEditorType & Partial<ProFor
     </ProFormField>
   );
 }
-export const RichEditorValueType = {
-  render: (text) => <RichEditor value={text} readonly />,
+export const RichTextValueType = {
+  render: (dom) => <RichEditor value={dom} readonly />,
   renderFormItem: (__, props) => <ProFormRichEditor {...props} />,
 };

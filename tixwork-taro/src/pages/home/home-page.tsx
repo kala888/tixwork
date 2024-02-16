@@ -8,6 +8,7 @@ import useModel from '@/model/use-model';
 import { CommonModel } from '@/model/models';
 import { useEffect } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
+import { useLoad } from '@tarojs/taro';
 import './home.less';
 
 type HomeDataType = {
@@ -17,6 +18,10 @@ type HomeDataType = {
 };
 
 function HomePage(props) {
+
+  useLoad(() => {
+    console.log('Page loaded.');
+  });
   const { root } = useModel<CommonModel<HomeDataType>>('home');
 
   usePageTitle(root);
@@ -52,12 +57,12 @@ function HomePage(props) {
   const { slideList = [], actionList = [], productList = [] } = root;
 
   return (
-    <View className='home-page'>
-      <EleCarousel className='home-page-carousel' items={slideList} />
-      <View className='home-page-action-floor'>
+    <View className="home-page">
+      <EleCarousel className="home-page-carousel" items={slideList} />
+      <View className="home-page-action-floor">
         <ActionFloor actionList={actionList} />
-        <SectionBar title='促销抢购' linkToUrl='page:///pages/biz/listof-test-page' />
-        <Listof items={productList} displayMode='product' />
+        <SectionBar title="促销抢购" linkToUrl="page:///pages/biz/listof-test-page" />
+        <Listof items={productList} displayMode="product" />
       </View>
     </View>
   );

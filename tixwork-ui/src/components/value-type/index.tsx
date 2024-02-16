@@ -13,10 +13,10 @@ import {
   ImageListValueType,
   SingleImageValueType,
 } from '@/components/value-type/file';
-import { RichEditorValueType } from '@/components/value-type/rich-editor';
 import { ObjectValueType } from './object/object-link';
 import { ObjectListValueType } from './object/object-list';
 import { RemoteCascadeValueType, RemoteEnumValueType, RemoteRadioValueType, RemoteSelectValueType } from './remote';
+import { RichTextValueType } from './rich-text';
 
 type PartialRecord<K extends string | number | symbol, T> = { [P in K]?: T };
 export type BizColumnType = { group?: string } & ProColumnType<any, EleValueType>;
@@ -39,7 +39,7 @@ export type CustomerValueType =
   | 'RemoteEnum'
   | 'RemoteSelect'
   | 'Uid'
-  | 'RichEdit'
+  | 'RichText'
   | 'File'
   | 'FileList'
   | 'RemoteCascade';
@@ -66,7 +66,7 @@ const elements: PartialRecord<EleValueType, ProSchema> = {
   RemoteEnum: RemoteEnumValueType,
   RemoteSelect: RemoteSelectValueType,
   RemoteCascade: RemoteCascadeValueType,
-  RichEdit: RichEditorValueType,
+  RichText: RichTextValueType,
 };
 
 export default elements;

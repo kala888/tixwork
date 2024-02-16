@@ -1,6 +1,6 @@
 import type { ResourceNameType } from '@/biz-models/biz-schema';
 import BizSchema from '@/biz-models/biz-schema';
-import ObjectEntityInfo, { getObjectFieldProps } from '@/components/detail/object-entity-info';
+import ObjectEntityInfo from '@/components/detail/object-entity-info';
 import type { ListItemsInfoType } from '@/components/detail/relative-entity-items';
 import RelativeEntityItems from '@/components/detail/relative-entity-items';
 import EleProProvider from '@/components/value-type/ele-pro-provider';
@@ -28,6 +28,26 @@ const defaultEmpty = (
     <Empty description="未找到相关的可以展示的数据" />
   </ProCard>
 );
+
+const getObjectFieldProps = (props, parent) => {
+  const { dataIndex = 'id', title, fieldProps } = props;
+  const obj = _.get(parent, dataIndex);
+  const objectType = fieldProps?.objectType;
+  const columns = BizSchema.get(objectType)?.columns;
+  const result: ListItemsInfoType & { dataSource: any } = {
+    ...fieldProps,
+    parent,
+    editable: fieldProps.editable,
+    key: dataIndex,
+    dataSource: obj,
+    searchKey: fieldProps?.searchKey,
+    objectType,
+    columns,
+    title,
+  };
+  return result;
+};
+
 export default function EleDetail(props: EleDetailType) {
   const { objectType, className, dataSource, onRefresh, ...rest } = props;
   const schema = BizSchema.get(objectType);

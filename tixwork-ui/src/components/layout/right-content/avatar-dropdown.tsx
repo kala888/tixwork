@@ -28,6 +28,7 @@ export default function AvatarDropdown() {
     transition: 'all 0.3s',
     fontWeight: 500,
     color: token.colorTextHeading,
+    minWidth: 100,
 
     '.ant-avatar': {
       marginRight: 8,

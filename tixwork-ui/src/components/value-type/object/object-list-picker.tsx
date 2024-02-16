@@ -1,18 +1,25 @@
 import ObjectUtils from '@/utils/object-utils';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProFormItem } from '@ant-design/pro-components';
+import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { Typography } from 'antd';
 import _ from 'lodash';
 import { ObjectListTable } from './object-list-table';
 import type { ObjectPickerType } from './object-picker';
 import type { ObjectPickerFieldType } from './object-picker-field';
 import ObjectPickerField from './object-picker-field';
-import styles from './styles.less';
 
 const LinkTarget = (props) => {
   const { onClick, disabled } = props;
+  const css = useEmotionCss(() => ({
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    width: ' 100%',
+    marginTop: -28,
+    paddingBottom: 6,
+  }));
   return (
-    <div className={styles.linkTarget}>
+    <div className={css}>
       <Typography.Link onClick={onClick} disabled={disabled}>
         <PlusOutlined />
         添加

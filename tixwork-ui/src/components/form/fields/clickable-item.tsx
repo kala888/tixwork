@@ -5,6 +5,7 @@ import { CloseCircleFilled } from '@ant-design/icons';
 import type { ProFormFieldProps } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import classNames from 'classnames';
+import _ from 'lodash';
 
 type ClickableItemType = {
   value: any;
@@ -12,7 +13,7 @@ type ClickableItemType = {
   onClick?: () => void;
   onClear?: () => void;
   className?: any;
-  placeholder?: string;
+  placeholder?: any;
   width?: ProFormFieldProps['width'];
   disabled?: boolean;
   allowClear?: boolean;
@@ -50,11 +51,11 @@ export default function ClickableItem(props: ClickableItemType) {
 
   const title = showPlaceHolder ? placeholder : formatValue(value, itemRender);
 
-  const handleClick = () => {
+  const handleClick = _.debounce(() => {
     if (!disabled && onClick) {
       onClick();
     }
-  };
+  }, 200);
   const handleClear = () => {
     if (!disabled && onClear) {
       onClear();
