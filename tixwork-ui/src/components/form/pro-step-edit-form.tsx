@@ -23,7 +23,7 @@ const TheForm = (props) => {
           render: (_, dom) => <Space className="footer-action">{dom}</Space>,
           submitButtonProps: {
             style: {
-              minWidth: 150,
+              minWidth: 148,
             },
           },
         }}
