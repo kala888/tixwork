@@ -1,0 +1,35 @@
+@import '/src/styles/theme';
+
+.user-profile-update {
+  &:extend(.page);
+  padding: 100px 50px 20px;
+  background-color: #fff;
+
+  &-avatar {
+    &:extend(.flex-center);
+    background: #fff;
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    border: 6px solid @golden-color;
+
+    .iconfont {
+      font-size: 180px;
+      color: @color-brand;
+    }
+
+    .server-image {
+      width: 185px;
+      height: 185px;
+      border-radius: 50%;
+    }
+  }
+
+  &-name {
+    padding-top: 50px;
+  }
+
+  &-button {
+    margin-top: 200px;
+  }
+}

@@ -1,5 +1,5 @@
 import TagList from '@/components/elements/ele-tag/tag-list';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import classNames from 'classnames';
 import { View } from '@tarojs/components';
 
@@ -59,7 +59,7 @@ function RenderInfoItem(props) {
 function FlexInfoItem(props: FlexInfoItemProps) {
   const { title, value } = props;
 
-  if (isEmpty(value)) {
+  if (ObjectUtils.isEmpty(value)) {
     return null;
   }
 
@@ -71,7 +71,7 @@ function FlexInfoItem(props: FlexInfoItemProps) {
 
   return (
     <View className={rootClass}>
-      {isNotEmpty(title) && <View className='info-item-title'>{title}</View>}
+      {ObjectUtils.isNotEmpty(title) && <View className='info-item-title'>{title}</View>}
       <View className='info-item-value'>
         <RenderInfoItem {...props} />
       </View>

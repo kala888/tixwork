@@ -4,10 +4,10 @@ import mockForm1Data from './mock-form.data';
 import MockService from '../../http/mock-service';
 
 const documentUrl = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/README.docx';
-const videoUrl = 'https://nice-router.oss-cn-chengdu.aliyuncs.com/video.mp4';
+const videoUrl = 'https://tixwork.oss-cn-chengdu.aliyuncs.com/media/video.mp4';
 const slideList = [
-  { id: 1, imageUrl: MockService.randomImage() },
-  { id: 2, imageUrl: MockService.randomImage() },
+  { id: 1, imageUrl: MockService.randomImage(), linkToUrl: 'page:///pages/active/active-page' },
+  { id: 2, imageUrl: MockService.randomImage(), linkToUrl: 'page:///pages/active/active-page' },
   { id: 3, imageUrl: MockService.randomImage(), videoUrl },
 ];
 

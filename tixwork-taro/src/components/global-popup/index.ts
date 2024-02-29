@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro';
 import { ActionListLike } from '@/nice-router/nice-router-types';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import NavigationService from '@/nice-router/navigation-service';
 
 export type PopupMessageProps = {
@@ -13,7 +13,7 @@ export default class GlobalPopup {
   static async show(options: PopupMessageProps) {
     const { title = '提示', text = '？', actionList = [], closeActionText = '关闭' } = options || {};
     const action = actionList.length > 0 ? actionList[0] : {};
-    if (isNotEmpty(action)) {
+    if (ObjectUtils.isNotEmpty(action)) {
       const { title: confirmText = '' } = action;
       Taro.showModal({
         title,

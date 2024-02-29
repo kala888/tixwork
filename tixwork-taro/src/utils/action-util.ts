@@ -19,9 +19,9 @@
  */
 
 import { noop } from '@/utils';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
 import _ from 'lodash';
 import { ActionLike, EleObject } from '@/nice-router/nice-router-types';
+import ObjectUtils from '@/utils/object-utils';
 
 const SUBMIT_CODE_LIST = ['nextStep', 'commit', 'next', 'nextRecord'];
 
@@ -39,7 +39,7 @@ const isActionLike = (action: any) => {
   if (_.isFunction(_.get(action, 'onChange'))) {
     return true;
   }
-  return isNotEmpty(getActionUri(action));
+  return ObjectUtils.isNotEmpty(getActionUri(action));
 };
 
 const trans2Action = (
@@ -66,7 +66,7 @@ const isSubmitAction = (action = {}) => {
   const tmp = _.isString(action) ? action : _.get(action, 'code', '');
   const theCode = _.toLower(tmp);
 
-  if (isEmpty(theCode)) {
+  if (ObjectUtils.isEmpty(theCode)) {
     return false;
   }
   if (theCode.startsWith('submit') || theCode.startsWith('update') || theCode.startsWith('save')) {
@@ -75,7 +75,7 @@ const isSubmitAction = (action = {}) => {
 
   const result = _.find(SUBMIT_CODE_LIST, (it) => it.toLowerCase() === theCode);
 
-  return isNotEmpty(result);
+  return ObjectUtils.isNotEmpty(result);
 };
 
 // @ts-ignore

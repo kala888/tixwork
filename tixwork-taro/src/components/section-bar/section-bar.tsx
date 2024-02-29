@@ -7,7 +7,7 @@ import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-r
 
 import { useVisible } from '@/service/use-service';
 import { getExtMode } from '@/nice-router/nice-router-utils';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import EleButton from '@/components/elements/ele-button';
 import ActionIcon from '@/components/action-icon/action-icon';
 import './styles.less';
@@ -18,6 +18,7 @@ type SectionBarProps = {
   foldable?: boolean;
   expand?: boolean;
   mode?: 'bordered' | 'highlight' | string[];
+  style?: any;
 } & ActionLike &
   ImageLike &
   EleObject &
@@ -45,6 +46,7 @@ function SectionBar(props: SectionBarProps) {
     expand = 'true',
     onClick,
     children,
+    style,
     ...others
   } = props;
 
@@ -79,14 +81,14 @@ function SectionBar(props: SectionBarProps) {
 
   const contentClass = classNames('section-bar-body', { hidden: !isAction && !visible });
 
-  let theIcon = isEmpty(icon) && isAction ? 'right' : icon;
+  let theIcon = ObjectUtils.isEmpty(icon) && isAction ? 'right' : icon;
 
   if (foldable) {
     theIcon = visible ? 'up' : 'down';
   }
 
   return (
-    <View className={rootClass}>
+    <View className={rootClass} style={style}>
       <EleButton mode='ghost' className='section-bar-header' onClick={handleClick} {...others}>
         <View className='section-bar-header'>
           <View className='section-bar-prefix' />

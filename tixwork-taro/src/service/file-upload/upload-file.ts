@@ -1,4 +1,4 @@
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import ApiConfig from '@/utils/api-config';
 import { formatTime, isH5 } from '@/utils';
 import Taro from '@tarojs/taro';
@@ -19,7 +19,7 @@ export type FileUploadType = {
 let ossToken: OssTokenDTO;
 
 function checkTokenPass(): boolean {
-  if (isNotEmpty(ossToken) && isNotEmpty(ossToken.expiration)) {
+  if (ObjectUtils.isNotEmpty(ossToken) && ObjectUtils.isNotEmpty(ossToken.expiration)) {
     const expr = new Date(ossToken.expiration);
     // 5分钟提前量
     return expr.valueOf() < Date.now() - 1000 * 300;
@@ -101,7 +101,7 @@ const uploadToRemote = async (params: FileUploadType) => {
 };
 
 const uploadFile = async (params: FileUploadType) => {
-  if (isEmpty(params?.file?.path)) {
+  if (ObjectUtils.isEmpty(params?.file?.path)) {
     console.warn('nothing to upload!');
     return;
   }

@@ -52,6 +52,11 @@ export function useAjaxPullDown(action: any) {
 
 export function usePullDown(action: any, ajax?: boolean) {
   Taro.usePullDownRefresh(() => {
+    if (typeof action === 'function') {
+      action();
+      Taro.stopPullDownRefresh();
+      return;
+    }
     if (!ActionUtil.isActionLike(action)) {
       Taro.stopPullDownRefresh();
       return;

@@ -5,10 +5,10 @@ import { getExtMode } from '@/nice-router/nice-router-utils';
 import ServerImage from '@/server-image/server-image';
 import { Text, View } from '@tarojs/components';
 import CardInfoTable from '@/components/ele-table/card-info-table';
-import { isNotEmpty } from '@/utils/object-utils';
 import { ActionListLike, EleObject, ImageLike } from '@/nice-router/nice-router-types';
 
 import './ele-card.less';
+import ObjectUtils from '@/utils/object-utils';
 
 type EleCardLevel = 'default' | 'normal' | 'primary' | 'warn' | 'danger';
 
@@ -59,8 +59,8 @@ function EleCard(props: EleCardProps) {
   } = props;
   const { mode = [] } = props;
   const flagSize = mode.includes('large') ? 'normal' : 'small';
-  const hasImage = isNotEmpty(imageUrl);
-  const hasFlag = !hasImage && isNotEmpty(flag);
+  const hasImage = ObjectUtils.isNotEmpty(imageUrl);
+  const hasFlag = !hasImage && ObjectUtils.isNotEmpty(flag);
   if (!hasImage && Array.isArray(mode)) {
     mode.push('as-text');
     // @ts-ignore
@@ -71,15 +71,15 @@ function EleCard(props: EleCardProps) {
       onClick();
       return;
     }
-    if (isNotEmpty(actionList)) {
+    if (ObjectUtils.isNotEmpty(actionList)) {
       NavigationService.view(props);
     }
   };
 
   const bodyClass = getExtMode(mode).classNames('ele-card-body');
 
-  const hasHeader = isNotEmpty(headerTitle) || isNotEmpty(headerBrief);
-  const hasFooter = isNotEmpty(actionList) || isNotEmpty(infoList);
+  const hasHeader = ObjectUtils.isNotEmpty(headerTitle) || ObjectUtils.isNotEmpty(headerBrief);
+  const hasFooter = ObjectUtils.isNotEmpty(actionList) || ObjectUtils.isNotEmpty(infoList);
   return (
     <View className='ele-card'>
       <StatusFlag title={status} size={flagSize} />
@@ -108,8 +108,8 @@ function EleCard(props: EleCardProps) {
       </View>
       {hasFooter && (
         <View className='ele-card-footer'>
-          {isNotEmpty(infoList) && <CardInfoTable data={infoList} />}
-          {isNotEmpty(actionList) && <EleActionList mode={['right', 'small']} items={actionList} />}
+          {ObjectUtils.isNotEmpty(infoList) && <CardInfoTable data={infoList} />}
+          {ObjectUtils.isNotEmpty(actionList) && <EleActionList mode={['right', 'small']} items={actionList} />}
         </View>
       )}
     </View>

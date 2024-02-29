@@ -16,7 +16,7 @@ type SearchBarType = {
   onSearch?: (value: string) => void;
 } & Omit<SearchBarCompType, 'onSearch'>;
 
-function SearchBarComp(props: SearchBarCompType) {
+export function SearchBarComp(props: SearchBarCompType) {
   const [isFocus, setFocus] = useState(false);
   const { title = '搜索', placeholder = '搜索', value, disabled, onSearch, onChange } = props;
 

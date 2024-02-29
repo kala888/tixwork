@@ -1,5 +1,5 @@
 import { noop } from '@/utils';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { useVisible } from '@/service/use-service';
 import _ from 'lodash';
 import { CandidateValue } from '@/nice-router/nice-router-types';
@@ -10,7 +10,7 @@ import FloatLayout from '@/components/float-layout';
 import EleCheckbox from '@/components/form/field/ele-checkbox';
 
 type ElePopupSelectProps = {
-  onChange?: Function;
+  onChange?: (value: any) => void;
   multiple?: boolean;
   value: string | string[];
   placeholder?: string;
@@ -33,7 +33,7 @@ function ElePopupSelect(props: ElePopupSelectProps) {
 
   const getValue = () => {
     let currentValue = value;
-    if (isEmpty(value)) {
+    if (ObjectUtils.isEmpty(value)) {
       currentValue = multiple ? [] : '';
     }
     if (multiple && _.isString(value)) {

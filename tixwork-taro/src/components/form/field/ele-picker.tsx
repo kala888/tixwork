@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { Picker, View } from '@tarojs/components';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { useVisible } from '@/service/use-service';
 import classNames from 'classnames';
 
@@ -22,10 +22,10 @@ export type ElePickerProps = {
 const getOptions = (v) => _.get(v, 'candidateValues', []);
 const getValue = (list, idx = 0) => _.get(list, idx, {});
 const getTips = (value, placeholder) => {
-  if (Array.isArray(value) && isNotEmpty(value)) {
+  if (Array.isArray(value) && ObjectUtils.isNotEmpty(value)) {
     return _.trim(value.map((it) => it.title || it).join('-'), '-');
   }
-  if (isNotEmpty(value)) {
+  if (ObjectUtils.isNotEmpty(value)) {
     return value.title || value;
   }
   return placeholder;
@@ -48,7 +48,7 @@ function ElePicker(props: ElePickerProps) {
   } = props;
 
   useEffect(() => {
-    if (isNotEmpty(source)) {
+    if (ObjectUtils.isNotEmpty(source)) {
       const newTips = getTips(value, placeholder);
       setTips(newTips);
       reBuildRangeList(0);
@@ -62,7 +62,7 @@ function ElePicker(props: ElePickerProps) {
       for (let i = col; i < numberOfColumn; i++) {
         const v = getValue(tempRange[i], i === col ? idx : 0);
         const list = getOptions(v);
-        if (isEmpty(list)) {
+        if (ObjectUtils.isEmpty(list)) {
           break;
         }
         tempRange[i + 1] = list;

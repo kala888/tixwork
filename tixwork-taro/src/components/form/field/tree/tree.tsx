@@ -1,5 +1,5 @@
 import { noop } from '@/utils';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { useVisible } from '@/service/use-service';
 import { Text, View } from '@tarojs/components';
 import classNames from 'classnames';
@@ -24,7 +24,7 @@ function Tree(props: TreeProps) {
     if (disabled) {
       return;
     }
-    const isLeaf = isEmpty(nodes);
+    const isLeaf = ObjectUtils.isEmpty(nodes);
     if (isLeaf) {
       onChange(value);
     } else {
@@ -32,7 +32,7 @@ function Tree(props: TreeProps) {
     }
   };
 
-  const isTrunk = isNotEmpty(nodes);
+  const isTrunk = ObjectUtils.isNotEmpty(nodes);
   const isSelected = selected === value;
   const subTreeClass = classNames('tree-subtree', { hidden: !visible });
   const treeItemClass = classNames('tree-item', { selected: isSelected, disabled });

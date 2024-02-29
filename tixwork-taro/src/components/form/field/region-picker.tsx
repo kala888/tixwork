@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ElePicker, { ElePickerProps } from '@/components/form/field/ele-picker';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import StorageTools from '@/utils/storage-tools';
 import Q from '@/http/q';
 
@@ -10,7 +10,7 @@ function RegionPicker(props: ElePickerProps) {
   useEffect(() => {
     const regionData = StorageTools.get('region-data', null);
     let initialed = false;
-    if (isNotEmpty(regionData)) {
+    if (ObjectUtils.isNotEmpty(regionData)) {
       setSource(regionData);
       initialed = true;
     }

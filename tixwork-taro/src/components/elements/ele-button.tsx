@@ -10,8 +10,8 @@ import { ActionLike, EleObject, IconLike, ImageLike, NavigationMethodType } from
 
 import './ele-button.less';
 import { ButtonProps } from '@tarojs/components/types/Button';
-import { isNotEmpty } from '@/utils/object-utils';
 import NiceRouterUtils from '@/nice-router/nice-router-utils';
+import ObjectUtils from '@/utils/object-utils';
 
 export type EleButtonProps = {
   size?: 'small' | 'default';
@@ -108,7 +108,7 @@ function EleButton(props: EleButtonProps) {
   };
 
   const handleCopy = () => {
-    if (isNotEmpty(extraData)) {
+    if (ObjectUtils.isNotEmpty(extraData)) {
       // noinspection JSIgnoredPromiseFromCall
       Taro.setClipboardData({
         data: JSON.stringify(extraData),
@@ -163,7 +163,6 @@ function EleButton(props: EleButtonProps) {
   }, 200);
 
   const rootClass = NiceRouterUtils.getExtMode(mode, { disabled }).classNames('ele-button', className);
-
   const buttonSize: any = size === 'small' ? 'mini' : size;
 
   return (

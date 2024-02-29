@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { View } from '@tarojs/components';
 import _ from 'lodash';
 import { noop } from '@/utils';
-import EleTag, { EleTagProps } from '@/components/elements/ele-tag/ele-tag';
+import EleTag, { EleTagType } from '@/components/elements/ele-tag/ele-tag';
 import './tag-list.less';
 
 type TagListProps = {
@@ -10,11 +10,11 @@ type TagListProps = {
   onChange?: Function;
   multiple?: boolean;
   disabled?: boolean;
-  items?: EleTagProps[];
+  items?: EleTagType[];
 };
 
 export default function TagList(props: TagListProps) {
-  const [tagList, setTagList] = useState<EleTagProps[]>([]);
+  const [tagList, setTagList] = useState<EleTagType[]>([]);
   const { onItemClick = noop, onChange = noop, multiple = false, disabled } = props;
 
   useEffect(() => {

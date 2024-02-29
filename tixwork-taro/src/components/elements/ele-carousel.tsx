@@ -3,14 +3,14 @@ import React from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import ServerImage from '@/server-image/server-image';
 import { Swiper, SwiperItem, Video, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
 import classNames from 'classnames';
 import { SwiperProps } from '@tarojs/components/types/Swiper';
 import { ImageSize } from '@/server-image/image-tools';
 import { ActionLike, ImageLike, VideoLike } from '@/nice-router/nice-router-types';
 import { ImageProps } from '@tarojs/components/types/Image';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
 import ActionUtil from '@/utils/action-util';
+import ImagePreview from '@/utils/image-preview';
+import ObjectUtils from '@/utils/object-utils';
 import './styles.less';
 
 export type EleCarouselItem = ActionLike & ImageLike & VideoLike;
@@ -34,7 +34,7 @@ function EleCarousel(props: EleCarouselProps) {
     imageMode,
   } = props;
 
-  if (isEmpty(items)) {
+  if (ObjectUtils.isEmpty(items)) {
     return null;
   }
 
@@ -42,7 +42,7 @@ function EleCarousel(props: EleCarouselProps) {
     const { videoUrl = '', imageUrl } = item;
     console.log('carousel viewed', item);
 
-    if (isNotEmpty(videoUrl)) {
+    if (ObjectUtils.isNotEmpty(videoUrl)) {
       return;
     }
 
@@ -50,9 +50,8 @@ function EleCarousel(props: EleCarouselProps) {
       NavigationService.view(item);
       return;
     }
-
-    if (isEmpty(videoUrl) && isNotEmpty(imageUrl)) {
-      await Taro.previewImage({ urls: [imageUrl || ''] });
+    if (ObjectUtils.isEmpty(videoUrl) && ObjectUtils.isNotEmpty(imageUrl)) {
+      await ImagePreview.preview(imageUrl);
     }
   };
 

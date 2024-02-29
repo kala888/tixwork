@@ -7,6 +7,7 @@ module.exports ={
     "jsx-quotes": "off",
     "react/sort-comp": [0],
     "no-shadow": "off",
-    "react/jsx-curly-brace-presence": "off"
+    "react/jsx-curly-brace-presence": "off",
+    "@typescript-eslint/no-useless-constructor": "off",
   }
 }

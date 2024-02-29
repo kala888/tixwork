@@ -1,0 +1,105 @@
+@import 'src/styles/theme';
+
+.order-item {
+  &:extend(.flex-column);
+  padding: 20px;
+  border-radius: 20px;
+  background: #fff;
+  margin-top: 16px;
+
+  &-header {
+    &:extend(.flex-row);
+    height: 40px;
+    justify-content: space-between;
+    padding-bottom: 10px;
+
+    &-title {
+      font-size: 30px;
+      font-weight: 600;
+      color: @primary-color;
+    }
+
+    &-brief {
+      font-size: 26px;
+      color: @text-color-lighter;
+    }
+  }
+
+  &-body {
+    &:extend(.flex-row);
+    justify-content: space-between;
+    padding-top: 20px;
+
+    .order-items {
+      &:extend(.flex-row);
+
+      .server-image {
+        width: 140px;
+        height: 140px;
+        margin-right: 20px;
+        border-radius: 10px;
+      }
+
+      &-info {
+        flex: 1;
+        color: @text-color;
+      }
+    }
+
+    .order-item-info {
+      &:extend(.flex-center);
+      flex-direction: column;
+
+      &-total {
+        font-size: 28px;
+        color: @text-color-lighter;
+        justify-content: flex-end;
+      }
+
+      &-amount {
+        &:extend(.flex-row);
+        align-items: baseline;
+        font-size: 26px;
+        color: @text-color-light;
+
+        &-pre {
+          font-size: 34px;
+        }
+      }
+    }
+  }
+
+  &-time {
+    padding: 20px 0;
+    &:extend(.flex-row);
+    justify-content: space-between;
+    color: @text-color-lighter;
+  }
+
+  &-footer {
+    border-top: 1px solid #eee;
+    &:extend(.flex-row);
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    background: #fff;
+    flex: 1;
+    padding-right: 20px;
+
+    .order-action {
+      margin-top: 20px;
+      font-size: 28px;
+      &:extend(.flex-center);
+      min-width: 100px;
+      margin-left: 20px;
+      height: 60px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px solid @primary-color;
+    }
+
+    .order-action.primary {
+      background: @primary-color;
+      color: #fff;
+    }
+  }
+}

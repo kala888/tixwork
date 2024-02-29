@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from '@tarojs/components';
 import { getExtMode } from '@/nice-router/nice-router-utils';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import './status-flag.less';
 import { codeLength } from '@/utils';
 
@@ -12,7 +12,7 @@ interface StatusFlagProps {
 
 const StatusFlag: React.FC<StatusFlagProps> = (props) => {
   const { title = '', size = 'normal' } = props;
-  if (isEmpty(title)) {
+  if (ObjectUtils.isEmpty(title)) {
     return null;
   }
   const length = codeLength(title);

@@ -1,107 +1,123 @@
-import { useEffect, useState } from 'react';
-import NavigationBox from '@/components/navigation/navigation-box';
-import ServerImage from '@/server-image/server-image';
-import { usePageTitle, usePullDown } from '@/service/use-service';
-import ApiConfig from '@/utils/api-config';
 import { View } from '@tarojs/components';
+import ProfileInfo from '@/pages/me/profile-info';
+import NavigationBox from '@/components/navigation/navigation-box';
+import ActionIcon from '@/components/action-icon/action-icon';
+import EleActionList from '@/components/elements/action-list/ele-action-list';
+import ApiConfig from '@/utils/api-config';
+import { useAjaxPullDown, usePageTitle } from '@/service/use-service';
 import { useDidShow } from '@tarojs/taro';
 import NavigationService from '@/nice-router/navigation-service';
-import { isNotEmpty } from '@/utils/object-utils';
-import EleActionList from '@/components/elements/action-list/ele-action-list';
-import Listof from '@/listof/listof';
-import { EleButtonProps } from '@/components/elements/ele-button';
-import MockService from '../../http/mock-service';
-import useModel from '@/model/use-model';
-import Q from '@/http/q';
 import AuthTools from '@/utils/auth-tools';
+import Q from '@/http/q';
+import ObjectUtils from '@/utils/object-utils';
+import NavigationLine from '@/listof/templates/navigation-line/navigation-line';
+import { Profile } from '@/types';
+import { useState } from 'react';
+import _ from 'lodash';
+
 import './me.less';
 
-const Box_Navigator_List = [
-  {
-    id: '4',
-    code: 'FINE_DECORATION',
-    imageUrl: MockService.randomImage(),
-    title: '发起申请',
-  },
-  {
-    id: '3',
-    code: 'BIZ_CHAIN',
-    icon: 'app-2',
-    title: '我发起',
-  },
-];
-
-const LineItem_Navigator_List = [
+const defaultOrderActions = [
   {
     id: '1',
-    code: 'my-wrong-list',
-    icon: 'app',
-    title: '我参与的项目',
+    code: 'PAY',
+    icon: 'bizfont-wait-to-pay',
+    title: '待付款',
+    onClick: () => NavigationService.goPage('/pages/order/order-list-page', { status: 'PAY' }),
   },
   {
     id: '2',
-    code: 'my-favorite-list',
-    icon: 'app-2',
-    title: '我的收藏',
+    code: 'DELIVERY',
+    icon: 'bizfont-wait-for-delivery',
+    title: '待发货',
+    onClick: () => NavigationService.goPage('/pages/order/order-list-page', { status: 'DELIVERY' }),
+  },
+  {
+    id: '3',
+    code: 'RECEIVE',
+    icon: 'bizfont-wait-receive',
+    title: '待收货',
+    onClick: () => NavigationService.goPage('/pages/order/order-list-page', { status: 'RECEIVE' }),
+  },
+  {
+    id: '4',
+    code: 'RETURN',
+    icon: 'bizfont-return',
+    title: '售后',
+    onClick: () => NavigationService.goPage('/pages/order/order-list-page', { status: 'RETURN' }),
   },
 ];
 
-function MePage() {
-  const { root = {} as any } = useModel('me');
-  const [footerActionList, setFooterActionList] = useState<EleButtonProps[]>([]);
+export default function MePage() {
+  const [data, setData] = useState<Profile>({} as any);
 
-  const refresh = () => NavigationService.ajax(ApiConfig.FooterMe);
+  const refresh = () => {
+    Q.get(ApiConfig.Me).then((res) => {
+      setData(res.data);
+    });
+  };
 
-  usePageTitle(root);
-  usePullDown(ApiConfig.FooterMe);
+  usePageTitle(data);
+  useAjaxPullDown(refresh);
   useDidShow(refresh);
 
-  const handleGoLogin = () => NavigationService.goPage('/pages/login/login-page');
+  const { customerType, lineActions = [], nickName = '未登录', avatar, mobile, userId, orderActions } = data || {};
+  const isLogin = ObjectUtils.isNotEmpty(userId);
+
+  const goToLogin = () => NavigationService.goPage('/pages/login/login-page');
+
   const handleLogout = async () => {
     await AuthTools.logout();
     await NavigationService.dispatch('me/clear');
-    await Q.get(ApiConfig.Logout);
+    await Q.post(ApiConfig.Logout);
+    setData({} as any);
   };
 
-  useEffect(() => {
-    if (isNotEmpty(root)) {
-      setFooterActionList([{ id: 'goLogout', title: '退出登录', onClick: handleLogout }]);
-    } else {
-      setFooterActionList([{ id: 'goLogin', title: '去登陆', onClick: handleGoLogin }]);
-    }
-  }, [root]);
+  const footerActionList = isLogin
+    ? [{ id: 'goLogout', title: '退出登录', onClick: handleLogout }]
+    : [{ id: 'goLogin', title: '去登陆', onClick: goToLogin }];
 
-  const {
-    boxNavigatorList = Box_Navigator_List,
-    navigationLineItems = LineItem_Navigator_List,
-    name = '用户A',
-    brief = '超级管理员',
-    avatar,
-  } = root;
+  const handleViewOrders = () => NavigationService.goPage('/pages/order/order-list-page', { status: 'ALL' });
+  const goToAboutUs = () => NavigationService.goPage('/pages/me/about-us');
+
+  const theOrderActions = defaultOrderActions.map((it) => {
+    const item = _.find(orderActions, { code: it.code }) || it;
+    // @ts-ignore
+    const quantity = _.toNumber(item?.brief);
+    return {
+      ...it,
+      ...item,
+      badge: quantity > 0 ? quantity : undefined,
+    };
+  });
 
   return (
-    <View className='me-page'>
-      <View className='me-page-header'>
-        <View className='me-page-header-info'>
-          <ServerImage className='me-avatar' src={avatar || MockService.randomImage()} />
-          <View className='me-title'>
-            <View className='me-title-name'>{name}</View>
-            <View className='me-title-brief'>{brief}</View>
-          </View>
-        </View>
-
-        <View className='me-page-header-actions'>
-          <NavigationBox items={boxNavigatorList} />
-        </View>
-      </View>
+    <View className={'me-page'}>
+      <ProfileInfo nickName={nickName} avatar={avatar} mobile={mobile} customerType={customerType} />
 
       <View className='me-page-body'>
-        <Listof items={navigationLineItems} displayMode='navigation-line' />
-      </View>
+        {isLogin && (
+          <View className='my-orders'>
+            <NavigationBox
+              title={'全部订单'}
+              icon={<ActionIcon icon='bizfont-orders' />}
+              onClick={handleViewOrders}
+              items={theOrderActions}
+            />
+          </View>
+        )}
 
-      <EleActionList mode='full' items={footerActionList} />
+        <View className='my-actions'>
+          {lineActions.map((it) => (
+            <NavigationLine key={it.code} title={it.title} prefixIcon={it.icon} linkToUrl={it.linkToUrl} />
+          ))}
+          <NavigationLine title='联系客服' prefixIcon={'bizfont-customer-center'} openType='contact' />
+          <NavigationLine title='关于我们' prefixIcon={'bizfont-about-us'} onClick={goToAboutUs} />
+        </View>
+      </View>
+      <View className='me-page-footer'>
+        <EleActionList mode='full' items={footerActionList} />
+      </View>
     </View>
   );
 }
-
-export default MePage;

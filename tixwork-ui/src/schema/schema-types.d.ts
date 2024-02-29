@@ -1,5 +1,4 @@
 import { BizColumnType } from '@/components/value-type';
-import React from 'react';
 
 export type ActionType = {
   title?: string;
@@ -27,7 +26,7 @@ export type ResourceDefine = {
 };
 
 export type BaseEntity = {
-  id?: React.Key; //'ID'
+  id?: number;
   displayName?: string; // readOnly，用于显示的
   tenantId?: string; //'租户Id'
   createDept?: number; //'创建部门'

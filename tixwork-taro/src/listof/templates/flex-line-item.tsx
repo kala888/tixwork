@@ -13,11 +13,12 @@ import CardTemplate from './card/card-template';
 import RichTextTemplate from './rich-text-template';
 import ObjectPickerItem from './card/object-picker-item';
 import ObjectPickerPopupItem from './card/object-picker-popup-item';
-import Product from './product/product';
+import ProductItem from './product/product-item';
 import NavigationLine from './navigation-line/navigation-line';
 
 import './flex-line-item.less';
 import Spin from '@/components/spin';
+import OrderItem from '@/listof/templates/order-item/order-item';
 
 export type FlexLineItemProps = {
   id?: string;
@@ -26,9 +27,10 @@ export type FlexLineItemProps = {
   bordered?: boolean;
   horizontal?: boolean;
   className?: string;
-  onItemClick?: Function;
   displayMode?: string;
   index?: number;
+  onItemClick?: Function;
+  [key: string]: any;
 };
 
 function FlexLineItem(props: FlexLineItemProps) {
@@ -51,8 +53,10 @@ function FlexLineItem(props: FlexLineItemProps) {
   };
   const stopLoading = () => setLoading(false);
 
-  const { item = {}, bordered = true, horizontal, className, onItemClick, ...others } = props;
-  const displayMode = _.get(item, 'displayMode', props.displayMode).toLowerCase().trim();
+  const { onItemClick, item = {}, bordered = true, horizontal, className, ...others } = props;
+  const displayMode = _.get(item, 'displayMode', props.displayMode || 'auto')
+    .toLowerCase()
+    .trim();
 
   // 使用节流，3面内的点击只算一次
   const handleClick = _.throttle(() => {
@@ -114,7 +118,9 @@ function FlexLineItem(props: FlexLineItemProps) {
       {displayMode === 'object-picker-popup' && <ObjectPickerPopupItem {...itemProps} />}
       {displayMode === 'info-list' && <FlexInfoList {...item} foldable />}
 
-      {displayMode === 'product' && <Product {...itemProps} {...item} />}
+      {displayMode === 'product' && <ProductItem {...itemProps} {...item} />}
+
+      {displayMode === 'order' && <OrderItem itemProps={itemProps} order={item as any} />}
 
       {loading && (
         <View className='inline-loading'>

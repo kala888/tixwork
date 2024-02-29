@@ -1,8 +1,9 @@
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { Image, Text, View } from '@tarojs/components';
 import './styles.less';
 import ActionIcon from '@/components/action-icon/action-icon';
 import Taro from '@tarojs/taro';
+import ImagePreview from '@/utils/image-preview';
 
 export type TaroImageFile = {
   /** 本地临时文件路径 */
@@ -28,7 +29,7 @@ type ImageItemType = {
 export default function ImageItem(props: ImageItemType) {
   const { imageUrl = '', onAdd, onRemove, disabled } = props;
 
-  const handlePreview = async () => await Taro.previewImage({ urls: [imageUrl] });
+  const handlePreview = async () => await ImagePreview.preview(imageUrl);
   const handleRemove = (e) => {
     e.stopPropagation();
     onRemove && onRemove();
@@ -53,7 +54,7 @@ export default function ImageItem(props: ImageItemType) {
     });
   };
 
-  if (isNotEmpty(imageUrl)) {
+  if (ObjectUtils.isNotEmpty(imageUrl)) {
     return (
       <View className='image-item' onClick={handlePreview}>
         <Image src={imageUrl} className='image-item--image' mode='aspectFill' />

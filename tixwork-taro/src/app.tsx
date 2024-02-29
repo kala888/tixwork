@@ -5,6 +5,7 @@ import { ModelProvider } from '@/model/model-provider';
 import './app.less';
 import TestData from './pages/mock-data/test-data';
 import { models } from '@/model/models';
+import NavigationService from '@/nice-router/navigation-service';
 
 TestData.initial();
 
@@ -32,7 +33,7 @@ const updateWeapp = () => {
       Taro.showModal({
         title: '更新提示',
         content: '新版本已经准备好，是否重启应用？',
-        success: function(res) {
+        success: function (res) {
           if (res.confirm) {
             updateManager.applyUpdate();
           }
@@ -62,12 +63,9 @@ function App({ children }: PropsWithChildren<any>) {
     if (isWeapp()) {
       updateWeapp();
     }
+    NavigationService.dispatch('cart/load');
   });
-  return (
-    <ModelProvider models={models}>
-      {children}
-    </ModelProvider>
-  );
+  return <ModelProvider models={models}>{children}</ModelProvider>;
 }
 
 export default App;

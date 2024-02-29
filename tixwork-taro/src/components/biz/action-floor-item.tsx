@@ -2,9 +2,9 @@ import ServerImage from '@/server-image/server-image';
 import { Text, View } from '@tarojs/components';
 import EleButton, { EleButtonProps } from '@/components/elements/ele-button';
 import { getExtMode } from '@/nice-router/nice-router-utils';
-import { isEmpty } from '@/utils/object-utils';
 
 import './styles.less';
+import ObjectUtils from '@/utils/object-utils';
 
 type ActionFloorItemProps = {
   color?: 'blue';
@@ -12,7 +12,7 @@ type ActionFloorItemProps = {
 
 function ActionFloorItem(props: ActionFloorItemProps) {
   const { title, brief, imageUrl, color, ...others } = props || {};
-  if (isEmpty(title) && isEmpty(brief) && isEmpty(imageUrl)) {
+  if (ObjectUtils.isEmpty(title) && ObjectUtils.isEmpty(brief) && ObjectUtils.isEmpty(imageUrl)) {
     return null;
   }
 

@@ -1,10 +1,9 @@
 import NavigationService from './navigation-service';
 import NiceRouterUtils from './nice-router-utils';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { noop } from '@/utils';
 import ActionUtil from '@/utils/action-util';
 import GlobalToast from '@/components/global-popup/global-toast';
-import { API } from '@/http/api-types';
 import { useState } from 'react';
 import { NiceRouterState } from './nice-router-types';
 import HttpRequest from '@/http/http-request';
@@ -23,24 +22,6 @@ export default function useNiceRouter() {
     });
   };
 
-  // 重发重试
-  // const retry = async () => {
-  //   const { latestRoute } = state;
-  //   if (latestRoute) {
-  //     console.log('retry to next', latestRoute);
-  //     await route(latestRoute);
-  //   }
-  // };
-
-  // // 保存最近的路由请求信息
-  // const saveLatestRoute = (latestRoute) => {
-  //   console.log('save latest route', latestRoute);
-  //   setState((pre) => ({
-  //     ...pre,
-  //     latestRoute,
-  //   }));
-  // };
-
   // 主路由逻辑
   const routeTo = async (action) => {
     console.log('niceRouter/router Router Payload', action);
@@ -57,7 +38,7 @@ export default function useNiceRouter() {
 
     const linkToUrl = ActionUtil.getActionUri(action);
 
-    if (isEmpty(linkToUrl)) {
+    if (ObjectUtils.isEmpty(linkToUrl)) {
       console.warn('store.modules.router.route","can not send empty url to backend');
       return;
     }
@@ -76,12 +57,12 @@ export default function useNiceRouter() {
     }
 
     // saveLatestRoute(action);
-    const weResult: API.WebResult = await HttpRequest.request(linkToUrl, { ...action, loading: withLoading });
-    const { responseOptions, data } = weResult;
-    const { success, xClass, xNavigationMethod } = responseOptions;
+    const resp: API.CustomResponse = await HttpRequest.request(linkToUrl, { ...action, loading: withLoading });
+    const { success, xClass, xNavigationMethod } = resp;
 
+    const data = resp.data?.data;
     // onSuccess回调
-    onSuccess(data, weResult);
+    onSuccess(data, resp);
 
     //获取ViewMapping 处理预支的state和effect，以及页面跳转
     if (xClass) {
@@ -94,7 +75,7 @@ export default function useNiceRouter() {
 
       for (let i = 0; i < modelActions.length; i++) {
         const modelAction = modelActions[i];
-        if (isNotEmpty(modelAction)) {
+        if (ObjectUtils.isNotEmpty(modelAction)) {
           await NavigationService.dispatch(modelAction, data);
         }
       }
@@ -106,8 +87,6 @@ export default function useNiceRouter() {
       if (xNavigationMethod || navigationMethod || pageChanged) {
         await NavigationService.goPage(pagePath, {}, { navigationMethod: xNavigationMethod || navigationMethod });
       }
-
-      NiceRouterUtils.showToastOrPopup({ toast: data.toast, popup: data.popup });
 
       if (success && asForm) {
         // noinspection JSIgnoredPromiseFromCall

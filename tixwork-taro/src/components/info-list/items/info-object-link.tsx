@@ -4,7 +4,7 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import { ActionLike, EleObject } from '@/nice-router/nice-router-types';
 import ActionUtil from '@/utils/action-util';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import './styles.less';
 
 function InfoObjectLink(props: EleObject & ActionLike) {
@@ -21,7 +21,7 @@ function InfoObjectLink(props: EleObject & ActionLike) {
   return (
     <View className={rootClass} onClick={onClick}>
       <Text className='info-object-link-title'>{title}</Text>
-      {isNotEmpty(brief) && <Text className='info-object-link-brief'>({brief})</Text>}
+      {ObjectUtils.isNotEmpty(brief) && <Text className='info-object-link-brief'>({brief})</Text>}
     </View>
   );
 }

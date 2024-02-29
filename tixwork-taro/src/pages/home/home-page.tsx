@@ -18,7 +18,6 @@ type HomeDataType = {
 };
 
 function HomePage(props) {
-
   useLoad(() => {
     console.log('Page loaded.');
   });
@@ -57,12 +56,12 @@ function HomePage(props) {
   const { slideList = [], actionList = [], productList = [] } = root;
 
   return (
-    <View className="home-page">
-      <EleCarousel className="home-page-carousel" items={slideList} />
-      <View className="home-page-action-floor">
+    <View className='home-page'>
+      <EleCarousel className='home-page-carousel' items={slideList} />
+      <View className='home-page-action-floor'>
         <ActionFloor actionList={actionList} />
-        <SectionBar title="促销抢购" linkToUrl="page:///pages/biz/listof-test-page" />
-        <Listof items={productList} displayMode="product" />
+        <SectionBar title='促销抢购' linkToUrl='page:///pages/biz/listof-test-page' />
+        <Listof items={productList} displayMode='product' />
       </View>
     </View>
   );

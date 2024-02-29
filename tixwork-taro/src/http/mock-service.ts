@@ -1,6 +1,5 @@
 import _ from 'lodash';
-import { API } from '@/http/api-types';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import Config from '@/utils/config';
 
 const SIMPLE_IMAGES = [
@@ -158,19 +157,20 @@ const titleBrief = () => _.sample(TITLE_BRIEF);
 const brief = () => _.sample(SHORT_BRIEF);
 const nickName = () => _.sample(NICK_NAME);
 
-const MockDataCache: Record<string, API.WebResult> = {};
-const mockResp = (uri: string = '', xClass, data = {}, others = {}) => {
+const MockDataCache: Record<string, API.CustomResponse> = {};
+const mockResp = (uri: string = '', xClass, data = {}) => {
   const key = _.trim(uri.toLowerCase().trim(), '/');
 
   MockDataCache[key] = {
-    code: 200,
+    statusCode: 200,
     msg: 'success',
-    data,
-    responseOptions: {
-      xClass,
-      success: true,
-      ...others,
+    data: {
+      code: 200,
+      data,
+      msg: 'success',
     },
+    xClass,
+    success: true,
   };
 };
 const MockService = {
@@ -178,7 +178,7 @@ const MockService = {
   getMockResp: (uri: string = '') => {
     let key = _.trim(uri.toLowerCase().trim(), '/');
     let resp = MockDataCache[key];
-    if (isEmpty(resp)) {
+    if (ObjectUtils.isEmpty(resp)) {
       key = key.substr(Config.baseURL.length, key.length);
       resp = MockDataCache[key];
     }

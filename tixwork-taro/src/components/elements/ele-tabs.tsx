@@ -36,7 +36,9 @@ function EleTabs(props: EleTabsProps) {
   };
 
   const scroll = type === 'scroll' && tabs.length > 4;
-  return <Tabs key={Date.now().valueOf()} current={current} scroll={scroll} items={tabs} onClick={handleTabSwitch} />;
+  return (
+    <Tabs key={Date.now().valueOf()} current={current} scroll={scroll} items={tabs as any} onClick={handleTabSwitch} />
+  );
 }
 
 EleTabs.defaultProps = {

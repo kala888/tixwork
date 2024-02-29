@@ -1,4 +1,4 @@
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import _ from 'lodash';
 import { compile, parse } from 'path-to-regexp';
 import { Chain } from '@tarojs/taro';
@@ -28,14 +28,14 @@ function replaceUrl(source: any, params = {}) {
     }
   });
 
-  const prefix = isNotEmpty(domain) ? domain : Config.baseURL;
+  const prefix = ObjectUtils.isNotEmpty(domain) ? domain : Config.baseURL;
   return {
     url: prefix + url,
     params: finalParams,
   };
 }
 
-const RequestUrlProcessor = async (chain: Chain) => {
+const RequestUrl = async (chain: Chain) => {
   const { requestParams } = chain;
 
   // 将params 处理成url
@@ -52,4 +52,4 @@ const RequestUrlProcessor = async (chain: Chain) => {
   return chain.proceed(nextParams);
 };
 
-export default RequestUrlProcessor;
+export default RequestUrl;

@@ -4,7 +4,7 @@ import { useEmotionCss } from '@ant-design/use-emotion-css';
 import classNames from 'classnames';
 
 type BoxWrapperType = {
-  title?: string;
+  title?: any;
   children?: any;
   className?: any;
   titleColor?: any;

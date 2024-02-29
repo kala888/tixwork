@@ -9,9 +9,11 @@ import AuthTools from '@/utils/auth-tools';
 import './login.less';
 import LoginUtils from './login-utils';
 
-export default function PasswordForm() {
+export default function PasswordForm(props) {
   const [username, setUsername] = useState<any>();
   const [password, setPassword] = useState<any>();
+
+  const { onSuccess } = props;
 
   const handleSubmit = async () => {
     const theTokenIsLoginToken = await AuthTools.isLoginToken();
@@ -20,10 +22,10 @@ export default function PasswordForm() {
     const params = { username, password, loginMethod: 'account_password' };
     try {
       await LoginUtils.getWxObj().checkSession();
-      await LoginUtils.remoteLogin({ params });
+      await LoginUtils.remoteLogin({ params, onSuccess });
     } catch (e) {
       console.log('error when login', e);
-      GlobalToast.show({ text: '登录失败，稍后重试！' });
+      GlobalToast.show({ text: '登录失败，稍后重试!!' });
     }
   };
 

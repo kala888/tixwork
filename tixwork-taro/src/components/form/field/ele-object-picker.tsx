@@ -2,7 +2,7 @@ import NavigationService from '@/nice-router/navigation-service';
 import { noop } from '@/utils';
 import _ from 'lodash';
 import { ActionLike, CandidateValue } from '@/nice-router/nice-router-types';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import ActionField from './action-field';
 import './styles.less';
 
@@ -18,7 +18,7 @@ type EleObjectPickerProps = {
 } & ActionLike;
 
 function getDisplayName(value) {
-  if (isEmpty(value)) {
+  if (ObjectUtils.isEmpty(value)) {
     return '';
   }
   if (_.isString(value)) {
@@ -44,7 +44,7 @@ function EleObjectPicker(props: EleObjectPickerProps) {
         delayCallBack: true,
       }
     );
-    const values = _.isEmpty(items) ? [] : items.map((it) => ({ id: it.id, title: it.title }));
+    const values = ObjectUtils.isEmpty(items) ? [] : items.map((it) => ({ id: it.id, title: it.title }));
     onChange(values);
   };
   let displayName = getDisplayName(value);

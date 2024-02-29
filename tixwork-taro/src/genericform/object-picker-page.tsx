@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import NavigationService from '@/nice-router/navigation-service';
 import { View } from '@tarojs/components';
-import { Current } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 import _ from 'lodash';
 import ListofPageBase from '@/listof/listof-page-base';
 import Listof from '@/listof/listof';
@@ -14,11 +14,11 @@ import './object-picker-page.less';
 
 function ObjectPickerPage() {
   const { visible, close, show } = useVisible(false);
+  // @ts-ignore
   const { root = {} as any } = useModel('objectPicker');
 
   // q如果变化了，就发送一个后台请求
-  // @ts-ignore
-  const { linkToUrl } = Current.router.params;
+  const { linkToUrl } = Taro.useRouter().params;
   // @ts-ignore
   useEffect(() => {
     if (linkToUrl) {

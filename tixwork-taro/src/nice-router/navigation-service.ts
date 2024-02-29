@@ -1,6 +1,6 @@
 import Taro, { Current } from '@tarojs/taro';
 import _ from 'lodash';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import ActionUtil from '@/utils/action-util';
 import { isH5 } from '@/utils';
 import { H5PageProps } from '@/pages/h5/h5-page';
@@ -10,7 +10,8 @@ import { NavigationOptionType, PageHistoryType, RouteFunction } from './nice-rou
 import LoadingType from '@/nice-router/loading-type';
 
 class NavigationServiceClass {
-  pageHistory: Record<string, PageHistoryType>; // 记得清空这个玩意，小心内存泄露
+  pageHistory: Record<string, PageHistoryType> = {}; // 记得清空这个玩意，小心内存泄露
+
   /**
    * redux dispatch
    * @param actionType redux action name
@@ -39,13 +40,18 @@ class NavigationServiceClass {
       console.log('页面栈只剩一个了，不能后退');
       return;
     }
+    console.log(Taro.getCurrentPages().length);
     const key: string = Current?.router?.path || '';
     await Taro.navigateBack({ delta });
-    const { callback } = this.pageHistory[key] || {};
+    const { callback } = this.pageHistory?.[key] || {};
     if (callback) {
       callback(data);
       _.omit(this.pageHistory, key);
     }
+  }
+
+  goPageWithCallback(routeName: any, params?: any, options?: any) {
+    return this.goPage(routeName, params, { ...(options || {}), delayCallBack: true });
   }
 
   /**
@@ -53,7 +59,7 @@ class NavigationServiceClass {
    */
   goPage(routeName: string, params: Record<string, any> = {}, options?: NavigationOptionType): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (isEmpty(routeName)) {
+      if (ObjectUtils.isEmpty(routeName)) {
         resolve && resolve(null);
         return;
       }
@@ -113,14 +119,14 @@ class NavigationServiceClass {
       ...theOptions,
     });
     const { linkToUrl = '', params, statInPage } = action;
-    if (isEmpty(linkToUrl)) {
+    if (ObjectUtils.isEmpty(linkToUrl)) {
       console.log('THE ACTION linkToUrl IS EMPTY');
       return;
     }
 
     // action上带有属性，confirmContent, 触发先confirm再执行相关动作
     const confirmContent = ActionUtil.getConfirmContent(action);
-    if (isNotEmpty(confirmContent)) {
+    if (ObjectUtils.isNotEmpty(confirmContent)) {
       const confirmResp = await Taro.showModal({
         title: action.title,
         content: confirmContent,

@@ -1,16 +1,19 @@
-import RequestUrlProcessor from './request-url-processor';
-import RequestAuthProcessor from './request-auth-processor';
-import loadingAndLogsProcessor from './loading-and-logs-processor';
+import RequestUrl from './request-url';
+import RequestAuth from './request-auth';
 import customProcessor from './custom-processor';
 import Taro from '@tarojs/taro';
-import { API } from '@/http/api-types';
+import ResponseLog from '@/http/http-request/request-loading-log';
+import ResponseError from './response-error';
+import ResponseToastPopup from '@/http/http-request/response-toast-popup';
 
-type RequestFunction = <R = any>(url: string, options?: Record<string, any>) => Promise<API.WebResult<R>>;
+type RequestFunction = <R = any>(url: string, options?: Record<string, any>) => Promise<API.CustomResponse<R>>;
 
 const interceptors = [
-  RequestUrlProcessor,
-  RequestAuthProcessor,
-  loadingAndLogsProcessor,
+  RequestUrl,
+  RequestAuth,
+  ResponseToastPopup,
+  ResponseError,
+  ResponseLog,
   customProcessor,
   Taro.interceptors.logInterceptor,
 ];
@@ -22,7 +25,7 @@ const request: RequestFunction = async (url, options) => {
     ...options,
     url,
   });
-  return resp as unknown as API.WebResult; //这个responseData是接口返回的直接数据, 如果是WebResult，里面还一个data
+  return resp as unknown as API.CustomResponse; //这个responseData是接口返回的直接数据, 如果是WebResult，里面还一个data
 };
 
 const HttpRequest = { request };

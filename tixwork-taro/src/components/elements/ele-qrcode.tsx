@@ -16,7 +16,7 @@ type EleQrcodeProps = {
   fgColor: string;
   logoSize?: number;
   logo?: number;
-  text: 'string';
+  value: string;
   customStyle?: React.CSSProperties;
 };
 
@@ -48,11 +48,11 @@ const convertStr = (str) => {
 };
 
 function EleQrcode(props: EleQrcodeProps) {
-  const { text, size, level, bgColor, fgColor, logoSize = '100', logo = '', customStyle = {} } = props;
+  const { value, size, level, bgColor, fgColor, logoSize = '100', logo = '', customStyle = {} } = props;
 
   const update = () => {
     const qrcode = new QRCodeImpl(-1, ErrorCorrectLevel[level]);
-    qrcode.addData(convertStr(text));
+    qrcode.addData(convertStr(value));
     qrcode.make();
     // @ts-ignore
     const canvas = Taro.createCanvasContext(defaultCanvasId);

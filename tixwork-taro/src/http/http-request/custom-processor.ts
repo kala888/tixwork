@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { Chain } from '@tarojs/taro';
-import { API } from '@/http/api-types';
 import MockService from '@/http/mock-service';
 
 type TaroResponse = {
@@ -10,8 +9,6 @@ type TaroResponse = {
   header: Record<string, any>;
   statusCode: number;
 };
-
-const systemErrorXClass = 'NetworkException.RetryPage';
 
 const formatHeaders = (header) => {
   const responseHeaders = {};
@@ -23,8 +20,7 @@ const formatHeaders = (header) => {
 
 const CustomProcessor = async (chain: Chain) => {
   const { headers: requestHeaders, ...others } = chain.requestParams;
-
-  // // mock 数据处理
+  // 1. mock 数据处理
   const mockData = MockService.getMockResp(others.url);
   if (mockData) {
     return mockData;
@@ -33,49 +29,36 @@ const CustomProcessor = async (chain: Chain) => {
   try {
     // // 注意request 中使用 header，在应用中使用的是headers，
     const resp: TaroResponse = await chain.proceed({ ...others, header: requestHeaders });
+    const { data = {}, statusCode, header } = resp;
 
     // 注意这里的taro 原生的http中使用的header是就叫header，其实是headers
-    const headers = formatHeaders(resp.header);
+    const headers = formatHeaders(header);
 
     const xClass = _.get(headers, 'x-class', '');
-    const xNavigationMethod = _.get(headers, 'x-navigation-method', '');
-    let responseData: { data: any } = resp.data;
+    const xNavigationMethod = _.get(headers, 'x-navigation-method');
 
-    const isNotJsonObject = !_.isObjectLike(responseData);
-    if (isNotJsonObject) {
-      responseData = { data: responseData };
-      console.error(
-        'response should be json, but it\'s string, please contact interface developer, tell him "Change it!!"'
-      );
-    }
-
-    if (_.isNil(responseData.data)) {
-      responseData = { data: responseData };
-    }
-    // 接口返回的数据response的body是对象，并且xClass不是Exception结尾，那么应该就是正常
-    const success = !isNotJsonObject && !xClass.endsWith('Exception');
-    // 无论后台接口如何，统计包装成WeResult
-    const result: API.WebResult = {
-      msg: 'not fond in response',
-      code: success ? 200 : 520,
-      ...responseData,
-      responseOptions: {
-        xClass,
-        xNavigationMethod,
-        headers,
-        success,
-      },
+    const result: API.CustomResponse = {
+      msg: 'success',
+      statusCode,
+      data: data as API.WebResult,
+      xClass,
+      xNavigationMethod,
+      headers,
     };
+    // 无论后台接口如何，统计包装成WeResult
     return result;
   } catch (error) {
     const { errMsg } = error;
     console.error('Request error', error);
-    return {
-      xClass: systemErrorXClass,
-      msg: `error code:${errMsg}`,
-      code: 521,
-      ...(error.response || {}),
-    };
+    const result: API.CustomResponse = {
+      msg: errMsg,
+      statusCode: error.response?.statusCode || 521,
+      data: error.response.data as any,
+      // xClass:'xxx',//todo
+      // xNavigationMethod//toto
+      // headers, //todo
+    } as any;
+    return result;
   }
 };
 

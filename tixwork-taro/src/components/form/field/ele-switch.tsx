@@ -1,7 +1,7 @@
 import { Switch, Text, View } from '@tarojs/components';
 import classNames from 'classnames';
 import { CandidateValue } from '@/nice-router/nice-router-types';
-import { toBoolean } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 
 // candidateValues 就是 options
 // candidateValues = [{
@@ -15,6 +15,7 @@ import { toBoolean } from '@/utils/object-utils';
 // }]
 
 type EleSwitchProps = {
+  name?: string;
   value?: boolean;
   candidateValues: CandidateValue[];
   disabled?: boolean;
@@ -22,8 +23,8 @@ type EleSwitchProps = {
 
 function EleSwitch(props: EleSwitchProps) {
   const { value = false, candidateValues = [], disabled, ...others } = props;
-  const checked = toBoolean(value);
-  const selected = candidateValues.find((it) => toBoolean(it.id) === checked);
+  const checked = ObjectUtils.toBoolean(value);
+  const selected = candidateValues.find((it) => ObjectUtils.toBoolean(it.id) === checked);
   const title = selected ? selected.title : '';
   const switchClass = classNames('ele-switch', {
     disabled: disabled,

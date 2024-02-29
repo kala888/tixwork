@@ -1,0 +1,21 @@
+@import '/src/styles/theme';
+
+.about-us {
+  &:extend(.page);
+  background: #fff;
+  height: 100vh;
+  &:extend(.flex-column);
+  color: @text-color-light;
+
+  &-body {
+    &:extend(.flex-flex);
+    flex: 1;
+    padding: 20px;
+  }
+
+  &-footer {
+    &:extend(.flex-center);
+    padding: 20px 40px 60px;
+    border-top: 1px solid #eee;
+  }
+}

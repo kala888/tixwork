@@ -1,7 +1,7 @@
 import { useCountdown } from '@/service/use-service';
 import { View } from '@tarojs/components';
 import classNames from 'classnames';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import './styles.less';
 import GlobalToast from '@/components/global-popup/global-toast';
 import Q from '@/http/q';
@@ -27,7 +27,7 @@ function EleMobileVerifyCode(props: EleMobileVerifyCodeProps) {
       });
       return;
     }
-    if (isNotEmpty(linkToUrl)) {
+    if (ObjectUtils.isNotEmpty(linkToUrl)) {
       startCount();
       console.log('props...', props);
       await Q.get(linkToUrl, { mobile: props.value });

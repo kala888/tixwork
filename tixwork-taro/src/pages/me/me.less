@@ -2,61 +2,70 @@
 
 .me-page {
   &:extend(.page);
+  background: #f4f4f4;
 
-  &-header {
-    background-color: #fff;
-    &:extend(.flex-column);
+  &-body {
+    padding: 20px 10px;
+    min-height: 50vh;
 
-    &-info {
-      &:extend(.flex-row);
-      background-color: @primary-color;
-      align-items: center;
-      border-bottom-left-radius: 50px;
-      padding-bottom: 40px;
-      padding-top: 30px;
-      width: 100%;
-
-      .me-avatar {
-        margin: 20px 40px 40px;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        border: 8px solid darken(@primary-color, 10%);
-        box-shadow: 0 0 20px #fff;
+    .my-orders {
+      .navigation-box-header {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #f4f4f4;
+        margin-bottom: 10px;
       }
 
-      .ele-button {
-        margin: 0;
+      .navigation-box-actions {
+        .navigation-box-item-title {
+          padding-top: 10px;
+          color: @text-color;
+        }
+
+        .navigation-box-item {
+          height: 160px;
+        }
+
+        .ele-badge-num {
+          right: 40px;
+          top: -26px;
+        }
+
+        .iconfont {
+          color: @text-color-lighter;
+        }
+      }
+    }
+
+    .my-actions {
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 20px;
+
+      .navigation-line {
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 0;
+        height: 100px;
+        border-bottom: 1px solid #f4f4f4;
       }
 
-      .me-title {
-        color: @white;
-        &:extend(.flex-column);
-        justify-content: center;
+      .navigation-line-header .action-icon {
+        height: unset;
+        font-weight: unset;
+
+        .iconfont {
+          font-size: 40px;
+        }
+      }
+
+      .navigation-line-title {
+        font-weight: 400;
         font-size: 30px;
-
-        &-name {
-          font-size: 38px;
-        }
-
-        &-brief {
-          font-size: 24px;
-        }
       }
     }
   }
 
-  &-body {
-    padding: 30px;
-
-    .navigation-line {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-
-    .navigation-line-title {
-      font-weight: 400;
-      font-size: 30px;
-    }
+  &-footer {
+    padding-top: 40px;
   }
 }

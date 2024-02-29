@@ -1,4 +1,4 @@
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 
 const SHOW_AS_MULTIPLE_LINE = ['image', 'image-list'];
 
@@ -11,7 +11,7 @@ export function isMultiline({
   multiline?: boolean;
   type?: string;
 }): boolean {
-  if (isNotEmpty(multiline)) {
+  if (ObjectUtils.isNotEmpty(multiline)) {
     return !!multiline;
   }
   if (Array.isArray(value)) {

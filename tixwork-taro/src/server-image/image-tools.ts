@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 
 // const logo = require('./images/default_id_icon.png')
 
@@ -24,7 +24,7 @@ const isSkipUrl = (url = '') => {
 
 const getServerImagUrl = (uri: string = '', size: ImageSize = ImageSize.Normal) => {
   const url = _.trim(uri);
-  if (isEmpty(url) || isSkipUrl(url)) {
+  if (ObjectUtils.isEmpty(url) || isSkipUrl(url)) {
     console.log("image uri don't need styled");
     return url;
   }

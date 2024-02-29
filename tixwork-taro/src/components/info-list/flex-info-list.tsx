@@ -3,7 +3,7 @@ import SectionBar from '@/components/section-bar/section-bar';
 
 import EleActionList from '@/components/elements/action-list/ele-action-list';
 import { View } from '@tarojs/components';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { ActionListLike } from '@/nice-router/nice-router-types';
 import './flex-info-list.less';
 
@@ -28,7 +28,7 @@ function FlexInfoList(props: FlexInfoListProps) {
       {items.map((it, idx) => (
         <FlexInfoItem key={`the-group-item-${idx}`} {...it} />
       ))}
-      {isNotEmpty(actionList) && (
+      {ObjectUtils.isNotEmpty(actionList) && (
         <View className='flex-info-list-actions'>
           <EleActionList mode={['small', 'right']} items={actionList} />
         </View>

@@ -88,7 +88,7 @@ const PopupContent = (props) => {
 
   const title = displayName || getDisplayName(record);
   const schema = BizSchema.get(objectType);
-  const columns = (schema?.columns || []).filter((it) => it.valueType !== 'Object');
+  const columns = (schema?.columns || []).filter((it) => it.valueType !== 'Object' && it.valueType !== 'RichText');
   const linkToUrl = getLinkToUrl(props) as string;
   let column = columns.length > 6 ? 3 : 2;
   if (columns.length > 12) {

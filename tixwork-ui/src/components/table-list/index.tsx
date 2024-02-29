@@ -44,14 +44,15 @@ function _TableList<T extends Record<string, any>>(
   }));
   const rootClass = useEmotionCss(() => ({
     height: 'auto',
-    paddingBottom: 10,
+    paddingBottom: 0,
 
     '.ant-pro-table-list-toolbar': {
       marginTop: 8,
       paddingRight: 20,
     },
     '.table-search-bar': {
-      marginBottom: 10,
+      marginBottom: 0,
+      // marginBottom: 10,
 
       '.ant-col': {
         paddingLeft: '0 !important',

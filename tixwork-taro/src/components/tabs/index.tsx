@@ -1,11 +1,11 @@
 // tabs.jsx
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from '@tarojs/components';
 import './styles.less';
 import classNames from 'classnames';
 
 type TabsType = {
-  items: any[];
+  items: { title: string }[];
   current?: number;
   onClick?: (index: number, item: any) => void;
   className?: any;
@@ -15,6 +15,9 @@ type TabsType = {
 export default function Tabs(props: TabsType) {
   const { items = [], current = 0, onClick, className, scroll = false } = props;
   const [selected, setSelected] = useState(current);
+  useEffect(() => {
+    setSelected(current);
+  }, [current]);
 
   const handleClick = (item, index) => {
     setSelected(index);

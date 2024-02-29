@@ -1,24 +1,25 @@
 // @ts-ignore
 /* eslint-disable */
 
-import { NavigationMethodType } from '@/nice-router/nice-router-types';
-
 declare namespace API {
   type Status = 'ENABLED' | 'DISABLED';
   type YesOrNo = 'Y' | 'N';
+  //对应后台的WebResult
+  export type CustomResponse<T = any> = {
+    msg?: string;
+    statusCode: number;
+    data: WebResult<T>;
+    xClass?: string;
+    xNavigationMethod?: string;
+    headers?: Record<string, any>;
+    success?: boolean;
+  };
 
   //对应后台的WebResult
   export type WebResult<T = any> = {
     code: number;
     msg: string;
     data: T;
-    responseOptions: {
-      // 移动端特殊字段
-      xClass?: string;
-      xNavigationMethod?: NavigationMethodType;
-      headers?: any;
-      success?: boolean;
-    };
   };
 
   // /**

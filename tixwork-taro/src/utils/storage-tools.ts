@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import Taro from '@tarojs/taro';
 import { SHA1 } from 'crypto-es/lib/sha1.js';
-import { parseToObject } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 
 const setItem = (key: string, value: any) => Taro.setStorageSync(key, value);
 const getItem = (key) => Taro.getStorageSync(key);
@@ -36,7 +36,7 @@ const StorageTools = {
       return defaultValue;
     }
     const value = getItem(theKey);
-    return value ? parseToObject(value) : defaultValue;
+    return value ? ObjectUtils.parseToObject(value) : defaultValue;
   },
 
   /**

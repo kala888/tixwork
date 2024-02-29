@@ -1,0 +1,94 @@
+@import '/src/styles/theme';
+
+@height: 450px;
+.profile-info {
+  height: @height;
+  width: 100%;
+  position: relative;
+
+  .user-card {
+    &:extend(.flex-row);
+    align-items: center;
+    position: absolute;
+    top: 35%;
+    left: 10%;
+    right: 0;
+
+    .user-avatar {
+      &:extend(.flex-center);
+      background: #fff;
+      border-radius: 100%;
+      width: 142px;
+      height: 142px;
+
+      .iconfont {
+        font-size: 120px;
+        color: @color-brand;
+      }
+
+      .server-image {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        border: 4px solid @golden-color;
+      }
+    }
+
+    .user-title {
+      padding-left: 20px;
+      color: #fff;
+      &:extend(.flex-column);
+
+      .user-name {
+        font-size: 40px;
+      }
+
+      .user-brief {
+        margin-top: 10px;
+        font-size: 26px;
+      }
+    }
+  }
+
+  .profile-info-bg-img {
+    height: @height;
+    width: 100%;
+    background: @color-brand;
+  }
+
+  .member-card {
+    margin-top: -110px;
+    &:extend(.flex-center);
+    height: 105px;
+    //position: relative; //不行！！
+    .member-card-img {
+      width: 90%;
+      height: 100%;
+      border-radius: 20px;
+      align-self: center;
+    }
+  }
+
+  .member-title {
+    color: #f7d67f;
+    padding-left: 10%;
+    margin-top: -100px;
+    &:extend(.flex-row);
+
+    .member-type-icon {
+      color: #f7d67f;
+      font-size: 40px;
+      margin-right: 20px;
+    }
+  }
+
+  .profile-footer {
+    margin-top: -35px;
+    z-index: 9999;
+
+    .server-image {
+      width: 750px;
+      height: 35px;
+    }
+  }
+}

@@ -17,7 +17,7 @@ export type RemoteOptionType = {
  * /api/options/gender  获取enums和字典的值
  */
 const getUrl = (props) => {
-  const { types, linkToUrl, objectType } = props;
+  const { type, types, linkToUrl, objectType } = props;
   if (ObjectUtils.isNotEmpty(linkToUrl)) {
     return linkToUrl;
   }
@@ -25,7 +25,7 @@ const getUrl = (props) => {
     const schema = BizSchema.get(objectType);
     return getResource(schema?.linkToUrl).resourceLike?.list?.linkToUrl;
   }
-  return `/api/options/${types}`;
+  return `/api/options/${type || types}`;
 };
 
 const transform = (items) => {

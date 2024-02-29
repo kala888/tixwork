@@ -1,8 +1,8 @@
 import { isH5 } from '@/utils';
 import jwtDecode from 'jwt-decode';
 import _ from 'lodash';
-import { isNotEmpty } from './object-utils';
 import StorageTools from './storage-tools';
+import ObjectUtils from '@/utils/object-utils';
 
 const TOKEN = 'TOKEN';
 const AUTH_INFO = 'AUTH_INFO';
@@ -23,7 +23,7 @@ export type AuthInfoType = {
 };
 
 const toAuthInfo = _.memoize(
-  (token: string): AuthInfoType => (isNotEmpty(token) ? jwtDecode(token) : ({} as AuthInfoType))
+  (token: string): AuthInfoType => (ObjectUtils.isNotEmpty(token) ? jwtDecode(token) : ({} as AuthInfoType))
 );
 
 async function saveTokenAsync(token: string) {

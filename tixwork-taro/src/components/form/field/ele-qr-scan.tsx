@@ -2,7 +2,7 @@ import { Text, View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import _ from 'lodash';
 import { noop } from '@/utils';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import EleButton from '@/components/elements/ele-button';
 
 import './styles.less';
@@ -19,7 +19,7 @@ function EleQrScan(props: EleQrScanProps) {
 
   const handleScan = async () => {
     const { result } = await Taro.scanCode({});
-    if (isNotEmpty(result)) {
+    if (ObjectUtils.isNotEmpty(result)) {
       await GlobalToast.show({ text: '扫码成功' });
       onChange(result);
     }

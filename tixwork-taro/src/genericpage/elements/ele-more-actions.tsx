@@ -3,7 +3,7 @@ import { Text } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classNames from 'classnames';
 import { ActionLike, ActionListLike, IconLike, ImageLike } from '@/nice-router/nice-router-types';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import ActionIcon from '@/components/action-icon/action-icon';
 import EleButton from '@/components/elements/ele-button';
 
@@ -22,7 +22,7 @@ function EleMoreActions(props: EleMoreActionsProps) {
   const { actionList = [], linkToUrl = '', type = 'auto', text, imageUrl, icon = 'chevron-right', className } = props;
 
   const showSheet = () => {
-    const itemList = actionList.map((it) => it.title).filter((it) => isNotEmpty(it));
+    const itemList = actionList.map((it) => it.title).filter((it) => ObjectUtils.isNotEmpty(it));
 
     Taro.showActionSheet({
       // @ts-ignore
@@ -34,7 +34,7 @@ function EleMoreActions(props: EleMoreActionsProps) {
   };
 
   const onClick = () => {
-    if (actionList.length === 0 && isNotEmpty(linkToUrl)) {
+    if (actionList.length === 0 && ObjectUtils.isNotEmpty(linkToUrl)) {
       NavigationService.view(linkToUrl);
       return;
     }

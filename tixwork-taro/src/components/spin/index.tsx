@@ -7,10 +7,11 @@ type SpinType = {
   children?: any;
   size?: 'default' | 'small' | 'large';
   spinning?: boolean;
+  style?: any;
 };
 
 export default function Spin(props: SpinType) {
-  const { type = 'ring', size = 'small', spinning = false } = props;
+  const { style, type = 'ripple', size = 'small', spinning = false } = props;
 
   if (!spinning) {
     return props.children;
@@ -24,9 +25,9 @@ export default function Spin(props: SpinType) {
   });
 
   return (
-    <View className='spin'>
-      <View className='spin__mark' />
+    <View className='spin' style={style}>
       {props.children}
+      <View className='spin__mark' />
       <View className='spin__content'>
         <View className={spinTypeCls}>
           <View />

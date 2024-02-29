@@ -1,5 +1,4 @@
 import HttpRequest from './http-request';
-import { API } from '@/http/api-types';
 
 const request = HttpRequest.request;
 
@@ -14,7 +13,7 @@ type RequestOptionType = {
 
 type RequestParamsType = Record<string, any>;
 
-interface RequestType {
+export interface RequestType {
   <R = any>(url: string, data?: RequestParamsType, options?: RequestOptionType): Promise<API.WebResult<R>>;
 }
 
@@ -22,12 +21,13 @@ interface SendRequestType {
   <R = any>(url: string, options?: RequestOptionType): Promise<API.WebResult<R>>;
 }
 
-const get: RequestType = (url = '', params = {}, options = {}) => {
-  return request(url, {
+const get: RequestType = async (url = '', params = {}, options = {}) => {
+  const resp = await request(url, {
     method: 'GET',
     params,
     ...(options || {}),
   });
+  return resp.data;
 };
 
 /**
@@ -43,7 +43,7 @@ const get: RequestType = (url = '', params = {}, options = {}) => {
  * @param data 默认设置到data上
  * @param options
  */
-const post: RequestType = (url = '', data = {}, options = {}) => {
+const post: RequestType = async (url = '', data = {}, options = {}) => {
   const { asParams, ...rest } = options || {};
   const theOptions = {
     data,
@@ -53,7 +53,8 @@ const post: RequestType = (url = '', data = {}, options = {}) => {
   if (asParams) {
     theOptions.params = data;
   }
-  return request(url, theOptions);
+  const resp = await request(url, theOptions);
+  return resp.data;
 };
 
 /**
@@ -62,7 +63,7 @@ const post: RequestType = (url = '', data = {}, options = {}) => {
  * @param data
  * @param options
  */
-const put: RequestType = (url = '', data = {}, options = {}) => {
+const put: RequestType = async (url = '', data = {}, options = {}) => {
   const { asParams, ...rest } = options || {};
   const theOptions = {
     method: 'PUT',
@@ -72,7 +73,17 @@ const put: RequestType = (url = '', data = {}, options = {}) => {
   if (asParams) {
     theOptions.params = data;
   }
-  return request(url, theOptions);
+  const resp = await request(url, theOptions);
+  return resp.data;
+};
+
+const remove: RequestType = async (url = '', data = {}, options = {}) => {
+  const resp = await request(url, {
+    method: 'DELETE',
+    data,
+    ...(options || {}),
+  });
+  return resp.data;
 };
 
 /**
@@ -81,8 +92,9 @@ const put: RequestType = (url = '', data = {}, options = {}) => {
  * @param url
  * @param options
  */
-const send: SendRequestType = (url = '', options = {}) => {
-  return request(url, options);
+const send: SendRequestType = async (url = '', options = {}) => {
+  const resp = await request(url, options);
+  return resp.data;
 };
 
 /**
@@ -92,6 +104,7 @@ const Q = {
   get,
   post,
   put,
+  remove,
   send,
   Get: get,
   Post: post,

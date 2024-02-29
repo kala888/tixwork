@@ -48,7 +48,7 @@ export default (props: GroupedCheckboxFieldType) => {
     return {
       width: '100%',
       '.ant-checkbox-wrapper': {
-        minWidth: 110,
+        minWidth: 100,
         color: token.colorTextLabel,
       },
     };

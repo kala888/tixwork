@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components';
 import ActionIcon from '@/components/action-icon/action-icon';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import ActionUtil from '@/utils/action-util';
 import EleButton, { EleButtonProps } from '@/components/elements/ele-button';
 
@@ -15,9 +15,10 @@ type NavigationLineProps = {
 export default function NavigationLine(props: NavigationLineProps) {
   const { title, secondTitle, brief, icon, imageUrl, prefixIcon, prefixImageUrl, ...others } = props;
 
-  const useDefaultPrefix = isEmpty(prefixIcon) && isEmpty(prefixImageUrl);
+  const useDefaultPrefix = ObjectUtils.isEmpty(prefixIcon) && ObjectUtils.isEmpty(prefixImageUrl);
 
-  let showDefaultRightIcon = ActionUtil.isActionLike(props) && isEmpty(icon) && isEmpty(imageUrl);
+  const showDefaultRightIcon =
+    ActionUtil.isActionLike(props) && ObjectUtils.isEmpty(icon) && ObjectUtils.isEmpty(imageUrl);
   const theAction = showDefaultRightIcon ? 'right' : icon;
 
   return (

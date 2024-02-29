@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { noop } from '@/utils';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { Text, View } from '@tarojs/components';
 import { ImageLike } from '@/nice-router/nice-router-types';
 import ImageItem, { TaroImageFile } from '@/components/image-picker/image-item';
@@ -28,7 +28,7 @@ function EleImagePicker(props: EleImagePickerType) {
 
   useEffect(() => {
     let sourceFile: EleImage[] = [];
-    if (!isEmpty(value)) {
+    if (!ObjectUtils.isEmpty(value)) {
       sourceFile = Array.isArray(value) ? value : [{ imageUrl: value }];
     }
     setFiles(sourceFile);

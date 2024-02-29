@@ -45,7 +45,7 @@ const columns: ProColumnType<API.OssConfig, EleValueType>[] = [
     title: '最后修改时间',
     dataIndex: 'updateTime',
     valueType: 'dateTime',
-    width: 142,
+    width: 140,
   },
 ];
 

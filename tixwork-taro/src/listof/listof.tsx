@@ -1,6 +1,6 @@
 import NavigationService from '@/nice-router/navigation-service';
-import { ScrollView, Text, View } from '@tarojs/components';
-import { isEmpty } from '@/utils/object-utils';
+import { ScrollView, View } from '@tarojs/components';
+import ObjectUtils from '@/utils/object-utils';
 import FooterTips from '@/listof/footer-tips';
 import { useLoading } from '@/service/use-service';
 import ActionUtil from '@/utils/action-util';
@@ -11,10 +11,11 @@ import LoadingType from '@/nice-router/loading-type';
 import NiceRouterUtils from '@/nice-router/nice-router-utils';
 import ListofUtil from './listof-util';
 import './listof.less';
+import React from 'react';
 
 export type ListofProps = {
   items?: FlexLineItemProps[];
-  emptyMessage?: string;
+  emptyMessage?: string | React.ReactNode;
   dataContainer?: Record<string, any>;
   listMeta?: ActionLike;
   displayMode?: string;
@@ -24,20 +25,21 @@ export type ListofProps = {
   height?: number | string;
   mode?: 'horizontal' | 'vertical';
   className?: string;
+  itemProps?: Record<string, any>;
 };
 
 function Listof(props: ListofProps) {
   const { loading, showLoading, hideLoading } = useLoading(false);
   const { items = [], emptyMessage } = props;
 
-  if (isEmpty(items)) {
-    if (isEmpty(emptyMessage)) {
+  if (ObjectUtils.isEmpty(items)) {
+    if (ObjectUtils.isEmpty(emptyMessage)) {
       return null;
     }
-    return <Text className='listof-empty-message'>{emptyMessage}</Text>;
+    return <View className='listof-empty-message'>{emptyMessage}</View>;
   }
 
-  const { dataContainer, listMeta = {}, displayMode, onItemClick, horizontal = false } = props;
+  const { itemProps = {}, dataContainer, listMeta = {}, displayMode, onItemClick, horizontal = false } = props;
   const { longList = false, mode, className, height } = props;
 
   const hasNextPage = ActionUtil.isActionLike(listMeta);
@@ -52,7 +54,6 @@ function Listof(props: ListofProps) {
     if (!hasNextPage) {
       return;
     }
-
     showLoading();
     NavigationService.ajax(
       listMeta,
@@ -92,6 +93,7 @@ function Listof(props: ListofProps) {
             onItemClick={onItemClick}
             displayMode={displayMode}
             horizontal={horizontal}
+            {...itemProps}
           />
         ))}
       </View>

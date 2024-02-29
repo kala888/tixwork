@@ -1,7 +1,7 @@
 import { Text, View } from '@tarojs/components';
 import './styles.less';
 import classNames from 'classnames';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 
 type ModalType = {
   title?: string;
@@ -14,7 +14,7 @@ type ModalType = {
 
 const Modal = (props: ModalType) => {
   const { title, content, closable = true, visible = false, onCancel } = props;
-  const hasContent = isNotEmpty(title) || isNotEmpty(content);
+  const hasContent = ObjectUtils.isNotEmpty(title) || ObjectUtils.isNotEmpty(content);
   const contentCls = classNames('modal-content', {
     whiteBackground: hasContent,
   });
@@ -26,7 +26,7 @@ const Modal = (props: ModalType) => {
       <View className='modal-mask modal-show' />
       <View className='modal-box'>
         <View className={contentCls}>
-          {isNotEmpty(title) && <View className='modal-title'>{title}</View>}
+          {ObjectUtils.isNotEmpty(title) && <View className='modal-title'>{title}</View>}
           {closable && <Text className='modal-close iconfont iconfont-close-circle' onClick={onCancel} />}
           {props.children}
         </View>

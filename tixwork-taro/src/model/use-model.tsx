@@ -5,7 +5,7 @@ import { ModelDispatcher } from '@/model/model-dispatcher';
 import { ModelContext } from '@/model/model-provider';
 
 //4. 运行时初始化，
-export default function useModel<T>(namespace: string): T {
+export default function useModel<T = any>(namespace: string): T {
   const isMount = useRef(false);
   useEffect(() => {
     isMount.current = true;

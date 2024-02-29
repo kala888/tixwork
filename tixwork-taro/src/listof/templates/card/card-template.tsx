@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import EleCard, { EleCardMode, EleCardProps } from '@/components/elements/ele-card/ele-card';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 
 type CardTemplateItemProps = {
   documentUrl?: string;
@@ -16,9 +16,11 @@ function CardTemplate(props: CardTemplateProps) {
   const { actionList = [], documentUrl } = item;
 
   // const imageUrl = ListofUtil.getImageUrl(item)
-  // const hasImage = isNotEmpty(imageUrl)
-  const isDocument = isNotEmpty(documentUrl);
-  const extClass: any[] = _.concat(props.mode, item.mode, isDocument ? 'large' : null).filter((it) => isNotEmpty(it));
+  // const hasImage =ObjectUtils.isNotEmpty(imageUrl)
+  const isDocument = ObjectUtils.isNotEmpty(documentUrl);
+  const extClass: any[] = _.concat(props.mode, item.mode, isDocument ? 'large' : null).filter((it) =>
+    ObjectUtils.isNotEmpty(it)
+  );
 
   const documentActions = isDocument
     ? [

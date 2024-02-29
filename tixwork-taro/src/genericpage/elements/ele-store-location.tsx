@@ -3,8 +3,8 @@ import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import classNames from 'classnames';
 import TagList from '@/components/elements/ele-tag/tag-list';
-import { isNotEmpty } from '@/utils/object-utils';
-import { EleTagProps } from '@/components/elements/ele-tag/ele-tag';
+import ObjectUtils from '@/utils/object-utils';
+import { EleTagType } from '@/components/elements/ele-tag/ele-tag';
 import { EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types';
 import './styles.less';
 
@@ -13,7 +13,7 @@ type EleStoreLocationProps = {
   iconColor?: string;
   phoneNumber?: string;
   summary?: string;
-  tags?: EleTagProps[];
+  tags?: EleTagType[];
   longitude?: string;
   latitude?: string;
   className?: string;
@@ -54,18 +54,18 @@ function EleStoreLocation(props: EleStoreLocationProps) {
         <ServerImage className='header-image' src={imageUrl} mode='widthFix' />
         <View className='header-right'>
           <View className='header-right-name'>{title}</View>
-          {isNotEmpty(brief) && <View className='header-right-summary'>{brief}</View>}
+          {ObjectUtils.isNotEmpty(brief) && <View className='header-right-summary'>{brief}</View>}
           <TagList items={tags} />
         </View>
       </View>
-      {isNotEmpty(address) && (
+      {ObjectUtils.isNotEmpty(address) && (
         <View className='info-item' onClick={showLocation}>
           <View className='iconfont iconfont-location' />
           <View className='info-item-txt'>{address}</View>
         </View>
       )}
 
-      {isNotEmpty(phoneNumber) && (
+      {ObjectUtils.isNotEmpty(phoneNumber) && (
         <View className='info-item' onClick={makePhoneCall}>
           <View className='iconfont iconfont-phone' />
           <View className='info-item-txt'>{phoneNumber}</View>

@@ -3,24 +3,32 @@
 @import '/src/styles/bizfont';
 // 修改switch样式
 .wx-switch-input {
-  width: 82px !important;
-  height: 20px !important;
+  width: 100px !important;
+  height: 56px !important;
+  border-color: @primary-color !important;
   background-color: @primary-color !important;
 }
 
 // false样式
 .wx-switch-input::before {
-  width: 82px !important;
-  height: 20px !important;
+  width: 100px !important;
+  height: 56px !important;
+  border-color: @primary-color !important;
   background: @text-color-lighter !important;
 }
 
-// true样式
+// true样式 小球
 .wx-switch-input::after {
-  width: 40px !important;
-  height: 40px !important;
-  margin-top: -10px !important;
+  width: 54px !important;
+  height: 54px !important;
+  //margin-top: -10px !important;
+  border-color: @primary-color !important;
   background-color: @primary-color !important;
+}
+
+.wx-switch-input:checked:after,
+.wx-switch-input-checked::after {
+  transform: translateX(40px) !important;
 }
 
 .at-input {
@@ -78,6 +86,10 @@
   color: unset;
   line-height: unset;
   text-align: unset;
+}
+
+.transparent-btn::after {
+  content: unset;
 }
 
 .transparent-btn.at-button--disabled {

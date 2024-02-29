@@ -1,6 +1,6 @@
 import React from 'react';
 import { getExtMode } from '@/nice-router/nice-router-utils';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { View } from '@tarojs/components';
 import _ from 'lodash';
 import classNames from 'classnames';
@@ -29,7 +29,7 @@ function ActionField(props: ActionFieldProps) {
   const theValue = _.isObject(value) ? value?.title : value;
 
   const contentClass = getExtMode({
-    placeholder: isEmpty(theValue),
+    placeholder: ObjectUtils.isEmpty(theValue),
     disabled,
   }).classNames('action-field-content');
 

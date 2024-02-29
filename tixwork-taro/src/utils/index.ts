@@ -1,4 +1,4 @@
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import Taro from '@tarojs/taro';
 import _ from 'lodash';
 
@@ -7,7 +7,7 @@ let device: Taro.getSystemInfoSync.Result;
 export const noop = () => {};
 
 function getDevice(): Taro.getSystemInfoSync.Result {
-  if (isEmpty(device)) {
+  if (ObjectUtils.isEmpty(device)) {
     device = Taro.getSystemInfoSync();
   }
   return device;
@@ -39,7 +39,7 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
     // @ts-ignore
     refsEntityContainer = root.dataContainer;
   }
-  if (!refsEntityContainer || (isEmpty(refsEntityContainer) && isNotEmpty(targetList))) {
+  if (!refsEntityContainer || (ObjectUtils.isEmpty(refsEntityContainer) && ObjectUtils.isNotEmpty(targetList))) {
     console.log('data container is empty, and target is not empty, return itself');
     return targetList;
   }
@@ -68,7 +68,7 @@ export function enrichListOfEntity({ dataContainer, targetList = [], root = {} }
 
 //坑！！ ios只能识别yyyy/MM/dd hh:mm:ss
 export function transToDate(value) {
-  if (_.isDate(value) || isEmpty(value)) {
+  if (_.isDate(value) || ObjectUtils.isEmpty(value)) {
     return value;
   }
   let temp = value;
@@ -114,14 +114,18 @@ function dateFormat(dateTime, fmt) {
     if (new RegExp('(' + key + ')').test(fmt)) {
       fmt = fmt.replace(
         RegExp.$1,
-        RegExp.$1.length == 1 ? values[key] : ('00' + values[key]).substr(('' + values[key]).length)
+        RegExp.$1.length === 1 ? values[key] : ('00' + values[key]).substr(('' + values[key]).length)
       );
     }
   }
   return fmt;
 }
 
-export function formatTime(time, fmt = 'yyyy-MM-dd') {
+export function formatDate(time, fmt = 'yyyy-MM-dd') {
+  return formatTime(time, fmt);
+}
+
+export function formatTime(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
   if (time) {
     return dateFormat(new Date(time), fmt);
   }
@@ -129,13 +133,11 @@ export function formatTime(time, fmt = 'yyyy-MM-dd') {
 }
 
 export function formatMoney(money) {
-  if (isEmpty(money)) {
-    return '';
+  const value = _.toNumber(money);
+  if (ObjectUtils.isEmpty(money) || _.isNaN(value)) {
+    return money;
   }
-  if (_.isNumber(money)) {
-    return money.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-  }
-  return money;
+  return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
 
 export function isH5() {
@@ -156,6 +158,7 @@ export function removeOrPush<T>(list: T[] = [], item: T, withClone = false) {
     return [];
   }
   const result: T[] = withClone ? _.clone(list) : list;
+  // @ts-ignore
   const target = _.remove(result, item);
   if (target.length === 0) {
     result.push(item);
@@ -174,7 +177,7 @@ export function removeOrPush<T>(list: T[] = [], item: T, withClone = false) {
 //   _.forEach(items, (it: any, idx) => {
 //     const { group = '' } = it;
 //     let theGroup: Group<T> | undefined = _.find(groupList, { title: group });
-//     if (isEmpty(theGroup)) {
+//     if (ObjectUtils.isEmpty(theGroup)) {
 //       theGroup = {
 //         id: idx,
 //         title: group,

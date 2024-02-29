@@ -6,7 +6,7 @@ import { getGroupListByColumn } from '@/utils';
 import NavigationService from '@/nice-router/navigation-service';
 import { ActionLike, EleObject, IconLike, ImageLike } from '@/nice-router/nice-router-types';
 import ActionIcon from '@/components/action-icon/action-icon';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import './grid-list.less';
 
 type GridListItemProps = ImageLike & IconLike & ActionLike & EleObject;
@@ -25,7 +25,7 @@ type GridListProps = {
  */
 export default function GridList(props: GridListProps) {
   const { items = [], columnNum = 3, onClick, className } = props;
-  if (isEmpty(items)) {
+  if (ObjectUtils.isEmpty(items)) {
     return null;
   }
 
@@ -60,7 +60,7 @@ export default function GridList(props: GridListProps) {
               }).classNames('grid-list-item');
 
               const itemStyle = { flex: `0 0 ${100 / columnNum}%` };
-              const actionTitle = `${title}${isNotEmpty(brief) ? '\n' + brief : ''}`;
+              const actionTitle = `${title}${ObjectUtils.isNotEmpty(brief) ? '\n' + brief : ''}`;
 
               const key = `item-${idx}-${item.id}`;
               return (

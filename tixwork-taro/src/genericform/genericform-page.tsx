@@ -3,7 +3,7 @@ import EleRichText from '@/components/elements/ele-rich-text';
 
 import EleForm from '@/components/form/ele-form';
 import NavigationService from '@/nice-router/navigation-service';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { usePageTitle, usePullDown } from '@/service/use-service';
 import { View } from '@tarojs/components';
 import EleActionList from '@/components/elements/action-list/ele-action-list';
@@ -42,7 +42,7 @@ function GenericformPage() {
     const result = await formRef.current.validateFields();
     const { errors, values } = result;
     const { navigationMethod = 'replace' } = action;
-    if (isEmpty(errors)) {
+    if (ObjectUtils.isEmpty(errors)) {
       console.log('form-values', values);
       await NavigationService.post(action, values, {
         asForm: true,
@@ -92,7 +92,7 @@ function GenericformPage() {
   console.log('generic-form fieldList', fieldList);
   return (
     <View className='generic-form-page'>
-      {isNotEmpty(content) && <EleRichText content={content} />}
+      {ObjectUtils.isNotEmpty(content) && <EleRichText content={content} />}
       {stepList.length > 0 && <FormSteps steps={stepList} />}
       <EleForm
         formKey={id}

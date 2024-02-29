@@ -3,7 +3,7 @@ import EleInput from '@/components/form/field/ele-input';
 import { View } from '@tarojs/components';
 import { useState } from 'react';
 import _ from 'lodash';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import EleButton from '@/components/elements/ele-button';
 import { noop } from '@/utils';
 import './login.less';
@@ -19,7 +19,7 @@ export default function VCodeLoginForm(props) {
     const params = {
       mobile,
       code: verifyCode,
-      loginMethod: 'mobile_vcode',
+      grantType: 'xcx',
     };
     const remoteCall = onSubmit ? onSubmit : LoginUtils.remoteLogin;
     remoteCall({ params });
@@ -29,7 +29,7 @@ export default function VCodeLoginForm(props) {
     const txt = _.get(resp, 'toast.text', '');
     const theCode = _.get(txt.match(/验证码(\d{6})/), 1);
     console.log('text', txt, theCode);
-    if (isNotEmpty(theCode)) {
+    if (ObjectUtils.isNotEmpty(theCode)) {
       setVerifyCode(theCode);
     }
   };

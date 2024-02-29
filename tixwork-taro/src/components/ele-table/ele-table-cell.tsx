@@ -1,8 +1,8 @@
 import { Text, View } from '@tarojs/components';
 import React from 'react';
 import { getExtMode } from '@/nice-router/nice-router-utils';
-import { isNotEmpty } from '@/utils/object-utils';
 import './ele-table.less';
+import ObjectUtils from '@/utils/object-utils';
 
 export type EleTableCellProps = {
   title?: string;
@@ -10,6 +10,7 @@ export type EleTableCellProps = {
   children?: React.ReactNode;
   mode?: 'left' | 'right';
   className?: string;
+  style?: React.CSSProperties;
 };
 
 const EleTableCell: React.FC<EleTableCellProps> = (props) => {
@@ -19,7 +20,7 @@ const EleTableCell: React.FC<EleTableCellProps> = (props) => {
 
   return (
     <View className={rootClass} style={{ flex: colspan }}>
-      {isNotEmpty(title) && <Text className='ele-table-cell-text'>{title}</Text>}
+      {ObjectUtils.isNotEmpty(title) && <Text className='ele-table-cell-text'>{title}</Text>}
       {props.children}
     </View>
   );

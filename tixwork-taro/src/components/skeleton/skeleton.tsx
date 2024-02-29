@@ -5,7 +5,7 @@ import './skeleton.less';
 
 type SkeletonProps = {
   loading: boolean;
-  size: number;
+  size?: number;
   children?: React.ReactNode;
 };
 

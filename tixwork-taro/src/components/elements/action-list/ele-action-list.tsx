@@ -3,7 +3,7 @@ import { View } from '@tarojs/components';
 import { isH5 } from '@/utils';
 import _ from 'lodash';
 import { getExtMode } from '@/nice-router/nice-router-utils';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import EleButton, { EleButtonProps } from '../ele-button';
 import './styles.less';
 
@@ -23,7 +23,7 @@ export type EleActionListProps = {
 
 const EleActionList: React.FC<EleActionListProps> = (props) => {
   const { items = [], mode = ['full'], className } = props;
-  if (isEmpty(items)) {
+  if (ObjectUtils.isEmpty(items)) {
     return null;
   }
 

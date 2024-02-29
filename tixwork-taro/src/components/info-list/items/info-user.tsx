@@ -1,14 +1,14 @@
 import NavigationService from '@/nice-router/navigation-service';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import ImageTools, { ImageSize } from '@/server-image/image-tools';
 import ServerImage from '@/server-image/server-image';
 import { Text, View } from '@tarojs/components';
-import Taro from '@tarojs/taro';
 import ActionUtil from '@/utils/action-util';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { ActionLike, EleObject, ImageLike } from '@/nice-router/nice-router-types';
 import './styles.less';
+import ImagePreview from '@/utils/image-preview';
 
 type InfoUserProps = ImageLike & EleObject & ActionLike;
 
@@ -21,7 +21,7 @@ function InfoUser(props: InfoUserProps) {
 
   const onImagePreview = () => {
     const url = ImageTools.getServerImagUrl(imageUrl, ImageSize.Origin);
-    Taro.previewImage({ urls: [url] });
+    ImagePreview.preview(url);
   };
 
   const contentClass = classNames('info-user-content', {
@@ -35,7 +35,7 @@ function InfoUser(props: InfoUserProps) {
       </View>
       <View className={contentClass} onClick={onClick}>
         <Text className='info-user-content-title'>{title}</Text>
-        {isNotEmpty(brief) && <Text className='info-user-content-brief'>{brief}</Text>}
+        {ObjectUtils.isNotEmpty(brief) && <Text className='info-user-content-brief'>{brief}</Text>}
       </View>
     </View>
   );

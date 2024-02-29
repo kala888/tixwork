@@ -1,8 +1,6 @@
 import _ from 'lodash';
 import classNames from 'classnames';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
-import GlobalToast, { GlobalToastProps } from '@/components/global-popup/global-toast';
-import GlobalPopup, { PopupMessageProps } from '@/components/global-popup/index';
+import ObjectUtils from '@/utils/object-utils';
 import Taro, { Current } from '@tarojs/taro';
 import { isH5 } from '@/utils';
 import ViewMappingService, { ViewConfigItemType } from '@/nice-router/viewmapping-service';
@@ -21,7 +19,7 @@ const NavigationMethodMap = {
 
 // 查看 Form是否被提交成功
 const isCachedForm = async (url: string, params: Record<string, any> = {}) => {
-  if (isEmpty(params)) {
+  if (ObjectUtils.isEmpty(params)) {
     return false;
   }
   const content = JSON.stringify(params);
@@ -30,7 +28,7 @@ const isCachedForm = async (url: string, params: Record<string, any> = {}) => {
 };
 // form 提交内容 缓存 2 秒
 const cacheForm = async (url: string, params: Record<string, any> = {}) => {
-  if (isNotEmpty(params)) {
+  if (ObjectUtils.isNotEmpty(params)) {
     const content = JSON.stringify(params);
     const key = `${url}_${content}`;
     StorageTools.set(key, params, 2);
@@ -47,7 +45,7 @@ const cacheForm = async (url: string, params: Record<string, any> = {}) => {
  */
 function toTaroUrl(uri: string, params: Record<string, any>): string {
   const url = trimUri(uri);
-  if (isEmpty(url)) {
+  if (ObjectUtils.isEmpty(url)) {
     return '';
   }
   const postFix = _.keys(params)
@@ -58,7 +56,7 @@ function toTaroUrl(uri: string, params: Record<string, any>): string {
 }
 
 const isFooterTabPage = _.memoize((pagePath = '') => {
-  if (isEmpty(pagePath)) {
+  if (ObjectUtils.isEmpty(pagePath)) {
     return false;
   }
   // @ts-ignore
@@ -102,7 +100,7 @@ const parseUri = (uri: string): { pagePath: string; params: Record<string, strin
   const url = trimUri(uri);
   const urlData = url.split('?');
   let params = {};
-  if (isNotEmpty(urlData)) {
+  if (ObjectUtils.isNotEmpty(urlData)) {
     const strAry = _.split(urlData[1], '&').map((i) => i.split('='));
     params = _.fromPairs(strAry);
   }
@@ -145,17 +143,6 @@ function getViewMapping(
   };
 }
 
-function showToastOrPopup({ toast, popup }: { toast: GlobalToastProps; popup: PopupMessageProps }): void {
-  // 后端说Toast
-  if (isNotEmpty(toast)) {
-    GlobalToast.show({ ...toast, icon: 'none' });
-  }
-  // 后端说Popup
-  if (isNotEmpty(popup)) {
-    GlobalPopup.show(popup);
-  }
-}
-
 /**
  *
  * mode
@@ -163,10 +150,10 @@ function showToastOrPopup({ toast, popup }: { toast: GlobalToastProps; popup: Po
  * @returns {{mode: (function(*=): (*)), classNames: (function(*=, ...[*]=): string)}}
  */
 export function getExtMode(...props: any[]) {
-  const modeList = _.flatten(props).filter(isNotEmpty);
+  const modeList = _.flatten(props).filter(ObjectUtils.isNotEmpty);
 
   const buildWithPrefix = (prefix) => {
-    if (isEmpty(prefix)) {
+    if (ObjectUtils.isEmpty(prefix)) {
       return prefix;
     }
     const list = modeList.map((it) => {
@@ -176,7 +163,7 @@ export function getExtMode(...props: any[]) {
       return it;
     });
     return _.flatten(list)
-      .filter((it) => isNotEmpty(it))
+      .filter((it) => ObjectUtils.isNotEmpty(it))
       .map((it) => `${prefix}--${_.trim(it)}`);
   };
 
@@ -210,7 +197,7 @@ const mergeState = (
   const { viewHashString: newHash } = newState;
 
   // 数据没有变化
-  if (isNotEmpty(newHash) && preHash === newHash) {
+  if (ObjectUtils.isNotEmpty(newHash) && preHash === newHash) {
     return null;
   }
 
@@ -241,7 +228,6 @@ const NiceRouterUtils = {
   parseUri,
   getCurrentPage,
   getViewMapping,
-  showToastOrPopup,
   getExtMode,
   mergeState,
 };

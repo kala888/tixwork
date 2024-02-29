@@ -1,12 +1,14 @@
 import _ from 'lodash';
 
+export const noop = () => {};
+
 // null=> true
 // true=> true
 // 1 => false
 // [1,2]=> false
 // {} => true
 // {a:'1'} => false
-export const isEmpty = (value: any) => {
+const isEmpty = (value: any) => {
   if (_.isNumber(value) || _.isBoolean(value)) {
     return false;
   }
@@ -16,15 +18,18 @@ export const isEmpty = (value: any) => {
   if (_.isString(value)) {
     return value.length === 0;
   }
+  if (value?.size > 0) {
+    return false;
+  }
   return _.isEmpty(value);
 };
 
-export const isNotEmpty = (value: any) => {
-  return !isEmpty(value);
+const isNotEmpty = (value: any) => {
+  return !ObjectUtils.isEmpty(value);
 };
 
-export const toBoolean = (value: any) => {
-  if (isEmpty(value)) {
+const toBoolean = (value: any) => {
+  if (ObjectUtils.isEmpty(value)) {
     return false;
   }
   if (_.isString(value)) {
@@ -39,7 +44,7 @@ export const toBoolean = (value: any) => {
   return value;
 };
 
-export function parseToObject(json: any) {
+function parseToObject(json: any, defaultValue: any = {}) {
   if (_.isObject(json)) {
     return json;
   }
@@ -47,16 +52,37 @@ export function parseToObject(json: any) {
     try {
       return JSON.parse(json);
     } catch (e) {
-      return {};
+      return defaultValue;
     }
   }
-  console.warn('shouldBeObject is not controlled value', json);
-  return json;
+  return defaultValue;
 }
 
-export function parseToString(obj: any) {
+function parseToArray(obj: any) {
+  if (_.isNil(obj)) {
+    return [];
+  }
+  const result = parseToObject(obj);
+  if (!Array.isArray(result)) {
+    return [result];
+  }
+  return result;
+}
+
+function parseToString(obj: any) {
   if (_.isObject(obj)) {
     return JSON.stringify(obj);
   }
   return obj;
 }
+
+const ObjectUtils = {
+  isEmpty,
+  isNotEmpty,
+  noop,
+  toBoolean,
+  parseToObject,
+  parseToArray,
+  parseToString,
+};
+export default ObjectUtils;

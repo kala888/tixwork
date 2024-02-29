@@ -5,11 +5,29 @@
   padding: 19px 5px;
   background-color: @white;
   box-shadow: 0 15px 10px 1px @shadow-color;
+  color: @text-color-light;
 
-  &-title {
-    font-weight: 500;
-    size: 40px;
-    padding: 10px 30px 30px 30px;
+  &-header {
+    &:extend(.flex-row);
+    align-items: center;
+    margin: 0 20px;
+    box-sizing: border-box;
+
+    &-title {
+      &:extend(.flex-row);
+
+      .iconfont {
+        padding-right: 15px;
+      }
+
+      align-items: center;
+      flex: 1;
+      font-size: 30px;
+    }
+
+    .click-icon {
+      font-size: 36px;
+    }
   }
 
   &-actions {
@@ -52,9 +70,12 @@
       border-radius: 1px;
       display: flex;
       align-self: center;
+      text-align: center;
+      justify-content: center;
+      margin-top: 20%;
     }
 
-    &:last-child {
+    &:first-child {
       &:after {
         display: none;
       }

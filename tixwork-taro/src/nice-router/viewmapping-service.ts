@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import ViewMappingConfig from '@/utils/viewmapping.config';
 
 export type ViewConfigStateActionType = string | string[];
@@ -9,6 +9,13 @@ export type ViewConfigItemType = {
   stateAction?: ViewConfigStateActionType;
 };
 type ViewConfigType = Record<string, ViewConfigItemType | ViewConfigItemType[]>;
+
+const bizViewConfig: ViewConfigType = {
+  'com.tiandtech.appview.MarketingPage': {
+    pageName: '/marketing/generic-marketing-page',
+    stateAction: 'marketing/save',
+  },
+};
 
 const defaultViewConfig: ViewConfigType = {
   'com.tiandtech.appview.H5Page': {
@@ -51,11 +58,11 @@ const defaultViewConfig: ViewConfigType = {
       stateAction: ['listofpage4/save', 'listofpage/clear'],
     },
   ],
-
   'com.tiandtech.appview.ObjectPickerPage': {
     pageName: '/genericform/object-picker-page',
     stateAction: 'objectPicker/saveInbound',
   },
+  ...bizViewConfig,
 };
 
 class ViewMappingServiceClass {
@@ -78,7 +85,7 @@ class ViewMappingServiceClass {
   getView(backendKey = '', ajax = false): ViewConfigItemType {
     const key = _.trim(backendKey);
     let view = _.get(this._viewConfig, key, {});
-    if (isEmpty(view)) {
+    if (ObjectUtils.isEmpty(view)) {
       const shortKey = key.substr(key.lastIndexOf('.') + 1, key.length);
       console.log('the key for class', key, 'not found, try to map with shortKey', shortKey);
       view = this._viewConfig[shortKey] || {};

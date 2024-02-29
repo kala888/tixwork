@@ -19,7 +19,15 @@ export interface VideoLike {
 }
 
 export interface ActionLike {
+  id?: string;
   code?: string;
+  title?: string;
+  brief?: string;
+  uiType?: string;
+
+  icon?: string;
+  imageUrl?: string;
+
   linkToUrl?: string;
   onClick?: Function;
   onChange?: Function;
@@ -35,8 +43,8 @@ export interface ModeClass {
 
 export interface EleObject {
   id?: React.Key;
-  title?: string;
-  brief?: string;
+  title?: any;
+  brief?: any;
 }
 
 // title就是name  ,id就是值，就是value
@@ -54,7 +62,7 @@ export interface ActionListLike {
 }
 
 export type RouterPayload = {
-  method?: 'put' | 'post' | 'get';
+  method?: 'put' | 'post' | 'get' | 'delete';
   statInPage?: boolean; //前台标记为ajax, 页面不动
   params?: Record<string, any>; //请求参数
   asForm?: boolean; // post 数据时候把json转换为字符串 formData="{...}" 形式提交给后台

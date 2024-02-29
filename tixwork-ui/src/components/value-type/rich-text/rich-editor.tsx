@@ -1,6 +1,7 @@
+import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { Editor } from '@tinymce/tinymce-react';
 import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export type RichEditorType = {
   value?: string;
@@ -13,7 +14,7 @@ export type RichEditorType = {
 
 const script = 'https://tixwork.oss-cn-chengdu.aliyuncs.com/tinymce/tinymce.min.js';
 
-export default function RichEditor(props: RichEditorType) {
+function RichEditor(props: RichEditorType, ref) {
   const editorRef = useRef<any>();
   const { convertValue, contentStyle, readonly, className, value, onChange } = props;
   const [content, setContent] = useState(value ?? '');
@@ -23,14 +24,30 @@ export default function RichEditor(props: RichEditorType) {
     setContent(value ?? '');
   }, [value]);
 
-  const handleChange = () => {
+  const css = useEmotionCss(() => ({
+    width: '100%',
+    '.tox-editor-header': {
+      display: readonly ? 'none !important' : 'unset',
+    },
+  }));
+
+  const getContent = () => {
     let html = editorRef.current.getContent();
     if (convertValue) {
       html = convertValue(html);
     }
+    return html;
+  };
+
+  const handleChange = () => {
+    let html = getContent();
     onChange?.(html);
   };
-  const rootClz = classNames('rich-editor', className);
+  const rootClz = classNames('rich-editor', className, css);
+
+  React.useImperativeHandle(ref, () => ({
+    getContent,
+  }));
 
   return (
     <div className={rootClz}>
@@ -103,3 +120,5 @@ export default function RichEditor(props: RichEditorType) {
     </div>
   );
 }
+
+export default React.forwardRef(RichEditor);

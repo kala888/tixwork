@@ -8,8 +8,8 @@ import SectionBar from '../section-bar/section-bar';
 import FormItem from './form-item';
 import FormUtil from './form-util';
 import validator from './validator';
-import { isNotEmpty, parseToObject } from '@/utils/object-utils';
 import './ele-form.less';
+import ObjectUtils from '@/utils/object-utils';
 
 // 参考 https://github.com/react-component/form
 
@@ -26,7 +26,7 @@ type EleFormProps = {
 };
 
 const getFields = (groupList, fieldList) => {
-  if (isNotEmpty(groupList)) {
+  if (ObjectUtils.isNotEmpty(groupList)) {
     let result = [];
     groupList.map((it) => {
       if (it.fieldList) {
@@ -39,7 +39,7 @@ const getFields = (groupList, fieldList) => {
 };
 
 const getGroups = (groupList, fieldList) => {
-  const groups = isNotEmpty(groupList) ? groupList : [{ id: 'base-group', fieldList }];
+  const groups = ObjectUtils.isNotEmpty(groupList) ? groupList : [{ id: 'base-group', fieldList }];
   return groups
     .filter((it) => !it.hidden)
     .map((group) => {
@@ -74,7 +74,7 @@ function EleForm(props: EleFormProps, ref) {
     // 记录处理错误信息
     const errors = await _validateField(name, value);
     console.log('xxxxxxx', name, errors, value);
-    if (isNotEmpty(errors)) {
+    if (ObjectUtils.isNotEmpty(errors)) {
       setFieldErrors((preState) => ({
         ...preState,
         [name]: errors,
@@ -120,7 +120,7 @@ function EleForm(props: EleFormProps, ref) {
     const fieldNameList = Object.keys(values);
     for (const name of fieldNameList) {
       const e = await _validateField(name, values[name]);
-      if (isNotEmpty(e)) {
+      if (ObjectUtils.isNotEmpty(e)) {
         console.log('set errors', e);
         errors[name] = e;
       }
@@ -171,7 +171,7 @@ function EleForm(props: EleFormProps, ref) {
 
         return (
           <View key={groupId + '_' + groupIdx}>
-            {isNotEmpty(title) && <SectionBar title={title} brief={brief} />}
+            {ObjectUtils.isNotEmpty(title) && <SectionBar title={title} brief={brief} />}
 
             <View className='ele-form-fields'>
               {fields.map((it, idx) => {
@@ -180,8 +180,8 @@ function EleForm(props: EleFormProps, ref) {
                 const value = fieldValues[name];
                 const key = name + '_' + idx; // key重做，因为有taro bug
 
-                if (type === 'display-field' && isNotEmpty(field.value)) {
-                  const ele = _.isString(field.value) ? parseToObject(field.value) : field.value;
+                if (type === 'display-field' && ObjectUtils.isNotEmpty(field.value)) {
+                  const ele = _.isString(field.value) ? ObjectUtils.parseToObject(field.value) : field.value;
                   return <EleFlex key={key} {...ele} />;
                 }
                 const errors = fieldErrors[name];
@@ -200,7 +200,7 @@ function EleForm(props: EleFormProps, ref) {
               })}
             </View>
 
-            {isNotEmpty(groupActionList) && (
+            {ObjectUtils.isNotEmpty(groupActionList) && (
               <View className='ele-form-group-actions'>
                 <EleActionList mode={['small', 'right']} items={actionList} />
               </View>

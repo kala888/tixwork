@@ -30,7 +30,11 @@ function EleNotice(props: EleNoticeProps) {
         {items.map((it) => {
           const { id } = it;
           return (
-            <SwiperItem key={id} className='ele-notice-bar-messages-item' onClick={handleItemClick.bind(this, it)}>
+            <SwiperItem
+              key={id as any}
+              className='ele-notice-bar-messages-item'
+              onClick={handleItemClick.bind(this, it)}
+            >
               <Text className='ele-notice-bar-messages-item-txt'>{it.title}</Text>
             </SwiperItem>
           );

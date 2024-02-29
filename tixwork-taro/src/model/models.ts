@@ -2,11 +2,13 @@ import useNiceRouter from '@/nice-router/use-nice-router';
 import { useState } from 'react';
 import NiceRouterUtils from '@/nice-router/nice-router-utils';
 import { StoreDataPayload } from '@/nice-router/nice-router-types';
+import { useCartModel } from '@/model/cart.model';
 
 export type CommonModel<T> = {
   root: T;
   save: (params: StoreDataPayload) => void;
   clear: () => void;
+  setState: (state: any) => void;
 };
 
 export function useCommonModel() {
@@ -24,6 +26,7 @@ export function useCommonModel() {
   return {
     root: state,
     save,
+    setState,
     clear: () => setState({}),
   };
 }
@@ -32,6 +35,7 @@ export const models = {
   niceRouter: useNiceRouter,
   home: useCommonModel,
   me: useCommonModel,
+  cart: useCartModel,
   genericform: useCommonModel,
   genericpage: useCommonModel,
   genericpage2: useCommonModel,
@@ -39,6 +43,8 @@ export const models = {
   listofpage2: useCommonModel,
   listofpage3: useCommonModel,
   listofpage4: useCommonModel,
+
+  marketing: useCommonModel,
 
   // app,
   // navigationList,

@@ -1,6 +1,6 @@
 import Schema from 'async-validator';
 import _ from 'lodash';
-import { isEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 
 //valid OOTB type:
 // const VALIDATOR_OOTB_TYP = [
@@ -35,7 +35,7 @@ import { isEmpty } from '@/utils/object-utils';
 const numberLikeType = ['integer', 'number', 'float', 'decimal', 'double', 'money'];
 
 function transformValue(type, value) {
-  if (isEmpty(value)) {
+  if (ObjectUtils.isEmpty(value)) {
     return value;
   }
   const isNumberLike = numberLikeType.includes(type);
@@ -62,7 +62,7 @@ const validator = (
   value
 ) => {
   const { name, rules = [], type } = field || {};
-  if (isEmpty(name) || isEmpty(rules)) {
+  if (ObjectUtils.isEmpty(name) || ObjectUtils.isEmpty(rules)) {
     return Promise.resolve();
   }
 
@@ -70,7 +70,7 @@ const validator = (
   //   const rule = { ...it }
   //   // // 强制把type塞回去
   //   // if (
-  //   //   (isNotEmpty(it.max) || isNotEmpty(it.min) || isNotEmpty(it.type) || isNotEmpty(it.required)) &&
+  //   //   (ObjectUtils.isNotEmpty(it.max) ||ObjectUtils.isNotEmpty(it.min) ||ObjectUtils.isNotEmpty(it.type) ||ObjectUtils.isNotEmpty(it.required)) &&
   //   //   VALIDATOR_OOTB_TYP.includes(validatorType)
   //   // ) {
   //   //   rule.type = validatorType

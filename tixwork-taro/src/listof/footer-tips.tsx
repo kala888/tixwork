@@ -26,7 +26,7 @@ function FooterTips(props: FooterTipsProps) {
   };
 
   const rootClass = getExtMode({ loading }).classNames('listof-footer-tips');
-
+  console.log('sleep 1s', loading);
   return (
     <View className={rootClass} onClick={handleLoadMore}>
       <View className='listof-footer-tips-line' />

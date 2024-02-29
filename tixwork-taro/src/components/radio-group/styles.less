@@ -5,9 +5,15 @@
   flex-direction: column;
 
   &__label {
-    margin-bottom: 20px;
-    padding: 0 20px 20px;
+    padding: 10px 20px;
     border-bottom: 1px solid #eee;
+
+    .radio-group__value {
+      &:extend(.flex-row);
+      min-height: 80px;
+      align-items: center;
+      width: 100%;
+    }
   }
 
   &__label:last-child {

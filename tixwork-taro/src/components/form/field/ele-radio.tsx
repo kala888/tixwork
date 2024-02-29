@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { getExtMode } from '@/nice-router/nice-router-utils';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import { noop } from '@/utils';
 import { Label, Radio, RadioGroup, View } from '@tarojs/components';
 import { CandidateValue } from '@/nice-router/nice-router-types';
@@ -20,7 +20,7 @@ function EleRadio(props: EleRadioProps) {
   const { candidateValues = [], onChange = noop, value, mode = [] } = props;
 
   useEffect(() => {
-    let theSelected = isNotEmpty(value) ? value : _.find(candidateValues, { selected: true });
+    let theSelected = ObjectUtils.isNotEmpty(value) ? value : _.find(candidateValues, { selected: true });
     setSelected(theSelected || {});
   }, [value, candidateValues]);
 
@@ -36,7 +36,7 @@ function EleRadio(props: EleRadioProps) {
       <RadioGroup onChange={handleChange}>
         <View className='ele-radio-body'>
           {candidateValues.map((item, idx) => {
-            const checked = isNotEmpty(selected) ? selected?.id === item.id : false;
+            const checked = ObjectUtils.isNotEmpty(selected) ? selected?.id === item.id : false;
             const key = `radio-${idx}`;
 
             return (

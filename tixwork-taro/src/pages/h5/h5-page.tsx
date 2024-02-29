@@ -1,8 +1,8 @@
 import { useVisible } from '@/service/use-service';
 import { View, WebView } from '@tarojs/components';
 
-import { Current } from '@tarojs/taro';
 import Spin from '@/components/spin';
+import Taro from '@tarojs/taro';
 
 export type H5PageProps = {
   uri: string;
@@ -10,7 +10,7 @@ export type H5PageProps = {
 
 export default function H5Page() {
   const { visible, close } = useVisible(true);
-  const { uri = '' } = (Current.router?.params || {}) as H5PageProps;
+  const { uri = '' } = Taro.useRouter().params;
   const src = decodeURIComponent(uri);
   console.log('action path in H5', src);
   return (

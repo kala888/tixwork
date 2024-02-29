@@ -6,8 +6,8 @@ import EleTable from '@/components/ele-table/ele-table';
 import EleTableRow from '@/components/ele-table/ele-table-row';
 import EleTableCell from '@/components/ele-table/ele-table-cell';
 import { TitleValue } from '@/nice-router/nice-router-types';
-import { isEmpty, isNotEmpty } from '@/utils/object-utils';
 import './card-info-table.less';
+import ObjectUtils from '@/utils/object-utils';
 
 const getMaxLabelLength = (list, idx = 0) => {
   const result = _.max(
@@ -45,16 +45,16 @@ export default function CardInfoTable(props: CardInfoTableProps) {
         {rowList.map((row: [TitleValue, TitleValue], idx) => {
           const leftItem = row[0] || {};
           const rightItem = row[1] || {};
-          const showRight = isNotEmpty(rightItem);
+          const showRight = ObjectUtils.isNotEmpty(rightItem);
 
           let colspan = 1;
           if (!showRight) {
-            colspan = isEmpty(leftItem.title) ? 4 : 3;
+            colspan = ObjectUtils.isEmpty(leftItem.title) ? 4 : 3;
           }
 
           return (
             <EleTableRow key={idx}>
-              {isNotEmpty(leftItem.title) && (
+              {ObjectUtils.isNotEmpty(leftItem.title) && (
                 <EleTableCell title={leftItem.title} className={leftItemLabelClass} mode='left' />
               )}
 

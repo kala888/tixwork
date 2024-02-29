@@ -8,7 +8,7 @@ import FormUtil from '../form/form-util';
 import FlexField from './field/flex-field';
 import FormItemLabel from './form-item-label';
 import './form-item.less';
-import { isNotEmpty } from '@/utils/object-utils';
+import ObjectUtils from '@/utils/object-utils';
 import GlobalToast from '@/components/global-popup/global-toast';
 import { noop } from '@/utils';
 
@@ -67,7 +67,7 @@ function FormItem(props: FormItemProps) {
     return false;
   };
 
-  const hasError = isNotEmpty(errors);
+  const hasError = ObjectUtils.isNotEmpty(errors);
 
   const handleShowError = () => GlobalToast.show({ text: errors[0] });
 
@@ -82,7 +82,7 @@ function FormItem(props: FormItemProps) {
   const isRequired = showRequiredIcon();
 
   // 没有disabled，没有错误，有值，显示清理btn，就展示
-  const showClear = !disabled && !hasError && clear && isNotEmpty(value);
+  const showClear = !disabled && !hasError && clear && ObjectUtils.isNotEmpty(value);
 
   const theTail = (
     <FormItemTail showClear={showClear} hasError={hasError} onClear={onClear} onShowError={handleShowError} />

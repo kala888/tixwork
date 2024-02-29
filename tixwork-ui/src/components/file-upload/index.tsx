@@ -26,7 +26,7 @@ function getBase64(file) {
 
 export const ProFormImage = (props) => {
   //这里指定name和label，为了使在_FileUpload获取onchange，且不讲onchange和Value传递给ProFormUploadButton
-  const { label, name, fieldProps, proFieldKey, ...rest } = props;
+  const { label, tooltip, rules, name, fieldProps, proFieldKey, ...rest } = props;
 
   const { open, close, show } = useOpen();
   const [previewImage, setPreviewImage] = useState<any>();
@@ -49,7 +49,7 @@ export const ProFormImage = (props) => {
 
   return (
     <>
-      <ProFormItem label={label} name={name} className="customized-form-item">
+      <ProFormItem label={label} name={name} className="customized-form-item" tooltip={tooltip} rules={rules}>
         <MemoFileUpload listType="picture-card" onPreview={handlePreview} {...rest} {...fieldProps} accept="image" />
       </ProFormItem>
       <Modal title={'图片'} open={open} footer={null} onCancel={handleCancel}>
