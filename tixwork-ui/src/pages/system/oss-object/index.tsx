@@ -57,7 +57,7 @@ const columns: ProColumnType<API.OssObject, EleValueType>[] = [
     align: 'center',
     ellipsis: true,
     copyable: true,
-    width: 180,
+    width: 182,
     search: false,
   },
 
@@ -79,7 +79,7 @@ const columns: ProColumnType<API.OssObject, EleValueType>[] = [
     align: 'center',
     hideInForm: true,
     hideInSearch: true,
-    width: 140,
+    width: 142,
   },
 ];
 
