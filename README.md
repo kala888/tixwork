@@ -107,3 +107,10 @@ git fetch tixwork
 git merge --allow-unrelated-histories tixwork/dev
  ## git merge tixwork/dev
 ```
+
+
+
+
+###### 感谢Jetbrains提供IDE支持
+
+[![](https://github.com/kala888/nice-router-taro/blob/master/docs/tixwork-taro/assets/jetbrains.svg)](https://www.jetbrains.com)
