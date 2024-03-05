@@ -76,11 +76,23 @@ function parseToString(obj: any) {
   return obj;
 }
 
+function toNumber(value: any) {
+  if (_.isNil(value) || (_.isString(value) && value.trim().length === 0)) {
+    return null;
+  }
+  const result = _.toNumber(value);
+  if (_.isNaN(result)) {
+    return null;
+  }
+  return result;
+}
+
 const ObjectUtils = {
   isEmpty,
   isNotEmpty,
   noop,
   toBoolean,
+  toNumber,
   parseToObject,
   parseToArray,
   parseToString,
