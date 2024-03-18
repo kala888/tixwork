@@ -1,0 +1,6 @@
+dependencies {
+    api project(":tixwork-core")
+    api project(":biz-models")
+    api project(":tixwork-system")
+    api project(":tixwork-websocket")
+}

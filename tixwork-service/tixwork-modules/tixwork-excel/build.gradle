@@ -1,0 +1,5 @@
+dependencies {
+    api project(":tixwork-base")
+    api project(":tixwork-json")
+    api "com.alibaba:easyexcel:${easyexcelVersion}"
+}

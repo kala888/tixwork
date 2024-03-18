@@ -1,0 +1,5 @@
+dependencies {
+    api project(":tixwork-core")
+    api "org.redisson:redisson-spring-boot-starter:${redissonVersion}"
+    api "com.baomidou:lock4j-redisson-spring-boot-starter:${lock4jVersion}"
+}

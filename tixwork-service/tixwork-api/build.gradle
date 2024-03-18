@@ -1,0 +1,14 @@
+dependencies {
+    api "org.postgresql:postgresql"
+    api project(":tixwork-doc")
+    api project(":tixwork-system")
+    api "de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}"
+    api project(":tixwork-core")
+    api project(":tixwork-ratelimiter")
+    api project(":tixwork-websocket")
+    api project(":biz-models")
+    api project(":cust-models")
+    api project(":tixwork-wechat")
+    api project(":tixwork-db-runner")
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+}

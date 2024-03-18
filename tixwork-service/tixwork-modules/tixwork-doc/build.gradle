@@ -1,0 +1,6 @@
+dependencies {
+    api project(":tixwork-core")
+    api "org.springdoc:springdoc-openapi-starter-webmvc-api:${springdocVersion}"
+    api "com.github.therapi:therapi-runtime-javadoc:${therapiJavadocVersion}"
+    api "com.fasterxml.jackson.module:jackson-module-kotlin"
+}

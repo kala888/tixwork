@@ -1,0 +1,9 @@
+dependencies {
+    api project(":tixwork-core")
+    api project(":tixwork-satoken")
+    api "com.baomidou:dynamic-datasource-spring-boot3-starter:${dynamicDsVersion}"
+    api "org.springframework.boot:spring-boot-starter-validation"
+    api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
+    api "com.github.yulichang:mybatis-plus-join-boot-starter:${mpJoinVersion}"
+    api "p6spy:p6spy:${p6spyVersion}"
+}

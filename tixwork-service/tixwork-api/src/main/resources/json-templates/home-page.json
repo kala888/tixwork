@@ -1,0 +1,94 @@
+{
+  "slideList": [
+    {
+      "id": 1,
+      "imageUrl": "https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png"
+    },
+    {
+      "id": 2,
+      "imageUrl": "https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-2.png",
+      "videoUrl": "https://nice-router.oss-cn-chengdu.aliyuncs.com/video.mp4"
+    }
+  ],
+  "actionList": [
+    {
+      "id": 1,
+      "title": "Listof 测试",
+      "brief": "有惊喜",
+      "linkToUrl": "page:///pages/biz/listof-test-page"
+    },
+    {
+      "id": 2,
+      "title": "GenericPage 测试",
+      "brief": "省心",
+      "linkToUrl": "mock-generic-page/"
+    },
+    {
+      "id": 3,
+      "title": "GenericForm 测试",
+      "brief": "牛逼",
+      "linkToUrl": "mock-generic-form/"
+    },
+    {
+      "id": 4,
+      "title": "H5 测试",
+      "brief": "某度",
+      "linkToUrl": "https://www.baidu.com"
+    },
+    {
+      "id": 5,
+      "title": "Login 页面",
+      "brief": "通用",
+      "linkToUrl": "page:///pages/login/login-page"
+    }
+  ],
+  "productList": [
+    {
+      "id": 1,
+      "preTag": "促",
+      "tags": [
+        "专业",
+        "防水"
+      ],
+      "brand": "3M",
+      "title": "成人雨衣半透明，粉色佳人",
+      "price": 13.8,
+      "imageUrl": "https://nice-router.oss-cn-chengdu.aliyuncs.com/product-1.jpg"
+    },
+    {
+      "id": 2,
+      "preTag": "柴",
+      "tags": [
+        "香",
+        "五常"
+      ],
+      "brand": "柴火大院",
+      "title": "真五常稻花香香米",
+      "price": 72.99,
+      "imageUrl": "https://nice-router.oss-cn-chengdu.aliyuncs.com/product-2.jpg"
+    },
+    {
+      "id": 3,
+      "preTag": "买",
+      "tags": [
+        "iPhone",
+        "HDR"
+      ],
+      "brand": "苹果",
+      "title": "新品 iPhone11 Pro",
+      "price": 9088.0,
+      "imageUrl": "https://nice-router.oss-cn-chengdu.aliyuncs.com/product-3.png"
+    },
+    {
+      "id": 4,
+      "preTag": "坑",
+      "tags": [
+        "半成品"
+      ],
+      "brand": "必胜客",
+      "title": "想吃披萨又觉得外面的披萨不卫生又贵",
+      "price": 39.2,
+      "imageUrl": "https://nice-router.oss-cn-chengdu.aliyuncs.com/product-4.jpg"
+    }
+  ]
+}

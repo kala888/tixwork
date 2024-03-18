@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tiandtech.system.mapper.SysConfigMapper">
+
+    <resultMap type="com.tiandtech.system.domain.SysConfig" id="SysConfigResult">
+        <id property="id" column="id"/>
+        <result property="parent" column="parent"
+            typeHandler="com.tiandtech.mybatis.handler.ObjectLinkTypeHandler"/>
+        <collection property="values" column="id" select="selectByParent" />
+    </resultMap>
+
+    <select id="selectByParent" resultMap="SysConfigResult" >
+        select * from sys_config where parent = #{id}
+    </select>
+</mapper>

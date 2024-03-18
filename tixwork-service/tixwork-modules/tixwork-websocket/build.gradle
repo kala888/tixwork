@@ -1,0 +1,12 @@
+dependencies {
+    api project(":tixwork-core")
+    api project(":tixwork-json")
+    api project(":tixwork-redis")
+    api project(":tixwork-satoken")
+
+    api("org.springframework.boot:spring-boot-starter-websocket") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-web'
+    }
+    api 'jakarta.websocket:jakarta.websocket-api'
+    api 'javax.websocket:javax.websocket-api:1.1'
+}

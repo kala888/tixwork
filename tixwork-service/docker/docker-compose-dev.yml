@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:14.1
+    container_name: pg-service
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/docker-data/postgresql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: xxxxxx
+      POSTGRES_DB: tixwork
+
+  redis:
+    image: redis:6.2.1
+    container_name: redis-service
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ~/docker-data/redis/data:/redis/data:rw
+    environment:
+      TZ: Asia/Shanghai
+    command: "redis-server --requirepass xxxxxx"
+

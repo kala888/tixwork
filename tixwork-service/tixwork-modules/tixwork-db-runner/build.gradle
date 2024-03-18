@@ -1,0 +1,6 @@
+dependencies {
+    api project(":tixwork-core")
+    api "org.postgresql:postgresql"
+    api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
+    api "p6spy:p6spy:${p6spyVersion}"
+}

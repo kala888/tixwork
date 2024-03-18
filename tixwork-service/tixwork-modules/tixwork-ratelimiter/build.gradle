@@ -1,0 +1,4 @@
+dependencies {
+    api project(":tixwork-core")
+    api project(":tixwork-redis")
+}

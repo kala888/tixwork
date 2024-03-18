@@ -1,0 +1,15 @@
+dependencies {
+    implementation ":tixwork-core"
+    implementation ":tixwork-doc"
+    implementation ":tixwork-mybatis"
+    implementation ":tixwork-translation"
+    implementation ":tixwork-oss"
+    implementation ":tixwork-log"
+    implementation ":tixwork-excel"
+    implementation ":tixwork-sms"
+    implementation ":tixwork-tenant"
+    implementation ":tixwork-security"
+    implementation ":tixwork-web"
+    implementation ":tixwork-idempotent"
+    implementation ":tixwork-sensitive"
+}

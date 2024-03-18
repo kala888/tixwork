@@ -1,0 +1,6 @@
+dependencies {
+    api("org.dromara.sms4j:sms4j-spring-boot-starter:${sms4jVersion}") {
+        exclude group: " com.alibaba", module: "fastjson"
+        exclude group: "com.sun.xml.bind"
+    }
+}

@@ -1,0 +1,5 @@
+dependencies {
+    api project(":tixwork-mybatis")
+    api project(":tixwork-redis")
+    api "com.alibaba:transmittable-thread-local:${alibabaTtlVersion}"
+}

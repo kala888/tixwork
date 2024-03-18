@@ -1,0 +1,18 @@
+dependencies {
+    //微信集成SDK
+    api project(":tixwork-base")
+    api project(":tixwork-core")
+    api project(":biz-models")
+    api project(":tixwork-system")
+    api project(":tixwork-websocket")
+    api project(":tixwork-order")
+    api project(":cust-models")
+
+    implementation "com.github.binarywang:wx-java-mp-spring-boot-starter:${wechatSDKVersion}"
+    implementation "com.github.binarywang:wx-java-miniapp-spring-boot-starter:${wechatSDKVersion}"
+    implementation "com.github.binarywang:weixin-java-pay:${wechatSDKVersion}"
+    implementation "com.github.binarywang:wx-java-pay-spring-boot-starter:${wechatSDKVersion}"
+
+    implementation "org.jsoup:jsoup:${jsoupVersion}"
+
+}

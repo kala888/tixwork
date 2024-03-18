@@ -1,0 +1,5 @@
+com.tiandtech.web.config.CaptchaConfig
+com.tiandtech.web.config.FilterConfig
+com.tiandtech.web.config.I18nConfig
+com.tiandtech.web.config.ResourcesConfig
+com.tiandtech.web.config.UndertowConfig

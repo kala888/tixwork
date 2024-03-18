@@ -1,0 +1,1 @@
+把nginx整个目录丢到~/software下

@@ -1,0 +1,45 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: tixwork-monitor
+  profiles:
+    active: #spring.profiles.active#
+
+logging:
+  config: classpath:logback-plus.xml
+
+--- # 监控中心服务端配置
+spring:
+  security:
+    user:
+      name: tixwork
+      password: xxxxxx
+  boot:
+    admin:
+      ui:
+        title: tixwork服务监控中心
+      context-path: /admin
+
+--- # Actuator 监控端点的配置项
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+    logfile:
+      external-file: ./logs/tixwork-monitor-admin.log
+
+--- # 监控配置
+spring.boot.admin.client:
+  # 增加客户端开关
+  enabled: true
+  # 设置 Spring Boot Admin Server 地址
+  url: http://localhost:8090/admin
+  instance:
+    service-host-type: IP
+  username: tixwork
+  password: xxxxxx

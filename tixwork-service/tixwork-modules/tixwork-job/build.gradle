@@ -1,0 +1,5 @@
+dependencies {
+    api project(":tixwork-core")
+    api "com.xuxueli:xxl-job-core:${xxlJobVersion}"
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
+}

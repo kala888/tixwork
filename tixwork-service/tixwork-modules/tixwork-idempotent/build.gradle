@@ -1,0 +1,5 @@
+dependencies {
+    api project(":tixwork-json")
+    api project(":tixwork-redis")
+    api "cn.dev33:sa-token-core:${satokenVersion}"
+}

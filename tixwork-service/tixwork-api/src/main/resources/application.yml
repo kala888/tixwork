@@ -1,0 +1,376 @@
+--- #自定义配置 biz.name 会在biz-modules中被application.properties覆盖
+biz:
+  name: tixwork
+  jwtSecretKey: 7UBDJfdXGP16NrEljWdO5o0e
+
+tixwork:
+  name: ${biz.name}
+  version: #project.version#
+  copyrightYear: 2023
+  adminEmail: kalaliu@aliyun.com
+  adminMobile: 13880964614
+
+--- #设置dbrunner
+dbrunner:
+  enabled: true
+  sql-paths: tixwork/sql, ${biz.name}/sql, cust/sql
+  auto-patch: false
+
+captcha:
+  enable: true
+  # 页面 <参数设置> 可开启关闭 验证码校验
+  # 验证码类型 math 数组计算 char 字符验证
+  type: MATH
+  # line 线段干扰 circle 圆圈干扰 shear 扭曲干扰
+  category: CIRCLE
+  # 数字验证码位数
+  numberLength: 1
+  # 字符验证码长度
+  charLength: 4
+
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 8080
+  servlet:
+    # 应用的访问路径
+    context-path: /api
+  # undertow 配置
+  undertow:
+    # HTTP post内容的最大大小。当值为-1时，默认值为大小是无限的
+    max-http-post-size: -1
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 512
+    # 是否分配的直接内存
+    direct-buffers: true
+    threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      io: 8
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+      worker: 256
+
+# 日志配置
+logging:
+  level:
+    com.tiandtech: debug
+    org.springframework: warn
+  config: classpath:logback-plus.xml
+
+# 用户配置
+user:
+  password:
+    # 密码最大错误次数
+    maxRetryCount: 5
+    # 密码锁定时间（默认10分钟）
+    lockTime: 10
+
+# Spring配置
+spring:
+  application:
+    name: ${tixwork.name}
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+  profiles:
+    active: #spring.profiles.active#
+  # 文件上传
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size: 10MB
+      # 设置总上传的文件大小
+      max-request-size: 20MB
+  mvc:
+    #出现错误时, 直接抛出异常
+    throw-exception-if-no-handler-found: true
+    resources:
+      add-mappings: false
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+  jackson:
+    default-property-inclusion: non_null
+    # 日期格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      # 格式化输出
+      indent_output: false
+      # 忽略无法转换的对象
+      fail_on_empty_beans: false
+    deserialization:
+      # 允许对象忽略json中不存在的属性
+      fail_on_unknown_properties: false
+
+# Sa-Token配置
+sa-token:
+  max-login-count: -1
+  # token名称 (同时也是cookie名称)
+  token-name: Authorization
+  # token有效期，单位:秒, -1代表永不过期，一个月: 2592000
+  timeout: 2592000
+  # 多端不同 token 有效期 可查看 LoginHelper.loginByDevice 方法自定义
+  # token 临时有效期 (指定时间无操作就过期) 单位:秒, 一天: 86400
+  active-timeout: 86400
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: false
+  # jwt秘钥
+  jwt-secret-key: ${biz.jwtSecretKey} # 在biz模块已经生成，防止系统间重复
+  is-print: false
+
+--- # security配置
+security:
+  # 排除路径
+  excludes:
+    # 公共路径
+    - /favicon.ico
+    - /error
+
+# 多租户配置
+tenant:
+  # 是否开启
+  enable: false
+  # 排除表
+  excludes:
+    - sys_menu
+    - sys_tenant
+    - sys_tenant_package
+    - sys_role_dept
+    - sys_role_menu
+    - sys_user_post
+    - sys_user_role
+    - sys_client
+
+# MyBatisPlus配置
+# https://baomidou.com/config/
+mybatis-plus:
+  # 不支持多包, 如有需要可在注解配置 或 提升扫包等级
+  # 例如 com.**.**.mapper
+  mapperPackage: com.tiandtech.**.mapper
+  # 对应的 XML 文件位置
+  mapperLocations: classpath*:mapper/*Mapper.xml, classpath*:mapper/**/*Mapper.xml, classpath*:**/mapper/*Mapper.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.tiandtech.**.domain
+  global-config:
+    # 是否打印 Logo banner
+    banner: true
+    dbConfig:
+      # 主键类型
+      # AUTO 自增 NONE 空 INPUT 用户输入 ASSIGN_ID 雪花 ASSIGN_UUID 唯一 UUID
+      idType: AUTO
+
+# 数据加密
+mybatis-encryptor:
+  # 是否开启加密
+  enable: false
+  # 默认加密算法
+  algorithm: BASE64
+  # 编码方式 BASE64/HEX。默认BASE64
+  encode: BASE64
+  # 安全秘钥 对称算法的秘钥 如：AES，SM4
+  password:
+  # 公私钥 非对称算法的公私钥 如：SM2，RSA
+  publicKey:
+  privateKey:
+
+springdoc:
+  api-docs:
+    # 是否开启接口文档
+    enabled: false
+  info:
+    # 标题
+    title: '标题：${tixwork.name}后台管理系统_接口文档'
+    # 描述
+    description: '描述：通过tixwork自动生成'
+    # 版本
+    version: '版本号: ${tixwork.version}'
+    # 作者信息
+    contact:
+      name: kala888
+      email: kalaliu@aliyun.com
+      url: https://github.com/tiandtech/tixwork
+  components:
+    # 鉴权方式配置
+    security-schemes:
+      apiKey:
+        type: APIKEY
+        in: HEADER
+        name: ${sa-token.token-name}
+  #这里定义了两个分组，可定义多个，也可以不定义
+  group-configs:
+    - group: 通用模块
+      packages-to-scan: org.tiandtech.web
+    - group: 系统模块
+      packages-to-scan: org.tiandtech.system
+
+# 防止XSS攻击
+xss:
+  # 过滤开关
+  enabled: true
+  # 排除链接（多个用逗号分隔）
+  excludes: /system/notice
+  # 匹配链接
+  urlPatterns: /system/*,/monitor/*,/tool/*
+
+# 全局线程池相关配置
+thread-pool:
+  # 是否开启线程池
+  enabled: true
+  # 队列最大长度
+  queueCapacity: 128
+  # 线程池维护线程所允许的空闲时间
+  keepAliveSeconds: 300
+
+--- # 分布式锁 lock4j 全局配置
+lock4j:
+  # 获取分布式锁超时时间，默认为 3000 毫秒
+  acquire-timeout: 3000
+  # 分布式锁的超时时间，默认为 30 秒
+  expire: 30000
+
+--- # Actuator 监控端点的配置项
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    configprops.show-values: ALWAYS
+    env.show-values: ALWAYS
+    info.show-values: ALWAYS
+    health.show-details: ALWAYS
+    logfile.external-file: ./logs/sys-console.log
+
+--- # websocket
+websocket:
+  # 如果关闭 需要和前端开关一起关闭
+  enabled: true
+  # 路径
+  path: /websocket
+  # 设置访问源地址
+  allowedOrigins: '*'
+
+--- # 数据源配置
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    # 动态数据源文档 https://www.kancloud.cn/tracy5546/dynamic-datasource/content
+    dynamic:
+      # 性能分析插件(有性能损耗 不建议生产环境使用)
+      p6spy: false
+      # 设置默认的数据源或者数据源组,默认值即为 master
+      primary: master
+      # 严格模式 匹配不到数据源则报错
+      strict: true
+      datasource:
+        # 主库数据源
+        master:
+          driverClassName: org.postgresql.Driver
+          url: jdbc:postgresql://localhost:5432/tixwork-dev?stringtype=unspecified&useUnicode=true&characterEncoding=utf8&useSSL=true&autoReconnect=true&reWriteBatchedInserts=true
+          username: root
+          password: xxxxxx
+      hikari:
+        # 最大连接池数量
+        maxPoolSize: 20
+        # 最小空闲线程数量
+        minIdle: 10
+        # 配置获取连接等待超时的时间
+        connectionTimeout: 30000
+        # 校验超时时间
+        validationTimeout: 5000
+        # 空闲连接存活最大时间，默认10分钟
+        idleTimeout: 600000
+        # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认30分钟
+        maxLifetime: 1800000
+        # 连接测试query（配置检测连接是否有效）
+        connectionTestQuery: SELECT 99
+        # 多久检查一次连接的活性
+        keepaliveTime: 30000
+
+--- # redisson
+redisson:
+  # redis key前缀
+  keyPrefix:
+  # 线程池数量
+  threads: 16
+  # Netty线程池数量
+  nettyThreads: 32
+  # 单节点配置
+  singleServerConfig:
+    # 客户端名称
+    clientName: ${tixwork.name}
+    # 最小空闲连接数
+    connectionMinimumIdleSize: 32
+    # 连接池大小
+    connectionPoolSize: 64
+    # 连接空闲超时，单位：毫秒
+    idleConnectionTimeout: 10000
+    # 命令等待超时，单位：毫秒
+    timeout: 3000
+    # 发布和订阅连接池大小
+    subscriptionConnectionPoolSize: 50
+
+--- # sms  https://wind.kim/doc/start 文档地址 各个厂商可同时使用
+sms:
+  is-print: false
+  alibaba:
+    requestUrl: dysmsapi.aliyuncs.com
+    accessKeyId: xxxxxxx
+    accessKeySecret: xxxxxxx
+    signature: 测试
+  tencent:
+    #请求地址默认为 sms.tencentcloudapi.com 如无特殊改变可不用设置
+    requestUrl: sms.tencentcloudapi.com
+    accessKeyId: xxxxxxx
+    accessKeySecret: xxxxxxx
+    signature: 测试
+    sdkAppId: appid
+    territory: ap-chengdu
+
+--- # mybatis-plus-join
+mybatis-plus-join.banner: false
+
+--- # mail 邮件发送
+mail:
+  enabled: true
+  host: smtp.126.com
+  port: 465
+  # 是否需要用户名密码验证
+  auth: true
+  # 发送方，遵循RFC-822标准
+  from: cloud2b@126.com
+  # 用户名（注意：如果使用foxmail邮箱，此处user为qq号）
+  user: cloud2b@126.com
+  # 密码（注意，某些邮箱需要为SMTP服务单独设置密码，详情查看相关帮助）
+  pass: xxxxxx
+  # 使用 STARTTLS安全连接，STARTTLS是对纯文本通信协议的扩展。
+  starttlsEnable: true
+  # 使用SSL安全连接
+  sslEnable: true
+  # SMTP超时时长，单位毫秒，缺省值不超时
+  timeout: 0
+  # Socket连接超时值，单位毫秒，缺省值不超时
+  connectionTimeout: 0
+
+--- #wechat
+## https://kf.qq.com/faq/161222NneAJf161222U7fARv.html
+## https://blog.csdn.net/lxyoucan/article/details/127065717
+wx:
+  miniapp:
+    appid: wx49672d8fab486c4b
+    secret: 89d4bf532ce610a7a122143339f6208f
+    token: #微信小程序消息服务器配置的token
+    aesKey: #微信小程序消息服务器配置的EncodingAESKey
+    msgDataFormat: JSON
+  mp:
+    appId: wxb6a6e135fb2d888c
+    secret: 8cabea300cd2704be99a1ac6799304db
+  pay:
+    appId: wx49672d8fab486c4b
+    mchId: 1666345022
+    mchKey: Zhengxuan0014JhdI2dNNMKLAUPPWERA
+    keyPath: /Users/kalaliu/tiandtech/wechat-cert/wechat-pay.p12
+    notifyUrl: http://www.weixin.qq.com/wxpay/pay.php
+

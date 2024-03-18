@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(":tixwork-core")
+    implementation project(":tixwork-system")
+    api project(":tixwork-db-runner")
+}

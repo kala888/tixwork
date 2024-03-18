@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  tixwork-service:
+    image: openjdk:17
+    container_name: tixwork-service
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ~/tixwork/app:/app
+      - ~/tixwork/app-data:/app-data
+    environment:
+      TZ: Asia/Shanghai
+      JAVA_OPTS: "-Xms2G -Xmx4G -XX:MetaspaceSize=512m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:ParallelGCThreads=4 -XX:ConcGCThreads=2 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./log/ -XX:InitiatingHeapOccupancyPercent=70 -XX:ErrorFile=./log/error.log -Dfile.encoding=UTF-8 -Duser.timezone=Asia/Shanghai"
+    command: java ${JAVA_OPTS} -jar /app/app.jar
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:14.1
+    container_name: pg-service
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/tixwork/postgresql-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: xxxxxx
+      POSTGRES_DB: tixwork-prod
+
+  redis:
+    image: redis:6.2.1
+    container_name: redis-service
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ~/tixwork/redis-data:/redis/data:rw
+    environment:
+      TZ: Asia/Shanghai
+    command: "redis-server --requirepass xxxxxx"

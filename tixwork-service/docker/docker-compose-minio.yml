@@ -1,0 +1,25 @@
+version: '3'
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      # api 端口
+      - 9000:9000
+      # 控制台端口
+      - 9001:9001
+    environment:
+      # 时区上海
+      TZ: Asia/Shanghai
+      # 管理后台用户名
+      MINIO_ACCESS_KEY: tixwork
+      # 管理后台密码，最小8个字符
+      MINIO_SECRET_KEY: xxxxxx
+    volumes:
+      # 映射当前目录下的data目录至容器内/data目录
+      - ~/docker/minio/data:/data
+      # 映射配置目录
+      - ~/docker/minio/config:/root/.minio/
+    command: server --console-address ':9001' /data  # 指定容器中的目录 /data
+    privileged: true
+    restart: always

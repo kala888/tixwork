@@ -1,0 +1,25 @@
+rootProject.name = "tixwork-service"
+
+include 'tixwork-api'
+include 'tixwork-system'
+include 'biz-models'
+include 'cust-models'
+include 'tixwork-wechat'
+include 'tixwork-monitor'
+project(":tixwork-monitor").projectDir = file("$rootDir/extend-server/tixwork-monitor")
+
+// 找到 extends 目录下的模块并引入
+def modules_dir = "$rootDir/tixwork-modules"
+def commonFolder = new File(modules_dir)
+def modules = commonFolder.listFiles(new FileFilter() {
+    boolean accept(File file) {
+        return new File(file, "build.gradle").exists()
+    }
+})
+modules.each { module ->
+    def moduleName = module.name - '.build.gradle'
+    System.out.println("include $moduleName")
+    include "${moduleName}"
+    project(":$moduleName").projectDir = file("$modules_dir/$moduleName")
+}
+

@@ -1,0 +1,5 @@
+dependencies {
+    api project(":tixwork-json")
+    api project(":tixwork-redis")
+    api "com.amazonaws:aws-java-sdk-s3:${awsJavaSdkS3Version}"
+}

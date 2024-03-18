@@ -1,0 +1,5 @@
+com.tiandtech.translation.TranslationConfig
+com.tiandtech.translation.impl.DeptNameTranslationImpl
+com.tiandtech.translation.impl.DictTypeTranslationImpl
+com.tiandtech.translation.impl.OssUrlTranslationImpl
+com.tiandtech.translation.impl.UserNameTranslationImpl

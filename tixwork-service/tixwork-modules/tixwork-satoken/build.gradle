@@ -1,0 +1,8 @@
+dependencies {
+    api project(":tixwork-core")
+    api project(":tixwork-redis")
+    api ("cn.dev33:sa-token-spring-boot3-starter:${satokenVersion}"){
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    api "cn.dev33:sa-token-jwt:${satokenVersion}"
+}

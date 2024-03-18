@@ -1,0 +1,5 @@
+dependencies {
+    api project(":tixwork-core")
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${springBootMybatis}"
+    implementation "org.bouncycastle:bcprov-jdk15to18:${bouncycastleVersion}"
+}

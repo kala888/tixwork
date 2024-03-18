@@ -1,0 +1,12 @@
+dependencies {
+    api project(":tixwork-base")
+    api project(":tixwork-json")
+    api project(":tixwork-redis")
+    api project(":tixwork-mybatis")
+    api ('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    api "org.springframework.boot:spring-boot-starter-undertow"
+    api "org.springframework.boot:spring-boot-starter-actuator"
+    api "com.alibaba:transmittable-thread-local:${alibabaTtlVersion}"
+}

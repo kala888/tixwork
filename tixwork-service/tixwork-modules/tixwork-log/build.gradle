@@ -1,0 +1,5 @@
+dependencies {
+    api project(":tixwork-satoken")
+    api project(":tixwork-json")
+    api "com.alibaba:transmittable-thread-local:${alibabaTtlVersion}"
+}

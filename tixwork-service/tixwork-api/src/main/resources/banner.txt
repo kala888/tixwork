@@ -1,0 +1,11 @@
+
+${AnsiColor.BRIGHT_YELLOW} ██████████╗  ██╗  ${AnsiColor.BRIGHT_RED}  ██╗    ██╗   ${AnsiColor.BRIGHT_YELLOW}  ██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗
+${AnsiColor.BRIGHT_YELLOW} ╚═══██╔═══╝  ██║  ${AnsiColor.BRIGHT_RED}   ╚██╗ ██╔╝   ${AnsiColor.BRIGHT_YELLOW}  ██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝
+${AnsiColor.BRIGHT_YELLOW}     ██║      ██║  ${AnsiColor.BRIGHT_RED}    ╚████╔╝    ${AnsiColor.BRIGHT_YELLOW}  ██║ █╗ ██║██║   ██║██████╔╝█████╔╝
+${AnsiColor.BRIGHT_YELLOW}     ██║      ██║  ${AnsiColor.BRIGHT_RED}    ██╔ ██╗    ${AnsiColor.BRIGHT_YELLOW}  ██║███╗██║██║   ██║██╔══██╗██╔═██╗
+${AnsiColor.BRIGHT_YELLOW}     ██║      ██║  ${AnsiColor.BRIGHT_RED}  ██╔╝    ██╗  ${AnsiColor.BRIGHT_YELLOW}  ╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗
+${AnsiColor.BRIGHT_YELLOW}     ╚═╝      ╚═╝  ${AnsiColor.BRIGHT_RED}  ╚═╝     ╚═╝  ${AnsiColor.BRIGHT_YELLOW}   ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+
+${AnsiColor.BRIGHT_YELLOW}        Application ${tixwork.name}, version: ${tixwork.version}
+${AnsiColor.BRIGHT_YELLOW}        Base on spring-boot: ${spring-boot.version}
+${AnsiStyle.NORMAL}

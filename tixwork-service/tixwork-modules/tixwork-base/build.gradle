@@ -1,0 +1,3 @@
+dependencies {
+    api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
+}
