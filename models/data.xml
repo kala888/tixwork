@@ -1,0 +1,6 @@
+<!-- 定义说明参照 ./README.md -->
+<root brief="基础数据">
+    <base type="data" brief="平台数据">
+        <platform id="1" name="tixwork" label="低码平台" />
+    </base>
+</root>

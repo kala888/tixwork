@@ -1,0 +1,16 @@
+<!-- 定义说明参照 ./README.md -->
+<root name="tixwork"
+      org="tiandtech"
+      label="schema测试"
+      brief="用来和jhipster对比"
+      logo="logo.svg"
+      slogan="起源传统, 超越未来"
+      appId="LKJP781BADU"
+>
+
+    <platform label="平台" brief="只有一个平台就行了，用来记账">
+        <name label="平台标识" brief="英文，例如：tixwork"/>
+        <label label="平台名称" brief="律师函平台"/>
+    </platform>
+
+</root>

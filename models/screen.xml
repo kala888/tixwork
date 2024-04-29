@@ -1,0 +1,8 @@
+<root brief="screen 工作台和数据大屏定义">
+<!--    <dashboard type="screen" label="工作台" >-->
+<!--        <slot1 label="律师函" condition="count from litigant as card"/>-->
+<!--        <slot2 label="当事人" condition="count from legal_letter as card"/>-->
+<!--        <slot3 label="案值分布" condition="sum total_money from legal_letter group by merchant as pie"/>-->
+<!--        <slot4 label="商户律师函数量" condition="count from legal_letter group by merchant as bar"/>-->
+<!--    </dashboard>-->
+</root>
