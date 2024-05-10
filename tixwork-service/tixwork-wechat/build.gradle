@@ -7,11 +7,11 @@ dependencies {
     api project(":tixwork-websocket")
     api project(":cust-models")
 
-    implementation "com.github.binarywang:wx-java-mp-spring-boot-starter:${wechatSDKVersion}"
-    implementation "com.github.binarywang:wx-java-miniapp-spring-boot-starter:${wechatSDKVersion}"
-    implementation "com.github.binarywang:weixin-java-pay:${wechatSDKVersion}"
-    implementation "com.github.binarywang:wx-java-pay-spring-boot-starter:${wechatSDKVersion}"
+    api "com.github.binarywang:wx-java-mp-spring-boot-starter:${wechatSDKVersion}"
+    api "com.github.binarywang:wx-java-miniapp-spring-boot-starter:${wechatSDKVersion}"
+    api "com.github.binarywang:weixin-java-pay:${wechatSDKVersion}"
+    api "com.github.binarywang:wx-java-pay-spring-boot-starter:${wechatSDKVersion}"
 
-    implementation "org.jsoup:jsoup:${jsoupVersion}"
+    api "org.jsoup:jsoup:${jsoupVersion}"
 
 }

@@ -14,4 +14,9 @@ public class UserExtendService implements SysUserExtendService {
     public void postUserCreate(SysUser user) {
         Console.log("post....", user.getUserName());
     }
+
+    @Override
+    public void postUserRegistry(SysUser user) {
+
+    }
 }
