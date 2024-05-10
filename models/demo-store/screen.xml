@@ -1,0 +1,8 @@
+<root brief="screen 工作台和数据大屏定义">
+    <dashboard type="screen" label="工作台" >
+        <slot1 label="店铺数量" condition="count from merchant as card"/>
+        <slot2 label="产品数量" condition="count from product as card"/>
+        <slot3 label="店铺状态" condition="count from merchant group by store_status as pie"/>
+        <slot4 label="产品统计" condition="count from product group by product_type as bar"/>
+    </dashboard>
+</root>

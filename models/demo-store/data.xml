@@ -1,0 +1,73 @@
+<!-- 定义说明参照 ./README.md -->
+<root brief="基础数据">
+
+    <base type="data" bref="基础数据">
+        <!-- 创建平台和平台账户-->
+        <account_book id="1" balance="10000"/>
+        <merchant id="1"
+            name="如是嘉木"
+            top_brand="true"
+            work_time="周一 ~ 周五；早10点 ~ 晚6点"
+            brief="如是嘉木是一家专业的茶叶店铺，主要经营茶叶、茶具、茶器等茶叶相关产品。"
+            contact_mobile="13880964614"
+            contact_email="kalaliu@aliyun.com"
+            account_book="1"
+            store_status="OPEN"
+        />
+
+        <!-- 产品单位 -->
+        <product_unit id="1" name="两" code="liang"/>
+        <product_unit id="2" name="克" code="g"/>
+        <product_unit id="3" name="千克" code="kg"/>
+        <product_unit id="4" name="片" code="piece"/>
+        <product_unit id="5" name="罐" code="can"/>
+        <product_unit id="6" name="套" code="set"/>
+        <product_unit id="7" name="盒" code="box"/>
+        <product_unit id="8" name="袋" code="bag"/>
+        <product_unit id="9" name="个" code="item"/>
+
+    </base>
+
+    <base type="data" bref="测试数据">
+        <!-- 测试店铺 -->
+        <product_tag id="1" name="礼品茶"/>
+        <product_tag id="2" name="产地茶"/>
+        <product_tag id="3" name="自营"/>
+
+        <product_category id="1" name="品鉴"/>
+        <product_category id="2" name="口粮"/>
+
+        <product id="1"
+            name="黄金芽"
+            list_price="100.00"
+            sale_price="88.88"
+            instock="10"
+            unit="1"
+            product_type="GREENTEA"
+            category="1"
+            total_view="200"
+        />
+        <product id="2"
+            name="黄金甘露"
+            list_price="299.00"
+            sale_price="166.00"
+            instock="1000"
+            unit="1"
+            product_type="GREENTEA"
+            category="1"
+            total_view="128"
+        />
+        <product id="3"
+            name="祁门红茶"
+            list_price="29.00"
+            sale_price="20.00"
+            instock="1000"
+            unit="2"
+            product_type="BLACKTEA"
+            category="2"
+            total_view="10"
+        />
+
+    </base>
+
+</root>

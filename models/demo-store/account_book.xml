@@ -1,0 +1,36 @@
+<root brief="账本">
+
+    <!-- 测试: menu, 测试actions -->
+    <account_book label="账本" menu="账户管理">
+        <!-- 测试: number -->
+        <balance label="余额" type="Money" required="true"/>
+        <!--测试: 1对多: transaction_list,-->
+        <!-- Composition意思就是账户记录在账本中管理，会在detail页面增加相应的ui-->
+        <!--测试: 1对多，同时定义多的一方的属性名称 合法写法 -->
+        <!-- 1. transaction_record[]：多的一方使用默认的属性名和中文-->
+        <!-- 2. transaction_record.book(关联账本)[] ：定义多的一方的属性名和中文-->
+        <!-- 3. transaction_record.book[]：定义多的一方的属性名-->
+        <!-- 4. transaction_record(关联账本)[]：定义多的一方的中文-->
+        <transaction_list label="交易记录" ref="transaction_record(关联账本)[]" associationType='Composition'/>
+        <!-- 测试: long-text-->
+        <brief label="备注" lenght="100"/>
+    </account_book>
+
+
+    <!-- 测试: menu=false和 readonly,disableController -->
+    <transaction_record label="账户记录" readonly="true" menu="false"
+        disableController="true"
+    >
+        <!-- 测试: field level enum -->
+        <direction label="变动类型" values="increase(增加)|decrease(减少)|reconcile(调账)" required="true" index="money"/>
+        <amount label="变动金额" type="Money" required="true" index="money"/>
+        <balance label="余额" type="Money" required="true"/>
+        <brief label="备注" type="long-text"/>
+        <source_obj label="备注" type="Clob"
+            brief="可以存关联对象的JSON String"
+            hideInTable="true"
+            hideInSearch="true"
+            hideInForm="true"
+        />
+    </transaction_record>
+</root>

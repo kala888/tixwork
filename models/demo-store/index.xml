@@ -1,0 +1,18 @@
+<!-- 定义说明参照 ./README.md -->
+<root name="teastore"
+    org="tiandtech"
+    label="小茶铺"
+    brief="Tea World"
+    logo="logo.svg"
+    slogan="Get your tea"
+>
+    <import file="account_book.xml"/>
+    <import file="course.xml"/>
+    <import file="data.xml"/>
+    <import file="merchant.xml"/>
+    <import file="product.xml"/>
+    <import file="screen.xml"/>
+
+    <!--这里为了简单，假设平台就是商店，非SAAS，所以只有一个merchant就行-->
+
+</root>

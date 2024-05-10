@@ -1,0 +1,53 @@
+<root brief="客户管理">
+    <!--entity level enum 测试-->
+    <customer_type label="客户类型" type="enum">
+        <Direct label="直客"/>
+        <Sales label="渠道"/>
+        <Chanel label="渠道客户"/>
+    </customer_type>
+
+    <store_status label="店铺状态" type="enum" values="open(营业)|closed(打烊)"/>
+
+    <!--建立一个平台对象，一般只有一条数据，用来记录平台相关数据，例如平台账本-->
+    <merchant label="茶铺" lineActions="开门|打烊" insertable="false">
+
+        <name label="店铺名称" required="true" brief="小茶铺"/>
+        <logo label="Logo" type="image"/>
+        <top_brand label="金牌店铺" type="boolean" searchable="true"/>
+        <work_time label="营业时间"/>
+
+        <!--测试: group-->
+        <contact_mobile label="联系电话" type="mobile" group="联系方式" rule="required"/>
+        <contact_email label="Email" type="email" group="联系方式"/>
+
+        <!--测试: rich-text-->
+        <brief label="店铺介绍" type="long-text" lenght="200" searchable="true" queryType="like"/>
+        <!--测试: 测试日期-->
+        <available_date label="开业日期" type="date"/>
+
+        <store_status label="店铺状态" ref="store_status"/>
+
+        <account_book label="账本" ref="account_book"/>
+
+    </merchant>
+
+
+    <!-- 拓展系统用户 -->
+    <customer_user label="客户" actions="充值|调账|对账单">
+        <!-- 测试: 拓展系统对象-->
+        <sys_user label="系统用户"
+            type="com.tiandtech.system.domain.SysUser"
+            customQuery="com.tiandtech.system.mapper.SysUserMapper.selectById"
+        />
+        <!-- 测试: length-->
+        <user_type label="客户类型" ref="customer_type" required="true"/>
+        <name label="客户名称" lenght="20"/>
+        <uid label="身份证" type="uid"/>
+        <!-- 测试: int，min, max -->
+        <age label="年龄" type="int" min="18"/>
+        <!-- 测试: 修改OOTB属性 -->
+        <create_time type="date-time" searchable="true" queryType="between" hideInDescriptions="false"/>
+        <!-- 测试: 关系1:1-->
+        <account_book label="账本" ref="account_book"/>
+    </customer_user>
+</root>

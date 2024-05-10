@@ -1,0 +1,31 @@
+<root brief="店铺历程，演示模型继承">
+    <!-- 1. 定义type：  历程类型 -->
+    <course_type label="历程类型" type="enum">
+        <create label="创建历程"/>
+        <update label="修改历程"/>
+        <other label="其他记录"/>
+    </course_type>
+
+    <!-- 2. 定义主对象 -->
+    <course_record label="历程信息">
+        <course_type label="历程类型" ref="course_type" subType="true"/>
+        <title label="历程记录" type="long-text" length="500"/>
+        <file_attachment label="文档附件" type="fileList" hideInTable="true"/>
+    </course_record>
+
+    <!-- 3. 子对象 -->
+    <create_record label="创建历程" extends="course_record.create" menu="false" disableController="true">
+        <title label="申请原因" type="long-text" length="500"/>
+    </create_record>
+
+    <update_record label="改进记录" extends="course_record.update" menu="false" disableController="true">
+        <approve_pass label="是否通过" type="boolean"/>
+        <title label="改进基建" type="long-text" length="500"/>
+    </update_record>
+
+    <other_record label="其他记录" extends="course_record.other" menu="false" disableController="true">
+        <title label="自定义类型" type="long-text" length="500" group="自定义信息"/>
+        <brief label="补充说明" type="long-text" length="500" group="自定义信息"/>
+    </other_record>
+</root>
+

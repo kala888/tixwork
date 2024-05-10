@@ -1,0 +1,63 @@
+<root brief="产品">
+
+    <product_type label="产品分类" type="enum">
+        <green_tea label="绿茶"/>
+        <black_tea label="红茶"/>
+        <dark_tea label="黑茶"/>
+        <white_tea label="白茶"/>
+        <oolong_tea label="乌龙茶"/>
+        <puer_tea label="普洱茶"/>
+        <fflower_tea label="花茶"/>
+        <container label="器皿"/>
+        <package label="包装"/>
+        <accessories label="配件"/>
+        <service label="服务"/>
+        <other label="其他"/>
+    </product_type>
+
+    <product_unit label="单位">
+        <name label="单位名称"/>
+        <code label="编码"/>
+        <brief label="描述"/>
+    </product_unit>
+
+    <product_category label="产品目录" menu="产品管理">
+        <name label="分类名称"/>
+        <!-- 测试: date-time和dateTime-->
+        <start_time label="开始时间" type="date-time"/>
+        <end_time label="开始时间" type="dateTime"/>
+    </product_category>
+
+    <product_tag label="产品标签" menu="产品管理">
+        <name label="产品标签"/>
+        <brief label="标签描述"/>
+    </product_tag>
+
+    <product label="产品" feature="+IE" menu="产品管理">
+        <name label="产品名称" required="true" index="true"/>
+        <brief label="产品简介" type="rich-text"/>
+        <product_type label="产品分类" ref="product_type" index="true"/>
+        <image_list label="产品图册" type="image-list" lenght="9" brief="9图"/>
+        <approve_video label="宣传视频" type="video"/>
+
+        <!--测试: 最大，最小，required，between-->
+        <list_price label="市场价" type="number" min="1" required="true" searchable="true" queryType="between" group="价格"/>
+        <sale_price label="销售价" type="number" min="1" max="999999" group="价格"/>
+
+        <instock label="库存数量" type="number" group="库存"/>
+        <unit label="单位" ref="product_unit" group="库存"/>
+
+        <display_order label="排序" type="number"/>
+        <category label="目录" ref="product_category"/>
+
+        <total_view label="浏览量" type="int" editable="false"/>
+        <total_hot_point label="热度" type="int" dynamic="true"/>
+    </product>
+
+    <!--测试: 多对多，忽略中间对象-->
+
+    <product_tag_relationship label="产品和产品标签" type="ManyToMany">
+        <product_entities label="产品ID" ref="product.tagList(标签)"/>
+        <tag_entities label="标签" ref="product_tag.productList(产品列表)"/>
+    </product_tag_relationship>
+</root>
