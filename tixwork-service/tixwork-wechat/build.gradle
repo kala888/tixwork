@@ -5,7 +5,6 @@ dependencies {
     api project(":biz-models")
     api project(":tixwork-system")
     api project(":tixwork-websocket")
-    api project(":tixwork-order")
     api project(":cust-models")
 
     implementation "com.github.binarywang:wx-java-mp-spring-boot-starter:${wechatSDKVersion}"
